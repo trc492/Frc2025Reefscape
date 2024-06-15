@@ -29,13 +29,13 @@ import team492.Robot;
 import team492.RobotParams;
 import trclib.dataprocessor.TrcTrigger.TriggerMode;
 import trclib.dataprocessor.TrcTriggerThresholdZones;
+import trclib.dataprocessor.TrcUtil;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
-import trclib.robotcore.TrcUtil;
 import trclib.timer.TrcTimer;
 
 /**

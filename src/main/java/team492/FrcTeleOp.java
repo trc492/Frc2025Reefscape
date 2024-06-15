@@ -24,10 +24,10 @@ package team492;
 
 import java.util.Locale;
 
-import frclib.inputoutput.FrcLogitechJoystick;
-import frclib.inputoutput.FrcPanelButtons;
-import frclib.inputoutput.FrcSideWinderJoystick;
-import frclib.inputoutput.FrcXboxController;
+import frclib.input.FrcLogitechJoystick;
+import frclib.input.FrcPanelButtons;
+import frclib.input.FrcSideWinderJoystick;
+import frclib.input.FrcXboxController;
 import frclib.motor.FrcCANSparkMax;
 import frclib.vision.FrcPhotonVision;
 import team492.subsystems.Shooter;

@@ -24,9 +24,9 @@ package team492.subsystems;
 
 import frclib.motor.FrcCANSparkMax;
 import team492.RobotParams;
+import trclib.dataprocessor.TrcUtil;
 import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcEvent;
-import trclib.robotcore.TrcUtil;
 
 public class Climber
 {

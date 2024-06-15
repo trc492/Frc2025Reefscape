@@ -27,7 +27,7 @@ import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 import frclib.motor.FrcCANSparkMax;
 import frclib.motor.FrcCANTalonFX;
 import team492.RobotParams;
-import trclib.robotcore.TrcUtil;
+import trclib.dataprocessor.TrcUtil;
 import trclib.subsystem.TrcShooter;
 
 public class Shooter

@@ -27,7 +27,7 @@ import frclib.sensor.FrcDigitalInput;
 import team492.Robot;
 import team492.RobotParams;
 import trclib.dataprocessor.TrcTriggerDigitalInput;
-import trclib.robotcore.TrcUtil;
+import trclib.dataprocessor.TrcUtil;
 import trclib.subsystem.TrcIntake;
 
 public class Intake

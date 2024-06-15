@@ -26,9 +26,9 @@ import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frclib.inputoutput.FrcChoiceMenu;
-import frclib.inputoutput.FrcUserChoices;
-import frclib.inputoutput.FrcXboxController;
+import frclib.input.FrcChoiceMenu;
+import frclib.input.FrcUserChoices;
+import frclib.input.FrcXboxController;
 import frclib.vision.FrcPhotonVision;
 import team492.drivebases.RobotDrive;
 import team492.drivebases.SwerveDrive;
@@ -36,12 +36,12 @@ import team492.vision.PhotonVision.PipelineType;
 import trclib.command.CmdDriveMotorsTest;
 import trclib.command.CmdPidDrive;
 import trclib.command.CmdTimedDrive;
+import trclib.dataprocessor.TrcUtil;
 import trclib.motor.TrcMotor;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcPidController;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcRobot.RunMode;
-import trclib.robotcore.TrcUtil;
 import trclib.timer.TrcTimer;
 
 /**
