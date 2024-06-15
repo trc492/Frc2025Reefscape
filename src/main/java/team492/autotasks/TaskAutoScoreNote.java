@@ -23,20 +23,20 @@
 package team492.autotasks;
 
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import frclib.archive.FrcPhotonVision;
+import frclib.vision.FrcPhotonVision;
 import team492.FrcAuto;
 import team492.Robot;
 import team492.RobotParams;
-import trclib.archive.TrcAutoTask;
-import trclib.archive.TrcEvent;
-import trclib.archive.TrcOwnershipMgr;
-import trclib.archive.TrcPose2D;
-import trclib.archive.TrcRobot;
-import trclib.archive.TrcTaskMgr;
-import trclib.archive.TrcTimer;
-import trclib.archive.TrcTrigger.TriggerMode;
-import trclib.archive.TrcTriggerThresholdZones;
-import trclib.archive.TrcUtil;
+import trclib.dataprocessor.TrcTrigger.TriggerMode;
+import trclib.dataprocessor.TrcTriggerThresholdZones;
+import trclib.pathdrive.TrcPose2D;
+import trclib.robotcore.TrcAutoTask;
+import trclib.robotcore.TrcEvent;
+import trclib.robotcore.TrcOwnershipMgr;
+import trclib.robotcore.TrcRobot;
+import trclib.robotcore.TrcTaskMgr;
+import trclib.robotcore.TrcUtil;
+import trclib.timer.TrcTimer;
 
 /**
  * This class implements auto-assist task.

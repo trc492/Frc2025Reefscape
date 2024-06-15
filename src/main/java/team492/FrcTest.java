@@ -26,23 +26,23 @@ import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frclib.archive.FrcChoiceMenu;
-import frclib.archive.FrcPhotonVision;
-import frclib.archive.FrcUserChoices;
-import frclib.archive.FrcXboxController;
+import frclib.inputoutput.FrcChoiceMenu;
+import frclib.inputoutput.FrcUserChoices;
+import frclib.inputoutput.FrcXboxController;
+import frclib.vision.FrcPhotonVision;
 import team492.drivebases.RobotDrive;
 import team492.drivebases.SwerveDrive;
 import team492.vision.PhotonVision.PipelineType;
-import trclib.archive.TrcMotor;
-import trclib.archive.TrcPidController;
-import trclib.archive.TrcPose2D;
-import trclib.archive.TrcRobot;
-import trclib.archive.TrcRobot.RunMode;
-import trclib.archive.TrcTimer;
-import trclib.archive.TrcUtil;
 import trclib.command.CmdDriveMotorsTest;
 import trclib.command.CmdPidDrive;
 import trclib.command.CmdTimedDrive;
+import trclib.motor.TrcMotor;
+import trclib.pathdrive.TrcPose2D;
+import trclib.robotcore.TrcPidController;
+import trclib.robotcore.TrcRobot;
+import trclib.robotcore.TrcRobot.RunMode;
+import trclib.robotcore.TrcUtil;
+import trclib.timer.TrcTimer;
 
 /**
  * This class implements the code to run in Test Mode.

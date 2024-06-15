@@ -31,22 +31,22 @@ import java.util.Scanner;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frclib.archive.FrcAHRSGyro;
-import frclib.archive.FrcCANSparkMax;
-import frclib.archive.FrcCANTalonFX;
-import frclib.archive.FrcCANTalonSRX;
+import frclib.motor.FrcCANSparkMax;
+import frclib.motor.FrcCANTalonFX;
+import frclib.motor.FrcCANTalonSRX;
+import frclib.sensor.FrcAHRSGyro;
 import team492.FrcAuto;
 import team492.Robot;
 import team492.RobotParams;
-import trclib.archive.TrcDriveBase;
-import trclib.archive.TrcGyro;
-import trclib.archive.TrcMotor;
-import trclib.archive.TrcPidController;
-import trclib.archive.TrcPidDrive;
-import trclib.archive.TrcPose2D;
-import trclib.archive.TrcPurePursuitDrive;
-import trclib.archive.TrcRobot.RunMode;
-import trclib.archive.TrcUtil;
+import trclib.drivebase.TrcDriveBase;
+import trclib.motor.TrcMotor;
+import trclib.pathdrive.TrcPidDrive;
+import trclib.pathdrive.TrcPose2D;
+import trclib.pathdrive.TrcPurePursuitDrive;
+import trclib.robotcore.TrcPidController;
+import trclib.robotcore.TrcRobot.RunMode;
+import trclib.robotcore.TrcUtil;
+import trclib.sensor.TrcGyro;
 
 /**
  * This class is intended to be extended by subclasses implementing different robot drive bases.

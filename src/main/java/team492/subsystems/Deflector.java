@@ -22,9 +22,9 @@
 
 package team492.subsystems;
 
-import frclib.archive.FrcServo;
+import frclib.motor.FrcServo;
 import team492.RobotParams;
-import trclib.archive.TrcTimer;
+import trclib.timer.TrcTimer;
 
 public class Deflector
 {

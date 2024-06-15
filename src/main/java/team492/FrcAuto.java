@@ -25,17 +25,17 @@ package team492;
 import java.util.Locale;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import frclib.archive.FrcChoiceMenu;
-import frclib.archive.FrcMatchInfo;
-import frclib.archive.FrcUserChoices;
+import frclib.inputoutput.FrcChoiceMenu;
+import frclib.inputoutput.FrcMatchInfo;
+import frclib.inputoutput.FrcUserChoices;
 import team492.autocommands.CmdAuto;
 import team492.commandbased.exampleAuto;
-import trclib.archive.TrcPose2D;
-import trclib.archive.TrcRobot;
-import trclib.archive.TrcRobot.RunMode;
 import trclib.command.CmdPidDrive;
 import trclib.command.CmdPurePursuitDrive;
 import trclib.command.CmdTimedDrive;
+import trclib.pathdrive.TrcPose2D;
+import trclib.robotcore.TrcRobot;
+import trclib.robotcore.TrcRobot.RunMode;
 
 /**
  * This class implements the code to run in Autonomous Mode.

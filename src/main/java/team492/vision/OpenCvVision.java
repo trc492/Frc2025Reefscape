@@ -29,14 +29,14 @@ import org.opencv.imgproc.Imgproc;
 import edu.wpi.first.apriltag.AprilTagPoseEstimator;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
-import frclib.archive.FrcOpenCvAprilTagPipeline;
-import frclib.archive.FrcOpenCvDetector;
+import frclib.vision.FrcOpenCvAprilTagPipeline;
+import frclib.vision.FrcOpenCvDetector;
 import team492.RobotParams;
-import trclib.archive.TrcHomographyMapper;
-import trclib.archive.TrcOpenCvColorBlobPipeline;
-import trclib.archive.TrcOpenCvDetector;
-import trclib.archive.TrcOpenCvPipeline;
-import trclib.archive.TrcVisionTargetInfo;
+import trclib.vision.TrcHomographyMapper;
+import trclib.vision.TrcOpenCvColorBlobPipeline;
+import trclib.vision.TrcOpenCvDetector;
+import trclib.vision.TrcOpenCvPipeline;
+import trclib.vision.TrcVisionTargetInfo;
 
 public class OpenCvVision extends FrcOpenCvDetector
 {

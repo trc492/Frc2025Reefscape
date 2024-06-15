@@ -23,7 +23,7 @@
 package team492.autocommands;
 
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import frclib.archive.FrcPhotonVision.DetectedObject;
+import frclib.vision.FrcPhotonVision.DetectedObject;
 import team492.FrcAuto;
 import team492.Robot;
 import team492.RobotParams;
@@ -32,13 +32,13 @@ import team492.FrcAuto.AutoStartPos;
 import team492.FrcAuto.EndAction;
 import team492.FrcAuto.ScoreWingNotes;
 import team492.autotasks.TaskAutoScoreNote.TargetType;
-import trclib.archive.TrcDbgTrace;
-import trclib.archive.TrcEvent;
-import trclib.archive.TrcPose2D;
-import trclib.archive.TrcRobot;
-import trclib.archive.TrcStateMachine;
-import trclib.archive.TrcTimer;
-import trclib.archive.TrcWaypoint;
+import trclib.pathdrive.TrcPose2D;
+import trclib.pathdrive.TrcWaypoint;
+import trclib.robotcore.TrcDbgTrace;
+import trclib.robotcore.TrcEvent;
+import trclib.robotcore.TrcRobot;
+import trclib.robotcore.TrcStateMachine;
+import trclib.timer.TrcTimer;
 
 /**
  * This class implements an autonomous strategy.

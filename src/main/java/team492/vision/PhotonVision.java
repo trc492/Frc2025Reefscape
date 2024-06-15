@@ -32,13 +32,13 @@ import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
-import frclib.archive.FrcPhotonVision;
+import frclib.vision.FrcPhotonVision;
 import team492.subsystems.LEDIndicator;
-import trclib.archive.TrcEvent;
-import trclib.archive.TrcPose2D;
-import trclib.archive.TrcPose3D;
-import trclib.archive.TrcTimer;
-import trclib.archive.TrcUtil;
+import trclib.pathdrive.TrcPose2D;
+import trclib.pathdrive.TrcPose3D;
+import trclib.robotcore.TrcEvent;
+import trclib.robotcore.TrcUtil;
+import trclib.timer.TrcTimer;
 
 /**
  * This class is a thin wrapper extending FrcPhotonVision that provides additional game specific functionalities.

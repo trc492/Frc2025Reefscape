@@ -22,8 +22,8 @@
 
 package team492;
 
-import trclib.archive.TrcRobot;
-import trclib.archive.TrcRobot.RunMode;
+import trclib.robotcore.TrcRobot;
+import trclib.robotcore.TrcRobot.RunMode;
 
 /**
  * This class implements the code to run in Disabled Mode.

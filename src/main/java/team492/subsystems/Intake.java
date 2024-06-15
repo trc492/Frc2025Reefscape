@@ -22,13 +22,13 @@
 
 package team492.subsystems;
 
-import frclib.archive.FrcCANSparkMax;
-import frclib.archive.FrcDigitalInput;
+import frclib.motor.FrcCANSparkMax;
+import frclib.sensor.FrcDigitalInput;
 import team492.Robot;
 import team492.RobotParams;
-import trclib.archive.TrcIntake;
-import trclib.archive.TrcTriggerDigitalInput;
-import trclib.archive.TrcUtil;
+import trclib.dataprocessor.TrcTriggerDigitalInput;
+import trclib.robotcore.TrcUtil;
+import trclib.subsystem.TrcIntake;
 
 public class Intake
 {

@@ -24,11 +24,11 @@ package team492.subsystems;
 
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 
-import frclib.archive.FrcCANSparkMax;
-import frclib.archive.FrcCANTalonFX;
+import frclib.motor.FrcCANSparkMax;
+import frclib.motor.FrcCANTalonFX;
 import team492.RobotParams;
-import trclib.archive.TrcShooter;
-import trclib.archive.TrcUtil;
+import trclib.robotcore.TrcUtil;
+import trclib.subsystem.TrcShooter;
 
 public class Shooter
 {

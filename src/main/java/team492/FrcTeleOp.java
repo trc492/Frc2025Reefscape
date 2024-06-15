@@ -24,18 +24,18 @@ package team492;
 
 import java.util.Locale;
 
-import frclib.archive.FrcCANSparkMax;
-import frclib.archive.FrcLogitechJoystick;
-import frclib.archive.FrcPanelButtons;
-import frclib.archive.FrcPhotonVision;
-import frclib.archive.FrcSideWinderJoystick;
-import frclib.archive.FrcXboxController;
+import frclib.inputoutput.FrcLogitechJoystick;
+import frclib.inputoutput.FrcPanelButtons;
+import frclib.inputoutput.FrcSideWinderJoystick;
+import frclib.inputoutput.FrcXboxController;
+import frclib.motor.FrcCANSparkMax;
+import frclib.vision.FrcPhotonVision;
 import team492.subsystems.Shooter;
-import trclib.archive.TrcDriveBase.DriveOrientation;
-import trclib.archive.TrcPidController;
-import trclib.archive.TrcPose2D;
-import trclib.archive.TrcRobot;
-import trclib.archive.TrcRobot.RunMode;
+import trclib.drivebase.TrcDriveBase.DriveOrientation;
+import trclib.pathdrive.TrcPose2D;
+import trclib.robotcore.TrcPidController;
+import trclib.robotcore.TrcRobot;
+import trclib.robotcore.TrcRobot.RunMode;
 
 /**
  * This class implements the code to run in TeleOp Mode.

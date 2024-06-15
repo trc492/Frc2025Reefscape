@@ -29,11 +29,11 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
-import frclib.archive.FrcPhotonVisionRaw;
+import frclib.vision.FrcPhotonVisionRaw;
 import team492.subsystems.LEDIndicator;
 import team492.vision.PhotonVision.PipelineType;
-import trclib.archive.TrcPose3D;
-import trclib.archive.TrcTimer;
+import trclib.pathdrive.TrcPose3D;
+import trclib.timer.TrcTimer;
 
 /**
  * This class is a thin wrapper extending FrcPhotonVision that provides additional game specific functionalities.

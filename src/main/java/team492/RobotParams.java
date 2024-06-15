@@ -31,9 +31,9 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import team492.autotasks.ShootParamTable;
 import team492.drivebases.RobotDrive.DriveMode;
-import trclib.archive.TrcHomographyMapper;
-import trclib.archive.TrcPidController.PidCoefficients;
-import trclib.archive.TrcPose2D;
+import trclib.pathdrive.TrcPose2D;
+import trclib.robotcore.TrcPidController.PidCoefficients;
+import trclib.vision.TrcHomographyMapper;
 
 /**
  * This class contains parameters and preferences related to all robot operations.
