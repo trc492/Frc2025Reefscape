@@ -23,11 +23,11 @@
 package team492.subsystems;
 
 import frclib.dataprocessor.FrcColor;
-import frclib.output.FrcAddressableLED;
+import frclib.driverio.FrcAddressableLED;
 import team492.RobotParams;
 import team492.vision.PhotonVision;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
-import trclib.output.TrcAddressableLED;
+import trclib.driverio.TrcAddressableLED;
 import trclib.pathdrive.TrcPose2D;
 
 public class LEDIndicator

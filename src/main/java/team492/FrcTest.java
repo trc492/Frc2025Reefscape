@@ -26,9 +26,9 @@ import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frclib.input.FrcChoiceMenu;
-import frclib.input.FrcUserChoices;
-import frclib.input.FrcXboxController;
+import frclib.driverio.FrcChoiceMenu;
+import frclib.driverio.FrcUserChoices;
+import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision;
 import team492.drivebases.RobotDrive;
 import team492.drivebases.SwerveDrive;

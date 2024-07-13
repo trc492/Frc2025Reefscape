@@ -25,9 +25,9 @@ package team492;
 import java.util.Locale;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import frclib.input.FrcChoiceMenu;
-import frclib.input.FrcMatchInfo;
-import frclib.input.FrcUserChoices;
+import frclib.driverio.FrcChoiceMenu;
+import frclib.driverio.FrcMatchInfo;
+import frclib.driverio.FrcUserChoices;
 import team492.autocommands.CmdAuto;
 import team492.commandbased.exampleAuto;
 import trclib.command.CmdPidDrive;
