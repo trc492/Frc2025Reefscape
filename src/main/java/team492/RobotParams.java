@@ -52,7 +52,7 @@ public class RobotParams
     public enum SteerEncoderType
     {
         CANCoder,
-        Canandcoder,
+        Canandmag,
         AnalogEncoder
     }   //enum SteerEncoderType
 
@@ -452,7 +452,7 @@ public class RobotParams
         public final boolean[] steerMotorInverted               = {false, false, false, false};
 
         // Steer encoders.
-        public SteerEncoderType steerEncoderType                = SteerEncoderType.Canandcoder;
+        public SteerEncoderType steerEncoderType                = SteerEncoderType.Canandmag;
         public final String[] steerEncoderNames                 =
             {"lfSteerEncoder", "rfSteerEncoder", "lbSteerEncoder", "rbSteerEncoder"};
         public int[] steerEncoderCanIds                         =

@@ -43,7 +43,7 @@ import frclib.motor.FrcCANTalonFX;
 import frclib.sensor.FrcAHRSGyro;
 import frclib.sensor.FrcAnalogEncoder;
 import frclib.sensor.FrcCANCoder;
-import frclib.sensor.FrcCanandcoder;
+import frclib.sensor.FrcCanandmag;
 import frclib.sensor.FrcPdp;
 import team492.Robot;
 import team492.RobotParams;
@@ -247,13 +247,13 @@ public class SwerveDrive extends RobotDrive
                 }
             }
         }
-        else if (driveBaseParams.steerEncoderType.equals(SteerEncoderType.Canandcoder))
+        else if (driveBaseParams.steerEncoderType.equals(SteerEncoderType.Canandmag))
         {
             CanandEventLoop.getInstance();
-            encoders = new FrcCanandcoder[names.length];
+            encoders = new FrcCanandmag[names.length];
             for (int i = 0; i < names.length; i++)
             {
-                try (FrcCanandcoder canandcoder = new FrcCanandcoder(names[i], encoderIds[i]))
+                try (FrcCanandmag canandcoder = new FrcCanandmag(names[i], encoderIds[i]))
                 {
                     canandcoder.resetFactoryDefaults(false);
                     // Configure the sensor direction to match the steering motor direction.

@@ -22,8 +22,6 @@
 
 package team492;
 
-import java.util.Locale;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcMatchInfo;
@@ -42,7 +40,7 @@ import trclib.robotcore.TrcRobot.RunMode;
  */
 public class FrcAuto implements TrcRobot.RobotMode
 {
-    private static final String moduleName = "FrcAuto";
+    private static final String moduleName = FrcAuto.class.getSimpleName();
     //
     // Global constants.
     //
@@ -264,24 +262,16 @@ public class FrcAuto implements TrcRobot.RobotMode
         @Override
         public String toString()
         {
-            return String.format(
-                Locale.US,
-                "alliance=\"%s\" " +
-                "strategy=\"%s\" " +
-                "startPos=\"%s\" " +
-                "scoreWingNotes=\"%s\" " +
-                "endAction=\"%s\" " +
-                "relocalize=\"%s\" " +
-                "startDelay=%.0f sec " +
-                "pathFile=\"%s\" " +
-                "xDistance=%.1f ft " +
-                "yDistance=%.1f ft " +
-                "turnDegrees=%.0f deg " +
-                "driveTime=%.0f sec " +
-                "drivePower=%.1f",
-                getAlliance(), getStrategy(), getStartPos(), getScoreWingNotes(), getEndAction(), getRelocalize(),
-                getStartDelay(), getPathFile(), getXDriveDistance(), getYDriveDistance(), getTurnAngle(),
-                getDriveTime(), getDrivePower());
+            return "alliance=\"" + getAlliance() + "\" " +
+                   "strategy=\"" + getStrategy() + "\" " +
+                   "startPos=\"" + getStartPos() + "\" " +
+                   "startDelay=" + getStartDelay() + " sec " +
+                   "pathFile=\"" + getPathFile() + "\" " +
+                   "xDistance=" + getXDriveDistance() + " ft " +
+                   "yDistance=" + getYDriveDistance() + " ft " +
+                   "turnDegrees=" + getTurnAngle() + " deg " +
+                   "driveTime=" + getDriveTime() + " sec " +
+                   "drivePower=" + getDrivePower();
         }   //toString
 
     }   //class AutoChoices
@@ -348,8 +338,8 @@ public class FrcAuto implements TrcRobot.RobotMode
         //
         // Retrieve Auto choices.
         //
-        robot.globalTracer.logInfo(moduleName, "MatchInfo", "%s", FrcMatchInfo.getMatchInfo());
-        robot.globalTracer.logInfo(moduleName, "AutoChoices", "%s", autoChoices);
+        robot.globalTracer.logInfo(moduleName, "MatchInfo", FrcMatchInfo.getMatchInfo().toString());
+        robot.globalTracer.logInfo(moduleName, "AutoChoices", autoChoices.toString());
         //
         // Create autonomous command.
         //

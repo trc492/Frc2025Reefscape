@@ -121,6 +121,10 @@ public class Robot extends FrcRobotBase
     private boolean aprilTagTrackingEnabled = false;
     private int[] trackedAprilTagIds = null;
     //
+    // Hybrid mode objects.
+    //
+    public Command m_autonomousCommand;
+    //
     // DriveBase subsystem.
     //
     public SwerveDrive robotDrive;
@@ -133,10 +137,6 @@ public class Robot extends FrcRobotBase
     public TrcDiscreteValue shooterTiltAngle;
     public Climber climber;
     public Deflector deflector;
-    //
-    // Hybrid mode objects.
-    //
-    public Command m_autonomousCommand;
     //
     // Auto-Assists.
     //
@@ -159,7 +159,7 @@ public class Robot extends FrcRobotBase
      * To create new hardware or subsystem, follow the steps below:
      * 1. Create a public class variable for the new hardware/subsystem.
      * 2. Instantiate and initialize the new hardware/subsystem object in this method.
-     * 3. Put code in updateDashboard to display status of the new hardware/subsystem if necessary.
+     * 3. Put code in updateStatus to display status of the new hardware/subsystem if necessary.
      * 4. Put code in robotStartMode or robotStopMode to configure/reset hardware/subsystem if necessary.
      * 5. Put code in FrcTeleOp to operate the subsystem if necessary (i.e. slowPeriodic/xxxButtonEvent).
      * 6. Create a getter method for the new sensor only if necessary (e.g. sensor value needs translation).
