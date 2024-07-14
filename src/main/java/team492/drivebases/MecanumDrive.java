@@ -22,6 +22,7 @@
 
 package team492.drivebases;
 
+import frclib.motor.FrcMotor.MotorType;
 import frclib.sensor.FrcPdp;
 import team492.Robot;
 import team492.RobotParams;

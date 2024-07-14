@@ -31,9 +31,8 @@ import java.util.Scanner;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frclib.motor.FrcCANSparkMax;
-import frclib.motor.FrcCANTalonFX;
-import frclib.motor.FrcCANTalonSRX;
+import frclib.motor.FrcMotor;
+import frclib.motor.FrcMotor.MotorType;
 import frclib.sensor.FrcAHRSGyro;
 import team492.FrcAuto;
 import team492.Robot;
@@ -60,13 +59,6 @@ public class RobotDrive extends SubsystemBase
     public static final int INDEX_RIGHT_FRONT = 1;
     public static final int INDEX_LEFT_BACK = 2;
     public static final int INDEX_RIGHT_BACK = 3;
-
-    public enum MotorType
-    {
-        CanTalonFx,
-        CanTalonSrx,
-        CanSparkMax
-    }   //enum MotorType
 
     /**
      * This enum specifies different drive modes.
@@ -214,20 +206,7 @@ public class RobotDrive extends SubsystemBase
 
         for (int i = 0; i < names.length; i++)
         {
-            switch (motorType)
-            {
-                case CanTalonFx:
-                    motors[i] = new FrcCANTalonFX(names[i], motorCanIds[i]);
-                    break;
-
-                case CanTalonSrx:
-                    motors[i] = new FrcCANTalonSRX(names[i], motorCanIds[i]);
-                    break;
-
-                case CanSparkMax:
-                    motors[i] = new FrcCANSparkMax(names[i], motorCanIds[i], brushless);
-                    break;
-            }
+            motors[i] = FrcMotor.createMotor(motorType, brushless, false, names[i], motorCanIds[i]);
             motors[i].resetFactoryDefault();
             motors[i].setMotorInverted(inverted[i]);
         }

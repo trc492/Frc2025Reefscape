@@ -40,6 +40,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frclib.motor.FrcCANTalonFX;
+import frclib.motor.FrcMotor.MotorType;
 import frclib.sensor.FrcAHRSGyro;
 import frclib.sensor.FrcAnalogEncoder;
 import frclib.sensor.FrcCANCoder;
