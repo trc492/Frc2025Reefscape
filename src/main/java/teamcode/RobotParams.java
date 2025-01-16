@@ -103,6 +103,11 @@ public class RobotParams
         public static final int CANID_RFDRIVE_MOTOR             = 4;
         public static final int CANID_LBDRIVE_MOTOR             = 5;
         public static final int CANID_RBDRIVE_MOTOR             = 6;
+        // Subsystem Motor CAN IDs.
+        public static final int CANID_ELEVATOR_MOTOR            = 7;
+        public static final int CANID_ARM_MOTOR                 = 8;
+        public static final int CANID_GRABBER_MOTOR             = 9;
+        public static final int CANID_INTAKE_MOTOR              = 10;
         // Swerve CAN IDs.
         public static final int CANID_LFSTEER_MOTOR             = 13;
         public static final int CANID_RFSTEER_MOTOR             = 14;

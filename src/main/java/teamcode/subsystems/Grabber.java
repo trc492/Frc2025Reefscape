@@ -24,6 +24,7 @@ package teamcode.subsystems;
 
 import frclib.motor.FrcMotorActuator;
 import frclib.subsystem.FrcMotorGrabber;
+import teamcode.RobotParams;
 import trclib.subsystem.TrcMotorGrabber;
 
 /**
@@ -37,18 +38,11 @@ public class Grabber
         public static final String SUBSYSTEM_NAME               = "Grabber";
 
         public static final String PRIMARY_MOTOR_NAME           = SUBSYSTEM_NAME + ".primary";
-        public static final int PRIMARY_MOTOR_ID                = 0;
+        public static final int PRIMARY_MOTOR_ID                = RobotParams.HwConfig.CANID_GRABBER_MOTOR;
         public static final FrcMotorActuator.MotorType PRIMARY_MOTOR_TYPE = FrcMotorActuator.MotorType.CanTalonSrx;
         public static final boolean PRIMARY_MOTOR_BRUSHLESS     = false;
         public static final boolean PRIMARY_MOTOR_ENC_ABS       = false;
         public static final boolean PRIMARY_MOTOR_INVERTED      = true;
-
-        public static final String FOLLOWER_MOTOR_NAME          = SUBSYSTEM_NAME + ".follower";
-        public static final int FOLLOWER_MOTOR_ID               = 1;
-        public static final FrcMotorActuator.MotorType FOLLOWER_MOTOR_TYPE = FrcMotorActuator.MotorType.CanTalonSrx;
-        public static final boolean FOLLOWER_MOTOR_BRUSHLESS    = false;
-        public static final boolean FOLLOWER_MOTOR_ENC_ABS      = false;
-        public static final boolean FOLLOWER_MOTOR_INVERTED     = !PRIMARY_MOTOR_INVERTED;
 
         // public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
         // public static final int SENSOR_DIGITAL_CHANNEL          = 0;
@@ -72,11 +66,7 @@ public class Grabber
         FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
             .setPrimaryMotor(
                 Params.PRIMARY_MOTOR_NAME, Params.PRIMARY_MOTOR_ID, Params.PRIMARY_MOTOR_TYPE,
-                Params.PRIMARY_MOTOR_BRUSHLESS, Params.PRIMARY_MOTOR_ENC_ABS, Params.PRIMARY_MOTOR_INVERTED)
-            .setFollowerMotor(
-                Params.FOLLOWER_MOTOR_NAME, Params.FOLLOWER_MOTOR_ID, Params.FOLLOWER_MOTOR_TYPE,
-                Params.FOLLOWER_MOTOR_BRUSHLESS, Params.FOLLOWER_MOTOR_ENC_ABS, Params.FOLLOWER_MOTOR_INVERTED)
-            .setPowerParams(Params.INTAKE_POWER, Params.EJECT_POWER, Params.RETAIN_POWER);
+                Params.PRIMARY_MOTOR_BRUSHLESS, Params.PRIMARY_MOTOR_ENC_ABS, Params.PRIMARY_MOTOR_INVERTED);
         motorGrabber = new FrcMotorGrabber(Params.SUBSYSTEM_NAME, grabberParams).getGrabber();
     }   //Grabber
 
