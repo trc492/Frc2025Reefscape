@@ -30,11 +30,11 @@ import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
 
 /**
- * This class implements auto-assist task.
+ * This class implements Auto Pickup Coral From Station task.
  */
-public class TaskAuto extends TrcAutoTask<TaskAuto.State>
+public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCoralFromStation.State>
 {
-    private static final String moduleName = TaskAuto.class.getSimpleName();
+    private static final String moduleName = TaskAutoPickupCoralFromStation.class.getSimpleName();
 
     public enum State
     {
@@ -60,23 +60,23 @@ public class TaskAuto extends TrcAutoTask<TaskAuto.State>
      * @param ownerName specifies the owner name to take subsystem ownership, can be null if no ownership required.
      * @param robot specifies the robot object that contains all the necessary subsystems.
      */
-    public TaskAuto(String ownerName, Robot robot)
+    public TaskAutoPickupCoralFromStation(String ownerName, Robot robot)
     {
         super(moduleName, ownerName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.ownerName = ownerName;
         this.robot = robot;
-    }   //TaskAuto
+    }   //TaskAutoPickupCoralFromStation
 
     /**
      * This method starts the auto-assist operation.
      *
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
-    public void autoAssist(TrcEvent completionEvent)
+    public void autoPickupCoral(TrcEvent completionEvent)
     {
         tracer.traceInfo(moduleName, "event=" + completionEvent);
         startAutoTask(State.START, new TaskParams(), completionEvent);
-    }   //autoAssist
+    }   //autoPickupCoral
 
     //
     // Implement TrcAutoTask abstract methods.
@@ -171,4 +171,4 @@ public class TaskAuto extends TrcAutoTask<TaskAuto.State>
         }
     }   //runTaskState
  
-}   //class TaskAuto
+}   //class TaskAutoPickupCoralFromStation

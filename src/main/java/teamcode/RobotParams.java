@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Titan Robotics Club (http://www.titanrobotics.com)
+ * Copyright (c) 2025 Titan Robotics Club (http://www.titanrobotics.com)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -81,6 +81,7 @@ public class RobotParams
         public static final boolean useSteeringAnalogEncoder    = false;
         // Subsystems
         public static final boolean useSubsystems               = true;
+        public static final boolean useDifferentialWrist        = false;
     }   //class Preferences
 
     /**
