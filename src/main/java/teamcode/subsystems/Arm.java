@@ -24,6 +24,7 @@ package teamcode.subsystems;
 
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
+import teamcode.RobotParams;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcPidController;
 
@@ -37,7 +38,7 @@ public class Arm
         public static final String SUBSYSTEM_NAME               = "Arm";
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = 10;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ARM_MOTOR;
         public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
