@@ -810,7 +810,7 @@ public class Robot extends FrcRobotBase
         if (alliance == Alliance.Red)
         {
             // Translate blue alliance pose to red alliance pose.
-            if (RobotParams.Game.fieldIsMirrored)
+            if (RobotParams.Field.mirroredField)
             {
                 // Mirrored field.
                 double angleDelta = (newPose.angle - 90.0)*2.0;
