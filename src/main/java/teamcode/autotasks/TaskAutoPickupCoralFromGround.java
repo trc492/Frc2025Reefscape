@@ -39,6 +39,9 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     public enum State
     {
         START,
+        FIND_CORAL,
+        APPROACH_CORAL,
+        CHECK_INTAKE_COMPLETION,
         DONE
     }   //enum State
 
@@ -161,6 +164,17 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
         switch (state)
         {
             case START:
+                // Set up vision and subsystems according to task params.
+                break;
+
+            case FIND_CORAL:
+                // Look for Coral on the ground.
+                break;
+
+            case APPROACH_CORAL:
+                break;
+
+            case CHECK_INTAKE_COMPLETION:
                 break;
 
             default:

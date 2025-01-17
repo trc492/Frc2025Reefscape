@@ -39,6 +39,9 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     public enum State
     {
         START,
+        FIND_STATION_APRILTAG,
+        APPROACH_STATION,
+        RECEIVE_CORAL,
         DONE
     }   //enum State
 
@@ -161,6 +164,17 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         switch (state)
         {
             case START:
+                // Set up vision and subsystems according to task params.
+                break;
+
+            case FIND_STATION_APRILTAG:
+                // Look for Coral Station AprilTag and relocalize robot.
+                break;
+
+            case APPROACH_STATION:
+                break;
+
+            case RECEIVE_CORAL:
                 break;
 
             default:
