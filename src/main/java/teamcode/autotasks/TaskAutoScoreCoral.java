@@ -39,6 +39,9 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     public enum State
     {
         START,
+        FIND_REEF_APRILTAG,
+        APPROACH_REEF,
+        SCORE_CORAL,
         DONE
     }   //enum State
 
@@ -161,6 +164,17 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         switch (state)
         {
             case START:
+                // Set up vision and subsystems according to task params (branch, height etc).
+                break;
+
+            case FIND_REEF_APRILTAG:
+                // Look for Reef AprilTag and relocalize robot.
+                break;
+
+            case APPROACH_REEF:
+                break;
+
+            case SCORE_CORAL:
                 break;
 
             default:

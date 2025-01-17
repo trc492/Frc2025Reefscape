@@ -49,6 +49,7 @@ import frclib.sensor.FrcAHRSGyro;
 import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
+import teamcode.FrcAuto.AutoChoices;
 import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
@@ -542,6 +543,20 @@ public class Robot extends FrcRobotBase
     public void turtle()
     {
     }   //turtle
+
+    /**
+     * This method sets the robot's starting position according to the autonomous choices.
+     *
+     * @param autoChoices specifies all the auto choices.
+     */
+    public void setRobotStartPosition(AutoChoices autoChoices)
+    {
+        // robotDrive.driveBase.setFieldPosition(
+        //     adjustPoseByAlliance(
+        //         autoChoices.startPos == FtcAuto.StartPos.NET_ZONE?
+        //             RobotParams.Game.STARTPOSE_RED_NET_ZONE: RobotParams.Game.STARTPOSE_RED_OBSERVATION_ZONE,
+        //         autoChoices.alliance, false));
+    }   //setRobotStartPosition
 
     /**
      * This method creates and opens the trace log with the file name derived from the given match info.
