@@ -42,7 +42,7 @@ public class RobotParams
     public static class Preferences
     {
         // Global config
-        public static final RobotType robotType                 = RobotType.CrescendoRobot;
+        public static final RobotType robotType                 = RobotType.MaestroRobot;
         public static final boolean inCompetition               = false;
         public static final boolean hybridMode                  = false;
         public static final boolean useTraceLog                 = true;
