@@ -55,9 +55,9 @@ public class RobotBase
     {
         // This is useful for developing Vision code where all you need is a Robot Controller and camera.
         VisionOnly,
-        // Last season's robot.
-        CrescendoRobot,
-        // This season's robot.
+        // Crescendo robot.
+        MaestroRobot,
+        // Reefscape robot.
         ReefscapeRobot
     }   //enum RobotType
 
@@ -115,16 +115,16 @@ public class RobotBase
         }   //BackCamParams
     }   //class BackCamParams
 
-    public static class CrescendoRobotParams extends FrcSwerveDrive.SwerveInfo
+    public static class MaestroParams extends FrcSwerveDrive.SwerveInfo
     {
         public final double FALCON_MAX_RPM                      = 6380.0;
         public final double DRIVE_GEAR_RATIO                    = 6.75;
         public final double DRIVE_WHEEL_DIAMETER                = 3.9326556997620689090425924610785;    // inches
         public final double STEER_GEAR_RATIO                    = 15.43;
 
-        public CrescendoRobotParams()
+        public MaestroParams()
         {
-            robotName = "SwerveRobot";
+            robotName = "Maestro";
             // Robot Dimensions.
             robotLength = RobotParams.Robot.ROBOT_LENGTH;
             robotWidth = RobotParams.Robot.ROBOT_WIDTH;
@@ -219,8 +219,8 @@ public class RobotBase
             // // ((theoretical max rpm * speed loss constant / gear ratio) / 60 sec/min) * 360 deg/rev
             // double steerMaxVelocity = (FALCON_MAX_RPM * 0.81 / STEER_GEAR_RATIO /60.0) * 360.0;
             // // kF set to Motion Magic recommendation.
-        }   //CrescendoRobotParams
-    }   //class CrescendoRobotParams
+        }   //MaestroParams
+    }   //class MaestroParams
 
     /**
      * This class contains the Swerve Robot Parameters.
@@ -234,7 +234,7 @@ public class RobotBase
 
         public ReefscapeRobotParams()
         {
-            robotName = "SwerveRobot";
+            robotName = "ReefscapeRobot";
             // Robot Dimensions.
             robotLength = RobotParams.Robot.ROBOT_LENGTH;
             robotWidth = RobotParams.Robot.ROBOT_WIDTH;
@@ -332,109 +332,6 @@ public class RobotBase
         }   //ReefscapeRobotParams
     }   //class ReefscapeRobotParams
 
-    /**
-     * This class contains the Mecanum Robot Parameters.
-     */
-    public static class MecanumParams extends FrcRobotDrive.RobotInfo
-    {
-        public MecanumParams()
-        {
-            robotName = "MecanumRobot";
-            // Robot Dimensions.
-            robotLength = RobotParams.Robot.ROBOT_LENGTH;
-            robotWidth = RobotParams.Robot.ROBOT_WIDTH;
-            wheelBaseLength = 23.25;
-            wheelBaseWidth = 23.25;
-            // Gyro parameters.
-            imuName = "NavX";
-            imuType = FrcRobotDrive.ImuType.NavX;
-            imuPort = NavXComType.kMXP_SPI;
-            // Drive Motor parameters.
-            driveMotorType = MotorType.CanTalonFx;
-            driveMotorNames = new String[] {"lfDriveMotor", "rfDriveMotor", "lbDriveMotor", "rbDriveMotor"};
-            driveMotorIds = new int[]
-                {HwConfig.CANID_LFDRIVE_MOTOR, HwConfig.CANID_RFDRIVE_MOTOR,
-                 HwConfig.CANID_LBDRIVE_MOTOR, HwConfig.CANID_RBDRIVE_MOTOR};
-            driveMotorInverted = new boolean[] {false, true, false, true};
-            odometryType = OdometryType.MotorOdometry;
-            // Absolute Odometry
-            absoluteOdometry = null;
-            // Drive Motor Odometry
-            xDrivePosScale = 1.6577438;         // inch/rev
-            yDrivePosScale = 2.355935875;       // inch/rev
-            // Robot Drive Characteristics
-            robotMaxVelocity = 177.1654;        // inch/sec
-            robotMaxAcceleration = 799.1;       // inch/sec sq
-            robotMaxTurnRate = 572.9578;        // degree/sec
-            profiledMaxVelocity = 157.48;       // inch/sec
-            profiledMaxAcceleration = 600.0;    // inch/sec sq
-            profiledMaxTurnRate = 180.0;        // degree/sec
-            // DriveBase PID Parameters
-            drivePidTolerance = 2.0;
-            turnPidTolerance = 2.0;
-            xDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0, 0.0, 0.0);
-            xDrivePidPowerLimit = 1.0;
-            yDrivePidCoeffs = new PidCoefficients(0.011, 0.0, 0.001, 0.0, 0.0);
-            yDrivePidPowerLimit = 1.0;
-            turnPidCoeffs = new PidCoefficients(0.012, 0.0, 0.0008, 0.0, 0.0);
-            turnPidPowerLimit = 0.5;
-            // PID Stall Detection
-            pidStallDetectionEnabled = true;
-            // PurePursuit Parameters
-            ppdFollowingDistance = 12.0;
-            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
-        }   //MecanumParams
-    }   //class MecanumParams
-
-    /**
-     * This class contains the Differential Robot Parameters.
-     */
-    public static class DifferentialParams extends FrcRobotDrive.RobotInfo
-    {
-        public DifferentialParams()
-        {
-            robotName = "DifferentialRobot";
-            // Robot Dimensions.
-            robotLength = RobotParams.Robot.ROBOT_LENGTH;
-            robotWidth = RobotParams.Robot.ROBOT_WIDTH;
-            wheelBaseLength = 23.25;
-            wheelBaseWidth = 23.25;
-            // Gyro parameters.
-            imuName = "NavX";
-            imuType = FrcRobotDrive.ImuType.NavX;
-            imuPort = NavXComType.kMXP_SPI;
-            // Drive Motor parameters.
-            driveMotorType = MotorType.CanTalonFx;
-            driveMotorNames = new String[] {"leftDriveMotor", "rightDriveMotor"};
-            driveMotorIds = new int[] {HwConfig.CANID_LFDRIVE_MOTOR, HwConfig.CANID_RFDRIVE_MOTOR};
-            driveMotorInverted = new boolean[] {false, true};
-            odometryType = OdometryType.MotorOdometry;
-            // Absolute Odometry
-            absoluteOdometry = null;
-            // Drive Motor Odometry
-            yDrivePosScale = 2.355935875;       // inch/rev
-            // Robot Drive Characteristics
-            robotMaxVelocity = 177.1654;        // inch/sec
-            robotMaxAcceleration = 799.1;       // inch/sec sq
-            robotMaxTurnRate = 572.9578;        // degree/sec
-            profiledMaxVelocity = 157.48;       // inch/sec
-            profiledMaxAcceleration = 600.0;    // inch/sec sq
-            profiledMaxTurnRate = 180.0;        // degree/sec
-            // DriveBase PID Parameters
-            drivePidTolerance = 1.0;
-            turnPidTolerance = 2.0;
-            yDrivePidCoeffs = new PidCoefficients(0.011, 0.0, 0.0013, 0.0, 0.0);
-            yDrivePidPowerLimit = 1.0;
-            turnPidCoeffs = new PidCoefficients(0.012, 0.0, 0.00008, 0.0, 0.0);
-            turnPidPowerLimit = 0.5;
-            // PID Stall Detection
-            pidStallDetectionEnabled = true;
-            // PurePursuit Parameters
-            ppdFollowingDistance = 12.0;
-            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
-        }   //DifferentialParams
-    }   //class DifferentialParams
-
     public static class VisionOnlyParams extends FrcRobotDrive.RobotInfo
     {
         public VisionOnlyParams()
@@ -480,14 +377,14 @@ public class RobotBase
                 robotDrive = null;
                 break;
 
-            case CrescendoRobot:
-                robotInfo = new CrescendoRobotParams();
+            case MaestroRobot:
+                robotInfo = new MaestroParams();
                 robotDrive = RobotParams.Preferences.useDriveBase?
-                    new FrcSwerveDrive((CrescendoRobotParams) robotInfo): null;
+                    new FrcSwerveDrive((MaestroParams) robotInfo): null;
                 break;
 
             case ReefscapeRobot:
-                robotInfo = new CrescendoRobotParams();
+                robotInfo = new ReefscapeRobotParams();
                 robotDrive = RobotParams.Preferences.useDriveBase?
                     new FrcSwerveDrive((ReefscapeRobotParams) robotInfo): null;
                 break;
