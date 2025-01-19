@@ -220,6 +220,44 @@ public class RobotParams
         //
         // Game element locations and dimensions.
         //
+        // AprilTag IDs for various locations for red and blue alliances.
+        public static final int[] APRILTAG_LEFT_CORAL_STATION   = {1, 13};
+        public static final int[] APRILTAG_RIGHT_CORAL_STATION  = {2, 12};
+        public static final int[] APRILTAG_PROCESSOR            = {3, 16};
+        public static final int[] APRILTAG_RIGHT_BARGE          = {4, 15};
+        public static final int[] APRILTAG_LEFT_BARGE           = {5, 14};
+        public static final int[] APRILTAG_CLOSE_LEFT_REEF      = {6, 19};
+        public static final int[] APRILTAG_CLOSE_MID_REEF       = {7, 18};
+        public static final int[] APRILTAG_CLOSE_RIGHT_REEF     = {8, 17};
+        public static final int[] APRILTAG_FAR_RIGHT_REEF       = {9, 22};
+        public static final int[] APRILTAG_FAR_MID_REEF         = {10, 21};
+        public static final int[] APRILTAG_FAR_LEFT_REEF        = {11, 20};
+        // Array of AprilTag poses indexed by AprilTag ID.
+        public static final TrcPose2D[] APRILTAG_POSES          =
+        {
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 1
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 2
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 3
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 4
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 5
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 6
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 7
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 8
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 9
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 10
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 11
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 12
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 13
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 14
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 15
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 16
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 17
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 18
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 19
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 20
+            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 21
+            new TrcPose2D(0.0, 0.0, 0.0)                        // ID 22
+        };
     }   //class Game
 
     /**
