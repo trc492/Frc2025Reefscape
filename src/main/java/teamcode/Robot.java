@@ -194,9 +194,6 @@ public class Robot extends FrcRobotBase
             pressureSensor = new AnalogInput(RobotParams.HwConfig.AIN_PRESSURE_SENSOR);
         }
 
-        // Create and initialize miscellaneous hardware.
-        ledIndicator = new LEDIndicator();
-
         // Create and initialize RobotInfo. This must be done early because subsequent components may require it.
         robotBase = new RobotBase();
         robotInfo = robotBase.getRobotInfo();
@@ -235,14 +232,39 @@ public class Robot extends FrcRobotBase
         //
         // Create and initialize other subsystems.
         //
-        if (RobotParams.Preferences.useSubsystems)
+
+        // If robotType is VisionOnly, the robot controller is disconnected from the robot for testing vision.
+        // In this case, we should not instantiate any robot hardware.
+        if (RobotParams.Preferences.robotType != RobotBase.RobotType.VisionOnly)
         {
-            // Create subsystems.
+            if (robotInfo.ledName != null)
+            {
+                ledIndicator = new LEDIndicator(robotInfo.ledName, robotInfo.ledChannel, robotInfo.numLEDs);
+            }
 
-            // Zero calibrate all subsystems only in Auto or if TeleOp is run standalone without prior Auto.
-            zeroCalibrate(null, null);
+            if (RobotParams.Preferences.useSubsystems)
+            {
+                // Create subsystems.
+                if (RobotParams.Preferences.useElevator)
+                {
+                }
 
-            // Create autotasks.
+                if (RobotParams.Preferences.useArm)
+                {
+                }
+
+                if (RobotParams.Preferences.useGrabber)
+                {
+                }
+
+                if (RobotParams.Preferences.useIntake)
+                {
+                }
+                // Zero calibrate all subsystems only once in robot initialization.
+                zeroCalibrate(null, null);
+
+                // Create autotasks.
+            }
         }
 
         // Miscellaneous.
