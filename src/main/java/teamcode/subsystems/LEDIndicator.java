@@ -65,10 +65,14 @@ public class LEDIndicator
 
     /**
      * Constructor: Create an instance of the object.
+     *
+     * @param name specifies the LED instance name.
+     * @param channel specifies the PWM channel of the LED.
+     * @param numLEDs specifies the number of LED pixels.
      */
-    public LEDIndicator()
+    public LEDIndicator(String name, int channel, int numLEDs)
     {
-        led = new FrcAddressableLED("LED", RobotParams.HwConfig.NUM_LEDS, RobotParams.HwConfig.PWM_CHANNEL_LED);
+        led = new FrcAddressableLED(name, channel, numLEDs);
         reset();
     }   //LEDIndicator
 

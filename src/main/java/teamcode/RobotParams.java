@@ -81,6 +81,10 @@ public class RobotParams
         public static final boolean useSteeringAnalogEncoder    = false;
         // Subsystems
         public static final boolean useSubsystems               = true;
+        public static final boolean useElevator                 = false;
+        public static final boolean useArm                      = false;
+        public static final boolean useGrabber                  = false;
+        public static final boolean useIntake                   = false;
         public static final boolean useDifferentialWrist        = false;
     }   //class Preferences
 
