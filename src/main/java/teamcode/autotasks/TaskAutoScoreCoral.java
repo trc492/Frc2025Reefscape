@@ -22,12 +22,17 @@
 
 package teamcode.autotasks;
 
+import org.opencv.video.TrackerGOTURN;
+
+import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
+import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
+import trclib.timer.TrcTimer;
 
 /**
  * This class implements Auto Score Coral task.
@@ -47,8 +52,20 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
 
     private static class TaskParams
     {
-        TaskParams()
+        boolean useVision;
+        int reefLevel; //0-4, with 0 being the trough and 4 being the high reef
+        boolean knockAlgae;
+        boolean inAuto;
+        boolean relocalize;
+
+
+        TaskParams(boolean useVision, int reefLevel, boolean knockAlgae, boolean inAuto, boolean relocalize)
         {
+            this.useVision = useVision;
+            this.reefLevel = reefLevel;
+            this.knockAlgae = knockAlgae;
+            this.inAuto = inAuto;
+            this.relocalize = relocalize;
         }   //TaskParams
     }   //class TaskParams
 
@@ -56,6 +73,9 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     private final Robot robot;
 
     private String currOwner = null;
+    private int aprilTagId = -1;
+    private TrcPose2D aprilTagPose = null;
+    private Double visionExpiredTime;
 
     /**
      * Constructor: Create an instance of the object.
@@ -75,10 +95,19 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      *
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
-    public void autoScoreCoral(TrcEvent completionEvent)
+    public void autoScoreCoral(boolean useVision, int reefLevel, boolean knockAlgae, boolean inAuto, boolean relocalize,
+        TrcEvent completionEvent)
     {
-        tracer.traceInfo(moduleName, "event=" + completionEvent);
-        startAutoTask(State.START, new TaskParams(), completionEvent);
+        tracer.traceInfo(
+            moduleName,
+            "useVision" + useVision,
+            "reefLevel" + reefLevel,
+            "knockAlgae" + knockAlgae,
+            "inAuto" + inAuto,
+            "relocalize" + relocalize,
+            "event=" + completionEvent
+            );
+        startAutoTask(State.START, new TaskParams(useVision, reefLevel, knockAlgae, inAuto, relocalize), completionEvent);
     }   //autoScoreCoral
 
     //
@@ -165,13 +194,53 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         {
             case START:
                 // Set up vision and subsystems according to task params (branch, height etc).
+                aprilTagId = -1;
+                aprilTagPose = null;
+                if(taskParams.useVision && robot.photonVisionFront != null){
+                    tracer.traceInfo(moduleName, "***** Using AprilTag Vision.*****");
+                    visionExpiredTime = null;
+                    sm.setState(State.FIND_REEF_APRILTAG);
+                } else {
+                    tracer.traceInfo(moduleName, "***** Not using AprilTag Vision*****");
+                    sm.setState(State.SCORE_CORAL);
+                }
                 break;
 
             case FIND_REEF_APRILTAG:
                 // Look for Reef AprilTag and relocalize robot.
+
+                // Used last years code, implementation of Vision might change
+                // Prioritize Reef AprilTags
+                FrcPhotonVision.DetectedObject object =
+                    robot.photonVisionFront.getBestDetectedAprilTag(new int[] {17, 18, 19, 20, 21, 22, 6, 7, 8, 9, 10, 11});
+                if(object != null){
+                    aprilTagId = object.target.getFiducialId();
+                    tracer.traceInfo(
+                        moduleName, "***** Vision found AprilTag " + aprilTagId +
+                        ": aprilTagPose=" + object.targetPose);
+
+                    aprilTagPose = object.getObjectPose();
+
+                    if(taskParams.relocalize){
+                        robot.relocalizeRobotByAprilTag(object);
+                    }
+                    sm.setState(State.APPROACH_REEF);
+                } else if(visionExpiredTime != null){
+                    visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
+                } else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
+                {
+                    if(!taskParams.inAuto){
+                        // We are in TeleOp, but we cannot see the Reef, the driver can drive to Reef so we can at least go to scoring position
+                        sm.setState(State.SCORE_CORAL);
+                    }
+                    tracer.traceInfo(moduleName, "***** No AprilTag found.");
+                    // We cannot see AprilTag, so we cannot do anything
+                    sm.setState(State.DONE);
+                }
                 break;
 
             case APPROACH_REEF:
+
                 break;
 
             case SCORE_CORAL:

@@ -22,12 +22,15 @@
 
 package teamcode.autotasks;
 
+import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
+import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
+import trclib.timer.TrcTimer;
 
 /**
  * This class implements Auto Pickup Coral from Ground task.
@@ -47,8 +50,12 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
 
     private static class TaskParams
     {
-        TaskParams()
+        boolean useVision;
+        boolean inAuto;
+        TaskParams(boolean useVision, boolean inAuto)
         {
+            this.useVision = useVision;
+            this.inAuto = inAuto;
         }   //TaskParams
     }   //class TaskParams
 
@@ -56,6 +63,10 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     private final Robot robot;
 
     private String currOwner = null;
+    private TrcPose2D coralPose = null;
+    private Double visionExpiredTime = null;
+
+
 
     /**
      * Constructor: Create an instance of the object.
@@ -75,10 +86,15 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
      *
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
-    public void autoPickupCoral(TrcEvent completionEvent)
+    public void autoPickupCoral(boolean useVision, boolean inAuto, TrcEvent completionEvent)
     {
-        tracer.traceInfo(moduleName, "event=" + completionEvent);
-        startAutoTask(State.START, new TaskParams(), completionEvent);
+        tracer.traceInfo(
+            moduleName, 
+            "useVision" + useVision,
+            "inAuto" + inAuto,
+            "event=" + completionEvent
+            );
+        startAutoTask(State.START, new TaskParams(useVision, inAuto), completionEvent);
     }   //autoPickupCoral
 
     //
@@ -165,10 +181,39 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
         {
             case START:
                 // Set up vision and subsystems according to task params.
+                coralPose = null;
+                if(taskParams.useVision && robot.photonVisionBack != null){
+                    tracer.traceInfo(moduleName, "***** Using Vision to pickup Coral");
+                    visionExpiredTime = null;
+                    sm.setState(State.FIND_CORAL);
+                } else{
+                    tracer.traceInfo(moduleName, "***** Not using Vision to find Coral");
+                    sm.setState(State.APPROACH_CORAL);
+                }
                 break;
 
             case FIND_CORAL:
                 // Look for Coral on the ground.
+                // Used last years code, Vision implementation might change
+                FrcPhotonVision.DetectedObject object = robot.photonVisionBack.getBestDetectedObject();
+
+                if(object!=null){
+                    coralPose = object.getObjectPose();
+                    coralPose.x = -coralPose.x;
+                    coralPose.y = -coralPose.y;
+                    tracer.traceInfo(
+                        moduleName, "***** Vision found Coral: notePose=" + coralPose +
+                        ", robotPose=" + robot.robotDrive.driveBase.getFieldPosition());
+                    sm.setState(State.APPROACH_CORAL);
+                } else if(visionExpiredTime != null){
+
+                    visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
+                } 
+                else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
+                {
+                    tracer.traceInfo(moduleName, "***** No Coral Found.");
+                    sm.setState(State.APPROACH_CORAL);
+                }
                 break;
 
             case APPROACH_CORAL:

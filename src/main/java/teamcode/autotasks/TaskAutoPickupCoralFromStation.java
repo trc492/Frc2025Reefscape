@@ -22,12 +22,17 @@
 
 package teamcode.autotasks;
 
+import java.nio.ReadOnlyBufferException;
+
+import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
+import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
+import trclib.timer.TrcTimer;
 
 /**
  * This class implements Auto Pickup Coral From Station task.
@@ -47,8 +52,15 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
 
     private static class TaskParams
     {
-        TaskParams()
+        boolean useVision;
+        boolean inAuto;
+        boolean relocalize;
+        TaskParams(boolean useVision, boolean inAuto, boolean relocalize)
         {
+            this.useVision = useVision;
+            this.inAuto = inAuto;
+            this.relocalize = relocalize;
+            
         }   //TaskParams
     }   //class TaskParams
 
@@ -56,6 +68,9 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     private final Robot robot;
 
     private String currOwner = null;
+    private int aprilTagId = -1;
+    private TrcPose2D aprilTagPose = null;
+    private Double visionExpiredTime = null;
 
     /**
      * Constructor: Create an instance of the object.
@@ -75,10 +90,16 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
      *
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
-    public void autoPickupCoral(TrcEvent completionEvent)
+    public void autoPickupCoral(boolean useVision, boolean inAuto, boolean relocalize, TrcEvent completionEvent)
     {
-        tracer.traceInfo(moduleName, "event=" + completionEvent);
-        startAutoTask(State.START, new TaskParams(), completionEvent);
+        tracer.traceInfo(
+            moduleName, 
+            "useVision" + useVision,
+            "inAuto" + inAuto,
+            "relocalize" + relocalize,
+            "event=" + completionEvent
+            );
+        startAutoTask(State.START, new TaskParams(useVision, inAuto, relocalize), completionEvent);
     }   //autoPickupCoral
 
     //
@@ -165,10 +186,49 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         {
             case START:
                 // Set up vision and subsystems according to task params.
+                aprilTagId = -1;
+                aprilTagPose = null;
+                
+                if(taskParams.useVision && robot.photonVisionBack != null){
+                    tracer.traceInfo(moduleName, "*****Moving to Coral Station using Vision");
+                    visionExpiredTime = null;
+                    sm.setState(State.FIND_STATION_APRILTAG);
+                } else{
+                    tracer.traceInfo(moduleName, "*****Not using Vision to move to Coral Station");
+                    sm.setState(State.APPROACH_STATION);
+                }
                 break;
 
             case FIND_STATION_APRILTAG:
                 // Look for Coral Station AprilTag and relocalize robot.
+                FrcPhotonVision.DetectedObject object =
+                    robot.photonVisionFront.getBestDetectedAprilTag(new int[] {1, 2, 12, 13});
+
+                if(object != null){
+                    aprilTagId = object.target.getFiducialId();
+                    tracer.traceInfo(
+                        moduleName, "***** Vision found AprilTag " + aprilTagId +
+                        ": aprilTagPose=" + object.targetPose);
+
+                    aprilTagPose = object.getObjectPose();
+
+                    if(taskParams.relocalize){
+                        robot.relocalizeRobotByAprilTag(object);
+                    }
+                    sm.setState(State.APPROACH_STATION);
+                } else if(visionExpiredTime != null){
+                    visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
+                } else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
+                {
+                    if(!taskParams.inAuto){
+                        // We are in TeleOp, but we cannot see the Station, at least we can turn on the hopper intake
+                        sm.setState(State.RECEIVE_CORAL);
+                    }
+                    tracer.traceInfo(moduleName, "***** No AprilTag found.");
+                    // We cannot see AprilTag, so we cannot do anything
+                    sm.setState(State.DONE);
+                }
+
                 break;
 
             case APPROACH_STATION:
