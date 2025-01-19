@@ -52,11 +52,18 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     {
         boolean useVision;
         boolean inAuto;
+
         TaskParams(boolean useVision, boolean inAuto)
         {
             this.useVision = useVision;
             this.inAuto = inAuto;
         }   //TaskParams
+
+        public String toString()
+        {
+            return "useVision=" + useVision +
+                   ",inAuto=" + inAuto;
+        }   //toString
     }   //class TaskParams
 
     private final String ownerName;
@@ -65,8 +72,6 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     private String currOwner = null;
     private TrcPose2D coralPose = null;
     private Double visionExpiredTime = null;
-
-
 
     /**
      * Constructor: Create an instance of the object.
@@ -84,17 +89,15 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     /**
      * This method starts the auto-assist operation.
      *
+     * @param useVision specifies true to use vision to find the coral, false otherwise.
+     * @param inAuto specifies true if caller is autonomous, false if in teleop.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoPickupCoral(boolean useVision, boolean inAuto, TrcEvent completionEvent)
     {
-        tracer.traceInfo(
-            moduleName, 
-            "useVision" + useVision,
-            "inAuto" + inAuto,
-            "event=" + completionEvent
-            );
-        startAutoTask(State.START, new TaskParams(useVision, inAuto), completionEvent);
+        TaskParams taskParams = new TaskParams(useVision, inAuto);
+        tracer.traceInfo(moduleName, "taskParams=(" + taskParams + "), event=" + completionEvent);
+        startAutoTask(State.START, taskParams, completionEvent);
     }   //autoPickupCoral
 
     //
@@ -112,7 +115,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     protected boolean acquireSubsystemsOwnership()
     {
         boolean success = ownerName == null ||
-                          (robot.robotDrive.driveBase.acquireExclusiveAccess(ownerName));
+                          robot.robotDrive.driveBase.acquireExclusiveAccess(ownerName);
 
         if (success)
         {
@@ -182,12 +185,15 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
             case START:
                 // Set up vision and subsystems according to task params.
                 coralPose = null;
-                if(taskParams.useVision && robot.photonVisionBack != null){
-                    tracer.traceInfo(moduleName, "***** Using Vision to pickup Coral");
+                if (taskParams.useVision && robot.photonVisionFront != null)
+                {
+                    tracer.traceInfo(moduleName, "***** Using Vision to find Coral.");
                     visionExpiredTime = null;
                     sm.setState(State.FIND_CORAL);
-                } else{
-                    tracer.traceInfo(moduleName, "***** Not using Vision to find Coral");
+                }
+                else
+                {
+                    tracer.traceInfo(moduleName, "***** Not using Vision to find Coral.");
                     sm.setState(State.APPROACH_CORAL);
                 }
                 break;
@@ -195,18 +201,18 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
             case FIND_CORAL:
                 // Look for Coral on the ground.
                 // Used last years code, Vision implementation might change
-                FrcPhotonVision.DetectedObject object = robot.photonVisionBack.getBestDetectedObject();
+                FrcPhotonVision.DetectedObject object = robot.photonVisionFront.getBestDetectedObject();
 
-                if(object!=null){
+                if (object != null)
+                {
                     coralPose = object.getObjectPose();
-                    coralPose.x = -coralPose.x;
-                    coralPose.y = -coralPose.y;
                     tracer.traceInfo(
-                        moduleName, "***** Vision found Coral: notePose=" + coralPose +
+                        moduleName, "***** Vision found Coral: coralPose=" + coralPose +
                         ", robotPose=" + robot.robotDrive.driveBase.getFieldPosition());
                     sm.setState(State.APPROACH_CORAL);
-                } else if(visionExpiredTime != null){
-
+                }
+                else if (visionExpiredTime != null)
+                {
                     visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
                 } 
                 else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
