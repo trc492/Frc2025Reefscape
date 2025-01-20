@@ -239,28 +239,28 @@ public class RobotParams
         // Array of AprilTag poses indexed by AprilTag ID.
         public static final TrcPose2D[] APRILTAG_POSES          =
         {
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 1
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 2
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 3
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 4
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 5
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 6
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 7
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 8
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 9
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 10
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 11
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 12
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 13
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 14
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 15
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 16
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 17
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 18
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 19
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 20
-            new TrcPose2D(0.0, 0.0, 0.0),                       // ID 21
-            new TrcPose2D(0.0, 0.0, 0.0)                        // ID 22
+        /*ID01*/    new TrcPose2D(-25.98, 657.48, -126.0), //z=58.5
+        /*ID02*/    new TrcPose2D(-291.34, 657.48, 126.0), //z=58.5
+        /*ID03*/    new TrcPose2D(-317.32, 455.12, 90.0), //z=51.125
+        /*ID04*/    new TrcPose2D(-241.73, 365.35, 0.0), //z=73.5466,pitch=30
+        /*ID05*/    new TrcPose2D(-75.2, 365.35, 0.0), //z=73.5466,pitch=30
+        /*ID06*/    new TrcPose2D(-130.32, 530.32, 60.0), //z=12.125
+        /*ID07*/    new TrcPose2D(-158.66, 546.85, 0.0), //z=12.125
+        /*ID08*/    new TrcPose2D(-187.01, 530.32, -60.0), //z=12.125
+        /*ID09*/    new TrcPose2D(-187.01, 497.64, -120.0), //z=12.125
+        /*ID10*/    new TrcPose2D(-158.66, 481.5, 180.0), //z=12.125
+        /*ID11*/    new TrcPose2D(-130.32, 497.64, 120.0), //z=12.125
+        /*ID12*/    new TrcPose2D(-25.98, 33.46, -54.0), //z=58.5
+        /*ID13*/    new TrcPose2D(-291.34, 33.46, 54.0), //z=58.5
+        /*ID14*/    new TrcPose2D(-241.73, 325.59, 180.0), //z=73.5466,pitch=30
+        /*ID15*/    new TrcPose2D(-75.2, 325.59, 180.0), //z=73.5466,pitch=30
+        /*ID16*/    new TrcPose2D(0.0, 235.83, -90.0), //z=51.125
+        /*ID17*/    new TrcPose2D(-130.32, 160.24, 120.0), //z=12.125
+        /*ID18*/    new TrcPose2D(-158.66, 144.09, 180.0), //z=12.125
+        /*ID19*/    new TrcPose2D(-187.01, 160.24, -120.0), //z=12.125
+        /*ID20*/    new TrcPose2D(-187.01, 192.91, -60.0), //z=12.125
+        /*ID21*/    new TrcPose2D(-158.66, 209.45, 0.0), //z=12.125
+        /*ID22*/    new TrcPose2D(-130.32, 192.91, 60.0) //z=12.125
         };
     }   //class Game
 
