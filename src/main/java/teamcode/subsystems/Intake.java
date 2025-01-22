@@ -95,6 +95,6 @@ public class Intake
     public TrcMotor getDeployer()
     {
         return deployer;
-    }   //getIntake
+    }   //getDeployer
 
 }   //class Intake

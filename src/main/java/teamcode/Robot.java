@@ -547,6 +547,9 @@ public class Robot extends FrcRobotBase
                     dashboard.displayPrintf(
                         lineNum++, "Intake: power=%.1f, hasObject=%s, autoActive=%s",
                         intake.getPower(), intake.hasObject(), intake.isAutoActive());
+                }
+                if (deployer != null)
+                {
                     dashboard.displayPrintf(
                         lineNum++, "Deployer: power=%.1f, pos=%.1f/%.1f",
                         deployer.getPower(), deployer.getPosition(), deployer.getPidTarget());
