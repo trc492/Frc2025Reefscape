@@ -155,6 +155,7 @@ public class RobotParams
         public static final int AIN_LBSTEER_ENCODER             = 2;
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
+        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 2;
 
         // PWM channels.
         public static final int NUM_LEDS                        = 60;
