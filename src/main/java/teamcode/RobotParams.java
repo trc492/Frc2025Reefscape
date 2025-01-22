@@ -196,7 +196,17 @@ public class RobotParams
     {
         public static final double ONTARGET_THRESHOLD           = 5.0;
         public static final double GUIDANCE_ERROR_THRESHOLD     = 12.0;
+        public static final double FRONTCAM_X_OFFSET            = 0.0;
     }   //class Vision
+
+    public static class SwerveDriveBase
+    {
+        // These values will have to be tuned
+        public static final double PROFILED_MAX_VELOCITY = 0.0;
+        public static final double PROFILED_MAX_ACCELERATION = 0.0;
+        public static final double PROFILED_MAX_DECELERATION = 0.0;
+
+    }
 
     /**
      * This class contains season specific game element information.

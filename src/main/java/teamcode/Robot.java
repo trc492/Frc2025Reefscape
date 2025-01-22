@@ -897,4 +897,21 @@ public class Robot extends FrcRobotBase
         return pressureSensor != null? (pressureSensor.getVoltage() - 0.5) * 50.0: 0.0;
     }   //getPressure
 
+    public int getClosestAprilTag(TrcPose2D robotPose){
+        int closestTag = 1;
+        double minDistance = Double.MAX_VALUE;
+        for(int i = 0; i<RobotParams.Game.APRILTAG_POSES.length; i++){
+            double x = robotPose.x - RobotParams.Game.APRILTAG_POSES[i].x;
+            double y = robotPose.y - RobotParams.Game.APRILTAG_POSES[i].y;
+            double distance = Math.sqrt((x * x) + (y * y));
+
+            if(distance < minDistance){
+                minDistance = distance;
+                closestTag = i+1;
+            }
+        }
+
+        return closestTag;
+    }
+
 }   //class Robot
