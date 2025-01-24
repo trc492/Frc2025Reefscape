@@ -22,11 +22,17 @@
 
 package teamcode.subsystems;
 
+import java.util.Locale;
+
+import org.w3c.dom.css.ElementCSSInlineStyle;
+
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
 import teamcode.RobotParams;
 import trclib.motor.TrcMotor;
+import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcPidController;
+
 
 /**
  * This class implements an Elevator Subsystem.
@@ -43,6 +49,12 @@ public class Elevator
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = true;
+        public static final String LOWER_LIMIT_NAME             = SUBSYSTEM_NAME + ".lowerLimit";
+        public static final String UPPER_LIMIT_NAME             = SUBSYSTEM_NAME + ".upperLimit";
+        public static final int LOWER_LIMIT_CHANNEL             = RobotParams.HwConfig.DIO_ELEVATOR_LOWER_LIMIT;
+        public static final int UPPER_LIMIT_CHANNEL             = RobotParams.HwConfig.DIO_ELEVATOR_UPPER_LIMIT;
+        public static final boolean LOWER_LIMIT_INVERTED        = false;
+        public static final boolean UPPER_LIMIT_INVERTED        = false;
         public static final double INCHES_PER_COUNT             = 18.25/4941.0;
         public static final double POS_OFFSET                   = 10.875;
         public static final double POWER_LIMIT                  = 1.0;
@@ -65,6 +77,8 @@ public class Elevator
     }   //class Params
 
     private final TrcMotor elevatorMotor;
+
+    // private final TrcEncoder elevatorEncoder;
     
     /**
      * Constructor: Creates an instance of the object.
@@ -76,13 +90,18 @@ public class Elevator
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
             .setPositionScaleAndOffset(Params.INCHES_PER_COUNT, Params.POS_OFFSET)
-            .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
+            .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets)
+            .setLowerLimitSwitch(Elevator.Params.LOWER_LIMIT_NAME, Elevator.Params.LOWER_LIMIT_CHANNEL,Elevator.Params.LOWER_LIMIT_INVERTED)
+            .setUpperLimitSwitch(Elevator.Params.UPPER_LIMIT_NAME, Elevator.Params.UPPER_LIMIT_CHANNEL,Elevator.Params.UPPER_LIMIT_INVERTED);
+
         elevatorMotor = new FrcMotorActuator(motorParams).getMotor();
         elevatorMotor.setSoftwarePidEnabled(Params.SOFTWARE_PID_ENABLED);
         elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE);
-        // elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
-        elevatorMotor.setStallProtection(
-            Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
+        elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
+
+        // ALREADY HAVE LIMIT SWITCHES, MIGHT NOT NEED STALL PROTECTION
+        // elevatorMotor.setStallProtection(
+        //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
     }   //Elevator
 
     public TrcMotor getElevatorMotor()
@@ -90,9 +109,27 @@ public class Elevator
         return elevatorMotor;
     }   //getElevatorMotor
 
-    // private double getGravityComp(double currPower)
-    // {
-    //     return RobotParams.Elevator.GRAVITY_COMP_POWER;
-    // }   //getGravityComp
+    private double getGravityComp(double currPower)
+    {
+        return Elevator.Params.GRAVITY_COMP_POWER;
+    }   //getGravityComp
+
+    public double getPosition()
+    {
+        // need to                        + autoStartOffset ?
+        return elevatorMotor.getPosition();
+    }   //getPosition
+
+    /**
+     * This method starts the zero calibration process.
+     *
+     * @param owner specifies the owner ID to check if the caller has ownership of the motor.
+     */
+    public void zeroCalibrate(String owner)
+    {
+        autoStartOffset = 0.0;
+        elevatorMotor.zeroCalibrate(owner);
+    }   //zeroCalibrate
+
 
 }   //class Elevator
