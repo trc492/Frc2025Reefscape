@@ -158,6 +158,7 @@ public class RobotParams
         public static final int DIO_DEPLOYER_LOWER_LIMIT        = 2;
         public static final int DIO_ELEVATOR_LOWER_LIMIT        = 0;
         public static final int DIO_ELEVATOR_UPPER_LIMIT        = 1;
+        
 
         // PWM channels.
         public static final int NUM_LEDS                        = 60;
