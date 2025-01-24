@@ -24,6 +24,7 @@ package teamcode.autotasks;
 
 import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
+import teamcode.RobotParams;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
@@ -68,6 +69,8 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
 
     private final String ownerName;
     private final Robot robot;
+    private final TrcEvent intakeEvent;
+    private final TrcEvent driveEvent;
 
     private String currOwner = null;
     private TrcPose2D coralPose = null;
@@ -84,6 +87,8 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
         super(moduleName, ownerName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.ownerName = ownerName;
         this.robot = robot;
+        this.intakeEvent = new TrcEvent(moduleName + ".intakeEvent");
+        this.driveEvent = new TrcEvent(moduleName + ".driveEvent");
     }   //TaskAutoPickupCoralFromGround
 
     /**
@@ -202,7 +207,6 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                 // Look for Coral on the ground.
                 // Used last years code, Vision implementation might change
                 FrcPhotonVision.DetectedObject object = robot.photonVisionFront.getBestDetectedObject();
-
                 if (object != null)
                 {
                     coralPose = object.getObjectPose();
@@ -222,10 +226,52 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                 }
                 break;
 
+            // TODO: The implementation I have added is very basic. We need to deal with ownership and driver stuff for Teleop.
+
             case APPROACH_CORAL:
+                if((coralPose == null || Math.abs(coralPose.y) > RobotParams.Intake.coralDistanceThreshold) && taskParams.inAuto)
+                {
+                    // We are in auto and vision did not see any Coral, quit.
+                    tracer.traceInfo(
+                        moduleName,
+                        "***** Either Vision doesn't see Coral or Coral is too far away: coralPose=" + coralPose);
+                    sm.setState(State.DONE);
+                }
+                else
+                {
+                    // Start the intake
+                    robot.intake.autoIntakeForward(
+                        currOwner, 0.0, RobotParams.Intake.intakePower, 0.0, 0.0, intakeEvent, 0.0);
+                    sm.addEvent(intakeEvent);
+                    if (coralPose != null)
+                    {
+                        tracer.traceInfo(moduleName, "***** Approach Coral.");
+                        // coralPose is the intermediate pose. Back it off a bit so we can turn to it and do a straight
+                        // run to it.
+                        coralPose.y += 6; //TODO: adjust this number
+                        robot.robotDrive.purePursuitDrive.start(
+                            currOwner, driveEvent, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            coralPose, new TrcPose2D(0.0, -26.0, 0.0)); //TODO: adjust y coordinate
+                        sm.addEvent(driveEvent);          
+                    }
+                }
+                sm.waitForEvents(State.CHECK_INTAKE_COMPLETION, false);
                 break;
 
             case CHECK_INTAKE_COMPLETION:
+                boolean gotCoral = robot.intake.hasObject();
+                tracer.traceInfo(
+                    moduleName,
+                    "**** Check Intake: intakeEvent=" + intakeEvent +
+                    ", driveEvent=" + driveEvent +
+                    ", gotCoral=" + gotCoral);
+                if (gotCoral)
+                {
+                    sm.waitForSingleEvent(intakeEvent, State.DONE, 1.0);
+                }
                 break;
 
             default:

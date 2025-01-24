@@ -287,4 +287,14 @@ public class RobotParams
         public static final double WIDTH                        = 26.0*12.0 + 5.0;
     }   //class Field
 
+    //
+    // Other subsystems.
+    //
+
+    public static class Intake
+    {
+        public static final double coralDistanceThreshold        = 96.0; //TODO: Needs to be adjusted
+        public static final double intakePower                   = 1.0;
+    }   //class Intake
+
 }   //class RobotParams
