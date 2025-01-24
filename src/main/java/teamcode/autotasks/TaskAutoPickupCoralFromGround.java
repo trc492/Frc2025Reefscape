@@ -31,6 +31,7 @@ import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
+import trclib.sensor.TrcTrigger.TriggerMode;
 import trclib.timer.TrcTimer;
 
 /**
@@ -71,8 +72,10 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     private final Robot robot;
     private final TrcEvent intakeEvent;
     private final TrcEvent driveEvent;
+    private final TrcEvent gotCoralEvent;
 
     private String currOwner = null;
+    private String driveOwner = null;
     private TrcPose2D coralPose = null;
     private Double visionExpiredTime = null;
 
@@ -89,6 +92,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
         this.robot = robot;
         this.intakeEvent = new TrcEvent(moduleName + ".intakeEvent");
         this.driveEvent = new TrcEvent(moduleName + ".driveEvent");
+        this.gotCoralEvent = new TrcEvent(moduleName + ".gotCoralEvent");
     }   //TaskAutoPickupCoralFromGround
 
     /**
@@ -120,12 +124,14 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     protected boolean acquireSubsystemsOwnership()
     {
         boolean success = ownerName == null ||
+                          robot.intake.acquireExclusiveAccess(ownerName) &&
                           robot.robotDrive.driveBase.acquireExclusiveAccess(ownerName);
 
         if (success)
         {
             currOwner = ownerName;
-            tracer.traceInfo(moduleName, "Successfully acquired subsystem ownerships.");
+            driveOwner = ownerName;
+            tracer.traceInfo(moduleName, "Successfully acquired subsystem ownerships for " + ownerName + ".");
         }
         else
         {
@@ -147,14 +153,20 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     @Override
     protected void releaseSubsystemsOwnership()
     {
-        if (ownerName != null)
+        if (currOwner != null)
         {
             TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
             tracer.traceInfo(
                 moduleName,
                 "Releasing subsystem ownership (currOwner=" + currOwner +
+                ", intake=" + ownershipMgr.getOwner(robot.intake) +
                 ", robotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) + ").");
-            robot.robotDrive.driveBase.releaseExclusiveAccess(currOwner);
+            robot.intake.releaseExclusiveAccess(currOwner);
+            if (driveOwner != null)
+            {
+                robot.robotDrive.driveBase.releaseExclusiveAccess(driveOwner);
+                driveOwner = null;
+            }
             currOwner = null;
         }
     }   //releaseSubsystemsOwnership
@@ -163,7 +175,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
      * This method is called by the super class to stop all the subsystems.
      */
     @Override
-    protected void stopSubsystems()
+    protected void stopSubsystems() //TODO: Add ownership stuff later
     {
         tracer.traceInfo(moduleName, "Stopping subsystems.");
         robot.robotDrive.cancel(currOwner);
@@ -226,8 +238,6 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                 }
                 break;
 
-            // TODO: The implementation I have added is very basic. We need to deal with ownership and driver stuff for Teleop.
-
             case APPROACH_CORAL:
                 if((coralPose == null || Math.abs(coralPose.y) > RobotParams.Intake.coralDistanceThreshold) && taskParams.inAuto)
                 {
@@ -243,6 +253,9 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                     robot.intake.autoIntakeForward(
                         currOwner, 0.0, RobotParams.Intake.intakePower, 0.0, 0.0, intakeEvent, 0.0);
                     sm.addEvent(intakeEvent);
+                    // Register entry trigger to release drive ownership early.
+                    robot.intake.registerEntryTriggerNotifyEvent(TriggerMode.OnActive, gotCoralEvent);
+                    sm.addEvent(gotCoralEvent);
                     if (coralPose != null)
                     {
                         tracer.traceInfo(moduleName, "***** Approach Coral.");
@@ -257,6 +270,13 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                             coralPose, new TrcPose2D(0.0, -26.0, 0.0)); //TODO: adjust y coordinate
                         sm.addEvent(driveEvent);          
                     }
+                    else
+                    {
+                        // Did not detect Coral, release drive ownership to let driver to drive manually.
+                        tracer.traceInfo(moduleName, "***** Did not see Coral, release drive ownership.");
+                        robot.robotDrive.driveBase.releaseExclusiveAccess(driveOwner);
+                        driveOwner = null;
+                    }
                 }
                 sm.waitForEvents(State.CHECK_INTAKE_COMPLETION, false);
                 break;
@@ -266,10 +286,17 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                 tracer.traceInfo(
                     moduleName,
                     "**** Check Intake: intakeEvent=" + intakeEvent +
+                    ", gotCoralEvent=" + gotCoralEvent +
                     ", driveEvent=" + driveEvent +
                     ", gotCoral=" + gotCoral);
                 if (gotCoral)
                 {
+                    // Got the Coral. Release drive ownership early so drivers can drive away.
+                    robot.robotDrive.purePursuitDrive.cancel(driveOwner);
+                    robot.robotDrive.driveBase.releaseExclusiveAccess(driveOwner);
+                    driveOwner = null;
+                    // Entry trigger caused early drive ownership release doesn't mean we are done.
+                    // Keep waiting for Intake to complete the operation.
                     sm.waitForSingleEvent(intakeEvent, State.DONE, 1.0);
                 }
                 break;
