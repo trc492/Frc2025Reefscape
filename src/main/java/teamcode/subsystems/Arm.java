@@ -22,6 +22,8 @@
 
 package teamcode.subsystems;
 
+import java.util.Locale;
+
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
 import teamcode.RobotParams;
@@ -39,7 +41,7 @@ public class Arm
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ARM_MOTOR;
-        public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
+        public static final MotorType MOTOR_TYPE                = MotorType.CanSparkMax;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = true;
@@ -86,6 +88,10 @@ public class Arm
             Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
     }   //Arm
 
+    public void zeroCalibrate(){
+        armMotor.zeroCalibrate(Params.ZERO_CAL_POWER);
+    }
+    
     public TrcMotor getArmMotor()
     {
         return armMotor;
