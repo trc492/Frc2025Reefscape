@@ -155,6 +155,7 @@ public class RobotParams
         public static final int AIN_LBSTEER_ENCODER             = 2;
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
+        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 2;
         public static final int DIO_ELEVATOR_LOWER_LIMIT        = 0;
         public static final int DIO_ELEVATOR_UPPER_LIMIT        = 1;
 
@@ -197,7 +198,17 @@ public class RobotParams
     {
         public static final double ONTARGET_THRESHOLD           = 5.0;
         public static final double GUIDANCE_ERROR_THRESHOLD     = 12.0;
+        public static final double FRONTCAM_X_OFFSET            = 0.0;
     }   //class Vision
+
+    public static class SwerveDriveBase
+    {
+        // These values will have to be tuned
+        public static final double PROFILED_MAX_VELOCITY = 0.0;
+        public static final double PROFILED_MAX_ACCELERATION = 0.0;
+        public static final double PROFILED_MAX_DECELERATION = 0.0;
+
+    }
 
     /**
      * This class contains season specific game element information.
@@ -277,5 +288,15 @@ public class RobotParams
         public static final double LENGTH                       = 57.0*12.0 + 6.875;
         public static final double WIDTH                        = 26.0*12.0 + 5.0;
     }   //class Field
+
+    //
+    // Other subsystems.
+    //
+
+    public static class Intake
+    {
+        public static final double coralDistanceThreshold        = 96.0; //TODO: Needs to be adjusted
+        public static final double intakePower                   = 1.0;
+    }   //class Intake
 
 }   //class RobotParams

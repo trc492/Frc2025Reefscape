@@ -22,9 +22,11 @@
 
 package teamcode.subsystems;
 
+import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
 import frclib.subsystem.FrcIntake;
 import teamcode.RobotParams;
+import trclib.motor.TrcMotor;
 import trclib.subsystem.TrcIntake;
 
 /**
@@ -36,12 +38,23 @@ public class Intake
     {
         public static final String SUBSYSTEM_NAME               = "Intake";
 
-        public static final String PRIMARY_MOTOR_NAME           = SUBSYSTEM_NAME + ".primary";
-        public static final int PRIMARY_MOTOR_ID                = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
-        public static final MotorType PRIMARY_MOTOR_TYPE        = MotorType.CanTalonSrx;
-        public static final boolean PRIMARY_MOTOR_BRUSHLESS     = false;
-        public static final boolean PRIMARY_MOTOR_ENC_ABS       = false;
-        public static final boolean PRIMARY_MOTOR_INVERTED      = false;
+        public static final String INTAKE_MOTOR_NAME           = SUBSYSTEM_NAME + ".intakeMotor";
+        public static final int INTAKE_MOTOR_ID                = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
+        public static final MotorType INTAKE_MOTOR_TYPE        = MotorType.CanTalonSrx;
+        public static final boolean INTAKE_MOTOR_BRUSHLESS     = false;
+        public static final boolean INTAKE_MOTOR_ENC_ABS       = false;
+        public static final boolean INTAKE_MOTOR_INVERTED      = false;
+
+        public static final String DEPLOYER_MOTOR_NAME           = SUBSYSTEM_NAME + ".deployerMotor";
+        public static final int DEPLOYER_MOTOR_ID                = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
+        public static final MotorType DEPLOYER_MOTOR_TYPE        = MotorType.CanTalonSrx;
+        public static final boolean DEPLOYER_MOTOR_BRUSHLESS     = false;
+        public static final boolean DEPLOYER_MOTOR_ENC_ABS       = false;
+        public static final boolean DEPLOYER_MOTOR_INVERTED      = false;
+
+        public static final String DEPLOYER_LOWER_LIMIT_NAME     = SUBSYSTEM_NAME + ".deployerLowerLimit";
+        public static final int DEPLOYER_LOWER_LIMIT_CHANNEL     = RobotParams.HwConfig.DIO_DEPLOYER_LOWER_LIMIT;
+        public static final boolean DEPLOYER_LOWER_LIMIT_INVERTED = false;
 
         public static final int SENSOR_DIGITAL_CHANNEL          = 0;
         public static final boolean SENSOR_INVERTED             = false;
@@ -52,6 +65,7 @@ public class Intake
     }   //class Params
 
     private final TrcIntake intake;
+    private final TrcMotor deployer;
     
     /**
      * Constructor: Creates an instance of the object.
@@ -60,15 +74,27 @@ public class Intake
     {
         FrcIntake.Params intakeParams = new FrcIntake.Params()
             .setPrimaryMotor(
-                Params.PRIMARY_MOTOR_NAME, Params.PRIMARY_MOTOR_ID, Params.PRIMARY_MOTOR_TYPE,
-                Params.PRIMARY_MOTOR_BRUSHLESS, Params.PRIMARY_MOTOR_ENC_ABS, Params.PRIMARY_MOTOR_INVERTED)
+                Params.INTAKE_MOTOR_NAME, Params.INTAKE_MOTOR_ID, Params.INTAKE_MOTOR_TYPE,
+                Params.INTAKE_MOTOR_BRUSHLESS, Params.INTAKE_MOTOR_ENC_ABS, Params.INTAKE_MOTOR_INVERTED)
             .setEntryDigitalInput(Params.SENSOR_DIGITAL_CHANNEL, Params.SENSOR_INVERTED, null);
         intake = new FrcIntake(Params.SUBSYSTEM_NAME, intakeParams).getIntake();
+
+        FrcMotorActuator.Params deployerParams = new FrcMotorActuator.Params()
+            .setPrimaryMotor(
+                Params.DEPLOYER_MOTOR_NAME, Params.DEPLOYER_MOTOR_ID, Params.DEPLOYER_MOTOR_TYPE,
+                Params.DEPLOYER_MOTOR_BRUSHLESS, Params.DEPLOYER_MOTOR_ENC_ABS, Params.DEPLOYER_MOTOR_INVERTED)
+            .setLowerLimitSwitch(Params.DEPLOYER_LOWER_LIMIT_NAME, Params.DEPLOYER_LOWER_LIMIT_CHANNEL, Params.DEPLOYER_LOWER_LIMIT_INVERTED);
+        deployer = new FrcMotorActuator(deployerParams).getMotor();
     }   //Intake
 
     public TrcIntake getIntake()
     {
         return intake;
     }   //getIntake
+
+    public TrcMotor getDeployer()
+    {
+        return deployer;
+    }   //getDeployer
 
 }   //class Intake

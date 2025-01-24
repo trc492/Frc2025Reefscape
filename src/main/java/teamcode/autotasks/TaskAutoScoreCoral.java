@@ -24,6 +24,7 @@ package teamcode.autotasks;
 
 import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
+import teamcode.RobotParams;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
@@ -77,6 +78,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
 
     private final String ownerName;
     private final Robot robot;
+    private final TrcEvent driveEvent;
 
     private String currOwner = null;
     private int aprilTagId = -1;
@@ -94,6 +96,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         super(moduleName, ownerName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.ownerName = ownerName;
         this.robot = robot;
+        this.driveEvent = new TrcEvent(moduleName + ".event");
     }   //TaskAutoScoreCoral
 
     /**
@@ -251,6 +254,56 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case APPROACH_REEF:
+
+                TrcPose2D robotPose = robot.robotDrive.driveBase.getFieldPosition();
+                TrcPose2D targetPose, intermediatePose;
+                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
+                sm.addEvent(driveEvent);
+
+                if(taskParams.useVision && aprilTagPose != null){
+                    tracer.traceInfo(moduleName, "*****Using Vision to drive to AprilTag");
+                    targetPose = aprilTagPose.clone();  
+                    targetPose.x += RobotParams.Vision.FRONTCAM_X_OFFSET; // This value will need to be measured.
+                    targetPose.angle = 0.0;
+
+                    intermediatePose = targetPose.clone();
+                    intermediatePose.y = targetPose.y;
+                     
+                    tracer.traceInfo(
+                        moduleName,
+                        state + "***** Approaching Reef with Vision:\n\tRobotFieldPose=" + robotPose +
+                        "\n\tintermediatePose=" + intermediatePose +
+                        "\n\ttargetPose=" + targetPose);
+                        robot.robotDrive.purePursuitDrive.start(
+                            currOwner, driveEvent, 2.0, true,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            intermediatePose, targetPose);
+
+                } else{
+                    tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
+                    
+                    targetPose = RobotParams.Game.APRILTAG_POSES[robot.getClosestAprilTag(robotPose) - 1];
+                    targetPose.x += RobotParams.Vision.FRONTCAM_X_OFFSET; // This value will need to be measured.
+                    targetPose.angle = 0.0;
+                    intermediatePose = targetPose.clone();
+                    intermediatePose.y = targetPose.y;
+                    targetPose.x = 0.0;
+                     
+                    tracer.traceInfo(
+                        moduleName,
+                        state + "***** Approaching Reef without Vision:\n\tRobotFieldPose=" + robotPose +
+                        "\n\tintermediatePose=" + intermediatePose +
+                        "\n\ttargetPose=" + targetPose);
+                    robot.robotDrive.purePursuitDrive.start(
+                        currOwner, driveEvent, 2.0, true,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                        intermediatePose, targetPose);
+                }
+                sm.waitForEvents(State.SCORE_CORAL);
                 break;
 
             case SCORE_CORAL:

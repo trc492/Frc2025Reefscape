@@ -50,18 +50,21 @@ import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
+import teamcode.subsystems.Intake;
 import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
+import trclib.motor.TrcMotor;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcPidController;
 import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
+import trclib.subsystem.TrcIntake;
 import trclib.timer.TrcTimer;
 import trclib.vision.TrcOpenCvDetector;
 import trclib.vision.TrcVisionTargetInfo;
@@ -108,6 +111,8 @@ public class Robot extends FrcRobotBase
     //
     // Other subsystems.
     //
+    public TrcIntake intake;
+    public TrcMotor deployer;
 
     //
     // Auto-Assists.
@@ -259,6 +264,9 @@ public class Robot extends FrcRobotBase
 
                 if (RobotParams.Preferences.useIntake)
                 {
+                    Intake intakeSubsystem = new Intake();
+                    intake = intakeSubsystem.getIntake();
+                    deployer = intakeSubsystem.getDeployer();
                 }
                 // Zero calibrate all subsystems only once in robot initialization.
                 zeroCalibrate(null, null);
@@ -534,6 +542,18 @@ public class Robot extends FrcRobotBase
             //
             if (RobotParams.Preferences.showSubsystems)
             {
+                if (intake != null)
+                {
+                    dashboard.displayPrintf(
+                        lineNum++, "Intake: power=%.1f, hasObject=%s, autoActive=%s",
+                        intake.getPower(), intake.hasObject(), intake.isAutoActive());
+                }
+                if (deployer != null)
+                {
+                    dashboard.displayPrintf(
+                        lineNum++, "Deployer: power=%.1f, pos=%.1f/%.1f",
+                        deployer.getPower(), deployer.getPosition(), deployer.getPidTarget());
+                }
             }
         }
     }   //updateStatus
@@ -876,5 +896,22 @@ public class Robot extends FrcRobotBase
     {
         return pressureSensor != null? (pressureSensor.getVoltage() - 0.5) * 50.0: 0.0;
     }   //getPressure
+
+    public int getClosestAprilTag(TrcPose2D robotPose){
+        int closestTag = 1;
+        double minDistance = Double.MAX_VALUE;
+        for(int i = 0; i<RobotParams.Game.APRILTAG_POSES.length; i++){
+            double x = robotPose.x - RobotParams.Game.APRILTAG_POSES[i].x;
+            double y = robotPose.y - RobotParams.Game.APRILTAG_POSES[i].y;
+            double distance = Math.sqrt((x * x) + (y * y));
+
+            if(distance < minDistance){
+                minDistance = distance;
+                closestTag = i+1;
+            }
+        }
+
+        return closestTag;
+    }
 
 }   //class Robot
