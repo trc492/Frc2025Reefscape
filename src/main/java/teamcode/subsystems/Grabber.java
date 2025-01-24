@@ -44,9 +44,10 @@ public class Grabber
         public static final boolean PRIMARY_MOTOR_ENC_ABS       = false;
         public static final boolean PRIMARY_MOTOR_INVERTED      = true;
 
-        // public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
-        // public static final int SENSOR_DIGITAL_CHANNEL          = 0;
-        // public static final boolean SENSOR_TRIGGER_INVERTED     = true;
+        public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
+        public static final int SENSOR_DIGITAL_CHANNEL          = 0; //TODO; adjust
+        public static final boolean SENSOR_TRIGGER_INVERTED     = true; //TODO: adjust
+        public static final double SENSOR_TRIGGER_THRESHOLD     = 0.9; //TODO: adjust
 
         public static final double INTAKE_POWER                 = 1.0;
         public static final double EJECT_POWER                  = -0.3;
@@ -79,5 +80,16 @@ public class Grabber
     {
         return motorGrabber;
     }   //getMotorGrabber
+
+    /**
+     *
+     * This method checks if object is detected.
+     *
+     * @return true if object is detected, false otherwise.
+     */
+    public boolean hasObject()
+    {
+        return motorGrabber.hasObject();
+    }   //hasObject
 
 }   //class Grabber

@@ -50,6 +50,7 @@ import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
+import teamcode.subsystems.Grabber;
 import teamcode.subsystems.Intake;
 import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
@@ -65,6 +66,7 @@ import trclib.robotcore.TrcPidController;
 import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
 import trclib.subsystem.TrcIntake;
+import trclib.subsystem.TrcMotorGrabber;
 import trclib.timer.TrcTimer;
 import trclib.vision.TrcOpenCvDetector;
 import trclib.vision.TrcVisionTargetInfo;
@@ -113,6 +115,7 @@ public class Robot extends FrcRobotBase
     //
     public TrcIntake intake;
     public TrcMotor deployer;
+    public Grabber grabber;
 
     //
     // Auto-Assists.
@@ -260,6 +263,7 @@ public class Robot extends FrcRobotBase
 
                 if (RobotParams.Preferences.useGrabber)
                 {
+                    Grabber grabber = new Grabber();
                 }
 
                 if (RobotParams.Preferences.useIntake)
@@ -553,6 +557,18 @@ public class Robot extends FrcRobotBase
                     dashboard.displayPrintf(
                         lineNum++, "Deployer: power=%.1f, pos=%.1f/%.1f",
                         deployer.getPower(), deployer.getPosition(), deployer.getPidTarget());
+                }
+                if (grabber != null)
+                {
+                    TrcMotorGrabber motorGrabber = grabber.getMotorGrabber();
+                    if (motorGrabber != null)
+                    {
+                        //TODO: add distance sensor stuff
+                        dashboard.displayPrintf(
+                            lineNum++,
+                            "MotorGrabber: power=%.3f, hasObject=%s",
+                            motorGrabber.getPower(), grabber.hasObject());
+                    }
                 }
             }
         }
