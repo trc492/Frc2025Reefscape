@@ -604,6 +604,7 @@ public class Robot extends FrcRobotBase
      */
     public void zeroCalibrate(String owner, TrcEvent event)
     {
+        globalTracer.traceInfo(moduleName, "Zero calibrate all subsystems.");
         TrcSubsystem.zeroCalibrateAll(owner, event);
     }   //zeroCalibrate
 
@@ -612,6 +613,7 @@ public class Robot extends FrcRobotBase
      */
     public void turtle()
     {
+        globalTracer.traceInfo(moduleName, "Turtle mode.");
         TrcSubsystem.resetStateAll();
     }   //turtle
 
