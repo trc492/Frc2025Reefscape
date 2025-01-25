@@ -54,7 +54,7 @@ public class RobotParams
         public static final boolean showDriveBase               = false;
         public static final boolean showPurePursuitDrive        = false;
         public static final boolean showPidDrive                = false;
-        public static final boolean showVision                  = false;
+        public static final boolean showVision                  = true;
         public static final boolean showSubsystems              = true;
         // Inputs
         public static final boolean useDriverXboxController     = true;
@@ -85,7 +85,9 @@ public class RobotParams
         public static final boolean useArm                      = false;
         public static final boolean useGrabber                  = false;
         public static final boolean useIntake                   = false;
+        public static final boolean useDeployer                 = false;
         public static final boolean useDifferentialWrist        = false;
+        public static final boolean useShooter                  = false;
     }   //class Preferences
 
     /**
@@ -112,6 +114,7 @@ public class RobotParams
         public static final int CANID_ARM_MOTOR                 = 8;
         public static final int CANID_GRABBER_MOTOR             = 9;
         public static final int CANID_INTAKE_MOTOR              = 10;
+        public static final int CANID_DEPLOYER_MOTOR            = 11;
         // Swerve CAN IDs.
         public static final int CANID_LFSTEER_MOTOR             = 13;
         public static final int CANID_RFSTEER_MOTOR             = 14;
@@ -155,9 +158,9 @@ public class RobotParams
         public static final int AIN_LBSTEER_ENCODER             = 2;
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
-        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 2;
         public static final int DIO_ELEVATOR_LOWER_LIMIT        = 0;
         public static final int DIO_ELEVATOR_UPPER_LIMIT        = 1;
+        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 2;
         
 
         // PWM channels.
@@ -289,15 +292,5 @@ public class RobotParams
         public static final double LENGTH                       = 57.0*12.0 + 6.875;
         public static final double WIDTH                        = 26.0*12.0 + 5.0;
     }   //class Field
-
-    //
-    // Other subsystems.
-    //
-
-    public static class Intake
-    {
-        public static final double coralDistanceThreshold        = 96.0; //TODO: Needs to be adjusted
-        public static final double intakePower                   = 1.0;
-    }   //class Intake
 
 }   //class RobotParams

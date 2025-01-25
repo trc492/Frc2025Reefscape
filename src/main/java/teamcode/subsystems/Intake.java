@@ -22,39 +22,29 @@
 
 package teamcode.subsystems;
 
-import frclib.motor.FrcMotorActuator;
+import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcMotorActuator.MotorType;
 import frclib.subsystem.FrcIntake;
 import teamcode.RobotParams;
-import trclib.motor.TrcMotor;
+import trclib.robotcore.TrcEvent;
 import trclib.subsystem.TrcIntake;
+import trclib.subsystem.TrcSubsystem;
 
 /**
  * This class implements an Elevator Subsystem.
  */
-public class Intake
+public class Intake extends TrcSubsystem
 {
     public static final class Params
     {
         public static final String SUBSYSTEM_NAME               = "Intake";
 
-        public static final String INTAKE_MOTOR_NAME           = SUBSYSTEM_NAME + ".intakeMotor";
-        public static final int INTAKE_MOTOR_ID                = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
-        public static final MotorType INTAKE_MOTOR_TYPE        = MotorType.CanTalonSrx;
-        public static final boolean INTAKE_MOTOR_BRUSHLESS     = false;
-        public static final boolean INTAKE_MOTOR_ENC_ABS       = false;
-        public static final boolean INTAKE_MOTOR_INVERTED      = false;
-
-        public static final String DEPLOYER_MOTOR_NAME           = SUBSYSTEM_NAME + ".deployerMotor";
-        public static final int DEPLOYER_MOTOR_ID                = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
-        public static final MotorType DEPLOYER_MOTOR_TYPE        = MotorType.CanTalonSrx;
-        public static final boolean DEPLOYER_MOTOR_BRUSHLESS     = false;
-        public static final boolean DEPLOYER_MOTOR_ENC_ABS       = false;
-        public static final boolean DEPLOYER_MOTOR_INVERTED      = false;
-
-        public static final String DEPLOYER_LOWER_LIMIT_NAME     = SUBSYSTEM_NAME + ".deployerLowerLimit";
-        public static final int DEPLOYER_LOWER_LIMIT_CHANNEL     = RobotParams.HwConfig.DIO_DEPLOYER_LOWER_LIMIT;
-        public static final boolean DEPLOYER_LOWER_LIMIT_INVERTED = false;
+        public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
+        public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
+        public static final boolean MOTOR_BRUSHLESS             = false;
+        public static final boolean MOTOR_ENC_ABS               = false;
+        public static final boolean MOTOR_INVERTED              = false;
 
         public static final int SENSOR_DIGITAL_CHANNEL          = 0;
         public static final boolean SENSOR_INVERTED             = false;
@@ -62,29 +52,26 @@ public class Intake
         public static final double INTAKE_FORWARD_POWER         = 1.0;
         public static final double RETAIN_POWER                 = 0.0;
         public static final double FINISH_DELAY                 = 0.0;
+
+        public static final double coralDistanceThreshold        = 96.0; //TODO: Needs to be adjusted
+        public static final double intakePower                   = 1.0;
     }   //class Params
 
     private final TrcIntake intake;
-    private final TrcMotor deployer;
     
     /**
      * Constructor: Creates an instance of the object.
      */
     public Intake()
     {
+        super(Params.SUBSYSTEM_NAME, false);
+
         FrcIntake.Params intakeParams = new FrcIntake.Params()
             .setPrimaryMotor(
-                Params.INTAKE_MOTOR_NAME, Params.INTAKE_MOTOR_ID, Params.INTAKE_MOTOR_TYPE,
-                Params.INTAKE_MOTOR_BRUSHLESS, Params.INTAKE_MOTOR_ENC_ABS, Params.INTAKE_MOTOR_INVERTED)
+                Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
+                Params.MOTOR_INVERTED)
             .setEntryDigitalInput(Params.SENSOR_DIGITAL_CHANNEL, Params.SENSOR_INVERTED, null);
         intake = new FrcIntake(Params.SUBSYSTEM_NAME, intakeParams).getIntake();
-
-        FrcMotorActuator.Params deployerParams = new FrcMotorActuator.Params()
-            .setPrimaryMotor(
-                Params.DEPLOYER_MOTOR_NAME, Params.DEPLOYER_MOTOR_ID, Params.DEPLOYER_MOTOR_TYPE,
-                Params.DEPLOYER_MOTOR_BRUSHLESS, Params.DEPLOYER_MOTOR_ENC_ABS, Params.DEPLOYER_MOTOR_INVERTED)
-            .setLowerLimitSwitch(Params.DEPLOYER_LOWER_LIMIT_NAME, Params.DEPLOYER_LOWER_LIMIT_CHANNEL, Params.DEPLOYER_LOWER_LIMIT_INVERTED);
-        deployer = new FrcMotorActuator(deployerParams).getMotor();
     }   //Intake
 
     public TrcIntake getIntake()
@@ -92,9 +79,55 @@ public class Intake
         return intake;
     }   //getIntake
 
-    public TrcMotor getDeployer()
+    //
+    // Implements TrcSubsystem abstract methods.
+    //
+
+    /**
+     * This method cancels any pending operations.
+     */
+    @Override
+    public void cancel()
     {
-        return deployer;
-    }   //getDeployer
+        intake.cancel();
+    }   //cancel
+
+    /**
+     * This method starts zero calibrate of the subsystem.
+     *
+     * @param owner specifies the owner ID to to claim subsystem ownership, can be null if ownership not required.
+     * @param event specifies an event to signal when zero calibration is done, can be null if not provided.
+     */
+    @Override
+    public void zeroCalibrate(String owner, TrcEvent event)
+    {
+        // No zero calibration needed.
+    }   //zeroCalibrate
+
+    /**
+     * This method resets the subsystem state. Typically, this is used to retract the subsystem for turtle mode.
+     */
+    @Override
+    public void resetState()
+    {
+        // No reset state needed.
+    }   //resetState
+
+    /**
+     * This method update the dashboard with the subsystem status.
+     *
+     * @param lineNum specifies the starting line number to print the subsystem status.
+     * @return updated line number for the next subsystem to print.
+     */
+    @Override
+    public int updateStatus(int lineNum)
+    {
+        FrcDashboard.getInstance().displayPrintf(
+            lineNum++,
+            "%s: power=%.3f, hasObject=%s, autoActive=%s",
+            Params.SUBSYSTEM_NAME, intake.getPower(), intake.hasObject(), intake.isAutoActive());
+
+        return lineNum;
+    }   //updateStatus
 
 }   //class Intake

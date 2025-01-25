@@ -25,6 +25,7 @@ package teamcode.autotasks;
 import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
 import teamcode.RobotParams;
+import teamcode.subsystems.Intake;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
@@ -239,7 +240,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                 break;
 
             case APPROACH_CORAL:
-                if((coralPose == null || Math.abs(coralPose.y) > RobotParams.Intake.coralDistanceThreshold) && taskParams.inAuto)
+                if((coralPose == null || Math.abs(coralPose.y) > Intake.Params.coralDistanceThreshold) && taskParams.inAuto)
                 {
                     // We are in auto and vision did not see any Coral, quit.
                     tracer.traceInfo(
@@ -251,7 +252,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                 {
                     // Start the intake
                     robot.intake.autoIntakeForward(
-                        currOwner, 0.0, RobotParams.Intake.intakePower, 0.0, 0.0, intakeEvent, 0.0);
+                        currOwner, 0.0, Intake.Params.intakePower, 0.0, 0.0, intakeEvent, 0.0);
                     sm.addEvent(intakeEvent);
                     // Register entry trigger to release drive ownership early.
                     robot.intake.registerEntryTriggerNotifyEvent(TriggerMode.OnActive, gotCoralEvent);

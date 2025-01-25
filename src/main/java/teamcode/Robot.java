@@ -50,12 +50,17 @@ import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
+import teamcode.subsystems.Arm;
+import teamcode.subsystems.Deployer;
+import teamcode.subsystems.Elevator;
 import teamcode.subsystems.Grabber;
 import teamcode.subsystems.Intake;
 import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
+import teamcode.subsystems.Shooter;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
+import trclib.dataprocessor.TrcDiscreteValue;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.motor.TrcMotor;
@@ -67,6 +72,8 @@ import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
 import trclib.subsystem.TrcIntake;
 import trclib.subsystem.TrcMotorGrabber;
+import trclib.subsystem.TrcShooter;
+import trclib.subsystem.TrcSubsystem;
 import trclib.timer.TrcTimer;
 import trclib.vision.TrcOpenCvDetector;
 import trclib.vision.TrcVisionTargetInfo;
@@ -113,9 +120,15 @@ public class Robot extends FrcRobotBase
     //
     // Other subsystems.
     //
+    public TrcMotor elevator;
+    public TrcMotor arm;
+    public TrcMotorGrabber grabber;
     public TrcIntake intake;
     public TrcMotor deployer;
-    public Grabber grabber;
+    // Crescendo subsystems.
+    public TrcShooter shooter;
+    public TrcDiscreteValue shooterVelocity;
+    public TrcDiscreteValue shooterTiltAngle;
 
     //
     // Auto-Assists.
@@ -255,22 +268,42 @@ public class Robot extends FrcRobotBase
                 // Create subsystems.
                 if (RobotParams.Preferences.useElevator)
                 {
+                    elevator = new Elevator().getElevatorMotor();
                 }
 
                 if (RobotParams.Preferences.useArm)
                 {
+                    arm = new Arm().getArmMotor();
                 }
 
                 if (RobotParams.Preferences.useGrabber)
                 {
-                    Grabber grabber = new Grabber();
+                    grabber = new Grabber().getMotorGrabber();
                 }
 
                 if (RobotParams.Preferences.useIntake)
                 {
-                    Intake intakeSubsystem = new Intake();
-                    intake = intakeSubsystem.getIntake();
-                    deployer = intakeSubsystem.getDeployer();
+                    intake = new Intake().getIntake();
+                }
+
+                if (RobotParams.Preferences.useDeployer)
+                {
+                    deployer = new Deployer().getDeployer();
+                }
+                // Crescendo subsystems.
+                if (RobotParams.Preferences.useShooter)
+                {
+                    shooter = new Shooter(null).getShooter();
+                    shooterVelocity = new TrcDiscreteValue(
+                        "ShooterVelocity",
+                        -Shooter.Params.shooterMaxVelocity, Shooter.Params.shooterMaxVelocity,
+                        Shooter.Params.shooterVelMinInc, Shooter.Params.shooterVelMaxInc,
+                        0.0, 10.0);
+                    shooterTiltAngle = new TrcDiscreteValue(
+                        "ShooterTiltAngle",
+                        Shooter.Params.tiltMinAngle, Shooter.Params.tiltMaxAngle,
+                        Shooter.Params.tiltAngleMinInc, Shooter.Params.tiltAngleMaxInc,
+                        0.0, 10.0);
                 }
                 // Zero calibrate all subsystems only once in robot initialization.
                 zeroCalibrate(null, null);
@@ -546,30 +579,7 @@ public class Robot extends FrcRobotBase
             //
             if (RobotParams.Preferences.showSubsystems)
             {
-                if (intake != null)
-                {
-                    dashboard.displayPrintf(
-                        lineNum++, "Intake: power=%.1f, hasObject=%s, autoActive=%s",
-                        intake.getPower(), intake.hasObject(), intake.isAutoActive());
-                }
-                if (deployer != null)
-                {
-                    dashboard.displayPrintf(
-                        lineNum++, "Deployer: power=%.1f, pos=%.1f/%.1f",
-                        deployer.getPower(), deployer.getPosition(), deployer.getPidTarget());
-                }
-                if (grabber != null)
-                {
-                    TrcMotorGrabber motorGrabber = grabber.getMotorGrabber();
-                    if (motorGrabber != null)
-                    {
-                        //TODO: add distance sensor stuff
-                        dashboard.displayPrintf(
-                            lineNum++,
-                            "MotorGrabber: power=%.3f, hasObject=%s",
-                            motorGrabber.getPower(), grabber.hasObject());
-                    }
-                }
+                lineNum = TrcSubsystem.updateAllStatus(lineNum);
             }
         }
     }   //updateStatus
@@ -582,6 +592,7 @@ public class Robot extends FrcRobotBase
         globalTracer.traceInfo(moduleName, "Cancel all operations.");
         // Cancel subsystems.
         if (robotDrive != null) robotDrive.cancel();
+        TrcSubsystem.cancelAll();
         // Cancel auto tasks.
     }   //cancelAll
 
@@ -593,6 +604,7 @@ public class Robot extends FrcRobotBase
      */
     public void zeroCalibrate(String owner, TrcEvent event)
     {
+        TrcSubsystem.zeroCalibrateAll(owner, event);
     }   //zeroCalibrate
 
     /**
@@ -600,6 +612,7 @@ public class Robot extends FrcRobotBase
      */
     public void turtle()
     {
+        TrcSubsystem.resetStateAll();
     }   //turtle
 
     /**

@@ -28,78 +28,55 @@ import frclib.motor.FrcMotorActuator.MotorType;
 import teamcode.RobotParams;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
-import trclib.robotcore.TrcPidController;
 import trclib.subsystem.TrcSubsystem;
 
 /**
- * This class implements an Arm Subsystem.
+ * This class implements an Elevator Subsystem.
  */
-public class Arm extends TrcSubsystem
+public class Deployer extends TrcSubsystem
 {
     public static final class Params
     {
-        public static final String SUBSYSTEM_NAME               = "Arm";
+        public static final String SUBSYSTEM_NAME               = "Deployer";
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ARM_MOTOR;
-        public static final MotorType MOTOR_TYPE                = MotorType.CanSparkMax;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_DEPLOYER_MOTOR;
+        public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = true;
+        public static final boolean MOTOR_INVERTED              = false;
 
-        public static final double DEG_PER_COUNT                = 1.0;
-        public static final double POS_OFFSET                   = 39.0;
-        public static final double POWER_LIMIT                  = 0.5;
+        public static final String LOWER_LIMIT_NAME             = SUBSYSTEM_NAME + ".lowerLimit";
+        public static final int LOWER_LIMIT_CHANNEL             = RobotParams.HwConfig.DIO_DEPLOYER_LOWER_LIMIT;
+        public static final boolean LOWER_LIMIT_INVERTED        = false;
         public static final double ZERO_CAL_POWER               = -0.25;
 
-        public static final double MIN_POS                      = POS_OFFSET;
-        public static final double MAX_POS                      = 270.0;
-        public static final double[] posPresets                 = {MIN_POS, 60.0, 90.0, 120.0, 150.0, 180.0, 210.0, 240.0, 270.0};
-        public static final double POS_PRESET_TOLERANCE         = 10.0;
-
-        public static final boolean SOFTWARE_PID_ENABLED        = true;
-        public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.018, 0.1, 0.001, 0.0, 2.0);
-        public static final double POS_PID_TOLERANCE            = 1.0;
-        public static final double GRAVITY_COMP_MAX_POWER       = 0.158;
-        public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
-        public static final double STALL_TOLERANCE              = 0.1;
-        public static final double STALL_TIMEOUT                = 0.1;
-        public static final double STALL_RESET_TIMEOUT          = 0.0;
+        public static final double INTAKE_FORWARD_POWER         = 1.0;
+        public static final double RETAIN_POWER                 = 0.0;
+        public static final double FINISH_DELAY                 = 0.0;
     }   //class Params
 
-    private final TrcMotor armMotor;
-
+    private final TrcMotor deployer;
+    
     /**
      * Constructor: Creates an instance of the object.
      */
-    public Arm()
+    public Deployer()
     {
         super(Params.SUBSYSTEM_NAME, true);
 
-        FrcMotorActuator.Params motorParams = new FrcMotorActuator.Params()
+        FrcMotorActuator.Params deployerParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
-            .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
-        armMotor = new FrcMotorActuator(motorParams).getMotor();
-        armMotor.setSoftwarePidEnabled(Params.SOFTWARE_PID_ENABLED);
-        armMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE);
-        armMotor.setPositionPidPowerComp(this::getGravityComp);
-        armMotor.setStallProtection(
-            Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
-    }   //Arm
+            .setLowerLimitSwitch(Params.LOWER_LIMIT_NAME, Params.LOWER_LIMIT_CHANNEL, Params.LOWER_LIMIT_INVERTED);
+        deployer = new FrcMotorActuator(deployerParams).getMotor();
+    }   //Intake
 
-    public TrcMotor getArmMotor()
+    public TrcMotor getDeployer()
     {
-        return armMotor;
-    }   //getArmMotor
-
-    private double getGravityComp(double currPower)
-    {
-        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(armMotor.getPosition()));
-    }   //getGravityComp
+        return deployer;
+    }   //getDeployer
 
     //
     // Implements TrcSubsystem abstract methods.
@@ -111,7 +88,7 @@ public class Arm extends TrcSubsystem
     @Override
     public void cancel()
     {
-        armMotor.cancel();
+        deployer.cancel();
     }   //cancel
 
     /**
@@ -123,7 +100,7 @@ public class Arm extends TrcSubsystem
     @Override
     public void zeroCalibrate(String owner, TrcEvent event)
     {
-        armMotor.zeroCalibrate(owner, Params.ZERO_CAL_POWER, event);
+        deployer.zeroCalibrate(owner, Params.ZERO_CAL_POWER, event);
     }   //zeroCalibrate
 
     /**
@@ -145,11 +122,11 @@ public class Arm extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f,pos=%.1f/%.1f,limitSw=%s",
-            Params.SUBSYSTEM_NAME, armMotor.getPower(), armMotor.getPosition(), armMotor.getPidTarget(),
-            armMotor.isLowerLimitSwitchActive());
+            "%s: power=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
+            Params.SUBSYSTEM_NAME, deployer.getPower(), deployer.getPosition(), deployer.getPidTarget(),
+            deployer.isLowerLimitSwitchActive(), deployer.isUpperLimitSwitchActive());
 
         return lineNum;
     }   //updateStatus
 
-}   //class Arm
+}   //class Deployer
