@@ -579,7 +579,7 @@ public class Robot extends FrcRobotBase
             //
             if (RobotParams.Preferences.showSubsystems)
             {
-                lineNum = TrcSubsystem.updateAllStatus(lineNum);
+                lineNum = TrcSubsystem.updateStatusAll(lineNum);
             }
         }
     }   //updateStatus
