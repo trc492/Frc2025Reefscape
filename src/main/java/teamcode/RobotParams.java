@@ -196,6 +196,8 @@ public class RobotParams
         public static final double TURN_SLOW_SCALE              = 0.3;
         public static final double TURN_NORMAL_SCALE            = 0.6;
         public static final double DRIVE_RAMP_RATE              = 0.25;
+        public static final double[] REEF_ELEVATOR_SCORE_POS    = {0.0, 0.0, 0.0, 0.0}; // TODO: Needs to be added
+        public static final double[] REEF_ARM_SCORE_POS    = {0.0, 0.0, 0.0, 0.0};
     }   //class Robot
 
     public static class Vision

@@ -945,4 +945,33 @@ public class Robot extends FrcRobotBase
         return closestTag;
     }
 
+
+    private final TrcEvent elevatorEvent = new TrcEvent("robot.elevatorEvent");
+    private final TrcEvent armEvent = new TrcEvent("robot.armEvent");
+    private TrcEvent completionEvent = null;
+
+
+    private void prepCompletion(Object context)
+    {
+        if (completionEvent != null && elevatorEvent.isSignaled() && armEvent.isSignaled())
+        {
+            completionEvent.signal();
+            completionEvent = null;
+        }
+    }   //prepCompletion
+
+    public void moveSubsystem(String owner, double elevatorPos, double elevatorDelay, double armPos, double armDelay, double timeout, TrcEvent event){
+        if(elevator != null && arm != null){
+            if(event != null){
+                elevatorEvent.clear();
+                armEvent.clear();
+                elevatorEvent.setCallback(this::prepCompletion, null);
+                armEvent.setCallback(this::prepCompletion, null);
+                completionEvent = event;
+            }
+            elevator.setPosition(owner, elevatorDelay, elevatorPos, true, 1.0, event != null? elevatorEvent: null, timeout);
+            arm.setPosition(owner, armDelay, armPos, true, 1.0, event != null? armEvent: null, timeout);
+        }
+    }
+
 }   //class Robot
