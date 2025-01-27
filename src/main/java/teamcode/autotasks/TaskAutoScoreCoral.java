@@ -83,6 +83,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     private final Robot robot;
     private final TrcEvent event;
     private final TrcEvent driveEvent;
+    private final TrcEvent scoreEvent;
 
     private String currOwner = null;
     private int aprilTagId = -1;
@@ -102,6 +103,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         this.robot = robot;
         this.driveEvent = new TrcEvent(moduleName + ".event");
         this.event = new TrcEvent(moduleName + ".event");
+        this.scoreEvent = new TrcEvent(moduleName + ".event");
     }   //TaskAutoScoreCoral
 
     /**
@@ -314,13 +316,14 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             case SCORE_CORAL:
                 double elevatorPos;
                 double armPos;
-
+                tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position in reefLevel");
                 elevatorPos = RobotParams.Robot.REEF_ELEVATOR_SCORE_POS[taskParams.reefLevel];
                 armPos = RobotParams.Robot.REEF_ARM_SCORE_POS[taskParams.reefLevel];
                 robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
                 sm.addEvent(event);
-                if(taskParams.scoreCoral || taskParams.inAuto){
-                    robot.grabber
+                if((taskParams.scoreCoral || taskParams.inAuto) && robot.grabber.hasObject()){
+                    robot.grabber.autoEject(currOwner, 0.0, scoreEvent, 2.0);
+                    sm.addEvent(scoreEvent);
                 }
 
                 sm.waitForEvents(State.DONE);
