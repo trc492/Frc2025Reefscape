@@ -56,14 +56,16 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean removeAlgae;
         boolean inAuto;
         boolean relocalize;
+        boolean scoreCoral;
 
-        TaskParams(boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize)
+        TaskParams(boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize, boolean scoreCoral)
         {
             this.useVision = useVision;
             this.reefLevel = reefLevel;
             this.removeAlgae = removeAlgae;
             this.inAuto = inAuto;
             this.relocalize = relocalize;
+            this.scoreCoral = scoreCoral;
         }   //TaskParams
 
         public String toString()
@@ -72,12 +74,14 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                    ",reefLevel=" + reefLevel +
                    ",removeAlgae=" + removeAlgae +
                    ",inAuto=" + inAuto +
+                   ",scoreCoral=" + scoreCoral +
                    ",relocalize" + relocalize;
         }   //toString
     }   //class TaskParams
 
     private final String ownerName;
     private final Robot robot;
+    private final TrcEvent event;
     private final TrcEvent driveEvent;
 
     private String currOwner = null;
@@ -97,6 +101,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         this.ownerName = ownerName;
         this.robot = robot;
         this.driveEvent = new TrcEvent(moduleName + ".event");
+        this.event = new TrcEvent(moduleName + ".event");
     }   //TaskAutoScoreCoral
 
     /**
@@ -110,10 +115,10 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
-        boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize,
+        boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize, boolean scoreCoral,
         TrcEvent completionEvent)
     {
-        TaskParams taskParams = new TaskParams(useVision, reefLevel, removeAlgae, inAuto, relocalize);
+        TaskParams taskParams = new TaskParams(useVision, reefLevel, removeAlgae, inAuto, relocalize, scoreCoral);
         tracer.traceInfo(moduleName, "taskParams=(" + taskParams + "), event=" + completionEvent);
         startAutoTask(State.START, taskParams, completionEvent);
     }   //autoScoreCoral
@@ -307,6 +312,18 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case SCORE_CORAL:
+                double elevatorPos;
+                double armPos;
+
+                elevatorPos = RobotParams.Robot.REEF_ELEVATOR_SCORE_POS[taskParams.reefLevel];
+                armPos = RobotParams.Robot.REEF_ARM_SCORE_POS[taskParams.reefLevel];
+                robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
+                sm.addEvent(event);
+                if(taskParams.scoreCoral || taskParams.inAuto){
+                    robot.grabber
+                }
+
+                sm.waitForEvents(State.DONE);
                 break;
 
             default:
