@@ -59,9 +59,9 @@ public class FrcAuto implements TrcRobot.RobotMode
 
     public enum AutoStartPos
     {
-        POS_1(0),
-        POS_2(1),
-        POS_3(2);
+        START_POSE_PROCESSOR(0),
+        START_POSE_CENTER(1),
+        START_POSE_FAR_SIDE(2);
         // The value can be used as index into arrays if necessary.
         public int value;
         AutoStartPos(int value)
@@ -70,6 +70,16 @@ public class FrcAuto implements TrcRobot.RobotMode
         }   //AutoStartPos
     }   //enum AutoStartPos
 
+    public enum StationSide{
+        LEFT,
+        RIGHT
+    }
+
+    public enum ScorePickup{
+        SCORE_NONE,
+        SCORE_ONE,
+        SCORE_TWO
+    }
     /**
      * This class encapsulates all user choices for autonomous mode from the smart dashboard.
      *
@@ -87,6 +97,7 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_ALLIANCE = "Auto/Alliance";
         private static final String DBKEY_AUTO_STRATEGY = "Auto/Strategy";
         private static final String DBKEY_AUTO_START_POS = "Auto/StartPos";
+        private static final String DBKEY_AUTO_STATION_SIDE = "Auto/StationSide";
         private static final String DBKEY_AUTO_START_DELAY = "Auto/StartDelay";
         private static final String DBKEY_AUTO_PATHFILE = "Auto/PathFile";
         private static final String DBKEY_AUTO_X_DRIVE_DISTANCE = "Auto/XDriveDistance";
@@ -94,11 +105,18 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_TURN_ANGLE = "Auto/TurnAngle";
         private static final String DBKEY_AUTO_DRIVE_TIME = "Auto/DriveTime";
         private static final String DBKEY_AUTO_DRIVE_POWER = "Auto/DrivePower";
+        private static final String DBKEY_AUTO_RELOCALIZE = "Auto/Relocalize";
+        private static final String DBKEY_AUTO_GO_TO_STATION = "Auto/GoToStation";
+        private static final String DBKEY_AUTO_SCORE_PRELOAD = "Auto/ScorePreload";
+        private static final String DBKEY_AUTO_SCORE_PICKUP = "Auto/ScorePickup";
+
 
         private final FrcUserChoices userChoices = new FrcUserChoices();
         private final FrcChoiceMenu<DriverStation.Alliance> allianceMenu;
         private final FrcChoiceMenu<AutoStrategy> autoStrategyMenu;
         private final FrcChoiceMenu<AutoStartPos> autoStartPosMenu;
+        private final FrcChoiceMenu<StationSide> stationChoiceMenu;
+        private final FrcChoiceMenu<ScorePickup> scorePickupChoiceMenu;
 
         public AutoChoices()
         {
@@ -108,6 +126,8 @@ public class FrcAuto implements TrcRobot.RobotMode
             allianceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_ALLIANCE);
             autoStrategyMenu = new FrcChoiceMenu<>(DBKEY_AUTO_STRATEGY);
             autoStartPosMenu = new FrcChoiceMenu<>(DBKEY_AUTO_START_POS);
+            stationChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_STATION_SIDE);
+            scorePickupChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_SCORE_PICKUP);
             //
             // Populate autonomous mode choice menus.
             //
@@ -126,9 +146,16 @@ public class FrcAuto implements TrcRobot.RobotMode
             }
             autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, true, true);
 
-            autoStartPosMenu.addChoice("Start Position 1", AutoStartPos.POS_1, true, false);
-            autoStartPosMenu.addChoice("Start Position 2", AutoStartPos.POS_2);
-            autoStartPosMenu.addChoice("Start Position 3", AutoStartPos.POS_3, false, true);
+            autoStartPosMenu.addChoice("Processor-side start position", AutoStartPos.START_POSE_PROCESSOR, true, false);
+            autoStartPosMenu.addChoice("Center start position", AutoStartPos.START_POSE_CENTER);
+            autoStartPosMenu.addChoice("Far side start position", AutoStartPos.START_POSE_FAR_SIDE, false, true);
+
+            stationChoiceMenu.addChoice("Right Side", StationSide.RIGHT);
+            stationChoiceMenu.addChoice("Left Side", StationSide.LEFT);
+
+            scorePickupChoiceMenu.addChoice("Score None", ScorePickup.SCORE_NONE);
+            scorePickupChoiceMenu.addChoice("Score One", ScorePickup.SCORE_ONE);
+            scorePickupChoiceMenu.addChoice("Score Two", ScorePickup.SCORE_TWO);
             //
             // Initialize dashboard with default choice values.
             //
@@ -142,6 +169,9 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addNumber(DBKEY_AUTO_TURN_ANGLE, 90.0);         // in degrees
             userChoices.addNumber(DBKEY_AUTO_DRIVE_TIME, 4.0);          // in seconds
             userChoices.addNumber(DBKEY_AUTO_DRIVE_POWER, 0.5);
+            userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, getRelocalize());
+            userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, goToStation());
+            userChoices.addBoolean(DBKEY_AUTO_SCORE_PRELOAD, scorePreload());
         }   //AutoChoices
 
         //
@@ -164,6 +194,14 @@ public class FrcAuto implements TrcRobot.RobotMode
         {
             return autoStartPosMenu.getCurrentChoiceObject();
         }   //getStartPos
+
+        public StationSide getStationSide(){
+            return stationChoiceMenu.getCurrentChoiceObject();
+        }
+
+        public ScorePickup getScorePickup(){
+            return scorePickupChoiceMenu.getCurrentChoiceObject();
+        }
 
         public double getStartDelay()
         {
@@ -200,6 +238,18 @@ public class FrcAuto implements TrcRobot.RobotMode
             return userChoices.getUserNumber(DBKEY_AUTO_DRIVE_TIME);
         }   //getDrivePower
 
+        public boolean getRelocalize(){
+            return userChoices.getUserBoolean(DBKEY_AUTO_RELOCALIZE);
+        }
+
+        public boolean goToStation(){
+            return userChoices.getUserBoolean(DBKEY_AUTO_GO_TO_STATION);
+        }
+
+        public boolean scorePreload(){
+            return userChoices.getUserBoolean(DBKEY_AUTO_SCORE_PRELOAD);
+        }
+
         @Override
         public String toString()
         {
@@ -212,7 +262,12 @@ public class FrcAuto implements TrcRobot.RobotMode
                    "yDistance=" + getYDriveDistance() + " ft " +
                    "turnDegrees=" + getTurnAngle() + " deg " +
                    "driveTime=" + getDriveTime() + " sec " +
-                   "drivePower=" + getDrivePower();
+                   "drivePower=" + getDrivePower() + 
+                   "relocalize=" + getRelocalize() + 
+                   "goToStation=" + goToStation() +
+                   "scorePreload=" + scorePreload() +   
+                   "stationScoreSide=" + getStationSide() +
+                   "scorePickup=" + getScorePickup();
         }   //toString
 
     }   //class AutoChoices
