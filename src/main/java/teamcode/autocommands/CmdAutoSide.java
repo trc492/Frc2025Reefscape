@@ -23,6 +23,7 @@
 package teamcode.autocommands;
 
 import teamcode.Robot;
+import teamcode.RobotParams;
 import teamcode.FrcAuto.AutoChoices;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcRobot;
@@ -42,9 +43,13 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
         SCORE_PRELOAD,
         DO_DELAY,
         GO_TO_CORAL_STATION,
-        PICK_UP_CORAL,
+        PICKUP_CORAL,
         GO_TO_REEF,
         SCORE_CORAL,
+        APPROACH_CORAL_STATION,
+        PICKUP_CORAL_STATION,
+        APPROACH_REEF,
+        SCORE_CENTER_CORAL,
         DONE
     }   //enum State
 
@@ -133,14 +138,25 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
              */
             switch (state)
             {
+                // NOTE: Daniel has not made auto choices yet so I am putting in values in for now 
+                // + Sarah hasn't finish auto pickup task so putting in values for that as well
                 case START:
                     // Set robot location according to auto choices.
                     robot.setRobotStartPosition(autoChoices);
                     // Navigate to Reef position.
+                    robot.robotDrive.purePursuitDrive.start(
+                        event, 0.0, false, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                        RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED); //TODO: check side using auto choices
+                    sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
                     break;
 
                 case SCORE_PRELOAD:
                     // Score preloaded Coral to high branch.
+                    robot.autoScoreCoralTask.autoScoreCoral(true, 4, false, true, true, true, event); //TODO: adjust using auto choices
+                    sm.waitForSingleEvent(event, State.DO_DELAY); //TODO: check if delay is required with auto choices
                     break;
 
                 case DO_DELAY:
@@ -159,18 +175,74 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case GO_TO_CORAL_STATION:
                     // Navigate to Coral Station.
+                    robot.robotDrive.purePursuitDrive.start(
+                        event, 0.0, false, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                        RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_RED); //TODO: check side using auto choices
+                    sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                     break;
 
-                case PICK_UP_CORAL:
+                case PICKUP_CORAL:
+                    // TODO: adjust once Sarah finishes the auto task
                     // Pick up Coral from station.
+                    robot.autoPickupCoralFromStationTask.autoPickupCoral(true, true, true, event); // TODO: adjust using auto choices
+                    sm.waitForSingleEvent(event, State.GO_TO_REEF);
                     break;
 
                 case GO_TO_REEF:
                     // Navigate to Reef.
+                    robot.robotDrive.purePursuitDrive.start(
+                        event, 0.0, false, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                        RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED); //TODO: check side using auto choices
+                    sm.waitForSingleEvent(event, State.SCORE_CORAL); 
                     break;
 
                 case SCORE_CORAL:
                     // Score Coral to high branch.
+                    robot.autoScoreCoralTask.autoScoreCoral(true, 4, false, true, true, true, event); //TODO: adjust using auto choices
+                    sm.waitForSingleEvent(event, State.APPROACH_CORAL_STATION);
+                    break;
+
+                //TODO: adjust as this is just a repetition with different poses
+
+                case APPROACH_CORAL_STATION:
+                    // Navigate to Coral Station.
+                    robot.robotDrive.purePursuitDrive.start(
+                        event, 0.0, false, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                        RobotParams.Game.PROCESSOR_CORAL_CENTER_RED); //TODO: check side using auto choices 
+                    sm.waitForSingleEvent(event, State.PICKUP_CORAL_STATION); 
+                    break;
+
+                case PICKUP_CORAL_STATION:
+                    // TODO: adjust once Sarah finishes the auto task
+                    // Pick up Coral from station.
+                    robot.autoPickupCoralFromStationTask.autoPickupCoral(true, true, true, event); // TODO: adjust using auto choices
+                    sm.waitForSingleEvent(event, State.APPROACH_REEF);
+                    break;
+
+                case APPROACH_REEF:
+                    // Navigate to Reef.
+                    robot.robotDrive.purePursuitDrive.start(
+                        event, 0.0, false, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                        RobotParams.Game.PROCESSOR_SCORE_CORAL_CENTER_RED); //TODO: check side using auto choices
+                    sm.waitForSingleEvent(event, State.SCORE_CENTER_CORAL);
+                    break;
+
+                case SCORE_CENTER_CORAL:
+                    // Score Coral to high branch.
+                    robot.autoScoreCoralTask.autoScoreCoral(true, 4, false, true, true, true, event); //TODO: adjust using auto choices
+                    sm.waitForSingleEvent(event, State.DONE);
                     break;
 
                 default:

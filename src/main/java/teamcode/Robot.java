@@ -50,6 +50,9 @@ import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
+import teamcode.autotasks.TaskAutoPickupCoralFromGround;
+import teamcode.autotasks.TaskAutoPickupCoralFromStation;
+import teamcode.autotasks.TaskAutoScoreCoral;
 import teamcode.subsystems.Arm;
 import teamcode.subsystems.Deployer;
 import teamcode.subsystems.Elevator;
@@ -133,6 +136,9 @@ public class Robot extends FrcRobotBase
     //
     // Auto-Assists.
     //
+    public TaskAutoPickupCoralFromGround pickupCoralFromGroundTask;
+    public TaskAutoPickupCoralFromStation autoPickupCoralFromStationTask;
+    public TaskAutoScoreCoral autoScoreCoralTask;
 
     /**
      * Constructor: Create an instance of the object.
