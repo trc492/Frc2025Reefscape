@@ -53,10 +53,6 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
         PICKUP_CORAL,
         GO_TO_REEF,
         SCORE_CORAL,
-        APPROACH_CORAL_STATION,
-        PICKUP_CORAL_STATION,
-        APPROACH_REEF,
-        SCORE_CENTER_CORAL,
         DONE
     }   //enum State
 
@@ -78,6 +74,8 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
     private int coralScored;
     private int coralTarget;
+
+    private String cyclePositions;
     /**
      * Constructor: Create an instance of the object.
      *
@@ -172,7 +170,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     relocalize = FrcAuto.autoChoices.getRelocalize();
                     goToStation = FrcAuto.autoChoices.goToStation();
                     scorePreload = FrcAuto.autoChoices.scorePreload();
-
+                    // Set score variables
                     if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)
                     {
                         coralTarget++; // increase coral target by 1
@@ -181,7 +179,8 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     {
                         coralTarget += 2; // increase coral target by 2
                     }
-
+                    // Set cycle positions
+                    cyclePositions = "Side";
                     // Navigate to Reef position.
                     if (scorePreload)
                     {
@@ -245,95 +244,79 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case GO_TO_CORAL_STATION:
                     // Navigate to Coral Station.
-                    TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                    if (cyclePositions == "Side")
+                    {
+                        TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_RED : RobotParams.Game.FAR_PICKUP_CORAL_SIDE_RED;
-                    robot.robotDrive.purePursuitDrive.start(
-                        event, 0.0, false, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        stationSidePos);
-                    sm.waitForSingleEvent(event, State.PICKUP_CORAL);
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            stationSidePos);
+                        sm.waitForSingleEvent(event, State.PICKUP_CORAL);
+                    }
+                    else if (cyclePositions == "Center")
+                    {
+                        TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            stationCenterPos);
+                        sm.waitForSingleEvent(event, State.PICKUP_CORAL); 
+                    }
                     break;
 
                 case PICKUP_CORAL:
                     // TODO: adjust once Sarah finishes the auto task
                     // Pick up Coral from station.
-                    robot.autoPickupCoralFromStationTask.autoPickupCoral(RobotParams.Preferences.useVision, true, relocalize, event); // TODO: adjust using auto choices
+                    robot.autoPickupCoralFromStationTask.autoPickupCoral(RobotParams.Preferences.useVision, true, relocalize, event);
                     sm.waitForSingleEvent(event, State.GO_TO_REEF);
                     break;
 
                 case GO_TO_REEF:
                     // Navigate to Reef.
-                    TrcPose2D scoreSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                    if (cyclePositions == "Side")
+                    {
+                        TrcPose2D scoreSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED : RobotParams.Game.FAR_SCORE_CORAL_SIDE_RED;
-                    robot.robotDrive.purePursuitDrive.start(
-                        event, 0.0, false, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        scoreSidePos);
-                    sm.waitForSingleEvent(event, State.SCORE_CORAL); 
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            scoreSidePos);
+                        sm.waitForSingleEvent(event, State.SCORE_CORAL); 
+                    }
+                    else if (cyclePositions == "Center")
+                    {
+                        TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            stationCenterPos);
+                        sm.waitForSingleEvent(event, State.SCORE_CORAL); 
+                    }
                     break;
 
                 case SCORE_CORAL:
                     // Score Coral to high branch.
-                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event); //TODO: adjust using auto choices
+                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
                     coralScored++;
+                    cyclePositions = "Center";
                     if (coralScored < coralTarget)
                     {
-                        sm.waitForSingleEvent(event, State.APPROACH_CORAL_STATION);
+                        sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     }
                     else
                     {
                         sm.setState(State.DONE);
-                    }
-                    break;
-
-                case APPROACH_CORAL_STATION:
-                    // Navigate to Coral Station.
-                    TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
-                    robot.robotDrive.purePursuitDrive.start(
-                        event, 0.0, false, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        stationCenterPos);
-                    sm.waitForSingleEvent(event, State.PICKUP_CORAL_STATION); 
-                    break;
-
-                case PICKUP_CORAL_STATION:
-                    // TODO: adjust once Sarah finishes the auto task
-                    // Pick up Coral from station.
-                    robot.autoPickupCoralFromStationTask.autoPickupCoral(RobotParams.Preferences.useVision, true, relocalize, event); // TODO: adjust using auto choices
-                    sm.waitForSingleEvent(event, State.APPROACH_REEF);
-                    break;
-
-                case APPROACH_REEF:
-                    // Navigate to Reef.
-                    TrcPose2D scoreCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_SCORE_CORAL_CENTER_RED : RobotParams.Game.FAR_SCORE_CORAL_CENTER_RED;
-                    robot.robotDrive.purePursuitDrive.start(
-                        event, 0.0, false, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        scoreCenterPos);
-                    break;
-
-                case SCORE_CENTER_CORAL:
-                    // Score Coral to high branch.
-                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
-                    coralScored++;
-                    if (coralScored < coralTarget)
-                    {
-                        // TODO: Write code for potential 4th coral
-                        sm.waitForSingleEvent(event, State.DONE);
-                    }
-                    else
-                    {
-                        sm.waitForSingleEvent(event, State.DONE);
                     }
                     break;
 
