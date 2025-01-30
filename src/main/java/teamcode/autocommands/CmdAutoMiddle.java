@@ -63,11 +63,9 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
     private Alliance alliance;
     private AutoStartPos startPos;
     private StationSide stationSide;
-    private boolean driveToStation;
     private boolean relocalize;
     private ScorePickup scorePickup;
     private boolean scorePreload;
-    private double startDelay;
     private boolean goToStation;
     private boolean useAprilTagVision;
 
@@ -157,16 +155,16 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
             {
                 case START:
                     // Set robot location according to auto choices.
+                    // If this method does nothing then we will have to find another way to find our current position
                     robot.setRobotStartPosition(autoChoices); // TODO: This method does nothing, do we need to add code to make it functional?
                     startPos = FrcAuto.autoChoices.getStartPos();
                     stationSide = FrcAuto.autoChoices.getStationSide();
                     scorePickup = FrcAuto.autoChoices.getScorePickup();
-                    startDelay = FrcAuto.autoChoices.getStartDelay();
                     relocalize = FrcAuto.autoChoices.getRelocalize();
                     goToStation = FrcAuto.autoChoices.goToStation();
                     scorePreload = FrcAuto.autoChoices.scorePreload();
                     robot.globalTracer.traceInfo(moduleName, "****** Scoring preload from" + startPos + " at " + robot.robotDrive.driveBase.getFieldPosition());
-
+                    // Depending on whether we want to score one coral from the station or two, it will set our coralTarget to one or two
                     if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)
                     {
                         coralTarget++; 
@@ -184,11 +182,12 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     // Score preloaded Coral to high branch.
                     if(scorePreload){
                         if(useAprilTagVision){
+                            // Using vision to view AprilTag that is directly infront of us, and will AutoScore using this AprilTag
                             robot.globalTracer.traceInfo(moduleName, "***** Scoring preload using AprilTag Vision");
                             robot.autoScoreCoralTask.autoScoreCoral(useAprilTagVision, 3, false, false, relocalize, true, event);
                             sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
                         } else{
-
+                            // If we do not have vision, then we will go to this position using odometry
                             robot.globalTracer.traceInfo(moduleName, "***** Scoring preload without AprilTag Vision");
                             int coralAprilTagId = RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red ? 0 : 1];
                             TrcPose2D aprilTagCenterPose = RobotParams.Game.APRILTAG_POSES[coralAprilTagId - 1].clone();
@@ -198,12 +197,13 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                                 RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
                                 RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
                                 aprilTagCenterPose);
-
+                            // Calling AutoScore without Vision so it will just call the subsystem tasks
                             robot.autoScoreCoralTask.autoScoreCoral(false, 3, false, true, relocalize, true, event);
                             sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
                         }
                         
                     } else{
+                        // If our scorePreload is false, then we can go to DONE
                         robot.globalTracer.traceInfo(moduleName, "***** Not scoring preload, going to DONE");
                         sm.setState(State.DONE);
                     }
@@ -226,7 +226,8 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                 case GO_TO_CORAL_STATION:
                 
                     if(stationSide == StationSide.RIGHT){
-                            robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for right coral station.");
+                        // Pure Pursuit to a position offset from AprilTags 8 or 16 depending on your alliance, so then we can call AutoPickupCoralFromStation to pick up the coral
+                        robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for right coral station.");
                         int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D stationSideIntermediatePose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
                         stationSideIntermediatePose.x -= 12.0; // TODO: Not Sure which direction to go, this will have to be checked
@@ -239,6 +240,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                             stationSideIntermediatePose);
                         sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
                     } else if(stationSide == StationSide.LEFT){
+                        // Same as above, but we are using Odometry to go to the intermediate position.
                         robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for left coral station.");
                         int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D stationSideIntermediatePose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
@@ -257,10 +259,12 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                 case PICK_UP_CORAL:
                     // Pick up Coral from station.
                     if(useAprilTagVision){
+                        // We are at the intermediate position, so now we can call AutoPickupCoralFromStation to pick up the coral
                         robot.globalTracer.traceInfo(moduleName, "***** Picking up coral from Station using AprilTag Vision");
                         robot.autoPickupCoralFromStationTask.autoPickupCoral(useAprilTagVision, true, relocalize, event);
                         sm.waitForSingleEvent(event, scorePickup == ScorePickup.SCORE_NONE ? State.DONE : State.SCORE_CORAL);
                     } else{
+                        // Use odometry to go to the position of the AprilTag, and call AutoPickupCoralFromStation without vision to call the subsystem tasks
                         robot.globalTracer.traceInfo(moduleName, "***** Picking up coral from Station without AprilTag Vision");
                         int stationAprilTagId = stationSide == StationSide.LEFT? RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D aprilTagStationPose = RobotParams.Game.APRILTAG_POSES[stationAprilTagId - 1].clone();
@@ -277,8 +281,10 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
 
                 case SCORE_CORAL:
                     if(useAprilTagVision){
+                        // We are at the coral Station and the Camera can probably see the AprilTag, so we can call AutoScoreCoral to score the coral
                         robot.globalTracer.traceInfo(moduleName, "***** Going to score on Reef using AprilTag Vision");
                         robot.autoScoreCoralTask.autoScoreCoral(true, 3, false, true, relocalize, true, event);
+                        // Increase coral scored by one, if we reached the coralTarget, then we are done, otherwise we go back to GO_TO_CORAL_STATION
                         coralScored++;
                         sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);
                     } else{
