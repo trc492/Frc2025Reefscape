@@ -244,7 +244,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case GO_TO_CORAL_STATION:
                     // Navigate to Coral Station.
-                    if (cyclePositions == "Side")
+                    if (cyclePositions.equals("Side"))
                     {
                         TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_RED : RobotParams.Game.FAR_PICKUP_CORAL_SIDE_RED;
@@ -256,7 +256,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                             stationSidePos);
                         sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                     }
-                    else if (cyclePositions == "Center")
+                    else if (cyclePositions.equals("Center"))
                     {
                         TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
