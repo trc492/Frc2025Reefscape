@@ -248,7 +248,7 @@ public class RobotParams
         public static final TrcPose2D PROCESSOR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
         public static final TrcPose2D PROCESSOR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
 
         // NOTE: This is a just a mirror of the processor positions
@@ -257,7 +257,7 @@ public class RobotParams
         public static final TrcPose2D FAR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
         public static final TrcPose2D FAR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
         // AprilTag IDs for various locations for red and blue alliances.
         public static final int[] APRILTAG_LEFT_CORAL_STATION   = {1, 13};

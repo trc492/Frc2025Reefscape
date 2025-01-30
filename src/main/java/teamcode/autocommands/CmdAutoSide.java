@@ -22,9 +22,16 @@
 
 package teamcode.autocommands;
 
+import teamcode.FrcAuto;
 import teamcode.Robot;
 import teamcode.RobotParams;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import teamcode.FrcAuto.AutoChoices;
+import teamcode.FrcAuto.AutoStartPos;
+import teamcode.FrcAuto.AutoStrategy;
+import teamcode.FrcAuto.ScorePickup;
+import teamcode.FrcAuto.StationSide;
+import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcStateMachine;
@@ -59,6 +66,18 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
     private final TrcEvent event;
     private final TrcStateMachine<State> sm;
 
+    private Alliance alliance;
+    private AutoStartPos startPos;
+    private AutoStrategy autoStrategy;
+    private StationSide stationSide;
+    private ScorePickup scorePickup;
+    private double startDelay;
+    private boolean relocalize;
+    private boolean goToStation;
+    private boolean scorePreload;
+
+    private int coralScored;
+    private int coralTarget;
     /**
      * Constructor: Create an instance of the object.
      *
@@ -143,106 +162,179 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                 case START:
                     // Set robot location according to auto choices.
                     robot.setRobotStartPosition(autoChoices);
+                    // Initialize auto choices.
+                    alliance = FrcAuto.autoChoices.getAlliance();
+                    autoStrategy = FrcAuto.autoChoices.getStrategy();
+                    startPos = FrcAuto.autoChoices.getStartPos();
+                    stationSide = FrcAuto.autoChoices.getStationSide();
+                    scorePickup = FrcAuto.autoChoices.getScorePickup();
+                    startDelay = FrcAuto.autoChoices.getStartDelay();
+                    relocalize = FrcAuto.autoChoices.getRelocalize();
+                    goToStation = FrcAuto.autoChoices.goToStation();
+                    scorePreload = FrcAuto.autoChoices.scorePreload();
+
+                    if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)
+                    {
+                        coralTarget++; // increase coral target by 1
+                    }
+                    else if (scorePickup == FrcAuto.ScorePickup.SCORE_TWO)
+                    {
+                        coralTarget += 2; // increase coral target by 2
+                    }
+
                     // Navigate to Reef position.
-                    robot.robotDrive.purePursuitDrive.start(
+                    if (scorePreload)
+                    {
+                        coralTarget++; // increase coral target by 1 to include preload
+                        TrcPose2D scorePreloadPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                            RobotParams.Game.PROCESSOR_SCORE_CORAL_START_RED : RobotParams.Game.FAR_SCORE_CORAL_START_RED;
+                        robot.robotDrive.purePursuitDrive.start(
                         event, 0.0, false, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
                         RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED); //TODO: check side using auto choices
-                    sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
+                        scorePreloadPos);
+                        sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
+                    }
+                    else
+                    {
+                        sm.setState(State.DO_DELAY);
+                    }
                     break;
 
                 case SCORE_PRELOAD:
                     // Score preloaded Coral to high branch.
-                    robot.autoScoreCoralTask.autoScoreCoral(true, 4, false, true, true, true, event); //TODO: adjust using auto choices
-                    sm.waitForSingleEvent(event, State.DO_DELAY); //TODO: check if delay is required with auto choices
+                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
+                    coralScored++;
+                    if (coralScored < coralTarget)
+                    {
+                        sm.waitForSingleEvent(event, State.DO_DELAY);
+                    }
+                    else
+                    {
+                        sm.setState(State.DONE);
+                    }
                     break;
 
                 case DO_DELAY:
-                    double startDelay = autoChoices.getStartDelay();
                     if (startDelay > 0.0)
                     {
                         robot.globalTracer.traceInfo(moduleName, "***** Do delay " + startDelay + "s.");
                         timer.set(startDelay, event);
-                        sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
+                        if (goToStation)
+                        {
+                            sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
+                        }
+                        else
+                        {
+                            sm.setState(State.DONE);
+                        }
                     }
                     else
                     {
-                        sm.setState(State.GO_TO_CORAL_STATION);
+                        if (goToStation)
+                        {
+                            sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
+                        }
+                        else
+                        {
+                            sm.setState(State.DONE);
+                        }
                     }
                     break;
 
                 case GO_TO_CORAL_STATION:
                     // Navigate to Coral Station.
+                    TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_RED : RobotParams.Game.FAR_PICKUP_CORAL_SIDE_RED;
                     robot.robotDrive.purePursuitDrive.start(
                         event, 0.0, false, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
                         RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_RED); //TODO: check side using auto choices
+                        stationSidePos);
                     sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                     break;
 
                 case PICKUP_CORAL:
                     // TODO: adjust once Sarah finishes the auto task
                     // Pick up Coral from station.
-                    robot.autoPickupCoralFromStationTask.autoPickupCoral(true, true, true, event); // TODO: adjust using auto choices
+                    robot.autoPickupCoralFromStationTask.autoPickupCoral(RobotParams.Preferences.useVision, true, relocalize, event); // TODO: adjust using auto choices
                     sm.waitForSingleEvent(event, State.GO_TO_REEF);
                     break;
 
                 case GO_TO_REEF:
                     // Navigate to Reef.
+                    TrcPose2D scoreSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                            RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED : RobotParams.Game.FAR_SCORE_CORAL_SIDE_RED;
                     robot.robotDrive.purePursuitDrive.start(
                         event, 0.0, false, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
                         RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED); //TODO: check side using auto choices
+                        scoreSidePos);
                     sm.waitForSingleEvent(event, State.SCORE_CORAL); 
                     break;
 
                 case SCORE_CORAL:
                     // Score Coral to high branch.
-                    robot.autoScoreCoralTask.autoScoreCoral(true, 4, false, true, true, true, event); //TODO: adjust using auto choices
-                    sm.waitForSingleEvent(event, State.APPROACH_CORAL_STATION);
+                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event); //TODO: adjust using auto choices
+                    coralScored++;
+                    if (coralScored < coralTarget)
+                    {
+                        sm.waitForSingleEvent(event, State.APPROACH_CORAL_STATION);
+                    }
+                    else
+                    {
+                        sm.setState(State.DONE);
+                    }
                     break;
-
-                //TODO: adjust as this is just a repetition with different poses
 
                 case APPROACH_CORAL_STATION:
                     // Navigate to Coral Station.
+                    TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
                     robot.robotDrive.purePursuitDrive.start(
                         event, 0.0, false, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
                         RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        RobotParams.Game.PROCESSOR_CORAL_CENTER_RED); //TODO: check side using auto choices 
+                        stationCenterPos);
                     sm.waitForSingleEvent(event, State.PICKUP_CORAL_STATION); 
                     break;
 
                 case PICKUP_CORAL_STATION:
                     // TODO: adjust once Sarah finishes the auto task
                     // Pick up Coral from station.
-                    robot.autoPickupCoralFromStationTask.autoPickupCoral(true, true, true, event); // TODO: adjust using auto choices
+                    robot.autoPickupCoralFromStationTask.autoPickupCoral(RobotParams.Preferences.useVision, true, relocalize, event); // TODO: adjust using auto choices
                     sm.waitForSingleEvent(event, State.APPROACH_REEF);
                     break;
 
                 case APPROACH_REEF:
                     // Navigate to Reef.
+                    TrcPose2D scoreCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                            RobotParams.Game.PROCESSOR_SCORE_CORAL_CENTER_RED : RobotParams.Game.FAR_SCORE_CORAL_CENTER_RED;
                     robot.robotDrive.purePursuitDrive.start(
                         event, 0.0, false, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
                         RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
                         RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        RobotParams.Game.PROCESSOR_SCORE_CORAL_CENTER_RED); //TODO: check side using auto choices
-                    sm.waitForSingleEvent(event, State.SCORE_CENTER_CORAL);
+                        scoreCenterPos);
                     break;
 
                 case SCORE_CENTER_CORAL:
                     // Score Coral to high branch.
-                    robot.autoScoreCoralTask.autoScoreCoral(true, 4, false, true, true, true, event); //TODO: adjust using auto choices
-                    sm.waitForSingleEvent(event, State.DONE);
+                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
+                    coralScored++;
+                    if (coralScored < coralTarget)
+                    {
+                        // TODO: Write code for potential 4th coral
+                        sm.waitForSingleEvent(event, State.DONE);
+                    }
+                    else
+                    {
+                        sm.waitForSingleEvent(event, State.DONE);
+                    }
                     break;
 
                 default:
