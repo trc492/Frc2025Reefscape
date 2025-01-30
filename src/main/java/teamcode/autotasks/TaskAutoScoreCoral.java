@@ -317,8 +317,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 double elevatorPos;
                 double armPos;
                 tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position in reefLevel");
-                elevatorPos = RobotParams.Robot.REEF_ELEVATOR_SCORE_POS[taskParams.reefLevel];
-                armPos = RobotParams.Robot.REEF_ARM_SCORE_POS[taskParams.reefLevel];
+                elevatorPos = RobotParams.Robot.REEF_ELEVATOR_SCORE_POS[taskParams.reefLevel]; // TODO: This value needs to be set
+                armPos = RobotParams.Robot.REEF_ARM_SCORE_POS[taskParams.reefLevel]; // TODO: This value needs to be set
                 robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
                 sm.addEvent(event);
                 if((taskParams.scoreCoral || taskParams.inAuto) && robot.grabber.hasObject()){
