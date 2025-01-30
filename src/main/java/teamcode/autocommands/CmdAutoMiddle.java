@@ -22,9 +22,16 @@
 
 package teamcode.autocommands;
 
+import teamcode.FrcAuto;
 import teamcode.Robot;
+import teamcode.RobotParams;
 
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import teamcode.FrcAuto.AutoChoices;
+import teamcode.FrcAuto.AutoStartPos;
+import teamcode.FrcAuto.ScorePickup;
+import teamcode.FrcAuto.StationSide;
+import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcStateMachine;
@@ -44,7 +51,6 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
         DO_DELAY,
         GO_TO_CORAL_STATION,
         PICK_UP_CORAL,
-        GO_TO_REEF,
         SCORE_CORAL,
         DONE
     }   //enum State
@@ -54,6 +60,21 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
     private final TrcTimer timer;
     private final TrcEvent event;
     private final TrcStateMachine<State> sm;
+    private Alliance alliance;
+    private AutoStartPos startPos;
+    private StationSide stationSide;
+    private boolean driveToStation;
+    private boolean relocalize;
+    private ScorePickup scorePickup;
+    private boolean scorePreload;
+    private double startDelay;
+    private boolean goToStation;
+    private boolean useAprilTagVision;
+
+
+    private int coralScored;
+    private int coralTarget;
+
 
     /**
      * Constructor: Create an instance of the object.
@@ -136,12 +157,56 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
             {
                 case START:
                     // Set robot location according to auto choices.
-                    robot.setRobotStartPosition(autoChoices);
+                    robot.setRobotStartPosition(autoChoices); // TODO: This method does nothing, do we need to add code to make it functional?
+                    startPos = FrcAuto.autoChoices.getStartPos();
+                    stationSide = FrcAuto.autoChoices.getStationSide();
+                    scorePickup = FrcAuto.autoChoices.getScorePickup();
+                    startDelay = FrcAuto.autoChoices.getStartDelay();
+                    relocalize = FrcAuto.autoChoices.getRelocalize();
+                    goToStation = FrcAuto.autoChoices.goToStation();
+                    scorePreload = FrcAuto.autoChoices.scorePreload();
+                    robot.globalTracer.traceInfo(moduleName, "****** Scoring preload from" + startPos + " at " + robot.robotDrive.driveBase.getFieldPosition());
+
+                    if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)
+                    {
+                        coralTarget++; 
+                    }
+                    else if (scorePickup == FrcAuto.ScorePickup.SCORE_TWO)
+                    {
+                        coralTarget += 2;
+                    }
+                        
                     // Navigate to Reef position.
+                    sm.setState(State.SCORE_PRELOAD);
                     break;
 
                 case SCORE_PRELOAD:
                     // Score preloaded Coral to high branch.
+                    if(scorePreload){
+                        if(useAprilTagVision){
+                            robot.globalTracer.traceInfo(moduleName, "***** Scoring preload using AprilTag Vision");
+                            robot.autoScoreCoralTask.autoScoreCoral(useAprilTagVision, 3, false, false, relocalize, true, event);
+                            sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
+                        } else{
+
+                            robot.globalTracer.traceInfo(moduleName, "***** Scoring preload without AprilTag Vision");
+                            int coralAprilTagId = RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red ? 0 : 1];
+                            TrcPose2D aprilTagCenterPose = RobotParams.Game.APRILTAG_POSES[coralAprilTagId - 1].clone();
+                            robot.robotDrive.purePursuitDrive.start(
+                                event, 0.0, false, 
+                                RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                                RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                                RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                                aprilTagCenterPose);
+
+                            robot.autoScoreCoralTask.autoScoreCoral(false, 3, false, true, relocalize, true, event);
+                            sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
+                        }
+                        
+                    } else{
+                        robot.globalTracer.traceInfo(moduleName, "***** Not scoring preload, going to DONE");
+                        sm.setState(State.DONE);
+                    }
                     break;
 
                 case DO_DELAY:
@@ -159,19 +224,77 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     break;
 
                 case GO_TO_CORAL_STATION:
-                    // Navigate to Coral Station.
+                
+                    if(stationSide == StationSide.RIGHT){
+                            robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for right coral station.");
+                        int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1];
+                        TrcPose2D stationSideIntermediatePose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
+                        stationSideIntermediatePose.x -= 12.0; // TODO: Not Sure which direction to go, this will have to be checked
+                        stationSideIntermediatePose.angle = 60;
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            stationSideIntermediatePose);
+                        sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
+                    } else if(stationSide == StationSide.LEFT){
+                        robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for left coral station.");
+                        int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
+                        TrcPose2D stationSideIntermediatePose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
+                        stationSideIntermediatePose.x -= 12.0; // TODO: Not Sure which direction to go, this will have to be checked
+                        stationSideIntermediatePose.angle = 60;
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            stationSideIntermediatePose);
+                        sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
+                    }
+                                
                     break;
-
                 case PICK_UP_CORAL:
                     // Pick up Coral from station.
-                    break;
-
-                case GO_TO_REEF:
-                    // Navigate to Reef.
+                    if(useAprilTagVision){
+                        robot.globalTracer.traceInfo(moduleName, "***** Picking up coral from Station using AprilTag Vision");
+                        robot.autoPickupCoralFromStationTask.autoPickupCoral(useAprilTagVision, true, relocalize, event);
+                        sm.waitForSingleEvent(event, scorePickup == ScorePickup.SCORE_NONE ? State.DONE : State.SCORE_CORAL);
+                    } else{
+                        robot.globalTracer.traceInfo(moduleName, "***** Picking up coral from Station without AprilTag Vision");
+                        int stationAprilTagId = stationSide == StationSide.LEFT? RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1];
+                        TrcPose2D aprilTagStationPose = RobotParams.Game.APRILTAG_POSES[stationAprilTagId - 1].clone();
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            aprilTagStationPose);
+                        robot.autoPickupCoralFromStationTask.autoPickupCoral(false, true, relocalize, event);
+                        sm.waitForSingleEvent(event, State.SCORE_CORAL);
+                    }
                     break;
 
                 case SCORE_CORAL:
-                    // Score Coral to high branch.
+                    if(useAprilTagVision){
+                        robot.globalTracer.traceInfo(moduleName, "***** Going to score on Reef using AprilTag Vision");
+                        robot.autoScoreCoralTask.autoScoreCoral(true, 3, false, true, relocalize, true, event);
+                        coralScored++;
+                        sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);
+                    } else{
+                        robot.globalTracer.traceInfo(moduleName, "***** Going to score on Reef without AprilTag Vision");
+                        int pickupScoreId = stationSide == StationSide.LEFT? RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
+                        TrcPose2D pickupScorePose = RobotParams.Game.APRILTAG_POSES[pickupScoreId - 1].clone();
+                        robot.robotDrive.purePursuitDrive.start(
+                            event, 0.0, false, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
+                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
+                            pickupScorePose);
+                        robot.autoScoreCoralTask.autoScoreCoral(false, 3, false, true, relocalize, true, event);
+                        coralScored++;
+                        sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);
+                    }
                     break;
 
                 default:
