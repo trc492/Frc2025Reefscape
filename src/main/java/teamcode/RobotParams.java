@@ -198,6 +198,9 @@ public class RobotParams
         public static final double DRIVE_RAMP_RATE              = 0.25;
         public static final double[] REEF_ELEVATOR_SCORE_POS    = {0.0, 0.0, 0.0, 0.0}; // TODO: Needs to be added
         public static final double[] REEF_ARM_SCORE_POS    = {0.0, 0.0, 0.0, 0.0};
+        public static final double STATION_ELEVATOR_PICKUP_POS  = 0.0; // TODO
+        public static final double STATION_ARM_PICKUP_POS       = 0.0; // TODO
+        public static final double STATION_PICKUP_FINISH_DELAY  = 0.0; // TODO
     }   //class Robot
 
     public static class Vision
