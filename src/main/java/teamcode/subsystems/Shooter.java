@@ -46,6 +46,7 @@ public class Shooter extends TrcSubsystem
         public static final double shooterVelTolerance          = 3.0;      // in rps.
         public static final double shooterMaxVelocity           = 100.0;    // in rps.
         public static final double shooterMaxAcceleration       = 100.0;    // in rps square.
+        public static final double shooterMaxDeceleration       = 100.0;    // in rps square.
         public static final double shooterVelMinInc             = 1.0;      // in rps.
         public static final double shooterVelMaxInc             = 10.0;     // in rps.
         public static final double shooterSpeakerCloseVelocity  = 90.0;     // in rps.
@@ -130,10 +131,9 @@ public class Shooter extends TrcSubsystem
         shooterMotor.setBrakeModeEnabled(false);
         shooterMotor.setVoltageCompensationEnabled(TrcUtil.BATTERY_NOMINAL_VOLTAGE);
         shooterMotor.enableMotionProfile(
-            Params.shooterMaxVelocity, Params.shooterMaxAcceleration, 0.0);
+            Params.shooterMaxVelocity, Params.shooterMaxAcceleration, Params.shooterMaxDeceleration, 0.0);
         shooterMotor.setPositionSensorScaleAndOffset(Params.shooterPosScale, 0.0);
-        shooterMotor.setVelocityPidParameters(
-            Params.shooterVelPidCoeff, Params.shooterVelTolerance);
+        shooterMotor.setVelocityPidParameters(Params.shooterVelPidCoeff, Params.shooterVelTolerance, false);
         shooterMotor.setPresets(
             true, Params.shooterPresetVelTolerance, Params.shooterPresetVelocities);
 
@@ -148,8 +148,7 @@ public class Shooter extends TrcSubsystem
         // tiltMotor.resetPositionOnLowerLimitSwitch();
         // We are using software position PID control for Tilt. So we just enable software PID before setting
         // PID coefficients.
-        tiltMotor.setSoftwarePidEnabled(true);
-        tiltMotor.setPositionPidParameters(Params.tiltPosPidCoeff, Params.tiltPosPidTolerance);
+        tiltMotor.setPositionPidParameters(Params.tiltPosPidCoeff, Params.tiltPosPidTolerance, true);
         // Tilt is heavily geared down, so don't really need gravity compensation.
         // tiltMotor.setPositionPidPowerComp(this::getTiltGravityComp);
         tiltMotor.setPresets(

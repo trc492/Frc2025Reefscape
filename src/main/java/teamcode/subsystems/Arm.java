@@ -84,8 +84,7 @@ public class Arm extends TrcSubsystem
             .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
         armMotor = new FrcMotorActuator(motorParams).getMotor();
-        armMotor.setSoftwarePidEnabled(Params.SOFTWARE_PID_ENABLED);
-        armMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE);
+        armMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
         armMotor.setPositionPidPowerComp(this::getGravityComp);
         armMotor.setStallProtection(
             Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);

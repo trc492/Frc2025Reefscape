@@ -95,8 +95,7 @@ public class Elevator extends TrcSubsystem
             .setUpperLimitSwitch(Elevator.Params.UPPER_LIMIT_NAME, Elevator.Params.UPPER_LIMIT_CHANNEL,Elevator.Params.UPPER_LIMIT_INVERTED);
 
         elevatorMotor = new FrcMotorActuator(motorParams).getMotor();
-        elevatorMotor.setSoftwarePidEnabled(Params.SOFTWARE_PID_ENABLED);
-        elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE);
+        elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
         elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
 
         // ALREADY HAVE LIMIT SWITCHES, MIGHT NOT NEED STALL PROTECTION
