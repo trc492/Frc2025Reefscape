@@ -149,12 +149,17 @@ public class RobotBase
             // Robot Drive Characteristics
             robotMaxVelocity = 171.0;           // inch/sec
             robotMaxAcceleration = 23000.0;     // inch/sec sq
+            robotMaxDeceleration = robotMaxAcceleration;
             robotMaxTurnRate = 1450.0;          // degree/sec
             profiledMaxVelocity = 157.48;       // inch/sec
             profiledMaxAcceleration = 10000.0;  // inch/sec sq
+            profiledMaxDeceleration = profiledMaxAcceleration;
             profiledMaxTurnRate = 180.0;        // degree/sec
             // DriveBase PID Parameters
-            drivePidTolerance = 1.0;
+            usePidDrive = true;
+            enablePidDriveSquareRootPid = true;
+            usePurePursuitDrive = true;
+            enablePurePursuitDriveSquareRootPid = true;            drivePidTolerance = 1.0;
             turnPidTolerance = 2.0;
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
