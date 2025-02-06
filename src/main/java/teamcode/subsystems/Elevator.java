@@ -26,9 +26,9 @@ import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
 import teamcode.RobotParams;
+import trclib.controller.TrcPidController;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
-import trclib.robotcore.TrcPidController;
 import trclib.subsystem.TrcSubsystem;
 
 /**

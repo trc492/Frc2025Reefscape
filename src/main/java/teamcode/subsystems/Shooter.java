@@ -25,9 +25,9 @@ package teamcode.subsystems;
 import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcCANSparkMax;
 import frclib.motor.FrcCANTalonFX;
+import trclib.controller.TrcPidController.PidCoefficients;
 import trclib.dataprocessor.TrcUtil;
 import trclib.robotcore.TrcEvent;
-import trclib.robotcore.TrcPidController.PidCoefficients;
 import trclib.subsystem.TrcShooter;
 import trclib.subsystem.TrcSubsystem;
 
