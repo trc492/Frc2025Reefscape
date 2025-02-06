@@ -37,9 +37,9 @@ import frclib.drivebase.FrcSwerveDrive.SteerEncoderType;
 import frclib.motor.FrcMotorActuator.MotorType;
 import teamcode.RobotParams;
 import teamcode.RobotParams.HwConfig;
+import trclib.controller.TrcPidController.PidCoefficients;
 import trclib.drivebase.TrcDriveBase.OdometryType;
 import trclib.pathdrive.TrcPose3D;
-import trclib.robotcore.TrcPidController.PidCoefficients;
 
 /**
  * This class creates the appropriate Robot Drive Base according to the specified robot type.
