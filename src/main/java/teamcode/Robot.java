@@ -400,7 +400,7 @@ public class Robot extends FrcRobotBase
                 endOfAutoRobotPose = robotDrive.driveBase.getFieldPosition();
             }
             robotDrive.driveBase.setOdometryEnabled(false);
-            robotDrive.pidDrive.pidDriveTaskProfiler.printPerformanceMetrics(robotDrive.pidDrive.tracer);
+            //robotDrive.pidDrive.pidDriveTaskProfiler.printPerformanceMetrics(robotDrive.pidDrive.tracer);
         }
         // Stop subsystems.
         ledIndicator.reset();

@@ -239,7 +239,7 @@ public class RobotBase
         public final double FALCON_MAX_RPM                      = 6380.0;
         public final double DRIVE_GEAR_RATIO                    = 6.75;
         public final double DRIVE_WHEEL_DIAMETER                = 3.9326556997620689090425924610785;    // inches
-        public final double STEER_GEAR_RATIO                    = 15.43;
+        public final double STEER_GEAR_RATIO                    = 13.3714;
 
         public ReefscapeRobotParams()
         {
