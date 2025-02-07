@@ -237,7 +237,7 @@ public class RobotBase
     public static class ReefscapeRobotParams extends FrcSwerveDrive.SwerveInfo
     {
         public final double FALCON_MAX_RPM                      = 6380.0;
-        public final double DRIVE_GEAR_RATIO                    = 6.75;
+        public final double DRIVE_GEAR_RATIO                    = 5.60;//6.75;
         public final double DRIVE_WHEEL_DIAMETER                = 3.9326556997620689090425924610785;    // inches
         public final double STEER_GEAR_RATIO                    = 13.3714;
 
@@ -278,7 +278,7 @@ public class RobotBase
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
             xDriveMaxPidRampRate = yDriveMaxPidRampRate = 0.5;  // %power per sec
-            turnPidCoeffs = new PidCoefficients(0.0065, 0.0, 0.0004, 0.0, 10.0);
+            turnPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 0.0, 0.0); //new PidCoefficients(0.0065, 0.0, 0.0004, 0.0, 10.0);
             turnPidPowerLimit = 1.0;
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
