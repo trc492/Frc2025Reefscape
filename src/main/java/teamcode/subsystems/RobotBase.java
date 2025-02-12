@@ -204,10 +204,11 @@ public class RobotBase
             steerMotorInverted = new boolean[] {false, false, false, false};
             steerMotorPidCoeffs = new PidCoefficients(3.0, 0.0, 0.0, 0.0, 0.0);
             steerMotorPidTolerance = 0.5; // in degrees
-            steerPositionScale = STEER_GEAR_RATIO;
             // Swerve Module parameters.
             swerveModuleNames = new String[] {"lfWheel", "rfWheel", "lbWheel", "rbWheel"};
             driveGearRatio = DRIVE_GEAR_RATIO;
+            steerGearRatio = STEER_GEAR_RATIO;
+            steerPositionScale = 360.0 / steerGearRatio;
             //
             // WPILib Parameters.
             //
@@ -319,10 +320,11 @@ public class RobotBase
             steerMotorInverted = new boolean[] {false, false, false, false};
             steerMotorPidCoeffs = new PidCoefficients(3.0, 0.0, 0.0, 0.0, 0.0);
             steerMotorPidTolerance = 0.5; // in degrees
-            steerPositionScale = STEER_GEAR_RATIO;
             // Swerve Module parameters.
             swerveModuleNames = new String[] {"lfWheel", "rfWheel", "lbWheel", "rbWheel"};
             driveGearRatio = DRIVE_GEAR_RATIO;
+            steerGearRatio = STEER_GEAR_RATIO;
+            steerPositionScale = 360.0 / steerGearRatio;
             //
             // WPILib Parameters.
             //
@@ -447,7 +449,17 @@ public class RobotBase
         {
             if (robotDrive instanceof FrcSwerveDrive)
             {
-                for (int i = 0; i < ((FrcSwerveDrive.SwerveInfo) robotInfo).steerEncoderNames.length; i++)
+                FrcSwerveDrive swerveDrive = (FrcSwerveDrive) robotDrive;
+                FrcSwerveDrive.SwerveInfo swerveInfo = (FrcSwerveDrive.SwerveInfo) robotInfo;
+                // Prevent Krakens from browning out.
+                for (int i = 0; i < swerveInfo.driveMotorNames.length; i++)
+                {
+                    swerveDrive.driveMotors[i].setCloseLoopRampRate(0.02);
+                    swerveDrive.driveMotors[i].setCurrentLimit(40.0, 45.0, 0.2);
+                    swerveDrive.driveMotors[i].setStatorCurrentLimit(55.0);
+                }
+                // Sync absolute encoders to steer motor internal encoders.
+                for (int i = 0; i < swerveInfo.steerEncoderNames.length; i++)
                 {
                     syncSteerEncoder((FrcSwerveDrive.SwerveInfo) robotInfo, i);
                 }
@@ -469,7 +481,7 @@ public class RobotBase
         TrcEncoder steerEncoder = swerveDrive.steerEncoders[index];
         FrcCANTalonFX steerMotor = (FrcCANTalonFX)swerveDrive.steerMotors[index];
         // getPosition returns a value in the range of 0 to 1.0 of one revolution.
-        double motorEncoderPos = steerEncoder.getScaledPosition() * swerveInfo.steerPositionScale;
+        double motorEncoderPos = steerEncoder.getScaledPosition() * swerveInfo.steerGearRatio;
         StatusCode statusCode = steerMotor.motor.setPosition(motorEncoderPos);
 
         if (statusCode != StatusCode.OK)
