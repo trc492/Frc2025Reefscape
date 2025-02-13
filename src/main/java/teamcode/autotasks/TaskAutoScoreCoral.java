@@ -245,7 +245,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                     {
                         robot.relocalizeRobotByAprilTag(object);
                     }
-                    sm.setState(State.APPROACH_REEF);
+                    //sm.setState(State.APPROACH_REEF);
+                    sm.setState(State.DONE);
                 }
                 else if (visionExpiredTime != null)
                 {
@@ -270,7 +271,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 if(taskParams.useVision && aprilTagPose != null){
                     tracer.traceInfo(moduleName, "*****Using Vision to drive to AprilTag");
                     targetPose = aprilTagPose.clone();  
-                    targetPose.x += RobotParams.Vision.FRONTCAM_X_OFFSET; // This value will need to be measured.
+                    targetPose.x += robot.robotInfo.cam1.camXOffset; //RobotParams.Vision.FRONTCAM_X_OFFSET; // This value will need to be measured.
                     targetPose.angle = 0.0;
 
                     intermediatePose = targetPose.clone();

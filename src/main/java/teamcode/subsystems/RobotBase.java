@@ -43,6 +43,7 @@ import trclib.controller.TrcPidController.PidCoefficients;
 import trclib.drivebase.TrcDriveBase.OdometryType;
 import trclib.pathdrive.TrcPose3D;
 import trclib.robotcore.TrcDbgTrace;
+import trclib.robotcore.TrcDbgTrace.MsgLevel;
 import trclib.sensor.TrcEncoder;
 
 /**
@@ -146,7 +147,7 @@ public class RobotBase
             driveMotorIds = new int[] {
                 HwConfig.CANID_LFDRIVE_MOTOR, HwConfig.CANID_RFDRIVE_MOTOR,
                 HwConfig.CANID_LBDRIVE_MOTOR, HwConfig.CANID_RBDRIVE_MOTOR};
-            driveMotorInverted = new boolean[] {false, false, false, false};
+            driveMotorInverted = new boolean[] {true, true, true, true};//{false, false, false, false};
             odometryType = OdometryType.MotorOdometry;
             // Absolute Odometry
             absoluteOdometry = null;
@@ -163,9 +164,9 @@ public class RobotBase
             profiledMaxTurnRate = 180.0;        // degree/sec
             // DriveBase PID Parameters
             usePidDrive = true;
-            enablePidDriveSquareRootPid = true;
+            enablePidDriveSquareRootPid = false;
             usePurePursuitDrive = true;
-            enablePurePursuitDriveSquareRootPid = true;            drivePidTolerance = 1.0;
+            enablePurePursuitDriveSquareRootPid = false;            drivePidTolerance = 1.0;
             turnPidTolerance = 2.0;
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
@@ -179,7 +180,7 @@ public class RobotBase
             ppdFollowingDistance = 10.0;
             velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
             // Front Camera
-            cam1 = new FrontCamParams();
+            cam1 = new BackCamParams(); //FrontCamParams();
             // Back Camera
             cam2 = new BackCamParams();
             // Miscellaneous
@@ -463,6 +464,8 @@ public class RobotBase
                 {
                     syncSteerEncoder((FrcSwerveDrive.SwerveInfo) robotInfo, i);
                 }
+                //robotDrive.pidDrive.setTraceLevel(MsgLevel.INFO, false, true, true);
+                
             }
         }
     }   //configureRobotDrive

@@ -139,8 +139,8 @@ public class Robot extends FrcRobotBase
     // Auto-Assists.
     //
     public TaskAutoPickupCoralFromGround pickupCoralFromGroundTask;
-    public TaskAutoPickupCoralFromStation autoPickupCoralFromStationTask;
-    public TaskAutoScoreCoral autoScoreCoralTask;
+    public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
+    public TaskAutoScoreCoral scoreCoralTask;
 
     /**
      * Constructor: Create an instance of the object.
@@ -322,6 +322,10 @@ public class Robot extends FrcRobotBase
                 zeroCalibrate(null, null);
 
                 // Create autotasks.
+                
+                scoreCoralTask = new TaskAutoScoreCoral("AutoScoreCoral", this);
+                pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround("AutoPickupCoralGround", this);
+                pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation("AutoPickupCoralFromStation", this);
             }
         }
 

@@ -203,7 +203,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case SCORE_PRELOAD:
                     // Score preloaded Coral to high branch.
-                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
+                    robot.scoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
                     coralScored++;
                     if (coralScored < coralTarget)
                     {
@@ -273,7 +273,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                 case PICKUP_CORAL:
                     // TODO: adjust once Sarah finishes the auto task
                     // Pick up Coral from station.
-                    robot.autoPickupCoralFromStationTask.autoPickupCoral(RobotParams.Preferences.useVision, true, relocalize, event);
+                    robot.pickupCoralFromStationTask.autoPickupCoral(RobotParams.Preferences.useVision, true, relocalize, event);
                     sm.waitForSingleEvent(event, State.GO_TO_REEF);
                     break;
 
@@ -307,7 +307,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case SCORE_CORAL:
                     // Score Coral to high branch.
-                    robot.autoScoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
+                    robot.scoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
                     coralScored++;
                     cyclePositions = "Center";
                     if (coralScored < coralTarget)
