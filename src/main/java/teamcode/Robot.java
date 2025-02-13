@@ -449,8 +449,9 @@ public class Robot extends FrcRobotBase
      * at DASHBOARD_UPDATE_INTERVAL.
      *
      * @param lineNum specifies the first Dashboard line for printing status.
+     * @return next available dashboard line.
      */
-    public void updateStatus(int lineNum)
+    public int updateStatus(int lineNum)
     {
         double currTime = TrcTimer.getCurrentTime();
         RunMode runMode = getCurrentRunMode();
@@ -588,6 +589,8 @@ public class Robot extends FrcRobotBase
                 lineNum = TrcSubsystem.updateStatusAll(lineNum);
             }
         }
+
+        return lineNum;
     }   //updateStatus
 
     /**

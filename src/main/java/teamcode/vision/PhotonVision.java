@@ -47,7 +47,9 @@ public class PhotonVision extends FrcPhotonVision
 {
     public enum PipelineType
     {
-        APRILTAG(0);
+        NONE(0),
+        APRILTAG(1),
+        ALGAEANDCORAL(2);
 
         public int pipelineIndex;
 
@@ -230,17 +232,25 @@ public class PhotonVision extends FrcPhotonVision
 
             if (objects != null)
             {
-                int bestIdIndex = -1;
-                for (DetectedObject obj: objects)
+                if (aprilTagIds == null)
                 {
-                    int id = obj.target.getFiducialId();
-                    int idIndex = matchAprilTagId(id, aprilTagIds);
-
-                    if (idIndex != -1 && (bestIdIndex == -1 || idIndex < bestIdIndex))
+                    // Caller did not provide AprilTag IDs to look for, just pick the first one.
+                    bestObj = objects[0];
+                }
+                else
+                {
+                    int bestIdIndex = -1;
+                    for (DetectedObject obj: objects)
                     {
-                        // Found first match or a better match.
-                        bestObj = obj;
-                        bestIdIndex = idIndex;
+                        int id = obj.target.getFiducialId();
+                        int idIndex = matchAprilTagId(id, aprilTagIds);
+
+                        if (idIndex != -1 && (bestIdIndex == -1 || idIndex < bestIdIndex))
+                        {
+                            // Found first match or a better match.
+                            bestObj = obj;
+                            bestIdIndex = idIndex;
+                        }
                     }
                 }
             }

@@ -307,8 +307,8 @@ public class RobotParams
     {
         public static final boolean mirroredField               = false;
         // Field dimensions in inches.
-        public static final double LENGTH                       = 57.0*12.0 + 6.875;
-        public static final double WIDTH                        = 26.0*12.0 + 5.0;
+        public static final double LENGTH                       = 57.0*12.0 + 6.875;    // 690.875
+        public static final double WIDTH                        = 26.0*12.0 + 5.0;      // 317.0
     }   //class Field
 
 }   //class RobotParams

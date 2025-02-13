@@ -24,12 +24,16 @@ package teamcode;
 
 import java.util.Locale;
 
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frclib.driverio.FrcButtonPanel;
 import frclib.driverio.FrcDualJoystick;
 import frclib.driverio.FrcJoystick;
 import frclib.driverio.FrcXboxController;
+import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.Shooter;
+import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
+import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcRobot.RunMode;
 
@@ -50,6 +54,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     protected boolean driverAltFunc = false;
     protected boolean operatorAltFunc = false;
     private boolean subsystemStatusOn = true;
+    private boolean relocalizing = false;
+    private TrcPose2D robotFieldPose = null;
 
     // Shooter subsystem.
     private double prevShooterVel = 0.0;
@@ -92,6 +98,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         if (robot.robotDrive != null)
         {
             robot.robotDrive.driveBase.setDriveOrientation(DriveOrientation.FIELD, true);
+            // Enable AprilTag vision for re-localization.
+            if (robot.photonVisionBack != null)
+            {
+                robot.globalTracer.traceInfo(moduleName, "Enabling BackCam for AprilTagVision.");
+                robot.photonVisionBack.setPipeline(PipelineType.APRILTAG);
+            }
         }
 
         if (RobotParams.Preferences.hybridMode)
@@ -150,64 +162,78 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (robot.robotDrive != null)
                 {
-                    double[] driveInputs;
-
-                    if (robot.driverController != null)
+                    if (relocalizing)
                     {
-                        driveInputs = robot.driverController.getDriveInputs(
-                            RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
-                    }
-                    else if (robot.driverJoystick != null)
-                    {
-                        driveInputs = robot.driverJoystick.getDriveInputs(
-                            RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
-                    }
-                    else
-                    {
-                        driveInputs = robot.driverDualJoystick.getDriveInputs(
-                            RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
-                    }
-
-                    if (robot.robotDrive.driveBase.supportsHolonomicDrive())
-                    {
-                        double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
-                        robot.robotDrive.driveBase.holonomicDrive(
-                            null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
-                        if (subsystemStatusOn)
+                        if (robotFieldPose == null)
                         {
-                            robot.dashboard.displayPrintf(
-                                lineNum++, "Holonomic: x=%.2f, y=%.2f, rot=%.2f, gyroAngle=%.2f",
-                                driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
-                        }
-                    }
-                    else if (RobotParams.Preferences.useTankDrive)
-                    {
-                        robot.robotDrive.driveBase.tankDrive(driveInputs[0], driveInputs[1]);
-                        if (subsystemStatusOn)
-                        {
-                            robot.dashboard.displayPrintf(
-                                lineNum++, "Tank: left=%.2f, right=%.2f, rot=%.2f",
-                                driveInputs[0], driveInputs[1], driveInputs[2]);
+                            DetectedObject aprilTagObj = robot.photonVisionBack.getBestDetectedAprilTag(null);
+                            if (aprilTagObj != null)
+                            {
+                                robotFieldPose = robot.photonVisionBack.getRobotFieldPose(aprilTagObj, false);
+                            }
                         }
                     }
                     else
                     {
-                        robot.robotDrive.driveBase.arcadeDrive(driveInputs[1], driveInputs[2]);
+                        double[] driveInputs;
+
+                        if (robot.driverController != null)
+                        {
+                            driveInputs = robot.driverController.getDriveInputs(
+                                RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
+                        }
+                        else if (robot.driverJoystick != null)
+                        {
+                            driveInputs = robot.driverJoystick.getDriveInputs(
+                                RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
+                        }
+                        else
+                        {
+                            driveInputs = robot.driverDualJoystick.getDriveInputs(
+                                RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
+                        }
+
+                        if (robot.robotDrive.driveBase.supportsHolonomicDrive())
+                        {
+                            double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
+                            robot.robotDrive.driveBase.holonomicDrive(
+                                null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
+                            if (subsystemStatusOn)
+                            {
+                                robot.dashboard.displayPrintf(
+                                    lineNum++, "Holonomic: x=%.2f, y=%.2f, rot=%.2f, gyroAngle=%.2f",
+                                    driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
+                            }
+                        }
+                        else if (RobotParams.Preferences.useTankDrive)
+                        {
+                            robot.robotDrive.driveBase.tankDrive(driveInputs[0], driveInputs[1]);
+                            if (subsystemStatusOn)
+                            {
+                                robot.dashboard.displayPrintf(
+                                    lineNum++, "Tank: left=%.2f, right=%.2f, rot=%.2f",
+                                    driveInputs[0], driveInputs[1], driveInputs[2]);
+                            }
+                        }
+                        else
+                        {
+                            robot.robotDrive.driveBase.arcadeDrive(driveInputs[1], driveInputs[2]);
+                            if (subsystemStatusOn)
+                            {
+                                robot.dashboard.displayPrintf(
+                                    lineNum++, "Arcade: x=%.2f, y=%.2f, rot=%.2f",
+                                    driveInputs[0], driveInputs[1], driveInputs[2]);
+                            }
+                        }
+
                         if (subsystemStatusOn)
                         {
                             robot.dashboard.displayPrintf(
-                                lineNum++, "Arcade: x=%.2f, y=%.2f, rot=%.2f",
-                                driveInputs[0], driveInputs[1], driveInputs[2]);
+                                lineNum++, "RobotPose=%s, Orient=%s, GyroAssist=%s",
+                                robot.robotDrive.driveBase.getFieldPosition(),
+                                robot.robotDrive.driveBase.getDriveOrientation(),
+                                robot.robotDrive.driveBase.isGyroAssistEnabled());
                         }
-                    }
-
-                    if (subsystemStatusOn)
-                    {
-                        robot.dashboard.displayPrintf(
-                            lineNum++, "RobotPose=%s, Orient=%s, GyroAssist=%s",
-                            robot.robotDrive.driveBase.getFieldPosition(),
-                            robot.robotDrive.driveBase.getDriveOrientation(),
-                            robot.robotDrive.driveBase.isGyroAssistEnabled());
                     }
                 }
                 //
@@ -283,7 +309,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             //
             if (RobotParams.Preferences.doStatusUpdate)
             {
-                robot.updateStatus(2);
+                lineNum = robot.updateStatus(lineNum);
+                TrcPose2D robotPose = robot.robotDrive.driveBase.getFieldPosition();
+                robot.dashboard.displayPrintf(
+                    lineNum++, "AdjRobotPose=%s", robot.adjustPoseByAlliance(robotPose, Alliance.Red));
             }
         }
     }   //periodic
@@ -407,9 +436,43 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Start:
-                if (pressed)
+                if (driverAltFunc)
                 {
-                    subsystemStatusOn = !subsystemStatusOn;
+                    if (pressed)
+                    {
+                        subsystemStatusOn = !subsystemStatusOn;
+                    }
+                }
+                else
+                {
+                    if (robot.photonVisionBack != null &&
+                        robot.photonVisionBack.getPipeline() == PipelineType.APRILTAG)
+                    {
+                        // On press of the button, we will start looking for AprilTag for re-localization.
+                        // On release of the button, we will set the robot's field location if we found the
+                        // AprilTag.
+                        relocalizing = pressed;
+                        if (!pressed)
+                        {
+                            if (robotFieldPose != null)
+                            {
+                                // Vision found an AprilTag, set the new robot field location.
+                                robot.globalTracer.traceInfo(
+                                    moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
+                                robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);
+                                robotFieldPose = null;
+                            }
+                            else
+                            {
+                                robot.globalTracer.traceInfo(
+                                    moduleName, ">>>>> Finish re-localizing: AprilTag not found.");
+                            }
+                        }
+                        else
+                        {
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Start re-localizing ...");
+                        }
+                    }
                 }
                 break;
 
