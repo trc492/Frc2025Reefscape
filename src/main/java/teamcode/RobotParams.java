@@ -79,10 +79,11 @@ public class RobotParams
         // Subsystems
         public static final boolean useSubsystems               = true;
         public static final boolean useElevator                 = false;
-        public static final boolean useArm                      = false;
-        public static final boolean useGrabber                  = false;
+        public static final boolean useCoralArm                 = false;
+        public static final boolean useAlgaeArm                 = false;
+        public static final boolean useAlgaeGrabber             = false;
         public static final boolean useIntake                   = false;
-        public static final boolean useDeployer                 = false;
+        public static final boolean useIntakeDeployer           = false;
         public static final boolean useDifferentialWrist        = false;
         public static final boolean useShooter                  = false;
     }   //class Preferences
@@ -108,10 +109,11 @@ public class RobotParams
         public static final int CANID_RBDRIVE_MOTOR             = 6;
         // Subsystem Motor CAN IDs.
         public static final int CANID_ELEVATOR_MOTOR            = 7;
-        public static final int CANID_ARM_MOTOR                 = 8;
-        public static final int CANID_GRABBER_MOTOR             = 9;
-        public static final int CANID_INTAKE_MOTOR              = 10;
-        public static final int CANID_DEPLOYER_MOTOR            = 11;
+        public static final int CANID_CORALARM_MOTOR            = 8;
+        public static final int CANID_ALGAEARM_MOTOR            = 9;
+        public static final int CANID_ALGAEGRABBER_MOTOR        = 10;
+        public static final int CANID_INTAKE_MOTOR              = 11;
+        public static final int CANID_DEPLOYER_MOTOR            = 12;
         // Swerve CAN IDs.
         public static final int CANID_LFSTEER_MOTOR             = 13;
         public static final int CANID_RFSTEER_MOTOR             = 14;
@@ -157,7 +159,11 @@ public class RobotParams
         // Digital Input/Output ports.
         public static final int DIO_ELEVATOR_LOWER_LIMIT        = 0;
         public static final int DIO_ELEVATOR_UPPER_LIMIT        = 1;
-        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 2;
+        public static final int DIO_CORALARM_LOWER_LIMIT        = 2;
+        public static final int DIO_CORALARM_UPPER_LIMIT        = 3;
+        public static final int DIO_ALGAEARM_LOWER_LIMIT        = 4;
+        public static final int DIO_ALGAEARM_UPPER_LIMIT        = 5;
+        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
         
 
         // PWM channels.

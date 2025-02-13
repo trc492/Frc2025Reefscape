@@ -53,10 +53,11 @@ import teamcode.FrcAuto.AutoChoices;
 import teamcode.autotasks.TaskAutoPickupCoralFromGround;
 import teamcode.autotasks.TaskAutoPickupCoralFromStation;
 import teamcode.autotasks.TaskAutoScoreCoral;
-import teamcode.subsystems.Arm;
+import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Deployer;
 import teamcode.subsystems.Elevator;
-import teamcode.subsystems.Grabber;
+import teamcode.subsystems.AlgaeArm;
+import teamcode.subsystems.AlgaeGrabber;
 import teamcode.subsystems.Intake;
 import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
@@ -124,10 +125,11 @@ public class Robot extends FrcRobotBase
     // Other subsystems.
     //
     public TrcMotor elevator;
-    public TrcMotor arm;
-    public TrcMotorGrabber grabber;
+    public TrcMotor coralArm;
+    public TrcMotor algaeArm;
+    public TrcMotorGrabber algaeGrabber;
     public TrcIntake intake;
-    public TrcMotor deployer;
+    public TrcMotor intakeDeployer;
     // Crescendo subsystems.
     public TrcShooter shooter;
     public TrcDiscreteValue shooterVelocity;
@@ -277,14 +279,19 @@ public class Robot extends FrcRobotBase
                     elevator = new Elevator().getElevatorMotor();
                 }
 
-                if (RobotParams.Preferences.useArm)
+                if (RobotParams.Preferences.useCoralArm)
                 {
-                    arm = new Arm().getArmMotor();
+                    coralArm = new CoralArm().getArmMotor();
                 }
 
-                if (RobotParams.Preferences.useGrabber)
+                if (RobotParams.Preferences.useAlgaeArm)
                 {
-                    grabber = new Grabber().getMotorGrabber();
+                    algaeArm = new AlgaeArm().getArmMotor();
+                }
+
+                if (RobotParams.Preferences.useAlgaeGrabber)
+                {
+                    algaeGrabber = new AlgaeGrabber().getMotorGrabber();
                 }
 
                 if (RobotParams.Preferences.useIntake)
@@ -292,9 +299,9 @@ public class Robot extends FrcRobotBase
                     intake = new Intake().getIntake();
                 }
 
-                if (RobotParams.Preferences.useDeployer)
+                if (RobotParams.Preferences.useIntakeDeployer)
                 {
-                    deployer = new Deployer().getDeployer();
+                    intakeDeployer = new Deployer().getDeployer();
                 }
                 // Crescendo subsystems.
                 if (RobotParams.Preferences.useShooter)
@@ -970,7 +977,7 @@ public class Robot extends FrcRobotBase
     }   //prepCompletion
 
     public void moveSubsystem(String owner, double elevatorPos, double elevatorDelay, double armPos, double armDelay, double timeout, TrcEvent event){
-        if(elevator != null && arm != null){
+        if(elevator != null && coralArm != null){
             if(event != null){
                 elevatorEvent.clear();
                 armEvent.clear();
@@ -979,7 +986,7 @@ public class Robot extends FrcRobotBase
                 completionEvent = event;
             }
             elevator.setPosition(owner, elevatorDelay, elevatorPos, true, 1.0, event != null? elevatorEvent: null, timeout);
-            arm.setPosition(owner, armDelay, armPos, true, 1.0, event != null? armEvent: null, timeout);
+            coralArm.setPosition(owner, armDelay, armPos, true, 1.0, event != null? armEvent: null, timeout);
         }
     }
 

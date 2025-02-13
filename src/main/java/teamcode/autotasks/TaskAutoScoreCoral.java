@@ -321,8 +321,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 armPos = RobotParams.Robot.REEF_ARM_SCORE_POS[taskParams.reefLevel]; // TODO: This value needs to be set
                 robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
                 sm.addEvent(event);
-                if((taskParams.scoreCoral || taskParams.inAuto) && robot.grabber.hasObject()){
-                    robot.grabber.autoEject(currOwner, 0.0, scoreEvent, 2.0);
+                if((taskParams.scoreCoral || taskParams.inAuto) && robot.algaeGrabber.hasObject()){
+                    robot.algaeGrabber.autoEject(currOwner, 0.0, scoreEvent, 2.0);
                     sm.addEvent(scoreEvent);
                 }
 

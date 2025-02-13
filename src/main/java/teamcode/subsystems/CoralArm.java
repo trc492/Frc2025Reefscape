@@ -32,23 +32,30 @@ import trclib.robotcore.TrcEvent;
 import trclib.subsystem.TrcSubsystem;
 
 /**
- * This class implements an Arm Subsystem.
+ * This class implements the Coral Arm Subsystem.
  */
-public class Arm extends TrcSubsystem
+public class CoralArm extends TrcSubsystem
 {
     public static final class Params
     {
-        public static final String SUBSYSTEM_NAME               = "Arm";
+        public static final String SUBSYSTEM_NAME               = "CoralArm";
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ARM_MOTOR;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_CORALARM_MOTOR;
         public static final MotorType MOTOR_TYPE                = MotorType.CanSparkMax;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = true;
+        public static final boolean MOTOR_INVERTED              = false;
+
+        public static final String LOWER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".lowerLimit";
+        public static final int LOWER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_CORALARM_LOWER_LIMIT;
+        public static final boolean LOWER_LIMITSWITCH_INVERTED  = false;
+        public static final String UPPER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".upperLimit";
+        public static final int UPPER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_CORALARM_UPPER_LIMIT;
+        public static final boolean UPPER_LIMITSWITCH_INVERTED  = false;
 
         public static final double DEG_PER_COUNT                = 1.0;
-        public static final double POS_OFFSET                   = 39.0;
+        public static final double POS_OFFSET                   = 0.0;
         public static final double POWER_LIMIT                  = 0.5;
         public static final double ZERO_CAL_POWER               = -0.25;
 
@@ -68,12 +75,12 @@ public class Arm extends TrcSubsystem
         public static final double STALL_RESET_TIMEOUT          = 0.0;
     }   //class Params
 
-    private final TrcMotor armMotor;
+    private final TrcMotor coralArmMotor;
 
     /**
      * Constructor: Creates an instance of the object.
      */
-    public Arm()
+    public CoralArm()
     {
         super(Params.SUBSYSTEM_NAME, true);
 
@@ -81,23 +88,25 @@ public class Arm extends TrcSubsystem
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
+            .setLowerLimitSwitch(Params.LOWER_LIMITSWITCH_NAME, Params.LOWER_LIMITSWITCH_CHANNEL, Params.LOWER_LIMITSWITCH_INVERTED)
+            .setUpperLimitSwitch(Params.UPPER_LIMITSWITCH_NAME, Params.UPPER_LIMITSWITCH_CHANNEL, Params.UPPER_LIMITSWITCH_INVERTED)
             .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
-        armMotor = new FrcMotorActuator(motorParams).getMotor();
-        armMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        armMotor.setPositionPidPowerComp(this::getGravityComp);
-        armMotor.setStallProtection(
+        coralArmMotor = new FrcMotorActuator(motorParams).getMotor();
+        coralArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
+        coralArmMotor.setPositionPidPowerComp(this::getGravityComp);
+        coralArmMotor.setStallProtection(
             Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
-    }   //Arm
+    }   //CoralArm
 
     public TrcMotor getArmMotor()
     {
-        return armMotor;
+        return coralArmMotor;
     }   //getArmMotor
 
     private double getGravityComp(double currPower)
     {
-        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(armMotor.getPosition()));
+        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(coralArmMotor.getPosition()));
     }   //getGravityComp
 
     //
@@ -110,7 +119,7 @@ public class Arm extends TrcSubsystem
     @Override
     public void cancel()
     {
-        armMotor.cancel();
+        coralArmMotor.cancel();
     }   //cancel
 
     /**
@@ -122,7 +131,7 @@ public class Arm extends TrcSubsystem
     @Override
     public void zeroCalibrate(String owner, TrcEvent event)
     {
-        armMotor.zeroCalibrate(owner, Params.ZERO_CAL_POWER, event);
+        coralArmMotor.zeroCalibrate(owner, Params.ZERO_CAL_POWER, event);
     }   //zeroCalibrate
 
     /**
@@ -144,11 +153,11 @@ public class Arm extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f,pos=%.1f/%.1f,limitSw=%s",
-            Params.SUBSYSTEM_NAME, armMotor.getPower(), armMotor.getPosition(), armMotor.getPidTarget(),
-            armMotor.isLowerLimitSwitchActive());
+            "%s: power=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
+            Params.SUBSYSTEM_NAME, coralArmMotor.getPower(), coralArmMotor.getPosition(), coralArmMotor.getPidTarget(),
+            coralArmMotor.isLowerLimitSwitchActive(), coralArmMotor.isUpperLimitSwitchActive());
 
         return lineNum;
     }   //updateStatus
 
-}   //class Arm
+}   //class CoralArm

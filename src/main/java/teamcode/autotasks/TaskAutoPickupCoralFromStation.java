@@ -315,7 +315,7 @@ import trclib.pathdrive.TrcPose2D;
             case TAKE_CORAL:
                 // Code to bring elevator and grabber down to position to pickup coral
                 // TODO: We will need to add code for an additional sensor that will be in the hopper that will track whether an object has entered the hopper yet
-                if(!robot.grabber.hasObject()){
+                if(!robot.algaeGrabber.hasObject()){
                     double elevatorPos;
                     double armPos;
                     double finishDelay;
@@ -326,7 +326,7 @@ import trclib.pathdrive.TrcPose2D;
                     robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
                     sm.addEvent(event);
 
-                    robot.grabber.autoIntake(currOwner, finishDelay, grabberEvent, 2.0);
+                    robot.algaeGrabber.autoIntake(currOwner, finishDelay, grabberEvent, 2.0);
                 }
 
                 sm.waitForEvents(State.DONE);
