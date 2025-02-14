@@ -26,6 +26,10 @@
  import frclib.vision.FrcPhotonVision;
  import teamcode.Robot;
 import teamcode.RobotParams;
+import teamcode.subsystems.AlgaeGrabber;
+import teamcode.subsystems.CoralArm;
+import teamcode.subsystems.Elevator;
+import teamcode.vision.PhotonVision;
 import trclib.pathdrive.TrcPose2D;
  import trclib.robotcore.TrcAutoTask;
  import trclib.robotcore.TrcEvent;
@@ -266,7 +270,7 @@ import trclib.pathdrive.TrcPose2D;
                 if(taskParams.useVision && aprilTagPose != null){
                     tracer.traceInfo(moduleName, "*****Using Vision to drive to AprilTag");
                     targetPose = aprilTagPose.clone();  
-                    targetPose.x += RobotParams.Vision.FRONTCAM_X_OFFSET; // This value will need to be measured.
+                    targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
                     targetPose.angle = 0.0;
 
                     intermediatePose = aprilTagPose.clone();
@@ -279,16 +283,14 @@ import trclib.pathdrive.TrcPose2D;
                         "\n\ttargetPose=" + targetPose);
                         robot.robotDrive.purePursuitDrive.start(
                             currOwner, driveEvent, 2.0, true,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            intermediatePose, targetPose);
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
 
                 } else if(!taskParams.inAuto){
                     tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
                     
-                    targetPose = RobotParams.Game.APRILTAG_POSES[robot.getClosestAprilTag(robotPose) - 1].clone();
-                    targetPose.x += RobotParams.Vision.FRONTCAM_X_OFFSET; // This value will need to be measured.
+                    targetPose = PhotonVision.getClosestAprilTagPose(robotPose);
+                    targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
                     targetPose.angle = 0.0;
                     intermediatePose = targetPose.clone();
                     intermediatePose.y = targetPose.y;
@@ -301,10 +303,8 @@ import trclib.pathdrive.TrcPose2D;
                         "\n\ttargetPose=" + targetPose);
                     robot.robotDrive.purePursuitDrive.start(
                         currOwner, driveEvent, 2.0, true,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        intermediatePose, targetPose);
+                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                        robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
                 } else{
                     tracer.traceInfo(moduleName, "Not going to AprilTag, we are just going to run the logic to pickup an object");
                 }
@@ -320,9 +320,9 @@ import trclib.pathdrive.TrcPose2D;
                     double armPos;
                     double finishDelay;
                     tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to pickup position for Coral Station coral");
-                    elevatorPos = RobotParams.Robot.STATION_ELEVATOR_PICKUP_POS;
-                    armPos = RobotParams.Robot.STATION_ARM_PICKUP_POS;
-                    finishDelay = RobotParams.Robot.STATION_PICKUP_FINISH_DELAY;
+                    elevatorPos = Elevator.Params.HOPPER_PICKUP_POS;
+                    armPos = CoralArm.Params.HOPPER_PICKUP_POS;
+                    finishDelay = AlgaeGrabber.Params.FINISH_DELAY;
                     robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
                     sm.addEvent(event);
 

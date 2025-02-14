@@ -24,7 +24,6 @@ package teamcode.autotasks;
 
 import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
-import teamcode.RobotParams;
 import teamcode.subsystems.Intake;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
@@ -264,11 +263,9 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                         // run to it.
                         coralPose.y += 6; //TODO: adjust this number
                         robot.robotDrive.purePursuitDrive.start(
-                            currOwner, driveEvent, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            coralPose, new TrcPose2D(0.0, -26.0, 0.0)); //TODO: adjust y coordinate
+                            currOwner, driveEvent, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, coralPose, new TrcPose2D(0.0, -26.0, 0.0)); //TODO: adjust y coordinate
                         sm.addEvent(driveEvent);          
                     }
                     else

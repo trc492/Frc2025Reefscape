@@ -61,6 +61,7 @@ public class CoralArm extends TrcSubsystem
 
         public static final double MIN_POS                      = POS_OFFSET;
         public static final double MAX_POS                      = 270.0;
+        public static final double HOPPER_PICKUP_POS            = 0.0; // TODO
         public static final double[] posPresets                 = {MIN_POS, 60.0, 90.0, 120.0, 150.0, 180.0, 210.0, 240.0, 270.0};
         public static final double POS_PRESET_TOLERANCE         = 10.0;
 

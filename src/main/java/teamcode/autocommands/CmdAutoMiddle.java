@@ -193,10 +193,8 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                             TrcPose2D aprilTagCenterPose = RobotParams.Game.APRILTAG_POSES[coralAprilTagId - 1].clone();
                             robot.robotDrive.purePursuitDrive.start(
                                 event, 0.0, false, 
-                                RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                                RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                                RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                                aprilTagCenterPose);
+                                robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                                robot.robotInfo.profiledMaxDeceleration, aprilTagCenterPose);
                             // Calling AutoScore without Vision so it will just call the subsystem tasks
                             robot.scoreCoralTask.autoScoreCoral(false, 3, false, true, relocalize, true, event);
                             sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
@@ -233,11 +231,9 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                         stationSideIntermediatePose.x -= 12.0; // TODO: Not Sure which direction to go, this will have to be checked
                         stationSideIntermediatePose.angle = 60;
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            stationSideIntermediatePose);
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, stationSideIntermediatePose);
                         sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
                     } else if(stationSide == StationSide.LEFT){
                         // Same as above, but we are using Odometry to go to the intermediate position.
@@ -248,10 +244,8 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                         stationSideIntermediatePose.angle = 60;
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            stationSideIntermediatePose);
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, stationSideIntermediatePose);
                         sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
                     }
                                 
@@ -269,11 +263,9 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                         int stationAprilTagId = stationSide == StationSide.LEFT? RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D aprilTagStationPose = RobotParams.Game.APRILTAG_POSES[stationAprilTagId - 1].clone();
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            aprilTagStationPose);
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, aprilTagStationPose);
                         robot.pickupCoralFromStationTask.autoPickupCoral(false, true, relocalize, event);
                         sm.waitForSingleEvent(event, State.SCORE_CORAL);
                     }
@@ -292,11 +284,9 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                         int pickupScoreId = stationSide == StationSide.LEFT? RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D pickupScorePose = RobotParams.Game.APRILTAG_POSES[pickupScoreId - 1].clone();
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            pickupScorePose);
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, pickupScorePose);
                         robot.scoreCoralTask.autoScoreCoral(false, 3, false, true, relocalize, true, event);
                         coralScored++;
                         sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);

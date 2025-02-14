@@ -456,7 +456,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         {
                             if (robotFieldPose != null)
                             {
-                                // Vision found an AprilTag, set the new robot field location.
                                 robot.globalTracer.traceInfo(
                                     moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
                                 robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);

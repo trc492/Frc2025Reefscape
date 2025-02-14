@@ -54,8 +54,9 @@ import teamcode.autotasks.TaskAutoPickupCoralFromGround;
 import teamcode.autotasks.TaskAutoPickupCoralFromStation;
 import teamcode.autotasks.TaskAutoScoreCoral;
 import teamcode.subsystems.CoralArm;
-import teamcode.subsystems.Deployer;
+import teamcode.subsystems.IntakeDeployer;
 import teamcode.subsystems.Elevator;
+import teamcode.subsystems.Hanger;
 import teamcode.subsystems.AlgaeArm;
 import teamcode.subsystems.AlgaeGrabber;
 import teamcode.subsystems.Intake;
@@ -130,6 +131,7 @@ public class Robot extends FrcRobotBase
     public TrcMotorGrabber algaeGrabber;
     public TrcIntake intake;
     public TrcMotor intakeDeployer;
+    public TrcMotor hanger;
     // Crescendo subsystems.
     public TrcShooter shooter;
     public TrcDiscreteValue shooterVelocity;
@@ -138,9 +140,9 @@ public class Robot extends FrcRobotBase
     //
     // Auto-Assists.
     //
-    public TaskAutoPickupCoralFromGround pickupCoralFromGroundTask;
-    public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
     public TaskAutoScoreCoral scoreCoralTask;
+    public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
+    public TaskAutoPickupCoralFromGround pickupCoralFromGroundTask;
 
     /**
      * Constructor: Create an instance of the object.
@@ -301,8 +303,14 @@ public class Robot extends FrcRobotBase
 
                 if (RobotParams.Preferences.useIntakeDeployer)
                 {
-                    intakeDeployer = new Deployer().getDeployer();
+                    intakeDeployer = new IntakeDeployer().getDeployer();
                 }
+
+                if (RobotParams.Preferences.useHanger)
+                {
+                    hanger = new Hanger().getHangerMotor();
+                }
+
                 // Crescendo subsystems.
                 if (RobotParams.Preferences.useShooter)
                 {
@@ -322,10 +330,9 @@ public class Robot extends FrcRobotBase
                 zeroCalibrate(null, null);
 
                 // Create autotasks.
-                
-                scoreCoralTask = new TaskAutoScoreCoral("AutoScoreCoral", this);
-                pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround("AutoPickupCoralGround", this);
-                pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation("AutoPickupCoralFromStation", this);
+                scoreCoralTask = new TaskAutoScoreCoral("ScoreCoralTask", this);
+                pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation("PickupCoralFromStationTask", this);
+                pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround("PickupCoralFromGroundTask", this);
             }
         }
 
@@ -816,12 +823,17 @@ public class Robot extends FrcRobotBase
     public boolean relocalizeRobotByAprilTag(FrcPhotonVision.DetectedObject aprilTagObj)
     {
         boolean success = false;
-        // Use AprilTag's location to re-localize the robot.
+
         if (aprilTagObj.robotPose != null)
         {
+            // Vision found an AprilTag, set the new robot field location.
+            globalTracer.traceInfo(moduleName, ">>>>> Re-localize robot: pose=" + aprilTagObj.robotPose);
             robotDrive.driveBase.setFieldPosition(aprilTagObj.robotPose, false);
-            globalTracer.traceInfo(moduleName, "Using AprilTag to re-localize to " + aprilTagObj.robotPose);
             success = true;
+        }
+        else
+        {
+            globalTracer.traceInfo(moduleName, ">>>>> Fail to re-localize: AprilTag not found.");
         }
 
         return success;
@@ -851,7 +863,7 @@ public class Robot extends FrcRobotBase
         double xDelta = robotPose.x - robotEstimatedPose.x;
         double yDelta = robotPose.y - robotEstimatedPose.y;
         double error = TrcUtil.magnitude(xDelta, yDelta);
-        if (error > RobotParams.Vision.GUIDANCE_ERROR_THRESHOLD && error < 96.00)
+        if (error > PhotonVision.GUIDANCE_ERROR_THRESHOLD && error < 96.00)
         {
             robotDrive.driveBase.setFieldPosition(robotEstimatedPose, false);
             globalTracer.traceInfo(
@@ -948,28 +960,10 @@ public class Robot extends FrcRobotBase
         return pressureSensor != null? (pressureSensor.getVoltage() - 0.5) * 50.0: 0.0;
     }   //getPressure
 
-    public int getClosestAprilTag(TrcPose2D robotPose){
-        int closestTag = 1;
-        double minDistance = Double.MAX_VALUE;
-        for(int i = 0; i<RobotParams.Game.APRILTAG_POSES.length; i++){
-            double x = robotPose.x - RobotParams.Game.APRILTAG_POSES[i].x;
-            double y = robotPose.y - RobotParams.Game.APRILTAG_POSES[i].y;
-            double distance = Math.sqrt((x * x) + (y * y));
-
-            if(distance < minDistance){
-                minDistance = distance;
-                closestTag = i+1;
-            }
-        }
-
-        return closestTag;
-    }
-
-
-    private final TrcEvent elevatorEvent = new TrcEvent("robot.elevatorEvent");
-    private final TrcEvent armEvent = new TrcEvent("robot.armEvent");
+    // Code Review: below code should belong somewhere else.
+    private final TrcEvent elevatorEvent = new TrcEvent(moduleName + ".elevatorEvent");
+    private final TrcEvent armEvent = new TrcEvent(moduleName + ".armEvent");
     private TrcEvent completionEvent = null;
-
 
     private void prepCompletion(Object context)
     {

@@ -135,7 +135,7 @@ public class LEDIndicator
             {
                 case APRILTAG:
                     // led.setPatternState(aprilTagPattern, true, 0.5);
-                    if (Math.abs(objPose.angle) < RobotParams.Vision.ONTARGET_THRESHOLD)
+                    if (Math.abs(objPose.angle) < PhotonVision.ONTARGET_THRESHOLD)
                     {
                         led.setPatternState(aprilTagLockedPattern, true, 0.5);
                     }

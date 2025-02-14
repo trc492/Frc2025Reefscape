@@ -188,11 +188,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         TrcPose2D scorePreloadPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_SCORE_CORAL_START_RED : RobotParams.Game.FAR_SCORE_CORAL_START_RED;
                         robot.robotDrive.purePursuitDrive.start(
-                        event, 0.0, false, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                        RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                        scorePreloadPos);
+                        event, 0.0, false,
+                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                        robot.robotInfo.profiledMaxDeceleration, scorePreloadPos);
                         sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
                     }
                     else
@@ -249,11 +247,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_RED : RobotParams.Game.FAR_PICKUP_CORAL_SIDE_RED;
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            stationSidePos);
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, stationSidePos);
                         sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                     }
                     else if (cyclePositions.equals("Center"))
@@ -261,11 +257,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            stationCenterPos);
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, stationCenterPos);
                         sm.waitForSingleEvent(event, State.PICKUP_CORAL); 
                     }
                     break;
@@ -284,11 +278,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         TrcPose2D scoreSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED : RobotParams.Game.FAR_SCORE_CORAL_SIDE_RED;
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            scoreSidePos);
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, scoreSidePos);
                         sm.waitForSingleEvent(event, State.SCORE_CORAL); 
                     }
                     else if (cyclePositions == "Center")
@@ -296,11 +288,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_VELOCITY, 
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_ACCELERATION,
-                            RobotParams.SwerveDriveBase.PROFILED_MAX_DECELERATION,
-                            stationCenterPos);
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, stationCenterPos);
                         sm.waitForSingleEvent(event, State.SCORE_CORAL); 
                     }
                     break;

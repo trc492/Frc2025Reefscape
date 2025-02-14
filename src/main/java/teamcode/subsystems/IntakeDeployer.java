@@ -33,14 +33,14 @@ import trclib.subsystem.TrcSubsystem;
 /**
  * This class implements an Elevator Subsystem.
  */
-public class Deployer extends TrcSubsystem
+public class IntakeDeployer extends TrcSubsystem
 {
     public static final class Params
     {
-        public static final String SUBSYSTEM_NAME               = "Deployer";
+        public static final String SUBSYSTEM_NAME               = "IntakeDeployer";
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_DEPLOYER_MOTOR;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_INTAKEDEPLOYER_MOTOR;
         public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
@@ -61,7 +61,7 @@ public class Deployer extends TrcSubsystem
     /**
      * Constructor: Creates an instance of the object.
      */
-    public Deployer()
+    public IntakeDeployer()
     {
         super(Params.SUBSYSTEM_NAME, true);
 
@@ -71,7 +71,7 @@ public class Deployer extends TrcSubsystem
                 Params.MOTOR_INVERTED)
             .setLowerLimitSwitch(Params.LOWER_LIMIT_NAME, Params.LOWER_LIMIT_CHANNEL, Params.LOWER_LIMIT_INVERTED);
         deployer = new FrcMotorActuator(deployerParams).getMotor();
-    }   //Intake
+    }   //IntakeDeployer
 
     public TrcMotor getDeployer()
     {
@@ -129,4 +129,4 @@ public class Deployer extends TrcSubsystem
         return lineNum;
     }   //updateStatus
 
-}   //class Deployer
+}   //class IntakeDeployer

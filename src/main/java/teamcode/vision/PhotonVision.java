@@ -33,6 +33,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import frclib.vision.FrcPhotonVision;
+import teamcode.RobotParams;
 import teamcode.subsystems.LEDIndicator;
 import trclib.dataprocessor.TrcUtil;
 import trclib.pathdrive.TrcPose2D;
@@ -45,6 +46,9 @@ import trclib.timer.TrcTimer;
  */
 public class PhotonVision extends FrcPhotonVision
 {
+    public static final double ONTARGET_THRESHOLD           = 5.0;
+    public static final double GUIDANCE_ERROR_THRESHOLD     = 12.0;
+
     public enum PipelineType
     {
         NONE(0),
@@ -308,6 +312,25 @@ public class PhotonVision extends FrcPhotonVision
         currPipeline = PipelineType.values()[getPipelineIndex()];
         return currPipeline;
     }   //getPipeline
+
+    public static TrcPose2D getClosestAprilTagPose(TrcPose2D robotPose)
+    {
+        TrcPose2D closestAprilTagPose = null;
+        double minDistance = Double.MAX_VALUE;
+
+        for (TrcPose2D aprilTagPose: RobotParams.Game.APRILTAG_POSES)
+        {
+            double distance = robotPose.distanceTo(aprilTagPose);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestAprilTagPose = aprilTagPose;
+            }
+        }
+
+        return closestAprilTagPose.clone();
+    }   //getClosestAprilTagPose
 
     //
     // Implements FrcPhotonVision abstract methods.

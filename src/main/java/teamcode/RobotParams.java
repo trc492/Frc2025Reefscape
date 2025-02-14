@@ -47,6 +47,7 @@ public class RobotParams
         public static final boolean hybridMode                  = false;
         public static final boolean useTraceLog                 = true;
         public static final boolean useCommStatusMonitor        = true;
+        public static final boolean invertedRobot               = false;
         // Status Update
         public static final boolean doStatusUpdate              = true;
         public static final boolean showLoopTime                = false;
@@ -84,6 +85,8 @@ public class RobotParams
         public static final boolean useAlgaeGrabber             = false;
         public static final boolean useIntake                   = false;
         public static final boolean useIntakeDeployer           = false;
+        public static final boolean useHanger                   = false;
+
         public static final boolean useDifferentialWrist        = false;
         public static final boolean useShooter                  = false;
     }   //class Preferences
@@ -113,7 +116,8 @@ public class RobotParams
         public static final int CANID_ALGAEARM_MOTOR            = 9;
         public static final int CANID_ALGAEGRABBER_MOTOR        = 10;
         public static final int CANID_INTAKE_MOTOR              = 11;
-        public static final int CANID_DEPLOYER_MOTOR            = 12;
+        public static final int CANID_INTAKEDEPLOYER_MOTOR      = 12;
+        public static final int CANID_HANGER_MOTOR              = 17;
         // Swerve CAN IDs.
         public static final int CANID_LFSTEER_MOTOR             = 13;
         public static final int CANID_RFSTEER_MOTOR             = 14;
@@ -126,7 +130,29 @@ public class RobotParams
         // Miscellaneous CAN IDs.
         public static final int CANID_PCM                       = 30;
         public static final int CANID_PDP                       = 31;
-        // Subsystem CAN IDs.
+        // Analog Input ports (not used).
+        public static final int AIN_ULTRASONIC                  = 0;
+        public static final int AIN_PRESSURE_SENSOR             = 0;
+        public static final int AIN_LFSTEER_ENCODER             = 0;
+        public static final int AIN_RFSTEER_ENCODER             = 1;
+        public static final int AIN_LBSTEER_ENCODER             = 2;
+        public static final int AIN_RBSTEER_ENCODER             = 3;
+        // Digital Input/Output ports.
+        public static final int DIO_ELEVATOR_LOWER_LIMIT        = 0;
+        public static final int DIO_ELEVATOR_UPPER_LIMIT        = 1;
+        public static final int DIO_CORALARM_LOWER_LIMIT        = 2;
+        public static final int DIO_CORALARM_UPPER_LIMIT        = 3;
+        public static final int DIO_ALGAEARM_LOWER_LIMIT        = 4;
+        public static final int DIO_ALGAEARM_UPPER_LIMIT        = 5;
+        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
+        public static final int DIO_HANGER_LOWER_LIMIT          = 7;
+        public static final int DIO_HANGER_UPPER_LIMIT          = 8;
+        // PWM channels.
+        public static final int NUM_LEDS                        = 60;
+        public static final int PWM_CHANNEL_LED                 = 9;
+        // Relay channels.
+
+        // Pneumatic channels.
 
         // PDP Channels.
         // Drive Base PDP Channels.
@@ -149,29 +175,6 @@ public class RobotParams
         public static final int PDP_CHANNEL_LED                 = 14;
 
         public static final double BATTERY_CAPACITY_WATT_HOUR   = 18.0*12.0;
-        // Analog Input ports (not used).
-        public static final int AIN_ULTRASONIC                  = 0;
-        public static final int AIN_PRESSURE_SENSOR             = 0;
-        public static final int AIN_LFSTEER_ENCODER             = 0;
-        public static final int AIN_RFSTEER_ENCODER             = 1;
-        public static final int AIN_LBSTEER_ENCODER             = 2;
-        public static final int AIN_RBSTEER_ENCODER             = 3;
-        // Digital Input/Output ports.
-        public static final int DIO_ELEVATOR_LOWER_LIMIT        = 0;
-        public static final int DIO_ELEVATOR_UPPER_LIMIT        = 1;
-        public static final int DIO_CORALARM_LOWER_LIMIT        = 2;
-        public static final int DIO_CORALARM_UPPER_LIMIT        = 3;
-        public static final int DIO_ALGAEARM_LOWER_LIMIT        = 4;
-        public static final int DIO_ALGAEARM_UPPER_LIMIT        = 5;
-        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
-        
-
-        // PWM channels.
-        public static final int NUM_LEDS                        = 60;
-        public static final int PWM_CHANNEL_LED                 = 9;
-        // Relay channels.
-
-        // Pneumatic channels.
 
         // Ultrasonic sensors.
         // public static final double SONAR_INCHES_PER_VOLT        = 1.0/0.0098; //9.8mV per inch
@@ -199,28 +202,7 @@ public class RobotParams
         public static final double TURN_SLOW_SCALE              = 0.3;
         public static final double TURN_NORMAL_SCALE            = 0.6;
         public static final double DRIVE_RAMP_RATE              = 0.25;
-        public static final double[] REEF_ELEVATOR_SCORE_POS    = {0.0, 0.0, 0.0, 0.0}; // TODO: Needs to be added
-        public static final double[] REEF_ARM_SCORE_POS    = {0.0, 0.0, 0.0, 0.0};
-        public static final double STATION_ELEVATOR_PICKUP_POS  = 0.0; // TODO
-        public static final double STATION_ARM_PICKUP_POS       = 0.0; // TODO
-        public static final double STATION_PICKUP_FINISH_DELAY  = 0.0; // TODO
     }   //class Robot
-
-    public static class Vision
-    {
-        public static final double ONTARGET_THRESHOLD           = 5.0;
-        public static final double GUIDANCE_ERROR_THRESHOLD     = 12.0;
-        public static final double FRONTCAM_X_OFFSET            = 0.0;
-    }   //class Vision
-
-    public static class SwerveDriveBase
-    {
-        // These values will have to be tuned
-        public static final double PROFILED_MAX_VELOCITY = 0.0;
-        public static final double PROFILED_MAX_ACCELERATION = 0.0;
-        public static final double PROFILED_MAX_DECELERATION = 0.0;
-
-    }
 
     /**
      * This class contains season specific game element information.
@@ -249,22 +231,6 @@ public class RobotParams
         //
         // Game element locations and dimensions.
         //
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
-        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
-
-        // NOTE: This is a just a mirror of the processor positions
-        public static final TrcPose2D FAR_SCORE_CORAL_START_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_SCORE_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
-        public static final TrcPose2D FAR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
         // AprilTag IDs for various locations for red and blue alliances.
         public static final int[] APRILTAG_LEFT_CORAL_STATION   = {1, 13};
         public static final int[] APRILTAG_RIGHT_CORAL_STATION  = {2, 12};
@@ -277,6 +243,8 @@ public class RobotParams
         public static final int[] APRILTAG_FAR_RIGHT_REEF       = {9, 22};
         public static final int[] APRILTAG_FAR_MID_REEF         = {10, 21};
         public static final int[] APRILTAG_FAR_LEFT_REEF        = {11, 20};
+        public static final int[] APRILTAG_REEFS                = {17, 18, 19, 20, 21, 22, 6, 7, 8, 9, 10, 11};
+
         // Array of AprilTag poses indexed by AprilTag ID.
         public static final TrcPose2D[] APRILTAG_POSES          =
         {
@@ -303,6 +271,21 @@ public class RobotParams
         /*ID21*/    new TrcPose2D(-158.66, 209.45, 0.0), //z=12.125
         /*ID22*/    new TrcPose2D(-130.32, 192.91, 60.0) //z=12.125
         };
+
+        public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_SCORE_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+
+        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+
+        // NOTE: This is a just a mirror of the processor positions
+        public static final TrcPose2D FAR_SCORE_CORAL_START_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_SCORE_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+
+        public static final TrcPose2D FAR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
     }   //class Game
 
     /**
