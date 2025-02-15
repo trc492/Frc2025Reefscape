@@ -189,10 +189,6 @@ public class RobotBase
             profiledMaxDeceleration = profiledMaxAcceleration;
             profiledMaxTurnRate = 180.0;        // degree/sec
             // DriveBase PID Parameters
-            usePidDrive = true;
-            enablePidDriveSquareRootPid = false;
-            usePurePursuitDrive = true;
-            enablePurePursuitDriveSquareRootPid = false;
             drivePidTolerance = 1.0;
             turnPidTolerance = 2.0;
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
@@ -203,9 +199,15 @@ public class RobotBase
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
             pidStallDetectionEnabled = true;
+            // PidDrive Parameters
+            usePidDrive = true;
+            enablePidDriveSquareRootPid = false;
             // PurePursuit Parameters
+            usePurePursuitDrive = true;
+            enablePurePursuitDriveSquareRootPid = false;
             ppdFollowingDistance = 10.0;
             velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
+            fastModeEnabled = true;
             // Vision
             if (RobotParams.Preferences.invertedRobot)
             {
@@ -370,10 +372,6 @@ public class RobotBase
             profiledMaxDeceleration = profiledMaxAcceleration;
             profiledMaxTurnRate = 180.0;        // degree/sec
             // DriveBase PID Parameters
-            usePidDrive = true;
-            enablePidDriveSquareRootPid = false;
-            usePurePursuitDrive = true;
-            enablePurePursuitDriveSquareRootPid = false;
             drivePidTolerance = 1.0;
             turnPidTolerance = 2.0;
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
@@ -384,9 +382,15 @@ public class RobotBase
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
             pidStallDetectionEnabled = true;
+            // PidDrive Parameters
+            usePidDrive = true;
+            enablePidDriveSquareRootPid = false;
             // PurePursuit Parameters
+            usePurePursuitDrive = true;
+            enablePurePursuitDriveSquareRootPid = false;
             ppdFollowingDistance = 10.0;
             velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
+            fastModeEnabled = true;
             // Vision
             cam1 = new ReefscapeFrontCamParams();
             cam2 = new ReefscapeBackCamParams();
