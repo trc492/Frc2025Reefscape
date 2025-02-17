@@ -83,9 +83,9 @@ public class RobotParams
         public static final boolean useCoralArm                 = false;
         public static final boolean useAlgaeArm                 = false;
         public static final boolean useAlgaeGrabber             = false;
+        public static final boolean useWinch                    = false;
         public static final boolean useIntake                   = false;
         public static final boolean useIntakeDeployer           = false;
-        public static final boolean useHanger                   = false;
 
         public static final boolean useDifferentialWrist        = false;
         public static final boolean useShooter                  = false;
@@ -106,27 +106,27 @@ public class RobotParams
         public static final int JSPORT_SWITCH_PANEL             = 4;
         // CAN IDs.
         // Drive Motor CAN IDs.
-        public static final int CANID_LFDRIVE_MOTOR             = 3;
-        public static final int CANID_RFDRIVE_MOTOR             = 4;
-        public static final int CANID_LBDRIVE_MOTOR             = 5;
-        public static final int CANID_RBDRIVE_MOTOR             = 6;
-        // Subsystem Motor CAN IDs.
-        public static final int CANID_ELEVATOR_MOTOR            = 7;
-        public static final int CANID_CORALARM_MOTOR            = 8;
-        public static final int CANID_ALGAEARM_MOTOR            = 9;
-        public static final int CANID_ALGAEGRABBER_MOTOR        = 10;
-        public static final int CANID_INTAKE_MOTOR              = 11;
-        public static final int CANID_INTAKEDEPLOYER_MOTOR      = 12;
-        public static final int CANID_HANGER_MOTOR              = 17;
+        public static final int CANID_LFDRIVE_MOTOR             = 3;    // Orange
+        public static final int CANID_RFDRIVE_MOTOR             = 4;    // Yellow
+        public static final int CANID_LBDRIVE_MOTOR             = 5;    // Green
+        public static final int CANID_RBDRIVE_MOTOR             = 6;    // Blue
         // Swerve CAN IDs.
-        public static final int CANID_LFSTEER_MOTOR             = 13;
-        public static final int CANID_RFSTEER_MOTOR             = 14;
-        public static final int CANID_LBSTEER_MOTOR             = 15;
-        public static final int CANID_RBSTEER_MOTOR             = 16;
-        public static final int CANID_LFSTEER_ENCODER           = 23;
-        public static final int CANID_RFSTEER_ENCODER           = 24;
-        public static final int CANID_LBSTEER_ENCODER           = 25;
-        public static final int CANID_RBSTEER_ENCODER           = 26;
+        public static final int CANID_LFSTEER_MOTOR             = 13;   // Orange
+        public static final int CANID_RFSTEER_MOTOR             = 14;   // Yellow
+        public static final int CANID_LBSTEER_MOTOR             = 15;   // Green
+        public static final int CANID_RBSTEER_MOTOR             = 16;   // Blue
+        public static final int CANID_LFSTEER_ENCODER           = 23;   // Orange
+        public static final int CANID_RFSTEER_ENCODER           = 24;   // Yellow
+        public static final int CANID_LBSTEER_ENCODER           = 25;   // Green
+        public static final int CANID_RBSTEER_ENCODER           = 26;   // Blue
+        // Subsystem Motor CAN IDs.
+        public static final int CANID_CORALARM_MOTOR            = 7;    // Purple
+        public static final int CANID_ALGAEARM_MOTOR            = 8;    // Gray
+        public static final int CANID_ALGAEGRABBER_MOTOR        = 9;    // White
+        public static final int CANID_ELEVATOR_MOTOR            = 17;   // Purple
+        public static final int CANID_WINCH_MOTOR               = 18;   // Gray
+        public static final int CANID_INTAKE_MOTOR              = 27;   // Purple
+        public static final int CANID_INTAKEDEPLOYER_MOTOR      = 28;   // Gray
         // Miscellaneous CAN IDs.
         public static final int CANID_PCM                       = 30;
         public static final int CANID_PDP                       = 31;
@@ -144,9 +144,9 @@ public class RobotParams
         public static final int DIO_CORALARM_UPPER_LIMIT        = 3;
         public static final int DIO_ALGAEARM_LOWER_LIMIT        = 4;
         public static final int DIO_ALGAEARM_UPPER_LIMIT        = 5;
+        public static final int DIO_WINCH_LOWER_LIMIT           = 7;
+        public static final int DIO_WINCH_UPPER_LIMIT           = 8;
         public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
-        public static final int DIO_HANGER_LOWER_LIMIT          = 7;
-        public static final int DIO_HANGER_UPPER_LIMIT          = 8;
         // PWM channels.
         public static final int NUM_LEDS                        = 60;
         public static final int PWM_CHANNEL_LED                 = 9;

@@ -56,13 +56,12 @@ import teamcode.autotasks.TaskAutoScoreCoral;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.IntakeDeployer;
 import teamcode.subsystems.Elevator;
-import teamcode.subsystems.Hanger;
+import teamcode.subsystems.Winch;
 import teamcode.subsystems.AlgaeArm;
 import teamcode.subsystems.AlgaeGrabber;
 import teamcode.subsystems.Intake;
 import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
-import teamcode.subsystems.Shooter;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
 import trclib.controller.TrcPidController;
@@ -131,7 +130,7 @@ public class Robot extends FrcRobotBase
     public TrcMotorGrabber algaeGrabber;
     public TrcIntake intake;
     public TrcMotor intakeDeployer;
-    public TrcMotor hanger;
+    public TrcMotor winch;
     // Crescendo subsystems.
     public TrcShooter shooter;
     public TrcDiscreteValue shooterVelocity;
@@ -306,26 +305,11 @@ public class Robot extends FrcRobotBase
                     intakeDeployer = new IntakeDeployer().getDeployer();
                 }
 
-                if (RobotParams.Preferences.useHanger)
+                if (RobotParams.Preferences.useWinch)
                 {
-                    hanger = new Hanger().getHangerMotor();
+                    winch = new Winch().getWinchMotor();
                 }
 
-                // Crescendo subsystems.
-                if (RobotParams.Preferences.useShooter)
-                {
-                    shooter = new Shooter(null).getShooter();
-                    shooterVelocity = new TrcDiscreteValue(
-                        "ShooterVelocity",
-                        -Shooter.Params.shooterMaxVelocity, Shooter.Params.shooterMaxVelocity,
-                        Shooter.Params.shooterVelMinInc, Shooter.Params.shooterVelMaxInc,
-                        0.0, 10.0);
-                    shooterTiltAngle = new TrcDiscreteValue(
-                        "ShooterTiltAngle",
-                        Shooter.Params.tiltMinAngle, Shooter.Params.tiltMaxAngle,
-                        Shooter.Params.tiltAngleMinInc, Shooter.Params.tiltAngleMaxInc,
-                        0.0, 10.0);
-                }
                 // Zero calibrate all subsystems only once in robot initialization.
                 zeroCalibrate(null, null);
 
