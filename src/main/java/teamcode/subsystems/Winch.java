@@ -32,26 +32,26 @@ import trclib.robotcore.TrcEvent;
 import trclib.subsystem.TrcSubsystem;
 
 /**
- * This class implements the Hanger Subsystem.
+ * This class implements the Winch Subsystem.
  */
-public class Hanger extends TrcSubsystem
+public class Winch extends TrcSubsystem
 {
     public static final class Params
     {
-        public static final String SUBSYSTEM_NAME               = "Hanger";
+        public static final String SUBSYSTEM_NAME               = "Winch";
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_HANGER_MOTOR;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_WINCH_MOTOR;
         public static final MotorType MOTOR_TYPE                = MotorType.CanSparkMax;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = false;
 
         public static final String LOWER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".lowerLimit";
-        public static final int LOWER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_HANGER_LOWER_LIMIT;
+        public static final int LOWER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_WINCH_LOWER_LIMIT;
         public static final boolean LOWER_LIMITSWITCH_INVERTED  = false;
         public static final String UPPER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".upperLimit";
-        public static final int UPPER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_HANGER_UPPER_LIMIT;
+        public static final int UPPER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_WINCH_UPPER_LIMIT;
         public static final boolean UPPER_LIMITSWITCH_INVERTED  = false;
 
         public static final double DEG_PER_COUNT                = 1.0;
@@ -75,12 +75,12 @@ public class Hanger extends TrcSubsystem
         public static final double STALL_RESET_TIMEOUT          = 0.0;
     }   //class Params
 
-    private final TrcMotor hangerMotor;
+    private final TrcMotor winchMotor;
 
     /**
      * Constructor: Creates an instance of the object.
      */
-    public Hanger()
+    public Winch()
     {
         super(Params.SUBSYSTEM_NAME, true);
 
@@ -92,21 +92,21 @@ public class Hanger extends TrcSubsystem
             .setUpperLimitSwitch(Params.UPPER_LIMITSWITCH_NAME, Params.UPPER_LIMITSWITCH_CHANNEL, Params.UPPER_LIMITSWITCH_INVERTED)
             .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
-        hangerMotor = new FrcMotorActuator(motorParams).getMotor();
-        hangerMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        hangerMotor.setPositionPidPowerComp(this::getGravityComp);
-        hangerMotor.setStallProtection(
+        winchMotor = new FrcMotorActuator(motorParams).getMotor();
+        winchMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
+        winchMotor.setPositionPidPowerComp(this::getGravityComp);
+        winchMotor.setStallProtection(
             Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
-    }   //Hanger
+    }   //Winch
 
-    public TrcMotor getHangerMotor()
+    public TrcMotor getWinchMotor()
     {
-        return hangerMotor;
-    }   //getHangerMotor
+        return winchMotor;
+    }   //getWinchMotor
 
     private double getGravityComp(double currPower)
     {
-        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(hangerMotor.getPosition()));
+        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(winchMotor.getPosition()));
     }   //getGravityComp
 
     //
@@ -119,7 +119,7 @@ public class Hanger extends TrcSubsystem
     @Override
     public void cancel()
     {
-        hangerMotor.cancel();
+        winchMotor.cancel();
     }   //cancel
 
     /**
@@ -131,7 +131,7 @@ public class Hanger extends TrcSubsystem
     @Override
     public void zeroCalibrate(String owner, TrcEvent event)
     {
-        hangerMotor.zeroCalibrate(owner, Params.ZERO_CAL_POWER, event);
+        winchMotor.zeroCalibrate(owner, Params.ZERO_CAL_POWER, event);
     }   //zeroCalibrate
 
     /**
@@ -154,10 +154,10 @@ public class Hanger extends TrcSubsystem
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
             "%s: power=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
-            Params.SUBSYSTEM_NAME, hangerMotor.getPower(), hangerMotor.getPosition(), hangerMotor.getPidTarget(),
-            hangerMotor.isLowerLimitSwitchActive(), hangerMotor.isUpperLimitSwitchActive());
+            Params.SUBSYSTEM_NAME, winchMotor.getPower(), winchMotor.getPosition(), winchMotor.getPidTarget(),
+            winchMotor.isLowerLimitSwitchActive(), winchMotor.isUpperLimitSwitchActive());
 
         return lineNum;
     }   //updateStatus
 
-}   //class Hanger
+}   //class Winch

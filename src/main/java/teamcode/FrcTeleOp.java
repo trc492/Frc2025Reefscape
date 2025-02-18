@@ -22,15 +22,12 @@
 
 package teamcode;
 
-import java.util.Locale;
-
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frclib.driverio.FrcButtonPanel;
 import frclib.driverio.FrcDualJoystick;
 import frclib.driverio.FrcJoystick;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
-import teamcode.subsystems.Shooter;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.pathdrive.TrcPose2D;
@@ -56,10 +53,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private boolean subsystemStatusOn = true;
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
-
-    // Shooter subsystem.
-    private double prevShooterVel = 0.0;
-    private double prevTiltPower = 0.0;
 
     /**
      * Constructor: Create an instance of the object.
@@ -241,67 +234,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (RobotParams.Preferences.useSubsystems)
                 {
-                    if (robot.shooter != null)
-                    {
-                        double shooterVel =
-                            (robot.operatorController.getRightTrigger() - robot.operatorController.getLeftTrigger()) *
-                            Shooter.Params.shooterMaxVelocity;
-                        // Only set shooter velocity if it is different from previous value.
-                        if (prevShooterVel != shooterVel)
-                        {
-                            if (shooterVel == 0.0)
-                            {
-                                // Don't abruptly stop the shooter, gently spin down.
-                                robot.shooter.stopShooter();
-                            }
-                            else
-                            {
-                                robot.shooter.setShooterMotorVelocity(shooterVel, 0.0);
-                            }
-                            prevShooterVel = shooterVel;
-                        }
-
-                        if (subsystemStatusOn)
-                        {
-                            String msg = String.format(
-                                Locale.US, "Shooter: vel=%.0f/%.0f, preset=%.0f, inc=%.0f",
-                                shooterVel, robot.shooter.getShooterMotor1Velocity(), robot.shooterVelocity.getValue(),
-                                robot.shooterVelocity.getIncrement());
-                            // if (robot.deflector != null)
-                            // {
-                            //     msg += ", deflector=" + robot.deflector.isExtended();
-                            // }
-                            robot.dashboard.displayPrintf(lineNum++, msg);
-                        }
-
-                        double tiltPower = robot.operatorController.getLeftStickY(true);
-                        // Only set tilt power if it is different from previous value.
-                        if (prevTiltPower != tiltPower)
-                        {
-                            if (operatorAltFunc)
-                            {
-                                robot.shooter.setTiltPower(tiltPower);
-                            }
-                            else
-                            {
-                                robot.shooter.setTiltPidPower(tiltPower, true);
-                            }
-                            prevTiltPower = tiltPower;
-                        }
-
-                        if (subsystemStatusOn)
-                        {
-                            robot.dashboard.displayPrintf(
-                                lineNum++,
-                                "Tilt: power=%.2f/%.2f, angle=%.2f/%.2f/%f, inc=%.0f, limits=%s/%s",
-                                // ", yaw/pitch/roll=%.2f/%.2f/%.2f",
-                                tiltPower, robot.shooter.getTiltPower(), robot.shooter.getTiltAngle(),
-                                robot.shooter.tiltMotor.getPidTarget(), robot.shooter.tiltMotor.getMotorPosition(),
-                                robot.shooterTiltAngle.getIncrement(), robot.shooter.tiltLowerLimitSwitchActive(),
-                                robot.shooter.tiltUpperLimitSwitchActive());
-                                // Shooter.getTilterYaw(), Shooter.getTilterPitch(), Shooter.getTilterRoll());
-                        }
-                    }
                 }
             }
             //
