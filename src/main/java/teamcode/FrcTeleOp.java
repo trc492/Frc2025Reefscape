@@ -345,10 +345,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case X:
-                if(robot.robotDrive != null && pressed){
-                    robot.scoreCoralTask.autoScoreCoral(true, 0, false, false, false, false, null);
+                if(robot.robotDrive != null && pressed)
+                {
+                    robot.scoreCoralTask.autoScoreCoral(
+                        true, 0, false, false, false, false, null);
                 }
                 break;
+
             case Y:
                 break;  
 

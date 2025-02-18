@@ -123,12 +123,14 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      * @param removeAlgae specifies true to remove algae from the reef.
      * @param inAuto specifies true if caller is autonomous, false if in teleop.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
+     * @param scoreCoral specifies true to score the coral, false otherwise.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
         boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize, boolean scoreCoral,
         TrcEvent completionEvent)
     {
+        // Code Review: What does it mean by calling autoScoreCoral with scoreCoral set to false?!
         TaskParams taskParams = new TaskParams(useVision, reefLevel, removeAlgae, inAuto, relocalize, scoreCoral);
         tracer.traceInfo(moduleName, "taskParams=(" + taskParams + "), event=" + completionEvent);
         startAutoTask(State.START, taskParams, completionEvent);
