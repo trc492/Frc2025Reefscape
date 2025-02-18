@@ -22,6 +22,9 @@
 
 package teamcode.autotasks;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Unit;
 import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
 import teamcode.RobotParams;
@@ -34,6 +37,7 @@ import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
+import trclib.robotcore.TrcDbgTrace.MsgLevel;
 import trclib.timer.TrcTimer;
 
 /**
@@ -247,9 +251,9 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                     {
                         robot.relocalizeRobotByAprilTag(object);
                     }
-                    sm.setState(State.DONE);//State.APPROACH_REEF);
+                    sm.setState(State.APPROACH_REEF);
                 }
-                else if (visionExpiredTime != null)
+                else if (visionExpiredTime == null)
                 {
                     visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
                 }
@@ -275,20 +279,19 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                     // adjust the y distance back a little so you don't run into the Reef tree.
                     targetPose = aprilTagPose.clone();  
                     targetPose.x += robot.robotInfo.cam1.camXOffset;// This value will need to be measured.
-                    targetPose.angle = 0.0;
-
-                    intermediatePose = targetPose.clone();
-                    intermediatePose.y = targetPose.y;
-                     
+                    targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 20;
+                    targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 20;
+                    tracer.traceInfo(moduleName, "****** \nAprilTagPose= " + aprilTagPose);
                     tracer.traceInfo(
                         moduleName,
                         "***** Approaching Reef with Vision:\n\tRobotFieldPose=" + robotPose +
-                        "\n\tintermediatePose=" + intermediatePose +
+                        // "\n\tintermediatePose=" + intermediatePose +
                         "\n\ttargetPose=" + targetPose);
+                    robot.robotDrive.purePursuitDrive.setTraceLevel(MsgLevel.INFO, false, true, true);
                     robot.robotDrive.purePursuitDrive.start(
                         currOwner, driveEvent, 2.0, true,
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                        robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
+                        robot.robotInfo.profiledMaxDeceleration, targetPose);
                 }
                 else
                 {
@@ -314,7 +317,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                         robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
                 }
-                sm.waitForSingleEvent(driveEvent, State.SCORE_CORAL);
+                sm.waitForSingleEvent(driveEvent, State.DONE);//State.SCORE_CORAL);
                 break;
 
             case SCORE_CORAL:

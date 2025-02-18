@@ -401,8 +401,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case X:
-            case Y:
+                if(robot.robotDrive != null && pressed){
+                    robot.scoreCoralTask.autoScoreCoral(true, 0, false, false, false, false, null);
+                }
                 break;
+            case Y:
+                break;  
 
             case LeftBumper:
                 driverAltFunc = pressed;
