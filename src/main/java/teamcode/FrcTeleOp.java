@@ -22,12 +22,12 @@
 
 package teamcode;
 
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frclib.driverio.FrcButtonPanel;
 import frclib.driverio.FrcDualJoystick;
 import frclib.driverio.FrcJoystick;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
+import teamcode.subsystems.CoralArm;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.pathdrive.TrcPose2D;
@@ -45,9 +45,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     // Global objects.
     //
     protected final Robot robot;
-    private boolean controlsEnabled = false;
     private double driveSpeedScale = RobotParams.Robot.DRIVE_NORMAL_SCALE;
     private double turnSpeedScale = RobotParams.Robot.TURN_NORMAL_SCALE;
+    private boolean controlsEnabled = false;
     protected boolean driverAltFunc = false;
     protected boolean operatorAltFunc = false;
     private boolean subsystemStatusOn = true;
@@ -234,6 +234,18 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (RobotParams.Preferences.useSubsystems)
                 {
+                    if (robot.coralArm != null)
+                    {
+                        double power = robot.operatorController.getLeftStickY(true);
+                        if (operatorAltFunc)
+                        {
+                            robot.coralArm.setPower(power);
+                        }
+                        else
+                        {
+                            robot.coralArm.setPidPower(power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, false);
+                        }
+                    }
                 }
             }
             //
@@ -242,9 +254,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             if (RobotParams.Preferences.doStatusUpdate)
             {
                 lineNum = robot.updateStatus(lineNum);
-                TrcPose2D robotPose = robot.robotDrive.driveBase.getFieldPosition();
-                robot.dashboard.displayPrintf(
-                    lineNum++, "AdjRobotPose=%s", robot.adjustPoseByAlliance(robotPose, Alliance.Red));
+                // TrcPose2D robotPose = robot.robotDrive.driveBase.getFieldPosition();
+                // robot.dashboard.displayPrintf(
+                //     lineNum++, "AdjRobotPose=%s", robot.adjustPoseByAlliance(robotPose, Alliance.Red));
             }
         }
     }   //periodic

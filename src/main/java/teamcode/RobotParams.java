@@ -42,7 +42,7 @@ public class RobotParams
     public static class Preferences
     {
         // Global config
-        public static final RobotType robotType                 = RobotType.MaestroRobot;
+        public static final RobotType robotType                 = RobotType.ReefscapeRobot;
         public static final boolean inCompetition               = false;
         public static final boolean hybridMode                  = false;
         public static final boolean useTraceLog                 = true;
@@ -55,7 +55,7 @@ public class RobotParams
         public static final boolean showDriveBase               = false;
         public static final boolean showPurePursuitDrive        = true; //false
         public static final boolean showPidDrive                = false;
-        public static final boolean showVision                  = true;
+        public static final boolean showVision                  = false;
         public static final boolean showSubsystems              = true;
         // Inputs
         public static final boolean useDriverXboxController     = true;
@@ -68,7 +68,7 @@ public class RobotParams
         public static final boolean usePdp                      = false;
         public static final boolean usePressureSensor           = false;
         // Vision
-        public static final boolean useVision                   = true;
+        public static final boolean useVision                   = false;
         public static final boolean usePhotonVision             = true;
         public static final boolean useOpenCvVision             = false;
         public static final boolean useStreamCamera             = false;
@@ -80,7 +80,7 @@ public class RobotParams
         // Subsystems
         public static final boolean useSubsystems               = true;
         public static final boolean useElevator                 = false;
-        public static final boolean useCoralArm                 = false;
+        public static final boolean useCoralArm                 = true;
         public static final boolean useAlgaeArm                 = false;
         public static final boolean useAlgaeGrabber             = false;
         public static final boolean useWinch                    = false;
@@ -128,8 +128,8 @@ public class RobotParams
         public static final int CANID_INTAKE_MOTOR              = 27;   // Purple
         public static final int CANID_INTAKEDEPLOYER_MOTOR      = 28;   // Gray
         // Miscellaneous CAN IDs.
-        public static final int CANID_PCM                       = 30;
-        public static final int CANID_PDP                       = 31;
+        public static final int CANID_PDP                       = 30;
+        public static final int CANID_PCM                       = 31;
         // Analog Input ports (not used).
         public static final int AIN_ULTRASONIC                  = 0;
         public static final int AIN_PRESSURE_SENSOR             = 0;
