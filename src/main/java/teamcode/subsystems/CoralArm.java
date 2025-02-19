@@ -42,6 +42,7 @@ public class CoralArm extends TrcSubsystem
     public static final class Params
     {
         public static final String SUBSYSTEM_NAME               = "CoralArm";
+        public static final boolean NEED_ZERO_CAL               = false;
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_CORALARM_MOTOR;
@@ -84,14 +85,12 @@ public class CoralArm extends TrcSubsystem
      */
     public CoralArm()
     {
-        super(Params.SUBSYSTEM_NAME, true);
+        super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
 
         FrcMotorActuator.Params motorParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            // .setLowerLimitSwitch(Params.LOWER_LIMITSWITCH_NAME, Params.LOWER_LIMITSWITCH_CHANNEL, Params.LOWER_LIMITSWITCH_INVERTED)
-            // .setUpperLimitSwitch(Params.UPPER_LIMITSWITCH_NAME, Params.UPPER_LIMITSWITCH_CHANNEL, Params.UPPER_LIMITSWITCH_INVERTED)
             .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
         coralArmMotor = new FrcMotorActuator(motorParams).getMotor();
@@ -100,8 +99,8 @@ public class CoralArm extends TrcSubsystem
         coralArmMotor.setLowerLimitSwitchInverted(Params.LOWER_LIMITSW_INVERTED);
         coralArmMotor.enableUpperLimitSwitch(Params.UPPER_LIMITSW_NORMAL_CLOSE);
         coralArmMotor.setUpperLimitSwitchInverted(Params.UPPER_LIMITSW_INVERTED);
-        FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) coralArmMotor;
         // Configure encoder.
+        FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) coralArmMotor;
         talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
 
         coralArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);

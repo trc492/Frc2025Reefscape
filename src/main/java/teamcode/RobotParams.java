@@ -47,13 +47,13 @@ public class RobotParams
         public static final boolean hybridMode                  = false;
         public static final boolean useTraceLog                 = true;
         public static final boolean useCommStatusMonitor        = true;
-        public static final boolean invertedRobot               = true;
+        public static final boolean invertedRobot               = false;
         // Status Update
         public static final boolean doStatusUpdate              = true;
         public static final boolean showLoopTime                = false;
         public static final boolean showPowerConsumption        = false;
         public static final boolean showDriveBase               = false;
-        public static final boolean showPurePursuitDrive        = true; //false
+        public static final boolean showPurePursuitDrive        = false;
         public static final boolean showPidDrive                = false;
         public static final boolean showVision                  = false;
         public static final boolean showSubsystems              = true;
@@ -73,13 +73,13 @@ public class RobotParams
         public static final boolean useOpenCvVision             = false;
         public static final boolean useStreamCamera             = false;
         // Drive Base
-        public static final boolean useDriveBase                = true;
+        public static final boolean useDriveBase                = false;
         public static final boolean useVelocityControl          = false;
         public static final boolean useGyroAssist               = false;
         public static final boolean useAntiTipping              = false;
         // Subsystems
         public static final boolean useSubsystems               = true;
-        public static final boolean useElevator                 = false;
+        public static final boolean useElevator                 = true;
         public static final boolean useCoralArm                 = true;
         public static final boolean useAlgaeArm                 = false;
         public static final boolean useAlgaeGrabber             = false;

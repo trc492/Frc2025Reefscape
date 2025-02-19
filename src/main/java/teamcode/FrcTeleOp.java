@@ -28,6 +28,7 @@ import frclib.driverio.FrcJoystick;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.CoralArm;
+import teamcode.subsystems.Elevator;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.pathdrive.TrcPose2D;
@@ -234,9 +235,22 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (RobotParams.Preferences.useSubsystems)
                 {
-                    if (robot.coralArm != null)
+                    if (robot.elevator != null)
                     {
                         double power = robot.operatorController.getLeftStickY(true);
+                        if (operatorAltFunc)
+                        {
+                            robot.elevator.setPower(power);
+                        }
+                        else
+                        {
+                            robot.elevator.setPidPower(power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
+                        }
+                    }
+
+                    if (robot.coralArm != null)
+                    {
+                        double power = robot.operatorController.getRightStickY(true);
                         if (operatorAltFunc)
                         {
                             robot.coralArm.setPower(power);
@@ -506,9 +520,45 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case RightBumper:
+                break;
+
             case DpadUp:
+                if (operatorAltFunc)
+                {
+                    if (robot.elevator != null && pressed)
+                    {
+                        robot.elevator.presetPositionUp(moduleName, 0.5);
+                    }
+                }
+                else
+                {
+                    if (robot.coralArm != null)
+                    {
+                        robot.coralArm.presetPositionUp(moduleName, 0.5);
+                    }
+                }
+                break;
+
             case DpadDown:
+            if (operatorAltFunc)
+            {
+                if (robot.elevator != null && pressed)
+                {
+                    robot.elevator.presetPositionDown(moduleName, 0.5);
+                }
+            }
+            else
+            {
+                if (robot.coralArm != null)
+                {
+                    robot.coralArm.presetPositionDown(moduleName, 0.5);
+                }
+            }
+            break;
+
             case DpadLeft:
+                break;
+
             case DpadRight:
                 break;
 

@@ -22,9 +22,7 @@
 
 package teamcode.autotasks;
 
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Unit;
 import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
 import teamcode.RobotParams;

@@ -39,24 +39,20 @@ public class Elevator extends TrcSubsystem
     public static final class Params
     {
         public static final String SUBSYSTEM_NAME               = "Elevator";
+        public static final boolean NEED_ZERO_CAL               = false;
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ELEVATOR_MOTOR;
         public static final MotorType MOTOR_TYPE                = MotorType.CanSparkMax;
         public static final boolean MOTOR_BRUSHLESS             = true;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = false;
+        public static final boolean MOTOR_INVERTED              = true;
 
-        public static final String LOWER_LIMIT_NAME             = SUBSYSTEM_NAME + ".lowerLimit";
-        public static final int LOWER_LIMIT_CHANNEL             = RobotParams.HwConfig.DIO_ELEVATOR_LOWER_LIMIT;
-        public static final boolean LOWER_LIMIT_INVERTED        = false;
+        public static final boolean LOWER_LIMITSW_NORMAL_CLOSE  = true;
+        public static final boolean UPPER_LIMITSW_NORMAL_CLOSE  = true;
 
-        public static final String UPPER_LIMIT_NAME             = SUBSYSTEM_NAME + ".upperLimit";
-        public static final int UPPER_LIMIT_CHANNEL             = RobotParams.HwConfig.DIO_ELEVATOR_UPPER_LIMIT;
-        public static final boolean UPPER_LIMIT_INVERTED        = false;
-
-        public static final double INCHES_PER_COUNT             = 18.25/4941.0;
-        public static final double POS_OFFSET                   = 10.875;
+        public static final double INCHES_PER_COUNT             = 1.0;
+        public static final double POS_OFFSET                   = 13.0;
         public static final double POWER_LIMIT                  = 1.0;
         public static final double ZERO_CAL_POWER               = -0.25;
 
@@ -90,18 +86,19 @@ public class Elevator extends TrcSubsystem
      */
     public Elevator()
     {
-        super(Params.SUBSYSTEM_NAME, true);
+        super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
 
         FrcMotorActuator.Params motorParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setLowerLimitSwitch(Elevator.Params.LOWER_LIMIT_NAME, Elevator.Params.LOWER_LIMIT_CHANNEL,Elevator.Params.LOWER_LIMIT_INVERTED)
-            .setUpperLimitSwitch(Elevator.Params.UPPER_LIMIT_NAME, Elevator.Params.UPPER_LIMIT_CHANNEL,Elevator.Params.UPPER_LIMIT_INVERTED)
             .setPositionScaleAndOffset(Params.INCHES_PER_COUNT, Params.POS_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
 
         elevatorMotor = new FrcMotorActuator(motorParams).getMotor();
+        // Configure limit switches
+        elevatorMotor.enableLowerLimitSwitch(Params.LOWER_LIMITSW_NORMAL_CLOSE);
+        elevatorMotor.enableUpperLimitSwitch(Params.UPPER_LIMITSW_NORMAL_CLOSE);
         elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
         elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
 
