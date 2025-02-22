@@ -23,6 +23,7 @@
 
  package teamcode.autotasks;
 
+ import edu.wpi.first.math.util.Units;
  import frclib.vision.FrcPhotonVision;
  import teamcode.Robot;
 import teamcode.RobotParams;
@@ -248,7 +249,7 @@ import trclib.pathdrive.TrcPose2D;
                      }
                      sm.setState(State.APPROACH_STATION);
                  }
-                 else if (visionExpiredTime != null)
+                 else if (visionExpiredTime == null)
                  {
                      visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
                  }
@@ -270,21 +271,20 @@ import trclib.pathdrive.TrcPose2D;
                 if(taskParams.useVision && aprilTagPose != null){
                     tracer.traceInfo(moduleName, "*****Using Vision to drive to AprilTag");
                     targetPose = aprilTagPose.clone();  
-                    targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
-                    targetPose.angle = 0.0;
-
-                    intermediatePose = aprilTagPose.clone();
-                    intermediatePose.y = targetPose.y;
-                     
+                    targetPose.x += robot.robotInfo.cam2.camXOffset; // This value will need to be measured.
+                    targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 23;
+                    targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 23;
+                    
+                    tracer.traceInfo(moduleName, "****** \nAprilTagPose= " + aprilTagPose);
                     tracer.traceInfo(
                         moduleName,
                         state + "***** Approaching Coral Station with Vision:\n\tRobotFieldPose=" + robotPose +
-                        "\n\tintermediatePose=" + intermediatePose +
+                        //"\n\tintermediatePose=" + intermediatePose +
                         "\n\ttargetPose=" + targetPose);
                         robot.robotDrive.purePursuitDrive.start(
                             currOwner, driveEvent, 2.0, true,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
+                            robot.robotInfo.profiledMaxDeceleration, targetPose);
 
                 } else if(!taskParams.inAuto){
                     tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
@@ -308,7 +308,7 @@ import trclib.pathdrive.TrcPose2D;
                 } else{
                     tracer.traceInfo(moduleName, "Not going to AprilTag, we are just going to run the logic to pickup an object");
                 }
-                sm.waitForEvents(State.TAKE_CORAL);
+                sm.waitForEvents(State.DONE);//TAKE_CORAL);
                 break;
 
 

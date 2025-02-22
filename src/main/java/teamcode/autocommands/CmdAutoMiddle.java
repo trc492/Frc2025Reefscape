@@ -163,6 +163,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     relocalize = FrcAuto.autoChoices.getRelocalize();
                     goToStation = FrcAuto.autoChoices.goToStation();
                     scorePreload = FrcAuto.autoChoices.scorePreload();
+                    useAprilTagVision = FrcAuto.autoChoices.useVision();
                     robot.globalTracer.traceInfo(moduleName, "****** Scoring preload from" + startPos + " at " + robot.robotDrive.driveBase.getFieldPosition());
                     // Depending on whether we want to score one coral from the station or two, it will set our coralTarget to one or two
                     if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)

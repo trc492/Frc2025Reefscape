@@ -22,11 +22,14 @@
 
 package teamcode;
 
+import com.ctre.phoenix.platform.can.AutocacheState;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcMatchInfo;
 import frclib.driverio.FrcUserChoices;
+import teamcode.autocommands.CmdAutoSide;
 import teamcode.commandbased.ExampleAuto;
 import trclib.command.CmdPidDrive;
 import trclib.command.CmdPurePursuitDrive;
@@ -54,6 +57,7 @@ public class FrcAuto implements TrcRobot.RobotMode
         PP_DRIVE,
         PID_DRIVE,
         TIMED_DRIVE,
+        REEFSCAPE_AUTO,
         DO_NOTHING
     }   //enum AutoStrategy
 
@@ -109,6 +113,7 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_GO_TO_STATION = "Auto/GoToStation";
         private static final String DBKEY_AUTO_SCORE_PRELOAD = "Auto/ScorePreload";
         private static final String DBKEY_AUTO_SCORE_PICKUP = "Auto/ScorePickup";
+        private static final String DBKEY_AUTO_USE_VISION   = "Auto/UseVision";
 
 
         private final FrcUserChoices userChoices = new FrcUserChoices();
@@ -143,6 +148,7 @@ public class FrcAuto implements TrcRobot.RobotMode
                 autoStrategyMenu.addChoice("Pure Pursuit Drive", AutoStrategy.PP_DRIVE);
                 autoStrategyMenu.addChoice("PID Drive", AutoStrategy.PID_DRIVE);
                 autoStrategyMenu.addChoice("Timed Drive", AutoStrategy.TIMED_DRIVE);
+                autoStrategyMenu.addChoice("Reefscape Auto", AutoStrategy.REEFSCAPE_AUTO);
             }
             autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, true, true);
 
@@ -172,6 +178,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, false);
             userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, false);
             userChoices.addBoolean(DBKEY_AUTO_SCORE_PRELOAD, false);
+            userChoices.addBoolean(DBKEY_AUTO_USE_VISION, true);
         }   //AutoChoices
 
         //
@@ -250,6 +257,10 @@ public class FrcAuto implements TrcRobot.RobotMode
             return userChoices.getUserBoolean(DBKEY_AUTO_SCORE_PRELOAD);
         }
 
+        public boolean useVision(){
+            return userChoices.getUserBoolean(DBKEY_AUTO_USE_VISION);
+        }
+
         @Override
         public String toString()
         {
@@ -264,6 +275,7 @@ public class FrcAuto implements TrcRobot.RobotMode
                    "driveTime=" + getDriveTime() + " sec " +
                    "drivePower=" + getDrivePower() + 
                    "relocalize=" + getRelocalize() + 
+                   "useVision="  + useVision() + 
                    "goToStation=" + goToStation() +
                    "scorePreload=" + scorePreload() +   
                    "stationScoreSide=" + getStationSide() +
@@ -385,6 +397,15 @@ public class FrcAuto implements TrcRobot.RobotMode
                 }
                 break;
 
+            case REEFSCAPE_AUTO:
+                if(robot.robotDrive != null){
+                    if(autoChoices.getStartPos().toString().equals("Processor-side start position") || autoChoices.getStartPos().toString().equals("Far side start position")){
+                        autoCommand = new CmdAutoSide(robot, autoChoices);
+                    } else{
+                        autoCommand = new CmdAutoSide(robot, autoChoices);
+                    }
+                }
+                break;
             default:
             case DO_NOTHING:
                 autoCommand = null;
