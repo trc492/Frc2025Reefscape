@@ -56,21 +56,14 @@ public class AlgaeArm extends TrcSubsystem
         public static final boolean UPPER_LIMITSW_NORMAL_CLOSE  = true;
         public static final boolean UPPER_LIMITSW_INVERTED      = true;
 
-        // public static final String LOWER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".lowerLimit";
-        // public static final int LOWER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_ALGAEARM_LOWER_LIMIT;
-        // public static final boolean LOWER_LIMITSWITCH_INVERTED  = true;
-        // public static final String UPPER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".upperLimit";
-        // public static final int UPPER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_ALGAEARM_UPPER_LIMIT;
-        // public static final boolean UPPER_LIMITSWITCH_INVERTED  = true;
-
-        public static final double DEG_PER_COUNT                = 360.0 / 4096.0; //1.0
+        public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
         public static final double POWER_LIMIT                  = 0.5;
         public static final double ZERO_CAL_POWER               = -0.25;
 
         public static final double MIN_POS                      = POS_OFFSET;
-        public static final double MAX_POS                      = 180.0;//270.0;
-        public static final double[] posPresets                 = {MIN_POS, 60.0, 90.0, 120.0, 150.0, 180.0, 210.0, 240.0, 270.0};
+        public static final double MAX_POS                      = 180.0;
+        public static final double[] posPresets                 = {MIN_POS, 30.0, 60.0, 90.0, 120.0, 150.0, 180.0};
         public static final double POS_PRESET_TOLERANCE         = 10.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
@@ -100,17 +93,16 @@ public class AlgaeArm extends TrcSubsystem
             .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
         algaeArmMotor = new FrcMotorActuator(motorParams).getMotor();
-        //Configure limit switches
+        // Configure limit switches
         algaeArmMotor.enableLowerLimitSwitch(Params.LOWER_LIMITSW_NORMAL_CLOSE);
         algaeArmMotor.setLowerLimitSwitchInverted(Params.LOWER_LIMITSW_INVERTED);
         algaeArmMotor.enableUpperLimitSwitch(Params.UPPER_LIMITSW_NORMAL_CLOSE);
         algaeArmMotor.setUpperLimitSwitchInverted(Params.UPPER_LIMITSW_INVERTED);
-        //
+        // Configure encoder
         FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) algaeArmMotor;
         talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
 
         algaeArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        // algaeArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
         // algaeArmMotor.setPositionPidPowerComp(this::getGravityComp);
         // algaeArmMotor.setStallProtection(
         //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
