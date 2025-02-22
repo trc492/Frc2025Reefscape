@@ -279,15 +279,15 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                     // adjust the y distance back a little so you don't run into the Reef tree.
                     targetPose = aprilTagPose.clone();  
                     targetPose.x += robot.robotInfo.cam1.camXOffset;// This value will need to be measured.
-                    targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 20;
-                    targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 20;
+                    targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 17;
+                    targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 17;
                     tracer.traceInfo(moduleName, "****** \nAprilTagPose= " + aprilTagPose);
                     tracer.traceInfo(
                         moduleName,
                         "***** Approaching Reef with Vision:\n\tRobotFieldPose=" + robotPose +
                         // "\n\tintermediatePose=" + intermediatePose +
                         "\n\ttargetPose=" + targetPose);
-                    robot.robotDrive.purePursuitDrive.setTraceLevel(MsgLevel.INFO, false, true, true);
+                    //robot.robotDrive.purePursuitDrive.setTraceLevel(MsgLevel.INFO, false, true, true);
                     robot.robotDrive.purePursuitDrive.start(
                         currOwner, driveEvent, 2.0, true,
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
@@ -303,7 +303,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                     tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
                     targetPose = PhotonVision.getClosestAprilTagPose(robotPose);
                     targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
-                    targetPose.angle = 0.0;
+                    targetPose.angle = 0.0; 
                     intermediatePose = targetPose.clone();
                     intermediatePose.y = targetPose.y;
                     targetPose.x = 0.0;

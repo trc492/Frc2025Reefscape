@@ -45,15 +45,15 @@ public class AlgaeGrabber extends TrcSubsystem
         public static final MotorType MOTOR_TYPE                = FrcMotorActuator.MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = false;
+        public static final boolean MOTOR_INVERTED              = true;
 
         public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
         public static final int SENSOR_DIGITAL_CHANNEL          = 0; //TODO; adjust
         public static final boolean SENSOR_TRIGGER_INVERTED     = true; //TODO: adjust
 
-        public static final double INTAKE_POWER                 = 1.0;
-        public static final double EJECT_POWER                  = -0.3;
-        public static final double RETAIN_POWER                 = 0.0;
+        public static final double INTAKE_POWER                 = 0.15;
+        public static final double EJECT_POWER                  = -0.15;
+        public static final double RETAIN_POWER                 = 0.025;
         public static final double FINISH_DELAY                 = 0.06;
         public static final double DUMP_TIME                    = 0.5;
         public static final double DUMP_DELAY                   = 0.0;
