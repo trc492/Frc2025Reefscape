@@ -22,8 +22,6 @@
 
 package teamcode;
 
-import com.ctre.phoenix.platform.can.AutocacheState;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
@@ -114,7 +112,6 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_SCORE_PRELOAD = "Auto/ScorePreload";
         private static final String DBKEY_AUTO_SCORE_PICKUP = "Auto/ScorePickup";
         private static final String DBKEY_AUTO_USE_VISION   = "Auto/UseVision";
-
 
         private final FrcUserChoices userChoices = new FrcUserChoices();
         private final FrcChoiceMenu<DriverStation.Alliance> allianceMenu;

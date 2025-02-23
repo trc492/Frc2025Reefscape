@@ -79,10 +79,11 @@ public class RobotParams
         public static final boolean useAntiTipping              = false;
         // Subsystems
         public static final boolean useSubsystems               = true;
-        public static final boolean useElevator                 = true;
         public static final boolean useCoralArm                 = true;
+        public static final boolean useCoralGrabber             = true;
         public static final boolean useAlgaeArm                 = false;
         public static final boolean useAlgaeGrabber             = false;
+        public static final boolean useElevator                 = true;
         public static final boolean useWinch                    = false;
         public static final boolean useIntake                   = false;
         public static final boolean useIntakeDeployer           = false;
@@ -122,9 +123,10 @@ public class RobotParams
         // Subsystem Motor CAN IDs.
         public static final int CANID_CORALARM_MOTOR            = 7;    // Purple
         public static final int CANID_ALGAEARM_MOTOR            = 8;    // Gray
-        public static final int CANID_ALGAEGRABBER_MOTOR        = 9;    // White
-        public static final int CANID_ELEVATOR_MOTOR            = 17;   // Purple
-        public static final int CANID_WINCH_MOTOR               = 18;   // Gray
+        public static final int CANID_ELEVATOR_MOTOR            = 9;    // White
+        public static final int CANID_CORALGRABBER_MOTOR        = 17;   // Purple
+        public static final int CANID_ALGAEGRABBER_MOTOR        = 18;   // Gray
+        public static final int CANID_WINCH_MOTOR               = 19;   // White
         public static final int CANID_INTAKE_MOTOR              = 27;   // Purple
         public static final int CANID_INTAKEDEPLOYER_MOTOR      = 28;   // Gray
         // Miscellaneous CAN IDs.

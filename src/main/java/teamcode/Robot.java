@@ -54,6 +54,7 @@ import teamcode.autotasks.TaskAutoPickupCoralFromGround;
 import teamcode.autotasks.TaskAutoPickupCoralFromStation;
 import teamcode.autotasks.TaskAutoScoreCoral;
 import teamcode.subsystems.CoralArm;
+import teamcode.subsystems.CoralGrabber;
 import teamcode.subsystems.IntakeDeployer;
 import teamcode.subsystems.Elevator;
 import teamcode.subsystems.Winch;
@@ -124,13 +125,14 @@ public class Robot extends FrcRobotBase
     //
     // Other subsystems.
     //
-    public TrcMotor elevator;
     public TrcMotor coralArm;
+    public TrcMotorGrabber coralGrabber;
     public TrcMotor algaeArm;
     public TrcMotorGrabber algaeGrabber;
+    public TrcMotor elevator;
+    public TrcMotor winch;
     public TrcIntake intake;
     public TrcMotor intakeDeployer;
-    public TrcMotor winch;
     // Crescendo subsystems.
     public TrcShooter shooter;
     public TrcDiscreteValue shooterVelocity;
@@ -275,14 +277,14 @@ public class Robot extends FrcRobotBase
             if (RobotParams.Preferences.useSubsystems)
             {
                 // Create subsystems.
-                if (RobotParams.Preferences.useElevator)
-                {
-                    elevator = new Elevator().getElevatorMotor();
-                }
-
                 if (RobotParams.Preferences.useCoralArm)
                 {
                     coralArm = new CoralArm().getArmMotor();
+                }
+
+                if (RobotParams.Preferences.useCoralGrabber)
+                {
+                    coralGrabber = new CoralGrabber().getMotorGrabber();
                 }
 
                 if (RobotParams.Preferences.useAlgaeArm)
@@ -295,6 +297,16 @@ public class Robot extends FrcRobotBase
                     algaeGrabber = new AlgaeGrabber().getMotorGrabber();
                 }
 
+                if (RobotParams.Preferences.useElevator)
+                {
+                    elevator = new Elevator().getElevatorMotor();
+                }
+
+                if (RobotParams.Preferences.useWinch)
+                {
+                    winch = new Winch().getWinchMotor();
+                }
+
                 if (RobotParams.Preferences.useIntake)
                 {
                     intake = new Intake().getIntake();
@@ -303,11 +315,6 @@ public class Robot extends FrcRobotBase
                 if (RobotParams.Preferences.useIntakeDeployer)
                 {
                     intakeDeployer = new IntakeDeployer().getDeployer();
-                }
-
-                if (RobotParams.Preferences.useWinch)
-                {
-                    winch = new Winch().getWinchMotor();
                 }
 
                 // Zero calibrate all subsystems only once in robot initialization.

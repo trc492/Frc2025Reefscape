@@ -32,16 +32,16 @@ import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
 
 /**
- * This class implements the Algae Grabber Subsystem.
+ * This class implements the Coral Grabber Subsystem.
  */
-public class AlgaeGrabber extends TrcSubsystem
+public class CoralGrabber extends TrcSubsystem
 {
     public static final class Params
     {
-        public static final String SUBSYSTEM_NAME               = "AlgaeGrabber";
+        public static final String SUBSYSTEM_NAME               = "CoralGrabber";
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ALGAEGRABBER_MOTOR;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_CORALGRABBER_MOTOR;
         public static final MotorType MOTOR_TYPE                = FrcMotorActuator.MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
@@ -62,7 +62,7 @@ public class AlgaeGrabber extends TrcSubsystem
     /**
      * Constructor: Creates an instance of the object.
      */
-    public AlgaeGrabber()
+    public CoralGrabber()
     {
         super(Params.SUBSYSTEM_NAME, false);
         FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
@@ -72,7 +72,7 @@ public class AlgaeGrabber extends TrcSubsystem
             .setMotorCurrentTrigger(Params.CURRENT_TRIGGER_THRESHOLD)
             .setPowerParams(Params.INTAKE_POWER, Params.EJECT_POWER, Params.RETAIN_POWER);
         motorGrabber = new FrcMotorGrabber(Params.SUBSYSTEM_NAME, grabberParams).getGrabber();
-    }   //AlgaeGrabber
+    }   //CoralGrabber
 
     /**
      * This method returns the created MotorGrabber object.
@@ -135,4 +135,4 @@ public class AlgaeGrabber extends TrcSubsystem
         return lineNum;
     }   //updateStatus
 
-}   //class AlgaeGrabber
+}   //class CoralGrabber
