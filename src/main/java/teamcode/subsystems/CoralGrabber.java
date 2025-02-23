@@ -129,8 +129,8 @@ public class CoralGrabber extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f, hasObject=%s",
-            Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.hasObject());
+            "%s: power=%.3f, current=%f, hasObject=%s",
+            Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.getSensorValue(), motorGrabber.hasObject());
 
         return lineNum;
     }   //updateStatus
