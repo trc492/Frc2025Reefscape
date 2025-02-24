@@ -39,6 +39,7 @@ public class CoralGrabber extends TrcSubsystem
     public static final class Params
     {
         public static final String SUBSYSTEM_NAME               = "CoralGrabber";
+        public static final boolean NEED_ZERO_CAL               = false;
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_CORALGRABBER_MOTOR;
@@ -47,7 +48,9 @@ public class CoralGrabber extends TrcSubsystem
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = true;
 
-        public static final double CURRENT_TRIGGER_THRESHOLD    = 15.0;
+        public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
+        public static final int SENSOR_CHANNEL                  = 0;
+        public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
         public static final double INTAKE_POWER                 = 0.15;
         public static final double EJECT_POWER                  = -0.15;
@@ -64,12 +67,12 @@ public class CoralGrabber extends TrcSubsystem
      */
     public CoralGrabber()
     {
-        super(Params.SUBSYSTEM_NAME, false);
+        super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
         FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE,Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setMotorCurrentTrigger(Params.CURRENT_TRIGGER_THRESHOLD)
+            .setDigitalInputTrigger(Params.SENSOR_NAME, Params.SENSOR_CHANNEL, Params.SENSOR_TRIGGER_INVERTED)
             .setPowerParams(Params.INTAKE_POWER, Params.EJECT_POWER, Params.RETAIN_POWER);
         motorGrabber = new FrcMotorGrabber(Params.SUBSYSTEM_NAME, grabberParams).getGrabber();
     }   //CoralGrabber
@@ -129,8 +132,8 @@ public class CoralGrabber extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f, current=%f, hasObject=%s",
-            Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.getSensorValue(), motorGrabber.hasObject());
+            "%s: power=%.3f, current=%f, sensorState=%s, hasObject=%s",
+            Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.getSensorState(), motorGrabber.hasObject());
 
         return lineNum;
     }   //updateStatus

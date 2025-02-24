@@ -39,6 +39,7 @@ public class AlgaeGrabber extends TrcSubsystem
     public static final class Params
     {
         public static final String SUBSYSTEM_NAME               = "AlgaeGrabber";
+        public static final boolean NEED_ZERO_CAL               = false;
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ALGAEGRABBER_MOTOR;
@@ -64,7 +65,7 @@ public class AlgaeGrabber extends TrcSubsystem
      */
     public AlgaeGrabber()
     {
-        super(Params.SUBSYSTEM_NAME, false);
+        super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
         FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE,Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
@@ -129,7 +130,7 @@ public class AlgaeGrabber extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f, current=%f, hasObject=%s",
+            "%s: power=%.3f, current=%f, sensorValue=%f, hasObject=%s",
             Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.getSensorValue(), motorGrabber.hasObject());
 
         return lineNum;
