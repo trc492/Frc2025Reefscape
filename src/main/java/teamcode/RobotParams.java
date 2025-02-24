@@ -89,7 +89,6 @@ public class RobotParams
         public static final boolean useIntakeDeployer           = false;
 
         public static final boolean useDifferentialWrist        = false;
-        public static final boolean useShooter                  = false;
     }   //class Preferences
 
     /**

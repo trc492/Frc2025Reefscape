@@ -66,7 +66,6 @@ import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
 import trclib.controller.TrcPidController;
-import trclib.dataprocessor.TrcDiscreteValue;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.motor.TrcMotor;
@@ -77,7 +76,6 @@ import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
 import trclib.subsystem.TrcIntake;
 import trclib.subsystem.TrcMotorGrabber;
-import trclib.subsystem.TrcShooter;
 import trclib.subsystem.TrcSubsystem;
 import trclib.timer.TrcTimer;
 import trclib.vision.TrcOpenCvDetector;
@@ -133,11 +131,6 @@ public class Robot extends FrcRobotBase
     public TrcMotor winch;
     public TrcIntake intake;
     public TrcMotor intakeDeployer;
-    // Crescendo subsystems.
-    public TrcShooter shooter;
-    public TrcDiscreteValue shooterVelocity;
-    public TrcDiscreteValue shooterTiltAngle;
-
     //
     // Auto-Assists.
     //
