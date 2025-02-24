@@ -58,20 +58,20 @@ public class CoralArm extends TrcSubsystem
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
-        public static final double POWER_LIMIT                  = 0.2;
+        public static final double POWER_LIMIT                  = 0.5;
         public static final double ZERO_CAL_POWER               = -0.1;
 
-        public static final double MIN_POS                      = POS_OFFSET;
-        public static final double MAX_POS                      = 180.0;
+        public static final double MIN_POS                      = -40.0;
+        public static final double MAX_POS                      = 165.0;
         public static final double HOPPER_PICKUP_POS            = 0.0; // TODO
-        public static final double[] posPresets                 = {MIN_POS, 30.0, 60.0, 90.0, 120.0, 150.0, 180.0};
+        public static final double[] posPresets                 = {-30.0, 0.0, 30.0, 60.0, 90.0, 120.0, 150.0};
         public static final double POS_PRESET_TOLERANCE         = 10.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.018, 0.1, 0.001, 0.0, 2.0);
+            new TrcPidController.PidCoefficients(0.02, 0.0, 0.0, 0.0, 2.0);
         public static final double POS_PID_TOLERANCE            = 1.0;
-        public static final double GRAVITY_COMP_MAX_POWER       = 0.0;
+        public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
         public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
         public static final double STALL_TOLERANCE              = 0.1;
         public static final double STALL_TIMEOUT                = 0.1;
@@ -104,9 +104,10 @@ public class CoralArm extends TrcSubsystem
         talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
 
         coralArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        // coralArmMotor.setPositionPidPowerComp(this::getGravityComp);
+        coralArmMotor.setPositionPidPowerComp(this::getGravityComp);
         // coralArmMotor.setStallProtection(
         //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
+        // coralArmMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
     }   //CoralArm
 
     public TrcMotor getArmMotor()
@@ -114,10 +115,10 @@ public class CoralArm extends TrcSubsystem
         return coralArmMotor;
     }   //getArmMotor
 
-    // private double getGravityComp(double currPower)
-    // {
-    //     return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(coralArmMotor.getPosition()));
-    // }   //getGravityComp
+    private double getGravityComp(double currPower)
+    {
+        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(coralArmMotor.getPosition()));
+    }   //getGravityComp
 
     //
     // Implements TrcSubsystem abstract methods.

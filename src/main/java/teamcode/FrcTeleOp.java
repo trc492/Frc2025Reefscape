@@ -235,29 +235,38 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (RobotParams.Preferences.useSubsystems)
                 {
-                    if (robot.elevator != null)
-                    {
-                        double power = robot.operatorController.getLeftStickY(true);
-                        if (operatorAltFunc)
-                        {
-                            robot.elevator.setPower(power);
-                        }
-                        else
-                        {
-                            robot.elevator.setPidPower(power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
-                        }
-                    }
-
                     if (robot.coralArm != null)
                     {
-                        double power = robot.operatorController.getRightStickY(true);
+                        double power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
                         if (operatorAltFunc)
                         {
                             robot.coralArm.setPower(power);
                         }
                         else
                         {
-                            robot.coralArm.setPidPower(power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, false);
+                            robot.coralArm.setPidPower(power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, true);
+                        }
+                    }
+                    // if(robot.algaeArm != null){
+                    //     double power = robot.operatorController.getLeftStickY(true);
+                    //     //robot.globalTracer.traceInfo(moduleName, "Algae Arm Power: " + power);
+                    //     if(operatorAltFunc){
+                    //         robot.algaeArm.setPower(power);
+                    //     } else{
+                    //         robot.algaeArm.setPower(power);
+                    //     }
+                    // }
+                    if (robot.elevator != null)
+                    {
+                        double power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
+                        //robot.globalTracer.traceInfo(moduleName, "Elevator Encoder Counts" + robot.elevator.getEncoderRawPosition());
+                        if (operatorAltFunc)
+                        {
+                               robot.elevator.setPower(power);
+                        }
+                        else
+                        {
+                            robot.elevator.setPidPower(power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
                         }
                     }
                 }
@@ -341,10 +350,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     if (robot.robotDrive.driveBase.getDriveOrientation() != DriveOrientation.FIELD)
                     {
+                        robot.globalTracer.traceInfo(moduleName, "Setting Mode to: Field");
                         robot.setDriveOrientation(DriveOrientation.FIELD, true);
                     }
                     else
                     {
+                        robot.globalTracer.traceInfo(moduleName, "Setting Mode to: Robot");
                         robot.setDriveOrientation(DriveOrientation.ROBOT, false);
                     }
                 }
@@ -359,14 +370,23 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case X:
-                if(robot.robotDrive != null && pressed)
+                if (robot.robotDrive != null && pressed && robot.scoreCoralTask != null)
                 {
                     robot.scoreCoralTask.autoScoreCoral(
                         true, 0, false, false, false, false, null);
                 }
+                else
+                {
+                    robot.globalTracer.traceInfo(moduleName, "AutoScoreState: " + robot.scoreCoralTask);
+                }
                 break;
 
             case Y:
+                if(robot.robotDrive != null && pressed && robot.pickupCoralFromStationTask != null)
+                {
+                    robot.pickupCoralFromStationTask.autoPickupCoral(
+                        true, false, false, null);
+                }
                 break;  
 
             case LeftBumper:
@@ -510,6 +530,19 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         switch (button)
         {
             case A:
+                if(robot.algaeGrabber!= null && pressed){
+                    if(!operatorAltFunc){
+                        //robot.coralGrabber.intake();
+                        //robot.coralGrabber.autoIntake(moduleName);
+                        robot.coralGrabber.intake();
+                    } else {
+                        //robot.coralGrabber.autoEject(moduleName);
+                        robot.coralGrabber.eject();
+                    }
+                } else if(!pressed){
+                    robot.coralGrabber.stop();
+                }
+                break;
             case B:
             case X:
             case Y:
@@ -544,22 +577,34 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             {
                 if (robot.elevator != null && pressed)
                 {
-                    robot.elevator.presetPositionDown(moduleName, 0.5);
+                    //robot.elevator.presetPositionDown(moduleName, 0.5);
+                    robot.elevator.setPower(0.3);
                 }
             }
             else
             {
                 if (robot.coralArm != null)
                 {
-                    robot.coralArm.presetPositionDown(moduleName, 0.5);
+                    //robot.coralArm.presetPos;tionDown(moduleName, 0.5);
+                    robot.elevator.setPower(-0.3);
                 }
             }
             break;
 
             case DpadLeft:
+                if(operatorAltFunc){
+                    if(robot.algaeArm != null && pressed){
+                        robot.algaeArm.setPower(-0.2);
+                    }
+                }
                 break;
 
             case DpadRight:
+                if(operatorAltFunc){
+                    if(robot.algaeArm != null && pressed){
+                        robot.algaeArm.setPower(0.2);
+                    }
+                }
                 break;
 
             case Back:

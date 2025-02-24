@@ -39,7 +39,7 @@ public class Elevator extends TrcSubsystem
     public static final class Params
     {
         public static final String SUBSYSTEM_NAME               = "Elevator";
-        public static final boolean NEED_ZERO_CAL               = false;
+        public static final boolean NEED_ZERO_CAL               = true;
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ELEVATOR_MOTOR;
@@ -51,13 +51,13 @@ public class Elevator extends TrcSubsystem
         public static final boolean LOWER_LIMITSW_NORMAL_CLOSE  = true;
         public static final boolean UPPER_LIMITSW_NORMAL_CLOSE  = true;
 
-        public static final double INCHES_PER_COUNT             = 1.0;
-        public static final double POS_OFFSET                   = 13.0;
+        public static final double INCHES_PER_COUNT             = 0.17682926829268292682926829268293;
+        public static final double POS_OFFSET                   = 39.25;
         public static final double POWER_LIMIT                  = 1.0;
-        public static final double ZERO_CAL_POWER               = -0.25;
+        public static final double ZERO_CAL_POWER               = -0.5;
 
         public static final double MIN_POS                      = POS_OFFSET;
-        public static final double MAX_POS                      = 30.25;
+        public static final double MAX_POS                      = 69.0;
         public static final double REEF_SCORE_LEVEL_1           = 0.0;  // TODO
         public static final double REEF_SCORE_LEVEL_2           = 0.0;  // TODO
         public static final double REEF_SCORE_LEVEL_3           = 0.0;  // TODO
@@ -65,12 +65,12 @@ public class Elevator extends TrcSubsystem
         public static final double[] REEF_SCORE_LEVELS          =
             {REEF_SCORE_LEVEL_1, REEF_SCORE_LEVEL_2, REEF_SCORE_LEVEL_3, REEF_SCORE_LEVEL_4};
         public static final double HOPPER_PICKUP_POS            = 0.0;  // TODO
-        public static final double[] posPresets                 = {MIN_POS, 15.0, 20.0, 25.0, 30.0};
+        public static final double[] posPresets                 = {MIN_POS, 45.0, 50.0, 55.0, 60.0, 65.0, MAX_POS};
         public static final double POS_PRESET_TOLERANCE         = 1.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(1.0, 0.0, 0.0, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.5, 0.0, 0.0, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.1;
         public static final double GRAVITY_COMP_POWER           = 0.0;
         public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
@@ -100,7 +100,7 @@ public class Elevator extends TrcSubsystem
         elevatorMotor.enableLowerLimitSwitch(Params.LOWER_LIMITSW_NORMAL_CLOSE);
         elevatorMotor.enableUpperLimitSwitch(Params.UPPER_LIMITSW_NORMAL_CLOSE);
         elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
+        // elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
 
         // ALREADY HAVE LIMIT SWITCHES, MIGHT NOT NEED STALL PROTECTION
         // elevatorMotor.setStallProtection(
@@ -112,10 +112,10 @@ public class Elevator extends TrcSubsystem
         return elevatorMotor;
     }   //getElevatorMotor
 
-    private double getGravityComp(double currPower)
-    {
-        return Elevator.Params.GRAVITY_COMP_POWER;
-    }   //getGravityComp
+    // private double getGravityComp(double currPower)
+    // {
+    //     return Elevator.Params.GRAVITY_COMP_POWER;
+    // }   //getGravityComp
 
     //
     // Implements TrcSubsystem abstract methods.
