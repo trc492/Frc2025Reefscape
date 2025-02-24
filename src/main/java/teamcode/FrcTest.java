@@ -293,6 +293,7 @@ public class FrcTest extends FrcTeleOp
                     // rightWheel. For 4-motor drive base, it is lfWheel, rfWheel, lbWheel, rbWheel.
                     //
                     testCommand = new CmdDriveMotorsTest(
+                        robot.robotDrive.driveBase,
                         new TrcMotor[] {
                             robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_FRONT],
                             robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_FRONT],
@@ -642,10 +643,6 @@ public class FrcTest extends FrcTeleOp
                         {
                             robot.elevator.presetPositionUp(moduleName, Elevator.Params.POWER_LIMIT);
                         }
-                        // else
-                        // {
-                        //     robot.elevator.cancel();
-                        // }
                         passToTeleOp = false;
                     }
                 }
@@ -657,10 +654,6 @@ public class FrcTest extends FrcTeleOp
                         {
                             robot.coralArm.presetPositionUp(moduleName, CoralArm.Params.POWER_LIMIT);
                         }
-                        // else
-                        // {
-                        //     robot.coralArm.cancel();
-                        // }
                         passToTeleOp = false;
                     }
                 }
@@ -675,10 +668,6 @@ public class FrcTest extends FrcTeleOp
                         {
                             robot.elevator.presetPositionDown(moduleName, Elevator.Params.POWER_LIMIT);
                         }
-                        // else
-                        // {
-                        //     robot.elevator.cancel();
-                        // }
                         passToTeleOp = false;
                     }
                 }
@@ -690,10 +679,6 @@ public class FrcTest extends FrcTeleOp
                         {
                             robot.coralArm.presetPositionDown(moduleName, CoralArm.Params.POWER_LIMIT);
                         }
-                        // else
-                        // {
-                        //     robot.coralArm.cancel();
-                        // }
                         passToTeleOp = false;
                     }
                 }
