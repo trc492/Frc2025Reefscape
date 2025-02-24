@@ -530,19 +530,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         switch (button)
         {
             case A:
-                if(robot.algaeGrabber!= null && pressed){
-                    if(!operatorAltFunc){
-                        //robot.coralGrabber.intake();
-                        //robot.coralGrabber.autoIntake(moduleName);
-                        robot.coralGrabber.intake();
-                    } else {
-                        //robot.coralGrabber.autoEject(moduleName);
-                        robot.coralGrabber.eject();
-                    }
-                } else if(!pressed){
-                    robot.coralGrabber.stop();
-                }
-                break;
             case B:
             case X:
             case Y:
@@ -562,19 +549,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadLeft:
-                if(operatorAltFunc){
-                    if(robot.algaeArm != null && pressed){
-                        robot.algaeArm.setPower(-0.2);
-                    }
-                }
                 break;
 
             case DpadRight:
-                if(operatorAltFunc){
-                    if(robot.algaeArm != null && pressed){
-                        robot.algaeArm.setPower(0.2);
-                    }
-                }
                 break;
 
             case Back:

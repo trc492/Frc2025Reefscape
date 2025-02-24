@@ -619,7 +619,49 @@ public class FrcTest extends FrcTeleOp
         switch (button)
         {
             case A:
+                if (robot.coralGrabber!= null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.coralGrabber.intake(0.0, null);
+                        }
+                        else
+                        {
+                            robot.coralGrabber.autoIntake(null);
+                        }
+                    }
+                    else
+                    {
+                        robot.coralGrabber.cancel();
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
             case B:
+                if (robot.coralGrabber!= null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.coralGrabber.eject(0.0, null);
+                        }
+                        else
+                        {
+                            robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
+                        }
+                    }
+                    else
+                    {
+                        robot.coralGrabber.cancel();
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
             case X:
             case Y:
             case LeftBumper:

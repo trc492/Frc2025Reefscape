@@ -49,12 +49,12 @@ public class CoralGrabber extends TrcSubsystem
         public static final boolean MOTOR_INVERTED              = true;
 
         public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
-        public static final int SENSOR_CHANNEL                  = 0;
+        public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_CORAL_GRABBER_SENSOR;
         public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
         public static final double INTAKE_POWER                 = 0.15;
         public static final double EJECT_POWER                  = -0.15;
-        public static final double RETAIN_POWER                 = 0.025;
+        public static final double RETAIN_POWER                 = 0.0;
         public static final double FINISH_DELAY                 = 0.06;
         public static final double DUMP_TIME                    = 0.5;
         public static final double DUMP_DELAY                   = 0.0;

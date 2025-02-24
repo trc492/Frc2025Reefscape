@@ -85,10 +85,9 @@ public class RobotParams
         public static final boolean useAlgaeGrabber             = false;
         public static final boolean useElevator                 = true;
         public static final boolean useWinch                    = false;
+        // TODO: remove.
         public static final boolean useIntake                   = false;
         public static final boolean useIntakeDeployer           = false;
-
-        public static final boolean useDifferentialWrist        = false;
     }   //class Preferences
 
     /**
@@ -126,6 +125,7 @@ public class RobotParams
         public static final int CANID_CORALGRABBER_MOTOR        = 17;   // Purple
         public static final int CANID_ALGAEGRABBER_MOTOR        = 18;   // Gray
         public static final int CANID_WINCH_MOTOR               = 19;   // White
+        // TODO: remove.
         public static final int CANID_INTAKE_MOTOR              = 27;   // Purple
         public static final int CANID_INTAKEDEPLOYER_MOTOR      = 28;   // Gray
         // Miscellaneous CAN IDs.
@@ -139,14 +139,11 @@ public class RobotParams
         public static final int AIN_LBSTEER_ENCODER             = 2;
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
-        public static final int DIO_ELEVATOR_LOWER_LIMIT        = 0;
-        public static final int DIO_ELEVATOR_UPPER_LIMIT        = 1;
-        public static final int DIO_CORALARM_LOWER_LIMIT        = 2;
-        public static final int DIO_CORALARM_UPPER_LIMIT        = 3;
-        public static final int DIO_ALGAEARM_LOWER_LIMIT        = 4;
-        public static final int DIO_ALGAEARM_UPPER_LIMIT        = 5;
+        public static final int DIO_CORAL_GRABBER_SENSOR        = 0;
+        public static final int DIO_ELEVATOR_MID_LIMIT          = 1;
         public static final int DIO_WINCH_LOWER_LIMIT           = 7;
         public static final int DIO_WINCH_UPPER_LIMIT           = 8;
+        // TODO: remove.
         public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
         // PWM channels.
         public static final int NUM_LEDS                        = 60;
