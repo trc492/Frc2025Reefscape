@@ -71,7 +71,7 @@ public class Elevator extends TrcSubsystem
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.5, 0.0, 0.0, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.4, 0.0, 0.01, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
         public static final double GRAVITY_COMP_POWER           = 0.0;
         public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
@@ -101,6 +101,7 @@ public class Elevator extends TrcSubsystem
         elevatorMotor.enableLowerLimitSwitch(Params.LOWER_LIMITSW_NORMAL_CLOSE);
         elevatorMotor.enableUpperLimitSwitch(Params.UPPER_LIMITSW_NORMAL_CLOSE);
         elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
+        // elevatorMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
         // Looks like mechanical gravity comp works well, so don't need software gravity comp.
         // elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
 

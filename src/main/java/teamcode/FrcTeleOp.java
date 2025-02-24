@@ -41,7 +41,7 @@ import trclib.robotcore.TrcRobot.RunMode;
 public class FrcTeleOp implements TrcRobot.RobotMode
 {
     private static final String moduleName = FrcTeleOp.class.getSimpleName();
-    private static final boolean traceButtonEvents = true;
+    protected static final boolean traceButtonEvents = true;
     //
     // Global objects.
     //
@@ -556,40 +556,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
-                if (operatorAltFunc)
-                {
-                    if (robot.elevator != null && pressed)
-                    {
-                        robot.elevator.presetPositionUp(moduleName, 0.5);
-                    }
-                }
-                else
-                {
-                    if (robot.coralArm != null)
-                    {
-                        robot.coralArm.presetPositionUp(moduleName, 0.5);
-                    }
-                }
                 break;
 
             case DpadDown:
-            if (operatorAltFunc)
-            {
-                if (robot.elevator != null && pressed)
-                {
-                    //robot.elevator.presetPositionDown(moduleName, 0.5);
-                    robot.elevator.setPower(0.3);
-                }
-            }
-            else
-            {
-                if (robot.coralArm != null)
-                {
-                    //robot.coralArm.presetPos;tionDown(moduleName, 0.5);
-                    robot.elevator.setPower(-0.3);
-                }
-            }
-            break;
+                break;
 
             case DpadLeft:
                 if(operatorAltFunc){

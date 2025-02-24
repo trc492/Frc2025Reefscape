@@ -30,7 +30,10 @@ import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcUserChoices;
+import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision;
+import teamcode.subsystems.CoralArm;
+import teamcode.subsystems.Elevator;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.command.CmdDriveMotorsTest;
 import trclib.command.CmdPidDrive;
@@ -40,6 +43,7 @@ import trclib.dataprocessor.TrcUtil;
 import trclib.motor.TrcMotor;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcRobot;
+import trclib.robotcore.TrcDbgTrace.MsgLevel;
 import trclib.robotcore.TrcRobot.RunMode;
 import trclib.timer.TrcTimer;
 
@@ -592,6 +596,124 @@ public class FrcTest extends FrcTeleOp
     //
     // Overriding ButtonEvent here if necessary.
     //
+    /**
+     * This method is called when an operator controller button event is detected.
+     *
+     * @param button specifies the button that generated the event.
+     * @param pressed specifies true if the button is pressed, false otherwise.
+     */
+    @Override
+    protected void operatorControllerButtonEvent(FrcXboxController.ButtonType button, boolean pressed)
+    {
+        boolean passToTeleOp = true;
+
+        if (traceButtonEvents)
+        {
+            robot.globalTracer.traceInfo(moduleName, "##### button=" + button + ", pressed=" + pressed);
+        }
+
+        robot.dashboard.displayPrintf(
+            8, "OperatorController: " + button + "=" + (pressed ? "pressed" : "released"));
+
+        switch (button)
+        {
+            case A:
+            case B:
+            case X:
+            case Y:
+            case LeftBumper:
+            case RightBumper:
+                if (pressed)
+                {
+                    robot.elevator.tracer.setTraceLevel(MsgLevel.DEBUG);
+                }
+                else
+                {
+                    robot.elevator.tracer.setTraceLevel(MsgLevel.INFO);
+                }
+                break;
+
+            case DpadUp:
+                if (operatorAltFunc)
+                {
+                    if (robot.elevator != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.elevator.presetPositionUp(moduleName, Elevator.Params.POWER_LIMIT);
+                        }
+                        // else
+                        // {
+                        //     robot.elevator.cancel();
+                        // }
+                        passToTeleOp = false;
+                    }
+                }
+                else
+                {
+                    if (robot.coralArm != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.coralArm.presetPositionUp(moduleName, CoralArm.Params.POWER_LIMIT);
+                        }
+                        // else
+                        // {
+                        //     robot.coralArm.cancel();
+                        // }
+                        passToTeleOp = false;
+                    }
+                }
+                break;
+
+            case DpadDown:
+                if (operatorAltFunc)
+                {
+                    if (robot.elevator != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.elevator.presetPositionDown(moduleName, Elevator.Params.POWER_LIMIT);
+                        }
+                        // else
+                        // {
+                        //     robot.elevator.cancel();
+                        // }
+                        passToTeleOp = false;
+                    }
+                }
+                else
+                {
+                    if (robot.coralArm != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.coralArm.presetPositionDown(moduleName, CoralArm.Params.POWER_LIMIT);
+                        }
+                        // else
+                        // {
+                        //     robot.coralArm.cancel();
+                        // }
+                        passToTeleOp = false;
+                    }
+                }
+                break;
+
+            case DpadLeft:
+            case DpadRight:
+            case Back:
+            case Start:
+            default:
+                break;
+        }
+        //
+        // If the control was not processed by this method, pass it back to TeleOp.
+        //
+        if (passToTeleOp)
+        {
+            super.operatorControllerButtonEvent(button, pressed);
+        }
+    }   //operatorControllerButtonEvent
 
     //
     // Implement tests.
