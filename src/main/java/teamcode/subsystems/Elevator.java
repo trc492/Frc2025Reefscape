@@ -59,13 +59,13 @@ public class Elevator extends TrcSubsystem
         public static final double MIN_POS                      = POS_OFFSET;
         public static final double MAX_POS                      = 69.0;
         public static final double TURTLE_POS                   = MIN_POS;
+        public static final double REEF_SCORE_TROUGH           = 0.0;  // TODO
         public static final double REEF_SCORE_LEVEL_1           = 0.0;  // TODO
-        public static final double REEF_SCORE_LEVEL_2           = 0.0;  // TODO
-        public static final double REEF_SCORE_LEVEL_3           = 0.0;  // TODO
-        public static final double REEF_SCORE_LEVEL_4           = 0.0;  // TODO
+        public static final double REEF_SCORE_LEVEL_2           = 39.5;  // TODO
+        public static final double REEF_SCORE_LEVEL_3           = 68.7;  // TODO
         public static final double[] REEF_SCORE_LEVELS          =
-            {REEF_SCORE_LEVEL_1, REEF_SCORE_LEVEL_2, REEF_SCORE_LEVEL_3, REEF_SCORE_LEVEL_4};
-        public static final double HOPPER_PICKUP_POS            = 0.0;  // TODO
+            {REEF_SCORE_TROUGH, REEF_SCORE_LEVEL_1, REEF_SCORE_LEVEL_2, REEF_SCORE_LEVEL_3};
+        public static final double HOPPER_PICKUP_POS            =   0.0;  // TODO
         public static final double[] posPresets                 = {MIN_POS, 45.0, 50.0, 55.0, 60.0, 65.0, MAX_POS};
         public static final double POS_PRESET_TOLERANCE         = 2.0;
 

@@ -62,9 +62,15 @@ public class CoralArm extends TrcSubsystem
         // public static final double ZERO_CAL_POWER               = -0.1;
 
         public static final double MIN_POS                      = -40.0;
-        public static final double MAX_POS                      = 165.0;
+        public static final double MAX_POS                      = 188.3;
         public static final double TURTLE_POS                   = 15.0;
-        public static final double HOPPER_PICKUP_POS            = 0.0; // TODO
+        public static final double TROUGH_SCORE_LEVEL           = 0.0;  // TODO
+        public static final double REEF_SCORE_LEVEL_1           = 122.5;  // TODO
+        public static final double REEF_SCORE_LEVEL_2           = 162.5;  // TODO
+        public static final double REEF_SCORE_LEVEL_3           = 157.1;  // TODO
+        public static final double[] REEF_SCORE_LEVELS          =
+        {TROUGH_SCORE_LEVEL, REEF_SCORE_LEVEL_1, REEF_SCORE_LEVEL_2, REEF_SCORE_LEVEL_3};
+        public static final double HOPPER_PICKUP_POS            = -39.4; // TODO
         public static final double[] posPresets                 = {-30.0, 0.0, 30.0, 60.0, 90.0, 120.0, 150.0};
         public static final double POS_PRESET_TOLERANCE         = 5.0;
 

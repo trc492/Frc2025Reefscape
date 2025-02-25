@@ -22,6 +22,8 @@
 
 package teamcode;
 
+import java.util.Timer;
+
 import frclib.driverio.FrcButtonPanel;
 import frclib.driverio.FrcDualJoystick;
 import frclib.driverio.FrcJoystick;
@@ -407,8 +409,11 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
-            case DpadDown:
+                break;
+            case DpadDown:         
+                break;
             case DpadLeft:
+                break;
             case DpadRight:
                 break;
 
@@ -530,9 +535,59 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         switch (button)
         {
             case A:
+                if (robot.coralGrabber!= null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.coralGrabber.intake(0.0, null);
+                        }
+                        else
+                        {
+                            robot.coralGrabber.autoIntake(null);
+                        }
+                    }
+                    else
+                    {
+                        robot.coralGrabber.cancel();
+                    }
+                }
+                break;   
             case B:
+                if (robot.coralGrabber!= null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.coralGrabber.eject(0.0, null);
+                        }
+                        else
+                        {
+                            robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
+                        }
+                    }
+                    else
+                    {
+                        robot.coralGrabber.cancel();
+                    }
+                
+                }
+                break;
             case X:
+                // Bindings for testing presets
+                if(robot.coralArm != null && robot.elevator != null && pressed){
+                    robot.coralArm.setPosition(CoralArm.Params.REEF_SCORE_LEVEL_3, true);
+                    robot.elevator.setPosition(Elevator.Params.REEF_SCORE_LEVEL_3, true);
+                }
+                break;
             case Y:
+                // Binding for testing presets
+                if(robot.coralArm != null && robot.elevator != null && pressed){
+                    robot.elevator.setPosition(Elevator.Params.HOPPER_PICKUP_POS, true);
+                    robot.elevator.setPosition(moduleName, 2.0, CoralArm.Params.HOPPER_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null, 0.0);
+                }
                 break;
 
             case LeftBumper:
@@ -543,9 +598,52 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
+
+                if (operatorAltFunc)
+                {
+                    if (robot.elevator != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.elevator.presetPositionUp(moduleName, Elevator.Params.POWER_LIMIT);
+                        }
+                    }
+                }
+                else
+                {
+                    if (robot.coralArm != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.coralArm.presetPositionUp(moduleName, CoralArm.Params.POWER_LIMIT);
+                        }
+        
+                    }
+                }
+            
                 break;
 
             case DpadDown:
+                if (operatorAltFunc)
+                {
+                    if (robot.elevator != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.elevator.presetPositionDown(moduleName, Elevator.Params.POWER_LIMIT);
+                        }
+                    }
+                }
+                else
+                {
+                    if (robot.coralArm != null)
+                    {
+                        if (pressed)
+                        {
+                            robot.coralArm.presetPositionDown(moduleName, CoralArm.Params.POWER_LIMIT);
+                        }
+                    }
+                }
                 break;
 
             case DpadLeft:
