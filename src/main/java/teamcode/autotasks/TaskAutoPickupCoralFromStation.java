@@ -204,12 +204,13 @@ import trclib.pathdrive.TrcPose2D;
                 // Check if already have coral, flash red light + stop
                 if(RobotParams.Preferences.useIntake)
                 {
-                    if(robot.intake.hasObject())
+                    if(robot.coralGrabber.hasObject())
                     {
                         if(robot.ledIndicator != null)
                         {
                             robot.ledIndicator.setPhotonDetectedObject(null, null);
                         }
+                        tracer.traceInfo(moduleName, "We already have an object. Going to DONE");
                         sm.setState(State.DONE);
                     }
                 }
@@ -225,15 +226,15 @@ import trclib.pathdrive.TrcPose2D;
                  }
                  else
                  {
-                     tracer.traceInfo(moduleName, "***** Not using Vision to move to Coral Station.");
-                     sm.setState(State.APPROACH_STATION);
+                     tracer.traceInfo(moduleName, "***** Not using Vision. Going to TAKE_CORAL directly");
+                     sm.setState(State.TAKE_CORAL);
                  }
                  break;
  
              case FIND_STATION_APRILTAG:
                  // Look for Coral Station AprilTag and relocalize robot.
                  FrcPhotonVision.DetectedObject object =
-                     robot.photonVisionBack.getBestDetectedAprilTag(new int[] {1, 2, 12, 13});
+                     robot.photonVisionBack.getBestDetectedAprilTag(RobotParams.Game.APRILTAG_STATION);
  
                  if (object != null)
                  {
@@ -285,52 +286,65 @@ import trclib.pathdrive.TrcPose2D;
                             currOwner, driveEvent, 2.0, true,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                             robot.robotInfo.profiledMaxDeceleration, targetPose);
-
-                } else if(!taskParams.inAuto){
-                    tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
-                    
-                    targetPose = PhotonVision.getClosestAprilTagPose(robotPose);
-                    targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
-                    targetPose.angle = 0.0;
-                    intermediatePose = targetPose.clone();
-                    intermediatePose.y = targetPose.y;
-                    targetPose.x = 0.0;
-                     
-                    tracer.traceInfo(
-                        moduleName,
-                        state + "***** Approaching Coral Station without Vision:\n\tRobotFieldPose=" + robotPose +
-                        "\n\tintermediatePose=" + intermediatePose +
-                        "\n\ttargetPose=" + targetPose);
-                    robot.robotDrive.purePursuitDrive.start(
-                        currOwner, driveEvent, 2.0, true,
-                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                        robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
+                    sm.waitForSingleEvent(driveEvent, State.DONE);//State.TAKE_CORAL);
+                } else if(!taskParams
+                .inAuto) {
+                    tracer.traceInfo(currOwner, "We cannot accurately use Odometry to move to the Station. We are in TeleOp so we can start grabber");
+                    sm.setState(State.TAKE_CORAL);
                 } else{
-                    tracer.traceInfo(moduleName, "Not going to AprilTag, we are just going to run the logic to pickup an object");
+                    tracer.traceInfo(currOwner, "We cannot accurately use Odometry to move to the Station. Going to DONE");
+                    sm.setState(State.DONE);
                 }
-                sm.waitForEvents(State.DONE);//TAKE_CORAL);
+                // } else if(!taskParams.inAuto){
+                //     tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
+                    
+                //     targetPose = PhotonVision.getClosestAprilTagPose(robotPose);
+                //     targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
+                //     targetPose.angle = 0.0;
+                //     intermediatePose = targetPose.clone();
+                //     intermediatePose.y = targetPose.y;
+                //     targetPose.x = 0.0;
+                     
+                //     tracer.traceInfo(
+                //         moduleName,
+                //         state + "***** Approaching Coral Station without Vision:\n\tRobotFieldPose=" + robotPose +
+                //         "\n\tintermediatePose=" + intermediatePose +
+                //         "\n\ttargetPose=" + targetPose);
+                //     robot.robotDrive.purePursuitDrive.start(
+                //         currOwner, driveEvent, 2.0, true,
+                //         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                //         robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
+                // } else{
+                //     tracer.traceInfo(moduleName, "Not going to AprilTag, we are just going to run the logic to pickup an object");
+                // }
                 break;
 
 
             case TAKE_CORAL:
                 // Code to bring elevator and grabber down to position to pickup coral
-                // TODO: We will need to add code for an additional sensor that will be in the hopper that will track whether an object has entered the hopper yet
-                if(!robot.algaeGrabber.hasObject()){
+                if(!robot.coralGrabber.hasObject()){
+                    if(robot.coralArm != null && robot.elevator != null && robot.coralGrabber != null){
                     double elevatorPos;
                     double armPos;
-                    double finishDelay;
                     tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to pickup position for Coral Station coral");
                     elevatorPos = Elevator.Params.HOPPER_PICKUP_POS;
                     armPos = CoralArm.Params.HOPPER_PICKUP_POS;
-                    finishDelay = AlgaeGrabber.Params.FINISH_DELAY;
-                    robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
+                    // TODO: This implentation will have to change depending of how we do the safe-zone code
+                    robot.elevator.setPosition(0.0, elevatorPos, true, Elevator.Params.POWER_LIMIT, event);
+                    robot.coralArm.setPosition(0.0, armPos, true, CoralArm.Params.POWER_LIMIT, event);
+                    //robot.moveSubsystem(moduleName, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
                     sm.addEvent(event);
+                    
+                    robot.coralGrabber.autoIntake(moduleName, 0.0, grabberEvent, 2.0);
+                    sm.addEvent(grabberEvent);
 
-                    robot.algaeGrabber.autoIntake(currOwner, finishDelay, grabberEvent, 2.0);
+                    sm.waitForEvents(State.DONE);
+                    }
+                } else{
+                    tracer.traceInfo(moduleName, "We already have a Coral!");
+                    sm.setState(State.DONE);
                 }
-
-                sm.waitForEvents(State.DONE);
-                 break;
+                break;
              default:
              case DONE:
                  // Stop task.

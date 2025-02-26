@@ -242,6 +242,7 @@ public class RobotParams
         public static final int[] APRILTAG_FAR_MID_REEF         = {10, 21};
         public static final int[] APRILTAG_FAR_LEFT_REEF        = {11, 20};
         public static final int[] APRILTAG_REEFS                = {17, 18, 19, 20, 21, 22, 6, 7, 8, 9, 10, 11};
+        public static final int[] APRILTAG_STATION              = {2, 12, 1, 13};
 
         // Array of AprilTag poses indexed by AprilTag ID.
         public static final TrcPose2D[] APRILTAG_POSES          =

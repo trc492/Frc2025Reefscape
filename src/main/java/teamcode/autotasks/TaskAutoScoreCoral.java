@@ -61,18 +61,17 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean removeAlgae;
         boolean inAuto;
         boolean relocalize;
-        boolean scoreCoral;
+        int scoreSide;
 
         TaskParams(
-            boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize,
-            boolean scoreCoral)
+            boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize, int scoreSide)
         {
             this.useVision = useVision;
             this.reefLevel = reefLevel;
             this.removeAlgae = removeAlgae;
             this.inAuto = inAuto;
             this.relocalize = relocalize;
-            this.scoreCoral = scoreCoral;
+            this.scoreSide = scoreSide;
         }   //TaskParams
 
         public String toString()
@@ -81,8 +80,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                    ",reefLevel=" + reefLevel +
                    ",removeAlgae=" + removeAlgae +
                    ",inAuto=" + inAuto +
-                   ",relocalize" + relocalize +
-                   ",scoreCoral=" + scoreCoral;
+                   ",relocalize=" + relocalize + 
+                   ",scoreSide=" + scoreSide;
         }   //toString
     }   //class TaskParams
 
@@ -121,15 +120,14 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      * @param removeAlgae specifies true to remove algae from the reef.
      * @param inAuto specifies true if caller is autonomous, false if in teleop.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
-     * @param scoreCoral specifies true to score the coral, false otherwise.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
-        boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize, boolean scoreCoral,
+        boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize, int scoreSide,
         TrcEvent completionEvent)
     {
         // Code Review: What does it mean by calling autoScoreCoral with scoreCoral set to false?!
-        TaskParams taskParams = new TaskParams(useVision, reefLevel, removeAlgae, inAuto, relocalize, scoreCoral);
+        TaskParams taskParams = new TaskParams(useVision, reefLevel, removeAlgae, inAuto, relocalize, scoreSide);
         tracer.traceInfo(moduleName, "taskParams=(" + taskParams + "), event=" + completionEvent);
         startAutoTask(State.START, taskParams, completionEvent);
     }   //autoScoreCoral
@@ -230,7 +228,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 }
                 else
                 {
-                    tracer.traceInfo(moduleName, "***** Not using AprilTag Vision");
+                    tracer.traceInfo(moduleName, "***** Not using AprilTag Vision.");
                     sm.setState(State.SCORE_CORAL);
                 }
                 break;
@@ -268,7 +266,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
 
             case APPROACH_REEF:
                 TrcPose2D robotPose = robot.robotDrive.driveBase.getFieldPosition();
-                TrcPose2D targetPose, intermediatePose;
+                TrcPose2D targetPose;
                 robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
                 if (taskParams.useVision && aprilTagPose != null)
                 {
@@ -281,6 +279,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                     targetPose.x += robot.robotInfo.cam1.camXOffset;// This value will need to be measured.
                     targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 17;
                     targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 17;
+                    targetPose.x = taskParams.scoreSide == 1? targetPose.x + 7.5: targetPose.x - 7.5; 
                     tracer.traceInfo(moduleName, "****** \nAprilTagPose= " + aprilTagPose);
                     tracer.traceInfo(
                         moduleName,
@@ -292,32 +291,36 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                         currOwner, driveEvent, 2.0, true,
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                         robot.robotInfo.profiledMaxDeceleration, targetPose);
+                    
+                    sm.waitForSingleEvent(driveEvent, State.DONE);//State.SCORE_CORAL);
+                } else{
+                    tracer.traceInfo(currOwner, "We cannot accurately go to the AprilTag with Odometry. Going to DONE");
+                    sm.setState(State.DONE);
                 }
-                else
-                {
-                    // Code Review: Is it really a good idea to not use vision?
-                    // Our odometry may be bad. If we don't have vision, it's not guarantee we will be at the correct
-                    // location to score. The comment in the previous state said if we don't see AprilTag, we quit
-                    // unless it's TeleOp then we assume the driver has navigate the robot right in front of the reef
-                    // so this code would just do the scoring but not the robot movement.
-                    tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
-                    targetPose = PhotonVision.getClosestAprilTagPose(robotPose);
-                    targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
-                    targetPose.angle = 0.0; 
-                    intermediatePose = targetPose.clone();
-                    intermediatePose.y = targetPose.y;
-                    targetPose.x = 0.0;
-                    tracer.traceInfo(
-                        moduleName,
-                        state + "***** Approaching Reef without Vision:\n\tRobotFieldPose=" + robotPose +
-                        "\n\tintermediatePose=" + intermediatePose +
-                        "\n\ttargetPose=" + targetPose);
-                    robot.robotDrive.purePursuitDrive.start(
-                        currOwner, driveEvent, 2.0, true,
-                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                        robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
-                }
-                sm.waitForSingleEvent(driveEvent, State.DONE);//State.SCORE_CORAL);
+                // else
+                // {
+                //     // Code Review: Is it really a good idea to not use vision?
+                //     // Our odometry may be bad. If we don't have vision, it's not guarantee we will be at the correct
+                //     // location to score. The comment in the previous state said if we don't see AprilTag, we quit
+                //     // unless it's TeleOp then we assume the driver has navigate the robot right in front of the reef
+                //     // so this code would just do the scoring but not the robot movement.
+                //     tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
+                //     targetPose = PhotonVision.getClosestAprilTagPose(robotPose);
+                //     targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
+                //     targetPose.angle = 0.0; 
+                //     intermediatePose = targetPose.clone();
+                //     intermediatePose.y = targetPose.y;
+                //     targetPose.x = 0.0;
+                //     tracer.traceInfo(
+                //         moduleName,
+                //         state + "***** Approaching Reef without Vision:\n\tRobotFieldPose=" + robotPose +
+                //         "\n\tintermediatePose=" + intermediatePose +
+                //         "\n\ttargetPose=" + targetPose);
+                //     robot.robotDrive.purePursuitDrive.start(
+                //         currOwner, driveEvent, 2.0, true,
+                //         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                //         robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
+                // }
                 break;
 
             case SCORE_CORAL:
@@ -327,15 +330,22 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 // simultaneously.
                 double elevatorPos;
                 double armPos;
-                tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position in reefLevel");
-                elevatorPos = Elevator.Params.REEF_SCORE_LEVELS[taskParams.reefLevel]; // TODO: This value needs to be set
-                armPos = CoralArm.Params.posPresets[taskParams.reefLevel]; // TODO: This value needs to be set
-                robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
+                tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position to reefLevel: " + taskParams.reefLevel);
+                elevatorPos = Elevator.Params.REEF_SCORE_LEVELS[taskParams.reefLevel];
+                armPos = CoralArm.Params.posPresets[taskParams.reefLevel]; 
+                // TODO: Setting this position will need to be changed according to how we implement the safe-zone system.
+                robot.coralArm.setPosition(0.0, armPos, true, CoralArm.Params.POWER_LIMIT, event);
+                robot.elevator.setPosition(2.0, elevatorPos, true, Elevator.Params.POWER_LIMIT, event);
+                //robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
                 sm.addEvent(event);
-                if((taskParams.scoreCoral || taskParams.inAuto) && robot.algaeGrabber.hasObject())
+                if(robot.coralGrabber.hasObject())
                 {
-                    robot.algaeGrabber.autoEject(currOwner, 0.0, scoreEvent, 2.0);
+                    
+                    robot.coralGrabber.autoEject(currOwner, 0.0, scoreEvent, 2.0);
+                    
                     sm.addEvent(scoreEvent);
+                } else{
+                    tracer.traceInfo(currOwner, "Coral Grabber does not have Coral to score");
                 }
                 sm.waitForEvents(State.DONE);
                 break;

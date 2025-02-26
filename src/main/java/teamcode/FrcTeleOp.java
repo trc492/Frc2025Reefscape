@@ -375,7 +375,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.robotDrive != null && pressed && robot.scoreCoralTask != null)
                 {
                     robot.scoreCoralTask.autoScoreCoral(
-                        true, 0, false, false, false, false, null);
+                        true, 0, false, false, false, 0, null);
                 }
                 else
                 {

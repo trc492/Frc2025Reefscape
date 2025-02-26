@@ -201,7 +201,8 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case SCORE_PRELOAD:
                     // Score preloaded Coral to high branch.
-                    robot.scoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
+                    // TODO: Will have to add a dashboard choice for scoreSide
+                    robot.scoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, 0, event);
                     coralScored++;
                     if (coralScored < coralTarget)
                     {
@@ -297,7 +298,8 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case SCORE_CORAL:
                     // Score Coral to high branch.
-                    robot.scoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, true, event);
+                    // TODO: Will have to add a dashboard choice for scoreSide
+                    robot.scoreCoralTask.autoScoreCoral(RobotParams.Preferences.useVision, 3, false, true, relocalize, 0, event);
                     coralScored++;
                     cyclePositions = "Center";
                     if (coralScored < coralTarget)
