@@ -53,6 +53,7 @@ import teamcode.FrcAuto.AutoChoices;
 import teamcode.autotasks.TaskAutoPickupCoralFromGround;
 import teamcode.autotasks.TaskAutoPickupCoralFromStation;
 import teamcode.autotasks.TaskAutoScoreCoral;
+import teamcode.autotasks.TaskElevatorArm;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.CoralGrabber;
 import teamcode.subsystems.IntakeDeployer;
@@ -134,6 +135,7 @@ public class Robot extends FrcRobotBase
     //
     // Auto-Assists.
     //
+    public TaskElevatorArm elevatorArmTask;
     public TaskAutoScoreCoral scoreCoralTask;
     public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
     public TaskAutoPickupCoralFromGround pickupCoralFromGroundTask;
@@ -314,9 +316,11 @@ public class Robot extends FrcRobotBase
                 zeroCalibrate(null, null);
 
                 // Create autotasks.
-                scoreCoralTask = new TaskAutoScoreCoral("ScoreCoralTask", this);
-                pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation("PickupCoralFromStationTask", this);
-                pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround("PickupCoralFromGroundTask", this);
+                elevatorArmTask = coralArm != null && algaeArm != null && elevator != null?
+                    new TaskElevatorArm(coralArm, algaeArm, elevator): null;
+                scoreCoralTask = new TaskAutoScoreCoral(this);
+                pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
+                pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround(this);
             }
         }
 

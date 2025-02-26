@@ -22,8 +22,6 @@
 
 package teamcode;
 
-import java.util.Timer;
-
 import frclib.driverio.FrcButtonPanel;
 import frclib.driverio.FrcDualJoystick;
 import frclib.driverio.FrcJoystick;
@@ -375,7 +373,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.robotDrive != null && pressed && robot.scoreCoralTask != null)
                 {
                     robot.scoreCoralTask.autoScoreCoral(
-                        true, 0, false, false, false, 0, null);
+                        moduleName, true, 0, false, false, false, 0, null);
                 }
                 else
                 {
@@ -387,7 +385,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if(robot.robotDrive != null && pressed && robot.pickupCoralFromStationTask != null)
                 {
                     robot.pickupCoralFromStationTask.autoPickupCoral(
-                        true, false, false, null);
+                        moduleName, true, false, false, null);
                 }
                 break;  
 
@@ -578,15 +576,17 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case X:
                 // Bindings for testing presets
                 if(robot.coralArm != null && robot.elevator != null && pressed){
-                    robot.coralArm.setPosition(CoralArm.Params.REEF_SCORE_LEVEL_3, true);
-                    robot.elevator.setPosition(Elevator.Params.REEF_SCORE_LEVEL_3, true);
+                    robot.coralArm.setPosition(CoralArm.Params.REEF_SCORE_LEVEL3_POS, true);
+                    robot.elevator.setPosition(Elevator.Params.REEF_SCORE_LEVEL3_POS, true);
                 }
                 break;
             case Y:
                 // Binding for testing presets
                 if(robot.coralArm != null && robot.elevator != null && pressed){
-                    robot.elevator.setPosition(Elevator.Params.HOPPER_PICKUP_POS, true);
-                    robot.elevator.setPosition(moduleName, 2.0, CoralArm.Params.HOPPER_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null, 0.0);
+                    robot.elevator.setPosition(Elevator.Params.STATION_PICKUP_POS, true);
+                    robot.elevator.setPosition(
+                        moduleName, 2.0, CoralArm.Params.STATION_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null,
+                        0.0);
                 }
                 break;
 

@@ -57,21 +57,21 @@ public class AlgaeArm extends TrcSubsystem
         public static final boolean UPPER_LIMITSW_INVERTED      = true;
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
-        public static final double POS_OFFSET                   = 0.0;
+        public static final double POS_OFFSET                   = 0.0;  //TODO: tune
         public static final double POWER_LIMIT                  = 0.5;
-        // public static final double ZERO_CAL_POWER               = -0.25;
 
         public static final double MIN_POS                      = POS_OFFSET;
-        public static final double MAX_POS                      = 180.0;
-        public static final double TURTLE_POS                   = 10.0;
+        public static final double MAX_POS                      = 180.0;//TODO: tune
+        public static final double TURTLE_POS                   = 10.0; //TODO: tune
+        public static final double SAFE_ZONE_POS                = 30.0; //TODO: tune
         public static final double[] posPresets                 = {MIN_POS, 30.0, 60.0, 90.0, 120.0, 150.0, 180.0};
         public static final double POS_PRESET_TOLERANCE         = 5.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.018, 0.1, 0.001, 0.0, 2.0);
+            new TrcPidController.PidCoefficients(0.018, 0.1, 0.001, 0.0, 2.0);  //TODO: tune
         public static final double POS_PID_TOLERANCE            = 1.0;
-        public static final double GRAVITY_COMP_MAX_POWER       = 0.158;
+        public static final double GRAVITY_COMP_MAX_POWER       = 0.158;    //TODO: tune
         // public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
         // public static final double STALL_TOLERANCE              = 0.1;
         // public static final double STALL_TIMEOUT                = 0.1;
@@ -107,6 +107,7 @@ public class AlgaeArm extends TrcSubsystem
         // algaeArmMotor.setPositionPidPowerComp(this::getGravityComp);
         // algaeArmMotor.setStallProtection(
         //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
+        // algaeArmMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
     }   //AlgaeArm
 
     public TrcMotor getArmMotor()

@@ -48,14 +48,16 @@ public class AlgaeGrabber extends TrcSubsystem
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = true;
 
-        public static final double CURRENT_TRIGGER_THRESHOLD    = 15.0;
+        public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
+        public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_ALGAE_GRABBER_SENSOR;
+        public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
-        public static final double INTAKE_POWER                 = 0.15;
-        public static final double EJECT_POWER                  = -0.15;
-        public static final double RETAIN_POWER                 = 0.025;
-        public static final double FINISH_DELAY                 = 0.06;
-        public static final double DUMP_TIME                    = 0.5;
-        public static final double DUMP_DELAY                   = 0.0;
+        public static final double INTAKE_POWER                 = 0.15; //TODO: tune
+        public static final double EJECT_POWER                  = -0.15;//TODO: tune
+        public static final double RETAIN_POWER                 = 0.025;//TODO: tune
+        public static final double FINISH_DELAY                 = 0.06; //TODO: tune
+        public static final double DUMP_TIME                    = 0.5;  //TODO: tune
+        public static final double DUMP_DELAY                   = 0.0;  //TODO: tune
     }   //class Params
 
     private final TrcMotorGrabber motorGrabber;
@@ -70,7 +72,6 @@ public class AlgaeGrabber extends TrcSubsystem
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE,Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setMotorCurrentTrigger(Params.CURRENT_TRIGGER_THRESHOLD)
             .setPowerParams(Params.INTAKE_POWER, Params.EJECT_POWER, Params.RETAIN_POWER);
         motorGrabber = new FrcMotorGrabber(Params.SUBSYSTEM_NAME, grabberParams).getGrabber();
     }   //AlgaeGrabber

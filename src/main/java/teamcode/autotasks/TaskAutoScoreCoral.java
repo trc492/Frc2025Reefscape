@@ -28,14 +28,12 @@ import teamcode.Robot;
 import teamcode.RobotParams;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
-import teamcode.vision.PhotonVision;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
-import trclib.robotcore.TrcDbgTrace.MsgLevel;
 import trclib.timer.TrcTimer;
 
 /**
@@ -85,13 +83,11 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         }   //toString
     }   //class TaskParams
 
-    private final String ownerName;
     private final Robot robot;
-    private final TrcEvent event;
     private final TrcEvent driveEvent;
     private final TrcEvent scoreEvent;
+    private final TrcEvent event;
 
-    private String currOwner = null;
     private int aprilTagId = -1;
     private TrcPose2D aprilTagPose = null;
     private Double visionExpiredTime;
@@ -99,37 +95,40 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     /**
      * Constructor: Create an instance of the object.
      *
-     * @param ownerName specifies the owner name to take subsystem ownership, can be null if no ownership required.
      * @param robot specifies the robot object that contains all the necessary subsystems.
      */
-    public TaskAutoScoreCoral(String ownerName, Robot robot)
+    public TaskAutoScoreCoral(Robot robot)
     {
-        super(moduleName, ownerName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
-        this.ownerName = ownerName;
+        super(moduleName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.robot = robot;
-        this.event = new TrcEvent(moduleName + ".event");
         this.driveEvent = new TrcEvent(moduleName + ".driveEvent");
         this.scoreEvent = new TrcEvent(moduleName + ".scoreEvent");
+        this.event = new TrcEvent(moduleName + ".event");
     }   //TaskAutoScoreCoral
 
     /**
-     * This method starts the auto-assist operation.
+     * This method starts the auto task operation.
      *
+     * @param owner specifies the owner to acquire the subsystem ownerships.
      * @param useVision specifies true to use vision to find the coral, false otherwise.
      * @param reefLevel specifies the reef level to score the coral.
-     * @param removeAlgae specifies true to remove algae from the reef.
+     * @param removeAlgae specifies true to remove algae from the reef, false otherwise.
      * @param inAuto specifies true if caller is autonomous, false if in teleop.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
+     * @param scoreSide specifies the reef branch to score the coral.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
-        boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize, int scoreSide,
-        TrcEvent completionEvent)
+        String owner, boolean useVision, int reefLevel, boolean removeAlgae, boolean inAuto, boolean relocalize,
+        int scoreSide, TrcEvent completionEvent)
     {
-        // Code Review: What does it mean by calling autoScoreCoral with scoreCoral set to false?!
         TaskParams taskParams = new TaskParams(useVision, reefLevel, removeAlgae, inAuto, relocalize, scoreSide);
-        tracer.traceInfo(moduleName, "taskParams=(" + taskParams + "), event=" + completionEvent);
-        startAutoTask(State.START, taskParams, completionEvent);
+        tracer.traceInfo(
+            moduleName,
+            "autoScoreCoral(owner=" + owner +
+            ", taskParams=(" + taskParams +
+            "), event=" + completionEvent + ")");
+        startAutoTask(owner, State.START, taskParams, completionEvent);
     }   //autoScoreCoral
 
     //
@@ -137,63 +136,47 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     //
 
     /**
-     * This method is called by the super class to acquire ownership of all subsystems involved in the auto-assist
-     * operation. This is typically done before starting an auto-assist operation.
+     * This method is called to acquire ownership of all subsystems involved in the auto task operation. This is
+     * typically called before starting an auto task operation.
      *
+     * @param owner specifies the owner to acquire the subsystem ownerships.
      * @return true if acquired all subsystems ownership, false otherwise. It releases all ownership if any acquire
      *         failed.
      */
     @Override
-    protected boolean acquireSubsystemsOwnership()
+    protected boolean acquireSubsystemsOwnership(String owner)
     {
-        boolean success = ownerName == null ||
-                          (robot.robotDrive.driveBase.acquireExclusiveAccess(ownerName));
-
-        if (success)
-        {
-            currOwner = ownerName;
-            tracer.traceInfo(moduleName, "Successfully acquired subsystem ownerships.");
-        }
-        else
-        {
-            TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
-            tracer.traceWarn(
-                moduleName,
-                "Failed to acquire subsystem ownership (currOwner=" + currOwner +
-                ", robotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) + ").");
-            releaseSubsystemsOwnership();
-        }
-
-        return success;
+        return robot.robotDrive.driveBase.acquireExclusiveAccess(owner);
     }   //acquireSubsystemsOwnership
 
     /**
-     * This method is called by the super class to release ownership of all subsystems involved in the auto-assist
-     * operation. This is typically done if the auto-assist operation is completed or canceled.
+     * This method is called to release ownership of all subsystems involved in the auto task operation. This is
+     * typically called if the auto task operation is completed or canceled.
+     *
+     * @param owner specifies the owner that acquired the subsystem ownerships.
      */
     @Override
-    protected void releaseSubsystemsOwnership()
+    protected void releaseSubsystemsOwnership(String owner)
     {
-        if (ownerName != null)
-        {
-            TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
-            tracer.traceInfo(
-                moduleName,
-                "Releasing subsystem ownership (currOwner=" + currOwner +
-                ", robotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) + ").");
-            robot.robotDrive.driveBase.releaseExclusiveAccess(currOwner);
-            currOwner = null;
-        }
+        TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
+        tracer.traceInfo(
+            moduleName,
+            "Releasing subsystem ownership on behalf of " + owner +
+            "\n\trobotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase));
+        robot.robotDrive.driveBase.releaseExclusiveAccess(owner);
     }   //releaseSubsystemsOwnership
 
     /**
-     * This method is called by the super class to stop all the subsystems.
+     * This method is called to stop all the subsystems. This is typically called if the auto task operation is
+     * completed or canceled.
+     *
+     * @param owner specifies the owner that acquired the subsystem ownerships.
      */
     @Override
-    protected void stopSubsystems()
+    protected void stopSubsystems(String owner)
     {
         tracer.traceInfo(moduleName, "Stopping subsystems.");
-        robot.robotDrive.cancel(currOwner);
+        robot.robotDrive.cancel(owner);
         // Restore to full power in case we have changed it.
         robot.robotDrive.purePursuitDrive.setMoveOutputLimit(1.0);
     }   //stopSubsystems
@@ -201,6 +184,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     /**
      * This methods is called periodically to run the auto-assist task.
      *
+     * @param owner specifies the owner acquired subsystem ownerships.
      * @param params specifies the task parameters.
      * @param state specifies the current state of the task.
      * @param taskType specifies the type of task being run.
@@ -210,7 +194,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      */
     @Override
     protected void runTaskState(
-        Object params, State state, TrcTaskMgr.TaskType taskType, TrcRobot.RunMode runMode, boolean slowPeriodicLoop)
+        String owner, Object params, State state, TrcTaskMgr.TaskType taskType, TrcRobot.RunMode runMode,
+        boolean slowPeriodicLoop)
     {
         TaskParams taskParams = (TaskParams) params;
 
@@ -270,17 +255,12 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
                 if (taskParams.useVision && aprilTagPose != null)
                 {
-                    // Code Review: Don't use vision detected AprilTag pose as your target pose.
-                    // You are going to run the robot into the AprilTag.
-                    // You should rotate the robot so that it's orthogonal to the AprilTag and then
-                    // you should determine the deltaX and deltaY distances after the rotation. Then
-                    // adjust the y distance back a little so you don't run into the Reef tree.
                     targetPose = aprilTagPose.clone();  
                     targetPose.x += robot.robotInfo.cam1.camXOffset;// This value will need to be measured.
                     targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 17;
                     targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 17;
                     targetPose.x = taskParams.scoreSide == 1? targetPose.x + 7.5: targetPose.x - 7.5; 
-                    tracer.traceInfo(moduleName, "****** \nAprilTagPose= " + aprilTagPose);
+                    tracer.traceInfo(moduleName, "***** \nAprilTagPose=" + aprilTagPose);
                     tracer.traceInfo(
                         moduleName,
                         "***** Approaching Reef with Vision:\n\tRobotFieldPose=" + robotPose +
@@ -288,39 +268,17 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                         "\n\ttargetPose=" + targetPose);
                     //robot.robotDrive.purePursuitDrive.setTraceLevel(MsgLevel.INFO, false, true, true);
                     robot.robotDrive.purePursuitDrive.start(
-                        currOwner, driveEvent, 2.0, true,
+                        owner, driveEvent, 2.0, true,
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                         robot.robotInfo.profiledMaxDeceleration, targetPose);
                     
                     sm.waitForSingleEvent(driveEvent, State.DONE);//State.SCORE_CORAL);
-                } else{
-                    tracer.traceInfo(currOwner, "We cannot accurately go to the AprilTag with Odometry. Going to DONE");
+                }
+                else
+                {
+                    tracer.traceInfo(owner, "We cannot accurately go to the AprilTag with Odometry. Going to DONE");
                     sm.setState(State.DONE);
                 }
-                // else
-                // {
-                //     // Code Review: Is it really a good idea to not use vision?
-                //     // Our odometry may be bad. If we don't have vision, it's not guarantee we will be at the correct
-                //     // location to score. The comment in the previous state said if we don't see AprilTag, we quit
-                //     // unless it's TeleOp then we assume the driver has navigate the robot right in front of the reef
-                //     // so this code would just do the scoring but not the robot movement.
-                //     tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
-                //     targetPose = PhotonVision.getClosestAprilTagPose(robotPose);
-                //     targetPose.x += robot.robotInfo.cam1.camXOffset; // This value will need to be measured.
-                //     targetPose.angle = 0.0; 
-                //     intermediatePose = targetPose.clone();
-                //     intermediatePose.y = targetPose.y;
-                //     targetPose.x = 0.0;
-                //     tracer.traceInfo(
-                //         moduleName,
-                //         state + "***** Approaching Reef without Vision:\n\tRobotFieldPose=" + robotPose +
-                //         "\n\tintermediatePose=" + intermediatePose +
-                //         "\n\ttargetPose=" + targetPose);
-                //     robot.robotDrive.purePursuitDrive.start(
-                //         currOwner, driveEvent, 2.0, true,
-                //         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                //         robot.robotInfo.profiledMaxDeceleration, intermediatePose, targetPose);
-                // }
                 break;
 
             case SCORE_CORAL:
@@ -331,7 +289,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 double elevatorPos;
                 double armPos;
                 tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position to reefLevel: " + taskParams.reefLevel);
-                elevatorPos = Elevator.Params.REEF_SCORE_LEVELS[taskParams.reefLevel];
+                elevatorPos = Elevator.Params.SCORE_LEVEL_POS[taskParams.reefLevel];
                 armPos = CoralArm.Params.posPresets[taskParams.reefLevel]; 
                 // TODO: Setting this position will need to be changed according to how we implement the safe-zone system.
                 robot.coralArm.setPosition(0.0, armPos, true, CoralArm.Params.POWER_LIMIT, event);
@@ -341,11 +299,11 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 if(robot.coralGrabber.hasObject())
                 {
                     
-                    robot.coralGrabber.autoEject(currOwner, 0.0, scoreEvent, 2.0);
+                    robot.coralGrabber.autoEject(owner, 0.0, scoreEvent, 2.0);
                     
                     sm.addEvent(scoreEvent);
                 } else{
-                    tracer.traceInfo(currOwner, "Coral Grabber does not have Coral to score");
+                    tracer.traceInfo(owner, "Coral Grabber does not have Coral to score");
                 }
                 sm.waitForEvents(State.DONE);
                 break;

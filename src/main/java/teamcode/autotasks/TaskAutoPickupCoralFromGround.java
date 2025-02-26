@@ -68,13 +68,11 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
         }   //toString
     }   //class TaskParams
 
-    private final String ownerName;
     private final Robot robot;
     private final TrcEvent intakeEvent;
     private final TrcEvent driveEvent;
     private final TrcEvent gotCoralEvent;
 
-    private String currOwner = null;
     private String driveOwner = null;
     private TrcPose2D coralPose = null;
     private Double visionExpiredTime = null;
@@ -82,13 +80,11 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     /**
      * Constructor: Create an instance of the object.
      *
-     * @param ownerName specifies the owner name to take subsystem ownership, can be null if no ownership required.
      * @param robot specifies the robot object that contains all the necessary subsystems.
      */
-    public TaskAutoPickupCoralFromGround(String ownerName, Robot robot)
+    public TaskAutoPickupCoralFromGround(Robot robot)
     {
-        super(moduleName, ownerName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
-        this.ownerName = ownerName;
+        super(moduleName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.robot = robot;
         this.intakeEvent = new TrcEvent(moduleName + ".intakeEvent");
         this.driveEvent = new TrcEvent(moduleName + ".driveEvent");
@@ -98,15 +94,16 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     /**
      * This method starts the auto-assist operation.
      *
+     * @param owner specifies the owner to acquire the subsystem ownerships.
      * @param useVision specifies true to use vision to find the coral, false otherwise.
      * @param inAuto specifies true if caller is autonomous, false if in teleop.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
-    public void autoPickupCoral(boolean useVision, boolean inAuto, TrcEvent completionEvent)
+    public void autoPickupCoral(String owner, boolean useVision, boolean inAuto, TrcEvent completionEvent)
     {
         TaskParams taskParams = new TaskParams(useVision, inAuto);
         tracer.traceInfo(moduleName, "taskParams=(" + taskParams + "), event=" + completionEvent);
-        startAutoTask(State.START, taskParams, completionEvent);
+        startAutoTask(owner, State.START, taskParams, completionEvent);
     }   //autoPickupCoral
 
     //
@@ -114,76 +111,67 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     //
 
     /**
-     * This method is called by the super class to acquire ownership of all subsystems involved in the auto-assist
-     * operation. This is typically done before starting an auto-assist operation.
+     * This method is called to acquire ownership of all subsystems involved in the auto task operation. This is
+     * typically called before starting an auto task operation.
      *
+     * @param owner specifies the owner to acquire the subsystem ownerships.
      * @return true if acquired all subsystems ownership, false otherwise. It releases all ownership if any acquire
      *         failed.
      */
     @Override
-    protected boolean acquireSubsystemsOwnership()
+    protected boolean acquireSubsystemsOwnership(String owner)
     {
-        boolean success = ownerName == null ||
-                          robot.intake.acquireExclusiveAccess(ownerName) &&
-                          robot.robotDrive.driveBase.acquireExclusiveAccess(ownerName);
+        boolean success = robot.robotDrive.driveBase.acquireExclusiveAccess(owner) &&
+                          robot.intake.acquireExclusiveAccess(owner);
 
         if (success)
         {
-            currOwner = ownerName;
-            driveOwner = ownerName;
-            tracer.traceInfo(moduleName, "Successfully acquired subsystem ownerships for " + ownerName + ".");
-        }
-        else
-        {
-            TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
-            tracer.traceWarn(
-                moduleName,
-                "Failed to acquire subsystem ownership (currOwner=" + currOwner +
-                ", robotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) + ").");
-            releaseSubsystemsOwnership();
+            driveOwner = owner;
         }
 
         return success;
     }   //acquireSubsystemsOwnership
 
     /**
-     * This method is called by the super class to release ownership of all subsystems involved in the auto-assist
-     * operation. This is typically done if the auto-assist operation is completed or canceled.
+     * This method is called to release ownership of all subsystems involved in the auto task operation. This is
+     * typically called if the auto task operation is completed or canceled.
+     *
+     * @param owner specifies the owner that acquired the subsystem ownerships.
      */
     @Override
-    protected void releaseSubsystemsOwnership()
+    protected void releaseSubsystemsOwnership(String owner)
     {
-        if (currOwner != null)
+        TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
+        tracer.traceInfo(
+            moduleName,
+            "Releasing subsystem ownership on behalf of " + owner +
+            "\n\trobotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) +
+            "\n\tintake=" + ownershipMgr.getOwner(robot.intake));
+        robot.intake.releaseExclusiveAccess(owner);
+        if (driveOwner != null)
         {
-            TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
-            tracer.traceInfo(
-                moduleName,
-                "Releasing subsystem ownership (currOwner=" + currOwner +
-                ", intake=" + ownershipMgr.getOwner(robot.intake) +
-                ", robotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) + ").");
-            robot.intake.releaseExclusiveAccess(currOwner);
-            if (driveOwner != null)
-            {
-                robot.robotDrive.driveBase.releaseExclusiveAccess(driveOwner);
-                driveOwner = null;
-            }
-            currOwner = null;
+            robot.robotDrive.driveBase.releaseExclusiveAccess(owner);
+            driveOwner = null;
         }
     }   //releaseSubsystemsOwnership
 
     /**
-     * This method is called by the super class to stop all the subsystems.
+     * This method is called to stop all the subsystems. This is typically called if the auto task operation is
+     * completed or canceled.
+     *
+     * @param owner specifies the owner that acquired the subsystem ownerships.
      */
     @Override
-    protected void stopSubsystems() //TODO: Add ownership stuff later
+    protected void stopSubsystems(String owner)
     {
         tracer.traceInfo(moduleName, "Stopping subsystems.");
-        robot.robotDrive.cancel(currOwner);
+        robot.robotDrive.cancel(owner);
     }   //stopSubsystems
 
     /**
      * This methods is called periodically to run the auto-assist task.
      *
+     * @param owner specifies the owner acquired subsystem ownerships.
      * @param params specifies the task parameters.
      * @param state specifies the current state of the task.
      * @param taskType specifies the type of task being run.
@@ -193,7 +181,8 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
      */
     @Override
     protected void runTaskState(
-        Object params, State state, TrcTaskMgr.TaskType taskType, TrcRobot.RunMode runMode, boolean slowPeriodicLoop)
+        String owner, Object params, State state, TrcTaskMgr.TaskType taskType, TrcRobot.RunMode runMode,
+        boolean slowPeriodicLoop)
     {
         TaskParams taskParams = (TaskParams) params;
 
@@ -251,7 +240,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                 {
                     // Start the intake
                     robot.intake.autoIntakeForward(
-                        currOwner, 0.0, Intake.Params.intakePower, 0.0, 0.0, intakeEvent, 0.0);
+                        owner, 0.0, Intake.Params.intakePower, 0.0, 0.0, intakeEvent, 0.0);
                     sm.addEvent(intakeEvent);
                     // Register entry trigger to release drive ownership early.
                     robot.intake.registerEntryTriggerNotifyEvent(TriggerMode.OnActive, gotCoralEvent);
@@ -263,7 +252,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
                         // run to it.
                         coralPose.y += 6; //TODO: adjust this number
                         robot.robotDrive.purePursuitDrive.start(
-                            currOwner, driveEvent, 0.0, false,
+                            owner, driveEvent, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                             robot.robotInfo.profiledMaxDeceleration, coralPose, new TrcPose2D(0.0, -26.0, 0.0)); //TODO: adjust y coordinate
                         sm.addEvent(driveEvent);          

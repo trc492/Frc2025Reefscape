@@ -59,13 +59,14 @@ public class Elevator extends TrcSubsystem
         public static final double MIN_POS                      = POS_OFFSET;
         public static final double MAX_POS                      = 69.0;
         public static final double TURTLE_POS                   = MIN_POS;
-        public static final double REEF_SCORE_TROUGH           = 0.0;  // TODO
-        public static final double REEF_SCORE_LEVEL_1           = 0.0;  // TODO
-        public static final double REEF_SCORE_LEVEL_2           = 39.5;  // TODO
-        public static final double REEF_SCORE_LEVEL_3           = 68.7;  // TODO
-        public static final double[] REEF_SCORE_LEVELS          =
-            {REEF_SCORE_TROUGH, REEF_SCORE_LEVEL_1, REEF_SCORE_LEVEL_2, REEF_SCORE_LEVEL_3};
-        public static final double HOPPER_PICKUP_POS            =   0.0;  // TODO
+        public static final double SAFE_ZONE_POS                = 40.0; //TODO
+        public static final double STATION_PICKUP_POS           = 0.0;  //TODO
+        public static final double TROUGH_SCORE_LEVEL_POS       = 0.0;  // TODO
+        public static final double REEF_SCORE_LEVEL1_POS        = 0.0;  // TODO
+        public static final double REEF_SCORE_LEVEL2_POS        = 39.5; // TODO
+        public static final double REEF_SCORE_LEVEL3_POS        = 68.7; // TODO
+        public static final double[] SCORE_LEVEL_POS            =
+            {TROUGH_SCORE_LEVEL_POS, REEF_SCORE_LEVEL1_POS, REEF_SCORE_LEVEL2_POS, REEF_SCORE_LEVEL3_POS};
         public static final double[] posPresets                 = {MIN_POS, 45.0, 50.0, 55.0, 60.0, 65.0, MAX_POS};
         public static final double POS_PRESET_TOLERANCE         = 2.0;
 
@@ -74,10 +75,10 @@ public class Elevator extends TrcSubsystem
             new TrcPidController.PidCoefficients(0.4, 0.0, 0.01, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
         public static final double GRAVITY_COMP_POWER           = 0.0;
-        public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
-        public static final double STALL_TOLERANCE              = 0.1;
-        public static final double STALL_TIMEOUT                = 0.1;
-        public static final double STALL_RESET_TIMEOUT          = 0.0;
+        // public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
+        // public static final double STALL_TOLERANCE              = 0.1;
+        // public static final double STALL_TIMEOUT                = 0.1;
+        // public static final double STALL_RESET_TIMEOUT          = 0.0;
     }   //class Params
 
     private final TrcMotor elevatorMotor;
@@ -101,13 +102,13 @@ public class Elevator extends TrcSubsystem
         elevatorMotor.enableLowerLimitSwitch(Params.LOWER_LIMITSW_NORMAL_CLOSE);
         elevatorMotor.enableUpperLimitSwitch(Params.UPPER_LIMITSW_NORMAL_CLOSE);
         elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        // elevatorMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
         // Looks like mechanical gravity comp works well, so don't need software gravity comp.
         // elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
 
         // ALREADY HAVE LIMIT SWITCHES, MIGHT NOT NEED STALL PROTECTION
         // elevatorMotor.setStallProtection(
         //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
+        // elevatorMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
     }   //Elevator
 
     public TrcMotor getElevatorMotor()

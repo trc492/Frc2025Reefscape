@@ -632,9 +632,13 @@ public class FrcTest extends FrcTeleOp
                             robot.coralGrabber.autoIntake(null);
                         }
                     }
-                    else
+                    else if (robot.coralGrabber.isAutoActive())
                     {
                         robot.coralGrabber.cancel();
+                    }
+                    else
+                    {
+                        robot.coralGrabber.stop();
                     }
                     passToTeleOp = false;
                 }
@@ -654,9 +658,13 @@ public class FrcTest extends FrcTeleOp
                             robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
                         }
                     }
-                    else
+                    else if (robot.coralGrabber.isAutoActive())
                     {
                         robot.coralGrabber.cancel();
+                    }
+                    else
+                    {
+                        robot.coralGrabber.stop();
                     }
                     passToTeleOp = false;
                 }
@@ -668,11 +676,11 @@ public class FrcTest extends FrcTeleOp
             case RightBumper:
                 if (pressed)
                 {
-                    robot.elevator.tracer.setTraceLevel(MsgLevel.DEBUG);
+                    robot.coralArm.tracer.setTraceLevel(MsgLevel.DEBUG);
                 }
                 else
                 {
-                    robot.elevator.tracer.setTraceLevel(MsgLevel.INFO);
+                    robot.coralArm.tracer.setTraceLevel(MsgLevel.INFO);
                 }
                 break;
 

@@ -140,7 +140,8 @@ public class RobotParams
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
         public static final int DIO_CORAL_GRABBER_SENSOR        = 0;
-        public static final int DIO_ELEVATOR_MID_LIMIT          = 1;
+        public static final int DIO_ALGAE_GRABBER_SENSOR        = 1;
+        public static final int DIO_ELEVATOR_MID_LIMIT          = 2;
         public static final int DIO_WINCH_LOWER_LIMIT           = 7;
         public static final int DIO_WINCH_UPPER_LIMIT           = 8;
         // TODO: remove.

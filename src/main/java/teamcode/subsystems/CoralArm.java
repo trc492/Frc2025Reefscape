@@ -59,24 +59,24 @@ public class CoralArm extends TrcSubsystem
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
         public static final double POWER_LIMIT                  = 0.5;
-        // public static final double ZERO_CAL_POWER               = -0.1;
 
         public static final double MIN_POS                      = -40.0;
         public static final double MAX_POS                      = 188.3;
         public static final double TURTLE_POS                   = 15.0;
-        public static final double TROUGH_SCORE_LEVEL           = 0.0;  // TODO
-        public static final double REEF_SCORE_LEVEL_1           = 122.5;  // TODO
-        public static final double REEF_SCORE_LEVEL_2           = 162.5;  // TODO
-        public static final double REEF_SCORE_LEVEL_3           = 157.1;  // TODO
-        public static final double[] REEF_SCORE_LEVELS          =
-        {TROUGH_SCORE_LEVEL, REEF_SCORE_LEVEL_1, REEF_SCORE_LEVEL_2, REEF_SCORE_LEVEL_3};
-        public static final double HOPPER_PICKUP_POS            = -39.4; // TODO
+        public static final double SAFE_ZONE_POS                = 30.0; //TODO
+        public static final double STATION_PICKUP_POS           = -39.4;//TODO
+        public static final double TROUGH_SCORE_LEVEL_POS       = 0.0;  // TODO
+        public static final double REEF_SCORE_LEVEL1_POS        = 122.5;// TODO
+        public static final double REEF_SCORE_LEVEL2_POS        = 162.5;// TODO
+        public static final double REEF_SCORE_LEVEL3_POS        = 157.1;// TODO
+        public static final double[] SCORE_LEVEL_POS            =
+            {TROUGH_SCORE_LEVEL_POS, REEF_SCORE_LEVEL1_POS, REEF_SCORE_LEVEL2_POS, REEF_SCORE_LEVEL3_POS};
         public static final double[] posPresets                 = {-30.0, 0.0, 30.0, 60.0, 90.0, 120.0, 150.0};
         public static final double POS_PRESET_TOLERANCE         = 5.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.02, 0.0, 0.0, 0.0, 2.0);
+            new TrcPidController.PidCoefficients(0.015, 0.0, 0.001, 0.0, 2.0);
         public static final double POS_PID_TOLERANCE            = 1.0;
         public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
         // public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
