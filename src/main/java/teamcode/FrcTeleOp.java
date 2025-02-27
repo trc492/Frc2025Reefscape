@@ -55,6 +55,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private boolean subsystemStatusOn = true;
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
+    private int scoreIndex          = 1;
 
     /**
      * Constructor: Create an instance of the object.
@@ -152,6 +153,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         {
             if (controlsEnabled)
             {
+                robot.dashboard.displayPrintf(lineNum++, "Coral Score Level=%s", scoreIndex);
                 //
                 // DriveBase operation.
                 //
@@ -627,16 +629,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case X:
                 // Bindings for testing presets
                 if(robot.coralArm != null && robot.elevator != null && pressed){
-                    robot.coralArm.setPosition(CoralArm.Params.REEF_SCORE_LEVEL3_POS, true);
-                    robot.elevator.setPosition(Elevator.Params.REEF_SCORE_LEVEL3_POS, true);
+                    robot.coralArm.setPosition(CoralArm.Params.SCORE_LEVEL_POS[scoreIndex], true);
+                    robot.elevator.setPosition(Elevator.Params.SCORE_LEVEL_POS[scoreIndex], true);
                 }
                 break;
             case Y:
                 // Binding for testing presets
-                if(robot.coralArm != null && robot.elevator != null && pressed){
-                    robot.elevator.setPosition(Elevator.Params.STATION_PICKUP_POS, true);
-                    robot.elevator.setPosition(
-                        moduleName, 2.0, CoralArm.Params.STATION_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null,
+                if(robot.coralArm != null && pressed){
+                    //robot.elevator.setPosition(Elevator.Params.STATION_PICKUP_POS, true);
+                    robot.coralArm.setPosition(
+                        moduleName, 0.0, CoralArm.Params.STATION_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null,
                         0.0);
                 }
                 break;
@@ -650,50 +652,56 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case DpadUp:
 
-                if (operatorAltFunc)
-                {
-                    if (robot.elevator != null)
-                    {
-                        if (pressed)
-                        {
-                            robot.elevator.presetPositionUp(moduleName, Elevator.Params.POWER_LIMIT);
-                        }
-                    }
-                }
-                else
-                {
-                    if (robot.coralArm != null)
-                    {
-                        if (pressed)
-                        {
-                            robot.coralArm.presetPositionUp(moduleName, CoralArm.Params.POWER_LIMIT);
-                        }
+                // if (operatorAltFunc)
+                // {
+                //     if (robot.elevator != null)
+                //     {
+                //         if (pressed)
+                //         {
+                //             robot.elevator.presetPositionUp(moduleName, Elevator.Params.POWER_LIMIT);
+                //         }
+                //     }
+                // }
+                // else
+                // {
+                //     if (robot.coralArm != null)
+                //     {
+                //         if (pressed)
+                //         {
+                //             robot.coralArm.presetPositionUp(moduleName, CoralArm.Params.POWER_LIMIT);
+                //         }
         
-                    }
+                //     }
+                // }
+                if(pressed && scoreIndex != 2){
+                    scoreIndex++;
                 }
             
                 break;
 
             case DpadDown:
-                if (operatorAltFunc)
-                {
-                    if (robot.elevator != null)
-                    {
-                        if (pressed)
-                        {
-                            robot.elevator.presetPositionDown(moduleName, Elevator.Params.POWER_LIMIT);
-                        }
-                    }
-                }
-                else
-                {
-                    if (robot.coralArm != null)
-                    {
-                        if (pressed)
-                        {
-                            robot.coralArm.presetPositionDown(moduleName, CoralArm.Params.POWER_LIMIT);
-                        }
-                    }
+                // if (operatorAltFunc)
+                // {
+                //     if (robot.elevator != null)
+                //     {
+                //         if (pressed)
+                //         {
+                //             robot.elevator.presetPositionDown(moduleName, Elevator.Params.POWER_LIMIT);
+                //         }
+                //     }
+                // }
+                // else
+                // {
+                //     if (robot.coralArm != null)
+                //     {
+                //         if (pressed)
+                //         {
+                //             robot.coralArm.presetPositionDown(moduleName, CoralArm.Params.POWER_LIMIT);
+                //         }
+                //     }
+                // }
+                if(pressed && scoreIndex != 1){
+                    scoreIndex--;
                 }
                 break;
 
