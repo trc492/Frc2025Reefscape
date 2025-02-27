@@ -313,16 +313,19 @@ public class Robot extends FrcRobotBase
                     intakeDeployer = new IntakeDeployer().getDeployer();
                 }
 
-                // Zero calibrate all subsystems only once in robot initialization.
-                zeroCalibrate(null, null);
-
                 // Create autotasks.
                 // To create elevatorArmTask, elevator must exist but coralArm and algaeArm are optional.
                 elevatorArmTask = RobotParams.Preferences.useElevatorArm && elevator != null?
                     new TaskElevatorArm(coralArm, algaeArm, elevator): null;
+                if (elevatorArmTask != null)
+                {
+                    elevatorArmTask.setStateTracingEnabled(false);
+                }
                 scoreCoralTask = new TaskAutoScoreCoral(this);
                 pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
                 pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround(this);
+                // Zero calibrate all subsystems only once in robot initialization.
+                zeroCalibrate(null, null);
             }
         }
 

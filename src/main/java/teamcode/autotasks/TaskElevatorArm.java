@@ -177,10 +177,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         if (coralArm != null)
         {
             TaskParams taskParams = TaskParams.setPowerParams(Action.SetCoralArmPidPower, power);
-            tracer.traceInfo(
-                moduleName,
-                "setCoralArmPidPower(owner=" + owner +
-                ", taskParams=(" + taskParams + "))");
+            tracer.traceDebug(moduleName, "setCoralArmPidPower(owner=%s, taskParams=(%s))", owner, taskParams);
             startAutoTask(owner, State.SET_CORALARM_PID_POWER, taskParams, null);
         }
     }   //setCoralArmPidPower
@@ -190,10 +187,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         if (coralArm != null)
         {
             TaskParams taskParams = TaskParams.setPowerParams(Action.SetCoralArmPower, power);
-            tracer.traceInfo(
-                moduleName,
-                "setCoralArmPower(owner=" + owner +
-                ", taskParams=(" + taskParams + "))");
+            tracer.traceDebug(moduleName, "setCoralArmPower(owner=%s, taskParams=(%s))", owner, taskParams);
             startAutoTask(owner, State.SET_CORALARM_POWER, taskParams, null);
         }
     }   //setCoralArmPower
@@ -203,10 +197,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         if (algaeArm != null)
         {
             TaskParams taskParams = TaskParams.setPowerParams(Action.SetAlgaeArmPidPower, power);
-            tracer.traceInfo(
-                moduleName,
-                "setAlgaeArmPidPower(owner=" + owner +
-                ", taskParams=(" + taskParams + "))");
+            tracer.traceDebug(moduleName, "setAlgaeArmPidPower(owner=%s, taskParams=(%s))", owner, taskParams);
             startAutoTask(owner, State.SET_ALGAEARM_PID_POWER, taskParams, null);
         }
     }   //setAlgaeArmPidPower
@@ -216,10 +207,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         if (algaeArm != null)
         {
             TaskParams taskParams = TaskParams.setPowerParams(Action.SetAlgaeArmPower, power);
-            tracer.traceInfo(
-                moduleName,
-                "setAlgaeArmPower(owner=" + owner +
-                ", taskParams=(" + taskParams + "))");
+            tracer.traceDebug(moduleName, "setAlgaeArmPower(owner=%s, taskParams=(%s))", owner, taskParams);
             startAutoTask(owner, State.SET_ALGAEARM_POWER, taskParams, null);
         }
     }   //setAlgaeArmPower
@@ -228,10 +216,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     {
         // Elevator must exist.
         TaskParams taskParams = TaskParams.setPowerParams(Action.SetElevatorPidPower, power);
-        tracer.traceInfo(
-            moduleName,
-            "setElevatorPidPower(owner=" + owner +
-            ", taskParams=(" + taskParams + "))");
+        tracer.traceDebug(moduleName, "setElevatorPidPower(owner=%s, taskParams=(%s))", owner, taskParams);
         startAutoTask(owner, State.SET_ELEVATOR_PID_POWER, taskParams, null);
     }   //setElevatorPidPower
 
@@ -239,10 +224,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     {
         // Elevator must exist.
         TaskParams taskParams = TaskParams.setPowerParams(Action.SetElevatorPower, power);
-        tracer.traceInfo(
-            moduleName,
-            "setElevatorPower(owner=" + owner +
-            ", taskParams=(" + taskParams + "))");
+        tracer.traceDebug(moduleName, "setElevatorPower(owner=%s, taskParams=(%s))", owner, taskParams);
         startAutoTask(owner, State.SET_ELEVATOR_POWER, taskParams, null);
     }   //setCoralArmPidPower
 
@@ -503,6 +485,9 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
                 targetPos = taskParams.power > 0.0? Elevator.Params.MAX_POS: Elevator.Params.MIN_POS;
                 if (taskParams.power != 0.0 && !isSafeToMoveElevator(targetPos))
                 {
+                    // CoralArm has backlash and will oscillate a little at the end.
+                    // We don't want to wait for it to settle, so enable noOscillation to move on to the next state.
+                    coralArm.getPosPidCtrl().setNoOscillation(true);
                     coralArm.setPosition(
                         owner, 0.0, CoralArm.Params.SAFE_ZONE_POS, true, CoralArm.Params.POWER_LIMIT, coralArmEvent,
                         0.0);
@@ -515,6 +500,11 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
                 break;
 
             case ELEVATOR_SETPOWER:
+                if (coralArm != null)
+                {
+                    coralArm.getPosPidCtrl().setNoOscillation(false);
+                }
+
                 if (taskParams.action == Action.SetElevatorPidPower)
                 {
                     elevator.setPidPower(owner, taskParams.power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);

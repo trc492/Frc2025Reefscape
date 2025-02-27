@@ -55,7 +55,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private boolean subsystemStatusOn = true;
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
-    private int scoreIndex          = 1;
+    private double prevCoralArmPower = 0.0;
+    private double prevAlgaeArmPower = 0.0;
+    private double prevElevatorPower = 0.0;
+    private int scoreIndex = 1;
 
     /**
      * Constructor: Create an instance of the object.
@@ -243,33 +246,45 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     if (robot.elevatorArmTask != null)
                     {
                         power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
-                        if (operatorAltFunc)
+                        if (power != prevCoralArmPower)
                         {
-                            robot.elevatorArmTask.setCoralArmPower(null, power);
-                        }
-                        else
-                        {
-                            robot.elevatorArmTask.setCoralArmPidPower(null, power);
+                            if (operatorAltFunc)
+                            {
+                                robot.elevatorArmTask.setCoralArmPower(null, power);
+                            }
+                            else
+                            {
+                                robot.elevatorArmTask.setCoralArmPidPower(null, power);
+                            }
+                            prevCoralArmPower = power;
                         }
 
                         power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
-                        if (operatorAltFunc)
+                        if (power != prevAlgaeArmPower)
                         {
-                            robot.elevatorArmTask.setAlgaeArmPower(null, power);
-                        }
-                        else
-                        {
-                            robot.elevatorArmTask.setAlgaeArmPidPower(null, power);
+                            if (operatorAltFunc)
+                            {
+                                robot.elevatorArmTask.setAlgaeArmPower(null, power);
+                            }
+                            else
+                            {
+                                robot.elevatorArmTask.setAlgaeArmPidPower(null, power);
+                            }
+                            prevAlgaeArmPower = power;
                         }
 
                         power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
-                        if (operatorAltFunc)
+                        if (power != prevElevatorPower)
                         {
+                            if (operatorAltFunc)
+                            {
                                 robot.elevatorArmTask.setElevatorPower(null, power);
-                        }
-                        else
-                        {
-                            robot.elevatorArmTask.setElevatorPidPower(null, power);
+                            }
+                            else
+                            {
+                                robot.elevatorArmTask.setElevatorPidPower(null, power);
+                            }
+                            prevElevatorPower = power;
                         }
                     }
                     else
@@ -277,42 +292,54 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         if (robot.coralArm != null)
                         {
                             power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
-                            if (operatorAltFunc)
+                            if (power != prevCoralArmPower)
                             {
-                                robot.coralArm.setPower(power);
-                            }
-                            else
-                            {
-                                robot.coralArm.setPidPower(
-                                    power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, true);
+                                if (operatorAltFunc)
+                                {
+                                    robot.coralArm.setPower(power);
+                                }
+                                else
+                                {
+                                    robot.coralArm.setPidPower(
+                                        power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, true);
+                                }
+                                prevCoralArmPower = power;
                             }
                         }
 
                         if (robot.algaeArm != null)
                         {
                             power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
-                            if (operatorAltFunc)
+                            if (power != prevAlgaeArmPower)
                             {
-                                robot.algaeArm.setPower(power);
-                            }
-                            else
-                            {
-                                robot.algaeArm.setPidPower(
-                                    power, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                                if (operatorAltFunc)
+                                {
+                                    robot.algaeArm.setPower(power);
+                                }
+                                else
+                                {
+                                    robot.algaeArm.setPidPower(
+                                        power, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                                }
+                                prevAlgaeArmPower = power;
                             }
                         }
 
                         if (robot.elevator != null)
                         {
                             power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
-                            if (operatorAltFunc)
+                            if (power != prevElevatorPower)
                             {
-                                robot.elevator.setPower(power);
-                            }
-                            else
-                            {
-                                robot.elevator.setPidPower(
-                                    power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
+                                if (operatorAltFunc)
+                                {
+                                    robot.elevator.setPower(power);
+                                }
+                                else
+                                {
+                                    robot.elevator.setPidPower(
+                                        power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
+                                }
+                                prevElevatorPower = power;
                             }
                         }
                     }
