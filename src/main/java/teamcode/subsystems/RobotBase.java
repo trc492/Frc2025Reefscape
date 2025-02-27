@@ -178,7 +178,7 @@ public class RobotBase
             // Absolute Odometry
             absoluteOdometry = null;
             // Drive Motor Odometry
-            xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
+            xDrivePosScale = yDrivePosScale = 0.91311455; //DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
             // Robot Drive Characteristics
             robotMaxVelocity = 171.0;           // inch/sec
             robotMaxAcceleration = 23000.0;     // inch/sec sq
