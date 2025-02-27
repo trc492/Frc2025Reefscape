@@ -27,6 +27,7 @@ import frclib.driverio.FrcDualJoystick;
 import frclib.driverio.FrcJoystick;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
+import teamcode.subsystems.AlgaeArm;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
 import teamcode.vision.PhotonVision.PipelineType;
@@ -235,67 +236,84 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (RobotParams.Preferences.useSubsystems)
                 {
-                    if (robot.coralArm != null)
+                    double power;
+
+                    if (robot.elevatorArmTask != null)
                     {
-                        double power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
+                        power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
                         if (operatorAltFunc)
                         {
-                            robot.coralArm.setPower(power);
+                            robot.elevatorArmTask.setCoralArmPower(null, power);
                         }
                         else
                         {
-                            robot.coralArm.setPidPower(power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, true);
+                            robot.elevatorArmTask.setCoralArmPidPower(null, power);
                         }
-                    }
 
-                    // if (robot.algaeArm != null)
-                    // {
-                    //     double power = robot.operatorController.getLeftStickY(true) * AlgaeArm.Params.POWER_LIMIT;
-                    //     if (operatorAltFunc)
-                    //     {
-                    //         robot.algaeArm.setPower(power);
-                    //     }
-                    //     else
-                    //     {
-                    //         robot.algaeArm.setPidPower(power, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
-                    //     }
-                    // }
-
-                    if (robot.elevator != null)
-                    {
-                        double power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
+                        power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
                         if (operatorAltFunc)
                         {
-                            robot.elevator.setPower(power);
+                            robot.elevatorArmTask.setAlgaeArmPower(null, power);
                         }
                         else
                         {
-                            robot.elevator.setPidPower(power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
+                            robot.elevatorArmTask.setAlgaeArmPidPower(null, power);
+                        }
+
+                        power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
+                        if (operatorAltFunc)
+                        {
+                                robot.elevatorArmTask.setElevatorPower(null, power);
+                        }
+                        else
+                        {
+                            robot.elevatorArmTask.setElevatorPidPower(null, power);
                         }
                     }
+                    else
+                    {
+                        if (robot.coralArm != null)
+                        {
+                            power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
+                            if (operatorAltFunc)
+                            {
+                                robot.coralArm.setPower(power);
+                            }
+                            else
+                            {
+                                robot.coralArm.setPidPower(
+                                    power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, true);
+                            }
+                        }
 
-                    // if (robot.elevatorArmTask != null)
-                    // {
-                    //     double power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
-                    //     if (operatorAltFunc)
-                    //     {
-                    //         robot.elevatorArmTask.setCoralArmPower(null, power);
-                    //     }
-                    //     else
-                    //     {
-                    //         robot.elevatorArmTask.setCoralArmPidPower(null, power);
-                    //     }
+                        if (robot.algaeArm != null)
+                        {
+                            power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
+                            if (operatorAltFunc)
+                            {
+                                robot.algaeArm.setPower(power);
+                            }
+                            else
+                            {
+                                robot.algaeArm.setPidPower(
+                                    power, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                            }
+                        }
 
-                    //     power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
-                    //     if (operatorAltFunc)
-                    //     {
-                    //            robot.elevatorArmTask.setElevatorPower(null, power);
-                    //     }
-                    //     else
-                    //     {
-                    //         robot.elevatorArmTask.setElevatorPidPower(null, power);
-                    //     }
-                    // }
+                        if (robot.elevator != null)
+                        {
+                            power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
+                            if (operatorAltFunc)
+                            {
+                                robot.elevator.setPower(power);
+                            }
+                            else
+                            {
+                                robot.elevator.setPidPower(
+                                    power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
+                            }
+                        }
+                    }
                 }
             }
             //
@@ -304,9 +322,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             if (RobotParams.Preferences.doStatusUpdate)
             {
                 lineNum = robot.updateStatus(lineNum);
-                // TrcPose2D robotPose = robot.robotDrive.driveBase.getFieldPosition();
-                // robot.dashboard.displayPrintf(
-                //     lineNum++, "AdjRobotPose=%s", robot.adjustPoseByAlliance(robotPose, Alliance.Red));
             }
         }
     }   //periodic

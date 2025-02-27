@@ -84,6 +84,7 @@ public class RobotParams
         public static final boolean useAlgaeArm                 = true;
         public static final boolean useAlgaeGrabber             = false;
         public static final boolean useElevator                 = true;
+        public static final boolean useElevatorArm              = false;
         public static final boolean useWinch                    = false;
         // TODO: remove.
         public static final boolean useIntake                   = false;

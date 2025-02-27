@@ -317,7 +317,8 @@ public class Robot extends FrcRobotBase
                 zeroCalibrate(null, null);
 
                 // Create autotasks.
-                elevatorArmTask = coralArm != null && algaeArm != null && elevator != null?
+                // To create elevatorArmTask, elevator must exist but coralArm and algaeArm are optional.
+                elevatorArmTask = RobotParams.Preferences.useElevatorArm && elevator != null?
                     new TaskElevatorArm(coralArm, algaeArm, elevator): null;
                 scoreCoralTask = new TaskAutoScoreCoral(this);
                 pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
