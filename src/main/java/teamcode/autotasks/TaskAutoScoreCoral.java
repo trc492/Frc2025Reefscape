@@ -146,7 +146,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     @Override
     protected boolean acquireSubsystemsOwnership(String owner)
     {
-        return robot.robotDrive.driveBase.acquireExclusiveAccess(owner);
+        return owner == null || robot.robotDrive.driveBase.acquireExclusiveAccess(owner);
     }   //acquireSubsystemsOwnership
 
     /**
@@ -158,12 +158,15 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     @Override
     protected void releaseSubsystemsOwnership(String owner)
     {
-        TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
-        tracer.traceInfo(
-            moduleName,
-            "Releasing subsystem ownership on behalf of " + owner +
-            "\n\trobotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase));
-        robot.robotDrive.driveBase.releaseExclusiveAccess(owner);
+        if (owner != null)
+        {
+            TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
+            tracer.traceInfo(
+                moduleName,
+                "Releasing subsystem ownership on behalf of " + owner +
+                "\n\trobotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase));
+            robot.robotDrive.driveBase.releaseExclusiveAccess(owner);
+        }
     }   //releaseSubsystemsOwnership
 
     /**

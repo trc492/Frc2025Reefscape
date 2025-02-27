@@ -121,7 +121,8 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     @Override
     protected boolean acquireSubsystemsOwnership(String owner)
     {
-        boolean success = robot.robotDrive.driveBase.acquireExclusiveAccess(owner) &&
+        boolean success = owner == null ||
+                          robot.robotDrive.driveBase.acquireExclusiveAccess(owner) &&
                           robot.intake.acquireExclusiveAccess(owner);
 
         if (success)
@@ -141,17 +142,20 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     @Override
     protected void releaseSubsystemsOwnership(String owner)
     {
-        TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
-        tracer.traceInfo(
-            moduleName,
-            "Releasing subsystem ownership on behalf of " + owner +
-            "\n\trobotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) +
-            "\n\tintake=" + ownershipMgr.getOwner(robot.intake));
-        robot.intake.releaseExclusiveAccess(owner);
-        if (driveOwner != null)
+        if (owner != null)
         {
-            robot.robotDrive.driveBase.releaseExclusiveAccess(owner);
-            driveOwner = null;
+            TrcOwnershipMgr ownershipMgr = TrcOwnershipMgr.getInstance();
+            tracer.traceInfo(
+                moduleName,
+                "Releasing subsystem ownership on behalf of " + owner +
+                "\n\trobotDrive=" + ownershipMgr.getOwner(robot.robotDrive.driveBase) +
+                "\n\tintake=" + ownershipMgr.getOwner(robot.intake));
+            robot.intake.releaseExclusiveAccess(owner);
+            if (driveOwner != null)
+            {
+                robot.robotDrive.driveBase.releaseExclusiveAccess(owner);
+                driveOwner = null;
+            }
         }
     }   //releaseSubsystemsOwnership
 
