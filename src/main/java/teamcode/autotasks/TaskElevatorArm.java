@@ -31,7 +31,6 @@ import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcOwnershipMgr;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcTaskMgr;
-import trclib.timer.TrcTimer;
 
 /**
  * This class implements the auto task to operate the Coral Arm, Algae Arm and Elevator subsystems.
@@ -43,14 +42,21 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     public enum State
     {
         ZERO_CALIBRATE,
+
         SET_CORAL_SCORE_POS,
-        CHECK_CORALARM_SAFE_ZONE,
+        CHECK_CORALARM_SAFETY_FOR_SCORE,
+
         SET_CORAL_STATION_PICKUP_POS,
-        CHECK_ELEVATOR_SAFE_ZONE,
+        CHECK_ELEVATOR_SAFETY_FOR_PICKUP,
+
         SET_CORALARM_PID_POWER,
         SET_CORALARM_POWER,
+        CORALARM_SETPOWER,
+
         SET_ELEVATOR_PID_POWER,
         SET_ELEVATOR_POWER,
+        ELEVATOR_SETPOWER,
+
         DONE
     }   //enum State
 
@@ -70,17 +76,15 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     private static class TaskParams
     {
         Action action = null;
-        double delay = 0.0;
+        double power = 0.0;
         Double coralArmPos = null;
         Double algaeArmPos = null;
         Double elevatorPos = null;
 
-        static TaskParams setPositionParams(
-            Action action, double delay, Double coralArmPos, Double algaeArmPos, Double elevatorPos)
+        static TaskParams setPositionParams(Action action, Double coralArmPos, Double algaeArmPos, Double elevatorPos)
         {
             TaskParams params = new TaskParams();
             params.action = action;
-            params.delay = delay;
             params.coralArmPos = coralArmPos;
             params.algaeArmPos = algaeArmPos;
             params.elevatorPos = elevatorPos;
@@ -88,10 +92,19 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
             return params;
         }   //setPositionParams
 
+        static TaskParams setPowerParams(Action action, double power)
+        {
+            TaskParams params = new TaskParams();
+            params.action = action;
+            params.power = power;
+
+            return params;
+        }  //setPowerParams
+
         public String toString()
         {
             return "action=" + action +
-                   ",delay=" + delay +
+                   ",power=" + power +
                    ",coralArmPos=" + coralArmPos +
                    ",algaeArmPos=" + algaeArmPos +
                    ",elevatorPos=" + elevatorPos;
@@ -104,15 +117,6 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     private final TrcEvent coralArmEvent;
     private final TrcEvent algaeArmEvent;
     private final TrcEvent elevatorEvent;
-    private final TrcTimer timer;
-    private final TrcEvent event;
-
-    private double currCoralArmPos;
-    private double currAlgaeArmPos;
-    private double currElevatorPos;
-    private double targetCoralArmPos;
-    private double targetAlgaeArmPos;
-    private double targetElevatorPos;
 
     /**
      * Constructor: Create an instance of the object.
@@ -130,8 +134,6 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         this.coralArmEvent = new TrcEvent(CoralArm.Params.SUBSYSTEM_NAME);
         this.algaeArmEvent = new TrcEvent(AlgaeArm.Params.SUBSYSTEM_NAME);
         this.elevatorEvent = new TrcEvent(Elevator.Params.SUBSYSTEM_NAME);
-        this.timer = new TrcTimer(moduleName);
-        this.event = new TrcEvent(moduleName);
     }   //TaskElevatorArm
 
     public void zeroCalibrate(String owner, TrcEvent completionEvent)
@@ -143,7 +145,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     public void setCoralScorePositions(String owner, int scoreLevel, TrcEvent completionEvent)
     {
         TaskParams taskParams = TaskParams.setPositionParams(
-            Action.SetCoralScorePosition, 0.0, CoralArm.Params.SCORE_LEVEL_POS[scoreLevel], null,
+            Action.SetCoralScorePosition, CoralArm.Params.SCORE_LEVEL_POS[scoreLevel], null,
             Elevator.Params.SCORE_LEVEL_POS[scoreLevel]);
         tracer.traceInfo(
             moduleName,
@@ -156,7 +158,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     public void setCoralStationPickupPositions(String owner, TrcEvent completionEvent)
     {
         TaskParams taskParams = TaskParams.setPositionParams(
-            Action.SetCoralStationPickupPosition, 0.0, CoralArm.Params.STATION_PICKUP_POS, null,
+            Action.SetCoralStationPickupPosition, CoralArm.Params.STATION_PICKUP_POS, null,
             Elevator.Params.STATION_PICKUP_POS);
         tracer.traceInfo(
             moduleName,
@@ -168,18 +170,42 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
 
     public void setCoralArmPidPower(String owner, double power)
     {
+        TaskParams taskParams = TaskParams.setPowerParams(Action.SetCoralArmPidPower, power);
+        tracer.traceInfo(
+            moduleName,
+            "setCoralArmPidPower(owner=" + owner +
+            ", taskParams=(" + taskParams + "))");
+        startAutoTask(owner, State.SET_CORALARM_PID_POWER, taskParams, null);
     }   //setCoralArmPidPower
 
     public void setCoralArmPower(String owner, double power)
     {
-    }   //setCoralArmPidPower
+        TaskParams taskParams = TaskParams.setPowerParams(Action.SetCoralArmPower, power);
+        tracer.traceInfo(
+            moduleName,
+            "setCoralArmPower(owner=" + owner +
+            ", taskParams=(" + taskParams + "))");
+        startAutoTask(owner, State.SET_CORALARM_POWER, taskParams, null);
+    }   //setCoralArmPower
 
     public void setElevatorPidPower(String owner, double power)
     {
-    }   //setCoralArmPidPower
+        TaskParams taskParams = TaskParams.setPowerParams(Action.SetElevatorPidPower, power);
+        tracer.traceInfo(
+            moduleName,
+            "setElevatorPidPower(owner=" + owner +
+            ", taskParams=(" + taskParams + "))");
+        startAutoTask(owner, State.SET_ELEVATOR_PID_POWER, taskParams, null);
+    }   //setElevatorPidPower
 
     public void setElevatorPower(String owner, double power)
     {
+        TaskParams taskParams = TaskParams.setPowerParams(Action.SetElevatorPower, power);
+        tracer.traceInfo(
+            moduleName,
+            "setElevatorPower(owner=" + owner +
+            ", taskParams=(" + taskParams + "))");
+        startAutoTask(owner, State.SET_ELEVATOR_POWER, taskParams, null);
     }   //setCoralArmPidPower
 
     private boolean isCoralArmPosInSafeZone(double pos)
@@ -197,29 +223,29 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         return pos <= Elevator.Params.SAFE_ZONE_POS;
     }   //isElevatorPosInSafeZone
 
-    private boolean isSafeToMoveCoralArm()
+    private boolean isSafeToMoveCoralArm(double targetPos)
     {
         // Moving the arm to the safe zone is always safe because if arm is currently in unsafe zone,
         // elevator must be in its safe zone.
         // Moving the arm to unsafe zone requires the elevator to be in its safe zone.
-        return isCoralArmPosInSafeZone(targetCoralArmPos) || isElevatorPosInSafeZone(currElevatorPos);
+        return isCoralArmPosInSafeZone(targetPos) || isElevatorPosInSafeZone(elevator.getPosition());
     }   //isSafeToMoveCoralArm
 
-    private boolean isSafeToMoveAlgaeArm()
+    private boolean isSafeToMoveAlgaeArm(double targetPos)
     {
         // Moving the arm to the safe zone is always safe because if arm is currently in unsafe zone,
         // elevator must be in its safe zone.
         // Moving the arm to unsafe zone requires the elevator to be in its safe zone.
-        return isAlgaeArmPosInSafeZone(targetAlgaeArmPos) || isElevatorPosInSafeZone(currElevatorPos);
+        return isAlgaeArmPosInSafeZone(targetPos) || isElevatorPosInSafeZone(elevator.getPosition());
     }   //isSafeToMoveAlgaeArm
 
-    private boolean isSafeToMoveElevator()
+    private boolean isSafeToMoveElevator(double targetPos)
     {
         // Moving elevator to the safe zone is always safe because if elevator is currently in unsafe zone,
         // both arms must be in their safe zone.
         // Moving the elevator to unsafe zone requires both arms to be in their safe zones.
-        return isElevatorPosInSafeZone(targetElevatorPos) ||
-               isCoralArmPosInSafeZone(currCoralArmPos) && isAlgaeArmPosInSafeZone(currAlgaeArmPos);
+        return isElevatorPosInSafeZone(targetPos) ||
+               isCoralArmPosInSafeZone(coralArm.getPosition()) && isAlgaeArmPosInSafeZone(algaeArm.getPosition());
     }   //isSafeToMoveElevator
 
     //
@@ -295,6 +321,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         boolean slowPeriodicLoop)
     {
         TaskParams taskParams = (TaskParams) params;
+        double targetPos;
 
         switch (state)
         {
@@ -315,10 +342,10 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
                 coralArm.setPosition(
                     owner, 0.0, taskParams.coralArmPos, true, CoralArm.Params.POWER_LIMIT, coralArmEvent, 0.0);
                 sm.addEvent(coralArmEvent);
-                sm.setState(State.CHECK_CORALARM_SAFE_ZONE);
+                sm.setState(State.CHECK_CORALARM_SAFETY_FOR_SCORE);
                 break;
 
-            case CHECK_CORALARM_SAFE_ZONE:
+            case CHECK_CORALARM_SAFETY_FOR_SCORE:
                 if (isCoralArmPosInSafeZone(coralArm.getPosition()))
                 {
                     elevator.setPosition(
@@ -331,15 +358,53 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
             case SET_CORAL_STATION_PICKUP_POS:
                 break;
 
-            case CHECK_ELEVATOR_SAFE_ZONE:
+            case CHECK_ELEVATOR_SAFETY_FOR_PICKUP:
                 break;
 
             case SET_CORALARM_PID_POWER:
             case SET_CORALARM_POWER:
+                targetPos = taskParams.power > 0.0? CoralArm.Params.MAX_POS: CoralArm.Params.MIN_POS;
+                if (taskParams.power != 0.0 && !isSafeToMoveCoralArm(targetPos))
+                {
+                    elevator.setPosition(
+                        owner, 0.0, Elevator.Params.SAFE_ZONE_POS, true, Elevator.Params.POWER_LIMIT, elevatorEvent,
+                        0.0);
+                    sm.waitForSingleEvent(elevatorEvent, State.CORALARM_SETPOWER);
+                }
+                else
+                {
+                    sm.setState(State.CORALARM_SETPOWER);
+                }
+                break;
+
+            case CORALARM_SETPOWER:
+                if (taskParams.action == Action.SetCoralArmPidPower)
+                {
+                    coralArm.setPidPower(owner, taskParams.power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, true);
+                }
+                else
+                {
+                    coralArm.setPower(owner, 0.0, taskParams.power, 0.0, null);
+                }
                 break;
 
             case SET_ELEVATOR_PID_POWER:
             case SET_ELEVATOR_POWER:
+                targetPos = taskParams.power > 0.0? CoralArm.Params.MAX_POS: CoralArm.Params.MIN_POS;
+                if (taskParams.power != 0.0 && !isSafeToMoveCoralArm(targetPos))
+                {
+                    elevator.setPosition(
+                        owner, 0.0, Elevator.Params.SAFE_ZONE_POS, true, Elevator.Params.POWER_LIMIT, elevatorEvent,
+                        0.0);
+                    sm.waitForSingleEvent(elevatorEvent, State.CORALARM_SETPOWER);
+                }
+                else
+                {
+                    sm.setState(State.CORALARM_SETPOWER);
+                }
+                break;
+
+            case ELEVATOR_SETPOWER:
                 break;
 
             default:

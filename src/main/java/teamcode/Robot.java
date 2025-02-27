@@ -125,10 +125,10 @@ public class Robot extends FrcRobotBase
     // Other subsystems.
     //
     public TrcMotor coralArm;
-    public TrcMotorGrabber coralGrabber;
     public TrcMotor algaeArm;
-    public TrcMotorGrabber algaeGrabber;
     public TrcMotor elevator;
+    public TrcMotorGrabber coralGrabber;
+    public TrcMotorGrabber algaeGrabber;
     public TrcMotor winch;
     public TrcIntake intake;
     public TrcMotor intakeDeployer;
@@ -271,6 +271,7 @@ public class Robot extends FrcRobotBase
 
             if (RobotParams.Preferences.useSubsystems)
             {
+                // TrcMotor coralArm, algaeArm, elevator;
                 // Create subsystems.
                 if (RobotParams.Preferences.useCoralArm)
                 {
@@ -620,6 +621,10 @@ public class Robot extends FrcRobotBase
     public void zeroCalibrate(String owner, TrcEvent event)
     {
         globalTracer.traceInfo(moduleName, "Zero calibrate all subsystems.");
+        if (elevatorArmTask != null)
+        {
+            elevatorArmTask.zeroCalibrate(owner, event);
+        }
         TrcSubsystem.zeroCalibrateAll(owner, event);
     }   //zeroCalibrate
 
@@ -947,33 +952,5 @@ public class Robot extends FrcRobotBase
     {
         return pressureSensor != null? (pressureSensor.getVoltage() - 0.5) * 50.0: 0.0;
     }   //getPressure
-
-    // Code Review: below code should belong somewhere else.
-    private final TrcEvent elevatorEvent = new TrcEvent(moduleName + ".elevatorEvent");
-    private final TrcEvent armEvent = new TrcEvent(moduleName + ".armEvent");
-    private TrcEvent completionEvent = null;
-
-    private void prepCompletion(Object context)
-    {
-        if (completionEvent != null && elevatorEvent.isSignaled() && armEvent.isSignaled())
-        {
-            completionEvent.signal();
-            completionEvent = null;
-        }
-    }   //prepCompletion
-
-    public void moveSubsystem(String owner, double elevatorPos, double elevatorDelay, double armPos, double armDelay, double timeout, TrcEvent event){
-        if(elevator != null && coralArm != null){
-            if(event != null){
-                elevatorEvent.clear();
-                armEvent.clear();
-                elevatorEvent.setCallback(this::prepCompletion, null);
-                armEvent.setCallback(this::prepCompletion, null);
-                completionEvent = event;
-            }
-            elevator.setPosition(owner, elevatorDelay, elevatorPos, true, 1.0, event != null? elevatorEvent: null, timeout);
-            coralArm.setPosition(owner, armDelay, armPos, true, 1.0, event != null? armEvent: null, timeout);
-        }
-    }
 
 }   //class Robot

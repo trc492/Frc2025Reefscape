@@ -247,28 +247,55 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.coralArm.setPidPower(power, CoralArm.Params.MIN_POS, CoralArm.Params.MAX_POS, true);
                         }
                     }
-                    // if(robot.algaeArm != null){
-                    //     double power = robot.operatorController.getLeftStickY(true);
-                    //     //robot.globalTracer.traceInfo(moduleName, "Algae Arm Power: " + power);
-                    //     if(operatorAltFunc){
-                    //         robot.algaeArm.setPower(power);
-                    //     } else{
+
+                    // if (robot.algaeArm != null)
+                    // {
+                    //     double power = robot.operatorController.getLeftStickY(true) * AlgaeArm.Params.POWER_LIMIT;
+                    //     if (operatorAltFunc)
+                    //     {
                     //         robot.algaeArm.setPower(power);
                     //     }
+                    //     else
+                    //     {
+                    //         robot.algaeArm.setPidPower(power, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                    //     }
                     // }
+
                     if (robot.elevator != null)
                     {
                         double power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
-                        //robot.globalTracer.traceInfo(moduleName, "Elevator Encoder Counts" + robot.elevator.getEncoderRawPosition());
                         if (operatorAltFunc)
                         {
-                               robot.elevator.setPower(power);
+                            robot.elevator.setPower(power);
                         }
                         else
                         {
                             robot.elevator.setPidPower(power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
                         }
                     }
+
+                    // if (robot.elevatorArmTask != null)
+                    // {
+                    //     double power = robot.operatorController.getLeftStickY(true) * CoralArm.Params.POWER_LIMIT;
+                    //     if (operatorAltFunc)
+                    //     {
+                    //         robot.elevatorArmTask.setCoralArmPower(null, power);
+                    //     }
+                    //     else
+                    //     {
+                    //         robot.elevatorArmTask.setCoralArmPidPower(null, power);
+                    //     }
+
+                    //     power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
+                    //     if (operatorAltFunc)
+                    //     {
+                    //            robot.elevatorArmTask.setElevatorPower(null, power);
+                    //     }
+                    //     else
+                    //     {
+                    //         robot.elevatorArmTask.setElevatorPidPower(null, power);
+                    //     }
+                    // }
                 }
             }
             //
@@ -546,12 +573,17 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.coralGrabber.autoIntake(null);
                         }
                     }
-                    else
+                    else if (robot.coralGrabber.isAutoActive())
                     {
                         robot.coralGrabber.cancel();
                     }
+                    else
+                    {
+                        robot.coralGrabber.stop();
+                    }
                 }
-                break;   
+                break;
+
             case B:
                 if (robot.coralGrabber!= null)
                 {
@@ -566,13 +598,17 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
                         }
                     }
-                    else
+                    else if (robot.coralGrabber.isAutoActive())
                     {
                         robot.coralGrabber.cancel();
                     }
-                
+                    else
+                    {
+                        robot.coralGrabber.stop();
+                    }
                 }
                 break;
+
             case X:
                 // Bindings for testing presets
                 if(robot.coralArm != null && robot.elevator != null && pressed){

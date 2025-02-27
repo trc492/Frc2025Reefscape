@@ -39,7 +39,7 @@ public class Elevator extends TrcSubsystem
     public static final class Params
     {
         public static final String SUBSYSTEM_NAME               = "Elevator";
-        public static final boolean NEED_ZERO_CAL               = true;
+        public static final boolean NEED_ZERO_CAL               = false;
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_ELEVATOR_MOTOR;
@@ -59,7 +59,7 @@ public class Elevator extends TrcSubsystem
         public static final double MIN_POS                      = POS_OFFSET;
         public static final double MAX_POS                      = 69.0;
         public static final double TURTLE_POS                   = MIN_POS;
-        public static final double SAFE_ZONE_POS                = 40.0; //TODO
+        public static final double SAFE_ZONE_POS                = 50.0;
         public static final double STATION_PICKUP_POS           = 0.0;  //TODO
         public static final double TROUGH_SCORE_LEVEL_POS       = 0.0;  // TODO
         public static final double REEF_SCORE_LEVEL1_POS        = 0.0;  // TODO
