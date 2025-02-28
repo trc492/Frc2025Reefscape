@@ -109,7 +109,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     /**
      * This method starts the auto task operation.
      *
-     * @param owner specifies the owner to acquire the subsystem ownerships.
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
      * @param useVision specifies true to use vision to find the coral, false otherwise.
      * @param reefLevel specifies the reef level to score the coral.
      * @param removeAlgae specifies true to remove algae from the reef, false otherwise.
@@ -187,7 +187,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     /**
      * This methods is called periodically to run the auto-assist task.
      *
-     * @param owner specifies the owner acquired subsystem ownerships.
+     * @param owner specifies the owner that acquired the subsystem ownerships.
      * @param params specifies the task parameters.
      * @param state specifies the current state of the task.
      * @param taskType specifies the type of task being run.

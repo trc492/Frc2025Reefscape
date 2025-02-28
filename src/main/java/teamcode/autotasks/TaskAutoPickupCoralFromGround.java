@@ -94,7 +94,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     /**
      * This method starts the auto-assist operation.
      *
-     * @param owner specifies the owner to acquire the subsystem ownerships.
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
      * @param useVision specifies true to use vision to find the coral, false otherwise.
      * @param inAuto specifies true if caller is autonomous, false if in teleop.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
@@ -175,7 +175,7 @@ public class TaskAutoPickupCoralFromGround extends TrcAutoTask<TaskAutoPickupCor
     /**
      * This methods is called periodically to run the auto-assist task.
      *
-     * @param owner specifies the owner acquired subsystem ownerships.
+     * @param owner specifies the owner that acquired the subsystem ownerships.
      * @param params specifies the task parameters.
      * @param state specifies the current state of the task.
      * @param taskType specifies the type of task being run.

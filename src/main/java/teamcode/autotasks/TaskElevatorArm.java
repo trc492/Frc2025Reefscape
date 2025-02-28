@@ -140,12 +140,28 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         this.elevatorEvent = new TrcEvent(Elevator.Params.SUBSYSTEM_NAME);
     }   //TaskElevatorArm
 
+    /**
+     * This method starts the zero calibrate operation. It sets the arms to their safe positions before doing zero
+     * calibration on the elevator.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param completionEvent specifies the event to signal when done, can be null if none provided.
+     */
     public void zeroCalibrate(String owner, TrcEvent completionEvent)
     {
         tracer.traceInfo(moduleName, "zeroCalibrate(owner=" + owner + ", event=" + completionEvent + ")");
         startAutoTask(owner, State.ZERO_CALIBRATE, null, completionEvent);
     }   //zeroCalibrate
 
+    /**
+     * This method sets the elevator and arms to the positions for scoring a Coral on a Reef branch safely. It
+     * understands the positions of the arms and elevator and coordinates their movements to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param scoreLevel specifies the level of the reef branch to score the Coral.
+     * @param completionEvent specifies the event to signal when done, can be null if none provided.
+     */
     public void setCoralScorePositions(String owner, int scoreLevel, TrcEvent completionEvent)
     {
         TaskParams taskParams = TaskParams.setPositionParams(
@@ -159,6 +175,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         startAutoTask(owner, State.SET_CORAL_SCORE_POS, taskParams, completionEvent);
     }   //setScoreCoralPositions
 
+    /**
+     * This method sets the elevator and arms to the positions for picking up a Coral from the station safely. It
+     * understands the positions of the arms and elevator and coordinates their movements to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param completionEvent specifies the event to signal when done, can be null if none provided.
+     */
     public void setCoralStationPickupPositions(String owner, TrcEvent completionEvent)
     {
         TaskParams taskParams = TaskParams.setPositionParams(
@@ -172,6 +196,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         startAutoTask(owner, State.SET_CORAL_STATION_PICKUP_POS, taskParams, completionEvent);
     }   //setCoralStationPickupPositions
 
+    /**
+     * This method is typically called by TeleOp to move the Coral Arm using a joystick. It understands the positions
+     * of the arms and elevator and moves them to safe positions before moving the Coral Arm to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param power specifies the power to apply to the Coral Arm motor.
+     */
     public void setCoralArmPidPower(String owner, double power)
     {
         if (coralArm != null)
@@ -182,6 +214,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         }
     }   //setCoralArmPidPower
 
+    /**
+     * This method is typically called by TeleOp to move the Coral Arm using a joystick. It understands the positions
+     * of the arms and elevator and moves them to safe positions before moving the Coral Arm to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param power specifies the power to apply to the Coral Arm motor.
+     */
     public void setCoralArmPower(String owner, double power)
     {
         if (coralArm != null)
@@ -192,6 +232,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         }
     }   //setCoralArmPower
 
+    /**
+     * This method is typically called by TeleOp to move the Algae Arm using a joystick. It understands the positions
+     * of the arms and elevator and moves them to safe positions before moving the Algae Arm to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param power specifies the power to apply to the Algae Arm motor.
+     */
     public void setAlgaeArmPidPower(String owner, double power)
     {
         if (algaeArm != null)
@@ -202,6 +250,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         }
     }   //setAlgaeArmPidPower
 
+    /**
+     * This method is typically called by TeleOp to move the Algae Arm using a joystick. It understands the positions
+     * of the arms and elevator and moves them to safe positions before moving the Algae Arm to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param power specifies the power to apply to the Algae Arm motor.
+     */
     public void setAlgaeArmPower(String owner, double power)
     {
         if (algaeArm != null)
@@ -212,6 +268,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         }
     }   //setAlgaeArmPower
 
+    /**
+     * This method is typically called by TeleOp to move the Elevator using a joystick. It understands the positions
+     * of the arms and elevator and moves them to safe positions before moving the Elevator to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param power specifies the power to apply to the Elevator motor.
+     */
     public void setElevatorPidPower(String owner, double power)
     {
         // Elevator must exist.
@@ -220,6 +284,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         startAutoTask(owner, State.SET_ELEVATOR_PID_POWER, taskParams, null);
     }   //setElevatorPidPower
 
+    /**
+     * This method is typically called by TeleOp to move the Elevator using a joystick. It understands the positions
+     * of the arms and elevator and moves them to safe positions before moving the Elevator to avoid them colliding
+     * with each other.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param power specifies the power to apply to the Elevator motor.
+     */
     public void setElevatorPower(String owner, double power)
     {
         // Elevator must exist.
@@ -228,43 +300,76 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         startAutoTask(owner, State.SET_ELEVATOR_POWER, taskParams, null);
     }   //setCoralArmPidPower
 
+    /**
+     * This method determines if the given Coral Arm position is in the safe zone.
+     *
+     * @param pos specifies the Coral Arm position.
+     * @return true if Coral Arm position is in the safe zone, false otherwise.
+     */
     private boolean isCoralArmPosInSafeZone(double pos)
     {
         return coralArm == null || pos >= CoralArm.Params.SAFE_ZONE_POS;
     }   //isCoralArmPosInSafeZone
 
+    /**
+     * This method determines if the given Algae Arm position is in the safe zone.
+     *
+     * @param pos specifies the Algae Arm position.
+     * @return true if Algae Arm position is in the safe zone, false otherwise.
+     */
     private boolean isAlgaeArmPosInSafeZone(double pos)
     {
         return algaeArm == null || pos >= AlgaeArm.Params.SAFE_ZONE_POS;
     }   //isAlgaeArmPosInSafeZone
 
+    /**
+     * This method determines if the given Elevator position is in the safe zone.
+     *
+     * @param pos specifies the Elevator position.
+     * @return true if Elevator position is in the safe zone, false otherwise.
+     */
     private boolean isElevatorPosInSafeZone(double pos)
     {
         // Elevator must exist.
         return pos <= Elevator.Params.SAFE_ZONE_POS;
     }   //isElevatorPosInSafeZone
 
+    /**
+     * This method determines if it is safe to move the Coral Arm. Moving the arm to the safe zone is always safe
+     * because if arm is currently in unsafe zone, elevator must be in its safe zone. However, moving the arm to
+     * unsafe zone requires the elevator to be in its safe zone.
+     *
+     * @param targetPos specifies the Coral Arm target position.
+     * @return true if it is safe to move the Coral Arm, false otherwise.
+     */
     private boolean isSafeToMoveCoralArm(double targetPos)
     {
-        // Moving the arm to the safe zone is always safe because if arm is currently in unsafe zone,
-        // elevator must be in its safe zone.
-        // Moving the arm to unsafe zone requires the elevator to be in its safe zone.
         return isCoralArmPosInSafeZone(targetPos) || isElevatorPosInSafeZone(elevator.getPosition());
     }   //isSafeToMoveCoralArm
 
+    /**
+     * This method determines if it is safe to move the Algae Arm. Moving the arm to the safe zone is always safe
+     * because if arm is currently in unsafe zone, elevator must be in its safe zone. However, moving the arm to
+     * unsafe zone requires the elevator to be in its safe zone.
+     *
+     * @param targetPos specifies the Algae Arm target position.
+     * @return true if it is safe to move the Algae Arm, false otherwise.
+     */
     private boolean isSafeToMoveAlgaeArm(double targetPos)
     {
-        // Moving the arm to the safe zone is always safe because if arm is currently in unsafe zone,
-        // elevator must be in its safe zone.
-        // Moving the arm to unsafe zone requires the elevator to be in its safe zone.
         return isAlgaeArmPosInSafeZone(targetPos) || isElevatorPosInSafeZone(elevator.getPosition());
     }   //isSafeToMoveAlgaeArm
 
+    /**
+     * This method determines if it is safe to move the Elevator. Moving the elevator to the safe zone is always safe
+     * because if elevator is currently in unsafe zone, both arms must be in their safe zones. However, moving the
+     * elevator to unsafe zone requires both arms to be in their safe zones.
+     *
+     * @param targetPos specifies the Elevator target position.
+     * @return true if it is safe to move the Algae Arm, false otherwise.
+     */
     private boolean isSafeToMoveElevator(double targetPos)
     {
-        // Moving elevator to the safe zone is always safe because if elevator is currently in unsafe zone,
-        // both arms must be in their safe zone.
-        // Moving the elevator to unsafe zone requires both arms to be in their safe zones.
         return isElevatorPosInSafeZone(targetPos) ||
                (coralArm == null || isCoralArmPosInSafeZone(coralArm.getPosition())) &&
                (algaeArm == null || isAlgaeArmPosInSafeZone(algaeArm.getPosition()));
@@ -333,7 +438,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     /**
      * This methods is called periodically to run the auto task.
      *
-     * @param owner specifies the owner acquired subsystem ownerships.
+     * @param owner specifies the owner that acquired the subsystem ownerships.
      * @param params specifies the task parameters.
      * @param state specifies the current state of the task.
      * @param taskType specifies the type of task being run.
