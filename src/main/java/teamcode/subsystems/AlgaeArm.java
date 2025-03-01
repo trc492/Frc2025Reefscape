@@ -72,10 +72,6 @@ public class AlgaeArm extends TrcSubsystem
             new TrcPidController.PidCoefficients(0.018, 0.1, 0.001, 0.0, 2.0);  //TODO: tune
         public static final double POS_PID_TOLERANCE            = 1.0;
         public static final double GRAVITY_COMP_MAX_POWER       = 0.158;    //TODO: tune
-        // public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
-        // public static final double STALL_TOLERANCE              = 0.1;
-        // public static final double STALL_TIMEOUT                = 0.1;
-        // public static final double STALL_RESET_TIMEOUT          = 0.0;
     }   //class Params
 
     private final TrcMotor algaeArmMotor;
@@ -104,9 +100,7 @@ public class AlgaeArm extends TrcSubsystem
         talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
 
         algaeArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        // algaeArmMotor.setPositionPidPowerComp(this::getGravityComp);
-        // algaeArmMotor.setStallProtection(
-        //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
+        algaeArmMotor.setPositionPidPowerComp(this::getGravityComp);
         // algaeArmMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
     }   //AlgaeArm
 
@@ -115,10 +109,10 @@ public class AlgaeArm extends TrcSubsystem
         return algaeArmMotor;
     }   //getArmMotor
 
-    // private double getGravityComp(double currPower)
-    // {
-    //     return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(algaeArmMotor.getPosition()));
-    // }   //getGravityComp
+    private double getGravityComp(double currPower)
+    {
+        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(algaeArmMotor.getPosition()));
+    }   //getGravityComp
 
     //
     // Implements TrcSubsystem abstract methods.

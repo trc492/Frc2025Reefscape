@@ -75,10 +75,6 @@ public class Elevator extends TrcSubsystem
             new TrcPidController.PidCoefficients(0.4, 0.0, 0.01, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
         public static final double GRAVITY_COMP_POWER           = 0.0;
-        // public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
-        // public static final double STALL_TOLERANCE              = 0.1;
-        // public static final double STALL_TIMEOUT                = 0.1;
-        // public static final double STALL_RESET_TIMEOUT          = 0.0;
     }   //class Params
 
     private final TrcMotor elevatorMotor;
@@ -104,10 +100,6 @@ public class Elevator extends TrcSubsystem
         elevatorMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
         // Looks like mechanical gravity comp works well, so don't need software gravity comp.
         // elevatorMotor.setPositionPidPowerComp(this::getGravityComp);
-
-        // ALREADY HAVE LIMIT SWITCHES, MIGHT NOT NEED STALL PROTECTION
-        // elevatorMotor.setStallProtection(
-        //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
         // elevatorMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
     }   //Elevator
 

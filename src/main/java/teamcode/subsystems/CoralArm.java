@@ -80,10 +80,6 @@ public class CoralArm extends TrcSubsystem
             new TrcPidController.PidCoefficients(0.015, 0.0, 0.001, 0.0, 2.0);
         public static final double POS_PID_TOLERANCE            = 1.0;
         public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
-        // public static final double STALL_MIN_POWER              = Math.abs(ZERO_CAL_POWER);
-        // public static final double STALL_TOLERANCE              = 0.1;
-        // public static final double STALL_TIMEOUT                = 0.1;
-        // public static final double STALL_RESET_TIMEOUT          = 0.0;
     }   //class Params
 
     private final TrcMotor coralArmMotor;
@@ -113,8 +109,6 @@ public class CoralArm extends TrcSubsystem
 
         coralArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
         coralArmMotor.setPositionPidPowerComp(this::getGravityComp);
-        // coralArmMotor.setStallProtection(
-        //     Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
         // coralArmMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
     }   //CoralArm
 
