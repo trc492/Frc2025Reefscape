@@ -143,8 +143,7 @@ public class RobotParams
         public static final int DIO_CORAL_GRABBER_SENSOR        = 0;
         public static final int DIO_ALGAE_GRABBER_SENSOR        = 1;
         public static final int DIO_ELEVATOR_MID_LIMIT          = 2;
-        public static final int DIO_WINCH_LOWER_LIMIT           = 7;
-        public static final int DIO_WINCH_UPPER_LIMIT           = 3;
+        public static final int DIO_WINCH_LOWER_LIMIT           = 3;
         // TODO: remove.
         public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
         // PWM channels.
