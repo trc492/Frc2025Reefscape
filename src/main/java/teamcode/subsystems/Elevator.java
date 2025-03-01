@@ -60,7 +60,7 @@ public class Elevator extends TrcSubsystem
         public static final double MAX_POS                      = 69.0;
         public static final double TURTLE_POS                   = MIN_POS;
         public static final double SAFE_ZONE_POS                = 50.0;
-        public static final double STATION_PICKUP_POS           = 0.0;  //TODO
+        public static final double STATION_PICKUP_POS           = 40.5;  //TODO
         public static final double TROUGH_SCORE_LEVEL_POS       = 0.0;  // TODO
         public static final double REEF_SCORE_LEVEL1_POS        = 0.0;  // TODO
         public static final double REEF_SCORE_LEVEL2_POS        = 39.5; // TODO
