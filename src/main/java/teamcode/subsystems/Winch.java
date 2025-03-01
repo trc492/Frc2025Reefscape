@@ -42,19 +42,19 @@ public class Winch extends TrcSubsystem
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_WINCH_MOTOR;
-        public static final MotorType MOTOR_TYPE                = MotorType.CanSparkMax;
+        public static final MotorType MOTOR_TYPE                = MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = false;
+        public static final boolean MOTOR_INVERTED              = true;
 
         public static final String LOWER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".lowerLimit";
-        public static final int LOWER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_WINCH_LOWER_LIMIT;
-        public static final boolean LOWER_LIMITSWITCH_INVERTED  = false;
+        //public static final int LOWER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_WINCH_LOWER_LIMIT;
+        //public static final boolean LOWER_LIMITSWITCH_INVERTED  = false;
         public static final String UPPER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".upperLimit";
-        public static final int UPPER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_WINCH_UPPER_LIMIT;
+        public static final int UPPER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_WINCH_UPPER_LIMIT; // TODO: Determine channel
         public static final boolean UPPER_LIMITSWITCH_INVERTED  = false;
 
-        public static final double DEG_PER_COUNT                = 1.0;
+        public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
         public static final double POWER_LIMIT                  = 0.5;
         public static final double ZERO_CAL_POWER               = -0.25;
@@ -88,15 +88,15 @@ public class Winch extends TrcSubsystem
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setLowerLimitSwitch(Params.LOWER_LIMITSWITCH_NAME, Params.LOWER_LIMITSWITCH_CHANNEL, Params.LOWER_LIMITSWITCH_INVERTED)
+            //.setLowerLimitSwitch(Params.LOWER_LIMITSWITCH_NAME, Params.LOWER_LIMITSWITCH_CHANNEL, Params.LOWER_LIMITSWITCH_INVERTED)
             .setUpperLimitSwitch(Params.UPPER_LIMITSWITCH_NAME, Params.UPPER_LIMITSWITCH_CHANNEL, Params.UPPER_LIMITSWITCH_INVERTED)
             .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
         winchMotor = new FrcMotorActuator(motorParams).getMotor();
         winchMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
-        winchMotor.setPositionPidPowerComp(this::getGravityComp);
-        winchMotor.setStallProtection(
-            Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
+        //winchMotor.setPositionPidPowerComp(this::getGravityComp);
+        //winchMotor.setStallProtection(
+            //Params.STALL_MIN_POWER, Params.STALL_TOLERANCE, Params.STALL_TIMEOUT, Params.STALL_RESET_TIMEOUT);
     }   //Winch
 
     public TrcMotor getWinchMotor()
@@ -104,10 +104,10 @@ public class Winch extends TrcSubsystem
         return winchMotor;
     }   //getWinchMotor
 
-    private double getGravityComp(double currPower)
-    {
-        return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(winchMotor.getPosition()));
-    }   //getGravityComp
+    // private double getGravityComp(double currPower)
+    // {
+    //     return Params.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(winchMotor.getPosition()));
+    // }   //getGravityComp
 
     //
     // Implements TrcSubsystem abstract methods.
