@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package teamcode.autotasks;
+package teamcode.tasks;
 
 import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;

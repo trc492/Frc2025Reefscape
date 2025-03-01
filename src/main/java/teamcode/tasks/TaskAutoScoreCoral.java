@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package teamcode.autotasks;
+package teamcode.tasks;
 
 import edu.wpi.first.math.util.Units;
 import frclib.vision.FrcPhotonVision;

@@ -747,6 +747,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Start:
+                if (pressed)
+                {
+                    robot.cancelAll();
+                }
+                break;
+
             default:
                 break;
         }
