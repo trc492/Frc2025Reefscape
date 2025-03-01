@@ -58,6 +58,7 @@ public class CoralArm extends TrcSubsystem
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
+        public static final double ZERO_OFFSET                  = 1925.0;
         public static final double POWER_LIMIT                  = 0.5;
 
         public static final double MIN_POS                      = -40.0;
@@ -98,7 +99,7 @@ public class CoralArm extends TrcSubsystem
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET)
+            .setPositionScaleAndOffset(Params.DEG_PER_COUNT, Params.POS_OFFSET, Params.ZERO_OFFSET)
             .setPositionPresets(Params.POS_PRESET_TOLERANCE, Params.posPresets);
         coralArmMotor = new FrcMotorActuator(motorParams).getMotor();
         // Configure limit switches
@@ -172,7 +173,7 @@ public class CoralArm extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f,current=%f,pos=%.1f/%.1f,limitSw=%s/%s",
+            "%s: power=%.3f,current=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
             Params.SUBSYSTEM_NAME, coralArmMotor.getPower(), coralArmMotor.getCurrent(), coralArmMotor.getPosition(),
             coralArmMotor.getPidTarget(), coralArmMotor.isLowerLimitSwitchActive(),
             coralArmMotor.isUpperLimitSwitchActive());
