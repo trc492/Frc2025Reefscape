@@ -250,11 +250,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         {
                             if (operatorAltFunc)
                             {
-                                robot.elevatorArmTask.setCoralArmPower(null, power);
+                               // robot.elevatorArmTask.setCoralArmPower(null, power);
+                               robot.elevator.setPower(power);
                             }
                             else
                             {
-                                robot.elevatorArmTask.setCoralArmPidPower(null, power);
+                                //robot.elevatorArmTask.setCoralArmPidPower(null, power);
+                                robot.elevator.setPidPower(power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
                             }
                             prevCoralArmPower = power;
                         }
@@ -610,7 +612,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     {
                         if (operatorAltFunc)
                         {
-                            robot.coralGrabber.intake(0.0, null);
+                            robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
+                           // robot.coralGrabber.intake(0.0, null);
                         }
                         else
                         {
@@ -629,44 +632,38 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case B:
-                if (robot.coralGrabber!= null)
-                {
-                    if (pressed)
-                    {
-                        if (operatorAltFunc)
-                        {
-                            robot.coralGrabber.eject(0.0, null);
-                        }
-                        else
-                        {
-                            robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
+                if(robot.algaeGrabber != null){
+                    if(pressed){
+                        if(operatorAltFunc){
+                            robot.algaeGrabber.autoEject(moduleName);
+                        } else{
+                            robot.algaeGrabber.autoIntake(moduleName);
                         }
                     }
-                    else if (robot.coralGrabber.isAutoActive())
-                    {
-                        robot.coralGrabber.cancel();
-                    }
-                    else
-                    {
-                        robot.coralGrabber.stop();
+                    else if(robot.algaeGrabber.isAutoActive()){
+                        robot.algaeGrabber.cancel();
+                    } else{
+                        robot.algaeGrabber.stop();
                     }
                 }
                 break;
 
             case X:
                 // Bindings for testing presets
-                if(robot.coralArm != null && robot.elevator != null && pressed){
-                    robot.coralArm.setPosition(CoralArm.Params.SCORE_LEVEL_POS[scoreIndex], true);
-                    robot.elevator.setPosition(Elevator.Params.SCORE_LEVEL_POS[scoreIndex], true);
+                if(robot.elevatorArmTask !=null && pressed){
+                    //robot.coralArm.setPosition(CoralArm.Params.SCORE_LEVEL_POS[scoreIndex], true);
+                    robot.elevatorArmTask.setCoralScorePositions(moduleName, scoreIndex, null);
+                    //robot.elevator.setPosition(Elevator.Params.SCORE_LEVEL_POS[scoreIndex], true);
                 }
                 break;
             case Y:
                 // Binding for testing presets
-                if(robot.coralArm != null && pressed){
+                if(robot.elevatorArmTask != null && pressed){
                     //robot.elevator.setPosition(Elevator.Params.STATION_PICKUP_POS, true);
-                    robot.coralArm.setPosition(
-                        moduleName, 0.0, CoralArm.Params.STATION_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null,
-                        0.0);
+                    // robot.coralArm.setPosition(
+                    //     moduleName, 0.0, CoralArm.Params.STATION_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null,
+                    //     0.0);
+                    robot.elevatorArmTask.setCoralStationPickupPositions(moduleName, null);
                 }
                 break;
 
@@ -700,7 +697,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         
                 //     }
                 // }
-                if(pressed && scoreIndex != 2){
+                if(pressed && scoreIndex != 3){
                     scoreIndex++;
                 }
             
@@ -727,15 +724,21 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //         }
                 //     }
                 // }
-                if(pressed && scoreIndex != 1){
+                if(pressed && scoreIndex != 0){
                     scoreIndex--;
                 }
                 break;
 
-            case DpadLeft:
+            case DpadLeft: 
+                if(pressed && robot.winch != null){
+                    robot.winch.setPower(0.1);
+                }
                 break;
 
             case DpadRight:
+                if(pressed && robot.winch != null){
+                    robot.winch.setPower(-0.1);
+                }
                 break;
 
             case Back:
