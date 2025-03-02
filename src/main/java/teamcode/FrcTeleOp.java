@@ -250,13 +250,11 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         {
                             if (operatorAltFunc)
                             {
-                               // robot.elevatorArmTask.setCoralArmPower(null, power);
-                               robot.elevator.setPower(power);
+                               robot.elevatorArmTask.setCoralArmPower(null, power);
                             }
                             else
                             {
-                                //robot.elevatorArmTask.setCoralArmPidPower(null, power);
-                                robot.elevator.setPidPower(power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
+                                robot.elevatorArmTask.setCoralArmPidPower(null, power);
                             }
                             prevCoralArmPower = power;
                         }
