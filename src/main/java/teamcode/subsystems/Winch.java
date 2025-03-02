@@ -61,6 +61,7 @@ public class Winch extends TrcSubsystem
 
         public static final double MIN_POS                      = 0.0; //TODO: determine
         public static final double MAX_POS                      = 20.0; //TODO: determine
+        public static final double CLIMB_POS                    = 15.0; //TODO: determine
         public static final double SPOOL_OUT_POS                = 10.0; //TODO: determine
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;

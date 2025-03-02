@@ -289,6 +289,7 @@ public class RobotParams
 
 
         public static final TrcPose2D PROCESSOR_CORAL_STATION_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_CORAL_STATION_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
     }   //class Game
 
     /**
