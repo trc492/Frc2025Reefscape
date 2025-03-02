@@ -685,97 +685,95 @@ public class FrcTest extends FrcTeleOp
                 break;
 
             case DpadUp:
-                if (operatorAltFunc)
+                if (robot.elevatorArmTask != null)
                 {
-                    if (robot.elevator != null)
+                    if (operatorAltFunc)
                     {
-                        if (pressed)
+                        if (robot.elevatorArmTask.elevator != null && pressed)
                         {
-                            robot.elevator.presetPositionUp(moduleName, Elevator.Params.POWER_LIMIT);
+                            robot.elevatorArmTask.elevator.presetPositionUp(
+                                moduleName, Elevator.Params.POWER_LIMIT);
                         }
-                        passToTeleOp = false;
                     }
-                }
-                else
-                {
-                    if (robot.coralArm != null)
+                    else
                     {
-                        if (pressed)
+                        if (robot.elevatorArmTask.coralArm != null && pressed)
                         {
-                            robot.coralArm.presetPositionUp(moduleName, CoralArm.Params.POWER_LIMIT);
+                            robot.elevatorArmTask.coralArm.presetPositionUp(
+                                moduleName, CoralArm.Params.POWER_LIMIT);
                         }
-                        passToTeleOp = false;
                     }
+                    passToTeleOp = false;
                 }
                 break;
 
             case DpadDown:
-                if (operatorAltFunc)
+                if (robot.elevatorArmTask != null)
                 {
-                    if (robot.elevator != null)
+                    if (operatorAltFunc)
                     {
-                        if (pressed)
+                        if (robot.elevatorArmTask.elevator != null && pressed)
                         {
-                            robot.elevator.presetPositionDown(moduleName, Elevator.Params.POWER_LIMIT);
+                            robot.elevatorArmTask.elevator.presetPositionDown(
+                                moduleName, Elevator.Params.POWER_LIMIT);
                         }
-                        passToTeleOp = false;
                     }
-                }
-                else
-                {
-                    if (robot.coralArm != null)
+                    else
                     {
-                        if (pressed)
+                        if (robot.elevatorArmTask.coralArm != null && pressed)
                         {
-                            robot.coralArm.presetPositionDown(moduleName, CoralArm.Params.POWER_LIMIT);
+                            robot.elevatorArmTask.coralArm.presetPositionDown(
+                                moduleName, CoralArm.Params.POWER_LIMIT);
                         }
-                        passToTeleOp = false;
                     }
+                    passToTeleOp = false;
                 }
                 break;
 
             case DpadLeft:
-                if (robot.algaeArm != null)
+                if (robot.elevatorArmTask != null && robot.elevatorArmTask.algaeArm != null)
                 {
                     if (pressed)
                     {
                         if (operatorAltFunc)
                         {
-                            robot.algaeArm.setPower(-0.3);
+                            robot.elevatorArmTask.algaeArm.setPower(-0.3);
                         }
                         else
                         {
-                            robot.algaeArm.setPidPower(-0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                            robot.elevatorArmTask.algaeArm.setPidPower(
+                                -0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
                         }
                     }
                     else
                     {
-                        robot.algaeArm.cancel();
+                        robot.elevatorArmTask.algaeArm.cancel();
                     }
                     passToTeleOp = false;
                 }
                 break;
 
             case DpadRight:
-                if (robot.algaeArm != null)
+            if (robot.elevatorArmTask != null && robot.elevatorArmTask.algaeArm != null)
+            {
+                if (pressed)
                 {
-                    if (pressed)
+                    if (operatorAltFunc)
                     {
-                        if (operatorAltFunc)
-                        {
-                            robot.algaeArm.setPower(0.3);
-                        }
-                        else
-                        {
-                            robot.algaeArm.setPidPower(0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
-                        }
+                        robot.elevatorArmTask.algaeArm.setPower(0.3);
                     }
                     else
                     {
-                        robot.algaeArm.cancel();
+                        robot.elevatorArmTask.algaeArm.setPidPower(
+                            0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
                     }
-                    passToTeleOp = false;
                 }
+                else
+                {
+                    robot.elevatorArmTask.algaeArm.cancel();
+                }
+                passToTeleOp = false;
+            }
                 break;
 
             case Back:
