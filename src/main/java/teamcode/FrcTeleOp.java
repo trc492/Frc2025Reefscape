@@ -98,6 +98,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         {
             robot.robotDrive.driveBase.setDriveOrientation(DriveOrientation.FIELD, true);
             // Enable AprilTag vision for re-localization.
+            if (robot.photonVisionFront != null)
+            {
+                robot.globalTracer.traceInfo(moduleName, "Enabling FrontCam for AprilTagVision.");
+                robot.photonVisionBack.setPipeline(PipelineType.APRILTAG);
+            }
+
             if (robot.photonVisionBack != null)
             {
                 robot.globalTracer.traceInfo(moduleName, "Enabling BackCam for AprilTagVision.");
@@ -166,7 +172,18 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     {
                         if (robotFieldPose == null)
                         {
-                            DetectedObject aprilTagObj = robot.photonVisionBack.getBestDetectedAprilTag(null);
+                            DetectedObject aprilTagObj = null;
+
+                            if (robot.photonVisionFront != null)
+                            {
+                                aprilTagObj = robot.photonVisionFront.getBestDetectedAprilTag(null);
+                            }
+
+                            if (aprilTagObj == null && robot.photonVisionBack != null)
+                            {
+                                aprilTagObj = robot.photonVisionBack.getBestDetectedAprilTag(null);
+                            }
+
                             if (aprilTagObj != null)
                             {
                                 robotFieldPose = robot.photonVisionBack.getRobotFieldPose(aprilTagObj, false);
@@ -250,27 +267,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         {
                             if (operatorAltFunc)
                             {
-                               robot.elevatorArmTask.setCoralArmPower(null, power);
+                                robot.elevatorArmTask.setCoralArmPower(null, power);
                             }
                             else
                             {
                                 robot.elevatorArmTask.setCoralArmPidPower(null, power);
                             }
                             prevCoralArmPower = power;
-                        }
-
-                        power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
-                        if (power != prevAlgaeArmPower)
-                        {
-                            if (operatorAltFunc)
-                            {
-                                robot.elevatorArmTask.setAlgaeArmPower(null, power);
-                            }
-                            else
-                            {
-                                robot.elevatorArmTask.setAlgaeArmPidPower(null, power);
-                            }
-                            prevAlgaeArmPower = power;
                         }
 
                         power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
@@ -285,6 +288,20 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                                 robot.elevatorArmTask.setElevatorPidPower(null, power);
                             }
                             prevElevatorPower = power;
+                        }
+
+                        power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
+                        if (power != prevAlgaeArmPower)
+                        {
+                            if (operatorAltFunc)
+                            {
+                                robot.elevatorArmTask.setAlgaeArmPower(null, power);
+                            }
+                            else
+                            {
+                                robot.elevatorArmTask.setAlgaeArmPidPower(null, power);
+                            }
+                            prevAlgaeArmPower = power;
                         }
                     }
                     else
@@ -307,24 +324,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             }
                         }
 
-                        if (robot.algaeArm != null)
-                        {
-                            power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
-                            if (power != prevAlgaeArmPower)
-                            {
-                                if (operatorAltFunc)
-                                {
-                                    robot.algaeArm.setPower(power);
-                                }
-                                else
-                                {
-                                    robot.algaeArm.setPidPower(
-                                        power, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
-                                }
-                                prevAlgaeArmPower = power;
-                            }
-                        }
-
                         if (robot.elevator != null)
                         {
                             power = robot.operatorController.getRightStickY(true) * Elevator.Params.POWER_LIMIT;
@@ -340,6 +339,24 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                                         power, Elevator.Params.MIN_POS, Elevator.Params.MAX_POS, true);
                                 }
                                 prevElevatorPower = power;
+                            }
+                        }
+
+                        if (robot.algaeArm != null)
+                        {
+                            power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
+                            if (power != prevAlgaeArmPower)
+                            {
+                                if (operatorAltFunc)
+                                {
+                                    robot.algaeArm.setPower(power);
+                                }
+                                else
+                                {
+                                    robot.algaeArm.setPidPower(
+                                        power, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                                }
+                                prevAlgaeArmPower = power;
                             }
                         }
                     }
@@ -421,13 +438,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     if (robot.robotDrive.driveBase.getDriveOrientation() != DriveOrientation.FIELD)
                     {
-                        robot.globalTracer.traceInfo(moduleName, "Setting Mode to: Field");
                         robot.setDriveOrientation(DriveOrientation.FIELD, true);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Setting Mode to: Field");
                     }
                     else
                     {
-                        robot.globalTracer.traceInfo(moduleName, "Setting Mode to: Robot");
                         robot.setDriveOrientation(DriveOrientation.ROBOT, false);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Setting Mode to: Robot");
                     }
                 }
                 break;
@@ -437,27 +454,26 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (pressed)
                 {
                     robot.turtle();
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
                 }
                 break;
 
             case X:
-                if (robot.robotDrive != null && pressed && robot.scoreCoralTask != null)
+                if (robot.scoreCoralTask != null && pressed)
                 {
                     robot.scoreCoralTask.autoScoreCoral(
                         moduleName, true, 0, false, false, false, 0, null);
-                }
-                else
-                {
-                    robot.globalTracer.traceInfo(moduleName, "AutoScoreState: " + robot.scoreCoralTask);
-                }
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-score Coral");
+                    }
                 break;
 
             case Y:
-                if(robot.robotDrive != null && pressed && robot.pickupCoralFromStationTask != null)
+                if(robot.pickupCoralFromStationTask != null && pressed)
                 {
                     robot.pickupCoralFromStationTask.autoPickupCoral(
                         moduleName, true, false, false, null);
-                }
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-pickup Coral");
+                    }
                 break;  
 
             case LeftBumper:
@@ -469,11 +485,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     driveSpeedScale = RobotParams.Robot.DRIVE_SLOW_SCALE;
                     turnSpeedScale = RobotParams.Robot.TURN_SLOW_SCALE;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Slow Drive");
                 }
                 else
                 {
                     driveSpeedScale = RobotParams.Robot.DRIVE_NORMAL_SCALE;
                     turnSpeedScale = RobotParams.Robot.TURN_NORMAL_SCALE;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Normal Drive");
                 }
                 break;
 
@@ -491,6 +509,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     robot.cancelAll();
                     robot.zeroCalibrate(null, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel All and Zero Calibrate");
                 }
                 break;
 
@@ -500,11 +519,14 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     if (pressed)
                     {
                         subsystemStatusOn = !subsystemStatusOn;
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Toggle Subsystem Status: status=" + subsystemStatusOn);
                     }
                 }
                 else
                 {
-                    if (robot.photonVisionBack != null &&
+                    if (robot.photonVisionFront != null &&
+                        robot.photonVisionFront.getPipeline() == PipelineType.APRILTAG ||
+                        robot.photonVisionBack != null &&
                         robot.photonVisionBack.getPipeline() == PipelineType.APRILTAG)
                     {
                         // On press of the button, we will start looking for AprilTag for re-localization.
@@ -610,58 +632,70 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     {
                         if (operatorAltFunc)
                         {
-                            robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
-                           // robot.coralGrabber.intake(0.0, null);
+                            robot.coralGrabber.intake(0.0, null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Coral Intake");
                         }
                         else
                         {
                             robot.coralGrabber.autoIntake(null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Coral Intake");
                         }
                     }
                     else if (robot.coralGrabber.isAutoActive())
                     {
                         robot.coralGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Coral Intake");
                     }
                     else
                     {
                         robot.coralGrabber.stop();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Coral Intake");
                     }
                 }
                 break;
 
             case B:
-                if(robot.algaeGrabber != null){
-                    if(pressed){
-                        if(operatorAltFunc){
-                            robot.algaeGrabber.autoEject(moduleName);
-                        } else{
-                            robot.algaeGrabber.autoIntake(moduleName);
+                if (robot.coralGrabber!= null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.coralGrabber.eject(0.0, null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Coral Eject");
+                        }
+                        else
+                        {
+                            robot.coralGrabber.autoEject(null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Coral Eject");
                         }
                     }
-                    else if(robot.algaeGrabber.isAutoActive()){
-                        robot.algaeGrabber.cancel();
-                    } else{
-                        robot.algaeGrabber.stop();
+                    else if (robot.coralGrabber.isAutoActive())
+                    {
+                        robot.coralGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Coral Eject");
+                    }
+                    else
+                    {
+                        robot.coralGrabber.stop();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Coral Eject");
                     }
                 }
                 break;
 
             case X:
-                // Bindings for testing presets
-                if(robot.elevatorArmTask !=null && pressed){
-                    //robot.coralArm.setPosition(CoralArm.Params.SCORE_LEVEL_POS[scoreIndex], true);
+                if (robot.elevatorArmTask !=null && pressed)
+                {
                     robot.elevatorArmTask.setCoralScorePositions(moduleName, scoreIndex, null);
-                    //robot.elevator.setPosition(Elevator.Params.SCORE_LEVEL_POS[scoreIndex], true);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Score Position");
                 }
                 break;
+
             case Y:
-                // Binding for testing presets
-                if(robot.elevatorArmTask != null && pressed){
-                    //robot.elevator.setPosition(Elevator.Params.STATION_PICKUP_POS, true);
-                    // robot.coralArm.setPosition(
-                    //     moduleName, 0.0, CoralArm.Params.STATION_PICKUP_POS, true, CoralArm.Params.POWER_LIMIT, null,
-                    //     0.0);
+                if (robot.elevatorArmTask != null && pressed)
+                {
                     robot.elevatorArmTask.setCoralStationPickupPositions(moduleName, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Station Pickup Position");
                 }
                 break;
 
@@ -673,68 +707,33 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
-
-                // if (operatorAltFunc)
-                // {
-                //     if (robot.elevator != null)
-                //     {
-                //         if (pressed)
-                //         {
-                //             robot.elevator.presetPositionUp(moduleName, Elevator.Params.POWER_LIMIT);
-                //         }
-                //     }
-                // }
-                // else
-                // {
-                //     if (robot.coralArm != null)
-                //     {
-                //         if (pressed)
-                //         {
-                //             robot.coralArm.presetPositionUp(moduleName, CoralArm.Params.POWER_LIMIT);
-                //         }
-        
-                //     }
-                // }
-                if(pressed && scoreIndex != 3){
+                if (pressed && scoreIndex < 3)
+                {
                     scoreIndex++;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Up: index=", scoreIndex);
                 }
-            
                 break;
 
             case DpadDown:
-                // if (operatorAltFunc)
-                // {
-                //     if (robot.elevator != null)
-                //     {
-                //         if (pressed)
-                //         {
-                //             robot.elevator.presetPositionDown(moduleName, Elevator.Params.POWER_LIMIT);
-                //         }
-                //     }
-                // }
-                // else
-                // {
-                //     if (robot.coralArm != null)
-                //     {
-                //         if (pressed)
-                //         {
-                //             robot.coralArm.presetPositionDown(moduleName, CoralArm.Params.POWER_LIMIT);
-                //         }
-                //     }
-                // }
-                if(pressed && scoreIndex != 0){
+                if (pressed && scoreIndex > 0)
+                {
                     scoreIndex--;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Down: index=", scoreIndex);
                 }
                 break;
 
-            case DpadLeft: 
-                if(pressed && robot.winch != null){
+            case DpadLeft:
+                // Test binding.
+                if (robot.winch != null && pressed)
+                {
                     robot.winch.setPower(0.1);
                 }
                 break;
 
             case DpadRight:
-                if(pressed && robot.winch != null){
+                // Test binding.
+                if(robot.winch != null && pressed)
+                {
                     robot.winch.setPower(-0.1);
                 }
                 break;
@@ -744,6 +743,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     robot.cancelAll();
                     robot.zeroCalibrate(null, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel All and Zero Calibrate");
                 }
                 break;
 
@@ -751,6 +751,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (pressed)
                 {
                     robot.cancelAll();
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel All");
                 }
                 break;
 

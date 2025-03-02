@@ -32,6 +32,7 @@ import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcUserChoices;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision;
+import teamcode.subsystems.AlgaeArm;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
 import teamcode.vision.PhotonVision.PipelineType;
@@ -43,7 +44,6 @@ import trclib.dataprocessor.TrcUtil;
 import trclib.motor.TrcMotor;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcRobot;
-import trclib.robotcore.TrcDbgTrace.MsgLevel;
 import trclib.robotcore.TrcRobot.RunMode;
 import trclib.timer.TrcTimer;
 
@@ -619,52 +619,60 @@ public class FrcTest extends FrcTeleOp
         switch (button)
         {
             case A:
-                if (robot.coralGrabber!= null)
+                if (robot.algaeGrabber!= null)
                 {
                     if (pressed)
                     {
                         if (operatorAltFunc)
                         {
-                            robot.coralGrabber.intake(0.0, null);
+                            robot.algaeGrabber.intake(0.0, null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Algae Intake");
                         }
                         else
                         {
-                            robot.coralGrabber.autoIntake(null);
+                            robot.algaeGrabber.autoIntake(null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
                         }
                     }
-                    else if (robot.coralGrabber.isAutoActive())
+                    else if (robot.algaeGrabber.isAutoActive())
                     {
-                        robot.coralGrabber.cancel();
+                        robot.algaeGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Intake");
                     }
                     else
                     {
-                        robot.coralGrabber.stop();
+                        robot.algaeGrabber.stop();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
                     }
                     passToTeleOp = false;
                 }
                 break;
 
             case B:
-                if (robot.coralGrabber!= null)
+                if (robot.algaeGrabber!= null)
                 {
                     if (pressed)
                     {
                         if (operatorAltFunc)
                         {
-                            robot.coralGrabber.eject(0.0, null);
+                            robot.algaeGrabber.eject(0.0, null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Algae Eject");
                         }
                         else
                         {
-                            robot.coralGrabber.autoEject(null, 1.0, null, 0.0);
+                            robot.algaeGrabber.autoEject(null, 1.0, null, 0.0);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Eject");
                         }
                     }
-                    else if (robot.coralGrabber.isAutoActive())
+                    else if (robot.algaeGrabber.isAutoActive())
                     {
-                        robot.coralGrabber.cancel();
+                        robot.algaeGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Eject");
                     }
                     else
                     {
-                        robot.coralGrabber.stop();
+                        robot.algaeGrabber.stop();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Eject");
                     }
                     passToTeleOp = false;
                 }
@@ -674,14 +682,6 @@ public class FrcTest extends FrcTeleOp
             case Y:
             case LeftBumper:
             case RightBumper:
-                if (pressed)
-                {
-                    robot.coralArm.tracer.setTraceLevel(MsgLevel.DEBUG);
-                }
-                else
-                {
-                    robot.coralArm.tracer.setTraceLevel(MsgLevel.INFO);
-                }
                 break;
 
             case DpadUp:
@@ -735,7 +735,49 @@ public class FrcTest extends FrcTeleOp
                 break;
 
             case DpadLeft:
+                if (robot.algaeArm != null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.algaeArm.setPower(-0.3);
+                        }
+                        else
+                        {
+                            robot.algaeArm.setPidPower(-0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                        }
+                    }
+                    else
+                    {
+                        robot.algaeArm.cancel();
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
             case DpadRight:
+                if (robot.algaeArm != null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.algaeArm.setPower(0.3);
+                        }
+                        else
+                        {
+                            robot.algaeArm.setPidPower(0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                        }
+                    }
+                    else
+                    {
+                        robot.algaeArm.cancel();
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
             case Back:
             case Start:
             default:

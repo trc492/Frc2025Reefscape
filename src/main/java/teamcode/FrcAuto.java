@@ -51,11 +51,11 @@ public class FrcAuto implements TrcRobot.RobotMode
     //
     public enum AutoStrategy
     {
+        REEFSCAPE_AUTO,
         HYBRID_MODE_AUTO,
         PP_DRIVE,
         PID_DRIVE,
         TIMED_DRIVE,
-        REEFSCAPE_AUTO,
         DO_NOTHING
     }   //enum AutoStrategy
 
@@ -72,16 +72,19 @@ public class FrcAuto implements TrcRobot.RobotMode
         }   //AutoStartPos
     }   //enum AutoStartPos
 
-    public enum StationSide{
+    public enum StationSide
+    {
         LEFT,
         RIGHT
-    }
+    }   //enum StationSide
 
-    public enum ScorePickup{
+    public enum ScorePickup
+    {
         SCORE_NONE,
         SCORE_ONE,
         SCORE_TWO
-    }
+    }   //enum ScorePickup
+
     /**
      * This class encapsulates all user choices for autonomous mode from the smart dashboard.
      *
@@ -100,6 +103,7 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_STRATEGY = "Auto/Strategy";
         private static final String DBKEY_AUTO_START_POS = "Auto/StartPos";
         private static final String DBKEY_AUTO_STATION_SIDE = "Auto/StationSide";
+        private static final String DBKEY_AUTO_SCORE_PICKUP = "Auto/ScorePickup";
         private static final String DBKEY_AUTO_START_DELAY = "Auto/StartDelay";
         private static final String DBKEY_AUTO_PATHFILE = "Auto/PathFile";
         private static final String DBKEY_AUTO_X_DRIVE_DISTANCE = "Auto/XDriveDistance";
@@ -110,7 +114,6 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_RELOCALIZE = "Auto/Relocalize";
         private static final String DBKEY_AUTO_GO_TO_STATION = "Auto/GoToStation";
         private static final String DBKEY_AUTO_SCORE_PRELOAD = "Auto/ScorePreload";
-        private static final String DBKEY_AUTO_SCORE_PICKUP = "Auto/ScorePickup";
         private static final String DBKEY_AUTO_USE_VISION   = "Auto/UseVision";
 
         private final FrcUserChoices userChoices = new FrcUserChoices();
@@ -142,10 +145,10 @@ public class FrcAuto implements TrcRobot.RobotMode
             }
             else
             {
+                autoStrategyMenu.addChoice("Reefscape Auto", AutoStrategy.REEFSCAPE_AUTO);
                 autoStrategyMenu.addChoice("Pure Pursuit Drive", AutoStrategy.PP_DRIVE);
                 autoStrategyMenu.addChoice("PID Drive", AutoStrategy.PID_DRIVE);
                 autoStrategyMenu.addChoice("Timed Drive", AutoStrategy.TIMED_DRIVE);
-                autoStrategyMenu.addChoice("Reefscape Auto", AutoStrategy.REEFSCAPE_AUTO);
             }
             autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, true, true);
 
@@ -165,6 +168,8 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addChoiceMenu(DBKEY_AUTO_ALLIANCE, allianceMenu);
             userChoices.addChoiceMenu(DBKEY_AUTO_STRATEGY, autoStrategyMenu);
             userChoices.addChoiceMenu(DBKEY_AUTO_START_POS, autoStartPosMenu);
+            userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationChoiceMenu);
+            userChoices.addChoiceMenu(DBKEY_AUTO_SCORE_PICKUP, scorePickupChoiceMenu);
             userChoices.addNumber(DBKEY_AUTO_START_DELAY, 0.0);
             userChoices.addString(DBKEY_AUTO_PATHFILE, "DrivePath.csv");
             userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 6.0);    // in feet
@@ -242,19 +247,23 @@ public class FrcAuto implements TrcRobot.RobotMode
             return userChoices.getUserNumber(DBKEY_AUTO_DRIVE_TIME);
         }   //getDrivePower
 
-        public boolean getRelocalize(){
+        public boolean getRelocalize()
+        {
             return userChoices.getUserBoolean(DBKEY_AUTO_RELOCALIZE);
         }
 
-        public boolean goToStation(){
+        public boolean goToStation()
+        {
             return userChoices.getUserBoolean(DBKEY_AUTO_GO_TO_STATION);
         }
 
-        public boolean scorePreload(){
+        public boolean scorePreload()
+        {
             return userChoices.getUserBoolean(DBKEY_AUTO_SCORE_PRELOAD);
         }
 
-        public boolean useVision(){
+        public boolean useVision()
+        {
             return userChoices.getUserBoolean(DBKEY_AUTO_USE_VISION);
         }
 
