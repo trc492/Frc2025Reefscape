@@ -96,7 +96,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         //
         if (robot.robotDrive != null)
         {
-            robot.robotDrive.driveBase.setDriveOrientation(DriveOrientation.FIELD, true);
+            // Set robot to FIELD by default but don't change the heading.
+            robot.robotDrive.driveBase.setDriveOrientation(DriveOrientation.FIELD, false);
             // Enable AprilTag vision for re-localization.
             if (robot.photonVisionFront != null)
             {
@@ -380,15 +381,26 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 // Toggle between field or robot oriented driving.
                 if (robot.robotDrive != null && pressed)
                 {
-                    if (robot.robotDrive.driveBase.getDriveOrientation() != DriveOrientation.FIELD)
+                    if (driverAltFunc)
                     {
-                        robot.setDriveOrientation(DriveOrientation.FIELD, true);
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Setting Mode to: Field");
+                        if (robot.robotDrive.driveBase.getDriveOrientation() != DriveOrientation.FIELD)
+                        {
+                            robot.setDriveOrientation(DriveOrientation.FIELD, true);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Setting Mode to: Field");
+                        }
+                        else
+                        {
+                            robot.setDriveOrientation(DriveOrientation.ROBOT, false);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Setting Mode to: Robot");
+                        }
                     }
                     else
                     {
-                        robot.setDriveOrientation(DriveOrientation.ROBOT, false);
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Setting Mode to: Robot");
+                        robot.robotDrive.driveBase.resetFieldForwardHeading();
+                        robot.globalTracer.traceInfo(
+                            moduleName,
+                            ">>>>> Reset field forward heading (heading=" + robot.robotDrive.driveBase.getHeading() +
+                            ")");
                     }
                 }
                 break;
