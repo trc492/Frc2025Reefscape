@@ -363,21 +363,21 @@ public class RobotBase
             // Drive Motor Odometry
             xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
             // Robot Drive Characteristics
-            robotMaxVelocity = 171.0;           // inch/sec
-            robotMaxAcceleration = 23000.0;     // inch/sec sq
+            robotMaxVelocity = 201.0;           // inch/sec
+            robotMaxAcceleration = 6935.0;     // inch/sec sq
             robotMaxDeceleration = robotMaxAcceleration;
-            robotMaxTurnRate = 1450.0;          // degree/sec
+            robotMaxTurnRate = 478.0;          // degree/sec
             profiledMaxVelocity = 157.48;       // inch/sec
             profiledMaxAcceleration = 10000.0;  // inch/sec sq
             profiledMaxDeceleration = profiledMaxAcceleration;
             profiledMaxTurnRate = 180.0;        // degree/sec
             // DriveBase PID Parameters
             drivePidTolerance = 1.0;
-            turnPidTolerance = 2.0;
+            turnPidTolerance = 1.0;
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
             xDriveMaxPidRampRate = yDriveMaxPidRampRate = 0.5;  // %power per sec
-            turnPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 0.0, 0.0); //new PidCoefficients(0.0065, 0.0, 0.0004, 0.0, 10.0);
+            turnPidCoeffs = new PidCoefficients(0.0044, 0.0, 0.0, 0.0, 0.0); //new PidCoefficients(0.0065, 0.0, 0.0004, 0.0, 10.0);
             turnPidPowerLimit = 1.0;
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
@@ -387,7 +387,7 @@ public class RobotBase
             enablePidDriveSquareRootPid = false;
             // PurePursuit Parameters
             usePurePursuitDrive = true;
-            enablePurePursuitDriveSquareRootPid = false;
+            enablePurePursuitDriveSquareRootPid = true;
             ppdFollowingDistance = 10.0;
             velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
             fastModeEnabled = true;
@@ -416,7 +416,7 @@ public class RobotBase
             steerMotorInverted = new boolean[] {false, false, false, false};
             steerMotorPidCoeffs = new PidCoefficients(3.0, 0.0, 0.0, 0.0, 0.0);
             steerMotorPidTolerance = 0.5; // in degrees
-            // Swerve Module parameters.
+            // Swerve Module parameters.    
             swerveModuleNames = new String[] {"lfWheel", "rfWheel", "lbWheel", "rbWheel"};
             driveGearRatio = DRIVE_GEAR_RATIO;
             steerGearRatio = STEER_GEAR_RATIO;
