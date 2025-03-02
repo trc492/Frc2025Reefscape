@@ -23,11 +23,9 @@
  package teamcode.tasks;
 
  import edu.wpi.first.math.util.Units;
- import frclib.vision.FrcPhotonVision;
+import frclib.vision.FrcPhotonVision;
  import teamcode.Robot;
 import teamcode.RobotParams;
-import teamcode.subsystems.CoralArm;
-import teamcode.subsystems.Elevator;
 import trclib.pathdrive.TrcPose2D;
  import trclib.robotcore.TrcAutoTask;
  import trclib.robotcore.TrcEvent;
@@ -76,7 +74,7 @@ import trclib.pathdrive.TrcPose2D;
      private final Robot robot;
      private final TrcEvent driveEvent;
      private final TrcEvent grabberEvent;
-     private final TrcEvent event;
+    //  private final TrcEvent event;
  
      private int aprilTagId = -1;
      private TrcPose2D aprilTagPose = null;
@@ -93,7 +91,7 @@ import trclib.pathdrive.TrcPose2D;
          this.robot = robot;
          this.driveEvent = new TrcEvent(moduleName + ".event");
          this.grabberEvent = new TrcEvent(moduleName + ".event");
-         this.event = new TrcEvent(moduleName + ".event");
+        //  this.event = new TrcEvent(moduleName + ".event");
      }   //TaskAutoPickupCoralFromStation
  
     /**
@@ -192,12 +190,16 @@ import trclib.pathdrive.TrcPose2D;
                     {
                         if(robot.ledIndicator != null)
                         {
-                            robot.ledIndicator.setPhotonDetectedObject(null, null);
+                            // TODO: This needs to be rewritten to use red without calling into Photon
+                            // robot.ledIndicator.setPhotonDetectedObject(null, null);
                         }
                         tracer.traceInfo(moduleName, "We already have an object. Going to DONE");
                         sm.setState(State.DONE);
+                        break;
                     }
                 }
+                // Start moving subsystems into position to save time
+                robot.elevatorArmTask.setCoralStationPickupPositions(owner, null);
                 // Navigate robot to Coral Station point.
                 // Set up vision and subsystems according to task params.
                 aprilTagId = -1;
@@ -242,8 +244,8 @@ import trclib.pathdrive.TrcPose2D;
                 {
                     tracer.traceInfo(moduleName, "***** No AprilTag found.");
                     // If we are in TeleOp and we cannot see the Station, at least we can turn on the hopper intake.
-                    // If we are in Auto and we cannot see the Station, quit.
-                    sm.setState(taskParams.inAuto? State.DONE: State.TAKE_CORAL);
+                    // If we are in Auto and we cannot see the Station, approach using odometry as Human Player can adjust.
+                    sm.setState(taskParams.inAuto? State.APPROACH_STATION: State.TAKE_CORAL);
                 }
                 break;
 
@@ -257,6 +259,7 @@ import trclib.pathdrive.TrcPose2D;
                     tracer.traceInfo(moduleName, "*****Using Vision to drive to AprilTag");
                     targetPose = aprilTagPose.clone();  
                     targetPose.x += robot.robotInfo.cam2.camXOffset; // This value will need to be measured.
+                    // What is 23? If this is a constant put in in RobotParams with a Name april tag height?
                     targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 23;
                     targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 23;
                     
@@ -267,9 +270,11 @@ import trclib.pathdrive.TrcPose2D;
                         //"\n\tintermediatePose=" + intermediatePose +
                         "\n\ttargetPose=" + targetPose);
                         robot.robotDrive.purePursuitDrive.start(
-                            owner, driveEvent, 2.0, true,
+                            owner, driveEvent, 2.0, true, // Tune this timeout
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                             robot.robotInfo.profiledMaxDeceleration, targetPose);
+
+                    // For testing don't gto the next state
                     sm.waitForSingleEvent(driveEvent, State.DONE);//State.TAKE_CORAL);
                 }
                 else if (!taskParams.inAuto)
@@ -279,8 +284,13 @@ import trclib.pathdrive.TrcPose2D;
                 }
                 else
                 {
-                    tracer.traceInfo(owner, "We cannot accurately use Odometry to move to the Station. Going to DONE");
-                    sm.setState(State.DONE);
+                    tracer.traceInfo(owner, "We cannot accurately use Odometry to move to the Station... but we're doing it anyways.");
+                    robot.robotDrive.purePursuitDrive.start(
+                        owner, driveEvent, 2.0, false, // Tune this timeout
+                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration, 
+                        // TODO: Use both coral stations
+                        robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(RobotParams.Game.PROCESSOR_CORAL_STATION_RED, null));
+                    sm.setState(State.TAKE_CORAL);
                 }
                 // } else if(!taskParams.inAuto){
                 //     tracer.traceInfo(moduleName, "****** Using Robot Position to drive to closest AprilTag");
@@ -312,22 +322,18 @@ import trclib.pathdrive.TrcPose2D;
                 {
                     if (robot.coralArm != null && robot.elevator != null && robot.coralGrabber != null)
                     {
-                        double elevatorPos;
-                        double armPos;
                         tracer.traceInfo(
                             moduleName, "***** Moving Elevator and Arm to pickup position for Coral Station coral");
-                        elevatorPos = Elevator.Params.STATION_PICKUP_POS;
-                        armPos = CoralArm.Params.STATION_PICKUP_POS;
-                        // TODO: This implentation will have to change depending of how we do the safe-zone code
-                        robot.elevator.setPosition(0.0, elevatorPos, true, Elevator.Params.POWER_LIMIT, event);
-                        robot.coralArm.setPosition(0.0, armPos, true, CoralArm.Params.POWER_LIMIT, event);
-                        //robot.moveSubsystem(moduleName, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
-                        sm.addEvent(event);
+                        // Been moved to State.START
+                        // Why would you wait for the elvator, I mean if you have one, just go?
+                        // robot.elevatorArmTask.setCoralStationPickupPositions(owner, null);
+                        // sm.addEvent(event);
                         
                         robot.coralGrabber.autoIntake(moduleName, 0.0, grabberEvent, 2.0);
-                        sm.addEvent(grabberEvent);
+                        // sm.addEvent(grabberEvent);
 
-                        sm.waitForEvents(State.DONE);
+                        // sm.waitForEvents(State.DONE);
+                        sm.waitForSingleEvent(grabberEvent, State.DONE);
                     }
                 }
                 else

@@ -27,6 +27,7 @@ import frclib.vision.FrcPhotonVision;
 import teamcode.Robot;
 import teamcode.RobotParams;
 import teamcode.subsystems.CoralArm;
+import teamcode.subsystems.CoralGrabber;
 import teamcode.subsystems.Elevator;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcAutoTask;
@@ -219,6 +220,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                     tracer.traceInfo(moduleName, "***** Not using AprilTag Vision.");
                     sm.setState(State.SCORE_CORAL);
                 }
+                tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position to reefLevel: " + taskParams.reefLevel);
+                robot.elevatorArmTask.setCoralScorePositions(owner, taskParams.reefLevel, event);
                 break;
 
             case FIND_REEF_APRILTAG:
@@ -288,27 +291,16 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 // Code Review: Prep'ing the elevator and the coral arm to the proper position for scoring should be
                 // done early in the START state. There will save time. Why do you need robot.moveSusystem? Was it
                 // because there is a dependency on moving the arm and the elevator? I thought we can move them
-                // simultaneously.
-                double elevatorPos;
-                double armPos;
-                tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position to reefLevel: " + taskParams.reefLevel);
-                elevatorPos = Elevator.Params.SCORE_LEVEL_POS[taskParams.reefLevel];
-                armPos = CoralArm.Params.posPresets[taskParams.reefLevel]; 
-                // TODO: Setting this position will need to be changed according to how we implement the safe-zone system.
-                robot.coralArm.setPosition(0.0, armPos, true, CoralArm.Params.POWER_LIMIT, event);
-                robot.elevator.setPosition(2.0, elevatorPos, true, Elevator.Params.POWER_LIMIT, event);
-                //robot.moveSubsystem(currOwner, elevatorPos, 0.0, armPos, 0.0, 4.0, event);
-                sm.addEvent(event);
+                // simultaneously. Resolved.
                 if(robot.coralGrabber.hasObject())
                 {
-                    
                     robot.coralGrabber.autoEject(owner, 0.0, scoreEvent, 2.0);
                     
-                    sm.addEvent(scoreEvent);
                 } else{
-                    tracer.traceInfo(owner, "Coral Grabber does not have Coral to score");
+                    tracer.traceInfo(owner, "Coral Grabber does not have Coral to score, manual eject to be safe");
+                    robot.coralGrabber.eject(owner, CoralGrabber.Params.DUMP_TIME, scoreEvent);
                 }
-                sm.waitForEvents(State.DONE);
+                sm.waitForSingleEvent(scoreEvent, State.DONE);
                 break;
 
             default:
