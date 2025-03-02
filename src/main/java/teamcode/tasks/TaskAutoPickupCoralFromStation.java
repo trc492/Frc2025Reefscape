@@ -320,7 +320,7 @@ import trclib.pathdrive.TrcPose2D;
                 // Code to bring elevator and grabber down to position to pickup coral
                 if (!robot.coralGrabber.hasObject())
                 {
-                    if (robot.coralArm != null && robot.elevator != null && robot.coralGrabber != null)
+                    if (robot.elevatorArmTask != null && robot.coralGrabber != null)
                     {
                         tracer.traceInfo(
                             moduleName, "***** Moving Elevator and Arm to pickup position for Coral Station coral");

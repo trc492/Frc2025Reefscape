@@ -124,9 +124,6 @@ public class Robot extends FrcRobotBase
     //
     // Other subsystems.
     //
-    public TrcMotor coralArm;
-    public TrcMotor algaeArm;
-    public TrcMotor elevator;
     public TrcMotorGrabber coralGrabber;
     public TrcMotorGrabber algaeGrabber;
     public TrcMotor winch;
@@ -271,7 +268,7 @@ public class Robot extends FrcRobotBase
 
             if (RobotParams.Preferences.useSubsystems)
             {
-                // TrcMotor coralArm, algaeArm, elevator;
+                TrcMotor coralArm = null, algaeArm = null, elevator = null;
                 // Create subsystems.
                 if (RobotParams.Preferences.useCoralArm)
                 {

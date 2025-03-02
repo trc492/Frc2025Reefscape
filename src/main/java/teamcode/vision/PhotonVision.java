@@ -223,7 +223,7 @@ public class PhotonVision extends FrcPhotonVision
      * ID at the top.
      *
      * @param detectionEvent specifies the event to signal when it detects the target.
-     * @param aprilTagIds specifies the AprilTag IDs to look for.
+     * @param aprilTagIds specifies the AprilTag IDs to look for, null to look for any.
      * @return best detected AprilTag.
      */
     public DetectedObject getBestDetectedAprilTag(TrcEvent detectionEvent, int... aprilTagIds)
@@ -280,7 +280,7 @@ public class PhotonVision extends FrcPhotonVision
      * This method get the best detected AprilTag matching the specified AprilTag IDs array sorted by most preferred
      * ID at the top.
      *
-     * @param aprilTagIds specifies the AprilTag IDs to look for.
+     * @param aprilTagIds specifies the AprilTag IDs to look for, null to look for any.
      * @return best detected AprilTag.
      */
     public DetectedObject getBestDetectedAprilTag(int... aprilTagIds)
