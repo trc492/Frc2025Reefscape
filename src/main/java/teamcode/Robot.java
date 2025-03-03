@@ -169,43 +169,15 @@ public class Robot extends FrcRobotBase
         }
 
         // Create and initialize inputs.
-        if (RobotParams.Preferences.useDriverXboxController)
-        {
-            driverController = new FrcXboxController("DriverController", RobotParams.HwConfig.XBOX_DRIVER_CONTROLLER);
-            driverController.setLeftStickInverted(false, true);
-            driverController.setRightStickInverted(false, true);
-        }
-        else if (RobotParams.Preferences.doOneStickDrive)
-        {
-            driverJoystick = new FrcJoystick("DriverJoystick", RobotParams.HwConfig.JSPORT_DRIVER_RIGHTSTICK);
-            driverJoystick.setInverted(false, true);
-        }
-        else
-        {
-            driverDualJoystick = new FrcDualJoystick(
-                "DriverDualJoystick", RobotParams.HwConfig.JSPORT_DRIVER_LEFTSTICK,
-                RobotParams.HwConfig.JSPORT_DRIVER_RIGHTSTICK);
-            driverDualJoystick.setLeftStickInverted(false, true);
-        }
+        driverController = new FrcXboxController(
+            "DriverController", RobotParams.HwConfig.XBOX_DRIVER_CONTROLLER);
+        driverController.setLeftStickInverted(false, true);
+        driverController.setRightStickInverted(false, true);
 
-        if (RobotParams.Preferences.useOperatorXboxController)
-        {
-            operatorController = new FrcXboxController(
-                "OperatorController", RobotParams.HwConfig.XBOX_OPERATOR_CONTROLLER);
-            operatorController.setLeftStickInverted(false, true);
-            operatorController.setRightStickInverted(false, true);
-        }
-        else
-        {
-            operatorStick = new FrcJoystick("operatorJoystick", RobotParams.HwConfig.JSPORT_OPERATORSTICK);
-            operatorStick.setInverted(false, true);
-        }
-
-        if (RobotParams.Preferences.useButtonPanels)
-        {
-            buttonPanel = new FrcButtonPanel("buttonPanel", RobotParams.HwConfig.JSPORT_BUTTON_PANEL);
-            switchPanel = new FrcButtonPanel("switchPanel", RobotParams.HwConfig.JSPORT_SWITCH_PANEL);
-        }
+        operatorController = new FrcXboxController(
+            "OperatorController", RobotParams.HwConfig.XBOX_OPERATOR_CONTROLLER);
+        operatorController.setLeftStickInverted(false, true);
+        operatorController.setRightStickInverted(false, true);
 
         // Create and initialize sensors.
         if (RobotParams.Preferences.usePdp)

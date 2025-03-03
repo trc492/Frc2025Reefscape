@@ -22,9 +22,6 @@
 
 package teamcode;
 
-import frclib.driverio.FrcButtonPanel;
-import frclib.driverio.FrcDualJoystick;
-import frclib.driverio.FrcJoystick;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.AlgaeArm;
@@ -223,16 +220,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                                     driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
                             }
                         }
-                        else if (RobotParams.Preferences.useTankDrive)
-                        {
-                            robot.robotDrive.driveBase.tankDrive(driveInputs[0], driveInputs[1]);
-                            if (subsystemStatusOn)
-                            {
-                                robot.dashboard.displayPrintf(
-                                    lineNum++, "Tank: left=%.2f, right=%.2f, rot=%.2f",
-                                    driveInputs[0], driveInputs[1], driveInputs[2]);
-                            }
-                        }
                         else
                         {
                             robot.robotDrive.driveBase.arcadeDrive(driveInputs[1], driveInputs[2]);
@@ -325,34 +312,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     protected void setControlsEnabled(boolean enabled)
     {
         controlsEnabled = enabled;
-
-        if (robot.driverController != null)
-        {
-            robot.driverController.setButtonEventHandler(enabled? this::driverControllerButtonEvent: null);
-        }
-        else if (robot.driverJoystick != null)
-        {
-            robot.driverJoystick.setButtonEventHandler(enabled? this::driverJoystickButtonEvent: null);
-        }
-        else
-        {
-            robot.driverDualJoystick.setButtonEventHandler(enabled? this::driverDualJoystickButtonEvent: null);
-        }
-
-        if (robot.operatorController != null)
-        {
-            robot.operatorController.setButtonEventHandler(enabled? this::operatorControllerButtonEvent: null);
-        }
-        else
-        {
-            robot.operatorStick.setButtonEventHandler(enabled? this::operatorStickButtonEvent: null);
-        }
-
-        if (RobotParams.Preferences.useButtonPanels)
-        {
-            robot.buttonPanel.setButtonEventHandler(enabled? this::buttonPanelButtonEvent: null);
-            robot.switchPanel.setButtonEventHandler(enabled? this::switchPanelButtonEvent: null);
-        }
+        robot.driverController.setButtonEventHandler(enabled? this::driverControllerButtonEvent: null);
+        robot.operatorController.setButtonEventHandler(enabled? this::operatorControllerButtonEvent: null);
     }   //setControlsEnabled
 
     //
@@ -518,52 +479,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     }   //driverControllerButtonEvent
 
     /**
-     * This method is called when a driver joystick button event is detected.
-     *
-     * @param button specifies the button that generated the event.
-     * @param pressed specifies true if the button is pressed, false otherwise.
-     */
-    protected void driverJoystickButtonEvent(FrcJoystick.ButtonType button, boolean pressed)
-    {
-        if (traceButtonEvents)
-        {
-            robot.globalTracer.traceInfo(moduleName, "##### button=" + button + ", pressed=" + pressed);
-        }
-
-        robot.dashboard.displayPrintf(
-            8, "DriveJoystick: " + button + "=" + (pressed ? "pressed" : "released"));
-
-        switch (button)
-        {
-            default:
-                break;
-        }
-    }   //driverJoystickButtonEvent
-
-    /**
-     * This method is called when a driver dual joystick button event is detected.
-     *
-     * @param button specifies the button that generated the event.
-     * @param pressed specifies true if the button is pressed, false otherwise.
-     */
-    protected void driverDualJoystickButtonEvent(FrcDualJoystick.ButtonType button, boolean pressed)
-    {
-        if (traceButtonEvents)
-        {
-            robot.globalTracer.traceInfo(moduleName, "##### button=" + button + ", pressed=" + pressed);
-        }
-
-        robot.dashboard.displayPrintf(
-            8, "DriveDualJoystick: " + button + "=" + (pressed ? "pressed" : "released"));
-
-        switch (button)
-        {
-            default:
-                break;
-        }
-    }   //driverDualJoystickButtonEvent
-
-    /**
      * This method is called when an operator controller button event is detected.
      *
      * @param button specifies the button that generated the event.
@@ -715,74 +630,5 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
         }
     }   //operatorControllerButtonEvent
-
-    /**
-     * This method is called when an operator stick button event is detected.
-     *
-     * @param button specifies the button that generated the event.
-     * @param pressed specifies true if the button is pressed, false otherwise.
-     */
-    protected void operatorStickButtonEvent(FrcJoystick.ButtonType button, boolean pressed)
-    {
-        if (traceButtonEvents)
-        {
-            robot.globalTracer.traceInfo(moduleName, "##### button=" + button + ", pressed=" + pressed);
-        }
-
-        robot.dashboard.displayPrintf(
-            8, "OperatorStick: " + button + "=" + (pressed ? "pressed" : "released"));
-
-        switch (button)
-        {
-            default:
-                break;
-        }
-    }   //operatorStickButtonEvent
-
-    /**
-     * This method is called when a button panel button event is detected.
-     *
-     * @param button specifies the button that generated the event.
-     * @param pressed specifies true if the button is pressed, false otherwise.
-     */
-    protected void buttonPanelButtonEvent(FrcButtonPanel.ButtonType button, boolean pressed)
-    {
-        if (traceButtonEvents)
-        {
-            robot.globalTracer.traceInfo(moduleName, "##### button=" + button + ", pressed=" + pressed);
-        }
-
-        robot.dashboard.displayPrintf(
-            8, "ButtonPanel: " + button + "=" + (pressed ? "pressed" : "released"));
-
-        switch (button)
-        {
-            default:
-                break;
-        }
-    }   //buttonPanelButtonEvent
-
-    /**
-     * This method is called when a switch panel button event is detected.
-     *
-     * @param button specifies the button that generated the event.
-     * @param pressed specifies true if the button is pressed, false otherwise.
-     */
-    protected void switchPanelButtonEvent(FrcButtonPanel.ButtonType button, boolean pressed)
-    {
-        if (traceButtonEvents)
-        {
-            robot.globalTracer.traceInfo(moduleName, "##### button=" + button + ", pressed=" + pressed);
-        }
-
-        robot.dashboard.displayPrintf(
-            8, "SwitchPanel: " + button + "=" + (pressed ? "pressed" : "released"));
-
-        switch (button)
-        {
-            default:
-                break;
-        }
-    }   //switchPanelButtonEvent
 
 }   //class FrcTeleOp

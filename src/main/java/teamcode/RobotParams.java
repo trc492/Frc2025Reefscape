@@ -57,12 +57,6 @@ public class RobotParams
         public static final boolean showPidDrive                = false;
         public static final boolean showVision                  = true;
         public static final boolean showSubsystems              = true;
-        // Inputs
-        public static final boolean useDriverXboxController     = true;
-        public static final boolean useOperatorXboxController   = true;
-        public static final boolean useTankDrive                = false;
-        public static final boolean doOneStickDrive             = false;
-        public static final boolean useButtonPanels             = false;
         // Sensors
         public static final boolean useNavX                     = true;
         public static final boolean usePdp                      = false;
