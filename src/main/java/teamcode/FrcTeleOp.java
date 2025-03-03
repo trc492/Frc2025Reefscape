@@ -97,7 +97,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         if (robot.robotDrive != null)
         {
             // Set robot to FIELD by default but don't change the heading.
-            robot.robotDrive.driveBase.setDriveOrientation(DriveOrientation.FIELD, false);
+            robot.robotDrive.driveBase.setDriveOrientation(RobotParams.Robot.DRIVE_ORIENTATION, false);
             // Enable AprilTag vision for re-localization.
             if (robot.photonVisionFront != null)
             {

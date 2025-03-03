@@ -148,7 +148,7 @@ public class RobotParams
         public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
         // PWM channels.
         public static final int NUM_LEDS                        = 60;
-        public static final int PWM_CHANNEL_LED                 = 9;
+        public static final int PWM_CHANNEL_LED                 = 1;
         // Relay channels.
 
         // Pneumatic channels.
@@ -195,7 +195,7 @@ public class RobotParams
         public static final double ROBOT_WIDTH                  = 34.5;
         // Robot Drive Parameters.
         public static final DriveMode DRIVE_MODE                = DriveMode.ArcadeMode;
-        public static final DriveOrientation DRIVE_ORIENTATION  = DriveOrientation.ROBOT;
+        public static final DriveOrientation DRIVE_ORIENTATION  = DriveOrientation.FIELD;
         public static final double DRIVE_SLOW_SCALE             = 0.25;
         public static final double DRIVE_NORMAL_SCALE           = 1.0;
         public static final double TURN_SLOW_SCALE              = 0.25;
