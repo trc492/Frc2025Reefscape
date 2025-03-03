@@ -53,8 +53,8 @@ public class Winch extends TrcSubsystem
         public static final boolean LOWER_LIMITSWITCH_INVERTED  = false;
 
         public static final double GEAR_RATIO                   = 60.0;
-        public static final double SPOOL_DIAMETER               = 1.5;  //TODO: determine
-        public static final double INCHES_PER_REV               = Math.PI * SPOOL_DIAMETER / GEAR_RATIO;
+        public static final double SPOOL_DIAMETER               = 1.0;
+        public static final double INCHES_PER_REV               = 0.0607;   //Math.PI * SPOOL_DIAMETER / GEAR_RATIO;
         public static final double POS_OFFSET                   = 0.0;
         public static final double POWER_LIMIT                  = 0.5;  //TODO: determine
         public static final double ZERO_CAL_POWER               = -0.5; //TODO: determine

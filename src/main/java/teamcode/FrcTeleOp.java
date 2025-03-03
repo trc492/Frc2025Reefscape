@@ -27,6 +27,7 @@ import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.AlgaeArm;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
+import teamcode.subsystems.Winch;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.pathdrive.TrcPose2D;
@@ -55,6 +56,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevCoralArmPower = 0.0;
     private double prevAlgaeArmPower = 0.0;
     private double prevElevatorPower = 0.0;
+    private double prevWinchPower = 0.0;
     private int scoreIndex = 3;
 
     /**
@@ -276,6 +278,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                                 robot.elevatorArmTask.setAlgaeArmPidPower(null, power);
                             }
                             prevAlgaeArmPower = power;
+                        }
+
+                        power = robot.driverController.getTrigger(true) * Winch.Params.POWER_LIMIT;
+                        if (power != prevWinchPower)
+                        {
+                            robot.winch.setPower(power);
+                            prevWinchPower = power;
                         }
                     }
                 }
