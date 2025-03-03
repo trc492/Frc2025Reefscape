@@ -55,24 +55,27 @@ public class AlgaeArm extends TrcSubsystem
         public static final boolean LOWER_LIMITSW_INVERTED      = true;
         public static final boolean UPPER_LIMITSW_NORMAL_CLOSE  = true;
         public static final boolean UPPER_LIMITSW_INVERTED      = true;
+        public static final boolean ENCODER_INVERTED            = true;
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
-        public static final double POS_OFFSET                   = 0.0;  //TODO: tune
+        public static final double POS_OFFSET                   = 155.0;
+        public static final double ZERO_OFFSET                  = 1768.0;
         public static final double POWER_LIMIT                  = 0.5;
 
-        public static final double MIN_POS                      = POS_OFFSET;
-        public static final double MAX_POS                      = 180.0;//TODO: tune
-        public static final double TURTLE_POS                   = 10.0; //TODO: tune
+        public static final double MIN_POS                      = 10.0;
+        public static final double MAX_POS                      = 150.0;//TODO: tune
+        public static final double TURTLE_POS                   = MIN_POS; //TODO: tune
         public static final double CLIMB_POS                    = 15.0;
-        public static final double SAFE_ZONE_POS                = 30.0; //TODO: tune
-        public static final double[] posPresets                 = {MIN_POS, 30.0, 60.0, 90.0, 120.0, 150.0, 180.0};
+        public static final double SAFE_ZONE_POS                = MIN_POS; //TODO: tune
+
+        public static final double[] posPresets                 = {MIN_POS, 30.0, 60.0, 90.0, 120.0, 150.0};
         public static final double POS_PRESET_TOLERANCE         = 5.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.018, 0.1, 0.001, 0.0, 2.0);  //TODO: tune
+            new TrcPidController.PidCoefficients(0.022, 0.0, 0.001, 0.0, 0.0);  //TODO: tune
         public static final double POS_PID_TOLERANCE            = 1.0;
-        public static final double GRAVITY_COMP_MAX_POWER       = 0.158;    //TODO: tune
+        public static final double GRAVITY_COMP_MAX_POWER       = 0.0;    //TODO: tune
     }   //class Params
 
     private final TrcMotor algaeArmMotor;
@@ -99,6 +102,7 @@ public class AlgaeArm extends TrcSubsystem
         // Configure encoder
         FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) algaeArmMotor;
         talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        talonSrx.setPositionSensorInverted(Params.ENCODER_INVERTED);
 
         algaeArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
         algaeArmMotor.setPositionPidPowerComp(this::getGravityComp);

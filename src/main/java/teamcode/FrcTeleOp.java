@@ -55,7 +55,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevCoralArmPower = 0.0;
     private double prevAlgaeArmPower = 0.0;
     private double prevElevatorPower = 0.0;
-    private int scoreIndex = 1;
+    private int scoreIndex = 3;
 
     /**
      * Constructor: Create an instance of the object.
@@ -561,21 +561,55 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case RightBumper:
+                if (robot.algaeGrabber != null)
+                {
+                    if (pressed)
+                    {
+                        robot.algaeGrabber.autoIntake(null);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
+                    }
+                    else if (robot.algaeGrabber.isAutoActive())
+                    {
+                        robot.algaeGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Intake");
+                    }
+                    else
+                    {
+                        robot.algaeGrabber.stop();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
+                    }
+                }
                 break;
 
             case DpadUp:
-                if (pressed && scoreIndex < 3)
+                if (pressed)
                 {
-                    scoreIndex++;
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Up: index=", scoreIndex);
+                    if (scoreIndex < 3)
+                    {
+                        scoreIndex++;
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Up: index=", scoreIndex);
+                    }
+
+                    if (robot.ledIndicator != null)
+                    {
+                        robot.ledIndicator.setReefLevel(scoreIndex);
+                    }
                 }
                 break;
 
             case DpadDown:
-                if (pressed && scoreIndex > 0)
+                if (pressed)
                 {
-                    scoreIndex--;
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Down: index=", scoreIndex);
+                    if (scoreIndex > 0)
+                    {
+                        scoreIndex--;
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Down: index=", scoreIndex);
+                    }
+
+                    if (robot.ledIndicator != null)
+                    {
+                        robot.ledIndicator.setReefLevel(scoreIndex);
+                    }
                 }
                 break;
 
