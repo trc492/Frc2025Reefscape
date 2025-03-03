@@ -46,7 +46,8 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
     }   //enum State
 
     private final Robot robot;
-    private final TrcEvent event;
+    private final TrcEvent elevatorArmEvent;
+    private final TrcEvent winchEvent;
 
     /**
      * Constructor: Create an instance of the object.
@@ -57,7 +58,8 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
     {
         super(moduleName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.robot = robot;
-        this.event = new TrcEvent(moduleName + ".event");
+        this.elevatorArmEvent = new TrcEvent(moduleName + ".elevatorArmEvent");
+        this.winchEvent = new TrcEvent(moduleName + ".winchEvent");
     }   //TaskAutoClimb
 
     /**
@@ -145,9 +147,21 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
         switch (state)
         {
             case START:
+                elevatorArmEvent.clear();
+                winchEvent.clear();
+                // Prep the elevatorArm for climbing.
+                if (robot.elevatorArmTask != null)
+                {
+                    robot.elevatorArmTask.setClimbPosition(owner, elevatorArmEvent);
+                    sm.addEvent(elevatorArmEvent);
+                }
+                // Code Review: is there a dependency between the elevatorArm and the winch? If there is, you may need
+                // to not do these concurrently but in two separate states.
                 // Break the ziptie by zero calibration.
-                robot.winch.zeroCalibrate(owner, Winch.Params.ZERO_CAL_POWER, event);
-                sm.waitForSingleEvent(event, State.SPOOL_OUT);
+                robot.winch.zeroCalibrate(owner, Winch.Params.ZERO_CAL_POWER, winchEvent);
+                sm.addEvent(winchEvent);
+                sm.waitForEvents(State.SPOOL_OUT, false, true);
+                break;
                 // if (robot.coralGrabber != null) 
                 // {
                 //     if (robot.coralGrabber.hasObject())
@@ -174,17 +188,16 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
                 // {
                 //     sm.setState(State.CLIMB);
                 // }
-                break;
 
             case SPOOL_OUT:
-                robot.winch.setPosition(owner, 0.0, Winch.Params.SPOOL_OUT_POS, true, 1.0, event, 0.0);
-                sm.waitForSingleEvent(event, State.CLIMB);
+                robot.winch.setPosition(owner, 0.0, Winch.Params.SPOOL_OUT_POS, true, 1.0, winchEvent, 0.0);
+                sm.waitForSingleEvent(winchEvent, State.CLIMB);
                 break;
 
             case CLIMB:
                 robot.winch.setPosition(
-                    owner, 0.0, Winch.Params.CLIMB_POS, true, 1.0, event, 0.0);
-                sm.waitForSingleEvent(event, State.DONE);
+                    owner, 0.0, Winch.Params.CLIMB_POS, true, 1.0, winchEvent, 0.0);
+                sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;
 
             default:

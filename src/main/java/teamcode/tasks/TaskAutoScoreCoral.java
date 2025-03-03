@@ -281,7 +281,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 if (robot.elevatorArmTask != null)
                 {
                     tracer.traceInfo(moduleName, "***** Moving Elevator and Arm to scoring position to reefLevel: " + taskParams.reefLevel);
-                    robot.elevatorArmTask.setCoralScorePositions(owner, taskParams.reefLevel, elevatorArmEvent);
+                    robot.elevatorArmTask.setCoralScorePosition(owner, taskParams.reefLevel, elevatorArmEvent);
                     sm.addEvent(elevatorArmEvent);
                 }
                 sm.waitForEvents(State.DONE/*SCORE_CORAL*/, true, true);

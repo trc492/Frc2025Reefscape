@@ -557,7 +557,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case X:
                 if (robot.elevatorArmTask !=null && pressed)
                 {
-                    robot.elevatorArmTask.setCoralScorePositions(moduleName, scoreIndex, null);
+                    robot.elevatorArmTask.setCoralScorePosition(moduleName, scoreIndex, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Score Position");
                 }
                 break;
@@ -565,7 +565,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case Y:
                 if (robot.elevatorArmTask != null && pressed)
                 {
-                    robot.elevatorArmTask.setCoralStationPickupPositions(moduleName, null);
+                    robot.elevatorArmTask.setCoralStationPickupPosition(moduleName, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Station Pickup Position");
                 }
                 break;

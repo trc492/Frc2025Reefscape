@@ -199,7 +199,7 @@ import trclib.pathdrive.TrcPose2D;
                     }
                 }
                 // Start moving subsystems into position to save time
-                robot.elevatorArmTask.setCoralStationPickupPositions(owner, null);
+                robot.elevatorArmTask.setCoralStationPickupPosition(owner, null);
                 // Navigate robot to Coral Station point.
                 // Set up vision and subsystems according to task params.
                 aprilTagId = -1;
