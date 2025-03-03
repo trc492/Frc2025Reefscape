@@ -206,21 +206,17 @@ public class RobotParams
         // Robot starting positions.
         //
         public static final double STARTPOS_BLUE_Y              = Robot.ROBOT_LENGTH / 2.0;
-        public static final double STARTPOS_RED_Y               = Field.LENGTH - STARTPOS_BLUE_Y;
-        public static final double STARTPOS_1_X                 = -42.19;
-        public static final double STARTPOS_2_X                 = -108.19;
-        public static final double STARTPOS_3_X                 = -174.19;
-        public static final TrcPose2D STARTPOS_BLUE_1           = new TrcPose2D(STARTPOS_1_X, STARTPOS_BLUE_Y, 180.0);
-        public static final TrcPose2D STARTPOS_BLUE_2           = new TrcPose2D(STARTPOS_2_X, STARTPOS_BLUE_Y, 180.0);
-        public static final TrcPose2D STARTPOS_BLUE_3           = new TrcPose2D(STARTPOS_3_X, STARTPOS_BLUE_Y, 180.0);
-        public static final TrcPose2D STARTPOS_RED_1            = new TrcPose2D(STARTPOS_1_X, STARTPOS_RED_Y, 0.0);
-        public static final TrcPose2D STARTPOS_RED_2            = new TrcPose2D(STARTPOS_2_X, STARTPOS_RED_Y, 0.0);
-        public static final TrcPose2D STARTPOS_RED_3            = new TrcPose2D(STARTPOS_3_X, STARTPOS_RED_Y, 0.0);
-        public static final TrcPose2D[][] startPoses            =
-        {
-            {STARTPOS_BLUE_1, STARTPOS_BLUE_2, STARTPOS_BLUE_3},
-            {STARTPOS_RED_1, STARTPOS_RED_2, STARTPOS_RED_3}
-        };
+        public static final double STARTPOS_PROCESSOR_X         = -42.19;
+        public static final double STARTPOS_CENTER_X            = -108.19;
+        public static final double STARTPOS_FAR_X               = -174.19;
+        public static final TrcPose2D STARTPOS_BLUE_PROCESSOR   =
+            new TrcPose2D(STARTPOS_PROCESSOR_X, STARTPOS_BLUE_Y, 180.0);
+        public static final TrcPose2D STARTPOS_BLUE_CENTER      =
+            new TrcPose2D(STARTPOS_CENTER_X, STARTPOS_BLUE_Y, 180.0);
+        public static final TrcPose2D STARTPOS_BLUE_FAR         =
+            new TrcPose2D(STARTPOS_FAR_X, STARTPOS_BLUE_Y, 180.0);
+        public static final TrcPose2D[] startPoses              =
+            {STARTPOS_BLUE_PROCESSOR, STARTPOS_BLUE_CENTER, STARTPOS_BLUE_FAR};
         //
         // Game element locations and dimensions.
         //

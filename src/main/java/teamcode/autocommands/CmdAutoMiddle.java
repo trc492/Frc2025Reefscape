@@ -156,7 +156,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                 case START:
                     // Set robot location according to auto choices.
                     // If this method does nothing then we will have to find another way to find our current position
-                    robot.setRobotStartPosition(autoChoices); // TODO: This method does nothing, do we need to add code to make it functional?
+                    robot.setRobotStartPosition(); // TODO: This method does nothing, do we need to add code to make it functional?
                     startPos = FrcAuto.autoChoices.getStartPos();
                     stationSide = FrcAuto.autoChoices.getStationSide();
                     scorePickup = FrcAuto.autoChoices.getScorePickup();

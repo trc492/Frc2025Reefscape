@@ -49,7 +49,6 @@ import frclib.sensor.FrcAHRSGyro;
 import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
-import teamcode.FrcAuto.AutoChoices;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.CoralGrabber;
 import teamcode.subsystems.IntakeDeployer;
@@ -618,20 +617,6 @@ public class Robot extends FrcRobotBase
     }   //turtle
 
     /**
-     * This method sets the robot's starting position according to the autonomous choices.
-     *
-     * @param autoChoices specifies all the auto choices.
-     */
-    public void setRobotStartPosition(AutoChoices autoChoices)
-    {
-        // robotDrive.driveBase.setFieldPosition(
-        //     adjustPoseByAlliance(
-        //         autoChoices.startPos == FtcAuto.StartPos.NET_ZONE?
-        //             RobotParams.Game.STARTPOSE_RED_NET_ZONE: RobotParams.Game.STARTPOSE_RED_OBSERVATION_ZONE,
-        //         autoChoices.alliance, false));
-    }   //setRobotStartPosition
-
-    /**
      * This method creates and opens the trace log with the file name derived from the given match info.
      * Note that the trace log is disabled after it is opened. The caller must explicitly call setTraceLogEnabled
      * to enable/disable it.
@@ -732,9 +717,9 @@ public class Robot extends FrcRobotBase
 
         if (pose == null)
         {
-            int startPos = FrcAuto.autoChoices.getStartPos().value;
-            robotPose = (FrcAuto.autoChoices.getAlliance() == Alliance.Blue?
-                RobotParams.Game.startPoses[0][startPos]: RobotParams.Game.startPoses[1][startPos]).clone();
+            int startPosIndex = FrcAuto.autoChoices.getStartPos().value;
+            Alliance alliance = FrcAuto.autoChoices.getAlliance();
+            robotPose = adjustPoseByAlliance(RobotParams.Game.startPoses[startPosIndex], alliance);
         }
         else
         {
@@ -768,6 +753,14 @@ public class Robot extends FrcRobotBase
     {
         setFieldPosition(null, useCompassHeading);
     }   //setFieldPosition
+
+    /**
+     * This method sets the robot's starting position according to the autonomous choices.
+     */
+    public void setRobotStartPosition()
+    {
+        setFieldPosition(null, false);
+    }   //setRobotStartPosition
 
     /**
      * This method sets the drive orientation mode and update the LEDs if necessary.

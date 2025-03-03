@@ -159,7 +159,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                 // + Sarah hasn't finish auto pickup task so putting in values for that as well
                 case START:
                     // Set robot location according to auto choices.
-                    robot.setRobotStartPosition(autoChoices);
+                    robot.setRobotStartPosition();
                     // Initialize auto choices.
                     alliance = FrcAuto.autoChoices.getAlliance();
                     autoStrategy = FrcAuto.autoChoices.getStrategy();
