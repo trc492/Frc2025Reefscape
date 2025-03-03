@@ -57,10 +57,11 @@ public class RobotParams
         public static final boolean showPidDrive                = false;
         public static final boolean showVision                  = true;
         public static final boolean showSubsystems              = true;
-        // Sensors
+        // Sensors and Indicators
         public static final boolean useNavX                     = true;
         public static final boolean usePdp                      = false;
         public static final boolean usePressureSensor           = false;
+        public static final boolean useLED                      = true;
         // Vision
         public static final boolean useVision                   = false;
         public static final boolean usePhotonVision             = true;
@@ -136,8 +137,8 @@ public class RobotParams
         // TODO: remove.
         public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
         // PWM channels.
-        public static final int NUM_LEDS                        = 60;
-        public static final int PWM_CHANNEL_LED                 = 1;
+        public static final int NUM_LEDS                        = 30;
+        public static final int PWM_CHANNEL_LED                 = 0;
         // Relay channels.
 
         // Pneumatic channels.

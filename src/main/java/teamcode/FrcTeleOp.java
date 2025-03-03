@@ -94,7 +94,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         if (robot.robotDrive != null)
         {
             // Set robot to FIELD by default but don't change the heading.
-            robot.robotDrive.driveBase.setDriveOrientation(RobotParams.Robot.DRIVE_ORIENTATION, false);
+            robot.setDriveOrientation(RobotParams.Robot.DRIVE_ORIENTATION, false);
             // Enable AprilTag vision for re-localization.
             if (robot.photonVisionFront != null)
             {
@@ -367,16 +367,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     robot.scoreCoralTask.autoScoreCoral(
                         moduleName, true, 0, false, false, false, 0, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-score Coral");
-                    }
+                }
                 break;
 
             case Y:
-                if(robot.pickupCoralFromStationTask != null && pressed)
+                if (robot.pickupCoralFromStationTask != null && pressed)
                 {
                     robot.pickupCoralFromStationTask.autoPickupCoral(
                         moduleName, true, false, false, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-pickup Coral");
-                    }
+                }
                 break;  
 
             case LeftBumper:

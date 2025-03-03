@@ -189,6 +189,11 @@ public class Robot extends FrcRobotBase
         robotInfo = robotBase.getRobotInfo();
         robotDrive = robotBase.getRobotDrive();
 
+        if (RobotParams.Preferences.useLED)
+        {
+            ledIndicator = new LEDIndicator(robotInfo.ledName, robotInfo.ledChannel, robotInfo.numLEDs);
+        }
+
         // Create and initialize Vision subsystem.
         if (RobotParams.Preferences.useVision)
         {
@@ -227,11 +232,6 @@ public class Robot extends FrcRobotBase
         // In this case, we should not instantiate any robot hardware.
         if (RobotParams.Preferences.robotType != RobotBase.RobotType.VisionOnly)
         {
-            if (robotInfo.ledName != null)
-            {
-                ledIndicator = new LEDIndicator(robotInfo.ledName, robotInfo.ledChannel, robotInfo.numLEDs);
-            }
-
             if (RobotParams.Preferences.useSubsystems)
             {
                 TrcMotor coralArm = null, algaeArm = null, elevator = null;
