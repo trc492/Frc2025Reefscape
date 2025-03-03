@@ -38,10 +38,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.drivebase.FrcRobotDrive.ImuType;
-import frclib.driverio.FrcButtonPanel;
 import frclib.driverio.FrcDashboard;
-import frclib.driverio.FrcDualJoystick;
-import frclib.driverio.FrcJoystick;
 import frclib.driverio.FrcMatchInfo;
 import frclib.driverio.FrcXboxController;
 import frclib.robotcore.FrcRobotBase;
@@ -98,12 +95,7 @@ public class Robot extends FrcRobotBase
     private boolean traceLogOpened = false;
     // Inputs.
     public FrcXboxController driverController;
-    public FrcJoystick driverJoystick;
-    public FrcDualJoystick driverDualJoystick;
     public FrcXboxController operatorController;
-    public FrcJoystick operatorStick;
-    public FrcButtonPanel buttonPanel;
-    public FrcButtonPanel switchPanel;
     // Sensors.
     public FrcPdp pdp;
     public TrcRobotBattery battery;
@@ -127,6 +119,7 @@ public class Robot extends FrcRobotBase
     public TrcMotorGrabber coralGrabber;
     public TrcMotorGrabber algaeGrabber;
     public TrcMotor winch;
+    // TODO: Remove
     public TrcIntake intake;
     public TrcMotor intakeDeployer;
     //
@@ -273,6 +266,7 @@ public class Robot extends FrcRobotBase
                     winch = new Winch().getWinchMotor();
                 }
 
+                // TODO: Remove
                 if (RobotParams.Preferences.useIntake)
                 {
                     intake = new Intake().getIntake();

@@ -192,22 +192,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     {
                         double[] driveInputs;
 
-                        if (robot.driverController != null)
-                        {
-                            driveInputs = robot.driverController.getDriveInputs(
-                                RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
-                        }
-                        else if (robot.driverJoystick != null)
-                        {
-                            driveInputs = robot.driverJoystick.getDriveInputs(
-                                RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
-                        }
-                        else
-                        {
-                            driveInputs = robot.driverDualJoystick.getDriveInputs(
-                                RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
-                        }
-
+                        driveInputs = robot.driverController.getDriveInputs(
+                            RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
                         if (robot.robotDrive.driveBase.supportsHolonomicDrive())
                         {
                             double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
