@@ -377,7 +377,7 @@ public class RobotBase
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
             xDriveMaxPidRampRate = yDriveMaxPidRampRate = 0.5;  // %power per sec
-            turnPidCoeffs = new PidCoefficients(0.0044, 0.0, 0.0, 0.0, 0.0); //new PidCoefficients(0.0065, 0.0, 0.0004, 0.0, 10.0);
+            turnPidCoeffs = new PidCoefficients(0.0044, 0.0, 0.0, 0.0, 0.0);
             turnPidPowerLimit = 1.0;
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
@@ -416,7 +416,7 @@ public class RobotBase
             steerMotorInverted = new boolean[] {false, false, false, false};
             steerMotorPidCoeffs = new PidCoefficients(3.0, 0.0, 0.0, 0.0, 0.0);
             steerMotorPidTolerance = 0.5; // in degrees
-            // Swerve Module parameters.    
+            // Swerve Module parameters.
             swerveModuleNames = new String[] {"lfWheel", "rfWheel", "lbWheel", "rbWheel"};
             driveGearRatio = DRIVE_GEAR_RATIO;
             steerGearRatio = STEER_GEAR_RATIO;

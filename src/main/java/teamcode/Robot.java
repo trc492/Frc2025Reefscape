@@ -55,6 +55,7 @@ import teamcode.subsystems.CoralGrabber;
 import teamcode.subsystems.IntakeDeployer;
 import teamcode.subsystems.Elevator;
 import teamcode.subsystems.Winch;
+import teamcode.tasks.TaskAutoClimb;
 import teamcode.tasks.TaskAutoPickupCoralFromGround;
 import teamcode.tasks.TaskAutoPickupCoralFromStation;
 import teamcode.tasks.TaskAutoScoreCoral;
@@ -135,6 +136,7 @@ public class Robot extends FrcRobotBase
     public TaskElevatorArm elevatorArmTask;
     public TaskAutoScoreCoral scoreCoralTask;
     public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
+    public TaskAutoClimb climbTask;
     public TaskAutoPickupCoralFromGround pickupCoralFromGroundTask;
 
     /**
@@ -317,10 +319,15 @@ public class Robot extends FrcRobotBase
                 if (elevatorArmTask != null)
                 {
                     elevatorArmTask.setStateTracingEnabled(false);
+                    scoreCoralTask = new TaskAutoScoreCoral(this);
+                    pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
                 }
-                scoreCoralTask = new TaskAutoScoreCoral(this);
-                pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
-                pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround(this);
+
+                if (winch != null)
+                {
+                    climbTask = new TaskAutoClimb(this);
+                }
+                // pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround(this);
                 // Zero calibrate all subsystems only once in robot initialization.
                 zeroCalibrate(null, null);
             }
