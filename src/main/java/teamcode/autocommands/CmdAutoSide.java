@@ -184,9 +184,10 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     // Navigate to Reef position.
                     if (scorePreload)
                     {
+                        // Code Review: What about red alliance side?
                         coralTarget++; // increase coral target by 1 to include preload
                         TrcPose2D scorePreloadPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_SCORE_CORAL_START_RED : RobotParams.Game.FAR_SCORE_CORAL_START_RED;
+                            RobotParams.Game.PROCESSOR_SCORE_CORAL_START_BLUE : RobotParams.Game.FAR_SCORE_CORAL_START_BLUE;
                         robot.robotDrive.purePursuitDrive.start(
                         event, 0.0, false,
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
@@ -245,8 +246,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     // Navigate to Coral Station.
                     if (cyclePositions.equals("Side"))
                     {
+                        // Code Review: What about red alliance side?
                         TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_RED : RobotParams.Game.FAR_PICKUP_CORAL_SIDE_RED;
+                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_BLUE : RobotParams.Game.FAR_PICKUP_CORAL_SIDE_BLUE;
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
@@ -255,8 +257,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     }
                     else if (cyclePositions.equals("Center"))
                     {
+                        // Code Review: What about red alliance side?
                         TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
+                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_BLUE : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_BLUE;
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
@@ -276,8 +279,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     // Navigate to Reef.
                     if (cyclePositions == "Side")
                     {
+                        // Code Review: What about red alliance side?
                         TrcPose2D scoreSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_RED : RobotParams.Game.FAR_SCORE_CORAL_SIDE_RED;
+                            RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_BLUE : RobotParams.Game.FAR_SCORE_CORAL_SIDE_BLUE;
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
@@ -286,8 +290,9 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     }
                     else if (cyclePositions == "Center")
                     {
+                        // Code Review: What about red alliance side?
                         TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_RED : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_RED;
+                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_BLUE : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_BLUE;
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,

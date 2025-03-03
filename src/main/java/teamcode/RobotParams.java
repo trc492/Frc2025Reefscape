@@ -206,15 +206,15 @@ public class RobotParams
         // Robot starting positions.
         //
         public static final double STARTPOS_BLUE_Y              = Robot.ROBOT_LENGTH / 2.0;
-        public static final double STARTPOS_PROCESSOR_X         = -42.19;
-        public static final double STARTPOS_CENTER_X            = -108.19;
-        public static final double STARTPOS_FAR_X               = -174.19;
+        public static final double STARTPOS_BLUE_PROCESSOR_X    = -42.19;
+        public static final double STARTPOS_BLUE_CENTER_X       = -108.19;
+        public static final double STARTPOS_BLUE_FAR_X          = -174.19;
         public static final TrcPose2D STARTPOS_BLUE_PROCESSOR   =
-            new TrcPose2D(STARTPOS_PROCESSOR_X, STARTPOS_BLUE_Y, 180.0);
+            new TrcPose2D(STARTPOS_BLUE_PROCESSOR_X, STARTPOS_BLUE_Y, 180.0);
         public static final TrcPose2D STARTPOS_BLUE_CENTER      =
-            new TrcPose2D(STARTPOS_CENTER_X, STARTPOS_BLUE_Y, 180.0);
+            new TrcPose2D(STARTPOS_BLUE_CENTER_X, STARTPOS_BLUE_Y, 180.0);
         public static final TrcPose2D STARTPOS_BLUE_FAR         =
-            new TrcPose2D(STARTPOS_FAR_X, STARTPOS_BLUE_Y, 180.0);
+            new TrcPose2D(STARTPOS_BLUE_FAR_X, STARTPOS_BLUE_Y, 180.0);
         public static final TrcPose2D[] startPoses              =
             {STARTPOS_BLUE_PROCESSOR, STARTPOS_BLUE_CENTER, STARTPOS_BLUE_FAR};
         //
@@ -262,23 +262,35 @@ public class RobotParams
         /*ID22*/    new TrcPose2D(-130.32, 192.91, 60.0) //z=12.125
         };
 
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_SCORE_CORAL_SIDE_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_SCORE_CORAL_CENTER_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
-        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_SIDE_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_CENTER_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
         // NOTE: This is a just a mirror of the processor positions
-        public static final TrcPose2D FAR_SCORE_CORAL_START_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_SCORE_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_SCORE_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_SCORE_CORAL_START_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_SCORE_CORAL_SIDE_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_SCORE_CORAL_CENTER_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
-        public static final TrcPose2D FAR_PICKUP_CORAL_SIDE_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_PICKUP_CORAL_CENTER_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_PICKUP_CORAL_SIDE_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_PICKUP_CORAL_CENTER_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
 
-        public static final TrcPose2D PROCESSOR_CORAL_STATION_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_CORAL_STATION_RED = new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D PROCESSOR_CORAL_STATION_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
+        public static final TrcPose2D FAR_CORAL_STATION_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
     }   //class Game
 
     /**

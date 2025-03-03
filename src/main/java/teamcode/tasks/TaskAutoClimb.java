@@ -143,7 +143,6 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
         String owner, Object params, State state, TrcTaskMgr.TaskType taskType, TrcRobot.RunMode runMode,
         boolean slowPeriodicLoop)
     {
-
         switch (state)
         {
             case START:

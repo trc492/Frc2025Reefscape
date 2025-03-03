@@ -289,7 +289,7 @@ import trclib.pathdrive.TrcPose2D;
                         owner, driveEvent, 2.0, false, // Tune this timeout
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration, 
                         // TODO: Use both coral stations
-                        robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(RobotParams.Game.PROCESSOR_CORAL_STATION_RED, null));
+                        robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(RobotParams.Game.PROCESSOR_CORAL_STATION_BLUE, null));
                     sm.setState(State.TAKE_CORAL);
                 }
                 // } else if(!taskParams.inAuto){
