@@ -58,7 +58,7 @@ public class CoralArm extends TrcSubsystem
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
-        public static final double ZERO_OFFSET                  = 1925.0;
+        public static final double ZERO_OFFSET                  = 1925.0;   //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 0.5;
 
         public static final double MIN_POS                      = -47.0;
