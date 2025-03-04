@@ -369,9 +369,9 @@ public class RobotBase
             robotMaxTurnRate = 478.0;          // degree/sec
 
 
-            profiledMaxVelocity = 140.0;       // inch/sec
-            profiledMaxAcceleration = 3000.0;  // inch/sec sq
-            profiledMaxDeceleration = profiledMaxAcceleration;
+            profiledMaxVelocity = 110.0;       // inch/sec
+            profiledMaxAcceleration = 150.0;  // inch/sec sq
+            profiledMaxDeceleration = 150.0;
             profiledMaxTurnRate = 200.0;     // degree/sec
             // DriveBase PID Parameters
             drivePidTolerance = 1.0;
@@ -389,7 +389,7 @@ public class RobotBase
             enablePidDriveSquareRootPid = false;
             // PurePursuit Parameters
             usePurePursuitDrive = true;
-            enablePurePursuitDriveSquareRootPid = true;
+            enablePurePursuitDriveSquareRootPid = false;
             ppdFollowingDistance = 10.0;
             velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / profiledMaxVelocity, 0.0);
             fastModeEnabled = true; 

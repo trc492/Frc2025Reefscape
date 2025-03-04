@@ -25,6 +25,7 @@ package teamcode;
 import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
@@ -343,9 +344,7 @@ public class FrcTest extends FrcTeleOp
                         robot.robotInfo.profiledMaxDeceleration,
                         new TrcPose2D(
                             testChoices.getXDriveDistance()*12.0, testChoices.getYDriveDistance()*12.0,
-                            testChoices.getTurnAngle()),
-                        new TrcPose2D(10, 20, 45),
-                        new TrcPose2D(20, 40, 15));
+                            testChoices.getTurnAngle()));
                 }
                 break;
 
@@ -394,7 +393,7 @@ public class FrcTest extends FrcTeleOp
             case LIVE_WINDOW:
                 liveWindowEnabled = true;
                 break;
-
+                
             default:
                 break;
         }
@@ -507,6 +506,15 @@ public class FrcTest extends FrcTeleOp
                         lineNum++, "Drive Decel: (%.1f/%.1f)", deceleration, maxDriveDeceleration);
                     robot.dashboard.displayPrintf(
                         lineNum++, "Turn Vel: (%.1f/%.1f)", velPose.angle, maxTurnVelocity);
+                }
+                break;
+
+            case PP_DRIVE:
+                SmartDashboard.putNumber("Target Velocity", robot.robotDrive.purePursuitDrive.getPathTargetVelocity());
+                SmartDashboard.putNumber("Current Velocity", robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
+                if (robot.robotDrive.purePursuitDrive.isActive())
+                {
+                    robot.globalTracer.traceInfo(moduleName, "TargVel=%f, CurrVel=%f", robot.robotDrive.purePursuitDrive.getPathTargetVelocity(), robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
                 }
                 break;
 
