@@ -212,7 +212,8 @@ public class FrcTest extends FrcTeleOp
     private TrcRobot.RobotCommand testCommand;
     private double maxDriveVelocity = 0.0;
     private double maxDriveAcceleration = 0.0;
-    private double maxTurnRate = 0.0;
+    private double maxDriveDeceleration = 0.0;
+    private double maxTurnVelocity = 0.0;
     private double prevTime = 0.0;
     private double prevVelocity = 0.0;
     private PipelineType frontPipeline = PipelineType.APRILTAG;
@@ -461,11 +462,19 @@ public class FrcTest extends FrcTeleOp
                     TrcPose2D velPose = robot.robotDrive.driveBase.getFieldVelocity();
                     double velocity = TrcUtil.magnitude(velPose.x, velPose.y);
                     double acceleration = 0.0;
-                    double turnRate = robot.robotDrive.driveBase.getTurnRate();
+                    double deceleration = 0.0;
+                    double deltaTime = currTime - prevTime;
 
                     if (prevTime != 0.0)
                     {
-                        acceleration = (velocity - prevVelocity)/(currTime - prevTime);
+                        if (velocity > prevVelocity)
+                        {
+                            acceleration = (velocity - prevVelocity)/deltaTime;
+                        }
+                        else
+                        {
+                            deceleration = (prevVelocity - velocity)/deltaTime;
+                        }
                     }
 
                     if (velocity > maxDriveVelocity)
@@ -478,17 +487,26 @@ public class FrcTest extends FrcTeleOp
                         maxDriveAcceleration = acceleration;
                     }
 
-                    if (turnRate > maxTurnRate)
+                    if (deceleration > maxDriveDeceleration)
                     {
-                        maxTurnRate = turnRate;
+                        maxDriveDeceleration = deceleration;
+                    }
+
+                    if (velPose.angle > maxTurnVelocity)
+                    {
+                        maxTurnVelocity = velPose.angle;
                     }
 
                     prevTime = currTime;
                     prevVelocity = velocity;
 
                     robot.dashboard.displayPrintf(lineNum++, "Drive Vel: (%.1f/%.1f)", velocity, maxDriveVelocity);
-                    robot.dashboard.displayPrintf(lineNum++, "Drive Accel: (%.1f/%.1f)", acceleration, maxDriveAcceleration);
-                    robot.dashboard.displayPrintf(lineNum++, "Turn Rate: (%.1f/%.1f)", turnRate, maxTurnRate);
+                    robot.dashboard.displayPrintf(
+                        lineNum++, "Drive Accel: (%.1f/%.1f)", acceleration, maxDriveAcceleration);
+                    robot.dashboard.displayPrintf(
+                        lineNum++, "Drive Decel: (%.1f/%.1f)", deceleration, maxDriveDeceleration);
+                    robot.dashboard.displayPrintf(
+                        lineNum++, "Turn Vel: (%.1f/%.1f)", velPose.angle, maxTurnVelocity);
                 }
                 break;
 
