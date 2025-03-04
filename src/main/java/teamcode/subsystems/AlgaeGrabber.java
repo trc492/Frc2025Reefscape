@@ -56,7 +56,7 @@ public class AlgaeGrabber extends TrcSubsystem
 
         public static final double INTAKE_POWER                 = 0.15; //TODO: tune
         public static final double EJECT_POWER                  = -0.15;//TODO: tune
-        public static final double RETAIN_POWER                 = 0.03;//TODO: tune
+        public static final double RETAIN_POWER                 = 0.035;//TODO: tune
         public static final double FINISH_DELAY                 = 0.06; //TODO: tune
         public static final double DUMP_TIME                    = 0.5;  //TODO: tune
         public static final double DUMP_DELAY                   = 0.0;  //TODO: tune

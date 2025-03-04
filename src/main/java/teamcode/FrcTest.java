@@ -393,7 +393,7 @@ public class FrcTest extends FrcTeleOp
             case LIVE_WINDOW:
                 liveWindowEnabled = true;
                 break;
-                
+
             default:
                 break;
         }
@@ -510,12 +510,8 @@ public class FrcTest extends FrcTeleOp
                 break;
 
             case PP_DRIVE:
-                SmartDashboard.putNumber("Target Velocity", robot.robotDrive.purePursuitDrive.getPathTargetVelocity());
-                SmartDashboard.putNumber("Current Velocity", robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
-                if (robot.robotDrive.purePursuitDrive.isActive())
-                {
-                    robot.globalTracer.traceInfo(moduleName, "TargVel=%f, CurrVel=%f", robot.robotDrive.purePursuitDrive.getPathTargetVelocity(), robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
-                }
+                SmartDashboard.putNumber("TargetVelocity", robot.robotDrive.purePursuitDrive.getPathTargetVelocity());
+                SmartDashboard.putNumber("RobotVelocity", robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
                 break;
 
             default:
@@ -531,7 +527,6 @@ public class FrcTest extends FrcTeleOp
                 //
                 super.periodic(elapsedTime, true);
             }
-
             //
             // Call super.runPeriodic only if you need TeleOp control of the robot.
             //

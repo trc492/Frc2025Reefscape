@@ -162,7 +162,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         {
             if (controlsEnabled)
             {
-                robot.dashboard.displayPrintf(lineNum++, "Coral Score Level=%s", scoreIndex);
                 //
                 // DriveBase operation.
                 //
