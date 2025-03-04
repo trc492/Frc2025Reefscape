@@ -525,12 +525,9 @@ public class Robot extends FrcRobotBase
                     if (object != null)
                     {
                         dashboard.displayPrintf(
-                            lineNum++, "PhotonFront: pipeline=%s, obj=%s", photonVisionFront.getPipeline(), object);
+                            lineNum, "Front(%s):%s", photonVisionFront.getPipeline(), object);
                     }
-                    else
-                    {
-                        lineNum++;
-                    }
+                    lineNum++;
                 }
 
                 if (photonVisionBack != null)
@@ -539,12 +536,10 @@ public class Robot extends FrcRobotBase
                     if (object != null)
                     {
                         dashboard.displayPrintf(
-                            lineNum++, "PhotonBack: pipeline=%s, obj=%s", photonVisionBack.getPipeline(), object);
+                            lineNum, "Back(%s):%s", photonVisionBack.getPipeline(), object);
+                        // dashboard.displayPrintf(++lineNum, "RobotPose=%s", object.robotPose);
                     }
-                    else
-                    {
-                        lineNum++;
-                    }
+                    lineNum++;
                 }
 
                 if (openCvVision != null)
@@ -553,12 +548,9 @@ public class Robot extends FrcRobotBase
                         openCvVision.getDetectedTargetInfo(null, null);
                     if (object != null)
                     {
-                        dashboard.displayPrintf(lineNum++, "OpenCv: %s", object);
+                        dashboard.displayPrintf(lineNum, "OpenCv:%s", object);
                     }
-                    else
-                    {
-                        lineNum++;
-                    }
+                    lineNum++;
                 }
             }
             //
