@@ -74,6 +74,12 @@ public class FrcAuto implements TrcRobot.RobotMode
 
     public enum StationSide
     {
+        PROCESSOR,
+        FAR
+    }   //enum StationSide
+
+    public enum ScoreSide
+    {
         LEFT,
         RIGHT
     }   //enum StationSide
@@ -103,6 +109,7 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_STRATEGY = "Auto/Strategy";
         private static final String DBKEY_AUTO_START_POS = "Auto/StartPos";
         private static final String DBKEY_AUTO_STATION_SIDE = "Auto/StationSide";
+        private static final String DBKEY_AUTO_SCORE_SIDE = "Auto/ScoreSide";
         private static final String DBKEY_AUTO_SCORE_PICKUP = "Auto/ScorePickup";
         private static final String DBKEY_AUTO_START_DELAY = "Auto/StartDelay";
         private static final String DBKEY_AUTO_PATHFILE = "Auto/PathFile";
@@ -122,6 +129,7 @@ public class FrcAuto implements TrcRobot.RobotMode
         private final FrcChoiceMenu<AutoStartPos> autoStartPosMenu;
         private final FrcChoiceMenu<StationSide> stationChoiceMenu;
         private final FrcChoiceMenu<ScorePickup> scorePickupChoiceMenu;
+        private final FrcChoiceMenu<ScoreSide> scoreSideChoiceMenu;
 
         public AutoChoices()
         {
@@ -133,6 +141,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             autoStartPosMenu = new FrcChoiceMenu<>(DBKEY_AUTO_START_POS);
             stationChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_STATION_SIDE);
             scorePickupChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_SCORE_PICKUP);
+            scoreSideChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_SCORE_SIDE);
             //
             // Populate autonomous mode choice menus.
             //
@@ -156,8 +165,11 @@ public class FrcAuto implements TrcRobot.RobotMode
             autoStartPosMenu.addChoice("Center start position", AutoStartPos.START_POSE_CENTER);
             autoStartPosMenu.addChoice("Far side start position", AutoStartPos.START_POSE_FAR_SIDE, false, true);
 
-            stationChoiceMenu.addChoice("Right Side", StationSide.RIGHT);
-            stationChoiceMenu.addChoice("Left Side", StationSide.LEFT);
+            stationChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR);
+            stationChoiceMenu.addChoice("Far Side", StationSide.FAR);
+
+            scoreSideChoiceMenu.addChoice("Left Side", ScoreSide.LEFT);
+            scoreSideChoiceMenu.addChoice("Right Side", ScoreSide.RIGHT);
 
             scorePickupChoiceMenu.addChoice("Score None", ScorePickup.SCORE_NONE);
             scorePickupChoiceMenu.addChoice("Score One", ScorePickup.SCORE_ONE);
@@ -206,6 +218,10 @@ public class FrcAuto implements TrcRobot.RobotMode
 
         public StationSide getStationSide(){
             return stationChoiceMenu.getCurrentChoiceObject();
+        }
+
+        public ScoreSide getScoreSide(){
+            return scoreSideChoiceMenu.getCurrentChoiceObject();
         }
 
         public ScorePickup getScorePickup(){

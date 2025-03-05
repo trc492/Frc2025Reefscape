@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import teamcode.FrcAuto.AutoChoices;
 import teamcode.FrcAuto.AutoStartPos;
 import teamcode.FrcAuto.ScorePickup;
+import teamcode.FrcAuto.ScoreSide;
 import teamcode.FrcAuto.StationSide;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcEvent;
@@ -63,6 +64,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
     private Alliance alliance;
     private AutoStartPos startPos;
     private StationSide stationSide;
+    private ScoreSide scoreSide;
     private boolean relocalize;
     private ScorePickup scorePickup;
     private boolean scorePreload;
@@ -160,6 +162,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     startPos = FrcAuto.autoChoices.getStartPos();
                     stationSide = FrcAuto.autoChoices.getStationSide();
                     scorePickup = FrcAuto.autoChoices.getScorePickup();
+                    scoreSide = FrcAuto.autoChoices.getScoreSide();
                     relocalize = FrcAuto.autoChoices.getRelocalize();
                     goToStation = FrcAuto.autoChoices.goToStation();
                     scorePreload = FrcAuto.autoChoices.scorePreload();
@@ -186,7 +189,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                             // Using vision to view AprilTag that is directly infront of us, and will AutoScore using this AprilTag
                             robot.globalTracer.traceInfo(moduleName, "***** Scoring preload using AprilTag Vision");
                             // TODO: Will have to add a dashboard input that will give scoreSide
-                            robot.scoreCoralTask.autoScoreCoral(null, useAprilTagVision, 3, false, false, relocalize, 0, event);
+                            robot.scoreCoralTask.autoScoreCoral(null, useAprilTagVision, 3, false, true, relocalize, scoreSide == ScoreSide.LEFT ? 0 : 1, event);
                             sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
                         } else{
                             // // If we do not have vision, then we will go to this position using odometry
@@ -227,23 +230,19 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     break;
 
                 case GO_TO_CORAL_STATION:
-                
-                    if(stationSide == StationSide.RIGHT){
+                    if(stationSide == StationSide.PROCESSOR){
                         // Pure Pursuit to a position offset from AprilTags 8 or 16 depending on your alliance, so then we can call AutoPickupCoralFromStation to pick up the coral
                         robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for right coral station.");
                         int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D stationSideIntermediatePose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
                         stationSideIntermediatePose.x -= 12.0; // TODO: Not Sure which direction to go, this will have to be checked
                         //stationSideIntermediatePose.angle = 60;
-
-
-
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                             robot.robotInfo.profiledMaxDeceleration, stationSideIntermediatePose);
                         sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
-                    } else if(stationSide == StationSide.LEFT){
+                    } else if(stationSide == StationSide.FAR){
                         // Same as above, but we are using Odometry to go to the intermediate position.
                         robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for left coral station.");
                         int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
@@ -268,7 +267,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     } else{
                         // Use odometry to go to the position of the AprilTag, and call AutoPickupCoralFromStation without vision to call the subsystem tasks
                         robot.globalTracer.traceInfo(moduleName, "***** Not using Vision");
-                        int stationAprilTagId = stationSide == StationSide.LEFT? RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1];
+                        int stationAprilTagId = stationSide == StationSide.FAR? RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D aprilTagStationPose = RobotParams.Game.APRILTAG_POSES[stationAprilTagId - 1].clone();
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
@@ -284,20 +283,20 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                         // We are at the coral Station and the Camera can probably see the AprilTag, so we can call AutoScoreCoral to score the coral
                         robot.globalTracer.traceInfo(moduleName, "***** Going to score on Reef using AprilTag Vision");
                         // TODO: Will have to add a dashboard input that will give scoreSide    
-                        robot.scoreCoralTask.autoScoreCoral(null, true, 3, false, true, relocalize, 0, event);
+                        robot.scoreCoralTask.autoScoreCoral(null, useAprilTagVision, 3, false, false, relocalize, scoreSide == ScoreSide.LEFT ? 0 : 1, event);
                         // Increase coral scored by one, if we reached the coralTarget, then we are done, otherwise we go back to GO_TO_CORAL_STATION
                         coralScored++;
                         sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);
                     } else{
                         robot.globalTracer.traceInfo(moduleName, "***** Going to score on Reef without AprilTag Vision");
-                        int pickupScoreId = stationSide == StationSide.LEFT? RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
+                        int pickupScoreId = stationSide == StationSide.FAR? RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1]: RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
                         TrcPose2D pickupScorePose = RobotParams.Game.APRILTAG_POSES[pickupScoreId - 1].clone();
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                             robot.robotInfo.profiledMaxDeceleration, pickupScorePose);
                             // TODO: Will have to add a dashboard input that will give scoreSide
-                        robot.scoreCoralTask.autoScoreCoral(null, false, 3, false, true, relocalize, 0, event);
+                        robot.scoreCoralTask.autoScoreCoral(null, false, 3, false, true, relocalize, scoreSide == ScoreSide.LEFT ? 0 : 1, event);
                         coralScored++;
                         sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);
                     }

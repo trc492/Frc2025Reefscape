@@ -64,8 +64,6 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
     private Alliance alliance;
     private AutoStartPos startPos;
-    private AutoStrategy autoStrategy;
-    private StationSide stationSide;
     private ScorePickup scorePickup;
     private double startDelay;
     private boolean relocalize;
@@ -155,21 +153,18 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
              */
             switch (state)
             {
-                // NOTE: Daniel has not made auto choices yet so I am putting in values in for now 
-                // + Sarah hasn't finish auto pickup task so putting in values for that as well
                 case START:
                     // Set robot location according to auto choices.
                     robot.setRobotStartPosition();
                     // Initialize auto choices.
                     alliance = FrcAuto.autoChoices.getAlliance();
-                    autoStrategy = FrcAuto.autoChoices.getStrategy();
                     startPos = FrcAuto.autoChoices.getStartPos();
-                    stationSide = FrcAuto.autoChoices.getStationSide();
                     scorePickup = FrcAuto.autoChoices.getScorePickup();
                     startDelay = FrcAuto.autoChoices.getStartDelay();
                     relocalize = FrcAuto.autoChoices.getRelocalize();
                     goToStation = FrcAuto.autoChoices.goToStation();
                     scorePreload = FrcAuto.autoChoices.scorePreload();
+                    robot.globalTracer.traceInfo(moduleName, "****** Scoring preload from" + startPos + " at " + robot.robotDrive.driveBase.getFieldPosition());
                     // Set score variables
                     if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)
                     {
