@@ -54,9 +54,9 @@ public class AlgaeGrabber extends TrcSubsystem
         public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_ALGAE_GRABBER_SENSOR;
         public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
-        public static final double INTAKE_POWER                 = 0.15; //TODO: tune
-        public static final double EJECT_POWER                  = -0.15;//TODO: tune
-        public static final double RETAIN_POWER                 = 0.035;//TODO: tune
+        public static final double INTAKE_POWER                 = 0.3; //TODO: tune
+        public static final double EJECT_POWER                  = -0.3;//TODO: tune
+        public static final double RETAIN_POWER                 = 0.07;//TODO: tune
         public static final double FINISH_DELAY                 = 0.06; //TODO: tune
         public static final double DUMP_TIME                    = 0.5;  //TODO: tune
         public static final double DUMP_DELAY                   = 0.0;  //TODO: tune
