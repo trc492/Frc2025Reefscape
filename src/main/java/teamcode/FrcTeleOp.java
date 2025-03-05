@@ -57,6 +57,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevAlgaeArmPower = 0.0;
     private double prevElevatorPower = 0.0;
     private double prevWinchPower = 0.0;
+    private boolean algaeGrabberActive = false;
     private int scoreIndex = 3;
 
     /**
@@ -569,9 +570,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case RightBumper:
-                if (robot.algaeGrabber != null)
+                if (robot.algaeGrabber != null && pressed)
                 {
-                    if (pressed)
+                    algaeGrabberActive = !algaeGrabberActive;
+                    if (algaeGrabberActive)
                     {
                         robot.algaeGrabber.autoIntake(null);
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
