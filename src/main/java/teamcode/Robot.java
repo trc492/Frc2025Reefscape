@@ -356,7 +356,10 @@ public class Robot extends FrcRobotBase
                 }
             }
             // Start subsystems.
-            ledIndicator.reset();
+            if (ledIndicator != null)
+            {
+                ledIndicator.reset();
+            }
         }
     }   //robotStartMode
 
@@ -383,7 +386,10 @@ public class Robot extends FrcRobotBase
             //robotDrive.pidDrive.pidDriveTaskProfiler.printPerformanceMetrics(robotDrive.pidDrive.tracer);
         }
         // Stop subsystems.
-        ledIndicator.reset();
+        if (ledIndicator != null)
+        {
+            ledIndicator.reset();
+        }
         // Performance status report.
         if (battery != null)
         {
@@ -537,7 +543,7 @@ public class Robot extends FrcRobotBase
                     {
                         dashboard.displayPrintf(
                             lineNum, "Back(%s):%s", photonVisionBack.getPipeline(), object);
-                        // dashboard.displayPrintf(++lineNum, "RobotPose=%s", object.robotPose);
+                        dashboard.displayPrintf(++lineNum, "RobotPose=%s", object.robotPose);
                     }
                     lineNum++;
                 }
