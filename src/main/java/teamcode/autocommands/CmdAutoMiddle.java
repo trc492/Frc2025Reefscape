@@ -233,26 +233,43 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     if(stationSide == StationSide.PROCESSOR){
                         // Pure Pursuit to a position offset from AprilTags 8 or 16 depending on your alliance, so then we can call AutoPickupCoralFromStation to pick up the coral
                         robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for right coral station.");
-                        int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0 : 1];
-                        TrcPose2D stationSideIntermediatePose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
-                        stationSideIntermediatePose.x -= 12.0; // TODO: Not Sure which direction to go, this will have to be checked
+                        int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1];
+                        int middleReefAprilId              = RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red ? 0 : 1];
+
+                        TrcPose2D intermediatePose = RobotParams.Game.APRILTAG_POSES[middleReefAprilId - 1].clone();
+                        intermediatePose.x += 85.0;
+
+                        TrcPose2D stationSideAprilTagPose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
+                        stationSideAprilTagPose.x -= 60;
+                        stationSideAprilTagPose.y -= 40;
+
                         //stationSideIntermediatePose.angle = 60;
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, stationSideIntermediatePose);
+                            robot.robotInfo.profiledMaxDeceleration, intermediatePose, stationSideAprilTagPose);
                         sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
+
+
                     } else if(stationSide == StationSide.FAR){
                         // Same as above, but we are using Odometry to go to the intermediate position.
                         robot.globalTracer.traceInfo(moduleName, "***** Driving to intermediate position for left coral station.");
-                        int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0 : 1];
-                        TrcPose2D stationSideIntermediatePose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
-                        stationSideIntermediatePose.x -= 12.0; // TODO: Not Sure which direction to go, this will have to be checked
-                        stationSideIntermediatePose.angle = 60;
+                        int stationSideIntermediatePoseId = RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red ? 0 : 1];
+                        int middleReefAprilId              = RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red ? 0 : 1];
+
+                        TrcPose2D intermediatePose = RobotParams.Game.APRILTAG_POSES[middleReefAprilId - 1].clone();
+                        intermediatePose.x -= 85.0;
+
+                        TrcPose2D stationSideAprilTagPose = RobotParams.Game.APRILTAG_POSES[stationSideIntermediatePoseId - 1].clone();
+                        stationSideAprilTagPose.x += 60;
+                        stationSideAprilTagPose.y -= 40;
+                        stationSideAprilTagPose.angle -= 180;
+
+                        //stationSideIntermediatePose.angle = 60;
                         robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false, 
+                            event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, stationSideIntermediatePose);
+                            robot.robotInfo.profiledMaxDeceleration, intermediatePose, stationSideAprilTagPose);
                         sm.waitForSingleEvent(event, State.PICK_UP_CORAL);
                     }
                                 
