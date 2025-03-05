@@ -284,11 +284,11 @@ public class RobotBase
             camName = "FrontOV9782";
             camImageWidth = 1280;
             camImageHeight = 800;
-            camXOffset = 0.0;                  // Inches to the right from robot center
-            camYOffset = 0.0;                // Inches forward from robot center
-            camZOffset = 23.125;                // Inches up from the floor
+            camXOffset = -0.1875;               // Inches to the right from robot center
+            camYOffset = 5.9375;                // Inches forward from robot center
+            camZOffset = 6.75;                  // Inches up from the floor
             camYaw = 0.0;                       // degrees clockwise from robot front
-            camPitch = 0.0;                    // degrees up from horizontal
+            camPitch = 16.0;                    // degrees up from horizontal
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),
@@ -393,7 +393,7 @@ public class RobotBase
             ppdFollowingDistance = 10.0;
             velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 0.012, 0.0);
             fastModeEnabled = true; 
-            // Vision   
+            // Vision
             cam1 = new ReefscapeFrontCamParams();
             cam2 = new ReefscapeBackCamParams();
             // Miscellaneous
