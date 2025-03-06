@@ -909,6 +909,11 @@ public class Robot extends FrcRobotBase
         return adjustPoseByAlliance(pose.x, pose.y, pose.angle, alliance);
     }   //adjustPoseByAlliance
 
+    public TrcPose2D adjustPoseByOrthogonalOffset(TrcPose2D pose, double offset)
+    {
+        return pose.addRelativePose(new TrcPose2D(0.0, offset, 0.0));
+    }   //adjustPoseByOrthogonalOffset
+
     //
     // Getters for sensor data.
     //
