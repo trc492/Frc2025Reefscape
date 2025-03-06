@@ -53,6 +53,7 @@ public class RobotParams
         public static final boolean showLoopTime                = false;
         public static final boolean showPowerConsumption        = false;
         public static final boolean showDriveBase               = false;
+        public static final boolean debugDriveBase              = false;
         public static final boolean showPurePursuitDrive        = false;
         public static final boolean showPidDrive                = false;
         public static final boolean showVision                  = false;
