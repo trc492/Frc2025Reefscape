@@ -57,7 +57,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevAlgaeArmPower = 0.0;
     private double prevElevatorPower = 0.0;
     private double prevWinchPower = 0.0;
-    private boolean algaeGrabberActive = false;
+    // private boolean algaeGrabberActive = false;
     private int scoreIndex = 3;
 
     /**
@@ -168,6 +168,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (robot.robotDrive != null)
                 {
+                    boolean showDriveBaseStatus =
+                        RobotParams.Preferences.showDriveBase &&
+                        (RobotParams.Preferences.doStatusUpdate || subsystemStatusOn);
                     if (relocalizing)
                     {
                         if (robotFieldPose == null)
@@ -201,32 +204,28 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
                             robot.robotDrive.driveBase.holonomicDrive(
                                 null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
-                            if (subsystemStatusOn)
+                            if (showDriveBaseStatus)
                             {
                                 robot.dashboard.displayPrintf(
-                                    lineNum++, "Holonomic: x=%.2f, y=%.2f, rot=%.2f, gyroAngle=%.2f",
+                                    lineNum, "Holonomic: x=%.2f, y=%.2f, rot=%.2f, gyroAngle=%.2f",
                                     driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
                             }
                         }
                         else
                         {
                             robot.robotDrive.driveBase.arcadeDrive(driveInputs[1], driveInputs[2]);
-                            if (subsystemStatusOn)
+                            if (showDriveBaseStatus)
                             {
                                 robot.dashboard.displayPrintf(
-                                    lineNum++, "Arcade: x=%.2f, y=%.2f, rot=%.2f",
+                                    lineNum, "Arcade: x=%.2f, y=%.2f, rot=%.2f",
                                     driveInputs[0], driveInputs[1], driveInputs[2]);
                             }
                         }
+                    }
 
-                        if (subsystemStatusOn)
-                        {
-                            robot.dashboard.displayPrintf(
-                                lineNum++, "RobotPose=%s, Orient=%s, GyroAssist=%s",
-                                robot.robotDrive.driveBase.getFieldPosition(),
-                                robot.robotDrive.driveBase.getDriveOrientation(),
-                                robot.robotDrive.driveBase.isGyroAssistEnabled());
-                        }
+                    if (showDriveBaseStatus)
+                    {
+                        lineNum += 2;
                     }
                 }
                 //
@@ -279,7 +278,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             }
                             prevAlgaeArmPower = power;
                         }
+                    }
 
+                    if (robot.winch != null)
+                    {
                         power = robot.driverController.getTrigger(true) * Winch.Params.POWER_LIMIT;
                         if (power != prevWinchPower)
                         {
@@ -292,7 +294,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             //
             // Update robot status.
             //
-            if (RobotParams.Preferences.doStatusUpdate)
+            if (RobotParams.Preferences.doStatusUpdate || subsystemStatusOn)
             {
                 lineNum = robot.updateStatus(lineNum);
             }
@@ -570,10 +572,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case RightBumper:
-                if (robot.algaeGrabber != null && pressed)
+                if (robot.algaeGrabber != null)
                 {
-                    algaeGrabberActive = !algaeGrabberActive;
-                    if (algaeGrabberActive)
+                    if (pressed)
                     {
                         robot.algaeGrabber.autoIntake(null);
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
@@ -589,6 +590,25 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
                     }
                 }
+                // if (robot.algaeGrabber != null && pressed)
+                // {
+                //     algaeGrabberActive = !algaeGrabberActive;
+                //     if (algaeGrabberActive)
+                //     {
+                //         robot.algaeGrabber.autoIntake(null);
+                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
+                //     }
+                //     else if (robot.algaeGrabber.isAutoActive())
+                //     {
+                //         robot.algaeGrabber.cancel();
+                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Intake");
+                //     }
+                //     else
+                //     {
+                //         robot.algaeGrabber.stop();
+                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
+                //     }
+                // }
                 break;
 
             case DpadUp:

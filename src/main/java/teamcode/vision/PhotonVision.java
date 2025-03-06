@@ -30,14 +30,14 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
 import frclib.vision.FrcPhotonVision;
 import teamcode.RobotParams;
 import teamcode.subsystems.LEDIndicator;
-import trclib.dataprocessor.TrcUtil;
 import trclib.pathdrive.TrcPose2D;
-import trclib.pathdrive.TrcPose3D;
 import trclib.robotcore.TrcEvent;
 import trclib.timer.TrcTimer;
 
@@ -97,6 +97,16 @@ public class PhotonVision extends FrcPhotonVision
         setPipeline(currPipeline);
     }   //PhotonVision
 
+    public TrcPose2D projectPose3dTo2d(Pose3d pose)
+    {
+        Translation2d translation = pose.getTranslation().toTranslation2d();
+        Rotation2d rotation = pose.getRotation().toRotation2d();
+        return new TrcPose2D(
+            -Units.metersToInches(translation.getY()),
+            Units.metersToInches(translation.getX()),
+            -rotation.getDegrees());
+    }   //projectPose3dTo2d
+
     /**
      * This method returns the 3D field location of the AprilTag with its given ID.
      *
@@ -115,18 +125,9 @@ public class PhotonVision extends FrcPhotonVision
      * @param aprilTagId sepcifies the AprilTag ID to retrieve its field location.
      * @return 3D location of the AprilTag.
      */
-    public TrcPose3D getAprilTagFieldPose(int aprilTagId)
+    public TrcPose2D getAprilTagFieldPose(int aprilTagId)
     {
-        Pose3d pose3d = getAprilTagFieldPose3d(aprilTagId);
-        Rotation3d rotation = pose3d != null? pose3d.getRotation(): null;
-
-        return pose3d == null? null:
-                new TrcPose3D(-pose3d.getY() * TrcUtil.INCHES_PER_METER,
-                              pose3d.getX() * TrcUtil.INCHES_PER_METER,
-                              pose3d.getZ() * TrcUtil.INCHES_PER_METER,
-                              -Math.toDegrees(rotation.getZ()),
-                              -Math.toDegrees(rotation.getY()),
-                              Math.toDegrees(rotation.getX()));
+        return projectPose3dTo2d(getAprilTagFieldPose3d(aprilTagId));
     }   //getAprilTagFieldPose
 
     /**
