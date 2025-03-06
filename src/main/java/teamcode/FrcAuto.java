@@ -27,6 +27,7 @@ import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcMatchInfo;
 import frclib.driverio.FrcUserChoices;
+import teamcode.autocommands.CmdAutoMiddle;
 import teamcode.autocommands.CmdAutoSide;
 import teamcode.commandbased.ExampleAuto;
 import trclib.command.CmdPidDrive;
@@ -165,21 +166,22 @@ public class FrcAuto implements TrcRobot.RobotMode
             autoStartPosMenu.addChoice("Center start position", AutoStartPos.START_POSE_CENTER);
             autoStartPosMenu.addChoice("Far side start position", AutoStartPos.START_POSE_FAR_SIDE, false, true);
 
-            stationChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR);
-            stationChoiceMenu.addChoice("Far Side", StationSide.FAR);
+            stationChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR, true, false);
+            stationChoiceMenu.addChoice("Far Side", StationSide.FAR, false, true);
 
-            scoreSideChoiceMenu.addChoice("Left Side", ScoreSide.LEFT);
-            scoreSideChoiceMenu.addChoice("Right Side", ScoreSide.RIGHT);
+            scoreSideChoiceMenu.addChoice("Left Side", ScoreSide.LEFT, true, false);
+            scoreSideChoiceMenu.addChoice("Right Side", ScoreSide.RIGHT, false, true);
 
-            scorePickupChoiceMenu.addChoice("Score None", ScorePickup.SCORE_NONE);
-            scorePickupChoiceMenu.addChoice("Score One", ScorePickup.SCORE_ONE);
-            scorePickupChoiceMenu.addChoice("Score Two", ScorePickup.SCORE_TWO);
+            scorePickupChoiceMenu.addChoice("Score None", ScorePickup.SCORE_NONE, true, false);
+            scorePickupChoiceMenu.addChoice("Score One", ScorePickup.SCORE_ONE, false, false);
+            scorePickupChoiceMenu.addChoice("Score Two", ScorePickup.SCORE_TWO, false,  true);
             //
             // Initialize dashboard with default choice values.
             //
             userChoices.addChoiceMenu(DBKEY_AUTO_ALLIANCE, allianceMenu);
             userChoices.addChoiceMenu(DBKEY_AUTO_STRATEGY, autoStrategyMenu);
             userChoices.addChoiceMenu(DBKEY_AUTO_START_POS, autoStartPosMenu);
+            userChoices.addChoiceMenu(DBKEY_AUTO_SCORE_SIDE, scoreSideChoiceMenu);
             userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationChoiceMenu);
             userChoices.addChoiceMenu(DBKEY_AUTO_SCORE_PICKUP, scorePickupChoiceMenu);
             userChoices.addNumber(DBKEY_AUTO_START_DELAY, 0.0);
@@ -192,7 +194,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, false);
             userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, false);
             userChoices.addBoolean(DBKEY_AUTO_SCORE_PRELOAD, false);
-            userChoices.addBoolean(DBKEY_AUTO_USE_VISION, true);
+            userChoices.addBoolean(DBKEY_AUTO_USE_VISION, false);
         }   //AutoChoices
 
         //
@@ -289,6 +291,8 @@ public class FrcAuto implements TrcRobot.RobotMode
             return "alliance=\"" + getAlliance() + "\" " +
                    "strategy=\"" + getStrategy() + "\" " +
                    "startPos=\"" + getStartPos() + "\" " +
+                   "stationSide=\"" + getStationSide() + "\" " +
+                   "scoreSide=\""   + getScoreSide() + "\" " +
                    "startDelay=" + getStartDelay() + " sec " +
                    "pathFile=\"" + getPathFile() + "\" " +
                    "xDistance=" + getXDriveDistance() + " ft " +
@@ -424,7 +428,7 @@ public class FrcAuto implements TrcRobot.RobotMode
                     if(autoChoices.getStartPos().toString().equals("Processor-side start position") || autoChoices.getStartPos().toString().equals("Far side start position")){
                         autoCommand = new CmdAutoSide(robot, autoChoices);
                     } else{
-                        autoCommand = new CmdAutoSide(robot, autoChoices);
+                        autoCommand = new CmdAutoMiddle(robot, autoChoices);
                     }
                 }
                 break;

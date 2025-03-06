@@ -202,10 +202,10 @@ public class RobotParams
         //
         // Robot starting positions.
         //
-        public static final double STARTPOS_BLUE_Y              = Robot.ROBOT_LENGTH / 2.0;
-        public static final double STARTPOS_BLUE_PROCESSOR_X    = -42.19;
-        public static final double STARTPOS_BLUE_CENTER_X       = -108.19;
-        public static final double STARTPOS_BLUE_FAR_X          = -174.19;
+        public static final double STARTPOS_BLUE_Y              = 297.5 - Robot.ROBOT_LENGTH / 2.0;
+        public static final double STARTPOS_BLUE_PROCESSOR_X    = -241.73;
+        public static final double STARTPOS_BLUE_CENTER_X       = -Field.WIDTH / 2.0; // -158.5
+        public static final double STARTPOS_BLUE_FAR_X          = -75.2;
         public static final TrcPose2D STARTPOS_BLUE_PROCESSOR   =
             new TrcPose2D(STARTPOS_BLUE_PROCESSOR_X, STARTPOS_BLUE_Y, 180.0);
         public static final TrcPose2D STARTPOS_BLUE_CENTER      =

@@ -371,7 +371,7 @@ public class RobotBase
 
             profiledMaxVelocity = 110.0;       // inch/sec
             profiledMaxAcceleration = 200.0;  // inch/sec sq
-            profiledMaxDeceleration = 250.0;
+            profiledMaxDeceleration = 90.0;
             profiledMaxTurnRate = 200.0;     // degree/sec
             // DriveBase PID Parameters
             drivePidTolerance = 1.0;
@@ -391,7 +391,7 @@ public class RobotBase
             usePurePursuitDrive = true;
             enablePurePursuitDriveSquareRootPid = false;
             ppdFollowingDistance = 10.0;
-            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 0.012, 0.0);
+            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1/profiledMaxVelocity, 0.0);
             fastModeEnabled = true; 
             // Vision
             cam1 = new ReefscapeFrontCamParams();
