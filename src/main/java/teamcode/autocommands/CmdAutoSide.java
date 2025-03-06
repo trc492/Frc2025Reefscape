@@ -28,9 +28,7 @@ import teamcode.RobotParams;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import teamcode.FrcAuto.AutoChoices;
 import teamcode.FrcAuto.AutoStartPos;
-import teamcode.FrcAuto.AutoStrategy;
 import teamcode.FrcAuto.ScorePickup;
-import teamcode.FrcAuto.StationSide;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcRobot;
@@ -73,7 +71,6 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
     private int coralScored;
     private int coralTarget;
 
-    private String cyclePositions;
     /**
      * Constructor: Create an instance of the object.
      *
@@ -174,19 +171,19 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     {
                         coralTarget += 2; // increase coral target by 2
                     }
-                    // Set cycle positions
-                    cyclePositions = "Side";
                     // Navigate to Reef position.
                     if (scorePreload)
                     {
                         // Code Review: What about red alliance side?
                         coralTarget++; // increase coral target by 1 to include preload
                         TrcPose2D scorePreloadPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_SCORE_CORAL_START_BLUE : RobotParams.Game.FAR_SCORE_CORAL_START_BLUE;
+                            RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red ? 0: 1]]: 
+                            RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red ? 0: 1]];
+                        robot.globalTracer.traceInfo(moduleName, "scorePreloadPos: ", scorePreloadPos);
                         robot.robotDrive.purePursuitDrive.start(
-                        event, 0.0, false,
-                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                        robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(scorePreloadPos, alliance));
+                            event, 0.0, false,
+                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                            robot.robotInfo.profiledMaxDeceleration, scorePreloadPos);
                         sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
                     }
                     else
@@ -239,27 +236,15 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case GO_TO_CORAL_STATION:
                     // Navigate to Coral Station.
-                    if (cyclePositions.equals("Side"))
-                    {
-                        // Code Review: What about red alliance side?
-                        TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_SIDE_BLUE : RobotParams.Game.FAR_PICKUP_CORAL_SIDE_BLUE;
-                        robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false,
-                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(stationSidePos, alliance));
-                        sm.waitForSingleEvent(event, State.PICKUP_CORAL);
-                    }
-                    else if (cyclePositions.equals("Center"))
-                    {
-                        TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_BLUE : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_BLUE;
-                        robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false,
-                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(stationCenterPos, alliance));
-                        sm.waitForSingleEvent(event, State.PICKUP_CORAL); 
-                    }
+                    // Code Review: What about red alliance side?
+                    TrcPose2D stationSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                        RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red ? 0: 1]]: 
+                        RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red ? 0: 1]];
+                    robot.robotDrive.purePursuitDrive.start(
+                        event, 0.0, false,
+                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                        robot.robotInfo.profiledMaxDeceleration, stationSidePos);
+                    sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                     break;
 
                 case PICKUP_CORAL:
@@ -271,28 +256,15 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
 
                 case GO_TO_REEF:
                     // Navigate to Reef.
-                    if (cyclePositions == "Side")
-                    {
-                        // Code Review: What about red alliance side?
-                        TrcPose2D scoreSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_SCORE_CORAL_SIDE_BLUE : RobotParams.Game.FAR_SCORE_CORAL_SIDE_BLUE;
-                        robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false,
-                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(scoreSidePos, alliance));
-                        sm.waitForSingleEvent(event, State.SCORE_CORAL); 
-                    }
-                    else if (cyclePositions == "Center")
-                    {
-                        // Code Review: What about red alliance side?
-                        TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_BLUE : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_BLUE;
-                        robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false,
-                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(stationCenterPos, alliance));
-                        sm.waitForSingleEvent(event, State.SCORE_CORAL); 
-                    }
+                    // Code Review: What about red alliance side?
+                    TrcPose2D scoreSidePos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
+                        RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red ? 0: 1]]: 
+                        RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red ? 0: 1]];
+                    robot.robotDrive.purePursuitDrive.start(
+                        event, 0.0, false,
+                        robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
+                        robot.robotInfo.profiledMaxDeceleration, scoreSidePos);
+                    sm.waitForSingleEvent(event, State.SCORE_CORAL); 
                     break;
 
                 case SCORE_CORAL:
@@ -300,7 +272,6 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     // TODO: Will have to add a dashboard choice for scoreSide
                     robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, 3, false, true, relocalize, startPos == AutoStartPos.START_POSE_FAR_SIDE ? 0: 1, event);
                     coralScored++;
-                    cyclePositions = "Center";
                     if (coralScored < coralTarget)
                     {
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
