@@ -186,7 +186,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         robot.robotDrive.purePursuitDrive.start(
                         event, 0.0, false,
                         robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                        robot.robotInfo.profiledMaxDeceleration, scorePreloadPos);
+                        robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(scorePreloadPos, alliance));
                         sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
                     }
                     else
@@ -198,7 +198,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                 case SCORE_PRELOAD:
                     // Score preloaded Coral to high branch.
                     // TODO: Will have to add a dashboard choice for scoreSide
-                    robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, 3, false, true, relocalize, 0, event);
+                    robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, 3, false, true, relocalize, startPos == AutoStartPos.START_POSE_FAR_SIDE ? 0: 1, event);
                     coralScored++;
                     if (coralScored < coralTarget)
                     {
@@ -247,18 +247,17 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, stationSidePos);
+                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(stationSidePos, alliance));
                         sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                     }
                     else if (cyclePositions.equals("Center"))
                     {
-                        // Code Review: What about red alliance side?
                         TrcPose2D stationCenterPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
                             RobotParams.Game.PROCESSOR_PICKUP_CORAL_CENTER_BLUE : RobotParams.Game.FAR_PICKUP_CORAL_CENTER_BLUE;
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, stationCenterPos);
+                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(stationCenterPos, alliance));
                         sm.waitForSingleEvent(event, State.PICKUP_CORAL); 
                     }
                     break;
@@ -280,7 +279,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, scoreSidePos);
+                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(scoreSidePos, alliance));
                         sm.waitForSingleEvent(event, State.SCORE_CORAL); 
                     }
                     else if (cyclePositions == "Center")
@@ -291,7 +290,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         robot.robotDrive.purePursuitDrive.start(
                             event, 0.0, false,
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, stationCenterPos);
+                            robot.robotInfo.profiledMaxDeceleration, robot.adjustPoseByAlliance(stationCenterPos, alliance));
                         sm.waitForSingleEvent(event, State.SCORE_CORAL); 
                     }
                     break;
@@ -299,7 +298,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     // Score Coral to high branch.
                     // TODO: Will have to add a dashboard choice for scoreSide
-                    robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, 3, false, true, relocalize, 0, event);
+                    robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, 3, false, true, relocalize, startPos == AutoStartPos.START_POSE_FAR_SIDE ? 0: 1, event);
                     coralScored++;
                     cyclePositions = "Center";
                     if (coralScored < coralTarget)
