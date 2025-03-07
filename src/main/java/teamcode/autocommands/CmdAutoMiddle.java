@@ -190,7 +190,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                             robot.globalTracer.traceInfo(moduleName, "***** Scoring preload using AprilTag Vision");
                             // TODO: Will have to add a dashboard input that will give scoreSide
                             robot.scoreCoralTask.autoScoreCoral(
-                                null, useAprilTagVision, -1, 3, scoreSide, false, relocalize, event);
+                                null, useAprilTagVision, alliance == Alliance.Red ? 10: 21, 3, scoreSide, false, relocalize, event);
                             sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
                         } else{
                             // // If we do not have vision, then we will go to this position using odometry

@@ -185,8 +185,29 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         {
                             // Using vision to view AprilTag that is directly infront of us, and will AutoScore using this AprilTag
                             robot.globalTracer.traceInfo(moduleName, "***** Scoring preload using AprilTag Vision");
+                            int sidePreloadAprilTagNum = -1;
+                            if (alliance == Alliance.Red)
+                            {
+                                if (startPos == FrcAuto.AutoStartPos.START_POSE_FAR_SIDE){
+                                    sidePreloadAprilTagNum = 11;
+                                }
+                                else if (startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR)
+                                {
+                                    sidePreloadAprilTagNum = 9;
+                                }
+                            }
+                            else if (alliance == Alliance.Blue)
+                            {
+                                if (startPos == FrcAuto.AutoStartPos.START_POSE_FAR_SIDE){
+                                    sidePreloadAprilTagNum = 20;
+                                }
+                                else if (startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR)
+                                {
+                                    sidePreloadAprilTagNum = 22;
+                                }
+                            }
                             robot.scoreCoralTask.autoScoreCoral(
-                                null, useAprilTagVision, -1, 3, startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? FrcAuto.ScoreSide.RIGHT : FrcAuto.ScoreSide.LEFT, false, relocalize, event);
+                                null, useAprilTagVision, sidePreloadAprilTagNum, 3, startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? FrcAuto.ScoreSide.RIGHT : FrcAuto.ScoreSide.LEFT, false, relocalize, event);
                             sm.waitForSingleEvent(event, State.DONE); // Only debugging preload for now
                             // sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
                         }
