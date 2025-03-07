@@ -67,6 +67,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
     private boolean relocalize;
     private boolean goToStation;
     private boolean scorePreload;
+    private boolean useAprilTagVision;
 
     private int coralScored;
     private int coralTarget;
@@ -161,6 +162,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     relocalize = FrcAuto.autoChoices.getRelocalize();
                     goToStation = FrcAuto.autoChoices.goToStation();
                     scorePreload = FrcAuto.autoChoices.scorePreload();
+                    useAprilTagVision = FrcAuto.autoChoices.useVision();
                     robot.globalTracer.traceInfo(moduleName, "****** Scoring preload from" + startPos + " at " + robot.robotDrive.driveBase.getFieldPosition());
                     // Set score variables
                     if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)
@@ -172,39 +174,43 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                         coralTarget += 2; // increase coral target by 2
                     }
                     // Navigate to Reef position.
-                    if (scorePreload)
-                    {
-                        // Code Review: What about red alliance side?
-                        coralTarget++; // increase coral target by 1 to include preload
-                        TrcPose2D scorePreloadPos = startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? 
-                            RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red ? 0: 1]]: 
-                            RobotParams.Game.APRILTAG_POSES[RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red ? 0: 1]];
-                        robot.globalTracer.traceInfo(moduleName, "scorePreloadPos: ", scorePreloadPos);
-                        robot.robotDrive.purePursuitDrive.start(
-                            event, 0.0, false,
-                            robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
-                            robot.robotInfo.profiledMaxDeceleration, scorePreloadPos);
-                        sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
-                    }
-                    else
-                    {
-                        sm.setState(State.DO_DELAY);
-                    }
+                    sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
                     break;
 
                 case SCORE_PRELOAD:
                     // Score preloaded Coral to high branch.
-                    // TODO: Will have to add a dashboard choice for scoreSide
-                    robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, -1, 3, FrcAuto.ScoreSide.LEFT, false, relocalize, event);
-                    coralScored++;
-                    if (coralScored < coralTarget)
+                    if (scorePreload)
                     {
-                        sm.waitForSingleEvent(event, State.DO_DELAY);
+                        if (useAprilTagVision)
+                        {
+                            // Using vision to view AprilTag that is directly infront of us, and will AutoScore using this AprilTag
+                            robot.globalTracer.traceInfo(moduleName, "***** Scoring preload using AprilTag Vision");
+                            robot.scoreCoralTask.autoScoreCoral(
+                                null, useAprilTagVision, -1, 3, startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? FrcAuto.ScoreSide.RIGHT : FrcAuto.ScoreSide.LEFT, false, relocalize, event);
+                            sm.waitForSingleEvent(event, State.DONE); // Only debugging preload for now
+                            // sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
+                        }
+                        else
+                        {
+                            robot.globalTracer.traceInfo(moduleName,"******* We do not have accurate Odometry to go to target");
+                            sm.setState(State.DONE);
+                        }        
                     }
                     else
                     {
+                        // If our scorePreload is false, then we can go to DONE
+                        robot.globalTracer.traceInfo(moduleName, "***** Not scoring preload, going to DONE");
                         sm.setState(State.DONE);
                     }
+                    // coralScored++;
+                    // if (coralScored < coralTarget)
+                    // {
+                    //     sm.waitForSingleEvent(event, State.DO_DELAY);
+                    // }
+                    // else
+                    // {
+                    //     sm.setState(State.DONE);
+                    // }
                     break;
 
                 case DO_DELAY:
