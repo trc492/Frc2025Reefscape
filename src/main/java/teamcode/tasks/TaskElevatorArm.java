@@ -528,7 +528,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
                 {
                     coralArm.setPosition(
                         owner, 0.0, taskParams.coralArmPos, true, CoralArm.Params.POWER_LIMIT, coralArmEvent, 0.0);
-                    sm.addEvent(coralArmEvent);
+                    // sm.addEvent(coralArmEvent);
                 }
                 sm.setState(State.CHECK_CORALARM_SAFETY_FOR_SCORE);
                 break;
@@ -538,8 +538,8 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
                 {
                     elevator.setPosition(
                         owner, 0.0, taskParams.elevatorPos, true, Elevator.Params.POWER_LIMIT, elevatorEvent, 0.0);
-                    sm.addEvent(elevatorEvent);
-                    sm.waitForEvents(State.DONE, false, true);
+                    // sm.addEvent(elevatorEvent);
+                    sm.waitForSingleEvent(elevatorEvent, State.DONE);//, false, true);
                 }
                 break;
             //
