@@ -79,7 +79,7 @@ public class CoralArm extends TrcSubsystem
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.015, 0.0, 0.001, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.03, 0.0, 0.001, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 1.0;
         public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
     }   //class Params

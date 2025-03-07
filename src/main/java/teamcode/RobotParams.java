@@ -49,7 +49,7 @@ public class RobotParams
         public static final boolean useCommStatusMonitor        = false;
         public static final boolean invertedRobot               = false;
         // Status Update
-        public static final boolean doStatusUpdate              = true;     //false
+        public static final boolean doStatusUpdate              = !inCompetition;
         public static final boolean showLoopTime                = false;
         public static final boolean showPowerConsumption        = false;
         public static final boolean showDriveBase               = false;
@@ -77,7 +77,7 @@ public class RobotParams
         public static final boolean useSubsystems               = true;
         public static final boolean useCoralArm                 = true;
         public static final boolean useCoralGrabber             = useCoralArm;
-        public static final boolean useAlgaeArm                 = false;
+        public static final boolean useAlgaeArm                 = true;
         public static final boolean useAlgaeGrabber             = useAlgaeArm;
         public static final boolean useElevator                 = true;
         public static final boolean useElevatorArm              = true;

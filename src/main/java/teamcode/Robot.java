@@ -63,6 +63,7 @@ import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
+import teamcode.vision.PhotonVision.PipelineType;
 import trclib.controller.TrcPidController;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
@@ -530,13 +531,18 @@ public class Robot extends FrcRobotBase
 
             if (RobotParams.Preferences.showVision)
             {
+                PipelineType pipelineType;
+
                 if (photonVisionFront != null)
                 {
                     FrcPhotonVision.DetectedObject object = photonVisionFront.getBestDetectedObject();
                     if (object != null)
                     {
+                        pipelineType = photonVisionFront.getPipeline();
                         dashboard.displayPrintf(
-                            lineNum, "Front(%s):%s", photonVisionFront.getPipeline(), object);
+                            lineNum, "Front(%s):%s",
+                            pipelineType == PipelineType.APRILTAG? object.target.getFiducialId(): pipelineType,
+                            object);
                     }
                     lineNum++;
                 }
@@ -546,8 +552,11 @@ public class Robot extends FrcRobotBase
                     FrcPhotonVision.DetectedObject object = photonVisionBack.getBestDetectedObject();
                     if (object != null)
                     {
+                        pipelineType = photonVisionFront.getPipeline();
                         dashboard.displayPrintf(
-                            lineNum, "Back(%s):%s", photonVisionBack.getPipeline(), object);
+                            lineNum, "Back(%s):%s",
+                            pipelineType == PipelineType.APRILTAG? object.target.getFiducialId(): pipelineType,
+                            object);
                     }
                     lineNum++;
                 }

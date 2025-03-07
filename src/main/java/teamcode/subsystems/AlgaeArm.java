@@ -62,11 +62,11 @@ public class AlgaeArm extends TrcSubsystem
         public static final double ZERO_OFFSET                  = 1768.0;
         public static final double POWER_LIMIT                  = 0.5;
 
-        public static final double MIN_POS                      = 10.0;
-        public static final double MAX_POS                      = 150.0;//TODO: tune
-        public static final double TURTLE_POS                   = MIN_POS; //TODO: tune
+        public static final double MIN_POS                      = 5.0;
+        public static final double MAX_POS                      = 150.0;
+        public static final double TURTLE_POS                   = MIN_POS;
         public static final double CLIMB_POS                    = 15.0;
-        public static final double SAFE_ZONE_POS                = MIN_POS; //TODO: tune
+        public static final double SAFE_ZONE_POS                = MIN_POS;
 
         public static final double[] posPresets                 = {MIN_POS, 30.0, 60.0, 90.0, 120.0, 150.0};
         public static final double POS_PRESET_TOLERANCE         = 5.0;

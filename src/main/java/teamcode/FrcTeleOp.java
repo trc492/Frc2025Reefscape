@@ -535,7 +535,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         }
                         else
                         {
-                            robot.coralGrabber.autoEject(null);
+                            robot.coralGrabber.autoEject(null, 0.5, null, 0.0);
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Coral Eject");
                         }
                     }
@@ -577,7 +577,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     if (pressed)
                     {
-                        robot.algaeGrabber.autoIntake(null);
+                        robot.algaeGrabber.autoIntake(null, 0.0, 0.2, null, 0.0);
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
                     }
                     else if (robot.algaeGrabber.isAutoActive())

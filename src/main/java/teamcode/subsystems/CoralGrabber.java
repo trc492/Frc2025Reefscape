@@ -55,7 +55,6 @@ public class CoralGrabber extends TrcSubsystem
         public static final double INTAKE_POWER                 = 1.0;
         public static final double EJECT_POWER                  = -0.25;
         public static final double RETAIN_POWER                 = 0.0;
-        public static final double FINISH_DELAY                 = 0.06;
         public static final double DUMP_TIME                    = 0.5;
         public static final double DUMP_DELAY                   = 0.0;
     }   //class Params
