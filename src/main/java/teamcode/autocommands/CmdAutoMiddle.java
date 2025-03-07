@@ -158,7 +158,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                 case START:
                     // Set robot location according to auto choices.
                     // If this method does nothing then we will have to find another way to find our current position
-                    robot.setRobotStartPosition(); // TODO: This method does nothing, do we need to add code to make it functional?
+                    robot.setRobotStartPosition();
                     startPos = FrcAuto.autoChoices.getStartPos();
                     stationSide = FrcAuto.autoChoices.getStationSide();
                     scorePickup = FrcAuto.autoChoices.getScorePickup();
@@ -189,7 +189,8 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                             // Using vision to view AprilTag that is directly infront of us, and will AutoScore using this AprilTag
                             robot.globalTracer.traceInfo(moduleName, "***** Scoring preload using AprilTag Vision");
                             // TODO: Will have to add a dashboard input that will give scoreSide
-                            robot.scoreCoralTask.autoScoreCoral(null, useAprilTagVision, 3, false, true, relocalize, scoreSide == ScoreSide.LEFT ? 0 : 1, event);
+                            robot.scoreCoralTask.autoScoreCoral(
+                                null, useAprilTagVision, -1, 3, scoreSide, false, relocalize, event);
                             sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
                         } else{
                             // // If we do not have vision, then we will go to this position using odometry
@@ -300,7 +301,8 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                         // We are at the coral Station and the Camera can probably see the AprilTag, so we can call AutoScoreCoral to score the coral
                         robot.globalTracer.traceInfo(moduleName, "***** Going to score on Reef using AprilTag Vision");
                         // TODO: Will have to add a dashboard input that will give scoreSide    
-                        robot.scoreCoralTask.autoScoreCoral(null, useAprilTagVision, 3, false, false, relocalize, scoreSide == ScoreSide.LEFT ? 0 : 1, event);
+                        robot.scoreCoralTask.autoScoreCoral(
+                            null, useAprilTagVision, -1, 3, scoreSide, false, relocalize, event);
                         // Increase coral scored by one, if we reached the coralTarget, then we are done, otherwise we go back to GO_TO_CORAL_STATION
                         coralScored++;
                         sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);
@@ -313,7 +315,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                             robot.robotInfo.profiledMaxVelocity, robot.robotInfo.profiledMaxAcceleration,
                             robot.robotInfo.profiledMaxDeceleration, pickupScorePose);
                             // TODO: Will have to add a dashboard input that will give scoreSide
-                        robot.scoreCoralTask.autoScoreCoral(null, false, 3, false, true, relocalize, scoreSide == ScoreSide.LEFT ? 0 : 1, event);
+                        robot.scoreCoralTask.autoScoreCoral(null, false, -1, 3, scoreSide, false, relocalize, event);
                         coralScored++;
                         sm.waitForSingleEvent(event, coralScored == coralTarget ? State.DONE : State.GO_TO_CORAL_STATION);
                     }

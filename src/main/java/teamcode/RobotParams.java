@@ -43,20 +43,20 @@ public class RobotParams
     {
         // Global config
         public static final RobotType robotType                 = RobotType.ReefscapeRobot;
-        public static final boolean inCompetition               = false;
+        public static final boolean inCompetition               = false;    //true
         public static final boolean hybridMode                  = false;
         public static final boolean useTraceLog                 = true;
-        public static final boolean useCommStatusMonitor        = true;
+        public static final boolean useCommStatusMonitor        = false;
         public static final boolean invertedRobot               = false;
         // Status Update
-        public static final boolean doStatusUpdate              = true;
+        public static final boolean doStatusUpdate              = true;     //false
         public static final boolean showLoopTime                = false;
         public static final boolean showPowerConsumption        = false;
         public static final boolean showDriveBase               = false;
         public static final boolean debugDriveBase              = false;
         public static final boolean showPurePursuitDrive        = false;
         public static final boolean showPidDrive                = false;
-        public static final boolean showVision                  = false;
+        public static final boolean showVision                  = true;     //false
         public static final boolean showSubsystems              = true;
         // Sensors and Indicators
         public static final boolean useNavX                     = true;
@@ -64,8 +64,8 @@ public class RobotParams
         public static final boolean usePressureSensor           = false;
         public static final boolean useLED                      = true;
         // Vision
-        public static final boolean useVision                   = false;
-        public static final boolean usePhotonVision             = false;
+        public static final boolean useVision                   = true;
+        public static final boolean usePhotonVision             = true;
         public static final boolean useOpenCvVision             = false;
         public static final boolean useStreamCamera             = false;
         // Drive Base
@@ -76,9 +76,9 @@ public class RobotParams
         // Subsystems
         public static final boolean useSubsystems               = true;
         public static final boolean useCoralArm                 = true;
-        public static final boolean useCoralGrabber             = true;
-        public static final boolean useAlgaeArm                 = true;
-        public static final boolean useAlgaeGrabber             = true;
+        public static final boolean useCoralGrabber             = useCoralArm;
+        public static final boolean useAlgaeArm                 = false;
+        public static final boolean useAlgaeGrabber             = useAlgaeArm;
         public static final boolean useElevator                 = true;
         public static final boolean useElevatorArm              = true;
         public static final boolean useWinch                    = true;

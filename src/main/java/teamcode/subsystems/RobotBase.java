@@ -284,11 +284,11 @@ public class RobotBase
             camName = "FrontOV9782";
             camImageWidth = 1280;
             camImageHeight = 800;
-            camXOffset = -0.1875;               // Inches to the right from robot center
-            camYOffset = 5.9375;                // Inches forward from robot center
+            camXOffset = -0.25;                 // Inches to the right from robot center
+            camYOffset = 5.75;                  // Inches forward from robot center
             camZOffset = 6.75;                  // Inches up from the floor
             camYaw = 0.0;                       // degrees clockwise from robot front
-            camPitch = 16.0;                    // degrees up from horizontal
+            camPitch = 24.422;                  // degrees up from horizontal
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),
@@ -311,11 +311,11 @@ public class RobotBase
             camName = "BackOV9782";
             camImageWidth = 1280;
             camImageHeight = 800;
-            camXOffset = 0.0;                  // Inches to the right from robot center
-            camYOffset = 0.0;                // Inches forward from robot center
-            camZOffset = 20.0;                  // Inches up from the floor
+            camXOffset = 0.0;                   // Inches to the right from robot center
+            camYOffset = -1.563;                // Inches forward from robot center
+            camZOffset = 41.374;                // Inches up from the floor
             camYaw = 180.0;                     // degrees clockwise from robot front
-            camPitch = 0.0;                   // degrees up from horizontal
+            camPitch = 8.75;                    // degrees up from horizontal
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),

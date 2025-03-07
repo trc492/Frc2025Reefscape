@@ -154,6 +154,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
      * @param slowPeriodicLoop specifies true if it is running the slow periodic loop on the main robot thread,
      *        false otherwise.
      */
+    @SuppressWarnings("unused")
     @Override
     public void periodic(double elapsedTime, boolean slowPeriodicLoop)
     {
@@ -376,7 +377,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.scoreCoralTask != null && pressed)
                 {
                     robot.scoreCoralTask.autoScoreCoral(
-                        moduleName, true, 0, false, false, false, 0, null);
+                        moduleName, true, -1, 0, FrcAuto.ScoreSide.LEFT, false, false, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-score Coral");
                 }
                 break;

@@ -548,7 +548,6 @@ public class Robot extends FrcRobotBase
                     {
                         dashboard.displayPrintf(
                             lineNum, "Back(%s):%s", photonVisionBack.getPipeline(), object);
-                        dashboard.displayPrintf(++lineNum, "RobotPose=%s", object.robotPose);
                     }
                     lineNum++;
                 }
@@ -909,10 +908,10 @@ public class Robot extends FrcRobotBase
         return adjustPoseByAlliance(pose.x, pose.y, pose.angle, alliance);
     }   //adjustPoseByAlliance
 
-    public TrcPose2D adjustPoseByOrthogonalOffset(TrcPose2D pose, double offset)
+    public TrcPose2D adjustPoseByOffset(TrcPose2D pose, double xOffset, double yOffset)
     {
-        return pose.addRelativePose(new TrcPose2D(0.0, offset, 0.0));
-    }   //adjustPoseByOrthogonalOffset
+        return pose.addRelativePose(new TrcPose2D(xOffset, yOffset, 0.0));
+    }   //adjustPoseByOffset
 
     //
     // Getters for sensor data.
