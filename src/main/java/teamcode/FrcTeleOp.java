@@ -386,7 +386,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.pickupCoralFromStationTask != null && pressed)
                 {
                     robot.pickupCoralFromStationTask.autoPickupCoral(
-                        moduleName, true, false, false, null);
+                        moduleName, true, -1, false, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-pickup Coral");
                 }
                 break;  

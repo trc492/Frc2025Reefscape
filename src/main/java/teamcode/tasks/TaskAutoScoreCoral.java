@@ -182,6 +182,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         tracer.traceInfo(moduleName, "Stopping subsystems.");
         robot.robotDrive.cancel(owner);
         robot.elevatorArmTask.cancel();
+        robot.coralGrabber.cancel();
         // Restore to full power in case we have changed it.
         robot.robotDrive.purePursuitDrive.setMoveOutputLimit(1.0);
     }   //stopSubsystems
@@ -209,14 +210,12 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             case START:
                 aprilTagId = -1;
                 aprilTagRelativePose = null;
-                elevatorArmEvent.clear();
                 if (robot.elevatorArmTask != null)
                 {
-                    tracer.traceInfo(
-                        moduleName,
-                        "***** Moving Elevator and Arm to scoring position to reefLevel: " + taskParams.reefLevel);
+                    elevatorArmEvent.clear();
                     robot.elevatorArmTask.setCoralScorePosition(owner, taskParams.reefLevel, elevatorArmEvent);
                 }
+
                 if (taskParams.useVision && robot.photonVisionFront != null)
                 {
                     tracer.traceInfo(moduleName, "***** Using AprilTag Vision.");
@@ -281,14 +280,10 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             case APPROACH_REEF:
                 TrcPose2D targetPose = robot.adjustPoseByOffset(
                     aprilTagRelativePose, taskParams.scoreSide == FrcAuto.ScoreSide.LEFT? -8.5: 8.0, -24.5);
-                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
-                // targetPose.x += robot.robotInfo.cam1.camXOffset;// This value will need to be measured.
-                // targetPose.x -= Math.sin(Units.degreesToRadians(aprilTagPose.angle)) * 17;
-                // targetPose.y -= Math.cos(Units.degreesToRadians(aprilTagPose.angle)) * 17;
-                // targetPose.x = taskParams.scoreSide == 1? targetPose.x + 7.5: targetPose.x - 7.5;
+
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
-                sm.setState(State.DONE);
                 driveEvent.clear();
+                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
                 robot.robotDrive.purePursuitDrive.start(
                     owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                     robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
@@ -301,8 +296,6 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case SCORE_CORAL:
-                // Code Review: Need to figure out the exact sequence to score the coral. Is there a reason why we won't have the coral?
-
                 robot.coralGrabber.eject(owner, 1.0, scoreEvent);
                 sm.waitForSingleEvent(scoreEvent, State.DONE);
                 break;

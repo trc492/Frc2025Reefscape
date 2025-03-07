@@ -28,7 +28,6 @@ import teamcode.RobotParams;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import teamcode.FrcAuto.AutoChoices;
 import teamcode.FrcAuto.AutoStartPos;
-import teamcode.FrcAuto.ScorePickup;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcRobot;
@@ -55,14 +54,13 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
     }   //enum State
 
     private final Robot robot;
-    private final AutoChoices autoChoices;
     private final TrcTimer timer;
     private final TrcEvent event;
     private final TrcStateMachine<State> sm;
 
     private Alliance alliance;
     private AutoStartPos startPos;
-    private ScorePickup scorePickup;
+    private double stationPickup;
     private double startDelay;
     private boolean relocalize;
     private boolean goToStation;
@@ -70,7 +68,6 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
     private boolean useAprilTagVision;
 
     private int coralScored;
-    private int coralTarget;
 
     /**
      * Constructor: Create an instance of the object.
@@ -81,7 +78,6 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
     public CmdAutoSide(Robot robot, AutoChoices autoChoices)
     {
         this.robot = robot;
-        this.autoChoices = autoChoices;
 
         timer = new TrcTimer(moduleName);
         event = new TrcEvent(moduleName);
@@ -157,7 +153,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     // Initialize auto choices.
                     alliance = FrcAuto.autoChoices.getAlliance();
                     startPos = FrcAuto.autoChoices.getStartPos();
-                    scorePickup = FrcAuto.autoChoices.getScorePickup();
+                    stationPickup = FrcAuto.autoChoices.getStationPickup();
                     startDelay = FrcAuto.autoChoices.getStartDelay();
                     relocalize = FrcAuto.autoChoices.getRelocalize();
                     goToStation = FrcAuto.autoChoices.goToStation();
@@ -165,14 +161,6 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     useAprilTagVision = FrcAuto.autoChoices.useVision();
                     robot.globalTracer.traceInfo(moduleName, "****** Scoring preload from" + startPos + " at " + robot.robotDrive.driveBase.getFieldPosition());
                     // Set score variables
-                    if (scorePickup == FrcAuto.ScorePickup.SCORE_ONE)
-                    {
-                        coralTarget++; // increase coral target by 1
-                    }
-                    else if (scorePickup == FrcAuto.ScorePickup.SCORE_TWO)
-                    {
-                        coralTarget += 2; // increase coral target by 2
-                    }
                     // Navigate to Reef position.
                     sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
                     break;
@@ -277,7 +265,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                 case PICKUP_CORAL:
                     // TODO: adjust once Sarah finishes the auto task
                     // Pick up Coral from station.
-                    robot.pickupCoralFromStationTask.autoPickupCoral(null, RobotParams.Preferences.useVision, true, relocalize, event);
+                    robot.pickupCoralFromStationTask.autoPickupCoral(null, RobotParams.Preferences.useVision, -1, relocalize, event);
                     sm.waitForSingleEvent(event, State.GO_TO_REEF);
                     break;
 
@@ -299,7 +287,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                     // TODO: Will have to add a dashboard choice for scoreSide
                     robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, -1, 3, FrcAuto.ScoreSide.LEFT, false, relocalize, event);
                     coralScored++;
-                    if (coralScored < coralTarget)
+                    if (coralScored < stationPickup)
                     {
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     }
