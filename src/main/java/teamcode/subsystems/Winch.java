@@ -46,11 +46,11 @@ public class Winch extends TrcSubsystem
         public static final MotorType MOTOR_TYPE                = MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = true; //TODO: determine
+        public static final boolean MOTOR_INVERTED              = false;
 
         public static final String LOWER_LIMITSWITCH_NAME       = SUBSYSTEM_NAME + ".lowerLimit";
         public static final int LOWER_LIMITSWITCH_CHANNEL       = RobotParams.HwConfig.DIO_WINCH_LOWER_LIMIT;
-        public static final boolean LOWER_LIMITSWITCH_INVERTED  = false;
+        public static final boolean LOWER_LIMITSWITCH_INVERTED  = true;
 
         public static final double GEAR_RATIO                   = 60.0;
         public static final double SPOOL_DIAMETER               = 1.0;
@@ -87,6 +87,7 @@ public class Winch extends TrcSubsystem
             .setPositionScaleAndOffset(Params.INCHES_PER_REV, Params.POS_OFFSET);
         winchMotor = new FrcMotorActuator(motorParams).getMotor();
         winchMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
+        winchMotor.enableLowerLimitSwitch(false);
     }   //Winch
 
     public TrcMotor getWinchMotor()
