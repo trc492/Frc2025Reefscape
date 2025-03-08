@@ -23,7 +23,6 @@
 package teamcode.tasks;
 
 import frclib.vision.FrcPhotonVision;
-import teamcode.FrcAuto;
 import teamcode.Robot;
 import teamcode.RobotParams;
 import teamcode.vision.PhotonVision.PipelineType;
@@ -56,18 +55,18 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean useVision;
         int aprilTagId;
         int reefLevel;  //0-3, with 0 being the trough and 3 being the high reef
-        FrcAuto.ScoreSide scoreSide;
+        boolean scoreRightSide;
         boolean removeAlgae;
         boolean relocalize;
 
         TaskParams(
-            boolean useVision, int aprilTagId, int reefLevel, FrcAuto.ScoreSide scoreSide, boolean removeAlgae,
+            boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide, boolean removeAlgae,
             boolean relocalize)
         {
             this.useVision = useVision;
             this.aprilTagId = aprilTagId;
             this.reefLevel = reefLevel;
-            this.scoreSide = scoreSide;
+            this.scoreRightSide = scoreRightSide;
             this.removeAlgae = removeAlgae;
             this.relocalize = relocalize;
         }   //TaskParams
@@ -77,7 +76,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             return "useVision=" + useVision +
                    ",aprilTagId=" + aprilTagId +
                    ",reefLevel=" + reefLevel +
-                   ",scoreSide=" + scoreSide +
+                   ",scoreRightSide=" + scoreRightSide +
                    ",removeAlgae=" + removeAlgae +
                    ",relocalize=" + relocalize;
         }   //toString
@@ -114,16 +113,16 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      * @param aprilTagId specifies the AprilTag ID of the reef branch to score, -1 to use Vision to look for the
      *        closest one.
      * @param reefLevel specifies the reef level to score the coral.
-     * @param scoreSide specifies the reef branch to score the coral.
+     * @param scoreRightSide specifies true to score the coral on the right reef branch, false on the left.
      * @param removeAlgae specifies true to remove algae from the reef, false otherwise.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
-        String owner, boolean useVision, int aprilTagId, int reefLevel, FrcAuto.ScoreSide scoreSide,
+        String owner, boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide,
         boolean removeAlgae, boolean relocalize, TrcEvent completionEvent)
     {
-        TaskParams taskParams = new TaskParams(useVision, aprilTagId, reefLevel, scoreSide, removeAlgae, relocalize);
+        TaskParams taskParams = new TaskParams(useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize);
         tracer.traceInfo(
             moduleName,
             "autoScoreCoral(owner=" + owner +
@@ -279,7 +278,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
 
             case APPROACH_REEF:
                 TrcPose2D targetPose = robot.adjustPoseByOffset(
-                    aprilTagRelativePose, taskParams.scoreSide == FrcAuto.ScoreSide.LEFT? -8.5: 8.0, -24.5);
+                    aprilTagRelativePose, taskParams.scoreRightSide? 8.0: -8.5, -24.5);
 
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
                 driveEvent.clear();

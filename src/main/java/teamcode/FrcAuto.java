@@ -79,12 +79,6 @@ public class FrcAuto implements TrcRobot.RobotMode
         FAR
     }   //enum StationSide
 
-    public enum ScoreSide
-    {
-        LEFT,
-        RIGHT
-    }   //enum StationSide
-
     /**
      * This class encapsulates all user choices for autonomous mode from the smart dashboard.
      *
@@ -106,7 +100,7 @@ public class FrcAuto implements TrcRobot.RobotMode
 
         private static final String DBKEY_AUTO_USE_VISION   = "Auto/UseVision";         //Boolean
         private static final String DBKEY_AUTO_SCORE_PRELOAD = "Auto/ScorePreload";     //Boolean
-        private static final String DBKEY_AUTO_SCORE_SIDE = "Auto/ScoreSide";           //Choices
+        private static final String DBKEY_AUTO_APRILTAG_ID = "Auto/AprilTagId";         //Number
         private static final String DBKEY_AUTO_RELOCALIZE = "Auto/Relocalize";          //Boolean
         private static final String DBKEY_AUTO_GO_TO_STATION = "Auto/GoToStation";      //Boolean
         private static final String DBKEY_AUTO_STATION_SIDE = "Auto/StationSide";       //Choices
@@ -126,7 +120,6 @@ public class FrcAuto implements TrcRobot.RobotMode
         private final FrcChoiceMenu<AutoStartPos> autoStartPosMenu;
 
         private final FrcChoiceMenu<StationSide> stationSideChoiceMenu;
-        private final FrcChoiceMenu<ScoreSide> scoreSideChoiceMenu;
 
         public AutoChoices()
         {
@@ -137,7 +130,6 @@ public class FrcAuto implements TrcRobot.RobotMode
             autoStrategyMenu = new FrcChoiceMenu<>(DBKEY_AUTO_STRATEGY);
             autoStartPosMenu = new FrcChoiceMenu<>(DBKEY_AUTO_START_POS);
             stationSideChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_STATION_SIDE);
-            scoreSideChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_SCORE_SIDE);
             //
             // Populate autonomous mode choice menus.
             //
@@ -163,9 +155,6 @@ public class FrcAuto implements TrcRobot.RobotMode
 
             stationSideChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR);
             stationSideChoiceMenu.addChoice("Far Side", StationSide.FAR, true, true);
-
-            scoreSideChoiceMenu.addChoice("Left Side", ScoreSide.LEFT);
-            scoreSideChoiceMenu.addChoice("Right Side", ScoreSide.RIGHT, true, true);
             //
             // Initialize dashboard with default choice values.
             //
@@ -176,7 +165,7 @@ public class FrcAuto implements TrcRobot.RobotMode
 
             userChoices.addBoolean(DBKEY_AUTO_USE_VISION, true);
             userChoices.addBoolean(DBKEY_AUTO_SCORE_PRELOAD, true);
-            userChoices.addChoiceMenu(DBKEY_AUTO_SCORE_SIDE, scoreSideChoiceMenu);
+            userChoices.addNumber(DBKEY_AUTO_APRILTAG_ID, -1.0);
             userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, true);
             userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, false);
             userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationSideChoiceMenu);
@@ -226,9 +215,9 @@ public class FrcAuto implements TrcRobot.RobotMode
             return userChoices.getUserBoolean(DBKEY_AUTO_SCORE_PRELOAD);
         }
 
-        public ScoreSide getScoreSide()
+        public int getAprilTagId()
         {
-            return scoreSideChoiceMenu.getCurrentChoiceObject();
+            return (int) userChoices.getUserNumber(DBKEY_AUTO_APRILTAG_ID);
         }
 
         public boolean getRelocalize()
@@ -246,9 +235,9 @@ public class FrcAuto implements TrcRobot.RobotMode
             return stationSideChoiceMenu.getCurrentChoiceObject();
         }
 
-        public double getStationPickup()
+        public int getStationPickup()
         {
-            return userChoices.getUserNumber(DBKEY_AUTO_STATION_PICKUP);
+            return (int) userChoices.getUserNumber(DBKEY_AUTO_STATION_PICKUP);
         }
 
         public String getPathFile()
@@ -291,7 +280,7 @@ public class FrcAuto implements TrcRobot.RobotMode
 
                    "useVision=\""  + useVision() + "\" " +
                    "scorePreload=\"" + scorePreload() + "\" " +
-                   "scoreSide=\"" + getScoreSide() + "\" " +
+                   "aprilTagId=\"" + getAprilTagId() + "\" " +
                    "relocalize=\"" + getRelocalize() + "\" " +
                    "goToStation=\"" + goToStation() + "\" " +
                    "stationSide=\"" + getStationSide() + "\" " +

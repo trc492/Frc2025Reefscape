@@ -195,7 +195,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                                 }
                             }
                             robot.scoreCoralTask.autoScoreCoral(
-                                null, useAprilTagVision, sidePreloadAprilTagNum, 3, startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR ? FrcAuto.ScoreSide.RIGHT : FrcAuto.ScoreSide.LEFT, false, relocalize, event);
+                                null, useAprilTagVision, sidePreloadAprilTagNum, 3, startPos == FrcAuto.AutoStartPos.START_POSE_PROCESSOR, false, relocalize, event);
                             sm.waitForSingleEvent(event, State.DONE); // Only debugging preload for now
                             // sm.waitForSingleEvent(event, goToStation ? State.DO_DELAY : State.DONE);
                         }
@@ -285,7 +285,7 @@ public class CmdAutoSide implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     // Score Coral to high branch.
                     // TODO: Will have to add a dashboard choice for scoreSide
-                    robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, -1, 3, FrcAuto.ScoreSide.LEFT, false, relocalize, event);
+                    robot.scoreCoralTask.autoScoreCoral(null, RobotParams.Preferences.useVision, -1, 3, false, false, relocalize, event);
                     coralScored++;
                     if (coralScored < stationPickup)
                     {

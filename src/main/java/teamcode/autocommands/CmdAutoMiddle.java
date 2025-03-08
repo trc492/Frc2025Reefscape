@@ -28,7 +28,6 @@ import teamcode.RobotParams;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
-import teamcode.FrcAuto.ScoreSide;
 import teamcode.FrcAuto.StationSide;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcEvent;
@@ -61,11 +60,12 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
 
     private Alliance alliance;
     private boolean useVision;
-    private ScoreSide scoreSide;
+    private int aprilTagId;
     private boolean relocalize;
     private boolean goToStation;
     private StationSide stationSide;
     private double stationPickup;
+    private boolean scoreRightSide = true;
 
     /**
      * Constructor: Create an instance of the object.
@@ -126,8 +126,6 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
         }
         else
         {
-            int aprilTagId = -1;
-
             robot.dashboard.displayPrintf(8, "State: " + state);
             robot.globalTracer.tracePreStateInfo(sm.toString(), state);
             switch (state)
@@ -137,7 +135,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     robot.setRobotStartPosition();
                     alliance = autoChoices.getAlliance();
                     useVision = autoChoices.useVision();
-                    scoreSide = autoChoices.getScoreSide();
+                    aprilTagId = autoChoices.getAprilTagId();
                     relocalize = autoChoices.getRelocalize();
                     goToStation = autoChoices.goToStation();
                     stationSide = autoChoices.getStationSide();
@@ -145,8 +143,14 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     if (autoChoices.scorePreload())
                     {
                         robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
+                        if (aprilTagId == -1)
+                        {
+                            // If Driver provided AprilTag from Shuffleboard, use that instead.
+                            // This is for using Middle Auto to do Side if we need to.
+                            aprilTagId = alliance == Alliance.Red? 10: 21;
+                        }
                         robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, alliance == Alliance.Red? 10: 21, 3, scoreSide, false, relocalize,
+                            null, useVision, aprilTagId, 3, true, false, relocalize,
                             event);
                         sm.waitForSingleEvent(event, State.DO_DELAY);
                     }
@@ -216,10 +220,12 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     {
                         aprilTagId = RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red? 0: 1];
                     }
-                    stationPickup--;
                     robot.scoreCoralTask.autoScoreCoral(
-                        null, useVision, aprilTagId, 3, scoreSide, false, relocalize, event);
+                        null, useVision, aprilTagId, 3, scoreRightSide, false, relocalize, event);
                     sm.waitForSingleEvent(event, stationPickup > 0? State.GO_TO_CORAL_STATION: State.DONE);
+                    // Decrement the number of station pickup and flip to the other side.
+                    stationPickup--;
+                    scoreRightSide = !scoreRightSide;
                     break;
 
                 default:
