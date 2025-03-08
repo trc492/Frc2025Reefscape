@@ -66,13 +66,11 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
      * This method starts the auto-assist operation.
      *
      * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
-     * @param useVision specifies true to use vision to find the coral, false otherwise.
-     * @param inAuto specifies true if caller is autonomous, false if in teleop.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoClimb(String owner, TrcEvent completionEvent)
     {
-        tracer.traceInfo(moduleName, "event=" + completionEvent);
+        tracer.traceInfo(moduleName, "owner=" + owner + ", event=" + completionEvent);
         startAutoTask(owner, State.START, null, completionEvent);
     }   //autoClimb
 
@@ -161,32 +159,6 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
                 sm.addEvent(winchEvent);
                 sm.waitForEvents(State.SPOOL_OUT, false, true);
                 break;
-                // if (robot.coralGrabber != null) 
-                // {
-                //     if (robot.coralGrabber.hasObject())
-                //     {
-                //         // Code Review: Why??? What are you trying to do?
-                //         // We need a coral to move the CG outward, goto done.
-                //         if (robot.ledIndicator != null) 
-                //         {
-                //             // robot.ledIndicator.
-                //         }
-                //         sm.setState(State.DONE);
-                //         break;
-                //     }
-                // }
-                // if (robot.elevatorArmTask != null)
-                // {
-                // // robot.coralArm.setPosition(0.0, CoralArm.Params.CLIMB_POS, true, 1.0, event);
-                // // robot.algaeArm.setPosition(0.0, AlgaeArm.Params.CLIMB_POS, true, 1.0, algaeEvent);
-                // // robot.elevator.setPosition(0.0, Elevator.Params.MIN_POS, true, 1.0, elevatorEvent);
-                //     // robot.elevatorArmTask.setClimbPosition(owner, event);
-                //     sm.waitForSingleEvent(event, State.CLIMB);
-                // }
-                // else
-                // {
-                //     sm.setState(State.CLIMB);
-                // }
 
             case SPOOL_OUT:
                 robot.winch.setPosition(owner, 0.0, Winch.Params.SPOOL_OUT_POS, true, 1.0, winchEvent, 0.0);

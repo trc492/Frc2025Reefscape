@@ -22,12 +22,13 @@
 
 package teamcode.autocommands;
 
+import teamcode.FrcAuto;
 import teamcode.Robot;
 import teamcode.RobotParams;
-
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
+import teamcode.FrcAuto.AutoStartPos;
 import teamcode.FrcAuto.StationSide;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcEvent;
@@ -38,9 +39,9 @@ import trclib.timer.TrcTimer;
 /**
  * This class implements an autonomous strategy.
  */
-public class CmdAutoMiddle implements TrcRobot.RobotCommand
+public class CmdReefscapeAuto implements TrcRobot.RobotCommand
 {
-    private static final String moduleName = CmdAutoMiddle.class.getSimpleName();
+    private static final String moduleName = CmdReefscapeAuto.class.getSimpleName();
 
     private enum State
     {
@@ -58,13 +59,16 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
     private final TrcEvent event;
     private final TrcStateMachine<State> sm;
 
+    private FrcAuto.AutoStartPos startPos;
     private Alliance alliance;
     private boolean useVision;
-    private int aprilTagId;
     private boolean relocalize;
     private boolean goToStation;
     private StationSide stationSide;
     private int stationPickupCount;
+
+    private int reefAprilTagId = -1;
+    private int stationAprilTagId = -1;
     private boolean scoreRightSide = true;
 
     /**
@@ -73,7 +77,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
      * @param robot specifies the robot object for providing access to various global objects.
      * @param autoChoices specifies the autoChoices object.
      */
-    public CmdAutoMiddle(Robot robot, AutoChoices autoChoices)
+    public CmdReefscapeAuto(Robot robot, AutoChoices autoChoices)
     {
         this.robot = robot;
         this.autoChoices = autoChoices;
@@ -82,7 +86,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
         event = new TrcEvent(moduleName);
         sm = new TrcStateMachine<>(moduleName);
         sm.start(State.START);
-    }   //CmdAutoMiddle
+    }   //CmdReefscapeAuto
 
     //
     // Implements the TrcRobot.RobotCommand interface.
@@ -133,9 +137,9 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                 case START:
                     // Set robot location according to auto choices.
                     robot.setRobotStartPosition();
+                    startPos = autoChoices.getStartPos();
                     alliance = autoChoices.getAlliance();
                     useVision = autoChoices.useVision();
-                    aprilTagId = autoChoices.getAprilTagId();
                     relocalize = autoChoices.getRelocalize();
                     goToStation = autoChoices.goToStation();
                     stationSide = autoChoices.getStationSide();
@@ -143,14 +147,20 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     if (autoChoices.scorePreload())
                     {
                         robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
-                        if (aprilTagId == -1)
+                        if (startPos == AutoStartPos.START_POSE_PROCESSOR)
                         {
-                            // If Driver provided AprilTag from Shuffleboard, use that instead.
-                            // This is for using Middle Auto to do Side if we need to.
-                            aprilTagId = alliance == Alliance.Red? 10: 21;
+                            reefAprilTagId = RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
+                        }
+                        else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
+                        {
+                            reefAprilTagId = RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                        }
+                        else
+                        {
+                            reefAprilTagId = RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
                         }
                         robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, aprilTagId, 3, true, false, relocalize, event);
+                            null, useVision, reefAprilTagId, 3, true, false, relocalize, event);
                         sm.waitForSingleEvent(event, State.DO_DELAY);
                     }
                     else
@@ -176,14 +186,32 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                 case GO_TO_CORAL_STATION:
                     if (goToStation)
                     {
-                        aprilTagId = RobotParams.Game.APRILTAG_STATION
-                            [stationSide == StationSide.PROCESSOR? 0: 1][alliance == Alliance.Red? 0: 1];
-                        TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(aprilTagId);
+                        if (stationAprilTagId == -1)
+                        {
+                            if (startPos == AutoStartPos.START_POSE_PROCESSOR)
+                            {
+                                stationAprilTagId =
+                                    RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red? 0: 1];
+                            }
+                            else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
+                            {
+                                stationAprilTagId =
+                                    RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red? 0: 1];
+                            }
+                            else
+                            {
+                                stationAprilTagId =
+                                    RobotParams.Game.APRILTAG_STATION[stationSide == StationSide.PROCESSOR? 0: 1]
+                                                                     [alliance == Alliance.Red? 0: 1];
+                            }
+                        }
+                        reefAprilTagId = -1;
+                        TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
                         // Code Review: Need to figure out intermediate points and proper offset.
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 0.0, -24.5);
                         robot.globalTracer.traceInfo(
                             moduleName,
-                            "***** Go to Coral Station: AprilTag=" + aprilTagId +
+                            "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
                             ", AprilTagPose=" + aprilTagPose +
                             ", TargetPose=" + targetPose);
                         robot.robotDrive.purePursuitDrive.start(
@@ -211,16 +239,34 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                     break;
 
                 case SCORE_CORAL:
-                    if (stationSide == StationSide.PROCESSOR)
+                    if (reefAprilTagId == -1)
                     {
-                        aprilTagId = RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
-                    }
-                    else
-                    {
-                        aprilTagId = RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                        if (startPos == AutoStartPos.START_POSE_PROCESSOR)
+                        {
+                            reefAprilTagId =
+                                RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
+                        }
+                        else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
+                        {
+                            reefAprilTagId =
+                                RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                        }
+                        else
+                        {
+                            if (stationSide == StationSide.PROCESSOR)
+                            {
+                                reefAprilTagId =
+                                    RobotParams.Game.APRILTAG_CLOSE_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
+                            }
+                            else
+                            {
+                                reefAprilTagId =
+                                    RobotParams.Game.APRILTAG_CLOSE_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                            }
+                        }
                     }
                     robot.scoreCoralTask.autoScoreCoral(
-                        null, useVision, aprilTagId, 3, scoreRightSide, false, relocalize, event);
+                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, event);
                     sm.waitForSingleEvent(event, stationPickupCount > 0? State.GO_TO_CORAL_STATION: State.DONE);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
@@ -241,4 +287,4 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
         return !sm.isEnabled();
     }   //cmdPeriodic
 
-}   //class CmdAutoMiddle
+}   //class CmdReefscapeAuto

@@ -46,7 +46,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         START,
         FIND_STATION_APRILTAG,
         APPROACH_STATION,
-        TAKE_CORAL,
+        RECEIVE_CORAL,
         DONE
     }   //enum State
 
@@ -66,8 +66,8 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         public String toString()
         {
             return "useVision=" + useVision +
-                ",aprilTagId=" + aprilTagId +
-                ",relocalize" + relocalize;
+                   ",aprilTagId=" + aprilTagId +
+                   ",relocalize" + relocalize;
         }   //toString
     }   //class TaskParams
 
@@ -109,7 +109,8 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     {
         TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize);
         tracer.traceInfo(
-        moduleName, "autoPickupCoral(taskParams=(" + taskParams + "), event=" + completionEvent + ")");
+        moduleName,
+        "autoPickupCoral(owner=" + owner + ", taskParams=(" + taskParams + "), event=" + completionEvent + ")");
         startAutoTask(owner, State.START, taskParams, completionEvent);
     }   //autoPickupCoral
 
@@ -272,10 +273,10 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 {
                     sm.addEvent(elevatorArmEvent);
                 }
-                sm.waitForEvents(State.TAKE_CORAL, false, true);
+                sm.waitForEvents(State.RECEIVE_CORAL, false, true);
                 break;
 
-            case TAKE_CORAL:
+            case RECEIVE_CORAL:
                 robot.coralGrabber.autoIntake(owner, 0.0, grabberEvent, 0.0);
                 sm.waitForSingleEvent(grabberEvent, State.DONE);
                 break;
