@@ -66,6 +66,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
     private boolean goToStation;
     private StationSide stationSide;
     private int stationPickupCount;
+    private double visionXOffset;
+    private double visionYOffset;
 
     private int reefAprilTagId = -1;
     private int stationAprilTagId = -1;
@@ -144,6 +146,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     goToStation = autoChoices.goToStation();
                     stationSide = autoChoices.getStationSide();
                     stationPickupCount = autoChoices.getStationPickupCount();
+                    visionXOffset = autoChoices.getVisionXOffset();
+                    visionYOffset = autoChoices.getVisionYOffset();
                     if (autoChoices.scorePreload())
                     {
                         int preloadAprilTagId;
@@ -165,7 +169,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
                         }
                         robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, preloadAprilTagId, 3, true, false, relocalize, event);
+                            null, useVision, preloadAprilTagId, 3, true, false, relocalize,
+                            visionXOffset, visionYOffset, event);
                         sm.waitForSingleEvent(event, State.DO_DELAY);
                     }
                     else
@@ -270,7 +275,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         }
                     }
                     robot.scoreCoralTask.autoScoreCoral(
-                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, event);
+                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, 0.0, 0.0, event);
                     sm.waitForSingleEvent(event, stationPickupCount > 0? State.GO_TO_CORAL_STATION: State.DONE);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;

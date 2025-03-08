@@ -58,10 +58,12 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean scoreRightSide;
         boolean removeAlgae;
         boolean relocalize;
+        double visionXOffset;
+        double visionYOffset;
 
         TaskParams(
             boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide, boolean removeAlgae,
-            boolean relocalize)
+            boolean relocalize, double visionXOffset, double visionYOffset)
         {
             this.useVision = useVision;
             this.aprilTagId = aprilTagId;
@@ -69,6 +71,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             this.scoreRightSide = scoreRightSide;
             this.removeAlgae = removeAlgae;
             this.relocalize = relocalize;
+            this.visionXOffset = visionXOffset;
+            this.visionYOffset = visionYOffset;
         }   //TaskParams
 
         public String toString()
@@ -78,7 +82,9 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                    ",reefLevel=" + reefLevel +
                    ",scoreRightSide=" + scoreRightSide +
                    ",removeAlgae=" + removeAlgae +
-                   ",relocalize=" + relocalize;
+                   ",relocalize=" + relocalize +
+                   ",visionXOffset=" + visionXOffset +
+                   ",visionYOffset=" + visionYOffset;
         }   //toString
     }   //class TaskParams
 
@@ -120,9 +126,10 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      */
     public void autoScoreCoral(
         String owner, boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide,
-        boolean removeAlgae, boolean relocalize, TrcEvent completionEvent)
+        boolean removeAlgae, boolean relocalize, double visionXOffset, double visionYOffset, TrcEvent completionEvent)
     {
-        TaskParams taskParams = new TaskParams(useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize);
+        TaskParams taskParams = new TaskParams(
+            useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize, visionXOffset, visionYOffset);
         tracer.traceInfo(
             moduleName,
             "autoScoreCoral(owner=" + owner +
@@ -277,8 +284,9 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case APPROACH_REEF:
-                TrcPose2D targetPose = robot.adjustPoseByOffset(
-                    aprilTagRelativePose, taskParams.scoreRightSide? 8.0: -8.5, -24.5);
+                double xOffset = (taskParams.scoreRightSide? 8.0: -8.5) + taskParams.visionXOffset;
+                double yOffset = -24.5 + taskParams.visionYOffset;
+                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, xOffset, yOffset);
 
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
                 driveEvent.clear();

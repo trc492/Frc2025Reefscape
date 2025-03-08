@@ -104,6 +104,8 @@ public class FrcAuto implements TrcRobot.RobotMode
         private static final String DBKEY_AUTO_GO_TO_STATION = "Auto/GoToStation";          //Boolean
         private static final String DBKEY_AUTO_STATION_SIDE = "Auto/StationSide";           //Choices
         private static final String DBKEY_AUTO_STATION_PICKUP = "Auto/StationPickupCount";  //Number
+        private static final String DBKEY_AUTO_VISION_X_OFFSET = "Auto/VisionXOffset";      //Number
+        private static final String DBKEY_AUTO_VISION_Y_OFFSET = "Auto/VisionYOffset";      //Number
 
         private static final String DBKEY_AUTO_PATHFILE = "Auto/PathFile";                  //String
         private static final String DBKEY_AUTO_X_DRIVE_DISTANCE = "Auto/XDriveDistance";    //Number
@@ -169,6 +171,8 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, false);
             userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationSideChoiceMenu);
             userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 0.0);
+            userChoices.addNumber(DBKEY_AUTO_VISION_X_OFFSET, 0.0);
+            userChoices.addNumber(DBKEY_AUTO_VISION_X_OFFSET, 0.0);
 
             userChoices.addString(DBKEY_AUTO_PATHFILE, "DrivePath.csv");
             userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 6.0);    // in feet
@@ -239,6 +243,16 @@ public class FrcAuto implements TrcRobot.RobotMode
             return (int) userChoices.getUserNumber(DBKEY_AUTO_STATION_PICKUP);
         }
 
+        public double getVisionXOffset()
+        {
+            return userChoices.getUserNumber(DBKEY_AUTO_VISION_X_OFFSET);
+        }
+
+        public double getVisionYOffset()
+        {
+            return userChoices.getUserNumber(DBKEY_AUTO_VISION_Y_OFFSET);
+        }
+
         public String getPathFile()
         {
             return userChoices.getUserString(DBKEY_AUTO_PATHFILE);
@@ -284,6 +298,8 @@ public class FrcAuto implements TrcRobot.RobotMode
                    "goToStation=\"" + goToStation() + "\" " +
                    "stationSide=\"" + getStationSide() + "\" " +
                    "stationPickupCount=" + getStationPickupCount() + " " +
+                   "visionXOffset=" + getVisionXOffset() + " " +
+                   "visionYOffset=" + getVisionYOffset() + " " +
 
                    "pathFile=\"" + getPathFile() + "\" " +
                    "xDistance=" + getXDriveDistance() + " ft " +
