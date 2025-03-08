@@ -226,7 +226,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
                     if (showDriveBaseStatus)
                     {
-                        lineNum += 2;
+                        lineNum++;
                     }
                 }
                 //
@@ -332,7 +332,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         }
 
         robot.dashboard.displayPrintf(
-            8, "DriverController: " + button + "=" + (pressed ? "pressed" : "released"));
+            15, "DriverController: " + button + "=" + (pressed ? "pressed" : "released"));
 
         switch (button)
         {
@@ -374,21 +374,21 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case X:
-                if (robot.scoreCoralTask != null && pressed)
-                {
-                    robot.scoreCoralTask.autoScoreCoral(
-                        moduleName, true, -1, 3, FrcAuto.ScoreSide.RIGHT, false, false, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-score Coral");
-                }
+                // if (robot.scoreCoralTask != null && pressed)
+                // {
+                //     robot.scoreCoralTask.autoScoreCoral(
+                //         moduleName, true, -1, 3, FrcAuto.ScoreSide.RIGHT, false, false, null);
+                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-score Coral");
+                // }
                 break;
 
             case Y:
-                if (robot.pickupCoralFromStationTask != null && pressed)
-                {
-                    robot.pickupCoralFromStationTask.autoPickupCoral(
-                        moduleName, true, -1, false, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-pickup Coral");
-                }
+                // if (robot.pickupCoralFromStationTask != null && pressed)
+                // {
+                //     robot.pickupCoralFromStationTask.autoPickupCoral(
+                //         moduleName, true, -1, false, null);
+                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-pickup Coral");
+                // }
                 break;  
 
             case LeftBumper:
@@ -490,7 +490,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         }
 
         robot.dashboard.displayPrintf(
-            8, "OperatorController: " + button + "=" + (pressed ? "pressed" : "released"));
+            15, "OperatorController: " + button + "=" + (pressed ? "pressed" : "released"));
 
         switch (button)
         {
