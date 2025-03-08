@@ -150,8 +150,7 @@ public class CmdAutoMiddle implements TrcRobot.RobotCommand
                             aprilTagId = alliance == Alliance.Red? 10: 21;
                         }
                         robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, aprilTagId, 3, true, false, relocalize,
-                            event);
+                            null, useVision, aprilTagId, 3, true, false, relocalize, event);
                         sm.waitForSingleEvent(event, State.DO_DELAY);
                     }
                     else
