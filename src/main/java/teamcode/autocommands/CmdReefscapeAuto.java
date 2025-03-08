@@ -146,21 +146,26 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     stationPickupCount = autoChoices.getStationPickupCount();
                     if (autoChoices.scorePreload())
                     {
+                        int preloadAprilTagId;
+
                         robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
                         if (startPos == AutoStartPos.START_POSE_PROCESSOR)
                         {
-                            reefAprilTagId = RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
+                            preloadAprilTagId =
+                                RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
                         {
-                            reefAprilTagId = RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                            preloadAprilTagId =
+                                RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
                         }
                         else
                         {
-                            reefAprilTagId = RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
+                            preloadAprilTagId =
+                                RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
                         }
                         robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, reefAprilTagId, 3, true, false, relocalize, event);
+                            null, useVision, preloadAprilTagId, 3, true, false, relocalize, event);
                         sm.waitForSingleEvent(event, State.DO_DELAY);
                     }
                     else
@@ -205,7 +210,6 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                                                      [alliance == Alliance.Red? 0: 1];
                             }
                         }
-                        reefAprilTagId = -1;
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
                         // Code Review: Need to figure out intermediate points and proper offset.
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 0.0, -24.5);
