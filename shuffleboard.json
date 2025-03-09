@@ -432,6 +432,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "12,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Auto/VisionXOffset",
+              "_title": "/SmartDashboard/Auto/VisionXOffset",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "12,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Auto/VisionYOffset",
+              "_title": "/SmartDashboard/Auto/VisionYOffset",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }

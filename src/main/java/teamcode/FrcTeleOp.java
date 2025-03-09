@@ -411,10 +411,20 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
+                if(pressed && robot.winch != null){
+                    robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
+                }
                 break;
-            case DpadDown:         
+            case DpadDown:  
+                if(pressed && robot.winch != null && robot.climbTask != null){
+                    robot.climbTask.climb(moduleName, null);
+                }
                 break;
             case DpadLeft:
+                if(pressed && robot.winch != null && robot.climbTask != null)
+                {
+                    robot.climbTask.deployClimber(moduleName, null);
+                }
                 break;
             case DpadRight:
                 break;
@@ -555,7 +565,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case X:
                 if (robot.elevatorArmTask !=null && pressed)
                 {
-                    robot.elevatorArmTask.setCoralScorePosition(moduleName, 3, null);
+                    robot.elevatorArmTask.setCoralScorePosition(moduleName, scoreIndex, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Score Position");
                 }
                 break;

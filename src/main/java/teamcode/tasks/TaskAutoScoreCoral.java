@@ -286,8 +286,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case APPROACH_REEF:
-                double xOffset = (taskParams.scoreRightSide? 8.0: -8.5) + taskParams.visionXOffset;
-                double yOffset = -24.5 + taskParams.visionYOffset;
+                double xOffset = (taskParams.scoreRightSide? 6.5: -8.5) + taskParams.visionXOffset;
+                double yOffset = -19.0 + taskParams.visionYOffset;
                 TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, xOffset, yOffset);
 
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
@@ -301,8 +301,10 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 {
                     sm.addEvent(elevatorArmEvent);
                 }
+                // sm.waitForEvents(
+                //     !secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
                 sm.waitForEvents(
-                    !secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
+                    State.SCORE_CORAL, false, true);
                 secondLook = true;
                 break;
 

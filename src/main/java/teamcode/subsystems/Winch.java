@@ -56,22 +56,22 @@ public class Winch extends TrcSubsystem
         public static final double SPOOL_DIAMETER               = 1.0;
         public static final double INCHES_PER_REV               = 0.0607;   //Math.PI * SPOOL_DIAMETER / GEAR_RATIO;
         public static final double POS_OFFSET                   = 0.0;
-        public static final double POWER_LIMIT                  = 0.5;  //TODO: determine
-        public static final double ZERO_CAL_POWER               = -0.5; //TODO: determine
+        public static final double POWER_LIMIT                  = 1.0;  //TODO: determine
+        public static final double ZERO_CAL_POWER               = -0.7; //TODO: determine
 
         public static final double MIN_POS                      = 0.0; //TODO: determine
         public static final double MAX_POS                      = 20.0; //TODO: determine
-        public static final double DEPLOY_POS                   = 10.0; //TODO: determine
-        public static final double PRE_CLIMB_POS                = 0.0; //TODO to set
-        public static final double CLIMB_POS                    = 0.0; //TODO to set
+        public static final double DEPLOY_POS                   = 16.0; //TODO: determine
+        public static final double PRE_CLIMB_POS                = 12.5; //TODO to set
+        public static final double CLIMB_POS                    = 4.4; //TODO to set
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.018, 0.1, 0.001, 0.0, 2.0);
+        new TrcPidController.PidCoefficients(1.0, 0.1, 0.001, 0.0, 2.0);
         public static final double POS_PID_TOLERANCE            = 1.0;
     }   //class Params
 
-    private final TrcMotor winchMotor;
+    private final TrcMotor winchMotor;  
 
     /**
      * Constructor: Creates an instance of the object.
