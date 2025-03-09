@@ -148,6 +148,12 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     stationPickupCount = autoChoices.getStationPickupCount();
                     visionXOffset = autoChoices.getVisionXOffset();
                     visionYOffset = autoChoices.getVisionYOffset();
+
+                    if (robot.climbTask != null)
+                    {
+                        robot.climbTask.deployClimber(null, null);
+                    }
+
                     if (autoChoices.scorePreload())
                     {
                         int preloadAprilTagId;

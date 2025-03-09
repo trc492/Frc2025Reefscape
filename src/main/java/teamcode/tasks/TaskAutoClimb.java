@@ -39,14 +39,14 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
 
     public enum State
     {
-        START,
-        SPOOL_OUT,
+        DEPLOY_CLIMBER,
+        FINISH_DEPLOY_CLIMBER,
         CLIMB,
+        FINISH_CLIMB,
         DONE
     }   //enum State
 
     private final Robot robot;
-    private final TrcEvent elevatorArmEvent;
     private final TrcEvent winchEvent;
 
     /**
@@ -58,9 +58,20 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
     {
         super(moduleName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.robot = robot;
-        this.elevatorArmEvent = new TrcEvent(moduleName + ".elevatorArmEvent");
         this.winchEvent = new TrcEvent(moduleName + ".winchEvent");
     }   //TaskAutoClimb
+
+    /**
+     * This method deploys the climber.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param completionEvent specifies the event to signal when done, can be null if none provided.
+     */
+    public void deployClimber(String owner, TrcEvent completionEvent)
+    {
+        tracer.traceInfo(moduleName, "owner=" + owner + ", event=" + completionEvent);
+        startAutoTask(owner, State.DEPLOY_CLIMBER, null, completionEvent);
+    }   //deployClimber
 
     /**
      * This method starts the auto-assist operation.
@@ -68,11 +79,11 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
      * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
-    public void autoClimb(String owner, TrcEvent completionEvent)
+    public void climb(String owner, TrcEvent completionEvent)
     {
         tracer.traceInfo(moduleName, "owner=" + owner + ", event=" + completionEvent);
-        startAutoTask(owner, State.START, null, completionEvent);
-    }   //autoClimb
+        startAutoTask(owner, State.CLIMB, null, completionEvent);
+    }   //climb
 
     //
     // Implement TrcAutoTask abstract methods.
@@ -143,31 +154,23 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
     {
         switch (state)
         {
-            case START:
-                elevatorArmEvent.clear();
-                winchEvent.clear();
-                // Prep the elevatorArm for climbing.
-                if (robot.elevatorArmTask != null)
-                {
-                    robot.elevatorArmTask.setClimbPosition(owner, elevatorArmEvent);
-                    sm.addEvent(elevatorArmEvent);
-                }
-                // Code Review: is there a dependency between the elevatorArm and the winch? If there is, you may need
-                // to not do these concurrently but in two separate states.
-                // Break the ziptie by zero calibration.
+            case DEPLOY_CLIMBER:
                 robot.winch.zeroCalibrate(owner, Winch.Params.ZERO_CAL_POWER, winchEvent);
-                sm.addEvent(winchEvent);
-                sm.waitForEvents(State.SPOOL_OUT, false, true);
+                sm.waitForSingleEvent(winchEvent, State.FINISH_DEPLOY_CLIMBER);
                 break;
 
-            case SPOOL_OUT:
-                robot.winch.setPosition(owner, 0.0, Winch.Params.SPOOL_OUT_POS, true, 1.0, winchEvent, 0.0);
-                sm.waitForSingleEvent(winchEvent, State.CLIMB);
+            case FINISH_DEPLOY_CLIMBER:
+                robot.winch.setPosition(owner, 0.0, Winch.Params.DEPLOY_POS, true, 1.0, winchEvent, 0.0);
+                sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;
 
             case CLIMB:
-                robot.winch.setPosition(
-                    owner, 0.0, Winch.Params.CLIMB_POS, true, 1.0, winchEvent, 0.0);
+                robot.winch.setPosition(owner, 0.0, Winch.Params.PRE_CLIMB_POS, true, 1.0, winchEvent, 0.0);
+                sm.waitForSingleEvent(winchEvent, State.FINISH_CLIMB);
+                break;
+
+            case FINISH_CLIMB:
+                robot.winch.setPosition(owner, 0.0, Winch.Params.CLIMB_POS, true, 1.0, winchEvent, 0.0);
                 sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;
 
