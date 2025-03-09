@@ -26,8 +26,6 @@ import teamcode.FrcAuto;
 import teamcode.Robot;
 import teamcode.RobotParams;
 
-import javax.lang.model.util.ElementScanner14;
-
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
@@ -49,7 +47,6 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
     private enum State
     {
         START,
-        DO_DELAY,
         SCORE_PRELOAD,
         GO_TO_CORAL_STATION,
         PICKUP_CORAL,
@@ -153,17 +150,6 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     visionXOffset = autoChoices.getVisionXOffset();
                     visionYOffset = autoChoices.getVisionYOffset();
 
-                    if(autoChoices.getStartDelay() > 0.0)
-                    {
-                        sm.setState(State.DO_DELAY);
-                    }
-                    else
-                    {
-                        sm.setState(State.SCORE_PRELOAD);
-                    }
-                    break;
-
-                case DO_DELAY:
                     double startDelay = autoChoices.getStartDelay();
                     if (startDelay > 0.0)
                     {
@@ -179,30 +165,30 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
 
                 case SCORE_PRELOAD:
                     if (autoChoices.scorePreload())
-                        {
-                            int preloadAprilTagId;
+                    {
+                        int preloadAprilTagId;
 
-                            robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
-                            if (startPos == AutoStartPos.START_POSE_PROCESSOR)
-                            {
-                                preloadAprilTagId =
-                                    RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
-                            }
-                            else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
-                            {
-                                preloadAprilTagId =
-                                    RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
-                            }
-                            else
-                            {
-                                preloadAprilTagId =
-                                    RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
-                            }
-                            robot.scoreCoralTask.autoScoreCoral(
-                                null, useVision, preloadAprilTagId, 3, true, false, relocalize,
-                                visionXOffset, visionYOffset, event);
-                            sm.waitForSingleEvent(event, State.DONE);
+                        robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
+                        if (startPos == AutoStartPos.START_POSE_PROCESSOR)
+                        {
+                            preloadAprilTagId =
+                                RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
                         }
+                        else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
+                        {
+                            preloadAprilTagId =
+                                RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                        }
+                        else
+                        {
+                            preloadAprilTagId =
+                                RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
+                        }
+                        robot.scoreCoralTask.autoScoreCoral(
+                            null, useVision, preloadAprilTagId, 3, true, false, relocalize,
+                            visionXOffset, visionYOffset, event);
+                        sm.waitForSingleEvent(event, State.DONE);
+                    }
                     else
                     {
                         sm.setState(State.DONE);
