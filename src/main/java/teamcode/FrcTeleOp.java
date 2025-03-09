@@ -414,6 +414,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.climbTask != null && pressed)
                 {
                     robot.climbTask.deployClimber(moduleName, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
                 }
                 break;
 
@@ -421,6 +422,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.climbTask != null && pressed)
                 {
                     robot.climbTask.climb(moduleName, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
                 }
                 break;
 
@@ -428,6 +430,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.climbTask != null && pressed)
                 {
                     robot.climbTask.prepClimber(moduleName, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Prep Climber");
                 }
                 break;
 
