@@ -25,6 +25,9 @@ package teamcode.autocommands;
 import teamcode.FrcAuto;
 import teamcode.Robot;
 import teamcode.RobotParams;
+
+import javax.lang.model.util.ElementScanner14;
+
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frclib.vision.FrcPhotonVision;
 import teamcode.FrcAuto.AutoChoices;
@@ -47,6 +50,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
     {
         START,
         DO_DELAY,
+        SCORE_PRELOAD,
         GO_TO_CORAL_STATION,
         PICKUP_CORAL,
         SCORE_CORAL,
@@ -149,34 +153,13 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     visionXOffset = autoChoices.getVisionXOffset();
                     visionYOffset = autoChoices.getVisionYOffset();
 
-                    if (autoChoices.scorePreload())
+                    if(autoChoices.getStartDelay() > 0.0)
                     {
-                        int preloadAprilTagId;
-
-                        robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
-                        if (startPos == AutoStartPos.START_POSE_PROCESSOR)
-                        {
-                            preloadAprilTagId =
-                                RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
-                        }
-                        else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
-                        {
-                            preloadAprilTagId =
-                                RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
-                        }
-                        else
-                        {
-                            preloadAprilTagId =
-                                RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
-                        }
-                        robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, preloadAprilTagId, 3, true, false, relocalize,
-                            visionXOffset, visionYOffset, event);
-                        sm.waitForSingleEvent(event, State.DO_DELAY);
+                        sm.setState(State.DO_DELAY);
                     }
                     else
                     {
-                        sm.setState(State.DO_DELAY);
+                        sm.setState(State.SCORE_PRELOAD);
                     }
                     break;
 
@@ -186,11 +169,43 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     {
                         robot.globalTracer.traceInfo(moduleName, "***** Do delay " + startDelay + "s.");
                         timer.set(startDelay, event);
-                        sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
+                        sm.waitForSingleEvent(event, State.SCORE_PRELOAD);
                     }
                     else
                     {
-                        sm.setState(State.GO_TO_CORAL_STATION);
+                        sm.setState(State.SCORE_PRELOAD);
+                    }
+                    break;
+
+                case SCORE_PRELOAD:
+                    if (autoChoices.scorePreload())
+                        {
+                            int preloadAprilTagId;
+
+                            robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
+                            if (startPos == AutoStartPos.START_POSE_PROCESSOR)
+                            {
+                                preloadAprilTagId =
+                                    RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
+                            }
+                            else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
+                            {
+                                preloadAprilTagId =
+                                    RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                            }
+                            else
+                            {
+                                preloadAprilTagId =
+                                    RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
+                            }
+                            robot.scoreCoralTask.autoScoreCoral(
+                                null, useVision, preloadAprilTagId, 3, true, false, relocalize,
+                                visionXOffset, visionYOffset, event);
+                            sm.waitForSingleEvent(event, State.DONE);
+                        }
+                    else
+                    {
+                        sm.setState(State.DONE);
                     }
                     break;
 
