@@ -191,7 +191,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     }
                     else
                     {
-                        sm.setState(State.DONE);
+                        sm.setState(State.GO_TO_CORAL_STATION);
                     }
                     break;
 
