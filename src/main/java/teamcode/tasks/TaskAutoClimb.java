@@ -41,8 +41,8 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
     {
         DEPLOY_CLIMBER,
         FINISH_DEPLOY_CLIMBER,
+        PREP_CLIMBER,
         CLIMB,
-        FINISH_CLIMB,
         DONE
     }   //enum State
 
@@ -72,6 +72,18 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
         tracer.traceInfo(moduleName, "owner=" + owner + ", event=" + completionEvent);
         startAutoTask(owner, State.DEPLOY_CLIMBER, null, completionEvent);
     }   //deployClimber
+
+    /**
+     * This method prepares the climber to climb.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param completionEvent specifies the event to signal when done, can be null if none provided.
+     */
+    public void prepClimber(String owner, TrcEvent completionEvent)
+    {
+        tracer.traceInfo(moduleName, "owner=" + owner + ", event=" + completionEvent);
+        startAutoTask(owner, State.PREP_CLIMBER, null, completionEvent);
+    }   //prepClimber
 
     /**
      * This method starts the auto-assist operation.
@@ -164,12 +176,12 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
                 sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;
 
-            case CLIMB:
+            case PREP_CLIMBER:
                 robot.winch.setPosition(owner, 0.0, Winch.Params.PRE_CLIMB_POS, true, 1.0, winchEvent, 0.0);
-                sm.waitForSingleEvent(winchEvent, State.FINISH_CLIMB);
+                sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;
 
-            case FINISH_CLIMB:
+            case CLIMB:
                 robot.winch.setPosition(owner, 0.0, Winch.Params.CLIMB_POS, true, 1.0, winchEvent, 0.0);
                 sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;

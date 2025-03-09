@@ -411,21 +411,26 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
-                if(pressed && robot.winch != null){
-                    robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
-                }
-                break;
-            case DpadDown:  
-                if(pressed && robot.winch != null && robot.climbTask != null){
-                    robot.climbTask.climb(moduleName, null);
-                }
-                break;
-            case DpadLeft:
-                if(pressed && robot.winch != null && robot.climbTask != null)
+                if (robot.climbTask != null && pressed)
                 {
                     robot.climbTask.deployClimber(moduleName, null);
                 }
                 break;
+
+            case DpadDown:  
+                if (robot.climbTask != null && pressed)
+                {
+                    robot.climbTask.climb(moduleName, null);
+                }
+                break;
+
+            case DpadLeft:
+                if (robot.climbTask != null && pressed)
+                {
+                    robot.climbTask.prepClimber(moduleName, null);
+                }
+                break;
+
             case DpadRight:
                 break;
 
@@ -655,19 +660,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadLeft:
-                // Test binding.
-                if (robot.winch != null && pressed)
-                {
-                    robot.winch.setPower(0.1);
-                }
                 break;
 
             case DpadRight:
-                // Test binding.
-                if(robot.winch != null && pressed)
-                {
-                    robot.winch.setPower(-0.1);
-                }
                 break;
 
             case Back:

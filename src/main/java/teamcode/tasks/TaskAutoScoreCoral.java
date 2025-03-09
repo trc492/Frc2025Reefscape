@@ -301,10 +301,9 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 {
                     sm.addEvent(elevatorArmEvent);
                 }
-                // sm.waitForEvents(
-                //     !secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
+                secondLook = true;  // TODO: to enable secondLook, remove this line.
                 sm.waitForEvents(
-                    State.SCORE_CORAL, false, true);
+                    !secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
                 secondLook = true;
                 break;
 
