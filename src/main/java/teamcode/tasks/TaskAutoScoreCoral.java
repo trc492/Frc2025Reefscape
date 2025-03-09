@@ -96,6 +96,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     private int aprilTagId = -1;
     private TrcPose2D aprilTagRelativePose = null;
     private Double visionExpiredTime;
+    private boolean secondLook = false;
 
     /**
      * Constructor: Create an instance of the object.
@@ -216,6 +217,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             case START:
                 aprilTagId = -1;
                 aprilTagRelativePose = null;
+                secondLook = false;
                 if (robot.elevatorArmTask != null)
                 {
                     elevatorArmEvent.clear();
@@ -299,7 +301,9 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 {
                     sm.addEvent(elevatorArmEvent);
                 }
-                sm.waitForEvents(State.SCORE_CORAL, false, true);
+                sm.waitForEvents(
+                    !secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
+                secondLook = true;
                 break;
 
             case SCORE_CORAL:
