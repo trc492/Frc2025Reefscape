@@ -23,61 +23,68 @@
 package teamcode.subsystems;
 
 import frclib.driverio.FrcDashboard;
+import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
-import frclib.subsystem.FrcIntake;
+import frclib.subsystem.FrcMotorGrabber;
 import teamcode.RobotParams;
 import trclib.robotcore.TrcEvent;
-import trclib.subsystem.TrcIntake;
+import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
 
 /**
- * This class implements an Elevator Subsystem.
+ * This class implements the Coral Grabber Subsystem.
  */
-public class Intake extends TrcSubsystem
+public class CoralGrabber extends TrcSubsystem
 {
     public static final class Params
     {
-        public static final String SUBSYSTEM_NAME               = "Intake";
+        public static final String SUBSYSTEM_NAME               = "CoralGrabber";
+        public static final boolean NEED_ZERO_CAL               = false;
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
-        public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_CORALGRABBER_MOTOR;
+        public static final MotorType MOTOR_TYPE                = FrcMotorActuator.MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = false;
+        public static final boolean MOTOR_INVERTED              = true;
 
-        public static final int SENSOR_DIGITAL_CHANNEL          = 0;
-        public static final boolean SENSOR_INVERTED             = false;
+        public static final String SENSOR_NAME                  = SUBSYSTEM_NAME + ".sensor";
+        public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_CORAL_GRABBER_SENSOR;
+        public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
-        public static final double INTAKE_FORWARD_POWER         = 1.0;
+        public static final double INTAKE_POWER                 = 1.0;
+        public static final double EJECT_POWER                  = -0.25;
         public static final double RETAIN_POWER                 = 0.0;
-        public static final double FINISH_DELAY                 = 0.0;
-
-        public static final double coralDistanceThreshold        = 96.0; //TODO: Needs to be adjusted
-        public static final double intakePower                   = 1.0;
+        public static final double DUMP_TIME                    = 0.5;
+        public static final double DUMP_DELAY                   = 0.0;
     }   //class Params
 
-    private final TrcIntake intake;
-    
+    private final TrcMotorGrabber motorGrabber;
+
     /**
      * Constructor: Creates an instance of the object.
      */
-    public Intake()
+    public CoralGrabber()
     {
-        super(Params.SUBSYSTEM_NAME, false);
-
-        FrcIntake.Params intakeParams = new FrcIntake.Params()
+        super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
+        FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
             .setPrimaryMotor(
-                Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
+                Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE,Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setEntryDigitalInput(Params.SENSOR_DIGITAL_CHANNEL, Params.SENSOR_INVERTED, null);
-        intake = new FrcIntake(Params.SUBSYSTEM_NAME, intakeParams).getIntake();
-    }   //Intake
+            .setDigitalInputTrigger(Params.SENSOR_NAME, Params.SENSOR_CHANNEL, Params.SENSOR_TRIGGER_INVERTED)
+            .setPowerParams(Params.INTAKE_POWER, Params.EJECT_POWER, Params.RETAIN_POWER);
+        motorGrabber = new FrcMotorGrabber(Params.SUBSYSTEM_NAME, grabberParams).getGrabber();
+    }   //CoralGrabber
 
-    public TrcIntake getIntake()
+    /**
+     * This method returns the created MotorGrabber object.
+     *
+     * @return created grabber object.
+     */
+    public TrcMotorGrabber getMotorGrabber()
     {
-        return intake;
-    }   //getIntake
+        return motorGrabber;
+    }   //getMotorGrabber
 
     //
     // Implements TrcSubsystem abstract methods.
@@ -89,7 +96,7 @@ public class Intake extends TrcSubsystem
     @Override
     public void cancel()
     {
-        intake.cancel();
+        motorGrabber.cancel();
     }   //cancel
 
     /**
@@ -124,10 +131,11 @@ public class Intake extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f, hasObject=%s, autoActive=%s",
-            Params.SUBSYSTEM_NAME, intake.getPower(), intake.hasObject(), intake.isAutoActive());
+            "%s: power=%.3f, current=%f, sensorState=%s, hasObject=%s",
+            Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.getCurrent(), motorGrabber.getSensorState(),
+            motorGrabber.hasObject());
 
         return lineNum;
     }   //updateStatus
 
-}   //class Intake
+}   //class CoralGrabber

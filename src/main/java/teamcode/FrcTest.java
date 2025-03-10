@@ -25,20 +25,25 @@ package teamcode;
 import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcUserChoices;
+import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision;
+import teamcode.subsystems.AlgaeArm;
+import teamcode.subsystems.CoralArm;
+import teamcode.subsystems.Elevator;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.command.CmdDriveMotorsTest;
 import trclib.command.CmdPidDrive;
 import trclib.command.CmdTimedDrive;
+import trclib.controller.TrcPidController;
 import trclib.dataprocessor.TrcUtil;
 import trclib.motor.TrcMotor;
 import trclib.pathdrive.TrcPose2D;
-import trclib.robotcore.TrcPidController;
 import trclib.robotcore.TrcRobot;
 import trclib.robotcore.TrcRobot.RunMode;
 import trclib.timer.TrcTimer;
@@ -208,7 +213,8 @@ public class FrcTest extends FrcTeleOp
     private TrcRobot.RobotCommand testCommand;
     private double maxDriveVelocity = 0.0;
     private double maxDriveAcceleration = 0.0;
-    private double maxTurnRate = 0.0;
+    private double maxDriveDeceleration = 0.0;
+    private double maxTurnVelocity = 0.0;
     private double prevTime = 0.0;
     private double prevVelocity = 0.0;
     private PipelineType frontPipeline = PipelineType.APRILTAG;
@@ -289,6 +295,7 @@ public class FrcTest extends FrcTeleOp
                     // rightWheel. For 4-motor drive base, it is lfWheel, rfWheel, lbWheel, rbWheel.
                     //
                     testCommand = new CmdDriveMotorsTest(
+                        robot.robotDrive.driveBase,
                         new TrcMotor[] {
                             robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_FRONT],
                             robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_FRONT],
@@ -337,9 +344,7 @@ public class FrcTest extends FrcTeleOp
                         robot.robotInfo.profiledMaxDeceleration,
                         new TrcPose2D(
                             testChoices.getXDriveDistance()*12.0, testChoices.getYDriveDistance()*12.0,
-                            testChoices.getTurnAngle()),
-                        new TrcPose2D(10, 20, 45),
-                        new TrcPose2D(20, 40, 15));
+                            testChoices.getTurnAngle()));
                 }
                 break;
 
@@ -456,11 +461,19 @@ public class FrcTest extends FrcTeleOp
                     TrcPose2D velPose = robot.robotDrive.driveBase.getFieldVelocity();
                     double velocity = TrcUtil.magnitude(velPose.x, velPose.y);
                     double acceleration = 0.0;
-                    double turnRate = robot.robotDrive.driveBase.getTurnRate();
+                    double deceleration = 0.0;
+                    double deltaTime = currTime - prevTime;
 
                     if (prevTime != 0.0)
                     {
-                        acceleration = (velocity - prevVelocity)/(currTime - prevTime);
+                        if (velocity > prevVelocity)
+                        {
+                            acceleration = (velocity - prevVelocity)/deltaTime;
+                        }
+                        else
+                        {
+                            deceleration = (prevVelocity - velocity)/deltaTime;
+                        }
                     }
 
                     if (velocity > maxDriveVelocity)
@@ -473,18 +486,32 @@ public class FrcTest extends FrcTeleOp
                         maxDriveAcceleration = acceleration;
                     }
 
-                    if (turnRate > maxTurnRate)
+                    if (deceleration > maxDriveDeceleration)
                     {
-                        maxTurnRate = turnRate;
+                        maxDriveDeceleration = deceleration;
+                    }
+
+                    if (velPose.angle > maxTurnVelocity)
+                    {
+                        maxTurnVelocity = velPose.angle;
                     }
 
                     prevTime = currTime;
                     prevVelocity = velocity;
 
                     robot.dashboard.displayPrintf(lineNum++, "Drive Vel: (%.1f/%.1f)", velocity, maxDriveVelocity);
-                    robot.dashboard.displayPrintf(lineNum++, "Drive Accel: (%.1f/%.1f)", acceleration, maxDriveAcceleration);
-                    robot.dashboard.displayPrintf(lineNum++, "Turn Rate: (%.1f/%.1f)", turnRate, maxTurnRate);
+                    robot.dashboard.displayPrintf(
+                        lineNum++, "Drive Accel: (%.1f/%.1f)", acceleration, maxDriveAcceleration);
+                    robot.dashboard.displayPrintf(
+                        lineNum++, "Drive Decel: (%.1f/%.1f)", deceleration, maxDriveDeceleration);
+                    robot.dashboard.displayPrintf(
+                        lineNum++, "Turn Vel: (%.1f/%.1f)", velPose.angle, maxTurnVelocity);
                 }
+                break;
+
+            case PP_DRIVE:
+                SmartDashboard.putNumber("TargetVelocity", robot.robotDrive.purePursuitDrive.getPathTargetVelocity());
+                SmartDashboard.putNumber("RobotVelocity", robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
                 break;
 
             default:
@@ -500,7 +527,6 @@ public class FrcTest extends FrcTeleOp
                 //
                 super.periodic(elapsedTime, true);
             }
-
             //
             // Call super.runPeriodic only if you need TeleOp control of the robot.
             //
@@ -592,6 +618,198 @@ public class FrcTest extends FrcTeleOp
     //
     // Overriding ButtonEvent here if necessary.
     //
+    /**
+     * This method is called when an operator controller button event is detected.
+     *
+     * @param button specifies the button that generated the event.
+     * @param pressed specifies true if the button is pressed, false otherwise.
+     */
+    @Override
+    protected void operatorControllerButtonEvent(FrcXboxController.ButtonType button, boolean pressed)
+    {
+        boolean passToTeleOp = true;
+
+        if (traceButtonEvents)
+        {
+            robot.globalTracer.traceInfo(moduleName, "##### button=" + button + ", pressed=" + pressed);
+        }
+
+        robot.dashboard.displayPrintf(
+            8, "OperatorController: " + button + "=" + (pressed ? "pressed" : "released"));
+
+        switch (button)
+        {
+            case A:
+                if (robot.algaeGrabber!= null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.algaeGrabber.intake(0.0, null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Algae Intake");
+                        }
+                        else
+                        {
+                            robot.algaeGrabber.autoIntake(null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
+                        }
+                    }
+                    else if (robot.algaeGrabber.isAutoActive())
+                    {
+                        robot.algaeGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Intake");
+                    }
+                    else
+                    {
+                        robot.algaeGrabber.stop();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
+            case B:
+                if (robot.algaeGrabber!= null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.algaeGrabber.eject(0.0, null);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Algae Eject");
+                        }
+                        else
+                        {
+                            robot.algaeGrabber.autoEject(null, 1.0, null, 0.0);
+                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Eject");
+                        }
+                    }
+                    else if (robot.algaeGrabber.isAutoActive())
+                    {
+                        robot.algaeGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Eject");
+                    }
+                    else
+                    {
+                        robot.algaeGrabber.stop();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Eject");
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
+            case X:
+            case Y:
+            case LeftBumper:
+            case RightBumper:
+                break;
+
+            case DpadUp:
+                if (robot.elevatorArmTask != null)
+                {
+                    if (operatorAltFunc)
+                    {
+                        if (robot.elevatorArmTask.elevator != null && pressed)
+                        {
+                            robot.elevatorArmTask.elevator.presetPositionUp(
+                                moduleName, Elevator.Params.POWER_LIMIT);
+                        }
+                    }
+                    else
+                    {
+                        if (robot.elevatorArmTask.coralArm != null && pressed)
+                        {
+                            robot.elevatorArmTask.coralArm.presetPositionUp(
+                                moduleName, CoralArm.Params.POWER_LIMIT);
+                        }
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
+            case DpadDown:
+                if (robot.elevatorArmTask != null)
+                {
+                    if (operatorAltFunc)
+                    {
+                        if (robot.elevatorArmTask.elevator != null && pressed)
+                        {
+                            robot.elevatorArmTask.elevator.presetPositionDown(
+                                moduleName, Elevator.Params.POWER_LIMIT);
+                        }
+                    }
+                    else
+                    {
+                        if (robot.elevatorArmTask.coralArm != null && pressed)
+                        {
+                            robot.elevatorArmTask.coralArm.presetPositionDown(
+                                moduleName, CoralArm.Params.POWER_LIMIT);
+                        }
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
+            case DpadLeft:
+                if (robot.elevatorArmTask != null && robot.elevatorArmTask.algaeArm != null)
+                {
+                    if (pressed)
+                    {
+                        if (operatorAltFunc)
+                        {
+                            robot.elevatorArmTask.algaeArm.setPower(-0.3);
+                        }
+                        else
+                        {
+                            robot.elevatorArmTask.algaeArm.setPidPower(
+                                -0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                        }
+                    }
+                    else
+                    {
+                        robot.elevatorArmTask.algaeArm.cancel();
+                    }
+                    passToTeleOp = false;
+                }
+                break;
+
+            case DpadRight:
+            if (robot.elevatorArmTask != null && robot.elevatorArmTask.algaeArm != null)
+            {
+                if (pressed)
+                {
+                    if (operatorAltFunc)
+                    {
+                        robot.elevatorArmTask.algaeArm.setPower(0.3);
+                    }
+                    else
+                    {
+                        robot.elevatorArmTask.algaeArm.setPidPower(
+                            0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
+                    }
+                }
+                else
+                {
+                    robot.elevatorArmTask.algaeArm.cancel();
+                }
+                passToTeleOp = false;
+            }
+                break;
+
+            case Back:
+            case Start:
+            default:
+                break;
+        }
+        //
+        // If the control was not processed by this method, pass it back to TeleOp.
+        //
+        if (passToTeleOp)
+        {
+            super.operatorControllerButtonEvent(button, pressed);
+        }
+    }   //operatorControllerButtonEvent
 
     //
     // Implement tests.

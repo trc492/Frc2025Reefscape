@@ -40,6 +40,14 @@ public class LEDIndicator
         new TrcAddressableLED.Pattern("SeeNothing", new FrcColor(63, 0, 0), RobotParams.HwConfig.NUM_LEDS);
     private static final TrcAddressableLED.Pattern fieldOrientedPattern =   // White
         new TrcAddressableLED.Pattern("FieldOriented", new FrcColor(63, 63, 63), RobotParams.HwConfig.NUM_LEDS);
+    private static final TrcAddressableLED.Pattern reefLevel4Pattern =      // Yellow
+        new TrcAddressableLED.Pattern("ReefLevel4", new FrcColor(63, 63, 0), RobotParams.HwConfig.NUM_LEDS);
+    private static final TrcAddressableLED.Pattern reefLevel3Pattern =      // Yellow
+        new TrcAddressableLED.Pattern("ReefLevel3", new FrcColor(63, 63, 0), RobotParams.HwConfig.NUM_LEDS*3/4);
+    private static final TrcAddressableLED.Pattern reefLevel2Pattern =      // Yellow
+        new TrcAddressableLED.Pattern("ReefLevel2", new FrcColor(63, 63, 0), RobotParams.HwConfig.NUM_LEDS/2);
+    private static final TrcAddressableLED.Pattern reefLevel1Pattern =      // Yellow
+        new TrcAddressableLED.Pattern("ReefLevel1", new FrcColor(63, 63, 0), RobotParams.HwConfig.NUM_LEDS/4);
     private static final TrcAddressableLED.Pattern robotOrientedPattern =   // Blue
         new TrcAddressableLED.Pattern("RobotOriented", new FrcColor(0, 0, 63), RobotParams.HwConfig.NUM_LEDS);
     private static final TrcAddressableLED.Pattern inverseOrientedPattern = // Magenta
@@ -48,18 +56,29 @@ public class LEDIndicator
         new TrcAddressableLED.Pattern("Nominal", new FrcColor(0, 0, 0), RobotParams.HwConfig.NUM_LEDS);
 
     private static final TrcAddressableLED.Pattern[] priorities =
-        new TrcAddressableLED.Pattern[]
-        {
-            // Highest priority
-            aprilTagLockedPattern,                     
-            aprilTagPattern,
-            seeNothingPattern,
-            fieldOrientedPattern,
-            robotOrientedPattern,
-            inverseOrientedPattern,
-            nominalPattern
-            // Lowest priority
-        };
+    {
+        // Highest priority
+        aprilTagLockedPattern,
+        aprilTagPattern,
+        seeNothingPattern,
+        reefLevel4Pattern,
+        reefLevel3Pattern,
+        reefLevel2Pattern,
+        reefLevel1Pattern,
+        fieldOrientedPattern,
+        robotOrientedPattern,
+        inverseOrientedPattern,
+        nominalPattern
+        // Lowest priority
+    };
+
+    private static final TrcAddressableLED.Pattern[] reefLevelPatterns =
+    {
+        reefLevel1Pattern,
+        reefLevel2Pattern,
+        reefLevel3Pattern,
+        reefLevel4Pattern
+    };
 
     private FrcAddressableLED led;
 
@@ -87,6 +106,11 @@ public class LEDIndicator
         led.resetAllPatternStates();
         led.setPatternState(nominalPattern, true);
     }   //reset
+
+    public void setReefLevel(int level)
+    {
+        led.setPatternState(reefLevelPatterns[level], true, 0.5);
+    }   //setReefLevel
 
     /**
      * This method sets the LED to indicate the drive orientation mode of the robot.
@@ -135,7 +159,7 @@ public class LEDIndicator
             {
                 case APRILTAG:
                     // led.setPatternState(aprilTagPattern, true, 0.5);
-                    if (Math.abs(objPose.angle) < RobotParams.Vision.ONTARGET_THRESHOLD)
+                    if (Math.abs(objPose.angle) < PhotonVision.ONTARGET_THRESHOLD)
                     {
                         led.setPatternState(aprilTagLockedPattern, true, 0.5);
                     }

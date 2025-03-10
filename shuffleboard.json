@@ -77,7 +77,8 @@
               "Slider Settings/Min": 1.0,
               "Slider Settings/Max": 3.0,
               "Slider Settings/Block increment": 1.0,
-              "Visuals/Display value": true
+              "Visuals/Display value": true,
+              "Visuals/Orientation": "HORIZONTAL"
             }
           },
           "0,6": {
@@ -380,32 +381,6 @@
               "_showGlyph": false
             }
           },
-          "12,3": {
-            "size": [
-              5,
-              3
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto/EndAction",
-              "_title": "SmartDashboard/Auto/EndAction",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "12,0": {
-            "size": [
-              5,
-              3
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/Auto/ScoreWingNotes",
-              "_title": "SmartDashboard/Auto/ScoreWingNotes",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "15,6": {
             "size": [
               3,
@@ -415,6 +390,71 @@
               "_type": "Toggle Switch",
               "_source0": "network_table:///SmartDashboard/Auto/Relocalize",
               "_title": "SmartDashboard/Auto/Relocalize",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "17,3": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Toggle Switch",
+              "_source0": "network_table:///SmartDashboard/Auto/UseVision",
+              "_title": "/SmartDashboard/Auto/UseVision",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "18,6": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Toggle Switch",
+              "_source0": "network_table:///SmartDashboard/Auto/ScorePreload",
+              "_title": "/SmartDashboard/Auto/ScorePreload",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "17,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "Toggle Switch",
+              "_source0": "network_table:///SmartDashboard/Auto/GoToStation",
+              "_title": "/SmartDashboard/Auto/GoToStation",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "12,0": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Auto/VisionXOffset",
+              "_title": "/SmartDashboard/Auto/VisionXOffset",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "12,2": {
+            "size": [
+              5,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Auto/VisionYOffset",
+              "_title": "/SmartDashboard/Auto/VisionYOffset",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -566,7 +606,7 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "3,0": {
+          "15,1": {
             "size": [
               14,
               12
@@ -574,27 +614,6 @@
             "content": {
               "_type": "Camera Stream",
               "_source0": "camera_server://photonvision_Port_1184_Output_MJPEG_Server",
-              "_title": "photonvision_Port_1182_Output_MJPEG_Server",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": 0,
-              "imageHeight": 0
-            }
-          },
-          "17,0": {
-            "size": [
-              14,
-              12
-            ],
-            "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://photonvision_Port_1186_Output_MJPEG_Server",
               "_title": "photonvision_Port_1184_Output_MJPEG_Server",
               "_glyph": 148,
               "_showGlyph": false,
@@ -626,9 +645,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -6.400000095367432,
-    "y": 0.800000011920929,
-    "width": 1546.4000244140625,
-    "height": 724.7999877929688
+    "x": -8.800000190734863,
+    "y": -8.800000190734863,
+    "width": 1550.4000244140625,
+    "height": 926.4000244140625
   }
 }

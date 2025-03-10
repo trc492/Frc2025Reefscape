@@ -1,0 +1,252 @@
+Robot.robotStartMode_INFO [0.152164724] Sat Mar 08 16:22:12 PST 2025: ***** AUTO_MODE *****
+FrcAuto.startMode_INFO [0.202527807] <Info name="MatchInfo" date="Sat Mar 08 16:22:12 PST 2025" event="WASAM" type="Qualification" match=26 replay=1 alliance="Red" location=1 gameMsg="" />
+FrcAuto.startMode_INFO [0.224636693] <Info name="AutoChoices" alliance="Red" strategy="REEFSCAPE_AUTO" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="false" stationSide="FAR" stationPickupCount=0 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=6.0 ft yDistance=6.0 ft turnDegrees=90.0 deg driveTime=4.0 sec drivePower=4.0 />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.270667092] <Event name="StateInfo" time="0.269249873" tag="vvvvv" CmdReefscapeAuto.state="START" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.342638194] ***** Score Preload.
+TaskAutoScoreCoral.autoScoreCoral_INFO [0.350031057] autoScoreCoral(owner=null, taskParams=(useVision=true,aprilTagId=10,reefLevel=3,scoreRightSide=true,removeAlgae=false,relocalize=true,visionXOffset=0.0,visionYOffset=0.0), event=(CmdReefscapeAuto=CLEARED))
+CmdReefscapeAuto.cmdPeriodic_INFO [0.359496064] <Event name="StateInfo" time="0.359243003" tag="^^^^^" CmdReefscapeAuto.state="START" />
+TaskElevatorArm.stopSubsystems_INFO [0.377797938] Stopping subsystems.
+TaskAutoScoreCoral.autoTask_INFO [0.382530427] <Event name="StateInfo" time="0.381672985" tag="vvvvv" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.setCoralScorePosition_INFO [0.398834883] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=70.0), event=(TaskAutoScoreCoral.elevatorArmEvent=CLEARED))
+TaskAutoScoreCoral.runTaskState_INFO [0.403585494] ***** Using AprilTag Vision.
+TaskAutoScoreCoral.autoTask_INFO [0.410365727] <Event name="StateInfo" time="0.4101352" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.runTaskState_INFO [0.430374045] ***** Vision found AprilTag[10]: aprilTagPose=(x=0.279033,y=65.991321,angle=-0.440231)
+Robot.relocalizeRobotByAprilTag_INFO [0.434562391] >>>>> Re-localize robot: pose=(x=-159.048760,y=409.764046,angle=0.440231)
+TaskAutoScoreCoral.autoTask_INFO [0.449221042] <Event name="StateInfo" time="0.448361558" tag="vvvvv" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskAutoScoreCoral.runTaskState_INFO [0.454303194] ***** Approaching Reef: targetPose=(x=6.924825,y=47.041824,angle=-0.440231)
+purePursuitDrive.start_INFO [0.51529107] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-159.048954,y=409.763261,angle=0.440231),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.6200139692839501,pose=(x=-154.413643,y=439.656010,angle=0.160161),vel=55.80125723555551,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-151.762892,y=456.750491,angle=-0.000000),vel=0.0)])
+CoralArm.motor.pidCtrlTask_INFO [1.640645709] controlMode: Position onTarget=true(154.951171875/155.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+Elevator.motor.pidCtrlTask_INFO [2.632392684] controlMode: Position onTarget=true(69.8444853991997/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [2.63654515] Stopping subsystems.
+purePursuitDrive.xPosPid.isStalled_INFO [5.352619187] PID stalled (currTime=1.7414797373626633E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0035540454799414304, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.370496762] PID stalled (currTime=1.7414797373812053E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.00411963948590435, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.403058848] PID stalled (currTime=1.7414797374159274E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.004556417038179197, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.405774633] PID stalled (currTime=1.741479737419194E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.005258074789827884, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.43322563] PID stalled (currTime=1.741479737444959E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.001640086798520103, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.435325427] PID stalled (currTime=1.7414797374490454E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.009772097725670848, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.489252464] PID stalled (currTime=1.7414797375029223E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.010828455380891168, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.490317503] PID stalled (currTime=1.7414797375040128E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.008507674781075588, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.522378167] PID stalled (currTime=1.7414797375360918E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.01392656242615574, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.523451124] PID stalled (currTime=1.7414797375371907E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.03353053680070327, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.544903157] PID stalled (currTime=1.7414797375586298E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.00234073566774321, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.550015231] PID stalled (currTime=1.7414797375630958E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0061841941953633866, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.604667799] PID stalled (currTime=1.741479737618238E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.010821310097850137, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.605425837] PID stalled (currTime=1.7414797376191933E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0064903364856543425, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.649791354] PID stalled (currTime=1.7414797376613896E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.022608751481439825, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.653429059] PID stalled (currTime=1.7414797376650991E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.009624444363225952, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.681124695] PID stalled (currTime=1.7414797376946485E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.025629419557982223, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.683491217] PID stalled (currTime=1.7414797376959054E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.00896919882069468, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.730167699] PID stalled (currTime=1.7414797377437446E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.013281108569740222, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.733426786] PID stalled (currTime=1.7414797377458613E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.012669620550200449, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.76936209] PID stalled (currTime=1.7414797377828789E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.00994953687363465, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.771106371] PID stalled (currTime=1.7414797377838037E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.015739827712047034, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.810630128] PID stalled (currTime=1.741479737824352E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.028893304561897197, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.813254166] PID stalled (currTime=1.741479737826966E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.004407628979498273, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.870148463] PID stalled (currTime=1.7414797378815155E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.008131580469403526, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.871406217] PID stalled (currTime=1.7414797378851314E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.010583567258255173, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.904007193] PID stalled (currTime=1.7414797379177227E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.005179464633637564, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.905625201] PID stalled (currTime=1.7414797379186435E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.006353516407291553, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.940719502] PID stalled (currTime=1.7414797379541109E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0024266053742461454, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.943920735] PID stalled (currTime=1.7414797379563699E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.005109917027939711, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [5.99610452] PID stalled (currTime=1.741479738008261E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.016061279872230848, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [5.999425704] PID stalled (currTime=1.7414797380127144E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=9.316112272809148E-4, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.035417109] PID stalled (currTime=1.7414797380491292E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0013013261652759646, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.03651204] PID stalled (currTime=1.7414797380500255E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0034354536963783467, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.070628573] PID stalled (currTime=1.7414797380841496E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.006852585029886447, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.071346586] PID stalled (currTime=1.7414797380851035E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.00349123564178066, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.11382269] PID stalled (currTime=1.7414797381257575E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0017770364978814998, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.117565404] PID stalled (currTime=1.7414797381283047E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.009894570665195505, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.149590084] PID stalled (currTime=1.7414797381633122E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.004740385844363769, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.1524407] PID stalled (currTime=1.7414797381640587E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.005815465475133186, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.182203973] PID stalled (currTime=1.741479738195864E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.011935749989408096, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.184489445] PID stalled (currTime=1.741479738197996E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.010263487481308743, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.233453715] PID stalled (currTime=1.7414797382469213E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.00366094946519048, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.237543546] PID stalled (currTime=1.7414797382505343E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-3.560863384095062E-4, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.279472869] PID stalled (currTime=1.7414797382928228E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.280280649] PID stalled (currTime=1.741479738294019E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.308574425] PID stalled (currTime=1.741479738319941E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.019418035160659854, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.311719968] PID stalled (currTime=1.741479738323865E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.005113431209907222, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.364582245] PID stalled (currTime=1.741479738376788E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.003984768272462511, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.367173571] PID stalled (currTime=1.7414797383790255E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.00771377336882988, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.390581828] PID stalled (currTime=1.7414797384043157E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0015564668336940017, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.392548857] PID stalled (currTime=1.7414797384062486E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0022505157482127043, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.422838911] PID stalled (currTime=1.7414797384357271E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.424506803] PID stalled (currTime=1.7414797384381917E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.485657447] PID stalled (currTime=1.7414797384991794E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.005037495881160333, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.487021575] PID stalled (currTime=1.7414797385007389E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0013066162522478151, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.507953639] PID stalled (currTime=1.7414797385214975E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0019882195552355353, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.511460004] PID stalled (currTime=1.741479738524704E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0028777804928886855, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.536393282] PID stalled (currTime=1.7414797385493457E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.007064720927443519, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.542145401] PID stalled (currTime=1.7414797385530322E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.006083181606295495, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.62002531] PID stalled (currTime=1.7414797386312695E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.008974264784122688, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.627196473] PID stalled (currTime=1.741479738637949E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0023099016899223966, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.67029815] PID stalled (currTime=1.7414797386824312E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.004829931319256503, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.674186686] PID stalled (currTime=1.7414797386879375E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0022161539369617107, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.704622519] PID stalled (currTime=1.7414797387183745E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.003623443877759151, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.709721301] PID stalled (currTime=1.741479738721668E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0065591049169030306, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.777120601] PID stalled (currTime=1.7414797387891355E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.008430346013644988, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.783386662] PID stalled (currTime=1.7414797387953672E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.001478611684693182, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.821642151] PID stalled (currTime=1.7414797388353379E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.008866456505929968, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.824150165] PID stalled (currTime=1.7414797388369396E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0075679789199514565, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.845401447] PID stalled (currTime=1.7414797388591688E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.011729144401592664, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.850575323] PID stalled (currTime=1.7414797388636556E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.024571447189395492, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.894712561] PID stalled (currTime=1.7414797389063125E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0061126594499867765, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.898803698] PID stalled (currTime=1.7414797389125354E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0033718078927885914, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.946712277] PID stalled (currTime=1.7414797389600122E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.027470912345010923, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.948456865] PID stalled (currTime=1.741479738961406E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.00828389358581934, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [6.988849574] PID stalled (currTime=1.7414797390018234E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.018098272235444062, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [6.991516937] PID stalled (currTime=1.741479739005275E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.01954100890841319, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.057807532] PID stalled (currTime=1.741479739071568E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0032045686635053306, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.062692513] PID stalled (currTime=1.7414797390764544E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.010432246314571056, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.097382727] PID stalled (currTime=1.7414797391111348E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=5.605110976799367E-4, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.100444894] PID stalled (currTime=1.7414797391118205E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.015516407452798014, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.13533906] PID stalled (currTime=1.7414797391490517E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.021130637113407083, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.136199095] PID stalled (currTime=1.741479739149969E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.027108536832974716, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.192603661] PID stalled (currTime=1.7414797392063434E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.03249138320795112, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.193427023] PID stalled (currTime=1.7414797392072065E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.043559695727501846, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.218882635] PID stalled (currTime=1.7414797392304585E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.007079711841665961, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.220168137] PID stalled (currTime=1.7414797392339203E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.008089631850688367, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.265538705] PID stalled (currTime=1.741479739279309E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.02280810376329089, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.266609541] PID stalled (currTime=1.7414797392800355E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.017039831860713086, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.349712593] PID stalled (currTime=1.7414797393633986E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.020789597256120385, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.357542946] PID stalled (currTime=1.7414797393705626E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.002476317395444669, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.405475265] PID stalled (currTime=1.7414797394187684E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0016033721330796873, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.41293426] PID stalled (currTime=1.741479739424585E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.030617122965037952, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.511500161] PID stalled (currTime=1.7414797395248146E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-4.306170028910878E-4, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.515918405] PID stalled (currTime=1.741479739529685E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.006266369348525633, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.554389819] PID stalled (currTime=1.7414797395673316E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.005446076880572036, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.561477575] PID stalled (currTime=1.741479739575231E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.007219389026337446, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.593605338] PID stalled (currTime=1.7414797396063943E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.004715760065123688, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.59872307] PID stalled (currTime=1.7414797396120796E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-4.245355165077945E-4, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.693575701] PID stalled (currTime=1.7414797397050261E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.014279543466630948, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.69703837] PID stalled (currTime=1.741479739710817E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.01045355374818357, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.786321397] PID stalled (currTime=1.7414797397993336E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.047389044257318366, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.790657119] PID stalled (currTime=1.7414797398034163E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.03411546675023666, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.850126277] PID stalled (currTime=1.7414797398591268E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.06416570450554838, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.85485923] PID stalled (currTime=1.741479739867316E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.05228861855060605, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.887550309] PID stalled (currTime=1.7414797399011276E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.010476825748704456, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.894633551] PID stalled (currTime=1.7414797399058032E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0020796067039279354, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [7.969960294] PID stalled (currTime=1.7414797399828877E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=8.671806451755842E-4, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.97383653] PID stalled (currTime=1.7414797399875832E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.003931039594174741, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.00785105] PID stalled (currTime=1.7414797400216212E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.01084868538980521, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.014424001] PID stalled (currTime=1.7414797400246842E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0028054302453801062, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.042565559] PID stalled (currTime=1.7414797400563395E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.009014161460409684, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.043453082] PID stalled (currTime=1.7414797400569823E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.008217092425282445, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.082707319] PID stalled (currTime=1.7414797400960884E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.009308026130205472, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.085380362] PID stalled (currTime=1.7414797400984423E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.020622011575276794, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.110570214] PID stalled (currTime=1.74147974012436E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.113189564] PID stalled (currTime=1.7414797401257763E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.14064683] PID stalled (currTime=1.7414797401542282E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.02086512709912026, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.141765797] PID stalled (currTime=1.7414797401553771E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0022413330233295313, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.169565649] PID stalled (currTime=1.741479740182128E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.005099379577197569, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.170842072] PID stalled (currTime=1.7414797401841102E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0027345669000293, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.210416206] PID stalled (currTime=1.7414797402234073E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.007650904109009484, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.213136163] PID stalled (currTime=1.7414797402264962E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.006906531129399353, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.251116245] PID stalled (currTime=1.7414797402647676E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.253595717] PID stalled (currTime=1.7414797402667613E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.269815116] PID stalled (currTime=1.7414797402832513E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0033068343528051777, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.270595617] PID stalled (currTime=1.7414797402843554E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.011521571138750155, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.294880241] PID stalled (currTime=1.7414797403078036E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.296272518] PID stalled (currTime=1.741479740309244E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.352948507] PID stalled (currTime=1.741479740366363E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.001343878649915432, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.355528168] PID stalled (currTime=1.7414797403673065E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.001676879902410981, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.375213278] PID stalled (currTime=1.7414797403881977E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.011303089501794775, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.376679267] PID stalled (currTime=1.7414797403904545E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.010325164950633892, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.402930747] PID stalled (currTime=1.7414797404166558E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.40370251] PID stalled (currTime=1.741479740417405E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.422224688] PID stalled (currTime=1.7414797404359953E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.010565766599144105, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.425672729] PID stalled (currTime=1.7414797404391446E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.009069530625810585, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.467092281] PID stalled (currTime=1.7414797404808397E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.007144308828412469, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.470256104] PID stalled (currTime=1.7414797404832354E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.006525524264560348, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.496794758] PID stalled (currTime=1.7414797405091023E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.005771280375670571, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.498628411] PID stalled (currTime=1.7414797405123734E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.007096171743956655, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.523468882] PID stalled (currTime=1.741479740537226E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.008880488373780976, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.526016807] PID stalled (currTime=1.7414797405395708E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.004243898659049396, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.558460979] PID stalled (currTime=1.7414797405697582E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0022356257035712197, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.560790163] PID stalled (currTime=1.7414797405745318E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.012383158281051031, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.639634039] PID stalled (currTime=1.7414797406532762E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.026614521080246388, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.643340779] PID stalled (currTime=1.7414797406570837E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0085581422618555, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.680689882] PID stalled (currTime=1.7414797406904569E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.05149180219644674, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.682664374] PID stalled (currTime=1.741479740696132E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.021600002027325163, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.713445247] PID stalled (currTime=1.7414797407272074E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.007892229787924646, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.71467602] PID stalled (currTime=1.7414797407283444E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.03075932552339601, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.730322735] PID stalled (currTime=1.7414797407376287E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.732099506] PID stalled (currTime=1.7414797407458644E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.791406537] PID stalled (currTime=1.7414797408048701E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0189002028964507, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.795009011] PID stalled (currTime=1.7414797408087854E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.006875145586460268, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.828760297] PID stalled (currTime=1.741479740841657E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.004448009373677515, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.830920267] PID stalled (currTime=1.7414797408440814E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.0010821231027447916, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.881204292] PID stalled (currTime=1.7414797408943667E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.0020709943005512207, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.882821024] PID stalled (currTime=1.7414797408965416E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=6.11729099139413E-4, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [8.958054354] PID stalled (currTime=1.7414797409687376E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.017241478497555432, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [8.961809187] PID stalled (currTime=1.7414797409755542E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.008108335713744207, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.00317786] PID stalled (currTime=1.741479741016947E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.006225725799816351, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.008454334] PID stalled (currTime=1.7414797410211985E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-5.557584298159734E-4, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.054611827] PID stalled (currTime=1.7414797410678122E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.004409441534821578, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.05726014] PID stalled (currTime=1.7414797410705612E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.0058161606431764296, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.142113286] PID stalled (currTime=1.7414797411554236E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=6.941524916178642E-4, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.152225082] PID stalled (currTime=1.7414797411631274E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.001107141724311537, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.18917359] PID stalled (currTime=1.7414797412029116E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0027438863628514265, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.1920814] PID stalled (currTime=1.7414797412054198E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.004964456968831262, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.233323081] PID stalled (currTime=1.741479741247097E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.024187269344995002, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.239420699] PID stalled (currTime=1.7414797412516856E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.009841350950499938, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.313014201] PID stalled (currTime=1.7414797413256686E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.002414037068044312, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.315275387] PID stalled (currTime=1.741479741329028E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.004564877130363853, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.352131486] PID stalled (currTime=1.7414797413659012E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=-0.017180300041486345, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.355829048] PID stalled (currTime=1.7414797413694928E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.023353564842495296, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.403322901] PID stalled (currTime=1.741479741416572E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=0.0049636350009949985, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.412877802] PID stalled (currTime=1.7414797414203043E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=-0.009394178313933353, errRateThreshold=0.1).
+purePursuitDrive.xPosPid.isStalled_INFO [9.514797842] PID stalled (currTime=1.7414797415272012E9, stallStartTime=1.7414797371450133E9, timeout=0.2, velError=7.414630896897315E-4, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.517280104] PID stalled (currTime=1.741479741531022E9, stallStartTime=1.741479733021228E9, timeout=0.2, velError=0.002229246422758436, errRateThreshold=0.1).
+purePursuitDrive.turnPid.isStalled_INFO [9.520590877] PID stalled (currTime=1.7414797415334508E9, stallStartTime=1.7414797413305295E9, timeout=0.2, velError=-0.09040269035095283, errRateThreshold=0.1).
+purePursuitDrive.driveTask_INFO [9.524485811] Done: index=2/3, stalled=true, timeout=false, posOnTarget=true, headingOnTarget=false, robotPose=(x=-152.059384,y=456.488384,angle=-7.309770)
+purePursuitDrive.driveTask_INFO [9.53154288] Signal completion event (TaskAutoScoreCoral.driveEvent=CLEARED).
+TaskAutoScoreCoral.autoTask_INFO [9.537038938] <Event name="StateInfo" time="9.534654658" tag="vvvvv" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [10.554299663] <Event name="StateInfo" time="10.552123663" tag="vvvvv" TaskAutoScoreCoral.state="DONE" />
+TaskAutoScoreCoral.stopSubsystems_INFO [10.560865511] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [10.56842094] Canceling auto task operation.
+CmdReefscapeAuto.cmdPeriodic_INFO [10.575102219] <Event name="StateInfo" time="10.572344843" tag="vvvvv" CmdReefscapeAuto.state="DO_DELAY" />
+CmdReefscapeAuto.cmdPeriodic_INFO [10.582799172] <Event name="StateInfo" time="10.580871593" tag="^^^^^" CmdReefscapeAuto.state="DO_DELAY" />
+CmdReefscapeAuto.cmdPeriodic_INFO [10.589636592] <Event name="StateInfo" time="10.589431133" tag="vvvvv" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" />
+CmdReefscapeAuto.cmdPeriodic_INFO [10.592083295] <Event name="StateInfo" time="10.59188293" tag="^^^^^" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" />
+CmdReefscapeAuto.cmdPeriodic_INFO [10.648799196] <Event name="StateInfo" time="10.64727998" tag="vvvvv" CmdReefscapeAuto.state="DONE" />
+CmdReefscapeAuto.cmdPeriodic_INFO [10.652234205] <Event name="StateInfo" time="10.652045388" tag="^^^^^" CmdReefscapeAuto.state="DONE" />
+FrcRobotBase.startCompetition_INFO [15.000211669] *** Transitioning from AUTO_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [15.014948055] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [15.056654367] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.000710s (freq=1407.594Hz, min=0.000000s, max=0.427149s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000057s
+[07]               UpdateTask=0.000487s
+[02]                StartMode=0.000000s
+[06]         PostPeriodicTask=0.000059s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=11.658188s
+[01]           RobotStartMode=0.000000s
+[05]                 Periodic=0.000055s
+[10]            RobotStopMode=0.000000s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.081275587] TrcWatchdogMgr: STANDALONE_TASK=1.2057786489479513E-4/0.9992664249069767
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.084416915] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.1140764654220915E-5/0.010714629480281039
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.087344555] TrcMotor.odometryTask: STANDALONE_TASK=4.7664159802885005E-4/5.771123668534089E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.090840835] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.0015031395/7.5091516235
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.095323712] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=4.120942297650131E-6/0.010714628068454784
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.100500508] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.80106133323839E-6/0.010714621906623468
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.112400354] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.871952718339445E-6/0.010714621821483248
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.11822785] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=1.0923385001542806E-5/0.010714658688364862
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.122099927] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=8.254854513303742E-6/0.010714659543720776
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.124966231] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=8.215273488957192E-6/0.010714653471666094
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.128115333] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=7.929322395357394E-6/0.010714653962462767
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.132379547] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.004295501702430846/0.01242069623386421
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.136094592] TrcSwerveDriveBase.stopTask: STOP_TASK=0.0013397645/7.5114892635
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.137813015] purePursuitDrive.driveTask: POST_PERIODIC_TASK=0.022606491457627116/0.03037885531864407
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.145130145] LED: OUTPUT_TASK=2.771260046995158E-5/0.010714658538058957
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.149331359] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=2.166874133388714E-4/0.010714648283462885
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.155137157] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=5.89924914258589E-6/0.01071464964913072
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.161184336] AlgaeArm.motor.pidCtrlTask: OUTPUT_TASK=1.5380401216386207E-4/0.01071463725325754
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.166082494] AlgaeGrabber.motor.pidCtrlTask: OUTPUT_TASK=5.691768756081931E-6/0.010714637624023924
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.170300152] Elevator.motor.pidCtrlTask: OUTPUT_TASK=1.882397562509642E-5/0.01071464713682699
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.174356556] Winch.motor.pidCtrlTask: OUTPUT_TASK=4.463036882765496E-6/0.010714649124936216
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.178588677] TaskElevatorArm: POST_PERIODIC_TASK=7.017123519255879E-6/7.013954175657052E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.181107643] TaskAutoScoreCoral: POST_PERIODIC_TASK=3.614597861507128E-4/0.020713912912423627

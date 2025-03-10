@@ -23,61 +23,60 @@
 package teamcode.subsystems;
 
 import frclib.driverio.FrcDashboard;
+import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
-import frclib.subsystem.FrcIntake;
 import teamcode.RobotParams;
+import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
-import trclib.subsystem.TrcIntake;
 import trclib.subsystem.TrcSubsystem;
 
 /**
  * This class implements an Elevator Subsystem.
  */
-public class Intake extends TrcSubsystem
+public class IntakeDeployer extends TrcSubsystem
 {
     public static final class Params
     {
-        public static final String SUBSYSTEM_NAME               = "Intake";
+        public static final String SUBSYSTEM_NAME               = "IntakeDeployer";
 
         public static final String MOTOR_NAME                   = SUBSYSTEM_NAME + ".motor";
-        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_INTAKE_MOTOR;
+        public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_INTAKEDEPLOYER_MOTOR;
         public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = false;
 
-        public static final int SENSOR_DIGITAL_CHANNEL          = 0;
-        public static final boolean SENSOR_INVERTED             = false;
+        public static final String LOWER_LIMIT_NAME             = SUBSYSTEM_NAME + ".lowerLimit";
+        public static final int LOWER_LIMIT_CHANNEL             = RobotParams.HwConfig.DIO_DEPLOYER_LOWER_LIMIT;
+        public static final boolean LOWER_LIMIT_INVERTED        = false;
+        public static final double ZERO_CAL_POWER               = -0.25;
 
         public static final double INTAKE_FORWARD_POWER         = 1.0;
         public static final double RETAIN_POWER                 = 0.0;
         public static final double FINISH_DELAY                 = 0.0;
-
-        public static final double coralDistanceThreshold        = 96.0; //TODO: Needs to be adjusted
-        public static final double intakePower                   = 1.0;
     }   //class Params
 
-    private final TrcIntake intake;
+    private final TrcMotor deployer;
     
     /**
      * Constructor: Creates an instance of the object.
      */
-    public Intake()
+    public IntakeDeployer()
     {
-        super(Params.SUBSYSTEM_NAME, false);
+        super(Params.SUBSYSTEM_NAME, true);
 
-        FrcIntake.Params intakeParams = new FrcIntake.Params()
+        FrcMotorActuator.Params deployerParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE, Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setEntryDigitalInput(Params.SENSOR_DIGITAL_CHANNEL, Params.SENSOR_INVERTED, null);
-        intake = new FrcIntake(Params.SUBSYSTEM_NAME, intakeParams).getIntake();
-    }   //Intake
+            .setLowerLimitSwitch(Params.LOWER_LIMIT_NAME, Params.LOWER_LIMIT_CHANNEL, Params.LOWER_LIMIT_INVERTED);
+        deployer = new FrcMotorActuator(deployerParams).getMotor();
+    }   //IntakeDeployer
 
-    public TrcIntake getIntake()
+    public TrcMotor getDeployer()
     {
-        return intake;
-    }   //getIntake
+        return deployer;
+    }   //getDeployer
 
     //
     // Implements TrcSubsystem abstract methods.
@@ -89,7 +88,7 @@ public class Intake extends TrcSubsystem
     @Override
     public void cancel()
     {
-        intake.cancel();
+        deployer.cancel();
     }   //cancel
 
     /**
@@ -101,7 +100,7 @@ public class Intake extends TrcSubsystem
     @Override
     public void zeroCalibrate(String owner, TrcEvent event)
     {
-        // No zero calibration needed.
+        deployer.zeroCalibrate(owner, Params.ZERO_CAL_POWER, event);
     }   //zeroCalibrate
 
     /**
@@ -110,7 +109,6 @@ public class Intake extends TrcSubsystem
     @Override
     public void resetState()
     {
-        // No reset state needed.
     }   //resetState
 
     /**
@@ -124,10 +122,11 @@ public class Intake extends TrcSubsystem
     {
         FrcDashboard.getInstance().displayPrintf(
             lineNum++,
-            "%s: power=%.3f, hasObject=%s, autoActive=%s",
-            Params.SUBSYSTEM_NAME, intake.getPower(), intake.hasObject(), intake.isAutoActive());
+            "%s: power=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
+            Params.SUBSYSTEM_NAME, deployer.getPower(), deployer.getPosition(), deployer.getPidTarget(),
+            deployer.isLowerLimitSwitchActive(), deployer.isUpperLimitSwitchActive());
 
         return lineNum;
     }   //updateStatus
 
-}   //class Intake
+}   //class IntakeDeployer

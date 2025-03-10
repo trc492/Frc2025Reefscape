@@ -22,6 +22,7 @@
 
 package teamcode.subsystems;
 
+import com.ctre.phoenix6.StatusCode;
 import com.studica.frc.AHRS.NavXComType;
 
 import edu.wpi.first.math.geometry.Rotation3d;
@@ -34,18 +35,23 @@ import edu.wpi.first.math.util.Units;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.drivebase.FrcSwerveDrive.SteerEncoderType;
+import frclib.motor.FrcCANTalonFX;
 import frclib.motor.FrcMotorActuator.MotorType;
 import teamcode.RobotParams;
 import teamcode.RobotParams.HwConfig;
+import trclib.controller.TrcPidController.PidCoefficients;
 import trclib.drivebase.TrcDriveBase.OdometryType;
 import trclib.pathdrive.TrcPose3D;
-import trclib.robotcore.TrcPidController.PidCoefficients;
+import trclib.robotcore.TrcDbgTrace;
+import trclib.sensor.TrcEncoder;
 
 /**
  * This class creates the appropriate Robot Drive Base according to the specified robot type.
  */
 public class RobotBase
 {
+    private static final String moduleName = RobotBase.class.getSimpleName();
+
     /**
      * When the season starts, the competition robot may not be ready for programmers. It's crucial to save time by
      * developing code on robots of previous seasons. By adding previous robots to the list of RobotType, one can
@@ -64,18 +70,27 @@ public class RobotBase
     /**
      * This class contains the parameters of the front camera.
      */
-    public static class FrontCamParams extends FrcRobotDrive.VisionInfo
+    public static class MaestroFrontCamParams extends FrcRobotDrive.VisionInfo
     {
-        public FrontCamParams()
+        public MaestroFrontCamParams()
         {
             camName = "OV9281";
             camImageWidth = 1280;
             camImageHeight = 800;
-            camXOffset = -3.5;                  // Inches to the right from robot center
-            camYOffset = -2.375;                // Inches forward from robot center
+            if (RobotParams.Preferences.invertedRobot)
+            {
+                camXOffset = 3.5;               // Inches to the right from robot center
+                camYOffset = 2.375;             // Inches forward from robot center
+                camYaw = 180.0;                 // degrees clockwise from robot front
+            }
+            else
+            {
+                camXOffset = -3.5;              // Inches to the right from robot center
+                camYOffset = -2.375;            // Inches forward from robot center
+                camYaw = 0.0;                   // degrees clockwise from robot front
+            }
             camZOffset = 23.125;                // Inches up from the floor
             camPitch = 33.0;                    // degrees up from horizontal
-            camYaw = 0.0;                       // degrees clockwise from robot front
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),
@@ -85,24 +100,33 @@ public class RobotBase
                                Units.degreesToRadians(-camPitch),
                                Units.degreesToRadians(-camYaw)));
             camPose = new TrcPose3D(camXOffset, camYOffset, camZOffset, camYaw, camPitch, camRoll);
-        }   //FrontCamParams
-    }   //class FrontCamParams
+        }   //MaestroFrontCamParams
+    }   //class MaestroFrontCamParams
 
     /**
      * This class contains the parameters of the back camera.
      */
-    public static class BackCamParams extends FrcRobotDrive.VisionInfo
+    public static class MaestroBackCamParams extends FrcRobotDrive.VisionInfo
     {
-        public BackCamParams()
+        public MaestroBackCamParams()
         {
             camName = "OV9782";
             camImageWidth = 1280;
             camImageHeight = 800;
-            camXOffset = -0.5;                  // Inches to the right from robot center
-            camYOffset = -5.375;                // Inches forward from robot center
+            if (RobotParams.Preferences.invertedRobot)
+            {
+                camXOffset = 0.5;               // Inches to the right from robot center
+                camYOffset = 5.375;             // Inches forward from robot center
+                camYaw = 0.0;                   // degrees clockwise from robot front
+            }
+            else
+            {
+                camXOffset = -0.5;              // Inches to the right from robot center
+                camYOffset = -5.375;            // Inches forward from robot center
+                camYaw = 180.0;                 // degrees clockwise from robot front
+            }
             camZOffset = 20.0;                  // Inches up from the floor
             camPitch = -17.5;                   // degrees up from horizontal
-            camYaw = 180.0;                     // degrees clockwise from robot front
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),
@@ -112,8 +136,8 @@ public class RobotBase
                                Units.degreesToRadians(-camPitch),
                                Units.degreesToRadians(-camYaw)));
             camPose = new TrcPose3D(camXOffset, camYOffset, camZOffset, camYaw, camPitch, camRoll);
-        }   //BackCamParams
-    }   //class BackCamParams
+        }   //MaestroBackCamParams
+    }   //class MaestroBackCamParams
 
     public static class MaestroParams extends FrcSwerveDrive.SwerveInfo
     {
@@ -140,18 +164,29 @@ public class RobotBase
             driveMotorIds = new int[] {
                 HwConfig.CANID_LFDRIVE_MOTOR, HwConfig.CANID_RFDRIVE_MOTOR,
                 HwConfig.CANID_LBDRIVE_MOTOR, HwConfig.CANID_RBDRIVE_MOTOR};
-            driveMotorInverted = new boolean[] {false, false, false, false};
+            if (RobotParams.Preferences.invertedRobot)
+            {
+                // To test Reefscape code on Maestro, we are inverting the robot direction. (i.e. robot front is now
+                // robot back).
+                driveMotorInverted = new boolean[] {true, true, true, true};
+            }
+            else
+            {
+                driveMotorInverted = new boolean[] {false, false, false, false};
+            }
             odometryType = OdometryType.MotorOdometry;
             // Absolute Odometry
             absoluteOdometry = null;
             // Drive Motor Odometry
-            xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
+            xDrivePosScale = yDrivePosScale = 0.91311455; //DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
             // Robot Drive Characteristics
             robotMaxVelocity = 171.0;           // inch/sec
             robotMaxAcceleration = 23000.0;     // inch/sec sq
+            robotMaxDeceleration = robotMaxAcceleration;
             robotMaxTurnRate = 1450.0;          // degree/sec
             profiledMaxVelocity = 157.48;       // inch/sec
             profiledMaxAcceleration = 10000.0;  // inch/sec sq
+            profiledMaxDeceleration = profiledMaxAcceleration;
             profiledMaxTurnRate = 180.0;        // degree/sec
             // DriveBase PID Parameters
             drivePidTolerance = 1.0;
@@ -164,13 +199,27 @@ public class RobotBase
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
             pidStallDetectionEnabled = true;
+            // PidDrive Parameters
+            usePidDrive = true;
+            enablePidDriveSquareRootPid = false;
             // PurePursuit Parameters
+            usePurePursuitDrive = true;
+            enablePurePursuitDriveSquareRootPid = false;
             ppdFollowingDistance = 10.0;
             velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
-            // Front Camera
-            cam1 = new FrontCamParams();
-            // Back Camera
-            cam2 = new BackCamParams();
+            fastModeEnabled = true;
+            // Vision
+            if (RobotParams.Preferences.invertedRobot)
+            {
+                // To Test Reefscape code on Maestro, we are making the Maestro robot back as robot front.
+                cam1 = new MaestroBackCamParams();
+                cam2 = new MaestroFrontCamParams();
+            }
+            else
+            {
+                cam1 = new MaestroFrontCamParams();
+                cam2 = new MaestroBackCamParams();
+            }
             // Miscellaneous
             ledName = "LED";
             ledChannel = HwConfig.PWM_CHANNEL_LED;
@@ -196,6 +245,8 @@ public class RobotBase
             // Swerve Module parameters.
             swerveModuleNames = new String[] {"lfWheel", "rfWheel", "lbWheel", "rbWheel"};
             driveGearRatio = DRIVE_GEAR_RATIO;
+            steerGearRatio = STEER_GEAR_RATIO;
+            steerPositionScale = 360.0 / steerGearRatio;
             //
             // WPILib Parameters.
             //
@@ -226,15 +277,66 @@ public class RobotBase
         }   //MaestroParams
     }   //class MaestroParams
 
+    public static class ReefscapeFrontCamParams extends FrcRobotDrive.VisionInfo
+    {
+        public ReefscapeFrontCamParams()
+        {
+            camName = "FrontOV9782";
+            camImageWidth = 1280;
+            camImageHeight = 800;
+            camXOffset = -0.25;                 // Inches to the right from robot center
+            camYOffset = 5.75;                  // Inches forward from robot center
+            camZOffset = 6.75;                  // Inches up from the floor
+            camYaw = 0.0;                       // degrees clockwise from robot front
+            camPitch = 23.0;                    // degrees up from horizontal
+            camRoll = 0.0;
+            robotToCam = new Transform3d(
+                new Translation3d(Units.inchesToMeters(camYOffset),
+                                  -Units.inchesToMeters(camXOffset),
+                                  Units.inchesToMeters(camZOffset)),
+                new Rotation3d(Units.degreesToRadians(camRoll),
+                               Units.degreesToRadians(-camPitch),
+                               Units.degreesToRadians(-camYaw)));
+            camPose = new TrcPose3D(camXOffset, camYOffset, camZOffset, camYaw, camPitch, camRoll);
+        }   //ReefscapeFrontCamParams
+    }   //class ReefscapeFrontCamParams
+
+    /**
+     * This class contains the parameters of the back camera.
+     */
+    public static class ReefscapeBackCamParams extends FrcRobotDrive.VisionInfo
+    {
+        public ReefscapeBackCamParams()
+        {
+            camName = "BackOV9782";
+            camImageWidth = 1280;
+            camImageHeight = 800;
+            camXOffset = 0.0;                   // Inches to the right from robot center
+            camYOffset = -1.563;                // Inches forward from robot center
+            camZOffset = 41.374;                // Inches up from the floor
+            camYaw = 180.0;                     // degrees clockwise from robot front
+            camPitch = 8.75;                    // degrees up from horizontal
+            camRoll = 0.0;
+            robotToCam = new Transform3d(
+                new Translation3d(Units.inchesToMeters(camYOffset),
+                                  -Units.inchesToMeters(camXOffset),
+                                  Units.inchesToMeters(camZOffset)),
+                new Rotation3d(Units.degreesToRadians(camRoll),
+                               Units.degreesToRadians(-camPitch),
+                               Units.degreesToRadians(-camYaw)));
+            camPose = new TrcPose3D(camXOffset, camYOffset, camZOffset, camYaw, camPitch, camRoll);
+        }   //ReefscapeBackCamParams
+    }   //class ReefscapeBackCamParams
+
     /**
      * This class contains the Swerve Robot Parameters.
      */
     public static class ReefscapeRobotParams extends FrcSwerveDrive.SwerveInfo
     {
         public final double FALCON_MAX_RPM                      = 6380.0;
-        public final double DRIVE_GEAR_RATIO                    = 6.75;
+        public final double DRIVE_GEAR_RATIO                    = 5.60;//6.75;
         public final double DRIVE_WHEEL_DIAMETER                = 3.9326556997620689090425924610785;    // inches
-        public final double STEER_GEAR_RATIO                    = 15.43;
+        public final double STEER_GEAR_RATIO                    = 13.3714;
 
         public ReefscapeRobotParams()
         {
@@ -261,30 +363,39 @@ public class RobotBase
             // Drive Motor Odometry
             xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
             // Robot Drive Characteristics
-            robotMaxVelocity = 171.0;           // inch/sec
-            robotMaxAcceleration = 23000.0;     // inch/sec sq
-            robotMaxTurnRate = 1450.0;          // degree/sec
-            profiledMaxVelocity = 157.48;       // inch/sec
-            profiledMaxAcceleration = 10000.0;  // inch/sec sq
-            profiledMaxTurnRate = 180.0;        // degree/sec
+            robotMaxVelocity = 201.0;           // inch/sec
+            robotMaxAcceleration = 6935.0;     // inch/sec sq
+            robotMaxDeceleration = robotMaxAcceleration;
+            robotMaxTurnRate = 478.0;          // degree/sec
+
+
+            profiledMaxVelocity = 110.0;       // inch/sec
+            profiledMaxAcceleration = 200.0;  // inch/sec sq
+            profiledMaxDeceleration = 90.0;
+            profiledMaxTurnRate = 200.0;     // degree/sec
             // DriveBase PID Parameters
             drivePidTolerance = 1.0;
-            turnPidTolerance = 2.0;
-            xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.017, 0.0, 0.0025, 0.0, 5.0);
+            turnPidTolerance = 1.0;
+            xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.012, 0.0, 0.0012, 0.0, 5.0);
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
             xDriveMaxPidRampRate = yDriveMaxPidRampRate = 0.5;  // %power per sec
-            turnPidCoeffs = new PidCoefficients(0.0065, 0.0, 0.0004, 0.0, 10.0);
+            turnPidCoeffs = new PidCoefficients(0.0044, 0.0, 0.0, 0.0, 0.0);
             turnPidPowerLimit = 1.0;
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
             pidStallDetectionEnabled = true;
+            // PidDrive Parameters
+            usePidDrive = true;
+            enablePidDriveSquareRootPid = false;
             // PurePursuit Parameters
+            usePurePursuitDrive = true;
+            enablePurePursuitDriveSquareRootPid = false;
             ppdFollowingDistance = 10.0;
-            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1.0 / robotMaxVelocity, 0.0);
-            // Front Camera
-            cam1 = new FrontCamParams();
-            // Back Camera
-            cam2 = new BackCamParams();
+            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1/profiledMaxVelocity, 0.0);
+            fastModeEnabled = true; 
+            // Vision
+            cam1 = new ReefscapeFrontCamParams();
+            cam2 = new ReefscapeBackCamParams();
             // Miscellaneous
             ledName = "LED";
             ledChannel = HwConfig.PWM_CHANNEL_LED;
@@ -310,6 +421,8 @@ public class RobotBase
             // Swerve Module parameters.
             swerveModuleNames = new String[] {"lfWheel", "rfWheel", "lbWheel", "rbWheel"};
             driveGearRatio = DRIVE_GEAR_RATIO;
+            steerGearRatio = STEER_GEAR_RATIO;
+            steerPositionScale = 360.0 / steerGearRatio;
             //
             // WPILib Parameters.
             //
@@ -345,10 +458,9 @@ public class RobotBase
         public VisionOnlyParams()
         {
             robotName = "VisionOnly";
-            // Front Camera
-            cam1 = new FrontCamParams();
-            // Back Camera
-            cam2 = new BackCamParams();
+            // Vision
+            cam1 = new ReefscapeFrontCamParams();
+            cam2 = new ReefscapeBackCamParams();
         }   //VisionOnlyParams
     }   //class VisionOnlyParams
 
@@ -402,6 +514,7 @@ public class RobotBase
                 robotDrive = null;
                 break;
         }
+        configureRobotDrive();
     }   //RobotBase
 
     /**
@@ -423,5 +536,67 @@ public class RobotBase
     {
         return robotDrive;
     }   //getRobotDrive
+
+    /**
+     * This method configures robotDrive with implementation details.
+     */
+    private void configureRobotDrive()
+    {
+        if (robotDrive != null)
+        {
+            if (robotDrive instanceof FrcSwerveDrive)
+            {
+                FrcSwerveDrive swerveDrive = (FrcSwerveDrive) robotDrive;
+                FrcSwerveDrive.SwerveInfo swerveInfo = (FrcSwerveDrive.SwerveInfo) robotInfo;
+                // Prevent Krakens from browning out.
+                for (int i = 0; i < swerveInfo.driveMotorNames.length; i++)
+                {
+                    swerveDrive.driveMotors[i].setCloseLoopRampRate(0.02);
+                    swerveDrive.driveMotors[i].setCurrentLimit(40.0, 45.0, 0.2);
+                    swerveDrive.driveMotors[i].setStatorCurrentLimit(55.0);
+                }
+                // Sync absolute encoders to steer motor internal encoders.
+                for (int i = 0; i < swerveInfo.steerEncoderNames.length; i++)
+                {
+                    syncSteerEncoder((FrcSwerveDrive.SwerveInfo) robotInfo, i);
+                }
+            }
+        }
+    }   //configureRobotDrive
+
+    /**
+     * This method reads the absolute steering encoder and synchronize the steering motor encoder with it.
+     *
+     * @param swerveInfo specifies the swerve drive parameters.
+     * @param index specifies the swerve module index.
+     */
+    private void syncSteerEncoder(FrcSwerveDrive.SwerveInfo swerveInfo, int index)
+    {
+        // Note this method is implementation specific. If your implementation is not with an absolute encoder that
+        // syncs with a TalonFX motor, you need to modify this method accordingly.
+        FrcSwerveDrive swerveDrive = (FrcSwerveDrive) robotDrive;
+        TrcEncoder steerEncoder = swerveDrive.steerEncoders[index];
+        FrcCANTalonFX steerMotor = (FrcCANTalonFX)swerveDrive.steerMotors[index];
+        // getPosition returns a value in the range of 0 to 1.0 of one revolution.
+        double motorEncoderPos = steerEncoder.getScaledPosition() * swerveInfo.steerGearRatio;
+        StatusCode statusCode = steerMotor.motor.setPosition(motorEncoderPos);
+
+        if (statusCode != StatusCode.OK)
+        {
+            TrcDbgTrace.globalTraceWarn(
+                moduleName,
+                swerveInfo.swerveModuleNames[index] + ": TalonFx.setPosition failed (code=" + statusCode +
+                ", pos=" + motorEncoderPos + ").");
+        }
+
+        double actualEncoderPos = steerMotor.motor.getPosition().getValueAsDouble();
+        if (Math.abs(motorEncoderPos - actualEncoderPos) > 0.1)
+        {
+            TrcDbgTrace.globalTraceWarn(
+                moduleName,
+                swerveInfo.swerveModuleNames[index] +
+                ": Steer encoder out-of-sync (expected=" + motorEncoderPos + ", actual=" + actualEncoderPos + ")");
+        }
+    }   //syncSteerEncoder
 
 }   //class RobotDrive

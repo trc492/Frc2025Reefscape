@@ -27,6 +27,7 @@ import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcMatchInfo;
 import frclib.driverio.FrcUserChoices;
+import teamcode.autocommands.CmdReefscapeAuto;
 import teamcode.commandbased.ExampleAuto;
 import trclib.command.CmdPidDrive;
 import trclib.command.CmdPurePursuitDrive;
@@ -50,6 +51,7 @@ public class FrcAuto implements TrcRobot.RobotMode
     //
     public enum AutoStrategy
     {
+        REEFSCAPE_AUTO,
         HYBRID_MODE_AUTO,
         PP_DRIVE,
         PID_DRIVE,
@@ -59,9 +61,9 @@ public class FrcAuto implements TrcRobot.RobotMode
 
     public enum AutoStartPos
     {
-        POS_1(0),
-        POS_2(1),
-        POS_3(2);
+        START_POSE_PROCESSOR(0),
+        START_POSE_CENTER(1),
+        START_POSE_FAR_SIDE(2);
         // The value can be used as index into arrays if necessary.
         public int value;
         AutoStartPos(int value)
@@ -69,6 +71,12 @@ public class FrcAuto implements TrcRobot.RobotMode
             this.value = value;
         }   //AutoStartPos
     }   //enum AutoStartPos
+
+    public enum StationSide
+    {
+        PROCESSOR,
+        FAR
+    }   //enum StationSide
 
     /**
      * This class encapsulates all user choices for autonomous mode from the smart dashboard.
@@ -84,21 +92,35 @@ public class FrcAuto implements TrcRobot.RobotMode
     public static class AutoChoices
     {
         // Smart dashboard keys for Autonomous choices.
-        private static final String DBKEY_AUTO_ALLIANCE = "Auto/Alliance";
-        private static final String DBKEY_AUTO_STRATEGY = "Auto/Strategy";
-        private static final String DBKEY_AUTO_START_POS = "Auto/StartPos";
-        private static final String DBKEY_AUTO_START_DELAY = "Auto/StartDelay";
-        private static final String DBKEY_AUTO_PATHFILE = "Auto/PathFile";
-        private static final String DBKEY_AUTO_X_DRIVE_DISTANCE = "Auto/XDriveDistance";
-        private static final String DBKEY_AUTO_Y_DRIVE_DISTANCE = "Auto/YDriveDistance";
-        private static final String DBKEY_AUTO_TURN_ANGLE = "Auto/TurnAngle";
-        private static final String DBKEY_AUTO_DRIVE_TIME = "Auto/DriveTime";
-        private static final String DBKEY_AUTO_DRIVE_POWER = "Auto/DrivePower";
+        private static final String DBKEY_AUTO_ALLIANCE = "Auto/Alliance";                  //Choices
+        private static final String DBKEY_AUTO_STRATEGY = "Auto/Strategy";                  //Choices
+        private static final String DBKEY_AUTO_START_POS = "Auto/StartPos";                 //Choices
+        private static final String DBKEY_AUTO_START_DELAY = "Auto/StartDelay";             //Number
+
+        private static final String DBKEY_AUTO_USE_VISION   = "Auto/UseVision";             //Boolean
+        private static final String DBKEY_AUTO_SCORE_PRELOAD = "Auto/ScorePreload";         //Boolean
+        private static final String DBKEY_AUTO_APRILTAG_ID = "Auto/AprilTagId";             //Number
+        private static final String DBKEY_AUTO_RELOCALIZE = "Auto/Relocalize";              //Boolean
+        private static final String DBKEY_AUTO_GO_TO_STATION = "Auto/GoToStation";          //Boolean
+        private static final String DBKEY_AUTO_STATION_SIDE = "Auto/StationSide";           //Choices
+        private static final String DBKEY_AUTO_STATION_PICKUP = "Auto/StationPickupCount";  //Number
+        private static final String DBKEY_AUTO_VISION_X_OFFSET = "Auto/VisionXOffset";      //Number
+        private static final String DBKEY_AUTO_VISION_Y_OFFSET = "Auto/VisionYOffset";      //Number
+
+        private static final String DBKEY_AUTO_PATHFILE = "Auto/PathFile";                  //String
+        private static final String DBKEY_AUTO_X_DRIVE_DISTANCE = "Auto/XDriveDistance";    //Number
+        private static final String DBKEY_AUTO_Y_DRIVE_DISTANCE = "Auto/YDriveDistance";    //Number
+        private static final String DBKEY_AUTO_TURN_ANGLE = "Auto/TurnAngle";               //Number
+        private static final String DBKEY_AUTO_DRIVE_TIME = "Auto/DriveTime";               //Number
+        private static final String DBKEY_AUTO_DRIVE_POWER = "Auto/DrivePower";             //Number
 
         private final FrcUserChoices userChoices = new FrcUserChoices();
+        // Choice menus
         private final FrcChoiceMenu<DriverStation.Alliance> allianceMenu;
         private final FrcChoiceMenu<AutoStrategy> autoStrategyMenu;
         private final FrcChoiceMenu<AutoStartPos> autoStartPosMenu;
+
+        private final FrcChoiceMenu<StationSide> stationSideChoiceMenu;
 
         public AutoChoices()
         {
@@ -108,6 +130,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             allianceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_ALLIANCE);
             autoStrategyMenu = new FrcChoiceMenu<>(DBKEY_AUTO_STRATEGY);
             autoStartPosMenu = new FrcChoiceMenu<>(DBKEY_AUTO_START_POS);
+            stationSideChoiceMenu = new FrcChoiceMenu<>(DBKEY_AUTO_STATION_SIDE);
             //
             // Populate autonomous mode choice menus.
             //
@@ -120,15 +143,19 @@ public class FrcAuto implements TrcRobot.RobotMode
             }
             else
             {
+                autoStrategyMenu.addChoice("Reefscape Auto", AutoStrategy.REEFSCAPE_AUTO);
                 autoStrategyMenu.addChoice("Pure Pursuit Drive", AutoStrategy.PP_DRIVE);
                 autoStrategyMenu.addChoice("PID Drive", AutoStrategy.PID_DRIVE);
                 autoStrategyMenu.addChoice("Timed Drive", AutoStrategy.TIMED_DRIVE);
             }
             autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, true, true);
 
-            autoStartPosMenu.addChoice("Start Position 1", AutoStartPos.POS_1, true, false);
-            autoStartPosMenu.addChoice("Start Position 2", AutoStartPos.POS_2);
-            autoStartPosMenu.addChoice("Start Position 3", AutoStartPos.POS_3, false, true);
+            autoStartPosMenu.addChoice("Processor Side", AutoStartPos.START_POSE_PROCESSOR);
+            autoStartPosMenu.addChoice("Far Side", AutoStartPos.START_POSE_FAR_SIDE);
+            autoStartPosMenu.addChoice("Center", AutoStartPos.START_POSE_CENTER, true, true);
+
+            stationSideChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR);
+            stationSideChoiceMenu.addChoice("Far Side", StationSide.FAR, true, true);
             //
             // Initialize dashboard with default choice values.
             //
@@ -136,6 +163,17 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addChoiceMenu(DBKEY_AUTO_STRATEGY, autoStrategyMenu);
             userChoices.addChoiceMenu(DBKEY_AUTO_START_POS, autoStartPosMenu);
             userChoices.addNumber(DBKEY_AUTO_START_DELAY, 0.0);
+
+            userChoices.addBoolean(DBKEY_AUTO_USE_VISION, true);
+            userChoices.addBoolean(DBKEY_AUTO_SCORE_PRELOAD, true);
+            userChoices.addNumber(DBKEY_AUTO_APRILTAG_ID, -1.0);
+            userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, true);
+            userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, false);
+            userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationSideChoiceMenu);
+            userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 0.0);
+            userChoices.addNumber(DBKEY_AUTO_VISION_X_OFFSET, 0.0);
+            userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, 0.0);
+
             userChoices.addString(DBKEY_AUTO_PATHFILE, "DrivePath.csv");
             userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 6.0);    // in feet
             userChoices.addNumber(DBKEY_AUTO_Y_DRIVE_DISTANCE, 6.0);    // in feet
@@ -169,6 +207,51 @@ public class FrcAuto implements TrcRobot.RobotMode
         {
             return userChoices.getUserNumber(DBKEY_AUTO_START_DELAY);
         }   //getStartDelay
+
+        public boolean useVision()
+        {
+            return userChoices.getUserBoolean(DBKEY_AUTO_USE_VISION);
+        }
+
+        public boolean scorePreload()
+        {
+            return userChoices.getUserBoolean(DBKEY_AUTO_SCORE_PRELOAD);
+        }
+
+        public int getAprilTagId()
+        {
+            return (int) userChoices.getUserNumber(DBKEY_AUTO_APRILTAG_ID);
+        }
+
+        public boolean getRelocalize()
+        {
+            return userChoices.getUserBoolean(DBKEY_AUTO_RELOCALIZE);
+        }
+
+        public boolean goToStation()
+        {
+            return userChoices.getUserBoolean(DBKEY_AUTO_GO_TO_STATION);
+        }
+
+        public StationSide getStationSide()
+        {
+            return stationSideChoiceMenu.getCurrentChoiceObject();
+        }
+
+        public int getStationPickupCount()
+        {
+            return (int) userChoices.getUserNumber(DBKEY_AUTO_STATION_PICKUP);
+        }
+
+        public double getVisionXOffset()
+        {
+            return userChoices.getUserNumber(DBKEY_AUTO_VISION_X_OFFSET);
+        }
+
+        public double getVisionYOffset()
+        {
+            return userChoices.getUserNumber(DBKEY_AUTO_VISION_Y_OFFSET);
+        }
 
         public String getPathFile()
         {
@@ -207,12 +290,24 @@ public class FrcAuto implements TrcRobot.RobotMode
                    "strategy=\"" + getStrategy() + "\" " +
                    "startPos=\"" + getStartPos() + "\" " +
                    "startDelay=" + getStartDelay() + " sec " +
+
+                   "useVision=\""  + useVision() + "\" " +
+                   "scorePreload=\"" + scorePreload() + "\" " +
+                   "aprilTagId=\"" + getAprilTagId() + "\" " +
+                   "relocalize=\"" + getRelocalize() + "\" " +
+                   "goToStation=\"" + goToStation() + "\" " +
+                   "stationSide=\"" + getStationSide() + "\" " +
+                   "stationPickupCount=" + getStationPickupCount() + " " +
+                   "visionXOffset=" + getVisionXOffset() + " " +
+                   "visionYOffset=" + getVisionYOffset() + " " +
+
                    "pathFile=\"" + getPathFile() + "\" " +
                    "xDistance=" + getXDriveDistance() + " ft " +
                    "yDistance=" + getYDriveDistance() + " ft " +
                    "turnDegrees=" + getTurnAngle() + " deg " +
                    "driveTime=" + getDriveTime() + " sec " +
                    "drivePower=" + getDrivePower();
+
         }   //toString
 
     }   //class AutoChoices
@@ -286,6 +381,21 @@ public class FrcAuto implements TrcRobot.RobotMode
         //
         switch (autoChoices.getStrategy())
         {
+            case REEFSCAPE_AUTO:
+                if (robot.robotDrive != null)
+                {
+                    autoCommand = new CmdReefscapeAuto(robot, autoChoices);
+                    // if (autoChoices.getStartPos() == AutoStartPos.START_POSE_CENTER)
+                    // {
+                    //     autoCommand = new CmdAutoMiddle(robot, autoChoices);
+                    // }
+                    // else
+                    // {
+                    //     autoCommand = new CmdReefscapeAuto(robot, autoChoices);
+                    // }
+                }
+                break;
+
             case HYBRID_MODE_AUTO:
                 if (robot.robotDrive != null && robot.robotDrive instanceof FrcSwerveDrive)
                 {
