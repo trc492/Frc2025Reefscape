@@ -834,6 +834,7 @@ public class Robot extends FrcRobotBase
         double xDelta = robotPose.x - robotEstimatedPose.x;
         double yDelta = robotPose.y - robotEstimatedPose.y;
         double error = TrcUtil.magnitude(xDelta, yDelta);
+        // TODO: Check if we need GUIDANCE_ERROR_THRESHOLD.
         if (error > PhotonVision.GUIDANCE_ERROR_THRESHOLD && error < 96.00)
         {
             robotDrive.driveBase.setFieldPosition(robotEstimatedPose, false);
@@ -917,6 +918,14 @@ public class Robot extends FrcRobotBase
         return adjustPoseByAlliance(pose.x, pose.y, pose.angle, alliance);
     }   //adjustPoseByAlliance
 
+    /**
+     * This method adjusts the given pose by the given x and y offsets.
+     *
+     * @param pose specifies the pose that needs adjustment.
+     * @param xOffset specifies the x offset.
+     * @param yOffset specifies the y offset.
+     * @return adjusted pose.
+     */
     public TrcPose2D adjustPoseByOffset(TrcPose2D pose, double xOffset, double yOffset)
     {
         return pose.addRelativePose(new TrcPose2D(xOffset, yOffset, 0.0));

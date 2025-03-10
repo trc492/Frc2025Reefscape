@@ -1,0 +1,559 @@
+Robot.robotStartMode_INFO [0.02716305] Sun Mar 09 14:30:41 PDT 2025: ***** TELEOP_MODE *****
+FrcTeleOp.startMode_INFO [0.101719255] Enabling FrontCam for AprilTagVision.
+FrcTeleOp.startMode_INFO [0.102757156] Enabling BackCam for AprilTagVision.
+FrcTeleOp.driverControllerButtonEvent_INFO [0.104307318] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [0.108882191] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [0.614122829] ##### button=Back, pressed=true
+Robot.cancelAll_INFO [0.620936383] Cancel all operations.
+Robot.zeroCalibrate_INFO [0.631783327] Zero calibrate all subsystems.
+TaskElevatorArm.zeroCalibrate_INFO [0.643410694] zeroCalibrate(owner=null, event=null)
+FrcTeleOp.operatorControllerButtonEvent_INFO [0.648023388] >>>>> Cancel All and Zero Calibrate
+FrcTeleOp.operatorControllerButtonEvent_INFO [0.756764667] ##### button=Back, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [2.435533807] controlMode: Position onTarget=true(35.419921875/35.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [2.615245039] ##### button=A, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [2.625294958] >>>>> Reset field forward heading (heading=171.12368270243547)
+FrcTeleOp.driverControllerButtonEvent_INFO [2.714630268] ##### button=A, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [3.277141203] ##### button=A, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [3.284109924] >>>>> Reset field forward heading (heading=182.6836955198183)
+FrcTeleOp.driverControllerButtonEvent_INFO [3.38072131] ##### button=A, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [3.562456961] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [3.580393102] >>>>> Normal Drive
+Elevator.motor.pidCtrlTask_INFO [4.294020067] Zero calibration done, event=(Elevator=CLEARED)
+Elevator.motor.pidCtrlTask_INFO [4.300724491] controlMode: Power onTarget=false(0.0/null), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [7.559239861] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [7.560974367] >>>>> Slow Drive
+TaskElevatorArm.stopSubsystems_INFO [8.588946472] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [8.617325231] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [8.66831997] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [8.972039057] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [9.026376392] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [9.433666124] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [9.555201729] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [9.682657558] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [9.71185729] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [10.362140117] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [10.425949188] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [11.124921037] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [11.18902475] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [11.403494945] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [11.435996833] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [11.530551834] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [11.588051856] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [11.682249116] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.079547895] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.128766094] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.205417594] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.25220097] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.31592119] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.348835051] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.456443447] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.50822231] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.580362509] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.610733921] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.659285822] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.726759756] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.761563031] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.825875313] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [12.864867938] Stopping subsystems.
+FrcTeleOp.driverControllerButtonEvent_INFO [12.948906024] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [12.953285142] >>>>> Normal Drive
+TaskElevatorArm.stopSubsystems_INFO [12.971458143] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [13.036596217] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [13.325258532] Stopping subsystems.
+FrcTeleOp.driverControllerButtonEvent_INFO [13.616882572] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [13.620294728] >>>>> Slow Drive
+TaskElevatorArm.stopSubsystems_INFO [14.033521529] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [14.137039067] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [14.212137069] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [14.491175267] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [14.539342702] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [14.599400045] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [14.822009949] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [14.85394014] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [15.143957878] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [15.273372349] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [15.30700499] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [16.146269839] Stopping subsystems.
+FrcTeleOp.driverControllerButtonEvent_INFO [16.165343456] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [16.171249318] >>>>> Normal Drive
+TaskElevatorArm.stopSubsystems_INFO [16.204115203] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [16.290094106] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [16.334384976] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [16.992596088] Stopping subsystems.
+FrcTeleOp.driverControllerButtonEvent_INFO [17.030729164] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [17.043417208] >>>>> Slow Drive
+TaskElevatorArm.stopSubsystems_INFO [17.073031821] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [18.257498953] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [18.33368745] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [18.37046419] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [18.437086991] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [18.471961013] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [18.687925668] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [18.74847157] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [19.138011211] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [19.242402044] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [19.297319055] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [19.393644118] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [19.742142694] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [19.751546139] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [20.102570482] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [20.178840349] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [20.877675062] Stopping subsystems.
+TaskElevatorArm.stopSubsystems_INFO [20.945526017] Stopping subsystems.
+FrcTeleOp.driverControllerButtonEvent_INFO [21.012000565] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [21.017697985] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [21.519445705] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [21.528907486] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [21.773344702] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [21.775275175] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [21.776940041] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [21.779043179] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [21.889798077] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [22.342689739] controlMode: Position onTarget=true(43.375988378757384/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [22.916900233] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.017718424] ##### button=DpadUp, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.122831957] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.172454367] ##### button=DpadUp, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [23.375187621] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [23.388095973] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.399980039] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.481123057] ##### button=DpadUp, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [23.657360322] controlMode: Position onTarget=true(-45.263671875/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [23.669017328] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [23.681131102] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.739268523] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.84033492] ##### button=DpadUp, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.459035551] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.478298658] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.511287191] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.517079259] >>>>> Cancel Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.76391555] ##### button=DpadDown, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.774064387] >>>>> Score Index Down: index=
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.916194] ##### button=DpadDown, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [26.912164344] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [26.915164501] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [27.422092702] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [27.43114237] >>>>> Stop Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [27.576884461] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [27.580791108] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [27.582821473] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [27.584615914] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [27.646215965] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [28.366110777] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [28.375915562] >>>>> Slow Drive
+Elevator.motor.pidCtrlTask_INFO [28.553974191] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [28.554114102] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [28.57904197] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.operatorControllerButtonEvent_INFO [29.261451881] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [29.413493084] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [30.731969345] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [31.395156866] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [31.597773521] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.363281548] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.36639705] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [32.774255734] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [32.775428411] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.082624337] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.083731035] >>>>> Stop Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.09231613] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.199850204] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [33.201547401] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [33.214697412] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.217408127] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.32270602] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [33.480664002] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [33.682507846] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [33.686578251] >>>>> Slow Drive
+CoralArm.motor.pidCtrlTask_INFO [35.196778183] controlMode: Position onTarget=true(-44.912109375/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [35.210372822] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [35.21534388] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.operatorControllerButtonEvent_INFO [35.584131276] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [35.586140787] >>>>> Auto Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [35.834829161] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [35.837070304] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [36.037235627] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [36.041144377] >>>>> Stop Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [36.138422495] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [36.139996302] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [36.142717578] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [36.143642933] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [36.244548036] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [36.70615669] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [36.707688029] >>>>> Slow Drive
+Elevator.motor.pidCtrlTask_INFO [37.088357343] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [37.103677746] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [37.106737187] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.429990149] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.634226389] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.736415439] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.888308834] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.938018014] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [38.757126827] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [38.759053609] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.469657338] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.519398313] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.525052187] >>>>> Stop Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.671448483] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [39.674298912] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [39.677365667] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.68919418] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.790465579] ##### button=Y, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [39.840301174] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [39.845382475] >>>>> Normal Drive
+Elevator.motor.pidCtrlTask_INFO [39.938625082] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+CoralArm.motor.pidCtrlTask_INFO [42.194728004] controlMode: Position onTarget=true(-45.791015625/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [42.209266495] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [42.219005525] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [42.345129012] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [42.446432049] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [44.435520739] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [44.447192936] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.355579485] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.35803138] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.812532526] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.823672844] >>>>> Cancel Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.062995309] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.070798951] >>>>> Auto Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [48.113261806] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [48.218085666] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.42077904] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.433990934] >>>>> Cancel Auto Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [48.62091725] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [48.623741072] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [56.758456945] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [56.759776915] >>>>> Slow Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [58.388846265] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [58.539066742] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [58.896198938] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [58.906684379] >>>>> Auto Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [59.100572497] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [59.110423089] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.251835945] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.256975979] >>>>> Stop Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.508372522] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [59.515696408] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [59.526947084] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.529858342] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.636986112] ##### button=X, pressed=false
+TaskElevatorArm.stopSubsystems_INFO [60.504096632] Stopping subsystems.
+Elevator.motor.pidCtrlTask_INFO [60.509067782] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [60.524279917] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [60.528968582] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [60.535701925] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [60.938330317] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [61.143193578] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [61.246345815] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [61.398612039] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [61.50063586] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.692002923] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.693860616] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [64.304799725] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [64.306899266] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.405748393] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.41594105] >>>>> Stop Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.435493368] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.533892562] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [64.541592492] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [64.55107222] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.554165217] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.621131195] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [64.816905686] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [65.397786029] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [65.406712033] >>>>> Slow Drive
+CoralArm.motor.pidCtrlTask_INFO [66.333157151] controlMode: Position onTarget=true(-45.52734375/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [66.334227886] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [66.348691445] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [66.985791741] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [67.088813762] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.47687337] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.485424058] >>>>> Auto Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [68.735957941] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [68.742390223] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.743855474] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.748786507] >>>>> Stop Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.91351432] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [68.915073886] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [68.916146767] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.917011611] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [69.073227047] ##### button=X, pressed=false
+Elevator.motor.pidCtrlTask_INFO [69.86796658] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [69.871474259] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [69.883618946] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [69.997365063] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [69.999525017] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.254149126] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.456674122] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.507769816] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.047751065] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.056973725] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [72.511136351] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [72.51943923] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.663132145] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.667890212] >>>>> Stop Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.718843693] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.917262464] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [72.920200276] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [72.92299281] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.925701651] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [73.019291141] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [73.179971571] controlMode: Position onTarget=true(43.47703194036716/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [73.812937382] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [73.821552081] >>>>> Slow Drive
+CoralArm.motor.pidCtrlTask_INFO [74.881527933] controlMode: Position onTarget=true(-45.87890625/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [74.882828024] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [74.89900921] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [74.954196249] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [74.959347304] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [78.055455835] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [78.05706405] >>>>> Slow Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [78.868188515] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [78.974004865] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [79.527462755] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [79.529142829] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [80.853581122] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [80.953169101] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [81.96801849] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [82.068815148] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [83.551500352] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [83.555754779] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [83.916903303] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [83.921900036] >>>>> Stop Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.070498584] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [84.080261992] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [84.09413372] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.098359728] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.161753234] ##### button=X, pressed=false
+Elevator.motor.pidCtrlTask_INFO [85.047782908] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [85.063830376] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [85.068827938] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [85.530147045] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [85.533869739] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [85.934430154] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [86.346480632] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [86.447338433] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.376892323] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.378995041] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [89.092530875] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [89.10420712] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.107963457] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.111910986] >>>>> Stop Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.122107022] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.290527745] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [89.295116381] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [89.307101351] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.311834971] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.392856575] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [89.536886189] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [90.674340354] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [90.676778263] >>>>> Slow Drive
+TaskElevatorArm.stopSubsystems_INFO [91.068674025] Stopping subsystems.
+CoralArm.motor.pidCtrlTask_INFO [91.070162069] controlMode: Position onTarget=true(-45.3515625/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [91.087376695] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.operatorControllerButtonEvent_INFO [93.330389151] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [93.33593698] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [93.43249026] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [93.438975828] >>>>> Cancel Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [94.405450688] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [94.41407278] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [94.766612793] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [94.775532769] >>>>> Stop Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [94.920013395] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [94.928954796] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.240958418] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [98.246003054] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [98.248988978] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.252019884] >>>>> Set Coral Score Position
+FrcTeleOp.driverControllerButtonEvent_INFO [98.299132268] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [98.305649713] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.352922466] ##### button=X, pressed=false
+Elevator.motor.pidCtrlTask_INFO [99.177374733] controlMode: Position onTarget=true(43.472821735754245/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [99.183502464] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [99.185609064] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.operatorControllerButtonEvent_INFO [100.511712597] ##### button=LeftBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [102.498808969] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [102.499970364] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [103.113177164] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [103.120792198] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.33132283] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.336191501] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [106.938694771] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [106.940204958] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.094179356] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.100049843] >>>>> Stop Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.1067095] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.518691116] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [107.521545873] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [107.523171843] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.524890464] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.622135542] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [107.766370029] controlMode: Position onTarget=true(43.47703194036716/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [108.938355822] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [108.940217248] >>>>> Slow Drive
+CoralArm.motor.pidCtrlTask_INFO [109.296327507] controlMode: Position onTarget=true(-45.615234375/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [109.319803461] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [109.320838092] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [111.948779925] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [112.049765077] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [112.761470891] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [112.762803336] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [113.166824079] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [113.176913504] >>>>> Slow Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [113.834171922] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [113.935296071] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [113.944716664] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [113.959650554] >>>>> Score Index Up: index=
+FrcTeleOp.operatorControllerButtonEvent_INFO [114.040405488] ##### button=DpadUp, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [114.713820288] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [114.862436361] ##### button=DpadUp, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [115.165951226] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [115.27066462] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [115.373791534] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [115.476227035] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [115.57919219] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [115.586372138] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [115.938904438] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [115.947394049] >>>>> Cancel Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [116.10178043] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [116.104367145] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [116.617831776] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [116.620087416] >>>>> Stop Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [116.822139381] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [116.824358795] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [117.938986066] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [118.04147672] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [118.959346779] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [118.965987844] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [119.37095208] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [119.37304341] >>>>> Stop Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [119.937193824] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [119.947150796] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=70.0), event=null)
+TaskElevatorArm.startAutoTask_INFO [119.956122608] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [119.958057435] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [120.039136692] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [120.190496966] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [120.191880478] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [121.156364909] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [121.563633694] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [121.664685537] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [121.871417255] ##### button=LeftBumper, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [121.877679296] controlMode: Position onTarget=true(154.248046875/155.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [121.973384843] ##### button=LeftBumper, pressed=true
+Elevator.motor.pidCtrlTask_INFO [122.520534238] controlMode: Position onTarget=true(69.87391568393241/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [122.522622052] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [122.527188954] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.operatorControllerButtonEvent_INFO [123.473154424] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [123.476782241] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [124.293255584] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [124.302746569] >>>>> Stop Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [124.343239898] ##### button=LeftBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [125.2190692] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [125.227695171] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [125.442367906] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [125.456262612] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,algaeArmPos=null,elevatorPos=43.5), event=null)
+TaskElevatorArm.startAutoTask_INFO [125.458792733] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [125.459746544] >>>>> Set Coral Station Pickup Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [125.609930313] ##### button=Y, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [125.76382612] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [125.765785679] >>>>> Slow Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [126.122497353] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [126.135643192] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [127.147219796] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [127.149874046] >>>>> Slow Drive
+Elevator.motor.pidCtrlTask_INFO [127.428494542] controlMode: Position onTarget=true(43.599126525041534/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [127.8189454] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [127.825331828] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [128.123826851] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [128.134640815] >>>>> Slow Drive
+CoralArm.motor.pidCtrlTask_INFO [128.518647226] controlMode: Position onTarget=true(-44.560546875/-45.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [128.520149455] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [128.536105664] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	algaeArmOwner=null
+	elevatorOwner=null
+FrcTeleOp.driverControllerButtonEvent_INFO [129.669437605] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [129.681487661] >>>>> Normal Drive
+FrcRobotBase.startCompetition_INFO [134.98984614] *** Transitioning from TELEOP_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [134.999207938] Cancel all operations.
+Robot.cancelAll_INFO [135.002524821] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [135.016104965] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.001108s (freq=902.678Hz, min=0.000000s, max=0.820340s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000092s
+[07]               UpdateTask=0.000625s
+[02]                StartMode=0.000000s
+[06]         PostPeriodicTask=0.000078s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=10.008297s
+[01]           RobotStartMode=0.000001s
+[05]                 Periodic=0.000238s
+[10]            RobotStopMode=0.000001s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.019080734] TrcWatchdogMgr: STANDALONE_TASK=1.4950228025477707E-4/0.9971938649968153
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.021432194] DriverController.buttonEventTask: PRE_PERIODIC_TASK=2.1804414786599006E-5/0.001724154495200235
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.023807737] OperatorController.buttonEventTask: PRE_PERIODIC_TASK=2.1201541433921747E-5/0.0017240536806718393
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.026189606] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.742346057571965E-5/0.010949305540710611
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.028326439] TrcMotor.odometryTask: STANDALONE_TASK=5.319201989068848E-4/6.008408083271333E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.030387326] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.006218763/38.27486512625
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.032766649] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=7.814237797246558E-6/0.01094929263694201
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.037284568] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=7.2843854470866366E-6/0.010949292006083994
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.039896442] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=7.9212630279854E-6/0.010949278887397879
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.042383855] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=1.207066375108639E-4/0.010949278703285244
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.044153403] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=9.093788468625065E-5/0.010949281609768815
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.046910415] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=9.009658162413961E-5/0.010949256267399014
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.049097288] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=9.584700663978308E-5/0.010949257162274907
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.051534137] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.002626548922108104/0.01146319081752755
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.053891362] TrcSwerveDriveBase.stopTask: STOP_TASK=8.418135E-4/38.274621764
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.059648692] purePursuitDrive.driveTask: POST_PERIODIC_TASK=0.018406979068965518/0.024461703836206897
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.061409835] LED: OUTPUT_TASK=3.055504011541002E-5/0.010949241663920464
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.06351797] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=3.9124867313240866E-4/0.010949229198595613
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.066137632] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=7.111209406611743E-6/0.01094923654298328
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.070105153] CoralGrabber.sensor.triggerTask: PRE_PERIODIC_TASK=5.775885279187817E-5/0.06006365164149746
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.073646923] AlgaeArm.motor.pidCtrlTask: OUTPUT_TASK=2.9063652944243606E-4/0.010949207160108455
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.076150511] AlgaeGrabber.motor.pidCtrlTask: OUTPUT_TASK=7.609193756952169E-6/0.010949213626112347
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.080678974] Elevator.motor.pidCtrlTask: OUTPUT_TASK=3.1474185112447423E-4/0.010949216037888005
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.082936684] Winch.motor.pidCtrlTask: OUTPUT_TASK=7.010149814035942E-6/0.010949221515103063
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.097081116] TaskElevatorArm: POST_PERIODIC_TASK=1.3127114152640851E-5/0.0014415354516952807
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.102502601] TaskAutoScoreCoral: POST_PERIODIC_TASK=3.239493784431138E-4/0.004971880961676647

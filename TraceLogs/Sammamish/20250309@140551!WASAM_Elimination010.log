@@ -1,0 +1,3 @@
+Robot.robotStartMode_INFO [0.137627857] Sun Mar 09 14:05:51 PDT 2025: ***** AUTO_MODE *****
+FrcAuto.startMode_INFO [0.194229336] <Info name="MatchInfo" date="Sun Mar 09 14:05:51 PDT 2025" event="WASAM" type="Elimination" match=10 replay=1 alliance="Blue" location=3 gameMsg="" />
+FrcAuto.startMode_INFO [0.221080349] <Info name="AutoChoices" alliance="Blue" strategy="PP_DRIVE" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="false" stationSide="FAR" stationPickupCount=0 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=6.0 ft yDistance=6.0 ft turnDegrees=90.0 deg driveTime=4.0 sec drivePower=4.0 />

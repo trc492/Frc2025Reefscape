@@ -1,0 +1,46 @@
+Robot.robotStartMode_INFO [0.15587415] Sat Mar 08 19:36:07 PST 2025: ***** AUTO_MODE *****
+FrcAuto.startMode_INFO [0.192575168] <Info name="MatchInfo" date="Sat Mar 08 19:36:07 PST 2025" event="WASAM" type="Qualification" match=48 replay=1 alliance="Blue" location=3 gameMsg="" />
+FrcAuto.startMode_INFO [0.197952167] <Info name="AutoChoices" alliance="Blue" strategy="PID_DRIVE" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="false" stationSide="FAR" stationPickupCount=0 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=6.0 ft yDistance=6.0 ft turnDegrees=90.0 deg driveTime=4.0 sec drivePower=4.0 />
+CmdPidDrive.start_INFO [0.208365544] delay=0.000,powerLimit=4.0,tunePidCoeff=null,path=[(x=72.000000,y=72.000000,angle=90.000000)]
+CmdPidDrive.cmdPeriodic_INFO [0.315035708] <Event name="StateInfo" time="0.314781682" tag="vvvvv" CmdPidDrive.state="DO_DELAY" />
+CmdPidDrive.cmdPeriodic_INFO [0.322924879] <Event name="StateInfo" time="0.322679763" tag="^^^^^" CmdPidDrive.state="DO_DELAY" RobotPose=(x=0.000000,y=0.000000,angle=0.003993) TargetPose=(x=72.005018,y=71.994982,angle=90.003993) />
+TaskElevatorArm.stopSubsystems_INFO [0.412841922] Stopping subsystems.
+FrcRobotBase.startCompetition_INFO [2.916681202] *** Transitioning from AUTO_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [2.937479508] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [2.987511284] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.000711s (freq=1406.370Hz, min=0.000000s, max=0.455814s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000057s
+[07]               UpdateTask=0.000488s
+[02]                StartMode=0.000000s
+[06]         PostPeriodicTask=0.000056s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=11.709479s
+[01]           RobotStartMode=0.000000s
+[05]                 Periodic=0.000058s
+[10]            RobotStopMode=0.000000s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.010973193] TrcWatchdogMgr: STANDALONE_TASK=1.803873125E-4/0.9986402429270834
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.013861159] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.1129639755590224E-5/0.010695368266752098
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.016896942] TrcMotor.odometryTask: STANDALONE_TASK=4.623988396081268E-4/5.614982476556056E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.025271415] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.0051666695/1.472850319
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.027929456] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=3.845801322289492E-6/0.010695360090313116
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.030711444] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.742418099765999E-6/0.010695359827470935
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.034214043] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.800255042157263E-6/0.010695359686197677
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.0384035] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=5.292313616610333E-6/0.010695359558574454
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.042260438] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=4.834935521013241E-6/0.010695361204542501
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.04600801] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=4.789267498653592E-6/0.010695362112931083
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.049362128] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=4.860853365027485E-6/0.010695353670071312
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.053248019] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.004153426995815899/0.011513021841004183
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.057073421] TrcSwerveDriveBase.stopTask: STOP_TASK=0.002336849/1.4712213575
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.060933036] pidDrive.driveTask: POST_PERIODIC_TASK=0.016599760661417322/0.01986188925984252
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.062804983] pidDrive.stopTask: STOP_TASK=0.003260908/0.0
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.067085201] LED: OUTPUT_TASK=2.7639249122546377E-5/0.010695350482423073
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.071161336] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=2.1621822350974932E-4/0.010695337281318476
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.073815205] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=6.259059331476323E-6/0.010695339310622097
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.077617486] AlgaeArm.motor.pidCtrlTask: OUTPUT_TASK=1.4408311756731662E-4/0.010695339164623955
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.082729013] AlgaeGrabber.motor.pidCtrlTask: OUTPUT_TASK=5.125112922694101E-6/0.010695327816827914
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.086875031] Elevator.motor.pidCtrlTask: OUTPUT_TASK=4.225907318341349E-6/0.010695327677239049
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.09074268] Winch.motor.pidCtrlTask: OUTPUT_TASK=3.9331360049024164E-6/0.010695327570537223
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [3.095357155] TaskElevatorArm: POST_PERIODIC_TASK=6.929888966427833E-6/7.077600645394371E-4

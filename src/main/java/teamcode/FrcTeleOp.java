@@ -22,7 +22,6 @@
 
 package teamcode;
 
-import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.AlgaeArm;
@@ -30,7 +29,6 @@ import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
 import teamcode.subsystems.Winch;
 import teamcode.vision.PhotonVision.PipelineType;
-import trclib.drivebase.TrcDriveBase;
 import trclib.drivebase.TrcSwerveDriveBase;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.pathdrive.TrcPose2D;

@@ -1,0 +1,77 @@
+Robot.robotStartMode_INFO [0.137247176] Sun Mar 09 12:46:43 PDT 2025: ***** AUTO_MODE *****
+FrcAuto.startMode_INFO [0.186431424] <Info name="MatchInfo" date="Sun Mar 09 12:46:43 PDT 2025" event="WASAM" type="Elimination" match=2 replay=1 alliance="Red" location=3 gameMsg="" />
+FrcAuto.startMode_INFO [0.210456966] <Info name="AutoChoices" alliance="Red" strategy="REEFSCAPE_AUTO" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="false" stationSide="FAR" stationPickupCount=0 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=6.0 ft yDistance=6.0 ft turnDegrees=90.0 deg driveTime=4.0 sec drivePower=4.0 />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.268325756] <Event name="StateInfo" time="0.265155321" tag="vvvvv" CmdReefscapeAuto.state="START" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.294316312] <Event name="StateInfo" time="0.293719559" tag="^^^^^" CmdReefscapeAuto.state="START" />
+TaskElevatorArm.stopSubsystems_INFO [0.338513501] Stopping subsystems.
+CmdReefscapeAuto.cmdPeriodic_INFO [0.3503541] <Event name="StateInfo" time="0.34808394" tag="vvvvv" CmdReefscapeAuto.state="DO_DELAY" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.359964729] ***** Do delay 7.0s.
+CmdReefscapeAuto.cmdPeriodic_INFO [0.392515957] <Event name="StateInfo" time="0.392259277" tag="^^^^^" CmdReefscapeAuto.state="DO_DELAY" />
+CmdReefscapeAuto.cmdPeriodic_INFO [7.369432309] <Event name="StateInfo" time="7.368655879" tag="vvvvv" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+CmdReefscapeAuto.cmdPeriodic_INFO [7.378101626] ***** Score Preload.
+TaskAutoScoreCoral.autoScoreCoral_INFO [7.382569157] autoScoreCoral(owner=null, taskParams=(useVision=true,aprilTagId=10,reefLevel=3,scoreRightSide=true,removeAlgae=false,relocalize=true,visionXOffset=0.0,visionYOffset=0.0), event=(CmdReefscapeAuto=SIGNALED))
+CmdReefscapeAuto.cmdPeriodic_INFO [7.388849235] <Event name="StateInfo" time="7.388328229" tag="^^^^^" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+TaskAutoScoreCoral.autoTask_INFO [7.390733648] <Event name="StateInfo" time="7.390442858" tag="vvvvv" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.setCoralScorePosition_INFO [7.40517521] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,algaeArmPos=null,elevatorPos=70.0), event=(TaskAutoScoreCoral.elevatorArmEvent=CLEARED))
+TaskAutoScoreCoral.runTaskState_INFO [7.410099183] ***** Using AprilTag Vision.
+TaskAutoScoreCoral.autoTask_INFO [7.437269745] <Event name="StateInfo" time="7.436271613" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.autoTask_INFO [7.443815471] <Event name="StateInfo" time="7.441728489" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.autoTask_INFO [7.451641717] <Event name="StateInfo" time="7.450535545" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.runTaskState_INFO [7.463664124] ***** Vision found AprilTag[10]: aprilTagPose=(x=31.059031,y=83.916341,angle=0.587605)
+Robot.relocalizeRobotByAprilTag_INFO [7.466590869] >>>>> Re-localize robot: pose=(x=-188.343422,y=391.518771,angle=-0.587605)
+TaskAutoScoreCoral.autoTask_INFO [7.476786651] <Event name="StateInfo" time="7.47654543" tag="vvvvv" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskAutoScoreCoral.runTaskState_INFO [7.483849943] ***** Approaching Reef: targetPose=(x=37.394601,y=67.850522,angle=0.587605)
+purePursuitDrive.start_INFO [7.54297075] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-188.343422,y=391.518771,angle=-0.587605),vel=0.0), Waypoint(simple=false,index=-1,timestep=1.0244011304153824,pose=(x=-174.014823,y=418.159975,angle=-0.358169),vel=92.19610173738442,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-151.646625,y=459.749224,angle=-0.000000),vel=0.0)])
+CoralArm.motor.pidCtrlTask_INFO [8.859325329] controlMode: Position onTarget=true(154.423828125/155.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+Elevator.motor.pidCtrlTask_INFO [9.86131676] controlMode: Position onTarget=true(69.86553136313835/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [9.880356555] Stopping subsystems.
+purePursuitDrive.xPosPid.isStalled_INFO [10.042345232] PID stalled (currTime=1.741549613234846E9, stallStartTime=1.7415496130340881E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [10.059885293] PID stalled (currTime=1.7415496132535555E9, stallStartTime=1.7415496112153196E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.turnPid.isStalled_INFO [10.067343734] PID stalled (currTime=1.7415496132574973E9, stallStartTime=1.7415496112153258E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.driveTask_INFO [10.073804474] Done: index=2/3, stalled=true, timeout=false, posOnTarget=false, headingOnTarget=false, robotPose=(x=-151.874782,y=458.112018,angle=-6.387604)
+purePursuitDrive.driveTask_INFO [10.086315744] Signal completion event (TaskAutoScoreCoral.driveEvent=CLEARED).
+TaskAutoScoreCoral.autoTask_INFO [10.090788598] <Event name="StateInfo" time="10.089597589" tag="vvvvv" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [11.112158036] <Event name="StateInfo" time="11.110964333" tag="vvvvv" TaskAutoScoreCoral.state="DONE" />
+TaskAutoScoreCoral.stopSubsystems_INFO [11.120440011] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [11.132108795] Canceling auto task operation.
+CmdReefscapeAuto.cmdPeriodic_INFO [11.136420142] <Event name="StateInfo" time="11.136150682" tag="vvvvv" CmdReefscapeAuto.state="DONE" />
+CmdReefscapeAuto.cmdPeriodic_INFO [11.140502927] <Event name="StateInfo" time="11.139781757" tag="^^^^^" CmdReefscapeAuto.state="DONE" />
+FrcRobotBase.startCompetition_INFO [14.986928151] *** Transitioning from AUTO_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [15.005795366] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [15.037654601] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.000782s (freq=1278.028Hz, min=0.000000s, max=0.819252s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000062s
+[07]               UpdateTask=0.000501s
+[02]                StartMode=0.000000s
+[06]         PostPeriodicTask=0.000064s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=11.585307s
+[01]           RobotStartMode=0.000001s
+[05]                 Periodic=0.000097s
+[10]            RobotStopMode=0.000000s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.060804565] TrcWatchdogMgr: STANDALONE_TASK=1.70789112E-4/0.99633920542
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.064486073] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.212337431869877E-5/0.010712462044933693
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.068904161] TrcMotor.odometryTask: STANDALONE_TASK=4.7317381218178566E-4/5.800794150270374E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.074761521] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.010253618/7.501058347
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.081098033] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=3.943389735227224E-6/0.010712412516972063
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.085070287] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.953695404025233E-6/0.010712412045788097
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.090439701] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.922428810504634E-6/0.010712429376373156
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.09417252] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=1.1064010127016822E-5/0.010712429074922761
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.102269952] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=8.647101394550525E-6/0.010712451345934348
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.105530774] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=8.467828792104699E-6/0.010712452502724738
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.108594538] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=8.897812272044627E-6/0.01071245485131946
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.113609036] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.0026823415725925927/0.010993984227407407
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.118293001] TrcSwerveDriveBase.stopTask: STOP_TASK=0.0010851355/7.5059653345
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.12449371] purePursuitDrive.driveTask: POST_PERIODIC_TASK=0.016964815276785714/0.021896025348214287
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.127945671] LED: OUTPUT_TASK=3.0315590680911315E-5/0.01071246132552452
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.132280069] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=2.2554096370344946E-4/0.01071243821902351
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.135518835] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=6.460637120302042E-6/0.010712441383559292
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.139558009] AlgaeArm.motor.pidCtrlTask: OUTPUT_TASK=1.561457811910074E-4/0.01071244103376523
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.144851496] AlgaeGrabber.motor.pidCtrlTask: OUTPUT_TASK=6.071302887296753E-6/0.010712429755244756
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.149535596] Elevator.motor.pidCtrlTask: OUTPUT_TASK=2.196404968038097E-5/0.010712429446136686
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.155061742] Winch.motor.pidCtrlTask: OUTPUT_TASK=4.476565079365079E-6/0.010712444997082798
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.15982067] TaskElevatorArm: POST_PERIODIC_TASK=7.568770450630302E-6/7.845527753062966E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.164740873] TaskAutoScoreCoral: POST_PERIODIC_TASK=2.2764815274151434E-4/0.004857268516971279
