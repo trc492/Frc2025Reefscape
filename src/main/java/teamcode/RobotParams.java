@@ -247,6 +247,11 @@ public class RobotParams
         /*ID22*/    new TrcPose2D(-130.32, 192.91, 60.0) //z=12.125
         };
 
+        public static final TrcPose2D PROCESSOR_SIDE_LOOKOUT_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0);
+        public static final TrcPose2D FAR_SIDE_LOOKOUT_BLUE =
+            new TrcPose2D(0.0, 0.0, 0.0);
+
         public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_BLUE =
             new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
         public static final TrcPose2D PROCESSOR_SCORE_CORAL_SIDE_BLUE =

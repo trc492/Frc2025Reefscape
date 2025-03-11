@@ -199,6 +199,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case GO_TO_CORAL_STATION:
                     if (goToStation)
                     {
+                        TrcPose2D intermediatePose = null;
                         // If we haven't already, determine the Coral Station AprilTag ID to look for.
                         // If we are fetching the 2nd Coral from the Station, we already determined the AprilTag ID
                         // last time.
@@ -208,39 +209,55 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             {
                                 stationAprilTagId =
                                     RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red? 0: 1];
+                                intermediatePose = RobotParams.Game.PROCESSOR_SIDE_LOOKOUT_BLUE;
                             }
                             else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
                             {
                                 stationAprilTagId =
                                     RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red? 0: 1];
+                                intermediatePose = RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE;
                             }
                             else
                             {
                                 stationAprilTagId =
                                     RobotParams.Game.APRILTAG_STATION[stationSide == StationSide.PROCESSOR? 0: 1]
                                                                      [alliance == Alliance.Red? 0: 1];
+                                intermediatePose = stationSide == StationSide.PROCESSOR?
+                                    RobotParams.Game.PROCESSOR_SIDE_LOOKOUT_BLUE:
+                                    RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE;
                             }
+
+                            intermediatePose = robot.adjustPoseByAlliance(intermediatePose, alliance);
                         }
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 0.0, -24.5);
-                        // Code Review: 5-in Y offset would go forward, wouldn't this clip the corner of the reef?
-                        // Also, this intermediate pose is only good for center start position, what about sides?
-                        // This may be too complicated to try doing intermediate pose relative to preload position.
-                        // I was thinking of determining absolute intermediate points.
-                        TrcPose2D preloadPose = FrcPhotonVision.getAprilTagFieldPose(preloadAprilTagId);
-                        TrcPose2D intermediatePose = robot.adjustPoseByOffset(preloadPose, stationSide == StationSide.FAR ? 77.0: -77.0, 5.0); // TODO: Tune these numbers
-                        intermediatePose.angle = 45.0; // TODO: determine in Teleop for both sides
+                        // // Code Review: 5-in Y offset would go forward, wouldn't this clip the corner of the reef?
+                        // // Also, this intermediate pose is only good for center start position, what about sides?
+                        // // This may be too complicated to try doing intermediate pose relative to preload position.
+                        // // I was thinking of determining absolute intermediate points.
+                        // TrcPose2D preloadPose = FrcPhotonVision.getAprilTagFieldPose(preloadAprilTagId);
+                        // TrcPose2D intermediatePose = robot.adjustPoseByOffset(preloadPose, stationSide == StationSide.FAR ? 77.0: -77.0, 5.0); // TODO: Tune these numbers
+                        // intermediatePose.angle = 45.0; // TODO: determine in Teleop for both sides
                         robot.globalTracer.traceInfo(
                             moduleName,
                             "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
                             ", AprilTagPose=" + aprilTagPose +
                             ", IntermediatePose=" + intermediatePose +
                             ", TargetPose=" + targetPose);
-                        robot.robotDrive.purePursuitDrive.start(
-                            null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
-                            robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
-                            intermediatePose, targetPose);
-                        sm.waitForSingleEvent(event, State.PICKUP_CORAL);
+                        if (intermediatePose != null)
+                        {
+                            // We are coming from scoring preload, so we need to have intermediate point to avoid the Reef.
+                            robot.robotDrive.purePursuitDrive.start(
+                                null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
+                                robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
+                                intermediatePose, targetPose);
+                                sm.waitForSingleEvent(event, State.PICKUP_CORAL);
+                        }
+                        else
+                        {
+                            // We are coming from the scoring a Station Coral, so we have a straight shot back to the station.
+                            sm.setState(State.PICKUP_CORAL);
+                        }
                     }
                     else
                     {
