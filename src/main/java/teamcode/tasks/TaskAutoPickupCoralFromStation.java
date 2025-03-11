@@ -189,7 +189,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         switch (state)
         {
             case START:
-                aprilTagId = -1;
+                aprilTagId = -1;    
                 aprilTagRelativePose = null;
                 if (robot.elevatorArmTask != null)
                 {
@@ -261,10 +261,10 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
 
             case APPROACH_STATION:
                 TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 0.0, 24.0);
-                tracer.traceInfo(moduleName, "***** Approaching Corl Station: targetPose=" + targetPose);
+                tracer.traceInfo(moduleName, "***** Approaching Coral Station: targetPose=" + targetPose);
                 driveEvent.clear();
                 // Code Review: This may be too slow, we have a long distance to go.
-                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
+                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.5);
                 robot.robotDrive.purePursuitDrive.start(
                     owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                     robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);

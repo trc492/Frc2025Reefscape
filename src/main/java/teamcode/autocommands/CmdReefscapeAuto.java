@@ -69,10 +69,12 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
     private int stationPickupCount;
     private double visionXOffset;
     private double visionYOffset;
+    private double startDelay = 7.0;
 
     private int reefAprilTagId = -1;
     private int stationAprilTagId = -1;
     private boolean scoreRightSide = true;
+    private int preloadAprilTagId;
 
     /**
      * Constructor: Create an instance of the object.
@@ -166,7 +168,6 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_PRELOAD:
                     if (autoChoices.scorePreload())
                     {
-                        int preloadAprilTagId;
 
                         robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
                         if (startPos == AutoStartPos.START_POSE_PROCESSOR)
@@ -219,7 +220,10 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         }
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
                         // Code Review: Need to figure out intermediate points and proper offset.
+                        TrcPose2D preloadPose = FrcPhotonVision.getAprilTagFieldPose(preloadAprilTagId);
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 0.0, -24.5);
+                        TrcPose2D intermediatePose = robot.adjustPoseByOffset(preloadPose, stationSide == StationSide.FAR ? 77.0: -77.0, 5.0); // TODO: Tune these numbers
+                        intermediatePose.angle = 45.0; // TODO: determine in Teleop for both sides
                         robot.globalTracer.traceInfo(
                             moduleName,
                             "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
@@ -228,7 +232,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         robot.robotDrive.purePursuitDrive.start(
                             null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
                             robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
-                            targetPose);
+                            intermediatePose, targetPose);
                         sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                     }
                     else

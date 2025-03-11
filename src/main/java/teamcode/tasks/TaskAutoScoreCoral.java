@@ -286,24 +286,26 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case APPROACH_REEF:
-                double xOffset = (taskParams.scoreRightSide? 6.5: -8.5) + taskParams.visionXOffset;
-                double yOffset = -16.0 + taskParams.visionYOffset;
+                double xOffset = (taskParams.scoreRightSide? 4.5: -9.5) + taskParams.visionXOffset; // 6.5: -8.5
+                double yOffset = -14.0 + taskParams.visionYOffset; //-14.0
                 TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, xOffset, yOffset);
 
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
                 driveEvent.clear();
                 robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
-                robot.robotDrive.purePursuitDrive.start(
-                    owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
-                    robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
+                if(!secondLook){
+                    robot.robotDrive.purePursuitDrive.start(
+                        owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
+                        robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
+                }
                 sm.addEvent(driveEvent);
                 if (robot.elevatorArmTask != null)
                 {
                     sm.addEvent(elevatorArmEvent);
                 }
-                secondLook = true;  // TODO: to enable secondLook, remove this line.
+                //secondLook = true;  // TODO: to enable secondLook, remove this line.
                 sm.waitForEvents(
-                    !secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
+                    !secondLook? State.FIND_REEF_APRILTAG: State.DONE, false, true);
                 secondLook = true;
                 break;
 
