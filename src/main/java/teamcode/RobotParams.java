@@ -169,8 +169,8 @@ public class RobotParams
         public static final String FIELD_ZERO_CAL_FILE          = TEAM_FOLDER_PATH + "/FieldZeroCalibration.txt";
         public static final double DASHBOARD_UPDATE_INTERVAL    = 0.1;      // in msec
         public static final String ROBOT_CODEBASE               = "Robot2025";
-        public static final double ROBOT_LENGTH                 = 34.5;
-        public static final double ROBOT_WIDTH                  = 34.5;
+        public static final double ROBOT_LENGTH                 = 35.5;
+        public static final double ROBOT_WIDTH                  = 35.5;
         // Robot Drive Parameters.
         public static final DriveMode DRIVE_MODE                = DriveMode.ArcadeMode;
         public static final DriveOrientation DRIVE_ORIENTATION  = DriveOrientation.FIELD;
@@ -189,7 +189,7 @@ public class RobotParams
         //
         // Robot starting positions.
         //
-        public static final double STARTPOS_BLUE_Y              = 297.5 - Robot.ROBOT_LENGTH / 2.0;
+        public static final double STARTPOS_BLUE_Y              = 297.5 - Robot.ROBOT_LENGTH / 2.0; // 279.75
         public static final double STARTPOS_BLUE_PROCESSOR_X    = -241.73;
         public static final double STARTPOS_BLUE_CENTER_X       = -Field.WIDTH / 2.0; // -158.5
         public static final double STARTPOS_BLUE_FAR_X          = -75.2;
@@ -248,9 +248,9 @@ public class RobotParams
         };
 
         public static final TrcPose2D PROCESSOR_SIDE_LOOKOUT_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0);
+            new TrcPose2D(-87.0, 250.0, -54.0);
         public static final TrcPose2D FAR_SIDE_LOOKOUT_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0);
+            new TrcPose2D(-230.0, 250.0, 126.0);
 
         public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_BLUE =
             new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
