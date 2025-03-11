@@ -48,6 +48,10 @@ public class LEDIndicator
         new TrcAddressableLED.Pattern("ReefLevel2", new FrcColor(63, 63, 0), RobotParams.HwConfig.NUM_LEDS/2);
     private static final TrcAddressableLED.Pattern reefLevel1Pattern =      // Yellow
         new TrcAddressableLED.Pattern("ReefLevel1", new FrcColor(63, 63, 0), RobotParams.HwConfig.NUM_LEDS/4);
+    private static final TrcAddressableLED.Pattern leftReefBranchPattern =  // Red
+        new TrcAddressableLED.Pattern("ReefLevel1", new FrcColor(63, 0, 0), RobotParams.HwConfig.NUM_LEDS/2);
+    private static final TrcAddressableLED.Pattern rightReefBranchPattern =  // Cyan
+        new TrcAddressableLED.Pattern("ReefLevel1", new FrcColor(0, 63, 63), RobotParams.HwConfig.NUM_LEDS/2);
     private static final TrcAddressableLED.Pattern robotOrientedPattern =   // Blue
         new TrcAddressableLED.Pattern("RobotOriented", new FrcColor(0, 0, 63), RobotParams.HwConfig.NUM_LEDS);
     private static final TrcAddressableLED.Pattern inverseOrientedPattern = // Magenta
@@ -107,10 +111,25 @@ public class LEDIndicator
         led.setPatternState(nominalPattern, true);
     }   //reset
 
+    /**
+     * This method sets the LED to indicate the reef level to score the coral.
+     *
+     * @param level specifies the reef score level (0-3: 0 being trough and 3 being highest level).
+     */
     public void setReefLevel(int level)
     {
         led.setPatternState(reefLevelPatterns[level], true, 0.5);
     }   //setReefLevel
+
+    /**
+     * This method sets the LED to indicate the left or right reef branch to score.
+     *
+     * @param rightBranch specifies true to score the right branch, false to score the left branch.
+     */
+    public void setReefBranch(boolean rightBranch)
+    {
+        led.setPatternState(rightBranch? rightReefBranchPattern: leftReefBranchPattern, true, 0.5);
+    }   //setReefBranch
 
     /**
      * This method sets the LED to indicate the drive orientation mode of the robot.
@@ -158,8 +177,7 @@ public class LEDIndicator
             switch (pipelineType)
             {
                 case APRILTAG:
-                    // led.setPatternState(aprilTagPattern, true, 0.5);
-                    if (Math.abs(objPose.angle) < PhotonVision.ONTARGET_THRESHOLD)
+                    if (Math.abs(Math.atan(objPose.x / objPose.y)) < PhotonVision.ONTARGET_THRESHOLD)
                     {
                         led.setPatternState(aprilTagLockedPattern, true, 0.5);
                     }

@@ -58,12 +58,13 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean scoreRightSide;
         boolean removeAlgae;
         boolean relocalize;
+        boolean alignOnly;
         double visionXOffset;
         double visionYOffset;
 
         TaskParams(
             boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide, boolean removeAlgae,
-            boolean relocalize, double visionXOffset, double visionYOffset)
+            boolean relocalize, boolean alignOnly, double visionXOffset, double visionYOffset)
         {
             this.useVision = useVision;
             this.aprilTagId = aprilTagId;
@@ -71,6 +72,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             this.scoreRightSide = scoreRightSide;
             this.removeAlgae = removeAlgae;
             this.relocalize = relocalize;
+            this.alignOnly = alignOnly;
             this.visionXOffset = visionXOffset;
             this.visionYOffset = visionYOffset;
         }   //TaskParams
@@ -83,6 +85,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                    ",scoreRightSide=" + scoreRightSide +
                    ",removeAlgae=" + removeAlgae +
                    ",relocalize=" + relocalize +
+                   ",alignOnly=" + alignOnly +
                    ",visionXOffset=" + visionXOffset +
                    ",visionYOffset=" + visionYOffset;
         }   //toString
@@ -123,14 +126,19 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      * @param scoreRightSide specifies true to score the coral on the right reef branch, false on the left.
      * @param removeAlgae specifies true to remove algae from the reef, false otherwise.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
+     * @param alignOnly specifies true to align the robot for scoring but don't score, false otherwise.
+     * @param visionXOffset specifies the X offset to add to the vision target accounting for end effector position.
+     * @param visionYOffset specifies the Y offset to add to the vision target accounting for end effector position.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
         String owner, boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide,
-        boolean removeAlgae, boolean relocalize, double visionXOffset, double visionYOffset, TrcEvent completionEvent)
+        boolean removeAlgae, boolean relocalize, boolean alignOnly, double visionXOffset, double visionYOffset,
+        TrcEvent completionEvent)
     {
         TaskParams taskParams = new TaskParams(
-            useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize, visionXOffset, visionYOffset);
+            useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize, alignOnly, visionXOffset,
+            visionYOffset);
         tracer.traceInfo(
             moduleName,
             "autoScoreCoral(owner=" + owner +
@@ -310,8 +318,15 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case SCORE_CORAL:
-                robot.coralGrabber.eject(owner, 1.0, scoreEvent);
-                sm.waitForSingleEvent(scoreEvent, State.DONE);
+                if (!taskParams.alignOnly)
+                {
+                    robot.coralGrabber.eject(owner, 1.0, scoreEvent);
+                    sm.waitForSingleEvent(scoreEvent, State.DONE);
+                }
+                else
+                {
+                    sm.setState(State.DONE);
+                }
                 break;
 
             default:

@@ -186,8 +186,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
                         }
                         robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, preloadAprilTagId, 3, true, false, relocalize,
-                            visionXOffset, visionYOffset, event);
+                            null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, visionXOffset,
+                            visionYOffset, event);
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     }
                     else
@@ -281,7 +281,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         }
                     }
                     robot.scoreCoralTask.autoScoreCoral(
-                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, 0.0, 0.0, event);
+                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.0, 0.0, event);
                     sm.waitForSingleEvent(event, stationPickupCount > 0? State.GO_TO_CORAL_STATION: State.DONE);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
