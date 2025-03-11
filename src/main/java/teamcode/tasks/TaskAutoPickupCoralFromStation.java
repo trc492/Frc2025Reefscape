@@ -189,7 +189,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         switch (state)
         {
             case START:
-                aprilTagId = -1;    
+                aprilTagId = -1;
                 aprilTagRelativePose = null;
                 if (robot.elevatorArmTask != null)
                 {

@@ -77,14 +77,9 @@ public class RobotParams
         public static final boolean useSubsystems               = true;
         public static final boolean useCoralArm                 = true;
         public static final boolean useCoralGrabber             = useCoralArm;
-        public static final boolean useAlgaeArm                 = false;
-        public static final boolean useAlgaeGrabber             = useAlgaeArm;
         public static final boolean useElevator                 = true;
         public static final boolean useElevatorArm              = true;
         public static final boolean useWinch                    = true;
-        // TODO: remove.
-        public static final boolean useIntake                   = false;
-        public static final boolean useIntakeDeployer           = false;
     }   //class Preferences
 
     /**
@@ -112,14 +107,9 @@ public class RobotParams
         public static final int CANID_RBSTEER_ENCODER           = 26;   // Blue
         // Subsystem Motor CAN IDs.
         public static final int CANID_CORALARM_MOTOR            = 7;    // Purple
-        public static final int CANID_ALGAEARM_MOTOR            = 8;    // Gray
         public static final int CANID_ELEVATOR_MOTOR            = 9;    // White
         public static final int CANID_CORALGRABBER_MOTOR        = 17;   // Purple
-        public static final int CANID_ALGAEGRABBER_MOTOR        = 18;   // Gray
         public static final int CANID_WINCH_MOTOR               = 19;   // White
-        // TODO: remove.
-        public static final int CANID_INTAKE_MOTOR              = 27;   // Purple
-        public static final int CANID_INTAKEDEPLOYER_MOTOR      = 28;   // Gray
         // Miscellaneous CAN IDs.
         public static final int CANID_PDP                       = 30;
         public static final int CANID_PCM                       = 31;
@@ -132,11 +122,8 @@ public class RobotParams
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
         public static final int DIO_CORAL_GRABBER_SENSOR        = 0;
-        public static final int DIO_ALGAE_GRABBER_SENSOR        = 1;
         public static final int DIO_ELEVATOR_MID_LIMIT          = 2;
         public static final int DIO_WINCH_LOWER_LIMIT           = 3;
-        // TODO: remove.
-        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
         // PWM channels.
         public static final int NUM_LEDS                        = 30;
         public static final int PWM_CHANNEL_LED                 = 0;

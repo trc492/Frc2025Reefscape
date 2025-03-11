@@ -48,17 +48,12 @@ import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.CoralGrabber;
-import teamcode.subsystems.IntakeDeployer;
 import teamcode.subsystems.Elevator;
 import teamcode.subsystems.Winch;
 import teamcode.tasks.TaskAutoClimb;
-import teamcode.tasks.TaskAutoPickupCoralFromGround;
 import teamcode.tasks.TaskAutoPickupCoralFromStation;
 import teamcode.tasks.TaskAutoScoreCoral;
 import teamcode.tasks.TaskElevatorArm;
-import teamcode.subsystems.AlgaeArm;
-import teamcode.subsystems.AlgaeGrabber;
-import teamcode.subsystems.Intake;
 import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
@@ -73,7 +68,6 @@ import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
-import trclib.subsystem.TrcIntake;
 import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
 import trclib.timer.TrcTimer;
@@ -118,11 +112,7 @@ public class Robot extends FrcRobotBase
     // Other subsystems.
     //
     public TrcMotorGrabber coralGrabber;
-    public TrcMotorGrabber algaeGrabber;
     public TrcMotor winch;
-    // TODO: Remove
-    public TrcIntake intake;
-    public TrcMotor intakeDeployer;
     //
     // Auto-Assists.
     //
@@ -130,7 +120,6 @@ public class Robot extends FrcRobotBase
     public TaskAutoScoreCoral scoreCoralTask;
     public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
     public TaskAutoClimb climbTask;
-    public TaskAutoPickupCoralFromGround pickupCoralFromGroundTask;
 
     /**
      * Constructor: Create an instance of the object.
@@ -235,7 +224,7 @@ public class Robot extends FrcRobotBase
         {
             if (RobotParams.Preferences.useSubsystems)
             {
-                TrcMotor coralArm = null, algaeArm = null, elevator = null;
+                TrcMotor coralArm = null, elevator = null;
                 // Create subsystems.
                 if (RobotParams.Preferences.useCoralArm)
                 {
@@ -245,16 +234,6 @@ public class Robot extends FrcRobotBase
                 if (RobotParams.Preferences.useCoralGrabber)
                 {
                     coralGrabber = new CoralGrabber().getMotorGrabber();
-                }
-
-                if (RobotParams.Preferences.useAlgaeArm)
-                {
-                    algaeArm = new AlgaeArm().getArmMotor();
-                }
-
-                if (RobotParams.Preferences.useAlgaeGrabber)
-                {
-                    algaeGrabber = new AlgaeGrabber().getMotorGrabber();
                 }
 
                 if (RobotParams.Preferences.useElevator)
@@ -267,21 +246,10 @@ public class Robot extends FrcRobotBase
                     winch = new Winch().getWinchMotor();
                 }
 
-                // TODO: Remove
-                if (RobotParams.Preferences.useIntake)
-                {
-                    intake = new Intake().getIntake();
-                }
-
-                if (RobotParams.Preferences.useIntakeDeployer)
-                {
-                    intakeDeployer = new IntakeDeployer().getDeployer();
-                }
-
                 // Create autotasks.
-                // To create elevatorArmTask, elevator must exist but coralArm and algaeArm are optional.
+                // To create elevatorArmTask, elevator must exist but coralArm is optional.
                 elevatorArmTask = RobotParams.Preferences.useElevatorArm && elevator != null?
-                    new TaskElevatorArm(coralArm, algaeArm, elevator): null;
+                    new TaskElevatorArm(coralArm, elevator): null;
                 if (elevatorArmTask != null)
                 {
                     elevatorArmTask.setStateTracingEnabled(false);

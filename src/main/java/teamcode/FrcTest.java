@@ -33,7 +33,6 @@ import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcUserChoices;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision;
-import teamcode.subsystems.AlgaeArm;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
 import teamcode.vision.PhotonVision.PipelineType;
@@ -640,65 +639,7 @@ public class FrcTest extends FrcTeleOp
         switch (button)
         {
             case A:
-                if (robot.algaeGrabber!= null)
-                {
-                    if (pressed)
-                    {
-                        if (operatorAltFunc)
-                        {
-                            robot.algaeGrabber.intake(0.0, null);
-                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Algae Intake");
-                        }
-                        else
-                        {
-                            robot.algaeGrabber.autoIntake(null);
-                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
-                        }
-                    }
-                    else if (robot.algaeGrabber.isAutoActive())
-                    {
-                        robot.algaeGrabber.cancel();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Intake");
-                    }
-                    else
-                    {
-                        robot.algaeGrabber.stop();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
-                    }
-                    passToTeleOp = false;
-                }
-                break;
-
             case B:
-                if (robot.algaeGrabber!= null)
-                {
-                    if (pressed)
-                    {
-                        if (operatorAltFunc)
-                        {
-                            robot.algaeGrabber.eject(0.0, null);
-                            robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Algae Eject");
-                        }
-                        else
-                        {
-                            robot.algaeGrabber.autoEject(null, 1.0, null, 0.0);
-                            robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Eject");
-                        }
-                    }
-                    else if (robot.algaeGrabber.isAutoActive())
-                    {
-                        robot.algaeGrabber.cancel();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Eject");
-                    }
-                    else
-                    {
-                        robot.algaeGrabber.stop();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Eject");
-                    }
-                    passToTeleOp = false;
-                }
-                break;
-
             case X:
             case Y:
             case LeftBumper:
@@ -752,51 +693,7 @@ public class FrcTest extends FrcTeleOp
                 break;
 
             case DpadLeft:
-                if (robot.elevatorArmTask != null && robot.elevatorArmTask.algaeArm != null)
-                {
-                    if (pressed)
-                    {
-                        if (operatorAltFunc)
-                        {
-                            robot.elevatorArmTask.algaeArm.setPower(-0.3);
-                        }
-                        else
-                        {
-                            robot.elevatorArmTask.algaeArm.setPidPower(
-                                -0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
-                        }
-                    }
-                    else
-                    {
-                        robot.elevatorArmTask.algaeArm.cancel();
-                    }
-                    passToTeleOp = false;
-                }
-                break;
-
             case DpadRight:
-            if (robot.elevatorArmTask != null && robot.elevatorArmTask.algaeArm != null)
-            {
-                if (pressed)
-                {
-                    if (operatorAltFunc)
-                    {
-                        robot.elevatorArmTask.algaeArm.setPower(0.3);
-                    }
-                    else
-                    {
-                        robot.elevatorArmTask.algaeArm.setPidPower(
-                            0.3, AlgaeArm.Params.MIN_POS, AlgaeArm.Params.MAX_POS, true);
-                    }
-                }
-                else
-                {
-                    robot.elevatorArmTask.algaeArm.cancel();
-                }
-                passToTeleOp = false;
-            }
-                break;
-
             case Back:
             case Start:
             default:

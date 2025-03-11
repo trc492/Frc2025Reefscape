@@ -69,7 +69,6 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
     private int stationPickupCount;
     private double visionXOffset;
     private double visionYOffset;
-    private double startDelay = 7.0;
 
     private int reefAprilTagId = -1;
     private int stationAprilTagId = -1;
@@ -142,6 +141,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case START:
                     // Set robot location according to auto choices.
                     robot.setRobotStartPosition();
+                    // Retrieve auto choice options.
                     startPos = autoChoices.getStartPos();
                     alliance = autoChoices.getAlliance();
                     useVision = autoChoices.useVision();
@@ -151,7 +151,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     stationPickupCount = autoChoices.getStationPickupCount();
                     visionXOffset = autoChoices.getVisionXOffset();
                     visionYOffset = autoChoices.getVisionYOffset();
-
+                    // Do delay if necessary.
                     double startDelay = autoChoices.getStartDelay();
                     if (startDelay > 0.0)
                     {
@@ -168,8 +168,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_PRELOAD:
                     if (autoChoices.scorePreload())
                     {
-
                         robot.globalTracer.traceInfo(moduleName, "***** Score Preload.");
+                        // Determine the AprilTagId to look for.
                         if (startPos == AutoStartPos.START_POSE_PROCESSOR)
                         {
                             preloadAprilTagId =
@@ -199,6 +199,9 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case GO_TO_CORAL_STATION:
                     if (goToStation)
                     {
+                        // If we haven't already, determine the Coral Station AprilTag ID to look for.
+                        // If we are fetching the 2nd Coral from the Station, we already determined the AprilTag ID
+                        // last time.
                         if (stationAprilTagId == -1)
                         {
                             if (startPos == AutoStartPos.START_POSE_PROCESSOR)
@@ -219,15 +222,19 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             }
                         }
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
-                        // Code Review: Need to figure out intermediate points and proper offset.
-                        TrcPose2D preloadPose = FrcPhotonVision.getAprilTagFieldPose(preloadAprilTagId);
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 0.0, -24.5);
+                        // Code Review: 5-in Y offset would go forward, wouldn't this clip the corner of the reef?
+                        // Also, this intermediate pose is only good for center start position, what about sides?
+                        // This may be too complicated to try doing intermediate pose relative to preload position.
+                        // I was thinking of determining absolute intermediate points.
+                        TrcPose2D preloadPose = FrcPhotonVision.getAprilTagFieldPose(preloadAprilTagId);
                         TrcPose2D intermediatePose = robot.adjustPoseByOffset(preloadPose, stationSide == StationSide.FAR ? 77.0: -77.0, 5.0); // TODO: Tune these numbers
                         intermediatePose.angle = 45.0; // TODO: determine in Teleop for both sides
                         robot.globalTracer.traceInfo(
                             moduleName,
                             "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
                             ", AprilTagPose=" + aprilTagPose +
+                            ", IntermediatePose=" + intermediatePose +
                             ", TargetPose=" + targetPose);
                         robot.robotDrive.purePursuitDrive.start(
                             null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
@@ -237,23 +244,30 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     }
                     else
                     {
+                        // Not going to the coral station, we are done.
                         sm.setState(State.DONE);
                     }
                     break;
 
                 case PICKUP_CORAL:
+                    // Check if we need to pick up a Coral from the Station.
                     if (stationPickupCount > 0)
                     {
-                        robot.pickupCoralFromGroundTask.autoPickupCoral(null, useVision, true, event);
+                        robot.pickupCoralFromStationTask.autoPickupCoral(
+                            null, useVision, stationAprilTagId, relocalize, event);
                         sm.waitForSingleEvent(event, State.SCORE_CORAL);
                     }
                     else
                     {
+                        // No more Coral to pick up, we are done.
                         sm.setState(State.DONE);
                     }
                     break;
 
                 case SCORE_CORAL:
+                    // If we haven't already, determine the Reef AprilTag ID to look for.
+                    // If we are scoring the 2nd Coral from the Station, we already determined the AprilTag ID
+                    // last time.
                     if (reefAprilTagId == -1)
                     {
                         if (startPos == AutoStartPos.START_POSE_PROCESSOR)
@@ -281,7 +295,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         }
                     }
                     robot.scoreCoralTask.autoScoreCoral(
-                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.0, 0.0, event);
+                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.0, 0.0,
+                        event);
                     sm.waitForSingleEvent(event, stationPickupCount > 0? State.GO_TO_CORAL_STATION: State.DONE);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;

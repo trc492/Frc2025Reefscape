@@ -24,7 +24,6 @@ package teamcode;
 
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
-import teamcode.subsystems.AlgaeArm;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
 import teamcode.subsystems.Winch;
@@ -55,10 +54,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
     private double prevCoralArmPower = 0.0;
-    private double prevAlgaeArmPower = 0.0;
     private double prevElevatorPower = 0.0;
     private double prevWinchPower = 0.0;
-    // private boolean algaeGrabberActive = false;
     private int scoreIndex = 3;
 
     /**
@@ -265,20 +262,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                                 robot.elevatorArmTask.setElevatorPidPower(null, power);
                             }
                             prevElevatorPower = power;
-                        }
-
-                        power = robot.operatorController.getTrigger(true) * AlgaeArm.Params.POWER_LIMIT;
-                        if (power != prevAlgaeArmPower)
-                        {
-                            if (operatorAltFunc)
-                            {
-                                robot.elevatorArmTask.setAlgaeArmPower(null, power);
-                            }
-                            else
-                            {
-                                robot.elevatorArmTask.setAlgaeArmPidPower(null, power);
-                            }
-                            prevAlgaeArmPower = power;
                         }
                     }
 
@@ -593,43 +576,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case RightBumper:
-                if (robot.algaeGrabber != null)
-                {
-                    if (pressed)
-                    {
-                        robot.algaeGrabber.autoIntake(null, 0.0, 0.2, null, 0.0);
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
-                    }
-                    else if (robot.algaeGrabber.isAutoActive())
-                    {
-                        robot.algaeGrabber.cancel();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Intake");
-                    }
-                    else
-                    {
-                        robot.algaeGrabber.stop();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
-                    }
-                }
-                // if (robot.algaeGrabber != null && pressed)
-                // {
-                //     algaeGrabberActive = !algaeGrabberActive;
-                //     if (algaeGrabberActive)
-                //     {
-                //         robot.algaeGrabber.autoIntake(null);
-                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Algae Intake");
-                //     }
-                //     else if (robot.algaeGrabber.isAutoActive())
-                //     {
-                //         robot.algaeGrabber.cancel();
-                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Algae Intake");
-                //     }
-                //     else
-                //     {
-                //         robot.algaeGrabber.stop();
-                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Algae Intake");
-                //     }
-                // }
                 break;
 
             case DpadUp:

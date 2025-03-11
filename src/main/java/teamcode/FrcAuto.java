@@ -175,11 +175,11 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, 0.0);
 
             userChoices.addString(DBKEY_AUTO_PATHFILE, "DrivePath.csv");
-            userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 6.0);    // in feet
-            userChoices.addNumber(DBKEY_AUTO_Y_DRIVE_DISTANCE, 6.0);    // in feet
-            userChoices.addNumber(DBKEY_AUTO_TURN_ANGLE, 90.0);         // in degrees
-            userChoices.addNumber(DBKEY_AUTO_DRIVE_TIME, 4.0);          // in seconds
-            userChoices.addNumber(DBKEY_AUTO_DRIVE_POWER, 0.5);
+            userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 0.0);    // in feet
+            userChoices.addNumber(DBKEY_AUTO_Y_DRIVE_DISTANCE, 0.0);    // in feet
+            userChoices.addNumber(DBKEY_AUTO_TURN_ANGLE, 0.0);          // in degrees
+            userChoices.addNumber(DBKEY_AUTO_DRIVE_TIME, 0.0);          // in seconds
+            userChoices.addNumber(DBKEY_AUTO_DRIVE_POWER, 0.0);
         }   //AutoChoices
 
         //

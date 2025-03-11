@@ -301,19 +301,20 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
                 driveEvent.clear();
                 robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
-                if(!secondLook){
+                if (!secondLook)
+                {
                     robot.robotDrive.purePursuitDrive.start(
                         owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                         robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
+                    sm.addEvent(driveEvent);
                 }
-                sm.addEvent(driveEvent);
+
                 if (robot.elevatorArmTask != null)
                 {
                     sm.addEvent(elevatorArmEvent);
                 }
-                //secondLook = true;  // TODO: to enable secondLook, remove this line.
                 sm.waitForEvents(
-                    !secondLook? State.FIND_REEF_APRILTAG: State.DONE, false, true);
+                    !secondLook? State.FIND_REEF_APRILTAG: State.DONE/*SCORE_CORAL*/, false, true);
                 secondLook = true;
                 break;
 
