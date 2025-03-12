@@ -367,7 +367,6 @@ public class RobotBase
             robotMaxAcceleration = 6935.0;     // inch/sec sq
             robotMaxDeceleration = robotMaxAcceleration;
             robotMaxTurnRate = 478.0;          // degree/sec
-
             profiledMaxVelocity = 110.0;       // inch/sec
             profiledMaxAcceleration = 200.0;  // inch/sec sq
             profiledMaxDeceleration = 90.0;

@@ -231,14 +231,10 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
 
                             intermediatePose = robot.adjustPoseByAlliance(intermediatePose, alliance);
                         }
+
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 20.0, -30.0);
                         targetPose.angle = intermediatePose.angle;
-
-                        // TrcPose2D preloadPose = FrcPhotonVision.getAprilTagFieldPose(preloadAprilTagId);
-                        // TrcPose2D intermediatePose = robot.adjustPoseByOffset(preloadPose, stationSide == StationSide.FAR ? 77.0: -77.0, 5.0); // TODO: Tune these numbers
-                        // intermediatePose.angle = 45.0; // TODO: determine in Teleop for both sides
-
                         robot.globalTracer.traceInfo(
                             moduleName,
                             "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
