@@ -370,15 +370,15 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Y:
-                // if (robot.pickupCoralFromStationTask != null && pressed)
-                // {
-                //     robot.pickupCoralFromStationTask.autoPickupCoral(
-                //         moduleName, true, -1, false, null);
-                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-pickup Coral");
-                // }
-                if(pressed && robot.winch != null){
-                    robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
+                if (robot.pickupCoralFromStationTask != null && pressed)
+                {
+                    robot.pickupCoralFromStationTask.autoPickupCoral(
+                        moduleName, true, -1, false, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-pickup Coral");
                 }
+                // if(pressed && robot.winch != null){
+                //     robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
+                // }
                 break;  
 
             case LeftBumper:

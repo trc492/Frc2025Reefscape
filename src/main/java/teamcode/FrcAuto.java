@@ -154,8 +154,8 @@ public class FrcAuto implements TrcRobot.RobotMode
             autoStartPosMenu.addChoice("Far Side", AutoStartPos.START_POSE_FAR_SIDE);
             autoStartPosMenu.addChoice("Center", AutoStartPos.START_POSE_CENTER, true, true);
 
-            stationSideChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR);
-            stationSideChoiceMenu.addChoice("Far Side", StationSide.FAR, true, true);
+            stationSideChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR, true, false);
+            stationSideChoiceMenu.addChoice("Far Side", StationSide.FAR, false, true);
             //
             // Initialize dashboard with default choice values.
             //
@@ -168,11 +168,11 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addBoolean(DBKEY_AUTO_SCORE_PRELOAD, true);
             userChoices.addNumber(DBKEY_AUTO_APRILTAG_ID, -1.0);
             userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, true);
-            userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, false);
+            userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, true);
             userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationSideChoiceMenu);
-            userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 0.0);
+            userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 1.0);
             userChoices.addNumber(DBKEY_AUTO_VISION_X_OFFSET, 0.0);
-            userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, 0.0);
+            userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, -12.0);
 
             userChoices.addString(DBKEY_AUTO_PATHFILE, "DrivePath.csv");
             userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 0.0);    // in feet

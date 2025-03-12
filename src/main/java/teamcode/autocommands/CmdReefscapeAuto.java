@@ -232,20 +232,20 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             intermediatePose = robot.adjustPoseByAlliance(intermediatePose, alliance);
                         }
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
-                        TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 0.0, -24.5);
-                        // // Code Review: 5-in Y offset would go forward, wouldn't this clip the corner of the reef?
-                        // // Also, this intermediate pose is only good for center start position, what about sides?
-                        // // This may be too complicated to try doing intermediate pose relative to preload position.
-                        // // I was thinking of determining absolute intermediate points.
+                        TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 20.0, -30.0);
+                        targetPose.angle = intermediatePose.angle;
+
                         // TrcPose2D preloadPose = FrcPhotonVision.getAprilTagFieldPose(preloadAprilTagId);
                         // TrcPose2D intermediatePose = robot.adjustPoseByOffset(preloadPose, stationSide == StationSide.FAR ? 77.0: -77.0, 5.0); // TODO: Tune these numbers
                         // intermediatePose.angle = 45.0; // TODO: determine in Teleop for both sides
+
                         robot.globalTracer.traceInfo(
                             moduleName,
                             "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
                             ", AprilTagPose=" + aprilTagPose +
                             ", IntermediatePose=" + intermediatePose +
                             ", TargetPose=" + targetPose);
+
                         if (intermediatePose != null)
                         {
                             // We are coming from scoring preload, so we need to have intermediate point to avoid the Reef.

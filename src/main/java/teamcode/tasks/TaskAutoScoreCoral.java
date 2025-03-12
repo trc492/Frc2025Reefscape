@@ -285,7 +285,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 }
                 else if (visionExpiredTime == null)
                 {
-                    visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
+                    visionExpiredTime = TrcTimer.getCurrentTime() + 5.0;
                 }
                 else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
                 {

@@ -368,7 +368,6 @@ public class RobotBase
             robotMaxDeceleration = robotMaxAcceleration;
             robotMaxTurnRate = 478.0;          // degree/sec
 
-
             profiledMaxVelocity = 110.0;       // inch/sec
             profiledMaxAcceleration = 200.0;  // inch/sec sq
             profiledMaxDeceleration = 90.0;
@@ -380,7 +379,7 @@ public class RobotBase
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
             xDriveMaxPidRampRate = yDriveMaxPidRampRate = 0.5;  // %power per sec
             turnPidCoeffs = new PidCoefficients(0.0044, 0.0, 0.0, 0.0, 0.0);
-            turnPidPowerLimit = 1.0;
+            turnPidPowerLimit = 0.5;
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
             pidStallDetectionEnabled = true;
