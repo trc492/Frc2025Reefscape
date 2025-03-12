@@ -58,7 +58,7 @@ public class CoralArm extends TrcSubsystem
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
-        public static final double ZERO_OFFSET                  = 1925.0;   //encoder reading at 0-deg
+        public static final double ZERO_OFFSET                  = 1924.0;   //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 0.5;
 
         public static final double MIN_POS                      = -47.0;
@@ -80,7 +80,7 @@ public class CoralArm extends TrcSubsystem
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.03, 0.0, 0.001, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.035, 0.0, 0.001, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 1.0;
         public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
     }   //class Params
