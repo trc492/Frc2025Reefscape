@@ -64,6 +64,7 @@ public class CoralArm extends TrcSubsystem
         public static final double MIN_POS                      = -47.0;
         public static final double MAX_POS                      = 188.3;
         public static final double TURTLE_POS                   = 15.0;
+        public static final double TURTLE_DELAY                 = 0.5;
         public static final double CLIMB_POS                    = 45.0;
         public static final double SAFE_ZONE_POS                = 35.0;
         public static final double STATION_PICKUP_POS           = -45;//TODO
@@ -155,7 +156,7 @@ public class CoralArm extends TrcSubsystem
     @Override
     public void resetState()
     {
-        coralArmMotor.setPosition(Params.TURTLE_POS);
+        coralArmMotor.setPosition(Params.TURTLE_DELAY, Params.TURTLE_POS, true, Params.POWER_LIMIT);
     }   //resetState
 
     /**

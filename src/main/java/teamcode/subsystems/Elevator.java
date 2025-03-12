@@ -145,7 +145,7 @@ public class Elevator extends TrcSubsystem
     @Override
     public void resetState()
     {
-        elevatorMotor.setPosition(Params.TURTLE_POS);
+        elevatorMotor.setPosition(0.0, Params.TURTLE_POS, true, Params.POWER_LIMIT);
     }   //resetState
 
     /**
