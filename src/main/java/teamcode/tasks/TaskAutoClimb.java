@@ -62,7 +62,7 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
     }   //TaskAutoClimb
 
     /**
-     * This method deploys the climber.
+     * This method deploys the climber by zero calibrating it and extending it out.
      *
      * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
@@ -182,7 +182,7 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
                 break;
 
             case CLIMB:
-                robot.winch.setPosition(owner, 0.0, Winch.Params.CLIMB_POS, true, 1.0, winchEvent, 0.0);
+                robot.winch.setPosition(owner, 0.0, Winch.Params.CLIMB_POS, true, 0.5, winchEvent, 0.0);
                 sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;
 

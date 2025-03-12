@@ -358,14 +358,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case X:
-                // if (robot.scoreCoralTask != null && pressed)
-                // {
-                //     robot.scoreCoralTask.autoScoreCoral(
-                //         moduleName, true, -1, 3, FrcAuto.ScoreSide.RIGHT, false, false, null);
-                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto-score Coral");
-                // }
-                if(pressed && robot.robotDrive != null){
+                if (robot.robotDrive != null && pressed)
+                {
                     ((TrcSwerveDriveBase) (robot.robotDrive.driveBase)).setXMode(null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> X Mode");
                 }
                 break;
 
@@ -375,13 +371,11 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
                 }
-                // if(pressed && robot.winch != null){
-                //     robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
-                // }
                 break;  
 
             case LeftBumper:
                 driverAltFunc = pressed;
+                robot.globalTracer.traceInfo(moduleName, ">>>>> DriverAltFunc = " + driverAltFunc);
                 break;
 
             case RightBumper:
@@ -400,24 +394,34 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
-                if(pressed && robot.climbTask != null){
+                if (robot.climbTask != null && pressed)
+                {
                     robot.climbTask.cancel();
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Climb");
                 }
                 break;
+
             case DpadDown:  
-                if(pressed && robot.winch != null && robot.climbTask != null){
+                if (robot.climbTask != null && pressed)
+                {
                     robot.climbTask.climb(moduleName, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
                 } 
                 break;
+
             case DpadLeft:
-                if(pressed && robot.winch != null && robot.climbTask != null)
+                if (robot.climbTask != null && pressed)
                 {
                     robot.climbTask.deployClimber(moduleName, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climber and Extend");
                 }
                 break;
+
             case DpadRight:
-                if(pressed && robot.winch != null && robot.climbTask != null){
+                if (robot.climbTask != null && pressed)
+                {
                     robot.climbTask.prepClimber(moduleName, null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Engage Cage");
                 }
                 break;
 
@@ -572,6 +576,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case LeftBumper:
                 operatorAltFunc = pressed;
+                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc = " + driverAltFunc);
                 break;
 
             case RightBumper:
@@ -610,19 +615,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadLeft:
-                // Test binding.
-                if (robot.winch != null && pressed)
-                {
-                    robot.winch.setPower(0.1);
-                }
                 break;
 
             case DpadRight:
-                // Test binding.
-                if(robot.winch != null && pressed)
-                {
-                    robot.winch.setPower(-0.1);
-                }
                 break;
 
             case Back:
