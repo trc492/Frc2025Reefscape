@@ -197,6 +197,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     break;
 
                 case GO_TO_CORAL_STATION:
+                    // Code Review: we may or may not need to back off a little before turtle.
+                    robot.turtle();
                     if (goToStation)
                     {
                         TrcPose2D intermediatePose = null;
