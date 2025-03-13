@@ -299,9 +299,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case APPROACH_REEF:
-                double xOffset = taskParams.visionXOffset; //(taskParams.scoreRightSide? 5.5: -10.5) +
-                double yOffset = taskParams.visionYOffset; // -20.0
-                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, xOffset, yOffset);
+                TrcPose2D targetPose = robot.adjustPoseByOffset(
+                    aprilTagRelativePose, taskParams.visionXOffset, taskParams.visionYOffset);
 
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
                 driveEvent.clear();

@@ -358,15 +358,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case X:
-                // if (robot.robotDrive != null && pressed)
-                // {
-                //     ((TrcSwerveDriveBase) (robot.robotDrive.driveBase)).setXMode(null);
-                //     robot.globalTracer.traceInfo(moduleName, ">>>>> X Mode");
-                // }
-                if (robot.scoreCoralTask != null && pressed)
+                if (robot.robotDrive != null && pressed)
                 {
-                    robot.scoreCoralTask.autoScoreCoral(moduleName, true, -1, 3, true, false, true, false, 0.2, 0.0, 0.0, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
+                    ((TrcSwerveDriveBase) (robot.robotDrive.driveBase)).setXMode(null);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> X Mode");
                 }
                 break;
 
