@@ -51,6 +51,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
         GO_TO_CORAL_STATION,
         PICKUP_CORAL,
         SCORE_CORAL,
+        APPROACH_REEF,
         DONE
     }   //enum State
 
@@ -174,20 +175,27 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         {
                             preloadAprilTagId =
                                 RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
+                            robot.scoreCoralTask.autoScoreCoral(
+                                null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2, scoreRightSide? 4.5: -10.5,
+                                -12.0, event);
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
                         {
                             preloadAprilTagId =
                                 RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
+                            robot.scoreCoralTask.autoScoreCoral(
+                                null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2, scoreRightSide? 5.5: -10.5,
+                                -21.0, event);
                         }
                         else
                         {
                             preloadAprilTagId =
                                 RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
+                            robot.scoreCoralTask.autoScoreCoral(
+                                null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2, scoreRightSide? 5.5: -10.5,
+                                -21.0, event);
                         }
-                        robot.scoreCoralTask.autoScoreCoral(
-                            null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2, visionXOffset,
-                            visionYOffset, event);
+
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     }
                     else
@@ -211,13 +219,13 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             {
                                 stationAprilTagId =
                                     RobotParams.Game.APRILTAG_RIGHT_CORAL_STATION[alliance == Alliance.Red? 0: 1];
-                                intermediatePose = RobotParams.Game.PROCESSOR_SIDE_LOOKOUT_BLUE;
+                                //intermediatePose = RobotParams.Game.PROCESSOR_SIDE_LOOKOUT_BLUE;
                             }
                             else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
                             {
                                 stationAprilTagId =
                                     RobotParams.Game.APRILTAG_LEFT_CORAL_STATION[alliance == Alliance.Red? 0: 1];
-                                intermediatePose = RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE;
+                                //intermediatePose = RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE;
                             }
                             else
                             {
@@ -228,13 +236,17 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                     RobotParams.Game.PROCESSOR_SIDE_LOOKOUT_BLUE:
                                     RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE;
                             }
-
-                            intermediatePose = robot.adjustPoseByAlliance(intermediatePose, alliance);
+                            if(intermediatePose != null){
+                                intermediatePose = robot.adjustPoseByAlliance(intermediatePose, alliance);
+                            }
                         }
 
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 20.0, -30.0);
-                        targetPose.angle = intermediatePose.angle;
+                        if (intermediatePose != null)
+                        {
+                            targetPose.angle = intermediatePose.angle;
+                        }
                         robot.globalTracer.traceInfo(
                             moduleName,
                             "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
@@ -254,7 +266,12 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         else
                         {
                             // We are coming from the scoring a Station Coral, so we have a straight shot back to the station.
-                            sm.setState(State.PICKUP_CORAL);
+                            targetPose.angle -= 180;
+                            robot.robotDrive.purePursuitDrive.start(
+                                null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
+                                robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
+                                targetPose);
+                                sm.waitForSingleEvent(event, State.PICKUP_CORAL);
                         }
                     }
                     else
@@ -270,7 +287,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     {
                         robot.pickupCoralFromStationTask.autoPickupCoral(
                             null, useVision, stationAprilTagId, relocalize, event);
-                        sm.waitForSingleEvent(event, State.SCORE_CORAL);
+                        sm.waitForSingleEvent(event, State.APPROACH_REEF);
                     }
                     else
                     {
@@ -279,7 +296,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     }
                     break;
 
-                case SCORE_CORAL:
+                case APPROACH_REEF:
                     // If we haven't already, determine the Reef AprilTag ID to look for.
                     // If we are scoring the 2nd Coral from the Station, we already determined the AprilTag ID
                     // last time.
@@ -309,13 +326,24 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             }
                         }
                     }
+                    robot.elevatorArmTask.setCoralScorePosition(null, 3, null);
+                    TrcPose2D reefAprilTagPose = FrcPhotonVision.getAprilTagFieldPose(reefAprilTagId);
+                    TrcPose2D reefTargetPose = robot.adjustPoseByOffset(reefAprilTagPose, 5.0, -55.0);
+                    robot.robotDrive.purePursuitDrive.start(
+                        null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
+                        robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
+                        reefTargetPose);
+                    sm.waitForSingleEvent(event, State.SCORE_CORAL);
+                    break;
+
+                case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
-                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.3, 0.0, 0.0,
+                        null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2, scoreRightSide? 4.5: -10.5, -21.0,
                         event);
-                    sm.waitForSingleEvent(event, stationPickupCount > 0? State.GO_TO_CORAL_STATION: State.DONE);
-                    // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;
+                    sm.waitForSingleEvent(event, stationPickupCount > 0? State.GO_TO_CORAL_STATION: State.DONE);
+                    // Decrement the number of station pickup and flip to the other side.
                     break;
 
                 default:

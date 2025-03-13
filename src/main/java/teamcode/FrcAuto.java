@@ -172,7 +172,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationSideChoiceMenu);
             userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 1.0);
             userChoices.addNumber(DBKEY_AUTO_VISION_X_OFFSET, 0.0);
-            userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, -12.0);
+            userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, 0.0);
 
             userChoices.addString(DBKEY_AUTO_PATHFILE, "DrivePath.csv");
             userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 0.0);    // in feet
@@ -371,6 +371,7 @@ public class FrcAuto implements TrcRobot.RobotMode
     @Override
     public void startMode(RunMode prevMode, RunMode nextMode)
     {
+        robot.zeroCalibrate(null, null);
         //
         // Retrieve Auto choices.
         //

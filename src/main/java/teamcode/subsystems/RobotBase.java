@@ -286,9 +286,9 @@ public class RobotBase
             camImageHeight = 800;
             camXOffset = -0.25;                 // Inches to the right from robot center
             camYOffset = 5.75;                  // Inches forward from robot center
-            camZOffset = 6.75;                  // Inches up from the floor
+            camZOffset = 7.0;                   // Inches up from the floor
             camYaw = 0.0;                       // degrees clockwise from robot front
-            camPitch = 25.255;                  // degrees up from horizontal
+            camPitch = 23.233;                  // degrees up from horizontal
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),
