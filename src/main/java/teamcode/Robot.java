@@ -252,7 +252,7 @@ public class Robot extends FrcRobotBase
                     new TaskElevatorArm(coralArm, elevator): null;
                 if (elevatorArmTask != null)
                 {
-                    elevatorArmTask.setStateTracingEnabled(false);
+                    elevatorArmTask.setStateTracingEnabled(true);
                     scoreCoralTask = new TaskAutoScoreCoral(this);
                     pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
                 }

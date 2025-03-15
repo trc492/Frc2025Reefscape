@@ -322,7 +322,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 }
                 else
                 {
-                    sm.waitForEvents(State.SCORE_CORAL, false, true);
+                    sm.waitForEvents(State.SCORE_CORAL, false, true, 5.5);
                 }
                 break;
 

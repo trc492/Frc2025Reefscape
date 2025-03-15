@@ -178,6 +178,7 @@ public class TaskAutoClimb extends TrcAutoTask<TaskAutoClimb.State>
 
             case PREP_CLIMBER:
                 robot.winch.setPosition(owner, 0.0, Winch.Params.PRE_CLIMB_POS, true, 1.0, winchEvent, 0.0);
+                robot.elevatorArmTask.coralArm.setPosition(90.0);
                 sm.waitForSingleEvent(winchEvent, State.DONE);
                 break;
 

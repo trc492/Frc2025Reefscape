@@ -201,6 +201,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         if (robot.robotDrive.driveBase.supportsHolonomicDrive())
                         {
                             double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
+                            if ((driveInputs[0] != 0.0 || driveInputs[1] != 0.0) &&
+                                robot.pickupCoralFromStationTask != null &&
+                                robot.pickupCoralFromStationTask.isActive())
+                            {
+                                robot.pickupCoralFromStationTask.cancel();
+                            }
                             robot.robotDrive.driveBase.holonomicDrive(
                                 null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
                             if (showDriveBaseStatus)
@@ -270,7 +276,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         power = robot.driverController.getTrigger(true) * Winch.Params.POWER_LIMIT;
                         if (power != prevWinchPower)
                         {
-                            robot.winch.setPower(power);
+                            //robot.winch.setPower(power);
+                            robot.winch.setPidPower(power, Winch.Params.MIN_POS, Winch.Params.MAX_POS, true);
                             prevWinchPower = power;
                         }
                     }
@@ -355,6 +362,19 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     robot.turtle();
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
                 }
+
+                // This does not work!!
+                // if (robot.pickupCoralFromStationTask != null)
+                // {
+                //     if (pressed)
+                //     {
+                //         robot.pickupCoralFromStationTask.autoPickupCoral(null, true, -1, false, null);
+                //     }
+                //     else
+                //     {
+                //         robot.pickupCoralFromStationTask.cancel();
+                //     }
+                // } 
                 break;
 
             case X:
@@ -370,6 +390,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
+                } else{
+                    
                 }
                 break;  
 
@@ -396,8 +418,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadUp:
                 if (robot.climbTask != null && pressed)
                 {
-                    robot.climbTask.cancel();
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Climb");
+                    robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climb");
                 }
                 break;
 
@@ -406,7 +428,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     robot.climbTask.climb(moduleName, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
-                } 
+                }   
                 break;
 
             case DpadLeft:

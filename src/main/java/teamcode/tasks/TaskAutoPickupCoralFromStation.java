@@ -258,10 +258,10 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 break;
 
             case APPROACH_STATION:
-                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 4.0, -13.0);
+                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 2.5, -13.0);
                 targetPose.angle -= 180.0;
                 tracer.traceInfo(moduleName, "***** Approaching Coral Station: targetPose=" + targetPose);
-                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
+                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.35);
                 robot.robotDrive.purePursuitDrive.start(
                     owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                     robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
@@ -269,7 +269,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 break;
 
             case RECEIVE_CORAL:
-                robot.coralGrabber.autoIntake(owner, 0.0, grabberEvent, 0.0);
+                robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
                 sm.waitForSingleEvent(grabberEvent, State.DONE);
                 break;
 

@@ -143,12 +143,12 @@ public class FrcAuto implements TrcRobot.RobotMode
             }
             else
             {
-                autoStrategyMenu.addChoice("Reefscape Auto", AutoStrategy.REEFSCAPE_AUTO);
+                autoStrategyMenu.addChoice("Reefscape Auto",AutoStrategy.REEFSCAPE_AUTO, true, false);
                 autoStrategyMenu.addChoice("Pure Pursuit Drive", AutoStrategy.PP_DRIVE);
                 autoStrategyMenu.addChoice("PID Drive", AutoStrategy.PID_DRIVE);
                 autoStrategyMenu.addChoice("Timed Drive", AutoStrategy.TIMED_DRIVE);
             }
-            autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, true, true);
+            autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, false, true);
 
             autoStartPosMenu.addChoice("Processor Side", AutoStartPos.START_POSE_PROCESSOR);
             autoStartPosMenu.addChoice("Far Side", AutoStartPos.START_POSE_FAR_SIDE);
@@ -372,6 +372,7 @@ public class FrcAuto implements TrcRobot.RobotMode
     public void startMode(RunMode prevMode, RunMode nextMode)
     {
         robot.zeroCalibrate(null, null);
+        robot.climbTask.deployClimber(null, null);
         //
         // Retrieve Auto choices.
         //

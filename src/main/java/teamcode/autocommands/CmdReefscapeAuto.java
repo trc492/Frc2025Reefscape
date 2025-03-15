@@ -176,15 +176,15 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             preloadAprilTagId =
                                 RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
                             robot.scoreCoralTask.autoScoreCoral(
-                                null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
-                                visionXOffset + (scoreRightSide? 4.5: -10.5), visionYOffset - 12.0, event);
+                                null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
+                                visionXOffset + (scoreRightSide? 3.0: -10.5), visionYOffset - 7.0, event);
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
                         {
                             preloadAprilTagId =
                                 RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
                             robot.scoreCoralTask.autoScoreCoral(
-                                null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
+                                null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
                                 visionXOffset + (scoreRightSide? 5.5: -10.5), visionYOffset - 21.0, event);
                         }
                         else
@@ -193,7 +193,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
-                                visionXOffset + (scoreRightSide? 5.5: -10.5), visionYOffset - 21.0, event);
+                                visionXOffset + (scoreRightSide? 5.5: -10.5), visionYOffset - 17.75, event);
                         }
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     }
