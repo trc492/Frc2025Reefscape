@@ -174,9 +174,9 @@ public class RobotParams
         // Robot Drive Parameters.
         public static final DriveMode DRIVE_MODE                = DriveMode.ArcadeMode;
         public static final DriveOrientation DRIVE_ORIENTATION  = DriveOrientation.FIELD;
-        public static final double DRIVE_SLOW_SCALE             = 0.25;
+        public static final double DRIVE_SLOW_SCALE             = 0.175;
         public static final double DRIVE_NORMAL_SCALE           = 1.0;
-        public static final double TURN_SLOW_SCALE              = 0.25;
+        public static final double TURN_SLOW_SCALE              = 0.15;
         public static final double TURN_NORMAL_SCALE            = 0.6;
         public static final double DRIVE_RAMP_RATE              = 0.25;
     }   //class Robot

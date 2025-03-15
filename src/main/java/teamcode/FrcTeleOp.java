@@ -426,7 +426,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadDown:  
                 if (robot.climbTask != null && pressed)
                 {
-                    robot.climbTask.climb(moduleName, null);
+                    robot.climbTask.climb(null, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
                 }   
                 break;
@@ -434,7 +434,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadLeft:
                 if (robot.climbTask != null && pressed)
                 {
-                    robot.climbTask.deployClimber(moduleName, null);
+                    robot.climbTask.deployClimber(null, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climber and Extend");
                 }
                 break;
@@ -442,7 +442,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadRight:
                 if (robot.climbTask != null && pressed)
                 {
-                    robot.climbTask.prepClimber(moduleName, null);
+                    robot.climbTask.prepClimber(null, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Engage Cage");
                 }
                 break;
