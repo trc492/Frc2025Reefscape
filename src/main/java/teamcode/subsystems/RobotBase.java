@@ -286,9 +286,9 @@ public class RobotBase
             camImageHeight = 800;
             camXOffset = -0.25;                 // Inches to the right from robot center
             camYOffset = 5.75;                  // Inches forward from robot center
-            camZOffset = 6.75;                  // Inches up from the floor
+            camZOffset = 7.0;                   // Inches up from the floor
             camYaw = 0.0;                       // degrees clockwise from robot front
-            camPitch = 23.0;                    // degrees up from horizontal
+            camPitch = 21.8346;                  // degrees up from horizontal
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),
@@ -315,7 +315,7 @@ public class RobotBase
             camYOffset = -1.563;                // Inches forward from robot center
             camZOffset = 41.374;                // Inches up from the floor
             camYaw = 180.0;                     // degrees clockwise from robot front
-            camPitch = 8.75;                    // degrees up from horizontal
+            camPitch = 9.1241;                  // degrees up from horizontal
             camRoll = 0.0;
             robotToCam = new Transform3d(
                 new Translation3d(Units.inchesToMeters(camYOffset),
@@ -367,8 +367,6 @@ public class RobotBase
             robotMaxAcceleration = 6935.0;     // inch/sec sq
             robotMaxDeceleration = robotMaxAcceleration;
             robotMaxTurnRate = 478.0;          // degree/sec
-
-
             profiledMaxVelocity = 110.0;       // inch/sec
             profiledMaxAcceleration = 200.0;  // inch/sec sq
             profiledMaxDeceleration = 90.0;
@@ -380,7 +378,7 @@ public class RobotBase
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
             xDriveMaxPidRampRate = yDriveMaxPidRampRate = 0.5;  // %power per sec
             turnPidCoeffs = new PidCoefficients(0.0044, 0.0, 0.0, 0.0, 0.0);
-            turnPidPowerLimit = 1.0;
+            turnPidPowerLimit = 0.5;
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection
             pidStallDetectionEnabled = true;

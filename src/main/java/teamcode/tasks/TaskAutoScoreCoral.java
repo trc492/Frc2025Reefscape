@@ -40,6 +40,7 @@ import trclib.timer.TrcTimer;
 public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
 {
     private static final String moduleName = TaskAutoScoreCoral.class.getSimpleName();
+    private static final boolean secondLookEnabled = false;
 
     public enum State
     {
@@ -58,12 +59,14 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean scoreRightSide;
         boolean removeAlgae;
         boolean relocalize;
+        boolean alignOnly;
+        double powerLimit;
         double visionXOffset;
         double visionYOffset;
 
         TaskParams(
             boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide, boolean removeAlgae,
-            boolean relocalize, double visionXOffset, double visionYOffset)
+            boolean relocalize, boolean alignOnly, double powerLimit, double visionXOffset, double visionYOffset)
         {
             this.useVision = useVision;
             this.aprilTagId = aprilTagId;
@@ -71,6 +74,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             this.scoreRightSide = scoreRightSide;
             this.removeAlgae = removeAlgae;
             this.relocalize = relocalize;
+            this.alignOnly = alignOnly;
+            this.powerLimit = powerLimit;
             this.visionXOffset = visionXOffset;
             this.visionYOffset = visionYOffset;
         }   //TaskParams
@@ -83,6 +88,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                    ",scoreRightSide=" + scoreRightSide +
                    ",removeAlgae=" + removeAlgae +
                    ",relocalize=" + relocalize +
+                   ",alignOnly=" + alignOnly +
+                   ",powerLimit=" + powerLimit +
                    ",visionXOffset=" + visionXOffset +
                    ",visionYOffset=" + visionYOffset;
         }   //toString
@@ -123,14 +130,20 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      * @param scoreRightSide specifies true to score the coral on the right reef branch, false on the left.
      * @param removeAlgae specifies true to remove algae from the reef, false otherwise.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
+     * @param alignOnly specifies true to align the robot for scoring but don't score, false otherwise.
+     * @param powerLimit specifies the power limit for approaching the reef.
+     * @param visionXOffset specifies the X offset to add to the vision target accounting for end effector position.
+     * @param visionYOffset specifies the Y offset to add to the vision target accounting for end effector position.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
         String owner, boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide,
-        boolean removeAlgae, boolean relocalize, double visionXOffset, double visionYOffset, TrcEvent completionEvent)
+        boolean removeAlgae, boolean relocalize, boolean alignOnly, double powerLimit, double visionXOffset,
+        double visionYOffset, TrcEvent completionEvent)
     {
         TaskParams taskParams = new TaskParams(
-            useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize, visionXOffset, visionYOffset);
+            useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize, alignOnly, powerLimit,
+            visionXOffset, visionYOffset);
         tracer.traceInfo(
             moduleName,
             "autoScoreCoral(owner=" + owner +
@@ -276,7 +289,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 }
                 else if (visionExpiredTime == null)
                 {
-                    visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
+                    visionExpiredTime = TrcTimer.getCurrentTime() + 5.0;
                 }
                 else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
                 {
@@ -286,30 +299,43 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 break;
 
             case APPROACH_REEF:
-                double xOffset = (taskParams.scoreRightSide? 6.5: -8.5) + taskParams.visionXOffset;
-                double yOffset = -16.0 + taskParams.visionYOffset;
-                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, xOffset, yOffset);
+                TrcPose2D targetPose = robot.adjustPoseByOffset(
+                    aprilTagRelativePose, taskParams.visionXOffset, taskParams.visionYOffset);
 
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
                 driveEvent.clear();
-                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
+                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(taskParams.powerLimit);
                 robot.robotDrive.purePursuitDrive.start(
                     owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                     robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
                 sm.addEvent(driveEvent);
+
                 if (robot.elevatorArmTask != null)
                 {
                     sm.addEvent(elevatorArmEvent);
                 }
-                secondLook = true;  // TODO: to enable secondLook, remove this line.
-                sm.waitForEvents(
-                    !secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
-                secondLook = true;
+
+                if (secondLookEnabled)
+                {
+                    sm.waitForEvents(!secondLook? State.FIND_REEF_APRILTAG: State.SCORE_CORAL, false, true);
+                    secondLook = true;
+                }
+                else
+                {
+                    sm.waitForEvents(State.SCORE_CORAL, false, true, 7.0);
+                }
                 break;
 
             case SCORE_CORAL:
-                robot.coralGrabber.eject(owner, 1.0, scoreEvent);
-                sm.waitForSingleEvent(scoreEvent, State.DONE);
+                if (!taskParams.alignOnly)
+                {
+                    robot.coralGrabber.eject(owner, 1.0, scoreEvent);
+                    sm.waitForSingleEvent(scoreEvent, State.DONE);
+                }
+                else
+                {
+                    sm.setState(State.DONE);
+                }
                 break;
 
             default:

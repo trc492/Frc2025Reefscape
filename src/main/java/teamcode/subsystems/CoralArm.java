@@ -58,12 +58,13 @@ public class CoralArm extends TrcSubsystem
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
-        public static final double ZERO_OFFSET                  = 1925.0;   //encoder reading at 0-deg
+        public static final double ZERO_OFFSET                  = 1942.0;   //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 0.5;
 
         public static final double MIN_POS                      = -47.0;
         public static final double MAX_POS                      = 188.3;
         public static final double TURTLE_POS                   = 15.0;
+        public static final double TURTLE_DELAY                 = 0.5;
         public static final double CLIMB_POS                    = 45.0;
         public static final double SAFE_ZONE_POS                = 35.0;
         public static final double STATION_PICKUP_POS           = -45;//TODO
@@ -79,7 +80,7 @@ public class CoralArm extends TrcSubsystem
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.03, 0.0, 0.001, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.035, 0.0, 0.001, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 1.0;
         public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
     }   //class Params
@@ -155,7 +156,7 @@ public class CoralArm extends TrcSubsystem
     @Override
     public void resetState()
     {
-        coralArmMotor.setPosition(Params.TURTLE_POS);
+        coralArmMotor.setPosition(Params.TURTLE_DELAY, Params.TURTLE_POS, true, Params.POWER_LIMIT);
     }   //resetState
 
     /**

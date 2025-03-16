@@ -59,6 +59,7 @@ public class Elevator extends TrcSubsystem
         public static final double MIN_POS                      = POS_OFFSET;
         public static final double MAX_POS                      = 70.5;
         public static final double TURTLE_POS                   = MIN_POS;
+        public static final double TURTLE_DELAY                 = 0.0;
         public static final double CLIMB_POS                    = MIN_POS;
         public static final double SAFE_ZONE_POS                = 50.0;
         public static final double STATION_PICKUP_POS           = 43.5;  //TODO
@@ -145,7 +146,7 @@ public class Elevator extends TrcSubsystem
     @Override
     public void resetState()
     {
-        elevatorMotor.setPosition(Params.TURTLE_POS);
+        elevatorMotor.setPosition(Params.TURTLE_DELAY, Params.TURTLE_POS, true, Params.POWER_LIMIT);
     }   //resetState
 
     /**

@@ -77,14 +77,9 @@ public class RobotParams
         public static final boolean useSubsystems               = true;
         public static final boolean useCoralArm                 = true;
         public static final boolean useCoralGrabber             = useCoralArm;
-        public static final boolean useAlgaeArm                 = true;
-        public static final boolean useAlgaeGrabber             = useAlgaeArm;
         public static final boolean useElevator                 = true;
         public static final boolean useElevatorArm              = true;
         public static final boolean useWinch                    = true;
-        // TODO: remove.
-        public static final boolean useIntake                   = false;
-        public static final boolean useIntakeDeployer           = false;
     }   //class Preferences
 
     /**
@@ -112,14 +107,9 @@ public class RobotParams
         public static final int CANID_RBSTEER_ENCODER           = 26;   // Blue
         // Subsystem Motor CAN IDs.
         public static final int CANID_CORALARM_MOTOR            = 7;    // Purple
-        public static final int CANID_ALGAEARM_MOTOR            = 8;    // Gray
         public static final int CANID_ELEVATOR_MOTOR            = 9;    // White
         public static final int CANID_CORALGRABBER_MOTOR        = 17;   // Purple
-        public static final int CANID_ALGAEGRABBER_MOTOR        = 18;   // Gray
         public static final int CANID_WINCH_MOTOR               = 19;   // White
-        // TODO: remove.
-        public static final int CANID_INTAKE_MOTOR              = 27;   // Purple
-        public static final int CANID_INTAKEDEPLOYER_MOTOR      = 28;   // Gray
         // Miscellaneous CAN IDs.
         public static final int CANID_PDP                       = 30;
         public static final int CANID_PCM                       = 31;
@@ -132,11 +122,8 @@ public class RobotParams
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
         public static final int DIO_CORAL_GRABBER_SENSOR        = 0;
-        public static final int DIO_ALGAE_GRABBER_SENSOR        = 1;
         public static final int DIO_ELEVATOR_MID_LIMIT          = 2;
         public static final int DIO_WINCH_LOWER_LIMIT           = 3;
-        // TODO: remove.
-        public static final int DIO_DEPLOYER_LOWER_LIMIT        = 6;
         // PWM channels.
         public static final int NUM_LEDS                        = 30;
         public static final int PWM_CHANNEL_LED                 = 0;
@@ -182,14 +169,14 @@ public class RobotParams
         public static final String FIELD_ZERO_CAL_FILE          = TEAM_FOLDER_PATH + "/FieldZeroCalibration.txt";
         public static final double DASHBOARD_UPDATE_INTERVAL    = 0.1;      // in msec
         public static final String ROBOT_CODEBASE               = "Robot2025";
-        public static final double ROBOT_LENGTH                 = 34.5;
-        public static final double ROBOT_WIDTH                  = 34.5;
+        public static final double ROBOT_LENGTH                 = 35.5;
+        public static final double ROBOT_WIDTH                  = 35.5;
         // Robot Drive Parameters.
         public static final DriveMode DRIVE_MODE                = DriveMode.ArcadeMode;
         public static final DriveOrientation DRIVE_ORIENTATION  = DriveOrientation.FIELD;
-        public static final double DRIVE_SLOW_SCALE             = 0.25;
+        public static final double DRIVE_SLOW_SCALE             = 0.175;
         public static final double DRIVE_NORMAL_SCALE           = 1.0;
-        public static final double TURN_SLOW_SCALE              = 0.25;
+        public static final double TURN_SLOW_SCALE              = 0.15;
         public static final double TURN_NORMAL_SCALE            = 0.6;
         public static final double DRIVE_RAMP_RATE              = 0.25;
     }   //class Robot
@@ -202,7 +189,7 @@ public class RobotParams
         //
         // Robot starting positions.
         //
-        public static final double STARTPOS_BLUE_Y              = 297.5 - Robot.ROBOT_LENGTH / 2.0;
+        public static final double STARTPOS_BLUE_Y              = 297.5 - Robot.ROBOT_LENGTH / 2.0; // 279.75
         public static final double STARTPOS_BLUE_PROCESSOR_X    = -241.73;
         public static final double STARTPOS_BLUE_CENTER_X       = -Field.WIDTH / 2.0; // -158.5
         public static final double STARTPOS_BLUE_FAR_X          = -75.2;
@@ -259,6 +246,11 @@ public class RobotParams
         /*ID21*/    new TrcPose2D(-158.66, 209.45, 0.0), //z=12.125
         /*ID22*/    new TrcPose2D(-130.32, 192.91, 60.0) //z=12.125
         };
+
+        public static final TrcPose2D PROCESSOR_SIDE_LOOKOUT_BLUE =
+            new TrcPose2D(-87.0, 137.0, -54.0);
+        public static final TrcPose2D FAR_SIDE_LOOKOUT_BLUE =
+            new TrcPose2D(-230.0, 137.0, 126.0);
 
         public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_BLUE =
             new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this

@@ -73,7 +73,6 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
 
     private final Robot robot;
     private final TrcEvent driveEvent;
-    private final TrcEvent elevatorArmEvent;
     private final TrcEvent grabberEvent;
 
     private int aprilTagId = -1;
@@ -90,7 +89,6 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         super(moduleName, TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
         this.robot = robot;
         this.driveEvent = new TrcEvent(moduleName + ".driveEvent");
-        this.elevatorArmEvent = new TrcEvent(moduleName + ".elevatorArmEvent");
         this.grabberEvent = new TrcEvent(moduleName + ".grabberEvent");
     }   //TaskAutoPickupCoralFromStation
 
@@ -193,8 +191,8 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 aprilTagRelativePose = null;
                 if (robot.elevatorArmTask != null)
                 {
-                    elevatorArmEvent.clear();
-                    robot.elevatorArmTask.setCoralStationPickupPosition(owner, elevatorArmEvent);
+                    // Fire and forget.
+                    robot.elevatorArmTask.setCoralStationPickupPosition(owner, null);
                 }
 
                 if (taskParams.useVision && robot.photonVisionBack != null)
@@ -250,7 +248,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 }
                 else if (visionExpiredTime == null)
                 {
-                    visionExpiredTime = TrcTimer.getCurrentTime() + 1.0;
+                    visionExpiredTime = TrcTimer.getCurrentTime() + 5.0; //NOTE: adjusting number so vision doesn't time out
                 }
                 else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
                 {
@@ -260,24 +258,18 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 break;
 
             case APPROACH_STATION:
-                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 0.0, 24.0);
-                tracer.traceInfo(moduleName, "***** Approaching Corl Station: targetPose=" + targetPose);
-                driveEvent.clear();
-                // Code Review: This may be too slow, we have a long distance to go.
-                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.2);
+                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 2.5, -11.0);
+                targetPose.angle -= 180.0;
+                tracer.traceInfo(moduleName, "***** Approaching Coral Station: targetPose=" + targetPose);
+                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.35);
                 robot.robotDrive.purePursuitDrive.start(
                     owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                     robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
-                sm.addEvent(driveEvent);
-                if (robot.elevatorArmTask != null)
-                {
-                    sm.addEvent(elevatorArmEvent);
-                }
-                sm.waitForEvents(State.RECEIVE_CORAL, false, true);
+                sm.waitForSingleEvent(driveEvent, State.RECEIVE_CORAL);
                 break;
 
             case RECEIVE_CORAL:
-                robot.coralGrabber.autoIntake(owner, 0.0, grabberEvent, 0.0);
+                robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
                 sm.waitForSingleEvent(grabberEvent, State.DONE);
                 break;
 

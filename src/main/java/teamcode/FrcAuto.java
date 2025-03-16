@@ -143,19 +143,19 @@ public class FrcAuto implements TrcRobot.RobotMode
             }
             else
             {
-                autoStrategyMenu.addChoice("Reefscape Auto", AutoStrategy.REEFSCAPE_AUTO);
+                autoStrategyMenu.addChoice("Reefscape Auto",AutoStrategy.REEFSCAPE_AUTO, true, false);
                 autoStrategyMenu.addChoice("Pure Pursuit Drive", AutoStrategy.PP_DRIVE);
                 autoStrategyMenu.addChoice("PID Drive", AutoStrategy.PID_DRIVE);
                 autoStrategyMenu.addChoice("Timed Drive", AutoStrategy.TIMED_DRIVE);
             }
-            autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, true, true);
+            autoStrategyMenu.addChoice("Do Nothing", AutoStrategy.DO_NOTHING, false, true);
 
             autoStartPosMenu.addChoice("Processor Side", AutoStartPos.START_POSE_PROCESSOR);
             autoStartPosMenu.addChoice("Far Side", AutoStartPos.START_POSE_FAR_SIDE);
             autoStartPosMenu.addChoice("Center", AutoStartPos.START_POSE_CENTER, true, true);
 
-            stationSideChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR);
-            stationSideChoiceMenu.addChoice("Far Side", StationSide.FAR, true, true);
+            stationSideChoiceMenu.addChoice("Processor Side", StationSide.PROCESSOR, true, false);
+            stationSideChoiceMenu.addChoice("Far Side", StationSide.FAR, false, true);
             //
             // Initialize dashboard with default choice values.
             //
@@ -168,18 +168,18 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addBoolean(DBKEY_AUTO_SCORE_PRELOAD, true);
             userChoices.addNumber(DBKEY_AUTO_APRILTAG_ID, -1.0);
             userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, true);
-            userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, false);
+            userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, true);
             userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationSideChoiceMenu);
-            userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 0.0);
+            userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 1.0);
             userChoices.addNumber(DBKEY_AUTO_VISION_X_OFFSET, 0.0);
             userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, 0.0);
 
             userChoices.addString(DBKEY_AUTO_PATHFILE, "DrivePath.csv");
-            userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 6.0);    // in feet
-            userChoices.addNumber(DBKEY_AUTO_Y_DRIVE_DISTANCE, 6.0);    // in feet
-            userChoices.addNumber(DBKEY_AUTO_TURN_ANGLE, 90.0);         // in degrees
-            userChoices.addNumber(DBKEY_AUTO_DRIVE_TIME, 4.0);          // in seconds
-            userChoices.addNumber(DBKEY_AUTO_DRIVE_POWER, 0.5);
+            userChoices.addNumber(DBKEY_AUTO_X_DRIVE_DISTANCE, 0.0);    // in feet
+            userChoices.addNumber(DBKEY_AUTO_Y_DRIVE_DISTANCE, 0.0);    // in feet
+            userChoices.addNumber(DBKEY_AUTO_TURN_ANGLE, 0.0);          // in degrees
+            userChoices.addNumber(DBKEY_AUTO_DRIVE_TIME, 0.0);          // in seconds
+            userChoices.addNumber(DBKEY_AUTO_DRIVE_POWER, 0.0);
         }   //AutoChoices
 
         //
@@ -371,6 +371,8 @@ public class FrcAuto implements TrcRobot.RobotMode
     @Override
     public void startMode(RunMode prevMode, RunMode nextMode)
     {
+        robot.zeroCalibrate(null, null);
+        robot.climbTask.deployClimber(null, null);
         //
         // Retrieve Auto choices.
         //
