@@ -1,0 +1,734 @@
+Robot.robotStartMode_INFO [0.170146408] Fri Mar 14 17:43:09 PDT 2025: ***** AUTO_MODE *****
+Robot.zeroCalibrate_INFO [0.213995911] Zero calibrate all subsystems.
+TaskElevatorArm.zeroCalibrate_INFO [0.215523214] zeroCalibrate(owner=null, event=null)
+TaskAutoClimb.deployClimber_INFO [0.216951491] owner=null, event=null
+FrcAuto.startMode_INFO [0.223869011] <Info name="MatchInfo" date="Fri Mar 14 17:43:09 PDT 2025" event="WAYAK" type="Qualification" match=34 replay=1 alliance="Red" location=1 gameMsg="" />
+FrcAuto.startMode_INFO [0.229374844] <Info name="AutoChoices" alliance="Red" strategy="REEFSCAPE_AUTO" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="true" stationSide="PROCESSOR" stationPickupCount=1 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=0.0 ft yDistance=0.0 ft turnDegrees=0.0 deg driveTime=0.0 sec drivePower=0.0 />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.286459343] <Event name="StateInfo" time="0.282752301" tag="vvvvv" CmdReefscapeAuto.state="START" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.355232268] <Event name="StateInfo" time="0.354161589" tag="^^^^^" CmdReefscapeAuto.state="START" />
+TaskElevatorArm.autoTask_INFO [0.36840836] <Event name="StateInfo" time="0.366710367" tag="vvvvv" TaskElevatorArm.state="ZERO_CALIBRATE" />
+TaskAutoClimb.autoTask_INFO [0.393942944] <Event name="StateInfo" time="0.372311021" tag="vvvvv" TaskAutoClimb.state="DEPLOY_CLIMBER" />
+Elevator.motor.pidCtrlTask_INFO [0.397350872] Zero calibration done, event=(Elevator=CLEARED)
+Elevator.motor.pidCtrlTask_INFO [0.415702311] controlMode: Power onTarget=false(0.0/null), stalled=false, expired=false, event=(Elevator=SIGNALED)
+CmdReefscapeAuto.cmdPeriodic_INFO [0.414907498] <Event name="StateInfo" time="0.414642887" tag="vvvvv" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.423370231] ***** Score Preload.
+Winch.motor.pidCtrlTask_INFO [0.424434871] Zero calibration done, event=(TaskAutoClimb.winchEvent=CLEARED)
+Winch.motor.pidCtrlTask_INFO [0.431323815] controlMode: Power onTarget=false(0.0/null), stalled=false, expired=false, event=(TaskAutoClimb.winchEvent=SIGNALED)
+TaskAutoScoreCoral.autoScoreCoral_INFO [0.438625847] autoScoreCoral(owner=null, taskParams=(useVision=true,aprilTagId=10,reefLevel=3,scoreRightSide=true,removeAlgae=false,relocalize=true,alignOnly=false,powerLimit=0.2,visionXOffset=5.5,visionYOffset=-17.75), event=(CmdReefscapeAuto=CLEARED))
+CmdReefscapeAuto.cmdPeriodic_INFO [0.452471546] <Event name="StateInfo" time="0.452231987" tag="^^^^^" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+TaskAutoScoreCoral.autoTask_INFO [0.455479702] <Event name="StateInfo" time="0.455219226" tag="vvvvv" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.setCoralScorePosition_INFO [0.472821276] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,elevatorPos=70.0), event=(TaskAutoScoreCoral.elevatorArmEvent=CLEARED))
+TaskAutoScoreCoral.runTaskState_INFO [0.477149625] ***** Using AprilTag Vision.
+TaskAutoClimb.autoTask_INFO [0.479255159] <Event name="StateInfo" time="0.479052193" tag="vvvvv" TaskAutoClimb.state="FINISH_DEPLOY_CLIMBER" />
+TaskElevatorArm.autoTask_INFO [0.511151654] <Event name="StateInfo" time="0.510524271" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskAutoScoreCoral.autoTask_INFO [0.5137407] <Event name="StateInfo" time="0.513516604" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.runTaskState_INFO [0.53862841] ***** Vision found AprilTag[10]: aprilTagPose=(x=2.295018,y=68.623154,angle=-0.916577)
+Robot.relocalizeRobotByAprilTag_INFO [0.543845412] >>>>> Re-localize robot: pose=(x=-161.944170,y=407.239176,angle=0.916577)
+TaskElevatorArm.autoTask_INFO [0.558961914] <Event name="StateInfo" time="0.558721831" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskAutoScoreCoral.autoTask_INFO [0.565273362] <Event name="StateInfo" time="0.56123185" tag="vvvvv" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskAutoScoreCoral.runTaskState_INFO [0.571775371] ***** Approaching Reef: targetPose=(x=8.078254,y=50.963407,angle=-0.916577)
+purePursuitDrive.start_INFO [0.637206489] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-161.944468,y=407.237588,angle=0.956577),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.6887941235750827,pose=(x=-156.710516,y=437.031350,angle=0.419239),vel=61.99147112175744,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-153.016525,y=458.059029,angle=0.040000),vel=0.0)])
+CoralArm.motor.pidCtrlTask_INFO [1.997116787] controlMode: Position onTarget=true(154.16015625/155.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+purePursuitDrive.driveTask_INFO [2.336883861] Done: index=2/3, stalled=false, timeout=false, posOnTarget=true, headingOnTarget=true, robotPose=(x=-153.319393,y=458.376801,angle=0.026577)
+purePursuitDrive.driveTask_INFO [2.357687717] Signal completion event (TaskAutoScoreCoral.driveEvent=CLEARED).
+Elevator.motor.pidCtrlTask_INFO [2.831920041] controlMode: Position onTarget=true(69.52875816531298/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [2.841661751] <Event name="StateInfo" time="2.84093556" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [2.843347659] Stopping subsystems.
+TaskAutoScoreCoral.autoTask_INFO [2.844701963] <Event name="StateInfo" time="2.84445453" tag="vvvvv" TaskAutoScoreCoral.state="SCORE_CORAL" />
+Winch.motor.pidCtrlTask_INFO [3.586983269] controlMode: Position onTarget=true(17.897371289062498/18.0), stalled=false, expired=false, event=(TaskAutoClimb.winchEvent=SIGNALED)
+TaskAutoClimb.autoTask_INFO [3.591818517] <Event name="StateInfo" time="3.587501459" tag="vvvvv" TaskAutoClimb.state="DONE" />
+TaskAutoClimb.stopSubsystems_INFO [3.594296443] Stopping subsystems.
+TaskAutoScoreCoral.autoTask_INFO [3.859156664] <Event name="StateInfo" time="3.858952834" tag="vvvvv" TaskAutoScoreCoral.state="DONE" />
+TaskAutoScoreCoral.stopSubsystems_INFO [3.867578497] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [3.879959649] Canceling auto task operation.
+CmdReefscapeAuto.cmdPeriodic_INFO [3.887932978] <Event name="StateInfo" time="3.887472711" tag="vvvvv" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" />
+Robot.turtle_INFO [3.892175763] Turtle mode.
+CmdReefscapeAuto.cmdPeriodic_INFO [3.914754144] ***** Go to Coral Station: AprilTag=2, AprilTagPose=(x=-291.200000,y=657.370000,angle=306.000000), IntermediatePose=(x=-230.000000,y=445.875000,angle=126.000000), TargetPose=(x=-255.173785,y=655.916782,angle=126.000000)
+purePursuitDrive.start_INFO [3.932116416] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-153.312166,y=458.386842,angle=0.016577),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.43138001947561816,pose=(x=-183.167419,y=453.515871,angle=49.063039),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-230.000000,y=445.875000,angle=126.000000),vel=110.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222225,pose=(x=-247.174361,y=589.172222,angle=126.000000),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=2,pose=(x=-255.173785,y=655.916782,angle=126.000000),vel=0.0)])
+CmdReefscapeAuto.cmdPeriodic_INFO [3.945911057] <Event name="StateInfo" time="3.943179412" tag="^^^^^" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" RobotPose=(x=-153.312166,y=458.386842,angle=0.016577) TargetPose=(x=-255.173785,y=655.916782,angle=126.000000) vel=(x=0.000000,y=0.000000,angle=0.000000) Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=0.000000,y=0.000000,angle=0.000000),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.43138001947561816,pose=(x=-29.853843,y=-4.879608,angle=49.046463),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-76.684211,y=-12.534028,angle=125.983423),vel=110.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222225,pose=(x=-93.900029,y=130.758219,angle=125.983423),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=2,pose=(x=-101.918763,y=197.500462,angle=125.983423),vel=0.0)]) />
+purePursuitDrive.xPosPid.isStalled_INFO [7.85827179] PID stalled (currTime=1.7419993977481823E9, stallStartTime=1.7419993975336032E9, timeout=0.2, velError=0.002984541898405474, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [7.861034716] PID stalled (currTime=1.7419993977567081E9, stallStartTime=1.7419993943249605E9, timeout=0.2, velError=-0.006139234850579486, errRateThreshold=0.1).
+purePursuitDrive.turnPid.isStalled_INFO [7.863411224] PID stalled (currTime=1.741999397759182E9, stallStartTime=1.7419993943249664E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.driveTask_INFO [7.866179778] Done: index=4/5, stalled=true, timeout=false, posOnTarget=false, headingOnTarget=false, robotPose=(x=-256.240339,y=656.286149,angle=123.796574)
+purePursuitDrive.driveTask_INFO [7.877151748] Signal completion event (CmdReefscapeAuto=CLEARED).
+CmdReefscapeAuto.cmdPeriodic_INFO [7.879862725] <Event name="StateInfo" time="7.879489387" tag="vvvvv" CmdReefscapeAuto.state="PICKUP_CORAL" />
+TaskAutoPickupCoralFromStation.autoPickupCoral_INFO [7.883791166] autoPickupCoral(owner=null, taskParams=(useVision=true,aprilTagId=2,relocalizetrue), event=(CmdReefscapeAuto=SIGNALED))
+CmdReefscapeAuto.cmdPeriodic_INFO [7.889089353] <Event name="StateInfo" time="7.888503376" tag="^^^^^" CmdReefscapeAuto.state="PICKUP_CORAL" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.891919336] <Event name="StateInfo" time="7.891651486" tag="vvvvv" TaskAutoPickupCoralFromStation.state="START" />
+TaskElevatorArm.setCoralStationPickupPosition_INFO [7.901866464] setCoralStationPickupPosition(owner=null, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-45.0,elevatorPos=43.5), event=null)
+TaskAutoPickupCoralFromStation.runTaskState_INFO [7.903565634] ***** Using AprilTag Vision.
+TaskElevatorArm.autoTask_INFO [7.908104341] <Event name="StateInfo" time="7.907876094" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.9115326] <Event name="StateInfo" time="7.911292418" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskElevatorArm.autoTask_INFO [7.916902773] <Event name="StateInfo" time="7.915079391" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.923234986] <Event name="StateInfo" time="7.922446967" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.928494607] <Event name="StateInfo" time="7.928213512" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.938318753] <Event name="StateInfo" time="7.937652592" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.942864983] <Event name="StateInfo" time="7.941930255" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.954835325] <Event name="StateInfo" time="7.949672981" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.005384812] <Event name="StateInfo" time="8.001364901" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.015239687] <Event name="StateInfo" time="8.012740726" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.027714631] <Event name="StateInfo" time="8.020167568" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.032698245] <Event name="StateInfo" time="8.03242284" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.038442377] <Event name="StateInfo" time="8.037619789" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.044093918] <Event name="StateInfo" time="8.043894411" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.050976265] <Event name="StateInfo" time="8.049627218" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.057443326] <Event name="StateInfo" time="8.054486521" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.061856639] <Event name="StateInfo" time="8.060930717" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.090183192] <Event name="StateInfo" time="8.089818964" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.103655767] <Event name="StateInfo" time="8.103040183" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.11113383] <Event name="StateInfo" time="8.109762576" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.117908481] <Event name="StateInfo" time="8.117706826" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.124038721] <Event name="StateInfo" time="8.123187159" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.132054381] <Event name="StateInfo" time="8.131411101" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.14046952] <Event name="StateInfo" time="8.139972637" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.149892661] <Event name="StateInfo" time="8.148440407" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.15913639] <Event name="StateInfo" time="8.158937497" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.164582166] <Event name="StateInfo" time="8.164368617" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.172235586] <Event name="StateInfo" time="8.172046971" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.198553407] <Event name="StateInfo" time="8.196418404" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.205274367] <Event name="StateInfo" time="8.20454227" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.21337002] <Event name="StateInfo" time="8.209773941" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.221277718] <Event name="StateInfo" time="8.219784823" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.227011295] <Event name="StateInfo" time="8.226383808" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.234512555] <Event name="StateInfo" time="8.234287714" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.241610657] <Event name="StateInfo" time="8.240196313" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.246849822] <Event name="StateInfo" time="8.24590974" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.25242577] <Event name="StateInfo" time="8.250283532" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.260007806] <Event name="StateInfo" time="8.25954315" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.265726141] <Event name="StateInfo" time="8.265521965" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.271133802] <Event name="StateInfo" time="8.269596005" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.278152139] <Event name="StateInfo" time="8.277951963" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.304925335] <Event name="StateInfo" time="8.303853931" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.315385031] <Event name="StateInfo" time="8.315185342" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.326982641] <Event name="StateInfo" time="8.325845161" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.336838703] <Event name="StateInfo" time="8.336637463" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.350961893] <Event name="StateInfo" time="8.348361784" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.36992274] <Event name="StateInfo" time="8.36926058" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.382944326] <Event name="StateInfo" time="8.382755116" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.428297194] <Event name="StateInfo" time="8.426615359" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.437415756] <Event name="StateInfo" time="8.433531324" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.450426906] <Event name="StateInfo" time="8.450237593" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.464656724] <Event name="StateInfo" time="8.461466062" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.472536025] <Event name="StateInfo" time="8.471443995" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.485365521] <Event name="StateInfo" time="8.482411038" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.492975286] <Event name="StateInfo" time="8.492775396" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.525767602] <Event name="StateInfo" time="8.525560073" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.534471677] <Event name="StateInfo" time="8.533212833" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.54462676] <Event name="StateInfo" time="8.54284684" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+Elevator.motor.pidCtrlTask_INFO [8.545235347] controlMode: Position onTarget=true(43.35915160760647/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.5518739] <Event name="StateInfo" time="8.551563716" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.559516933] <Event name="StateInfo" time="8.558793121" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.569414789] <Event name="StateInfo" time="8.567332443" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.574951432] <Event name="StateInfo" time="8.573771613" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.582749367] <Event name="StateInfo" time="8.581890834" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.589847335] <Event name="StateInfo" time="8.588381288" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.600473658] <Event name="StateInfo" time="8.598056833" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.607375147] <Event name="StateInfo" time="8.607163933" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.629826081] <Event name="StateInfo" time="8.62949307" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.638609188] <Event name="StateInfo" time="8.638315405" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.64472158] <Event name="StateInfo" time="8.64390264" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.649093965] <Event name="StateInfo" time="8.647753431" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.657630995] <Event name="StateInfo" time="8.65736832" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.66241753] <Event name="StateInfo" time="8.662230369" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.667986564] <Event name="StateInfo" time="8.667794576" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.677184424] <Event name="StateInfo" time="8.676981799" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.683109763] <Event name="StateInfo" time="8.68291456" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.689766597] <Event name="StateInfo" time="8.6895751" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.698556364] <Event name="StateInfo" time="8.696167563" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.705161425] <Event name="StateInfo" time="8.704454281" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.710331853] <Event name="StateInfo" time="8.710145957" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.715867391] <Event name="StateInfo" time="8.714267251" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.741778932] <Event name="StateInfo" time="8.740511545" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.748544276] <Event name="StateInfo" time="8.748365386" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.758579541] <Event name="StateInfo" time="8.755047013" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.764073287] <Event name="StateInfo" time="8.763269284" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.769752561] <Event name="StateInfo" time="8.769083737" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.774675792] <Event name="StateInfo" time="8.774304332" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.782754211] <Event name="StateInfo" time="8.782575503" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.788136573] <Event name="StateInfo" time="8.786517485" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.805211704] <Event name="StateInfo" time="8.803902771" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.812623744] <Event name="StateInfo" time="8.811640417" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.818587511] <Event name="StateInfo" time="8.818223885" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.824199927] <Event name="StateInfo" time="8.823258465" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.849845762] <Event name="StateInfo" time="8.847699583" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.854792732] <Event name="StateInfo" time="8.853422521" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.860375437] <Event name="StateInfo" time="8.858880246" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.866857662] <Event name="StateInfo" time="8.866650812" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.873869642] <Event name="StateInfo" time="8.872463612" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.879507598] <Event name="StateInfo" time="8.879196999" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.88546762] <Event name="StateInfo" time="8.885005232" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.891102266] <Event name="StateInfo" time="8.890890745" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.897109627] <Event name="StateInfo" time="8.896389198" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.906336467] <Event name="StateInfo" time="8.905902796" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.913127463] <Event name="StateInfo" time="8.912939492" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.921956463] <Event name="StateInfo" time="8.920266427" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.92627795] <Event name="StateInfo" time="8.925520893" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.932003992] <Event name="StateInfo" time="8.930754683" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.938588651] <Event name="StateInfo" time="8.938395598" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.944391666] <Event name="StateInfo" time="8.944185647" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.949456278] <Event name="StateInfo" time="8.948896245" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.956450736] <Event name="StateInfo" time="8.956250731" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.961687857] <Event name="StateInfo" time="8.960246777" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.967670953] <Event name="StateInfo" time="8.965673791" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.973217663] <Event name="StateInfo" time="8.972894397" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [8.976597405] <Event name="StateInfo" time="8.976396936" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.000312244] <Event name="StateInfo" time="8.999816201" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.006923238] <Event name="StateInfo" time="9.006731933" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.014553696] <Event name="StateInfo" time="9.012243041" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.021266977] <Event name="StateInfo" time="9.01889348" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.026259362] <Event name="StateInfo" time="9.025655804" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.030998545] <Event name="StateInfo" time="9.030797287" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.039586373] <Event name="StateInfo" time="9.038548486" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.044460822] <Event name="StateInfo" time="9.044009275" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.048699559] <Event name="StateInfo" time="9.047958582" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.056559877] <Event name="StateInfo" time="9.053097513" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.063970297] <Event name="StateInfo" time="9.063690222" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.071128201] <Event name="StateInfo" time="9.069688837" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.079345275] <Event name="StateInfo" time="9.079005375" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.106370399] <Event name="StateInfo" time="9.106023135" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.118473438] <Event name="StateInfo" time="9.116946329" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.124047184] <Event name="StateInfo" time="9.123844769" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.129675876] <Event name="StateInfo" time="9.129476962" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.138515861] <Event name="StateInfo" time="9.136909956" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.143066919] <Event name="StateInfo" time="9.14287092" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.14766459] <Event name="StateInfo" time="9.147466846" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.153156288] <Event name="StateInfo" time="9.152475844" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.161068027] <Event name="StateInfo" time="9.159860811" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.168588815] <Event name="StateInfo" time="9.16825437" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.174466599] <Event name="StateInfo" time="9.173708382" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.184345196] <Event name="StateInfo" time="9.183934357" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.221933018] <Event name="StateInfo" time="9.219923087" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.228288963] <Event name="StateInfo" time="9.227297616" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.234606756] <Event name="StateInfo" time="9.231386983" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.242407356] <Event name="StateInfo" time="9.242183937" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.249142626] <Event name="StateInfo" time="9.248892211" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.256104918] <Event name="StateInfo" time="9.25354634" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.266811687] <Event name="StateInfo" time="9.265430956" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.272857656] <Event name="StateInfo" time="9.271805353" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.279452324] <Event name="StateInfo" time="9.279277364" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.288081427] <Event name="StateInfo" time="9.286662411" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.329527828] <Event name="StateInfo" time="9.327697122" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.339477446] <Event name="StateInfo" time="9.339281138" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.345763688] <Event name="StateInfo" time="9.344997785" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.35949376] <Event name="StateInfo" time="9.359156067" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.365485453] <Event name="StateInfo" time="9.365302277" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.377295101] <Event name="StateInfo" time="9.377097719" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.383991945] <Event name="StateInfo" time="9.382606603" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.392350195] <Event name="StateInfo" time="9.390421822" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.423543335] <Event name="StateInfo" time="9.423349957" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.432927219] <Event name="StateInfo" time="9.432308656" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.443641477] <Event name="StateInfo" time="9.442338886" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.449126673] <Event name="StateInfo" time="9.448907578" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.458743344] <Event name="StateInfo" time="9.458543708" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.464478501] <Event name="StateInfo" time="9.464294442" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.472357902] <Event name="StateInfo" time="9.472156409" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.481729875] <Event name="StateInfo" time="9.477236823" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.488253089] <Event name="StateInfo" time="9.488048528" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.493204254] <Event name="StateInfo" time="9.493013284" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.527011506] <Event name="StateInfo" time="9.526000112" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.533781032] <Event name="StateInfo" time="9.533579983" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.54444423] <Event name="StateInfo" time="9.543393969" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.547775644] <Event name="StateInfo" time="9.54758736" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.559036392] <Event name="StateInfo" time="9.555269917" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.567053379] <Event name="StateInfo" time="9.56684667" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.574091959] <Event name="StateInfo" time="9.57389557" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.584532294] <Event name="StateInfo" time="9.584331305" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.59273122] <Event name="StateInfo" time="9.592443511" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.603832623] <Event name="StateInfo" time="9.601282436" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.629216923] <Event name="StateInfo" time="9.628412621" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.642866198] <Event name="StateInfo" time="9.642064382" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.6488024] <Event name="StateInfo" time="9.647436426" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.653545839] <Event name="StateInfo" time="9.652732347" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.65957487] <Event name="StateInfo" time="9.659358987" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.666382862] <Event name="StateInfo" time="9.666173624" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.674566657] <Event name="StateInfo" time="9.674349159" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.683337402] <Event name="StateInfo" time="9.682531542" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.688236946] <Event name="StateInfo" time="9.687955655" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.692764837] <Event name="StateInfo" time="9.69220311" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.698822419] <Event name="StateInfo" time="9.698599759" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.705054893] <Event name="StateInfo" time="9.703319855" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.710285968] <Event name="StateInfo" time="9.709392213" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.733743361] <Event name="StateInfo" time="9.732566112" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.740117438] <Event name="StateInfo" time="9.739619639" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.745480439] <Event name="StateInfo" time="9.742014638" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.750913317] <Event name="StateInfo" time="9.748817443" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.755315588] <Event name="StateInfo" time="9.75414182" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.761481366] <Event name="StateInfo" time="9.760430208" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.764559844] <Event name="StateInfo" time="9.764372538" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.771800999] <Event name="StateInfo" time="9.768849152" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.776540741] <Event name="StateInfo" time="9.775467837" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.781264585] <Event name="StateInfo" time="9.780803976" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.78569489] <Event name="StateInfo" time="9.784757169" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.792525847] <Event name="StateInfo" time="9.791059354" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.798361915] <Event name="StateInfo" time="9.798157756" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.802905812] <Event name="StateInfo" time="9.802485371" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.806872802] <Event name="StateInfo" time="9.806663788" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.811437002] <Event name="StateInfo" time="9.810906288" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.836373455] <Event name="StateInfo" time="9.836164" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.840512862] <Event name="StateInfo" time="9.840321162" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.846724254] <Event name="StateInfo" time="9.845220871" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.851119801] <Event name="StateInfo" time="9.850924498" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.856413331] <Event name="StateInfo" time="9.856211588" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.861401585] <Event name="StateInfo" time="9.861202905" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.867861629] <Event name="StateInfo" time="9.867449422" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.876473558] <Event name="StateInfo" time="9.873633474" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.882780705] <Event name="StateInfo" time="9.882277074" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.896207295] <Event name="StateInfo" time="9.895992027" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.907541413] <Event name="StateInfo" time="9.905534289" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.915595354] <Event name="StateInfo" time="9.912102616" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.921915507] <Event name="StateInfo" time="9.919789677" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.957337316] <Event name="StateInfo" time="9.953007033" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.964021475] <Event name="StateInfo" time="9.96382989" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.971486763] <Event name="StateInfo" time="9.971272316" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.982190151] <Event name="StateInfo" time="9.981992948" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.990045815] <Event name="StateInfo" time="9.988928343" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.996251814] <Event name="StateInfo" time="9.996065149" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.999890429] <Event name="StateInfo" time="9.999679882" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.016931883] <Event name="StateInfo" time="10.016742578" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.019617554] <Event name="StateInfo" time="10.018730161" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.024928676] <Event name="StateInfo" time="10.024709305" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.064082286] <Event name="StateInfo" time="10.063796518" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.072506434] <Event name="StateInfo" time="10.072269367" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.077987914] <Event name="StateInfo" time="10.077774508" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.083009637] <Event name="StateInfo" time="10.081802467" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.087248386] <Event name="StateInfo" time="10.087042203" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.090075632] <Event name="StateInfo" time="10.08981783" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.096947404] <Event name="StateInfo" time="10.09673971" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.101991824] <Event name="StateInfo" time="10.098899947" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.108849242] <Event name="StateInfo" time="10.108441817" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.114821638] <Event name="StateInfo" time="10.112959508" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.119903421] <Event name="StateInfo" time="10.118203658" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.123662712] <Event name="StateInfo" time="10.122480506" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.129526461] <Event name="StateInfo" time="10.129058119" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.136324597] <Event name="StateInfo" time="10.13582143" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.139903374] <Event name="StateInfo" time="10.139698684" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.162726024] <Event name="StateInfo" time="10.162516774" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.171583683] <Event name="StateInfo" time="10.171379909" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.185607223] <Event name="StateInfo" time="10.185146121" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.195456198] <Event name="StateInfo" time="10.195249338" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.20253032] <Event name="StateInfo" time="10.20120423" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.20646173] <Event name="StateInfo" time="10.206266368" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.217781208] <Event name="StateInfo" time="10.21645303" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.224648222] <Event name="StateInfo" time="10.22439816" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.230262101] <Event name="StateInfo" time="10.230068714" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.238518251] <Event name="StateInfo" time="10.238301942" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.243503451] <Event name="StateInfo" time="10.24331302" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.251916653] <Event name="StateInfo" time="10.250452302" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.282542209] <Event name="StateInfo" time="10.282348054" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.289240254] <Event name="StateInfo" time="10.289033325" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.299070036] <Event name="StateInfo" time="10.297672495" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.302040772] <Event name="StateInfo" time="10.30181459" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.305440861] <Event name="StateInfo" time="10.304660531" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.321687484] <Event name="StateInfo" time="10.321494796" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.328142965] <Event name="StateInfo" time="10.32793881" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.332703198] <Event name="StateInfo" time="10.332491899" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.339916666] <Event name="StateInfo" time="10.339631571" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.344324487] <Event name="StateInfo" time="10.344120496" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.347344181] <Event name="StateInfo" time="10.347146518" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.351498768] <Event name="StateInfo" time="10.351313719" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.355127667] <Event name="StateInfo" time="10.354923231" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.364026482] <Event name="StateInfo" time="10.360340117" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.368845816] <Event name="StateInfo" time="10.367908676" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.389247007] <Event name="StateInfo" time="10.387738843" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.393278984] <Event name="StateInfo" time="10.392581773" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.402774017] <Event name="StateInfo" time="10.40255807" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.406410813] <Event name="StateInfo" time="10.406222519" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.411700028] <Event name="StateInfo" time="10.411508431" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.430233063] <Event name="StateInfo" time="10.418511322" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.435980613] <Event name="StateInfo" time="10.433187126" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.446354097] <Event name="StateInfo" time="10.444701198" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.450993064] <Event name="StateInfo" time="10.450373534" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.459053612] <Event name="StateInfo" time="10.458735032" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.468089512] <Event name="StateInfo" time="10.467472103" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.472871429] <Event name="StateInfo" time="10.472608618" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.48122268] <Event name="StateInfo" time="10.480951133" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.502011923] <Event name="StateInfo" time="10.500490076" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.507948023] <Event name="StateInfo" time="10.507742018" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.513701592] <Event name="StateInfo" time="10.513425472" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.51959571] <Event name="StateInfo" time="10.519298849" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.525706844] <Event name="StateInfo" time="10.525347788" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.531495174] <Event name="StateInfo" time="10.531310842" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.538040177] <Event name="StateInfo" time="10.537802002" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.544110568] <Event name="StateInfo" time="10.543414702" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.550224183] <Event name="StateInfo" time="10.549630419" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.557385303] <Event name="StateInfo" time="10.554671704" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.562564861] <Event name="StateInfo" time="10.561823506" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.568580549] <Event name="StateInfo" time="10.568367893" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.571821361] <Event name="StateInfo" time="10.570594837" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.580049429] <Event name="StateInfo" time="10.577434938" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.588043972] <Event name="StateInfo" time="10.587211228" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.592894112] <Event name="StateInfo" time="10.591931875" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.638236629] <Event name="StateInfo" time="10.635015963" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.644551475] <Event name="StateInfo" time="10.642225023" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.652373548] <Event name="StateInfo" time="10.650207756" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.658787103] <Event name="StateInfo" time="10.658334594" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.668321659] <Event name="StateInfo" time="10.667139147" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.673877641] <Event name="StateInfo" time="10.673669713" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.684741379] <Event name="StateInfo" time="10.683155395" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.688702923] <Event name="StateInfo" time="10.68794093" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.694106369] <Event name="StateInfo" time="10.693897816" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.733913979] <Event name="StateInfo" time="10.733042982" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.739664176] <Event name="StateInfo" time="10.739467048" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.752009954] <Event name="StateInfo" time="10.750834304" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.757090043] <Event name="StateInfo" time="10.75663621" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.769714029] <Event name="StateInfo" time="10.767415951" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.774411946] <Event name="StateInfo" time="10.774204148" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.783259967] <Event name="StateInfo" time="10.783051628" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.789438984] <Event name="StateInfo" time="10.789243697" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.799206792] <Event name="StateInfo" time="10.796767958" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.802433032] <Event name="StateInfo" time="10.802117648" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.805387418] <Event name="StateInfo" time="10.805058648" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.859674336] <Event name="StateInfo" time="10.858405156" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.86422707] <Event name="StateInfo" time="10.863810333" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.8709752] <Event name="StateInfo" time="10.87040538" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.878545975] <Event name="StateInfo" time="10.875322646" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.885639695] <Event name="StateInfo" time="10.884729813" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.890116786] <Event name="StateInfo" time="10.88897143" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.898502661] <Event name="StateInfo" time="10.898305614" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.904363669] <Event name="StateInfo" time="10.903658609" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.909646357] <Event name="StateInfo" time="10.909452213" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.913324567] <Event name="StateInfo" time="10.913141824" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.943413243] <Event name="StateInfo" time="10.942042582" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.947947681] <Event name="StateInfo" time="10.947757257" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.961998788] <Event name="StateInfo" time="10.961703886" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.966550986] <Event name="StateInfo" time="10.96635639" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.977113386] <Event name="StateInfo" time="10.976044696" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.985332569] <Event name="StateInfo" time="10.983855351" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [10.989010131] <Event name="StateInfo" time="10.988816763" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.000340351] <Event name="StateInfo" time="10.998908167" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.004348241] <Event name="StateInfo" time="11.00415391" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.008412645] <Event name="StateInfo" time="11.007691233" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.011602075] <Event name="StateInfo" time="11.011164718" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.018642906] <Event name="StateInfo" time="11.018201682" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.022323043] <Event name="StateInfo" time="11.022011459" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.041653047] <Event name="StateInfo" time="11.040988725" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.043927857] <Event name="StateInfo" time="11.04356131" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.046442513] <Event name="StateInfo" time="11.046054223" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.052627253] <Event name="StateInfo" time="11.051618655" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.054828221] <Event name="StateInfo" time="11.054626831" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.06402213] <Event name="StateInfo" time="11.06376635" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.071449602] <Event name="StateInfo" time="11.071257773" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.082966602] <Event name="StateInfo" time="11.081377516" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.092102846] <Event name="StateInfo" time="11.091463525" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.105644431] <Event name="StateInfo" time="11.104818683" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.11287375] <Event name="StateInfo" time="11.112621554" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.122278393] <Event name="StateInfo" time="11.121314373" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.127013853] <Event name="StateInfo" time="11.126817561" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.152909106] <Event name="StateInfo" time="11.150927315" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.167632128] <Event name="StateInfo" time="11.167397722" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.174338884] <Event name="StateInfo" time="11.171939383" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.185943281] <Event name="StateInfo" time="11.182226023" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.190405742] <Event name="StateInfo" time="11.189870584" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.206430538] <Event name="StateInfo" time="11.205712056" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.212431394] <Event name="StateInfo" time="11.212232243" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.231873889] <Event name="StateInfo" time="11.228788472" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.239038972] <Event name="StateInfo" time="11.238832597" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.274622443] <Event name="StateInfo" time="11.273281205" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.284497319] <Event name="StateInfo" time="11.284296199" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.293170232] <Event name="StateInfo" time="11.292466686" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.302018898] <Event name="StateInfo" time="11.301013843" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.311225686] <Event name="StateInfo" time="11.310896708" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.320240465] <Event name="StateInfo" time="11.318978307" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.325713462] <Event name="StateInfo" time="11.325510357" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.332911205] <Event name="StateInfo" time="11.332707246" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.33757359] <Event name="StateInfo" time="11.337146582" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.341780984] <Event name="StateInfo" time="11.339523973" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.347381701] <Event name="StateInfo" time="11.347056637" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.371623229] <Event name="StateInfo" time="11.363539613" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.379301976] <Event name="StateInfo" time="11.379010383" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.381929791] <Event name="StateInfo" time="11.381599406" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.394702005] <Event name="StateInfo" time="11.394197516" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.401842275] <Event name="StateInfo" time="11.401645002" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.404504351] <Event name="StateInfo" time="11.404151786" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.407381171] <Event name="StateInfo" time="11.406948663" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.417699673] <Event name="StateInfo" time="11.417297223" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.423192535] <Event name="StateInfo" time="11.42298677" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.4262013] <Event name="StateInfo" time="11.425838999" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.428458599] <Event name="StateInfo" time="11.428133706" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.438133906] <Event name="StateInfo" time="11.43782108" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.44058033] <Event name="StateInfo" time="11.439817227" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.447416395] <Event name="StateInfo" time="11.447234748" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.449905359] <Event name="StateInfo" time="11.449591668" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.468547152] <Event name="StateInfo" time="11.468245638" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.477296262] <Event name="StateInfo" time="11.471155006" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.48152428] <Event name="StateInfo" time="11.481214364" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.487509778] <Event name="StateInfo" time="11.487267044" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.490150418] <Event name="StateInfo" time="11.489896098" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.498837797] <Event name="StateInfo" time="11.498570919" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.501405839] <Event name="StateInfo" time="11.501002408" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.50380156] <Event name="StateInfo" time="11.50358139" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.509989499] <Event name="StateInfo" time="11.5097907" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.512682707] <Event name="StateInfo" time="11.512332374" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.52164695] <Event name="StateInfo" time="11.521225041" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.524727091] <Event name="StateInfo" time="11.524536589" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.532571697] <Event name="StateInfo" time="11.531851898" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.540364402] <Event name="StateInfo" time="11.540179799" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.547139042] <Event name="StateInfo" time="11.546444636" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.558129344] <Event name="StateInfo" time="11.552768519" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.582081981] <Event name="StateInfo" time="11.581787307" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.587282056] <Event name="StateInfo" time="11.585064772" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.59141235] <Event name="StateInfo" time="11.591221619" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.604902836] <Event name="StateInfo" time="11.603801536" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.607597417] <Event name="StateInfo" time="11.60731194" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.60964984] <Event name="StateInfo" time="11.609359449" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.612552499] <Event name="StateInfo" time="11.611506847" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.618438114] <Event name="StateInfo" time="11.617384163" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.624325132] <Event name="StateInfo" time="11.624126506" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.627936199] <Event name="StateInfo" time="11.627740516" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.635004059] <Event name="StateInfo" time="11.634314647" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.639616603] <Event name="StateInfo" time="11.639226776" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.643853189] <Event name="StateInfo" time="11.64366621" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.64997801] <Event name="StateInfo" time="11.649775863" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.654989482] <Event name="StateInfo" time="11.653049382" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.660212713] <Event name="StateInfo" time="11.660011491" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.666593595] <Event name="StateInfo" time="11.666406072" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.690417759] <Event name="StateInfo" time="11.690234697" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.702825201] <Event name="StateInfo" time="11.7018353" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.709381329] <Event name="StateInfo" time="11.709206515" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.715404679] <Event name="StateInfo" time="11.715188009" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.719561719] <Event name="StateInfo" time="11.719385104" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.723022339] <Event name="StateInfo" time="11.722848124" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.731109054] <Event name="StateInfo" time="11.729731218" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.73741267] <Event name="StateInfo" time="11.735620435" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.74434501] <Event name="StateInfo" time="11.743118891" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.747085822] <Event name="StateInfo" time="11.746912315" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.757309127] <Event name="StateInfo" time="11.757119271" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.77026876] <Event name="StateInfo" time="11.769064643" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.791461848] <Event name="StateInfo" time="11.79104704" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.797048935] <Event name="StateInfo" time="11.796873045" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.801578026] <Event name="StateInfo" time="11.801400799" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.813996424] <Event name="StateInfo" time="11.813040553" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.820534994] <Event name="StateInfo" time="11.820328587" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.825800755] <Event name="StateInfo" time="11.825206024" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.831411323] <Event name="StateInfo" time="11.831226555" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.841269893] <Event name="StateInfo" time="11.841068649" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.856180408] <Event name="StateInfo" time="11.855036104" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.862984621] <Event name="StateInfo" time="11.862785397" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.871177295] <Event name="StateInfo" time="11.870974297" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.899334966] <Event name="StateInfo" time="11.899156223" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.907973027] <Event name="StateInfo" time="11.90688508" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.913588218] <Event name="StateInfo" time="11.913400122" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.920424521] <Event name="StateInfo" time="11.919448718" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.92847809] <Event name="StateInfo" time="11.928299493" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.937385247] <Event name="StateInfo" time="11.937190155" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.9419972] <Event name="StateInfo" time="11.941811583" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.95209224] <Event name="StateInfo" time="11.951016375" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.958087251] <Event name="StateInfo" time="11.957599075" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.964547555] <Event name="StateInfo" time="11.964362706" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.972455866] <Event name="StateInfo" time="11.972271119" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.979498992] <Event name="StateInfo" time="11.976889933" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [11.984639328] <Event name="StateInfo" time="11.982057103" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.014935442] <Event name="StateInfo" time="12.014141679" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.017915421] <Event name="StateInfo" time="12.017720031" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.022244114] <Event name="StateInfo" time="12.021657868" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.025902263] <Event name="StateInfo" time="12.025714226" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.033146777] <Event name="StateInfo" time="12.032961704" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.038035168] <Event name="StateInfo" time="12.037857377" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.045581668] <Event name="StateInfo" time="12.044049469" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.052472883] <Event name="StateInfo" time="12.051705312" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.059162671] <Event name="StateInfo" time="12.058096944" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.064363213] <Event name="StateInfo" time="12.062380637" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.071418624] <Event name="StateInfo" time="12.06931429" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.078605108] <Event name="StateInfo" time="12.077634906" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.084658778] <Event name="StateInfo" time="12.084453322" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.111791762] <Event name="StateInfo" time="12.111591297" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.118754612] <Event name="StateInfo" time="12.117700959" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.123582651] <Event name="StateInfo" time="12.12306615" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.128076371] <Event name="StateInfo" time="12.127299868" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.132018992] <Event name="StateInfo" time="12.131845784" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.136396126] <Event name="StateInfo" time="12.135969397" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.140528114] <Event name="StateInfo" time="12.140330206" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.14561622] <Event name="StateInfo" time="12.143636509" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.148342214] <Event name="StateInfo" time="12.148153479" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.154126994] <Event name="StateInfo" time="12.153483349" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.158765477] <Event name="StateInfo" time="12.158152032" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.16270695] <Event name="StateInfo" time="12.162536959" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.166876814] <Event name="StateInfo" time="12.165979427" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.171197881] <Event name="StateInfo" time="12.17059495" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.176306885] <Event name="StateInfo" time="12.175443776" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.180773015] <Event name="StateInfo" time="12.180255864" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.18560077] <Event name="StateInfo" time="12.184576962" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.188871749] <Event name="StateInfo" time="12.18868519" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.206971361] <Event name="StateInfo" time="12.205951891" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.212613784] <Event name="StateInfo" time="12.212029769" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.214713798] <Event name="StateInfo" time="12.214522275" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.219908563] <Event name="StateInfo" time="12.219737341" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.224550763] <Event name="StateInfo" time="12.224357623" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.228865252] <Event name="StateInfo" time="12.228682873" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.232924232] <Event name="StateInfo" time="12.232745044" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.237026499] <Event name="StateInfo" time="12.236834039" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.239621217] <Event name="StateInfo" time="12.239452689" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.24323385] <Event name="StateInfo" time="12.24304838" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.249690309] <Event name="StateInfo" time="12.248808316" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.253665327] <Event name="StateInfo" time="12.253491833" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.258004015] <Event name="StateInfo" time="12.256933066" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.26294379] <Event name="StateInfo" time="12.262766831" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.267186125] <Event name="StateInfo" time="12.267017698" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.272980738] <Event name="StateInfo" time="12.271852272" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.277616952] <Event name="StateInfo" time="12.276763588" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.289710587] <Event name="StateInfo" time="12.289518954" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.315366329] <Event name="StateInfo" time="12.315186252" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.320098856] <Event name="StateInfo" time="12.319899733" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.329203905] <Event name="StateInfo" time="12.3282893" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.337937851] <Event name="StateInfo" time="12.337747912" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.34281884] <Event name="StateInfo" time="12.342632182" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.350821338] <Event name="StateInfo" time="12.350593541" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.357386316] <Event name="StateInfo" time="12.354677835" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.36084293] <Event name="StateInfo" time="12.360656106" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.364469367] <Event name="StateInfo" time="12.364290595" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.369205516] <Event name="StateInfo" time="12.369002143" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.374107382] <Event name="StateInfo" time="12.373911023" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.37868643] <Event name="StateInfo" time="12.378498687" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.38323569] <Event name="StateInfo" time="12.382411495" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.387763223] <Event name="StateInfo" time="12.387293965" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.392928893] <Event name="StateInfo" time="12.391563159" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.396031239] <Event name="StateInfo" time="12.395844713" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.418395545] <Event name="StateInfo" time="12.418098894" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.427466491] <Event name="StateInfo" time="12.427271274" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.434802709] <Event name="StateInfo" time="12.433679018" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.439172272] <Event name="StateInfo" time="12.438996063" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.446571389] <Event name="StateInfo" time="12.446383538" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.453180456] <Event name="StateInfo" time="12.452010986" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.459746736] <Event name="StateInfo" time="12.459561121" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.462240777] <Event name="StateInfo" time="12.462079395" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.469795155] <Event name="StateInfo" time="12.469605071" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.474273011] <Event name="StateInfo" time="12.474095351" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.481966017] <Event name="StateInfo" time="12.481780619" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.487673748] <Event name="StateInfo" time="12.486907866" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.493179039] <Event name="StateInfo" time="12.492986741" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.500093056] <Event name="StateInfo" time="12.499776117" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.505137888] <Event name="StateInfo" time="12.5049462" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.530430224] <Event name="StateInfo" time="12.530240393" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.537883069] <Event name="StateInfo" time="12.537696462" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.542211792] <Event name="StateInfo" time="12.54202264" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.544415435] <Event name="StateInfo" time="12.544241287" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.549813298] <Event name="StateInfo" time="12.54959277" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.554349222] <Event name="StateInfo" time="12.55382008" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.559080167] <Event name="StateInfo" time="12.558193367" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.563341018] <Event name="StateInfo" time="12.5617108" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.566566044] <Event name="StateInfo" time="12.566387175" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.571528314] <Event name="StateInfo" time="12.570588845" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.576598725] <Event name="StateInfo" time="12.57611182" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.578758868] <Event name="StateInfo" time="12.578579546" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.583150286] <Event name="StateInfo" time="12.582974498" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.587701333] <Event name="StateInfo" time="12.587519657" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.593219856] <Event name="StateInfo" time="12.592642852" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.597905821] <Event name="StateInfo" time="12.596933932" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.603140002] <Event name="StateInfo" time="12.602954851" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.606489546] <Event name="StateInfo" time="12.606317577" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.615063015] <Event name="StateInfo" time="12.613597269" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.621905316] <Event name="StateInfo" time="12.620602292" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.659285649] <Event name="StateInfo" time="12.653345712" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.665537075] <Event name="StateInfo" time="12.665357223" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.670965965] <Event name="StateInfo" time="12.670772197" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.677511577] <Event name="StateInfo" time="12.677325441" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.687193838] <Event name="StateInfo" time="12.685010089" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.699961572] <Event name="StateInfo" time="12.691428319" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.708934736] <Event name="StateInfo" time="12.708739478" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.714777234] <Event name="StateInfo" time="12.71346155" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.721373683] <Event name="StateInfo" time="12.721167751" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.726295776] <Event name="StateInfo" time="12.726112967" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.749956389] <Event name="StateInfo" time="12.749766683" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.752390658] <Event name="StateInfo" time="12.752219603" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.762588759] <Event name="StateInfo" time="12.761062327" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.767434772] <Event name="StateInfo" time="12.76678881" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.771734356] <Event name="StateInfo" time="12.770850314" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.776138153] <Event name="StateInfo" time="12.775606468" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.779994014] <Event name="StateInfo" time="12.779811953" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.783291743] <Event name="StateInfo" time="12.783120528" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.789421553] <Event name="StateInfo" time="12.789034579" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.793605109] <Event name="StateInfo" time="12.792788493" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.811226994] <Event name="StateInfo" time="12.798113463" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.813725029] <Event name="StateInfo" time="12.813293841" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.815601381] <Event name="StateInfo" time="12.815401778" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.817294877] <Event name="StateInfo" time="12.817122603" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.819192774] <Event name="StateInfo" time="12.818960728" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.822005664] <Event name="StateInfo" time="12.821590185" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.8256631] <Event name="StateInfo" time="12.824862562" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.830099415] <Event name="StateInfo" time="12.829898832" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.84961556] <Event name="StateInfo" time="12.848822833" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.860087208] <Event name="StateInfo" time="12.854576279" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.864256506] <Event name="StateInfo" time="12.864064721" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.868657504] <Event name="StateInfo" time="12.868071237" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.871859621] <Event name="StateInfo" time="12.871674394" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.877003827] <Event name="StateInfo" time="12.876192161" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.880115695] <Event name="StateInfo" time="12.879913818" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.88529771] <Event name="StateInfo" time="12.885113049" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.890528093] <Event name="StateInfo" time="12.889944457" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.898744977] <Event name="StateInfo" time="12.898542436" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.900338248] <Event name="StateInfo" time="12.900167019" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.903629432] <Event name="StateInfo" time="12.903452273" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.908885896] <Event name="StateInfo" time="12.908710288" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.91183722] <Event name="StateInfo" time="12.911653562" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.runTaskState_INFO [12.916205467] ***** No AprilTag found.
+TaskAutoPickupCoralFromStation.autoTask_INFO [12.920122546] <Event name="StateInfo" time="12.919943232" tag="vvvvv" TaskAutoPickupCoralFromStation.state="DONE" />
+TaskAutoPickupCoralFromStation.stopSubsystems_INFO [12.92317269] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [12.927739413] Canceling auto task operation.
+TaskElevatorArm.stopSubsystems_INFO [12.929381112] Stopping subsystems.
+CmdReefscapeAuto.cmdPeriodic_INFO [12.939379704] <Event name="StateInfo" time="12.938082307" tag="vvvvv" CmdReefscapeAuto.state="APPROACH_REEF" />
+TaskElevatorArm.setCoralScorePosition_INFO [12.942665848] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=155.0,elevatorPos=70.0), event=null)
+purePursuitDrive.start_INFO [12.952146003] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-256.253085,y=656.292298,angle=123.736576),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.06325074281200656,pose=(x=-250.664895,y=626.562942,angle=122.654209),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222225,pose=(x=-249.379597,y=619.725110,angle=122.405261),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-236.961397,y=553.659873,angle=120.000000),vel=0.0)])
+CmdReefscapeAuto.cmdPeriodic_INFO [12.962275381] <Event name="StateInfo" time="12.959628633" tag="^^^^^" CmdReefscapeAuto.state="APPROACH_REEF" RobotPose=(x=-256.253085,y=656.292298,angle=123.736576) TargetPose=(x=-236.961397,y=553.659873,angle=120.000000) vel=(x=0.000000,y=0.000000,angle=0.000000) Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=0.000000,y=0.000000,angle=0.000000),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.06325074281200656,pose=(x=21.619382,y=21.158091,angle=-1.082367),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222225,pose=(x=26.591899,y=26.024509,angle=-1.331315),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=74.634971,y=73.042488,angle=-3.736576),vel=0.0)]) />
+TaskElevatorArm.autoTask_INFO [13.007713319] <Event name="StateInfo" time="13.007136143" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [13.028225575] <Event name="StateInfo" time="13.028052021" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.0460907] <Event name="StateInfo" time="13.045907056" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.065690217] <Event name="StateInfo" time="13.065515668" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.10663074] <Event name="StateInfo" time="13.106470483" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.128305019] <Event name="StateInfo" time="13.128133179" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.143148283] <Event name="StateInfo" time="13.142981436" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.178721231] <Event name="StateInfo" time="13.176220159" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.234889401] <Event name="StateInfo" time="13.233434295" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.275595167] <Event name="StateInfo" time="13.274786427" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.307950249] <Event name="StateInfo" time="13.304874847" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.346564855] <Event name="StateInfo" time="13.346341122" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.370167033] <Event name="StateInfo" time="13.36998119" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.404277774] <Event name="StateInfo" time="13.401888415" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.434364883] <Event name="StateInfo" time="13.434183616" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.511007846] <Event name="StateInfo" time="13.509687848" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.53816867] <Event name="StateInfo" time="13.537993253" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.558734055] <Event name="StateInfo" time="13.558557224" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.576594643] <Event name="StateInfo" time="13.575991588" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.616648567] <Event name="StateInfo" time="13.615749543" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.64461394] <Event name="StateInfo" time="13.644263224" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.65841467] <Event name="StateInfo" time="13.658050677" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.682929542] <Event name="StateInfo" time="13.682521708" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.718426165] <Event name="StateInfo" time="13.718257814" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcRobotBase.startCompetition_INFO [15.00004219] *** Transitioning from AUTO_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [15.010893111] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [15.059105335] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.000931s (freq=1074.144Hz, min=0.000000s, max=0.499423s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000060s
+[07]               UpdateTask=0.000523s
+[02]                StartMode=0.000001s
+[06]         PostPeriodicTask=0.000147s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=11.084328s
+[01]           RobotStartMode=0.000003s
+[05]                 Periodic=0.000121s
+[10]            RobotStopMode=0.000000s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.063433725] TrcWatchdogMgr: STANDALONE_TASK=9.295698823529412E-5/0.9886902668117648
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.065295738] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.7717873767763408E-5/0.010895009069133274
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.066667086] TrcMotor.odometryTask: STANDALONE_TASK=4.5421081067745196E-4/5.737543118975397E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.068006741] lfDriveMotor.odometryCleanupTask: STOP_TASK=4.85663E-4/7.512040311
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.069441196] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=5.536787506400409E-6/0.010895007488479262
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.071033605] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=9.173458397337431E-6/0.010895005608550947
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.072652276] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=5.568745903737839E-6/0.010895004661162316
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.074634186] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=6.798577790578598E-5/0.01089500378187404
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.076921096] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=5.132019508448541E-5/0.010895014661034307
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.0782721] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=4.5640627240143367E-5/0.010895018489887352
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.080099773] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=4.643555113272751E-5/0.010895353826827082
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.082233487] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.004094187000841043/0.012455774932716568
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.083729617] TrcSwerveDriveBase.stopTask: STOP_TASK=0.00256281/7.5121385655
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.085392168] purePursuitDrive.driveTask: POST_PERIODIC_TASK=0.018938054855218853/0.048223213107744106
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.087642484] LED: OUTPUT_TASK=3.532776999872008E-5/0.010895360284013823
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.089892782] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=3.0594805478049406E-4/0.010895308930884423
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.091242367] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=8.588207832096237E-6/0.010895288132198618
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.093374732] Elevator.motor.pidCtrlTask: OUTPUT_TASK=1.568244276938828E-4/0.010895281986818531
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.096404091] Winch.motor.pidCtrlTask: OUTPUT_TASK=1.7847584604555925E-4/0.010895301031865881
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.098224075] TaskElevatorArm: POST_PERIODIC_TASK=8.505990092783619E-6/9.354128337176333E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.100129048] TaskAutoScoreCoral: POST_PERIODIC_TASK=2.4512144092570036E-4/0.004145837571254567
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.101899625] TaskAutoPickupCoralFromStation: POST_PERIODIC_TASK=0.0038886406212624586/0.008352642355481728
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.104040406] TaskAutoClimb: POST_PERIODIC_TASK=8.455879915730336E-5/0.0045157183230337085
