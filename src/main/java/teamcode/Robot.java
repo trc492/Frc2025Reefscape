@@ -33,6 +33,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
@@ -507,10 +508,9 @@ public class Robot extends FrcRobotBase
                     if (object != null)
                     {
                         pipelineType = photonVisionFront.getPipeline();
-                        dashboard.displayPrintf(
-                            lineNum, "Front(%s):%s",
-                            pipelineType == PipelineType.APRILTAG? object.target.getFiducialId(): pipelineType,
-                            object);
+                        SmartDashboard.putString(
+                            "FrontCam",
+                            String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
                     }
                     lineNum++;
                 }
@@ -521,10 +521,9 @@ public class Robot extends FrcRobotBase
                     if (object != null)
                     {
                         pipelineType = photonVisionFront.getPipeline();
-                        dashboard.displayPrintf(
-                            lineNum, "Back(%s):%s",
-                            pipelineType == PipelineType.APRILTAG? object.target.getFiducialId(): pipelineType,
-                            object);
+                        SmartDashboard.putString(
+                            "BackCam",
+                            String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
                     }
                     lineNum++;
                 }
