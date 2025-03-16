@@ -24,8 +24,6 @@ package teamcode;
 
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import teamcode.subsystems.RobotBase.RobotType;
-import trclib.drivebase.TrcDriveBase.DriveOrientation;
-import trclib.driverio.TrcGameController.DriveMode;
 import trclib.pathdrive.TrcPose2D;
 
 /**
@@ -49,7 +47,6 @@ public class RobotParams
         public static final boolean useCommStatusMonitor        = false;
         public static final boolean invertedRobot               = false;
         // Status Update
-        public static final boolean doStatusUpdate              = !inCompetition;
         public static final boolean showLoopTime                = false;
         public static final boolean showPowerConsumption        = false;
         public static final boolean showDriveBase               = false;
@@ -168,16 +165,9 @@ public class RobotParams
         public static final String STEER_ZERO_CAL_FILE          = TEAM_FOLDER_PATH + "/SteerZeroCalibration.txt";
         public static final String FIELD_ZERO_CAL_FILE          = TEAM_FOLDER_PATH + "/FieldZeroCalibration.txt";
         public static final double DASHBOARD_UPDATE_INTERVAL    = 0.1;      // in msec
-        public static final String ROBOT_CODEBASE               = "Robot2025";
+        public static final String ROBOT_CODEBASE               = "Reefscape";
         public static final double ROBOT_LENGTH                 = 35.5;
         public static final double ROBOT_WIDTH                  = 35.5;
-        // Robot Drive Parameters.
-        public static final DriveMode DRIVE_MODE                = DriveMode.ArcadeMode;
-        public static final DriveOrientation DRIVE_ORIENTATION  = DriveOrientation.FIELD;
-        public static final double DRIVE_SLOW_SCALE             = 0.175;
-        public static final double DRIVE_NORMAL_SCALE           = 1.0;
-        public static final double TURN_SLOW_SCALE              = 0.15;
-        public static final double TURN_NORMAL_SCALE            = 0.6;
         public static final double DRIVE_RAMP_RATE              = 0.25;
     }   //class Robot
 
@@ -251,36 +241,6 @@ public class RobotParams
             new TrcPose2D(-87.0, 137.0, -54.0);
         public static final TrcPose2D FAR_SIDE_LOOKOUT_BLUE =
             new TrcPose2D(-230.0, 137.0, 126.0);
-
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_START_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_SIDE_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_SCORE_CORAL_CENTER_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
-        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_SIDE_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D PROCESSOR_PICKUP_CORAL_CENTER_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
-        // NOTE: This is a just a mirror of the processor positions
-        public static final TrcPose2D FAR_SCORE_CORAL_START_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_SCORE_CORAL_SIDE_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_SCORE_CORAL_CENTER_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
-        public static final TrcPose2D FAR_PICKUP_CORAL_SIDE_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_PICKUP_CORAL_CENTER_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-
-        public static final TrcPose2D PROCESSOR_CORAL_STATION_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
-        public static final TrcPose2D FAR_CORAL_STATION_BLUE =
-            new TrcPose2D(0.0, 0.0, 0.0); //TODO: tune this
     }   //class Game
 
     /**

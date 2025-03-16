@@ -39,8 +39,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.drivebase.FrcRobotDrive.ImuType;
+import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcDashboard;
 import frclib.driverio.FrcMatchInfo;
+import frclib.driverio.FrcUserChoices;
 import frclib.driverio.FrcXboxController;
 import frclib.robotcore.FrcRobotBase;
 import frclib.sensor.FrcAHRSGyro;
@@ -63,6 +65,7 @@ import teamcode.vision.PhotonVision.PipelineType;
 import trclib.controller.TrcPidController;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
+import trclib.driverio.TrcGameController.DriveMode;
 import trclib.motor.TrcMotor;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcDbgTrace;
@@ -83,8 +86,117 @@ import trclib.vision.TrcVisionTargetInfo;
  */
 public class Robot extends FrcRobotBase
 {
+    /**
+     * This class encapsulates all user choices for Robot operation modes from the smart dashboard.
+     *
+     * To add a robot choice, follow the steps below:
+     * 1. Add a DBKEY string constant.
+     * 2. If the choice is a choice menu, create a FrcChoiceMenu variable for it, create the enum type if necessary,
+     *    add code to create the FrcChoiceMenu object and add choices to it.
+     * 3. Call userChoices to add the new choice object and provide default value if necessary.
+     * 4. Add a getter method for the new choice.
+     * 5. Add an entry of the new choice to the toString method.
+     */
+    public static class RobotChoices
+    {
+        // Smart dashboard keys for Robot choices.
+        private static final String DBKEY_ROBOT_DRIVE_MODE = "Robot/DriveMode";                 //Choices
+        private static final String DBKEY_ROBOT_DRIVE_ORIENTATION = "Robot/DriveOrientation";   //Choices
+        private static final String DBKEY_ROBOT_DRIVE_NORMAL_SCALE = "Robot/DriveNormalScale";  //Number
+        private static final String DBKEY_ROBOT_DRIVE_SLOW_SCALE = "Robot/DriveSlowScale";      //Number
+        private static final String DBKEY_ROBOT_TURN_NORMAL_SCALE = "Robot/TurnNormalScale";    //Number
+        private static final String DBKEY_ROBOT_TURN_SLOW_SCALE = "Robot/TurnNormalScale";      //Number
+        private static final String DBKEY_ROBOT_SUBSYSTEM_STATUS_ON = "Robot/SubsystemStatusOn";//Boolean
+
+        private final FrcUserChoices userChoices = new FrcUserChoices();
+        // Choice menus
+        private final FrcChoiceMenu<DriveMode> driveModeMenu;
+        private final FrcChoiceMenu<DriveOrientation> driveOrientationMenu;
+
+        public RobotChoices()
+        {
+            //
+            // Create robot mode specific choice menus.
+            //
+            driveModeMenu = new FrcChoiceMenu<>(DBKEY_ROBOT_DRIVE_MODE);
+            driveOrientationMenu = new FrcChoiceMenu<>(DBKEY_ROBOT_DRIVE_ORIENTATION);
+
+            //
+            // Populate robot mode choice menus.
+            //
+            driveModeMenu.addChoice("Tank", DriveMode.TankMode);
+            driveModeMenu.addChoice("Holonomic", DriveMode.HolonomicMode);
+            driveModeMenu.addChoice("Arcade", DriveMode.ArcadeMode, true, true);
+
+            driveOrientationMenu.addChoice("Inverted", DriveOrientation.INVERTED);
+            driveOrientationMenu.addChoice("Robot", DriveOrientation.ROBOT);
+            driveOrientationMenu.addChoice("Field", DriveOrientation.FIELD, true, true);
+            //
+            // Initialize dashboard with default choice values.
+            //
+            userChoices.addChoiceMenu(DBKEY_ROBOT_DRIVE_MODE, driveModeMenu);
+            userChoices.addChoiceMenu(DBKEY_ROBOT_DRIVE_ORIENTATION, driveOrientationMenu);
+            userChoices.addNumber(DBKEY_ROBOT_DRIVE_NORMAL_SCALE, 1.0);
+            userChoices.addNumber(DBKEY_ROBOT_DRIVE_SLOW_SCALE, 0.175);
+            userChoices.addNumber(DBKEY_ROBOT_TURN_NORMAL_SCALE, 0.6);
+            userChoices.addNumber(DBKEY_ROBOT_TURN_SLOW_SCALE, 0.15);
+            userChoices.addBoolean(DBKEY_ROBOT_SUBSYSTEM_STATUS_ON, false);
+        }   //RobotChoices
+
+        //
+        // Getters for robot choices.
+        //
+        public DriveMode getDriveMode()
+        {
+            return driveModeMenu.getCurrentChoiceObject();
+        }   //getDriveMode
+
+        public DriveOrientation getDriveOrientation()
+        {
+            return driveOrientationMenu.getCurrentChoiceObject();
+        }   //getDriveOrientation
+
+        public double getDriveNormalScale()
+        {
+            return userChoices.getUserNumber(DBKEY_ROBOT_DRIVE_NORMAL_SCALE);
+        }   //getDriveNormalScale
+
+        public double getDriveSlowScale()
+        {
+            return userChoices.getUserNumber(DBKEY_ROBOT_DRIVE_SLOW_SCALE);
+        }   //getDriveSlowScale
+
+        public double getTurnNormalScale()
+        {
+            return userChoices.getUserNumber(DBKEY_ROBOT_TURN_NORMAL_SCALE);
+        }   //getTurnNormalScale
+
+        public double getTurnSlowScale()
+        {
+            return userChoices.getUserNumber(DBKEY_ROBOT_TURN_SLOW_SCALE);
+        }   //getTurnSlowScale
+
+        public boolean getSubsystemStatusOn()
+        {
+            return userChoices.getUserBoolean(DBKEY_ROBOT_SUBSYSTEM_STATUS_ON);
+        }   //geteSubsystemStatusOn
+
+        @Override
+        public String toString()
+        {
+            return "driveMode=\"" + getDriveMode() + "\" " +
+                   "driveOrientation=\"" + getDriveOrientation() + "\" " +
+                   "driveNormalScale=\"" + getDriveNormalScale() + "\" " +
+                   "driveSlowScale=\"" + getDriveSlowScale() + "\" " +
+                   "turnNormalScale=\"" + getTurnNormalScale() + "\" " +
+                   "turnSlowScale=\"" + getTurnSlowScale() + "\" " +
+                   "subsystemStatusOn=" + getSubsystemStatusOn();
+        }   //toString
+    }   //class RobotChoices
+
     // Global objects.
     public static final String moduleName = Robot.class.getSimpleName();
+    public static final RobotChoices robotChoices = new RobotChoices();
     public final TrcDbgTrace globalTracer = TrcDbgTrace.getGlobalTracer();
     public final FrcDashboard dashboard = FrcDashboard.getInstance();
     private double nextDashboardUpdateTime = TrcTimer.getCurrentTime();

@@ -41,16 +41,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 {
     private static final String moduleName = FrcTeleOp.class.getSimpleName();
     protected static final boolean traceButtonEvents = true;
+
     //
     // Global objects.
     //
     protected final Robot robot;
-    private double driveSpeedScale = RobotParams.Robot.DRIVE_NORMAL_SCALE;
-    private double turnSpeedScale = RobotParams.Robot.TURN_NORMAL_SCALE;
+    private double driveSpeedScale = Robot.robotChoices.getDriveNormalScale();
+    private double turnSpeedScale = Robot.robotChoices.getTurnNormalScale();
     private boolean controlsEnabled = false;
     protected boolean driverAltFunc = false;
     protected boolean operatorAltFunc = false;
-    private boolean subsystemStatusOn = true;
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
     private double prevCoralArmPower = 0.0;
@@ -95,7 +95,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         if (robot.robotDrive != null)
         {
             // Set robot to FIELD by default but don't change the heading.
-            robot.setDriveOrientation(RobotParams.Robot.DRIVE_ORIENTATION, false);
+            robot.setDriveOrientation(Robot.robotChoices.getDriveOrientation(), false);
             // Enable AprilTag vision for re-localization.
             if (robot.photonVisionFront != null)
             {
@@ -168,8 +168,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.robotDrive != null)
                 {
                     boolean showDriveBaseStatus =
-                        RobotParams.Preferences.showDriveBase &&
-                        (RobotParams.Preferences.doStatusUpdate || subsystemStatusOn);
+                        RobotParams.Preferences.showDriveBase && Robot.robotChoices.getSubsystemStatusOn();
                     if (relocalizing)
                     {
                         if (robotFieldPose == null)
@@ -197,7 +196,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         double[] driveInputs;
 
                         driveInputs = robot.driverController.getDriveInputs(
-                            RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
+                            Robot.robotChoices.getDriveMode(), true, driveSpeedScale, turnSpeedScale);
                         if (robot.robotDrive.driveBase.supportsHolonomicDrive())
                         {
                             double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
@@ -286,7 +285,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             //
             // Update robot status.
             //
-            if (RobotParams.Preferences.doStatusUpdate || subsystemStatusOn)
+            if (Robot.robotChoices.getSubsystemStatusOn())
             {
                 lineNum = robot.updateStatus(lineNum);
             }
@@ -399,14 +398,14 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case RightBumper:
                 if (pressed)
                 {
-                    driveSpeedScale = RobotParams.Robot.DRIVE_SLOW_SCALE;
-                    turnSpeedScale = RobotParams.Robot.TURN_SLOW_SCALE;
+                    driveSpeedScale = Robot.robotChoices.getDriveSlowScale();
+                    turnSpeedScale = Robot.robotChoices.getTurnSlowScale();
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Slow Drive");
                 }
                 else
                 {
-                    driveSpeedScale = RobotParams.Robot.DRIVE_NORMAL_SCALE;
-                    turnSpeedScale = RobotParams.Robot.TURN_NORMAL_SCALE;
+                    driveSpeedScale = Robot.robotChoices.getDriveNormalScale();
+                    turnSpeedScale = Robot.robotChoices.getTurnNormalScale();
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Normal Drive");
                 }
                 break;
@@ -455,44 +454,33 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Start:
-                if (driverAltFunc)
+                if (robot.photonVisionFront != null &&
+                    robot.photonVisionFront.getPipeline() == PipelineType.APRILTAG ||
+                    robot.photonVisionBack != null &&
+                    robot.photonVisionBack.getPipeline() == PipelineType.APRILTAG)
                 {
-                    if (pressed)
+                    // On press of the button, we will start looking for AprilTag for re-localization.
+                    // On release of the button, we will set the robot's field location if we found the
+                    // AprilTag.
+                    relocalizing = pressed;
+                    if (!pressed)
                     {
-                        subsystemStatusOn = !subsystemStatusOn;
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Toggle Subsystem Status: status=" + subsystemStatusOn);
-                    }
-                }
-                else
-                {
-                    if (robot.photonVisionFront != null &&
-                        robot.photonVisionFront.getPipeline() == PipelineType.APRILTAG ||
-                        robot.photonVisionBack != null &&
-                        robot.photonVisionBack.getPipeline() == PipelineType.APRILTAG)
-                    {
-                        // On press of the button, we will start looking for AprilTag for re-localization.
-                        // On release of the button, we will set the robot's field location if we found the
-                        // AprilTag.
-                        relocalizing = pressed;
-                        if (!pressed)
+                        if (robotFieldPose != null)
                         {
-                            if (robotFieldPose != null)
-                            {
-                                robot.globalTracer.traceInfo(
-                                    moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
-                                robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);
-                                robotFieldPose = null;
-                            }
-                            else
-                            {
-                                robot.globalTracer.traceInfo(
-                                    moduleName, ">>>>> Finish re-localizing: AprilTag not found.");
-                            }
+                            robot.globalTracer.traceInfo(
+                                moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
+                            robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);
+                            robotFieldPose = null;
                         }
                         else
                         {
-                            robot.globalTracer.traceInfo(moduleName, ">>>>> Start re-localizing ...");
+                            robot.globalTracer.traceInfo(
+                                moduleName, ">>>>> Finish re-localizing: AprilTag not found.");
                         }
+                    }
+                    else
+                    {
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Start re-localizing ...");
                     }
                 }
                 break;

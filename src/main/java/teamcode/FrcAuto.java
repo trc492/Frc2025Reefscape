@@ -493,7 +493,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             //
             // Update robot status.
             //
-            if (RobotParams.Preferences.doStatusUpdate)
+            if (Robot.robotChoices.getSubsystemStatusOn())
             {
                 robot.updateStatus(2);
             }
