@@ -185,7 +185,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 RobotParams.Game.APRILTAG_FAR_LEFT_REEF[alliance == Alliance.Red? 0: 1];
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
-                                visionXOffset + (scoreRightSide? 5.5: -10.5), visionYOffset - 21.0, event);
+                                visionXOffset + (scoreRightSide? 8.5: -10.5), visionYOffset - 22.5, event);
                         }
                         else
                         {
@@ -193,7 +193,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
-                                visionXOffset + (scoreRightSide? 5.5: -10.5), visionYOffset - 17.75, event);
+                                visionXOffset + (scoreRightSide? 7.5: -10.5), visionYOffset - 10.5, event);
                         }
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     }
@@ -241,7 +241,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         }
 
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
-                        TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 20.0, -30.0);
+                        TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 20.0, -45.0);
                         // AprilTag angle is reversed from the robot.
                         targetPose.angle -= 180.0;
                         robot.globalTracer.traceInfo(
@@ -338,7 +338,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
                         null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2,
-                        scoreRightSide? 4.5: -10.5, -21.0, event);
+                        scoreRightSide? 6.5: -10.5, -18.5, event);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;

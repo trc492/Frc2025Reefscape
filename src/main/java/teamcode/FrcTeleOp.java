@@ -357,24 +357,20 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case B:
                 // Turtle mode.
-                if (pressed)
-                {
-                    robot.turtle();
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
-                }
+                // if (pressed)
+                // {
+                //     robot.turtle();
+                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
+                // }
 
                 // This does not work!!
-                // if (robot.pickupCoralFromStationTask != null)
-                // {
-                //     if (pressed)
-                //     {
-                //         robot.pickupCoralFromStationTask.autoPickupCoral(null, true, -1, false, null);
-                //     }
-                //     else
-                //     {
-                //         robot.pickupCoralFromStationTask.cancel();
-                //     }
-                // } 
+                if (robot.pickupCoralFromStationTask != null)
+                {
+                    if (pressed)
+                    {
+                        robot.pickupCoralFromStationTask.autoPickupCoral(null, true, -1, false, null);
+                    }
+                }
                 break;
 
             case X:
@@ -429,13 +425,15 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     robot.climbTask.climb(null, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
                 }   
-                break;
+                break;  
 
             case DpadLeft:
                 if (robot.climbTask != null && pressed)
                 {
-                    robot.climbTask.deployClimber(null, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climber and Extend");
+                    if(driverAltFunc){
+                        robot.climbTask.deployClimber(null, null);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climber and Extend");
+                    }
                 }
                 break;
 

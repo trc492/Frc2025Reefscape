@@ -63,12 +63,12 @@ public class Winch extends TrcSubsystem
         public static final double MAX_POS                      = 20.0;
         public static final double DEPLOY_POS                   = 18.0;
         public static final double PRE_CLIMB_POS                = 14.5;
-        public static final double CLIMB_POS                    = 4.0;
+        public static final double CLIMB_POS                    = 4.25;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(1.0, 0.0, 0.0, 0.0, .0);
-        public static final double POS_PID_TOLERANCE            = 0.5;
+            new TrcPidController.PidCoefficients(2.0, 0.0, 0.0, 0.0, .0);
+        public static final double POS_PID_TOLERANCE            = 0.01;
     }   //class Params
 
     private final TrcMotor winchMotor;

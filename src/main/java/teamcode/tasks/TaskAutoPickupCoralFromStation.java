@@ -258,7 +258,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 break;
 
             case APPROACH_STATION:
-                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 2.5, -13.0);
+                TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 2.5, -11.0);
                 targetPose.angle -= 180.0;
                 tracer.traceInfo(moduleName, "***** Approaching Coral Station: targetPose=" + targetPose);
                 robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.35);
