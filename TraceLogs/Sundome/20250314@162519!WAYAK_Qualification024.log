@@ -1,0 +1,55 @@
+Robot.robotStartMode_INFO [0.170236018] Fri Mar 14 16:25:19 PDT 2025: ***** AUTO_MODE *****
+Robot.zeroCalibrate_INFO [0.216791877] Zero calibrate all subsystems.
+TaskElevatorArm.zeroCalibrate_INFO [0.218107379] zeroCalibrate(owner=null, event=null)
+TaskAutoClimb.deployClimber_INFO [0.219276119] owner=null, event=null
+FrcAuto.startMode_INFO [0.236031279] <Info name="MatchInfo" date="Fri Mar 14 16:25:19 PDT 2025" event="WAYAK" type="Qualification" match=24 replay=1 alliance="Blue" location=2 gameMsg="" />
+FrcAuto.startMode_INFO [0.254765515] <Info name="AutoChoices" alliance="Blue" strategy="DO_NOTHING" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="true" stationSide="PROCESSOR" stationPickupCount=1 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=0.0 ft yDistance=0.0 ft turnDegrees=0.0 deg driveTime=0.0 sec drivePower=0.0 />
+TaskElevatorArm.autoTask_INFO [0.297097704] <Event name="StateInfo" time="0.296120364" tag="vvvvv" TaskElevatorArm.state="ZERO_CALIBRATE" />
+TaskAutoClimb.autoTask_INFO [0.304129687] <Event name="StateInfo" time="0.303888744" tag="vvvvv" TaskAutoClimb.state="DEPLOY_CLIMBER" />
+Elevator.motor.pidCtrlTask_INFO [0.42115227] Zero calibration done, event=(Elevator=CLEARED)
+Elevator.motor.pidCtrlTask_INFO [0.442524751] controlMode: Power onTarget=false(0.0/null), stalled=false, expired=false, event=(Elevator=SIGNALED)
+CoralArm.motor.pidCtrlTask_INFO [0.968784126] controlMode: Position onTarget=true(35.68359375/35.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.autoTask_INFO [0.973041758] <Event name="StateInfo" time="0.972510684" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [0.974684676] Stopping subsystems.
+Winch.motor.pidCtrlTask_INFO [1.992910452] Zero calibration done, event=(TaskAutoClimb.winchEvent=CLEARED)
+Winch.motor.pidCtrlTask_INFO [1.996538288] controlMode: Power onTarget=false(-0.671875/null), stalled=false, expired=false, event=(TaskAutoClimb.winchEvent=SIGNALED)
+TaskAutoClimb.autoTask_INFO [2.007202199] <Event name="StateInfo" time="2.00616463" tag="vvvvv" TaskAutoClimb.state="FINISH_DEPLOY_CLIMBER" />
+Winch.motor.pidCtrlTask_INFO [5.108185547] controlMode: Position onTarget=true(17.90987880859375/18.0), stalled=false, expired=false, event=(TaskAutoClimb.winchEvent=SIGNALED)
+TaskAutoClimb.autoTask_INFO [5.128038989] <Event name="StateInfo" time="5.127585751" tag="vvvvv" TaskAutoClimb.state="DONE" />
+TaskAutoClimb.stopSubsystems_INFO [5.131971299] Stopping subsystems.
+FrcRobotBase.startCompetition_INFO [15.009776901] *** Transitioning from AUTO_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [15.028684314] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [15.070796496] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.000997s (freq=1003.354Hz, min=0.000000s, max=0.728019s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000066s
+[07]               UpdateTask=0.000600s
+[02]                StartMode=0.000001s
+[06]         PostPeriodicTask=0.000062s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=11.494922s
+[01]           RobotStartMode=0.000007s
+[05]                 Periodic=0.000159s
+[10]            RobotStopMode=0.000000s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.076080371] TrcWatchdogMgr: STANDALONE_TASK=0.001304681076923077/0.9747264863846155
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.078739959] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=2.0871169774561648E-5/0.010767559134149736
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.080859752] TrcMotor.odometryTask: STANDALONE_TASK=4.957492005793706E-4/6.12574193883366E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.08298584] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.0046749085/7.508483013
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.085189555] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=5.882413303645978E-6/0.010767512135541332
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.087837027] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.3345603784084586E-6/0.010767438567056205
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.089960282] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=4.4440606566499715E-6/0.010767436262103506
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.09218328] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=5.280186421814135E-6/0.010767434369226489
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.095098354] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=3.848389816360601E-6/0.010767432217863105
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.097063673] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=3.74099081803005E-6/0.01076743024095715
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.099645023] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=4.517425591098748E-6/0.010767609300417246
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.101860765] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.002582149604719764/0.010928313456489674
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.104712235] TrcSwerveDriveBase.stopTask: STOP_TASK=0.004192994/7.51286878
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.107121503] LED: OUTPUT_TASK=3.70525702364395E-5/0.010767604561335187
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.109592019] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=2.934935850945495E-4/0.010767504256952169
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.112160712] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=6.486499443826474E-6/0.01076760145189099
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.114114039] Elevator.motor.pidCtrlTask: OUTPUT_TASK=1.4534275027808677E-5/0.010767571081757509
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.116879845] Winch.motor.pidCtrlTask: OUTPUT_TASK=2.348647116240267E-4/0.01076756582897664
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.118968319] TaskElevatorArm: POST_PERIODIC_TASK=1.1551489125234608E-5/8.80780027527325E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.122137729] TaskAutoClimb: POST_PERIODIC_TASK=1.8961775681950085E-5/0.0013999871149158445
