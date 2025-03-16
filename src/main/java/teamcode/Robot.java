@@ -105,7 +105,7 @@ public class Robot extends FrcRobotBase
         private static final String DBKEY_ROBOT_DRIVE_NORMAL_SCALE = "Robot/DriveNormalScale";  //Number
         private static final String DBKEY_ROBOT_DRIVE_SLOW_SCALE = "Robot/DriveSlowScale";      //Number
         private static final String DBKEY_ROBOT_TURN_NORMAL_SCALE = "Robot/TurnNormalScale";    //Number
-        private static final String DBKEY_ROBOT_TURN_SLOW_SCALE = "Robot/TurnNormalScale";      //Number
+        private static final String DBKEY_ROBOT_TURN_SLOW_SCALE = "Robot/TurnSlowScale";        //Number
         private static final String DBKEY_ROBOT_SUBSYSTEM_STATUS_ON = "Robot/SubsystemStatusOn";//Boolean
 
         private final FrcUserChoices userChoices = new FrcUserChoices();

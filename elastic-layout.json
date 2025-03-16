@@ -370,6 +370,109 @@
       }
     },
     {
+      "name": "Robot",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "DriveMode",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "ComboBox Chooser",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/DriveMode",
+              "period": 0.06,
+              "sort_options": false
+            }
+          },
+          {
+            "title": "DriveOrientation",
+            "x": 256.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "ComboBox Chooser",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/DriveOrientation",
+              "period": 0.06,
+              "sort_options": false
+            }
+          },
+          {
+            "title": "DriveNormalScale",
+            "x": 0.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/DriveNormalScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "DriveSlowScale",
+            "x": 128.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/DriveSlowScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SubsystemStatusOn",
+            "x": 0.0,
+            "y": 256.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/SubsystemStatusOn",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "TurnNormalScale",
+            "x": 256.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/TurnNormalScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "TurnSlowScale",
+            "x": 384.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Robot/TurnSlowScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "Autonomous",
       "grid_layout": {
         "layouts": [],
@@ -633,13 +736,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "name": "TeleOp",
-      "grid_layout": {
-        "layouts": [],
-        "containers": []
       }
     },
     {
