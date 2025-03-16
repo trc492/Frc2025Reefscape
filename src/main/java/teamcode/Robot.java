@@ -512,7 +512,6 @@ public class Robot extends FrcRobotBase
                             "FrontCam",
                             String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
                     }
-                    lineNum++;
                 }
 
                 if (photonVisionBack != null)
@@ -525,7 +524,6 @@ public class Robot extends FrcRobotBase
                             "BackCam",
                             String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
                     }
-                    lineNum++;
                 }
 
                 if (openCvVision != null)
