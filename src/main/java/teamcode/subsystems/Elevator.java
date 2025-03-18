@@ -79,6 +79,13 @@ public class Elevator extends TrcSubsystem
         public static final double GRAVITY_COMP_POWER           = 0.0;
     }   //class Params
 
+    private static final String DBKEY_POWER                     = Params.SUBSYSTEM_NAME + "/Power";
+    private static final String DBKEY_CURRENT                   = Params.SUBSYSTEM_NAME + "/Current";
+    private static final String DBKEY_POSITION                  = Params.SUBSYSTEM_NAME + "/Position";
+    private static final String DBKEY_LOWER_LIMIT_SW            = Params.SUBSYSTEM_NAME + "/LowerLimitSw";
+    private static final String DBKEY_UPPER_LIMIT_SW            = Params.SUBSYSTEM_NAME + "/UpperLimitSw";
+
+    private final FrcDashboard dashboard;
     private final TrcMotor elevatorMotor;
 
     /**
@@ -87,6 +94,13 @@ public class Elevator extends TrcSubsystem
     public Elevator()
     {
         super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
+
+        dashboard = FrcDashboard.getInstance();
+        dashboard.refreshKey(DBKEY_POWER, 0.0);
+        dashboard.refreshKey(DBKEY_CURRENT, 0.0);
+        dashboard.refreshKey(DBKEY_POSITION, "");
+        dashboard.refreshKey(DBKEY_LOWER_LIMIT_SW, false);
+        dashboard.refreshKey(DBKEY_UPPER_LIMIT_SW, false);
 
         FrcMotorActuator.Params motorParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
@@ -158,13 +172,18 @@ public class Elevator extends TrcSubsystem
     @Override
     public int updateStatus(int lineNum)
     {
-        FrcDashboard.getInstance().displayPrintf(
-            lineNum++,
-            "%s: power=%.3f,current=%f,pos=%.1f/%.1f,limitSw=%s/%s",
-            Params.SUBSYSTEM_NAME, elevatorMotor.getPower(), elevatorMotor.getCurrent(), elevatorMotor.getPosition(),
-            elevatorMotor.getPidTarget(), elevatorMotor.isLowerLimitSwitchActive(),
-            elevatorMotor.isUpperLimitSwitchActive());
-
+        dashboard.putNumber(DBKEY_POWER, elevatorMotor.getPower());
+        dashboard.putNumber(DBKEY_CURRENT, elevatorMotor.getCurrent());
+        dashboard.putString(
+            DBKEY_POSITION, String.format("%.1f/%.1f", elevatorMotor.getPosition(), elevatorMotor.getPidTarget()));
+        dashboard.putBoolean(DBKEY_LOWER_LIMIT_SW, elevatorMotor.isLowerLimitSwitchActive());
+        dashboard.putBoolean(DBKEY_UPPER_LIMIT_SW, elevatorMotor.isUpperLimitSwitchActive());
+        // FrcDashboard.getInstance().displayPrintf(
+        //     lineNum++,
+        //     "%s: power=%.3f,current=%f,pos=%.1f/%.1f,limitSw=%s/%s",
+        //     Params.SUBSYSTEM_NAME, elevatorMotor.getPower(), elevatorMotor.getCurrent(), elevatorMotor.getPosition(),
+        //     elevatorMotor.getPidTarget(), elevatorMotor.isLowerLimitSwitchActive(),
+        //     elevatorMotor.isUpperLimitSwitchActive());
         return lineNum;
     }   //updateStatus
 

@@ -71,6 +71,12 @@ public class Winch extends TrcSubsystem
         public static final double POS_PID_TOLERANCE            = 0.01;
     }   //class Params
 
+    private static final String DBKEY_POWER                     = Params.SUBSYSTEM_NAME + "/Power";
+    private static final String DBKEY_CURRENT                   = Params.SUBSYSTEM_NAME + "/Current";
+    private static final String DBKEY_POSITION                  = Params.SUBSYSTEM_NAME + "/Position";
+    private static final String DBKEY_LOWER_LIMIT_SW            = Params.SUBSYSTEM_NAME + "/LowerLimitSw";
+
+    private final FrcDashboard dashboard;
     private final TrcMotor winchMotor;
 
     /**
@@ -79,6 +85,12 @@ public class Winch extends TrcSubsystem
     public Winch()
     {
         super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
+
+        dashboard = FrcDashboard.getInstance();
+        dashboard.refreshKey(DBKEY_POWER, 0.0);
+        dashboard.refreshKey(DBKEY_CURRENT, 0.0);
+        dashboard.refreshKey(DBKEY_POSITION, "");
+        dashboard.refreshKey(DBKEY_LOWER_LIMIT_SW, false);
 
         FrcMotorActuator.Params motorParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
@@ -138,12 +150,16 @@ public class Winch extends TrcSubsystem
     @Override
     public int updateStatus(int lineNum)
     {
-        FrcDashboard.getInstance().displayPrintf(
-            lineNum++,
-            "%s: power=%.3f,currnet=%.3f,pos=%.1f,limitSw=%s",
-            Params.SUBSYSTEM_NAME, winchMotor.getPower(), winchMotor.getCurrent(), winchMotor.getPosition(),
-            winchMotor.isLowerLimitSwitchActive());
-
+        dashboard.putNumber(DBKEY_POWER, winchMotor.getPower());
+        dashboard.putNumber(DBKEY_CURRENT, winchMotor.getCurrent());
+        dashboard.putString(
+            DBKEY_POSITION, String.format("%.1f/%.1f", winchMotor.getPosition(), winchMotor.getPidTarget()));
+        dashboard.putBoolean(DBKEY_LOWER_LIMIT_SW, winchMotor.isLowerLimitSwitchActive());
+        // FrcDashboard.getInstance().displayPrintf(
+        //     lineNum++,
+        //     "%s: power=%.3f,currnet=%.3f,pos=%.1f,limitSw=%s",
+        //     Params.SUBSYSTEM_NAME, winchMotor.getPower(), winchMotor.getCurrent(), winchMotor.getPosition(),
+        //     winchMotor.isLowerLimitSwitchActive());
         return lineNum;
     }   //updateStatus
 

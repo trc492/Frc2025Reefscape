@@ -33,16 +33,13 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.drivebase.FrcRobotDrive.ImuType;
-import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcDashboard;
 import frclib.driverio.FrcMatchInfo;
-import frclib.driverio.FrcUserChoices;
 import frclib.driverio.FrcXboxController;
 import frclib.robotcore.FrcRobotBase;
 import frclib.sensor.FrcAHRSGyro;
@@ -61,11 +58,8 @@ import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
-import teamcode.vision.PhotonVision.PipelineType;
-import trclib.controller.TrcPidController;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
-import trclib.driverio.TrcGameController.DriveMode;
 import trclib.motor.TrcMotor;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcDbgTrace;
@@ -74,9 +68,6 @@ import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
 import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
-import trclib.timer.TrcTimer;
-import trclib.vision.TrcOpenCvDetector;
-import trclib.vision.TrcVisionTargetInfo;
 
 /**
  * The Main class is configured to instantiate and automatically run this class,
@@ -86,121 +77,11 @@ import trclib.vision.TrcVisionTargetInfo;
  */
 public class Robot extends FrcRobotBase
 {
-    /**
-     * This class encapsulates all user choices for Robot operation modes from the smart dashboard.
-     *
-     * To add a robot choice, follow the steps below:
-     * 1. Add a DBKEY string constant.
-     * 2. If the choice is a choice menu, create a FrcChoiceMenu variable for it, create the enum type if necessary,
-     *    add code to create the FrcChoiceMenu object and add choices to it.
-     * 3. Call userChoices to add the new choice object and provide default value if necessary.
-     * 4. Add a getter method for the new choice.
-     * 5. Add an entry of the new choice to the toString method.
-     */
-    public static class RobotChoices
-    {
-        // Smart dashboard keys for Robot choices.
-        private static final String DBKEY_ROBOT_DRIVE_MODE = "Robot/DriveMode";                 //Choices
-        private static final String DBKEY_ROBOT_DRIVE_ORIENTATION = "Robot/DriveOrientation";   //Choices
-        private static final String DBKEY_ROBOT_DRIVE_NORMAL_SCALE = "Robot/DriveNormalScale";  //Number
-        private static final String DBKEY_ROBOT_DRIVE_SLOW_SCALE = "Robot/DriveSlowScale";      //Number
-        private static final String DBKEY_ROBOT_TURN_NORMAL_SCALE = "Robot/TurnNormalScale";    //Number
-        private static final String DBKEY_ROBOT_TURN_SLOW_SCALE = "Robot/TurnSlowScale";        //Number
-        private static final String DBKEY_ROBOT_SUBSYSTEM_STATUS_ON = "Robot/SubsystemStatusOn";//Boolean
-
-        private final FrcUserChoices userChoices = new FrcUserChoices();
-        // Choice menus
-        private final FrcChoiceMenu<DriveMode> driveModeMenu;
-        private final FrcChoiceMenu<DriveOrientation> driveOrientationMenu;
-
-        public RobotChoices()
-        {
-            //
-            // Create robot mode specific choice menus.
-            //
-            driveModeMenu = new FrcChoiceMenu<>(DBKEY_ROBOT_DRIVE_MODE);
-            driveOrientationMenu = new FrcChoiceMenu<>(DBKEY_ROBOT_DRIVE_ORIENTATION);
-
-            //
-            // Populate robot mode choice menus.
-            //
-            driveModeMenu.addChoice("Tank", DriveMode.TankMode);
-            driveModeMenu.addChoice("Holonomic", DriveMode.HolonomicMode);
-            driveModeMenu.addChoice("Arcade", DriveMode.ArcadeMode, true, true);
-
-            driveOrientationMenu.addChoice("Inverted", DriveOrientation.INVERTED);
-            driveOrientationMenu.addChoice("Robot", DriveOrientation.ROBOT);
-            driveOrientationMenu.addChoice("Field", DriveOrientation.FIELD, true, true);
-            //
-            // Initialize dashboard with default choice values.
-            //
-            userChoices.addChoiceMenu(DBKEY_ROBOT_DRIVE_MODE, driveModeMenu);
-            userChoices.addChoiceMenu(DBKEY_ROBOT_DRIVE_ORIENTATION, driveOrientationMenu);
-            userChoices.addNumber(DBKEY_ROBOT_DRIVE_NORMAL_SCALE, 1.0);
-            userChoices.addNumber(DBKEY_ROBOT_DRIVE_SLOW_SCALE, 0.175);
-            userChoices.addNumber(DBKEY_ROBOT_TURN_NORMAL_SCALE, 0.6);
-            userChoices.addNumber(DBKEY_ROBOT_TURN_SLOW_SCALE, 0.15);
-            userChoices.addBoolean(DBKEY_ROBOT_SUBSYSTEM_STATUS_ON, false);
-        }   //RobotChoices
-
-        //
-        // Getters for robot choices.
-        //
-        public DriveMode getDriveMode()
-        {
-            return driveModeMenu.getCurrentChoiceObject();
-        }   //getDriveMode
-
-        public DriveOrientation getDriveOrientation()
-        {
-            return driveOrientationMenu.getCurrentChoiceObject();
-        }   //getDriveOrientation
-
-        public double getDriveNormalScale()
-        {
-            return userChoices.getUserNumber(DBKEY_ROBOT_DRIVE_NORMAL_SCALE);
-        }   //getDriveNormalScale
-
-        public double getDriveSlowScale()
-        {
-            return userChoices.getUserNumber(DBKEY_ROBOT_DRIVE_SLOW_SCALE);
-        }   //getDriveSlowScale
-
-        public double getTurnNormalScale()
-        {
-            return userChoices.getUserNumber(DBKEY_ROBOT_TURN_NORMAL_SCALE);
-        }   //getTurnNormalScale
-
-        public double getTurnSlowScale()
-        {
-            return userChoices.getUserNumber(DBKEY_ROBOT_TURN_SLOW_SCALE);
-        }   //getTurnSlowScale
-
-        public boolean getSubsystemStatusOn()
-        {
-            return userChoices.getUserBoolean(DBKEY_ROBOT_SUBSYSTEM_STATUS_ON);
-        }   //geteSubsystemStatusOn
-
-        @Override
-        public String toString()
-        {
-            return "driveMode=\"" + getDriveMode() + "\" " +
-                   "driveOrientation=\"" + getDriveOrientation() + "\" " +
-                   "driveNormalScale=\"" + getDriveNormalScale() + "\" " +
-                   "driveSlowScale=\"" + getDriveSlowScale() + "\" " +
-                   "turnNormalScale=\"" + getTurnNormalScale() + "\" " +
-                   "turnSlowScale=\"" + getTurnSlowScale() + "\" " +
-                   "subsystemStatusOn=" + getSubsystemStatusOn();
-        }   //toString
-    }   //class RobotChoices
-
     // Global objects.
     public static final String moduleName = Robot.class.getSimpleName();
-    public static final RobotChoices robotChoices = new RobotChoices();
     public final TrcDbgTrace globalTracer = TrcDbgTrace.getGlobalTracer();
-    public final FrcDashboard dashboard = FrcDashboard.getInstance();
-    private double nextDashboardUpdateTime = TrcTimer.getCurrentTime();
-    private boolean traceLogOpened = false;
+    public FrcDashboard dashboard;
+    private boolean traceLogOpened;
     // Inputs.
     public FrcXboxController driverController;
     public FrcXboxController operatorController;
@@ -257,12 +138,9 @@ public class Robot extends FrcRobotBase
     @Override
     public void robotInit()
     {
-        // Enable LostComm detection.
-        if (RobotParams.Preferences.useCommStatusMonitor)
-        {
-            super.setCommStatusMonitorEnabled(this::commStatusCallback);
-        }
-
+        // Initialize global objects.
+        dashboard = new Dashboard().getDashboard();
+        traceLogOpened = false;
         // Create and initialize inputs.
         driverController = new FrcXboxController(
             "DriverController", RobotParams.HwConfig.XBOX_DRIVER_CONTROLLER);
@@ -400,6 +278,12 @@ public class Robot extends FrcRobotBase
     @Override
     public void robotStartMode(RunMode runMode, RunMode prevMode)
     {
+        // Enable LostComm detection.
+        if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_COMMSTATUS_MONITOR, Dashboard.DEF_COMMSTATUS_MONITOR))
+        {
+            super.setCommStatusMonitorEnabled(this::commStatusCallback);
+        }
+
         cancelAll();
         // Read FMS Match info.
         FrcMatchInfo matchInfo = FrcMatchInfo.getMatchInfo();
@@ -510,156 +394,6 @@ public class Robot extends FrcRobotBase
             CommandScheduler.getInstance().run();
         }
     }   //robotPeriodic
-
-    /**
-     * This method is called periodically to update various hardware/subsystem status of the robot to the dashboard
-     * and trace log. In order to lower the potential impact these updates, this method will only update the dashboard
-     * at DASHBOARD_UPDATE_INTERVAL.
-     *
-     * @param lineNum specifies the first Dashboard line for printing status.
-     * @return next available dashboard line.
-     */
-    public int updateStatus(int lineNum)
-    {
-        double currTime = TrcTimer.getCurrentTime();
-        RunMode runMode = getCurrentRunMode();
-
-        if (currTime >= nextDashboardUpdateTime)
-        {
-            nextDashboardUpdateTime = currTime + RobotParams.Robot.DASHBOARD_UPDATE_INTERVAL;
-            if (RobotParams.Preferences.showPowerConsumption)
-            {
-                if (pdp != null)
-                {
-                    dashboard.putNumber("Power/pdpTotalCurrent", pdp.getTotalCurrent());
-                    dashboard.putNumber("Power/totalEnergy", battery.getTotalEnergy());
-                    dashboard.putData("Power/pdpInfo", pdp.getPdpSendable());
-                    if (runMode == RunMode.TELEOP_MODE)
-                    {
-                        globalTracer.traceInfo(
-                            moduleName, "Battery: currVoltage=%.2f, lowestVoltage=%.2f",
-                            battery.getVoltage(), battery.getLowestVoltage());
-                        globalTracer.traceInfo(moduleName, "Total=%.2fA", pdp.getTotalCurrent());
-                    }
-                }
-            }
-
-            if (RobotParams.Preferences.showDriveBase)
-            {
-                if (robotDrive != null)
-                {
-                    dashboard.displayPrintf(
-                        lineNum++, "RobotPose=%s, Orient=%s, GyroAssist=%s",
-                        robotDrive.driveBase.getFieldPosition(),
-                        robotDrive.driveBase.getDriveOrientation(),
-                        robotDrive.driveBase.isGyroAssistEnabled());
-
-                    if (RobotParams.Preferences.debugDriveBase)
-                    {
-                        // DriveBase debug info.
-                        double lfDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_FRONT].getPosition();
-                        double rfDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_FRONT].getPosition();
-                        double lbDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_BACK] != null?
-                            robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_BACK].getPosition(): 0.0;
-                        double rbDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_BACK] != null?
-                            robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_BACK].getPosition(): 0.0;
-
-                        dashboard.displayPrintf(
-                            lineNum++, "DriveEnc: lf=%.0f, rf=%.0f, lb=%.0f, rb=%.0f, avg=%.0f",
-                            lfDriveEnc, rfDriveEnc, lbDriveEnc, rbDriveEnc,
-                            (lfDriveEnc + rfDriveEnc + lbDriveEnc + rbDriveEnc) / 4.0);
-
-                        if (robotDrive instanceof FrcSwerveDrive)
-                        {
-                            FrcSwerveDrive swerveDrive = (FrcSwerveDrive) robotDrive;
-
-                            dashboard.displayPrintf(
-                                lineNum++,
-                                "FrontSteer(angle/motorEnc/absEnc): lf=%.1f/%.3f/%.3f, rf=%.1f/%.3f/%.3f",
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_LEFT_FRONT].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_LEFT_FRONT].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_LEFT_FRONT].getRawPosition(),
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_RIGHT_FRONT].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_RIGHT_FRONT].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_RIGHT_FRONT].getRawPosition());
-                            dashboard.displayPrintf(
-                                lineNum++,
-                                "BackSteer(angle/motorEnc/absEnc): lb=%.1f/%.3f/%.3f, rb=%.1f/%.3f/%.3f",
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_LEFT_BACK].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_LEFT_BACK].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_LEFT_BACK].getRawPosition(),
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_RIGHT_BACK].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_RIGHT_BACK].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_RIGHT_BACK].getRawPosition());
-                        }
-
-                        if (RobotParams.Preferences.showPidDrive)
-                        {
-                            TrcPidController xPidCtrl = robotDrive.pidDrive.getXPidCtrl();
-                            if (xPidCtrl != null)
-                            {
-                                xPidCtrl.displayPidInfo(lineNum);
-                                lineNum += 2;
-                            }
-                            robotDrive.pidDrive.getYPidCtrl().displayPidInfo(lineNum);
-                            lineNum += 2;
-                            robotDrive.pidDrive.getTurnPidCtrl().displayPidInfo(lineNum);
-                            lineNum += 2;
-                        }
-                    }
-                }
-            }
-
-            if (RobotParams.Preferences.showVision)
-            {
-                PipelineType pipelineType;
-
-                if (photonVisionFront != null)
-                {
-                    FrcPhotonVision.DetectedObject object = photonVisionFront.getBestDetectedObject();
-                    if (object != null)
-                    {
-                        pipelineType = photonVisionFront.getPipeline();
-                        SmartDashboard.putString(
-                            "FrontCam",
-                            String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
-                    }
-                }
-
-                if (photonVisionBack != null)
-                {
-                    FrcPhotonVision.DetectedObject object = photonVisionBack.getBestDetectedObject();
-                    if (object != null)
-                    {
-                        pipelineType = photonVisionFront.getPipeline();
-                        SmartDashboard.putString(
-                            "BackCam",
-                            String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
-                    }
-                }
-
-                if (openCvVision != null)
-                {
-                    TrcVisionTargetInfo<TrcOpenCvDetector.DetectedObject<?>> object =
-                        openCvVision.getDetectedTargetInfo(null, null);
-                    if (object != null)
-                    {
-                        dashboard.displayPrintf(lineNum, "OpenCv:%s", object);
-                    }
-                    lineNum++;
-                }
-            }
-            //
-            // Display other subsystem status here.
-            //
-            if (RobotParams.Preferences.showSubsystems)
-            {
-                lineNum = TrcSubsystem.updateStatusAll(lineNum);
-            }
-        }
-
-        return lineNum;
-    }   //updateStatus
 
     /**
      * This method is called to cancel all pending operations and release the ownership of all subsystems.
@@ -875,7 +609,10 @@ public class Robot extends FrcRobotBase
         if (aprilTagObj.robotPose != null)
         {
             // Vision found an AprilTag, set the new robot field location.
-            globalTracer.traceInfo(moduleName, ">>>>> Re-localize robot: pose=" + aprilTagObj.robotPose);
+            globalTracer.traceInfo(
+                moduleName,
+                ">>>>> Re-localize robot: beforePose=" + robotDrive.driveBase.getFieldPosition() +
+                ", afterPose=" + aprilTagObj.robotPose);
             robotDrive.driveBase.setFieldPosition(aprilTagObj.robotPose, false);
             success = true;
         }

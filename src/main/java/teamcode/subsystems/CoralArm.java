@@ -85,6 +85,13 @@ public class CoralArm extends TrcSubsystem
         public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
     }   //class Params
 
+    private static final String DBKEY_POWER                     = Params.SUBSYSTEM_NAME + "/Power";
+    private static final String DBKEY_CURRENT                   = Params.SUBSYSTEM_NAME + "/Current";
+    private static final String DBKEY_POSITION                  = Params.SUBSYSTEM_NAME + "/Position";
+    private static final String DBKEY_LOWER_LIMIT_SW            = Params.SUBSYSTEM_NAME + "/LowerLimitSw";
+    private static final String DBKEY_UPPER_LIMIT_SW            = Params.SUBSYSTEM_NAME + "/UpperLimitSw";
+
+    private final FrcDashboard dashboard;
     private final TrcMotor coralArmMotor;
 
     /**
@@ -93,6 +100,13 @@ public class CoralArm extends TrcSubsystem
     public CoralArm()
     {
         super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
+
+        dashboard = FrcDashboard.getInstance();
+        dashboard.refreshKey(DBKEY_POWER, 0.0);
+        dashboard.refreshKey(DBKEY_CURRENT, 0.0);
+        dashboard.refreshKey(DBKEY_POSITION, "");
+        dashboard.refreshKey(DBKEY_LOWER_LIMIT_SW, false);
+        dashboard.refreshKey(DBKEY_UPPER_LIMIT_SW, false);
 
         FrcMotorActuator.Params motorParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
@@ -168,13 +182,18 @@ public class CoralArm extends TrcSubsystem
     @Override
     public int updateStatus(int lineNum)
     {
-        FrcDashboard.getInstance().displayPrintf(
-            lineNum++,
-            "%s: power=%.3f,current=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
-            Params.SUBSYSTEM_NAME, coralArmMotor.getPower(), coralArmMotor.getCurrent(), coralArmMotor.getPosition(),
-            coralArmMotor.getPidTarget(), coralArmMotor.isLowerLimitSwitchActive(),
-            coralArmMotor.isUpperLimitSwitchActive());
-
+        dashboard.putNumber(DBKEY_POWER, coralArmMotor.getPower());
+        dashboard.putNumber(DBKEY_CURRENT, coralArmMotor.getCurrent());
+        dashboard.putString(
+            DBKEY_POSITION, String.format("%.1f/%.1f", coralArmMotor.getPosition(), coralArmMotor.getPidTarget()));
+        dashboard.putBoolean(DBKEY_LOWER_LIMIT_SW, coralArmMotor.isLowerLimitSwitchActive());
+        dashboard.putBoolean(DBKEY_UPPER_LIMIT_SW, coralArmMotor.isUpperLimitSwitchActive());
+        // FrcDashboard.getInstance().displayPrintf(
+        //     lineNum++,
+        //     "%s: power=%.3f,current=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
+        //     Params.SUBSYSTEM_NAME, coralArmMotor.getPower(), coralArmMotor.getCurrent(), coralArmMotor.getPosition(),
+        //     coralArmMotor.getPidTarget(), coralArmMotor.isLowerLimitSwitchActive(),
+        //     coralArmMotor.isUpperLimitSwitchActive());
         return lineNum;
     }   //updateStatus
 
