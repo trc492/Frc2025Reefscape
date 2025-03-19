@@ -35,10 +35,13 @@ import edu.wpi.first.math.util.Units;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.drivebase.FrcSwerveDrive.SteerEncoderType;
+import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcCANTalonFX;
 import frclib.motor.FrcMotorActuator.MotorType;
+import teamcode.Dashboard;
 import teamcode.RobotParams;
 import teamcode.RobotParams.HwConfig;
+import trclib.controller.TrcPidController;
 import trclib.controller.TrcPidController.PidCoefficients;
 import trclib.drivebase.TrcDriveBase.OdometryType;
 import trclib.pathdrive.TrcPose3D;
@@ -480,6 +483,12 @@ public class RobotBase
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }   //class AutoConstants
 
+    public static final String DBKEY_ROBOT_POSE                 = "DriveBase/RobotPose";
+    public static final String DBKEY_DRIVE_ENC                  = "DriveBase/DriveEnc";
+    public static final String DBKEY_STEER_FRONT                = "DriveBase/SteerFront";
+    public static final String DBKEY_STEER_BACK                 = "DriveBase/SteerBack";
+
+    private final FrcDashboard dashboard;
     private final FrcRobotDrive.RobotInfo robotInfo;
     private final FrcRobotDrive robotDrive;
 
@@ -488,6 +497,12 @@ public class RobotBase
      */
     public RobotBase()
     {
+        dashboard = FrcDashboard.getInstance();
+        dashboard.refreshKey(DBKEY_ROBOT_POSE, "");
+        dashboard.refreshKey(DBKEY_DRIVE_ENC, "");
+        dashboard.refreshKey(DBKEY_STEER_FRONT, "");
+        dashboard.refreshKey(DBKEY_STEER_BACK, "");
+
         switch (RobotParams.Preferences.robotType)
         {
             case VisionOnly:
@@ -596,5 +611,78 @@ public class RobotBase
                 ": Steer encoder out-of-sync (expected=" + motorEncoderPos + ", actual=" + actualEncoderPos + ")");
         }
     }   //syncSteerEncoder
+
+    /**
+     * This method update the dashboard with the drive base status.
+     *
+     * @param lineNum specifies the starting line number to print the subsystem status.
+     * @return updated line number for the next subsystem to print.
+     */
+    public int updateStatus(int lineNum)
+    {
+        if (robotDrive != null)
+        {
+            dashboard.putString(DBKEY_ROBOT_POSE, robotDrive.driveBase.getFieldPosition().toString());
+            if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_DEBUG_DRIVEBASE, Dashboard.DEF_DEBUG_DRIVEBASE))
+            {
+                // DriveBase debug info.
+                double lfDriveEnc =
+                    robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_FRONT].getPosition();
+                double rfDriveEnc =
+                    robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_FRONT].getPosition();
+                double lbDriveEnc =
+                    robotDrive.driveMotors.length > 2?
+                        robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_BACK].getPosition(): 0.0;
+                double rbDriveEnc =
+                    robotDrive.driveMotors.length > 2?
+                    robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_BACK].getPosition(): 0.0;
+                dashboard.putString(
+                    DBKEY_DRIVE_ENC,
+                    String.format(
+                        "lf=%.0f, rf=%.0f, lb=%.0f, rb=%.0f, avg=%.0f",
+                        lfDriveEnc, rfDriveEnc, lbDriveEnc, rbDriveEnc,
+                        (lfDriveEnc + rfDriveEnc + lbDriveEnc + rbDriveEnc) / robotDrive.driveMotors.length));
+                if (robotDrive instanceof FrcSwerveDrive)
+                {
+                    FrcSwerveDrive swerveDrive = (FrcSwerveDrive) robotDrive;
+                    dashboard.putString(
+                        DBKEY_STEER_FRONT,
+                        String.format(
+                            "angle/motorEnc/absEnc: lf=%.1f/%.3f/%.3f, rf=%.1f/%.3f/%.3f",
+                            swerveDrive.swerveModules[FrcRobotDrive.INDEX_LEFT_FRONT].getSteerAngle(),
+                            swerveDrive.steerMotors[FrcRobotDrive.INDEX_LEFT_FRONT].getMotorPosition(),
+                            swerveDrive.steerEncoders[FrcRobotDrive.INDEX_LEFT_FRONT].getRawPosition(),
+                            swerveDrive.swerveModules[FrcRobotDrive.INDEX_RIGHT_FRONT].getSteerAngle(),
+                            swerveDrive.steerMotors[FrcRobotDrive.INDEX_RIGHT_FRONT].getMotorPosition(),
+                            swerveDrive.steerEncoders[FrcRobotDrive.INDEX_RIGHT_FRONT].getRawPosition()));
+                    dashboard.putString(
+                        DBKEY_STEER_BACK,
+                        String.format(
+                            "angle/motorEnc/absEnc: lb=%.1f/%.3f/%.3f, rb=%.1f/%.3f/%.3f",
+                            swerveDrive.swerveModules[FrcRobotDrive.INDEX_LEFT_BACK].getSteerAngle(),
+                            swerveDrive.steerMotors[FrcRobotDrive.INDEX_LEFT_BACK].getMotorPosition(),
+                            swerveDrive.steerEncoders[FrcRobotDrive.INDEX_LEFT_BACK].getRawPosition(),
+                            swerveDrive.swerveModules[FrcRobotDrive.INDEX_RIGHT_BACK].getSteerAngle(),
+                            swerveDrive.steerMotors[FrcRobotDrive.INDEX_RIGHT_BACK].getMotorPosition(),
+                            swerveDrive.steerEncoders[FrcRobotDrive.INDEX_RIGHT_BACK].getRawPosition()));
+                }
+
+                if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_DEBUG_PIDDRIVE, Dashboard.DEF_DEBUG_PIDDRIVE))
+                {
+                    TrcPidController xPidCtrl = robotDrive.pidDrive.getXPidCtrl();
+                    if (xPidCtrl != null)
+                    {
+                        xPidCtrl.displayPidInfo(lineNum);
+                        lineNum += 2;
+                    }
+                    robotDrive.pidDrive.getYPidCtrl().displayPidInfo(lineNum);
+                    lineNum += 2;
+                    robotDrive.pidDrive.getTurnPidCtrl().displayPidInfo(lineNum);
+                    lineNum += 2;
+                }
+            }
+        }
+        return lineNum;
+    }   //updateStatus
 
 }   //class RobotDrive
