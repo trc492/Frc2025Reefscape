@@ -38,6 +38,7 @@ import trclib.robotcore.TrcEvent;
  */
 public class PhotonVision extends FrcPhotonVision
 {
+    private static final String DBKEY_PREFIX                = "Vision/";
     public static final double ONTARGET_THRESHOLD           = 2.0;
     public static final double GUIDANCE_ERROR_THRESHOLD     = 12.0;
 
@@ -73,6 +74,7 @@ public class PhotonVision extends FrcPhotonVision
     {
         super(cameraName, robotToCam);
         dashboard = FrcDashboard.getInstance();
+        dashboard.refreshKey(DBKEY_PREFIX + cameraName, "");
         this.instanceName = cameraName;
         this.robotToCam = robotToCam;
         this.ledIndicator = ledIndicator;
@@ -341,7 +343,7 @@ public class PhotonVision extends FrcPhotonVision
             }
             else
             {
-                dashboard.putString("Vision/" + instanceName, object.toString());
+                dashboard.putString(DBKEY_PREFIX + instanceName, object.toString());
             }
         }
         return lineNum;
