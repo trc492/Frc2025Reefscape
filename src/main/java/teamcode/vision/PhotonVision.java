@@ -26,6 +26,7 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Transform3d;
+import frclib.driverio.FrcDashboard;
 import frclib.vision.FrcPhotonVision;
 import teamcode.RobotParams;
 import teamcode.subsystems.LEDIndicator;
@@ -55,6 +56,8 @@ public class PhotonVision extends FrcPhotonVision
 
     }   //enum PipelineType
 
+    private final FrcDashboard dashboard;
+    private final String instanceName;
     private final Transform3d robotToCam;
     private final LEDIndicator ledIndicator;
     private PipelineType currPipeline = PipelineType.APRILTAG;
@@ -69,6 +72,8 @@ public class PhotonVision extends FrcPhotonVision
     public PhotonVision(String cameraName, Transform3d robotToCam, LEDIndicator ledIndicator)
     {
         super(cameraName, robotToCam);
+        dashboard = FrcDashboard.getInstance();
+        this.instanceName = cameraName;
         this.robotToCam = robotToCam;
         this.ledIndicator = ledIndicator;
         setPipeline(currPipeline);
@@ -314,5 +319,32 @@ public class PhotonVision extends FrcPhotonVision
 
         return targetHeight;
     }   //getTargetGroundOffset
+
+    /**
+     * This method update the dashboard with vision status.
+     *
+     * @param lineNum specifies the starting line number to print the subsystem status.
+     * @return updated line number for the next subsystem to print.
+     */
+    public int updateStatus(int lineNum)
+    {
+        PipelineType pipelineType;
+        FrcPhotonVision.DetectedObject object = getBestDetectedObject();
+        if (object != null)
+        {
+            pipelineType = getPipeline();
+            if (pipelineType == PipelineType.APRILTAG)
+            {
+                dashboard.putString(
+                    "Vision/" + instanceName,
+                    String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
+            }
+            else
+            {
+                dashboard.putString("Vision/" + instanceName, object.toString());
+            }
+        }
+        return lineNum;
+    }   //updateStatus
 
 }   //class PhotonVision

@@ -23,12 +23,8 @@
 package teamcode;
 
 import frclib.driverio.FrcDashboard;
-import frclib.vision.FrcPhotonVision;
-import teamcode.vision.PhotonVision.PipelineType;
 import trclib.subsystem.TrcSubsystem;
 import trclib.timer.TrcTimer;
-import trclib.vision.TrcOpenCvDetector;
-import trclib.vision.TrcVisionTargetInfo;
 
 /**
  * This class contains Dashboard constants and parameters.
@@ -105,43 +101,19 @@ public class Dashboard
             {
                 if (dashboard.getBoolean(DBKEY_PREFERENCE_DRIVEBASE_STATUS, DEF_DRIVEBASE_STATUS))
                 {
+                    lineNum = robot.robotBase.updateStatus(lineNum);
                 }
 
                 if (dashboard.getBoolean(DBKEY_PREFERENCE_VISION_STATUS, DEF_VISION_STATUS))
                 {
-                    PipelineType pipelineType;
                     if (robot.photonVisionFront != null)
                     {
-                        FrcPhotonVision.DetectedObject object = robot.photonVisionFront.getBestDetectedObject();
-                        if (object != null)
-                        {
-                            pipelineType = robot.photonVisionFront.getPipeline();
-                            dashboard.putString(
-                                DBKEY_VISION_FRONTCAM,
-                                String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
-                        }
+                        lineNum = robot.photonVisionFront.updateStatus(lineNum);
                     }
 
                     if (robot.photonVisionBack != null)
                     {
-                        FrcPhotonVision.DetectedObject object = robot.photonVisionBack.getBestDetectedObject();
-                        if (object != null)
-                        {
-                            pipelineType = robot.photonVisionFront.getPipeline();
-                            dashboard.putString(
-                                DBKEY_VISION_BACKCAM,
-                                String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
-                        }
-                    }
-
-                    if (robot.openCvVision != null)
-                    {
-                        TrcVisionTargetInfo<TrcOpenCvDetector.DetectedObject<?>> object =
-                            robot.openCvVision.getDetectedTargetInfo(null, null);
-                        if (object != null)
-                        {
-                            dashboard.putString(DBKEY_VISION_OPENCV, String.format("%s", object));
-                        }
+                        lineNum = robot.photonVisionBack.updateStatus(lineNum);
                     }
                 }
 
