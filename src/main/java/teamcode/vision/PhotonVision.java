@@ -149,29 +149,6 @@ public class PhotonVision extends FrcPhotonVision
     }   //getBestDetectedObject
 
     /**
-     * This method finds a matching AprilTag ID in the specified array and returns the found index.
-     *
-     * @param id specifies the AprilTag ID to be matched.
-     * @param aprilTagIds specifies the AprilTag ID array to find the given ID.
-     * @return index in the array that matched the ID, -1 if not found.
-     */
-    private int matchAprilTagId(int id, int[] aprilTagIds)
-    {
-        int matchedIndex = -1;
-
-        for (int i = 0; i < aprilTagIds.length; i++)
-        {
-            if (id == aprilTagIds[i])
-            {
-                matchedIndex = i;
-                break;
-            }
-        }
-
-        return matchedIndex;
-    }   //matchAprilTagId
-
-    /**
      * This method get the best detected AprilTag matching the specified AprilTag IDs array sorted by most preferred
      * ID at the top.
      *
@@ -185,32 +162,7 @@ public class PhotonVision extends FrcPhotonVision
 
         if (currPipeline == PipelineType.APRILTAG)
         {
-            DetectedObject objects[] = super.getDetectedObjects();
-
-            if (objects != null)
-            {
-                if (aprilTagIds == null)
-                {
-                    // Caller did not provide AprilTag IDs to look for, just pick the first one.
-                    bestObj = objects[0];
-                }
-                else
-                {
-                    int bestIdIndex = -1;
-                    for (DetectedObject obj: objects)
-                    {
-                        int id = obj.target.getFiducialId();
-                        int idIndex = matchAprilTagId(id, aprilTagIds);
-
-                        if (idIndex != -1 && (bestIdIndex == -1 || idIndex < bestIdIndex))
-                        {
-                            // Found first match or a better match.
-                            bestObj = obj;
-                            bestIdIndex = idIndex;
-                        }
-                    }
-                }
-            }
+            bestObj = super.getDetectedAprilTag(aprilTagIds);
         }
 
         if (bestObj != null)
