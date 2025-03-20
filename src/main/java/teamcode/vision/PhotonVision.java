@@ -148,6 +148,11 @@ public class PhotonVision extends FrcPhotonVision
         return getBestDetectedObject(null);
     }   //getBestDetectedObject
 
+    private int compareAreas(PhotonTrackedTarget t1, PhotonTrackedTarget t2)
+    {
+        return (int)((t2.getArea() - t1.getArea())*100);
+    }   //compareArea
+
     /**
      * This method get the best detected AprilTag matching the specified AprilTag IDs array sorted by most preferred
      * ID at the top.
@@ -162,7 +167,7 @@ public class PhotonVision extends FrcPhotonVision
 
         if (currPipeline == PipelineType.APRILTAG)
         {
-            bestObj = super.getDetectedAprilTag(aprilTagIds);
+            bestObj = super.getBestDetectedAprilTag(this::compareAreas, aprilTagIds);
         }
 
         if (bestObj != null)
@@ -190,7 +195,7 @@ public class PhotonVision extends FrcPhotonVision
      */
     public DetectedObject getBestDetectedAprilTag(int... aprilTagIds)
     {
-        return getBestDetectedAprilTag(null, aprilTagIds);
+        return getBestDetectedAprilTag((TrcEvent) null, aprilTagIds);
     }   //getBestDetectedAprilTag
 
     /**
@@ -283,7 +288,9 @@ public class PhotonVision extends FrcPhotonVision
     public int updateStatus(int lineNum)
     {
         PipelineType pipelineType;
-        FrcPhotonVision.DetectedObject object = getBestDetectedObject();
+        // FrcPhotonVision.DetectedObject object = getBestDetectedObject();
+        FrcPhotonVision.DetectedObject object = getBestDetectedAprilTag(RobotParams.Game.APRILTAG_REEFS);
+
         if (object != null)
         {
             pipelineType = getPipeline();
