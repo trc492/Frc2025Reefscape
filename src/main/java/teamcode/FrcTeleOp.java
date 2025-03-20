@@ -391,11 +391,18 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 // }
 
                 // This does not work!!
-                if (robot.pickupCoralFromStationTask != null)
-                {
-                    if (pressed)
-                    {
-                        robot.pickupCoralFromStationTask.autoPickupCoral(null, true, -1, false, null);
+                // if (robot.pickupCoralFromStationTask != null)
+                // {
+                //     if (pressed)
+                //     {
+                //         robot.pickupCoralFromStationTask.autoPickupCoral(null, true, -1, false, null);
+                //     }
+                // }
+
+                if(robot.pickupCoralFromStationTask != null){
+                    if(pressed){
+                        robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, 
+                        true, -1, false, null);
                     }
                 }
                 break;

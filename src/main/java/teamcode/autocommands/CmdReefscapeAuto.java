@@ -177,7 +177,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 RobotParams.Game.APRILTAG_FAR_RIGHT_REEF[alliance == Alliance.Red? 0: 1];
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
-                                visionXOffset + (scoreRightSide? 3.0: -10.5), visionYOffset - 7.0, event);
+                                visionXOffset + (scoreRightSide? 5.0: -10.5), visionYOffset - 16.5, event);
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
                         {
