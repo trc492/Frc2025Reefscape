@@ -152,6 +152,14 @@ public class PhotonVision extends FrcPhotonVision
         return getBestDetectedObject(comparator, null);
     }   //getBestDetectedObject
 
+    /**
+     * This method is called by the comparator to sort the detected object array in descending area of the target.
+     *
+     * @param t1 specifies the target 1 object.
+     * @param t2 specifies the target 2 object.
+     * @return positive value if target 2 area is greater than target 1, negative value if target 2 area is smaller
+     *         than target 1, zero if areas are equal.
+     */
     private int compareAreas(PhotonTrackedTarget t1, PhotonTrackedTarget t2)
     {
         return (int)((t2.getArea() - t1.getArea())*100);
@@ -292,8 +300,7 @@ public class PhotonVision extends FrcPhotonVision
     public int updateStatus(int lineNum)
     {
         PipelineType pipelineType;
-        // FrcPhotonVision.DetectedObject object = getBestDetectedObject();
-        FrcPhotonVision.DetectedObject object = getBestDetectedAprilTag(RobotParams.Game.APRILTAG_REEFS);
+        FrcPhotonVision.DetectedObject object = getBestDetectedObject(this::compareAreas);
 
         if (object != null)
         {

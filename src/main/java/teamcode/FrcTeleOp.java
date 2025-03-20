@@ -390,11 +390,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     robot.turtle();
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
                 }
-
-                // if (robot.scoreCoralTask != null && pressed)
-                // {
-                //     robot.scoreCoralTask.autoScoreCoral(moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, true, true, 0.2, scoreRightSide? 5.0: -10.5, -15.0, null); //TODO: add logic for different offsets for different levels
-                // }
                 break;
 
             case X:
@@ -406,16 +401,30 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Y:
-                if (robot.pickupCoralFromStationTask != null && pressed)
+                if (driverAltFunc)
                 {
-                    robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
+                    if (robot.scoreCoralTask != null && pressed)
+                    {
+                        robot.scoreCoralTask.autoScoreCoral(
+                            moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.2,
+                            scoreRightSide? 5.0: -10.5, -15.0, null);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Align to Score Coral");
+                            //TODO: add logic for different offsets for different levels
+                    }
+                }
+                else
+                {
+                    if (robot.pickupCoralFromStationTask != null && pressed)
+                    {
+                        robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, null);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
+                    }
                 }
                 break;  
 
             case LeftBumper:
                 driverAltFunc = pressed;
-                robot.globalTracer.traceInfo(moduleName, ">>>>> DriverAltFunc = " + driverAltFunc);
+                robot.globalTracer.traceInfo(moduleName, ">>>>> DriverAltFunc=" + driverAltFunc);
                 break;
 
             case RightBumper:
@@ -452,7 +461,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadLeft:
                 if (robot.climbTask != null && pressed)
                 {
-                    if(driverAltFunc){
+                    if (driverAltFunc)
+                    {
                         robot.climbTask.deployClimber(null, null);
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climber and Extend");
                     }
@@ -498,7 +508,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         else
                         {
                             robot.globalTracer.traceInfo(
-                                moduleName, ">>>>> Finish re-localizing: AprilTag not found.");
+                                moduleName, ">>>>> Finish re-localizing: AprilTag not found");
                         }
                     }
                     else
@@ -607,7 +617,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case LeftBumper:
                 operatorAltFunc = pressed;
-                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc = " + driverAltFunc);
+                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc=" + driverAltFunc);
                 break;
 
             case RightBumper:
@@ -646,16 +656,18 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadLeft:
-                if (pressed) {
+                if (pressed)
+                {
                     scoreRightSide = false;
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Right Side:", scoreRightSide);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Left Reef Branch");
                 }
                 break;
 
             case DpadRight:
-                if (pressed) {
+                if (pressed)
+                {
                     scoreRightSide = true;
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Right Side:", scoreRightSide);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Right Reef Branch");
                 }
                 break;
 
