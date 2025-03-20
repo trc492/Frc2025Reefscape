@@ -22,6 +22,8 @@
 
 package teamcode.vision;
 
+import java.util.Comparator;
+
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.math.geometry.Pose3d;
@@ -114,12 +116,14 @@ public class PhotonVision extends FrcPhotonVision
     /**
      * This method returns the best detected object.
      *
+     * @param comparator specifies comparator for sorting the detected objects, can be null if not provided.
      * @param detectionEvent specifies the event to signal when it detects the target.
      * @return best detected object.
      */
-    public DetectedObject getBestDetectedObject(TrcEvent detectionEvent)
+    public DetectedObject getBestDetectedObject(
+        Comparator<? super PhotonTrackedTarget> comparator, TrcEvent detectionEvent)
     {
-        DetectedObject bestDetectedObj = super.getBestDetectedObject();
+        DetectedObject bestDetectedObj = super.getBestDetectedObject(comparator);
 
         if (bestDetectedObj != null)
         {
@@ -143,9 +147,9 @@ public class PhotonVision extends FrcPhotonVision
      * @return best detected object.
      */
     @Override
-    public DetectedObject getBestDetectedObject()
+    public DetectedObject getBestDetectedObject(Comparator<? super PhotonTrackedTarget> comparator)
     {
-        return getBestDetectedObject(null);
+        return getBestDetectedObject(comparator, null);
     }   //getBestDetectedObject
 
     private int compareAreas(PhotonTrackedTarget t1, PhotonTrackedTarget t2)
@@ -167,7 +171,7 @@ public class PhotonVision extends FrcPhotonVision
 
         if (currPipeline == PipelineType.APRILTAG)
         {
-            bestObj = super.getBestDetectedAprilTag(this::compareAreas, aprilTagIds);
+            bestObj = super.getDetectedAprilTag(this::compareAreas, aprilTagIds);
         }
 
         if (bestObj != null)

@@ -765,7 +765,7 @@ public class FrcTest extends FrcTeleOp
 
         if (robot.photonVisionFront != null)
         {
-            FrcPhotonVision.DetectedObject object = robot.photonVisionFront.getBestDetectedObject();
+            FrcPhotonVision.DetectedObject object = robot.photonVisionFront.getBestDetectedObject(null);
             if (object != null)
             {
                 robot.dashboard.displayPrintf(
@@ -779,7 +779,7 @@ public class FrcTest extends FrcTeleOp
 
         if (robot.photonVisionBack != null)
         {
-            FrcPhotonVision.DetectedObject object = robot.photonVisionBack.getBestDetectedObject();
+            FrcPhotonVision.DetectedObject object = robot.photonVisionBack.getBestDetectedObject(null);
             if (object != null)
             {
                 robot.dashboard.displayPrintf(
