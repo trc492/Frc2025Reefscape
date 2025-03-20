@@ -73,7 +73,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevCoralArmPower = 0.0;
     private double prevElevatorPower = 0.0;
     private double prevWinchPower = 0.0;
-    private int scoreIndex = 3;
+    private int scoreLevelIndex = 3;
+    private boolean scoreRightSide = true;
 
     /**
      * Constructor: Create an instance of the object.
@@ -384,27 +385,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case B:
                 // Turtle mode.
-                // if (pressed)
-                // {
-                //     robot.turtle();
-                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
-                // }
-
-                // This does not work!!
-                // if (robot.pickupCoralFromStationTask != null)
-                // {
-                //     if (pressed)
-                //     {
-                //         robot.pickupCoralFromStationTask.autoPickupCoral(null, true, -1, false, null);
-                //     }
-                // }
-
-                if(robot.pickupCoralFromStationTask != null){
-                    if(pressed){
-                        robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, 
-                        true, -1, false, null);
-                    }
+                if (pressed)
+                {
+                    robot.turtle();
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
                 }
+
+                // if (robot.scoreCoralTask != null && pressed)
+                // {
+                //     robot.scoreCoralTask.autoScoreCoral(moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, true, true, 0.2, scoreRightSide? 5.0: -10.5, -15.0, null); //TODO: add logic for different offsets for different levels
+                // }
                 break;
 
             case X:
@@ -420,8 +410,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
-                } else{
-                    
                 }
                 break;  
 
@@ -604,7 +592,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case X:
                 if (robot.elevatorArmTask !=null && pressed)
                 {
-                    robot.elevatorArmTask.setCoralScorePosition(moduleName, scoreIndex, null);
+                    robot.elevatorArmTask.setCoralScorePosition(moduleName, scoreLevelIndex, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Score Position");
                 }
                 break;
@@ -628,15 +616,15 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadUp:
                 if (pressed)
                 {
-                    if (scoreIndex < 3)
+                    if (scoreLevelIndex < 3)
                     {
-                        scoreIndex++;
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Up: index=", scoreIndex);
+                        scoreLevelIndex++;
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Up: index=", scoreLevelIndex);
                     }
 
                     if (robot.ledIndicator != null)
                     {
-                        robot.ledIndicator.setReefLevel(scoreIndex);
+                        robot.ledIndicator.setReefLevel(scoreLevelIndex);
                     }
                 }
                 break;
@@ -644,23 +632,31 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadDown:
                 if (pressed)
                 {
-                    if (scoreIndex > 0)
+                    if (scoreLevelIndex > 0)
                     {
-                        scoreIndex--;
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Down: index=", scoreIndex);
+                        scoreLevelIndex--;
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Down: index=", scoreLevelIndex);
                     }
 
                     if (robot.ledIndicator != null)
                     {
-                        robot.ledIndicator.setReefLevel(scoreIndex);
+                        robot.ledIndicator.setReefLevel(scoreLevelIndex);
                     }
                 }
                 break;
 
             case DpadLeft:
+                if (pressed) {
+                    scoreRightSide = false;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Right Side:", scoreRightSide);
+                }
                 break;
 
             case DpadRight:
+                if (pressed) {
+                    scoreRightSide = true;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Right Side:", scoreRightSide);
+                }
                 break;
 
             case Back:
