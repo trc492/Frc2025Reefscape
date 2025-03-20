@@ -406,11 +406,11 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     if (robot.scoreCoralTask != null && pressed)
                     {
+                        //TODO: add logic for different offsets for different levels
                         robot.scoreCoralTask.autoScoreCoral(
                             moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.2,
                             new ScoreCoralOffset(scoreRightSide? 5.0: -10.5, -15.0), null);
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Align to Score Coral");
-                            //TODO: add logic for different offsets for different levels
                     }
                 }
                 else
