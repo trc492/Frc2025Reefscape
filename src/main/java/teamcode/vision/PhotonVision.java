@@ -308,12 +308,18 @@ public class PhotonVision extends FrcPhotonVision
             if (pipelineType == PipelineType.APRILTAG)
             {
                 dashboard.putString(
-                    "Vision/" + instanceName,
-                    String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
+                    DBKEY_PREFIX + instanceName,
+                    String.format(
+                        "%s[%d]:targetPose=%s,robotPose=%s",
+                        pipelineType, object.target.getFiducialId(), object.targetPose, object.robotPose));
             }
             else
             {
-                dashboard.putString(DBKEY_PREFIX + instanceName, object.toString());
+                dashboard.putString(
+                    DBKEY_PREFIX + instanceName,
+                    String.format(
+                        "%s:targetPose=%s,robotPose=%s",
+                        pipelineType, object.targetPose, object.robotPose));
             }
         }
         return lineNum;
