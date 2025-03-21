@@ -146,11 +146,6 @@ public class CoralGrabber extends TrcSubsystem
         dashboard.putNumber(DBKEY_CURRENT, motorGrabber.getCurrent());
         dashboard.putBoolean(DBKEY_SENSOR_STATE, motorGrabber.getSensorState());
         dashboard.putBoolean(DBKEY_HAS_OBJECT, motorGrabber.hasObject());
-        // FrcDashboard.getInstance().displayPrintf(
-        //     lineNum++,
-        //     "%s: power=%.3f, current=%f, sensorState=%s, hasObject=%s",
-        //     Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.getCurrent(), motorGrabber.getSensorState(),
-        //     motorGrabber.hasObject());
         return lineNum;
     }   //updateStatus
 

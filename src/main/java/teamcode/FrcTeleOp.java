@@ -25,9 +25,9 @@ package teamcode;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
+import teamcode.subsystems.Climber;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
-import teamcode.subsystems.Winch;
 import teamcode.tasks.TaskAutoScoreCoral.ScoreCoralOffset;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcSwerveDriveBase;
@@ -88,7 +88,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private TrcPose2D robotFieldPose = null;
     private double prevCoralArmPower = 0.0;
     private double prevElevatorPower = 0.0;
-    private double prevWinchPower = 0.0;
+    private double prevClimberArmPower = 0.0;
     private int scoreLevelIndex = 3;
     private boolean scoreRightSide = true;
 
@@ -325,14 +325,15 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         }
                     }
 
-                    if (robot.winch != null)
+                    if (robot.climber != null)
                     {
-                        power = robot.driverController.getTrigger(true) * Winch.Params.POWER_LIMIT;
-                        if (power != prevWinchPower)
+                        power = robot.driverController.getTrigger(true) * Climber.ArmParams.POWER_LIMIT;
+                        if (power != prevClimberArmPower)
                         {
                             //robot.winch.setPower(power);
-                            robot.winch.setPidPower(power, Winch.Params.MIN_POS, Winch.Params.MAX_POS, true);
-                            prevWinchPower = power;
+                            robot.climber.armMotor.setPidPower(
+                                power, Climber.ArmParams.MIN_POS, Climber.ArmParams.MAX_POS, true);
+                            prevClimberArmPower = power;
                         }
                     }
                 }
@@ -465,38 +466,25 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadUp:
-                if (robot.climbTask != null && pressed)
+                if (robot.climber != null && pressed)
                 {
-                    robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climb");
+                    robot.climber.deploy(moduleName);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
                 }
                 break;
 
             case DpadDown:  
-                if (robot.climbTask != null && pressed)
+                if (robot.climber != null && pressed)
                 {
-                    robot.climbTask.climb(null, null);
+                    robot.climber.climb(moduleName);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
                 }   
                 break;  
 
             case DpadLeft:
-                if (robot.climbTask != null && pressed)
-                {
-                    if (driverAltFunc)
-                    {
-                        robot.climbTask.deployClimber(null, null);
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climber and Extend");
-                    }
-                }
                 break;
 
             case DpadRight:
-                if (robot.climbTask != null && pressed)
-                {
-                    robot.climbTask.prepClimber(null, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Engage Cage");
-                }
                 break;
 
             case Back:
@@ -579,15 +567,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Coral Intake");
                         }
                     }
-                    else if (robot.coralGrabber.isAutoActive())
-                    {
-                        robot.coralGrabber.cancel();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Coral Intake");
-                    }
                     else
                     {
-                        robot.coralGrabber.stop();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Coral Intake");
+                        robot.coralGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Coral Intake");
                     }
                 }
                 break;
@@ -608,15 +591,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Coral Eject");
                         }
                     }
-                    else if (robot.coralGrabber.isAutoActive())
-                    {
-                        robot.coralGrabber.cancel();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Coral Eject");
-                    }
                     else
                     {
-                        robot.coralGrabber.stop();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Coral Eject");
+                        robot.coralGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Coral Eject");
                     }
                 }
                 break;

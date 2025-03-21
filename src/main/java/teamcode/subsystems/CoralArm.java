@@ -188,12 +188,6 @@ public class CoralArm extends TrcSubsystem
             DBKEY_POSITION, String.format("%.1f/%.1f", coralArmMotor.getPosition(), coralArmMotor.getPidTarget()));
         dashboard.putBoolean(DBKEY_LOWER_LIMIT_SW, coralArmMotor.isLowerLimitSwitchActive());
         dashboard.putBoolean(DBKEY_UPPER_LIMIT_SW, coralArmMotor.isUpperLimitSwitchActive());
-        // FrcDashboard.getInstance().displayPrintf(
-        //     lineNum++,
-        //     "%s: power=%.3f,current=%.3f,pos=%.1f/%.1f,limitSw=%s/%s",
-        //     Params.SUBSYSTEM_NAME, coralArmMotor.getPower(), coralArmMotor.getCurrent(), coralArmMotor.getPosition(),
-        //     coralArmMotor.getPidTarget(), coralArmMotor.isLowerLimitSwitchActive(),
-        //     coralArmMotor.isUpperLimitSwitchActive());
         return lineNum;
     }   //updateStatus
 

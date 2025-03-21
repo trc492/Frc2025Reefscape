@@ -178,12 +178,6 @@ public class Elevator extends TrcSubsystem
             DBKEY_POSITION, String.format("%.1f/%.1f", elevatorMotor.getPosition(), elevatorMotor.getPidTarget()));
         dashboard.putBoolean(DBKEY_LOWER_LIMIT_SW, elevatorMotor.isLowerLimitSwitchActive());
         dashboard.putBoolean(DBKEY_UPPER_LIMIT_SW, elevatorMotor.isUpperLimitSwitchActive());
-        // FrcDashboard.getInstance().displayPrintf(
-        //     lineNum++,
-        //     "%s: power=%.3f,current=%f,pos=%.1f/%.1f,limitSw=%s/%s",
-        //     Params.SUBSYSTEM_NAME, elevatorMotor.getPower(), elevatorMotor.getCurrent(), elevatorMotor.getPosition(),
-        //     elevatorMotor.getPidTarget(), elevatorMotor.isLowerLimitSwitchActive(),
-        //     elevatorMotor.isUpperLimitSwitchActive());
         return lineNum;
     }   //updateStatus
 

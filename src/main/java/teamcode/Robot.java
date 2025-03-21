@@ -46,11 +46,10 @@ import frclib.sensor.FrcAHRSGyro;
 import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
+import teamcode.subsystems.Climber;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.CoralGrabber;
 import teamcode.subsystems.Elevator;
-import teamcode.subsystems.Winch;
-import teamcode.tasks.TaskAutoClimb;
 import teamcode.tasks.TaskAutoPickupCoralFromStation;
 import teamcode.tasks.TaskAutoScoreCoral;
 import teamcode.tasks.TaskElevatorArm;
@@ -106,14 +105,13 @@ public class Robot extends FrcRobotBase
     // Other subsystems.
     //
     public TrcMotorGrabber coralGrabber;
-    public TrcMotor winch;
+    public Climber climber;
     //
     // Auto-Assists.
     //
     public TaskElevatorArm elevatorArmTask;
     public TaskAutoScoreCoral scoreCoralTask;
     public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
-    public TaskAutoClimb climbTask;
 
     /**
      * Constructor: Create an instance of the object.
@@ -232,9 +230,9 @@ public class Robot extends FrcRobotBase
                     elevator = new Elevator().getElevatorMotor();
                 }
 
-                if (RobotParams.Preferences.useWinch)
+                if (RobotParams.Preferences.useClimber)
                 {
-                    winch = new Winch().getWinchMotor();
+                    climber = new Climber();
                 }
 
                 // Create autotasks.
@@ -246,11 +244,6 @@ public class Robot extends FrcRobotBase
                     elevatorArmTask.setStateTracingEnabled(true);
                     scoreCoralTask = new TaskAutoScoreCoral(this);
                     pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
-                }
-
-                if (winch != null)
-                {
-                    climbTask = new TaskAutoClimb(this);
                 }
                 // pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround(this);
                 // Zero calibrate all subsystems only once in robot initialization.

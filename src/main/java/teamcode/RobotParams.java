@@ -64,9 +64,9 @@ public class RobotParams
         public static final boolean useSubsystems               = true;
         public static final boolean useCoralArm                 = true;
         public static final boolean useCoralGrabber             = useCoralArm;
+        public static final boolean useClimber                  = false;
         public static final boolean useElevator                 = true;
         public static final boolean useElevatorArm              = true;
-        public static final boolean useWinch                    = true;
     }   //class Preferences
 
     /**
@@ -94,9 +94,10 @@ public class RobotParams
         public static final int CANID_RBSTEER_ENCODER           = 26;   // Blue
         // Subsystem Motor CAN IDs.
         public static final int CANID_CORALARM_MOTOR            = 7;    // Purple
+        public static final int CANID_CLIMBERARM_MOTOR          = 8;    // Gray
         public static final int CANID_ELEVATOR_MOTOR            = 9;    // White
         public static final int CANID_CORALGRABBER_MOTOR        = 17;   // Purple
-        public static final int CANID_WINCH_MOTOR               = 19;   // White
+        public static final int CANID_CLIMBERGRABBER_MOTOR      = 18;   // Gray
         // Miscellaneous CAN IDs.
         public static final int CANID_PDP                       = 30;
         public static final int CANID_PCM                       = 31;
@@ -109,8 +110,7 @@ public class RobotParams
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
         public static final int DIO_CORAL_GRABBER_SENSOR        = 0;
-        public static final int DIO_ELEVATOR_MID_LIMIT          = 2;
-        public static final int DIO_WINCH_LOWER_LIMIT           = 3;
+        public static final int DIO_CLIMBER_GRABBER_SENSOR      = 1;
         // PWM channels.
         public static final int NUM_LEDS                        = 30;
         public static final int PWM_CHANNEL_LED                 = 0;
