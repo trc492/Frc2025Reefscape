@@ -77,10 +77,20 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private int scoreLevelIndex = 3;
     private boolean scoreRightSide = true;
 
-    private double[] rightXOffsets = {0.0, 7.0, 7.0, 7.0};
-    private double[] leftXOffsets = {0.0, -6.5, -6.5, -6.5};
-    private double[] yOffsets      = {0.0, -14.0, -17.0, -19.0};
-
+    private ScoreCoralOffset[] leftScoreOffsets = new ScoreCoralOffset[]
+    {
+        new ScoreCoralOffset(0.0, 0.0),
+        new ScoreCoralOffset(-6.5, -14.0),
+        new ScoreCoralOffset(-6.5, -17.0),
+        new ScoreCoralOffset(-6.5, -19.0)
+    };
+    private ScoreCoralOffset[] rightScoreOffsets = new ScoreCoralOffset[]
+    {
+        new ScoreCoralOffset(0.0, 0.0),
+        new ScoreCoralOffset(7.0, -14.0),
+        new ScoreCoralOffset(7.0, -17.0),
+        new ScoreCoralOffset(7.0, -19.0)
+    };
 
     /**
      * Constructor: Create an instance of the object.
@@ -241,17 +251,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
                             if (driveInputs[0] != 0.0 || driveInputs[1] != 0.0)
                             {
-                                if(robot.pickupCoralFromStationTask != null && 
-                                robot.pickupCoralFromStationTask.isActive()){
+                                if (robot.pickupCoralFromStationTask != null && robot.pickupCoralFromStationTask.isActive())
+                                {
                                     robot.pickupCoralFromStationTask.cancel();
-                                } 
-
-                                if(robot.scoreCoralTask != null && 
-                                robot.scoreCoralTask.isActive()){
-                                    robot.scoreCoralTask.cancel();
                                 }
 
-                            } 
+                                if (robot.scoreCoralTask != null && robot.scoreCoralTask.isActive())
+                                {
+                                    robot.scoreCoralTask.cancel();
+                                }
+                            }
 
                             robot.robotDrive.driveBase.holonomicDrive(
                                 null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
@@ -419,10 +428,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     if (robot.scoreCoralTask != null && pressed)
                     {
-                        //TODO: add logic for different offsets for different levels
                         robot.scoreCoralTask.autoScoreCoral(
                             moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.4,
-                            new ScoreCoralOffset(scoreRightSide? rightXOffsets[scoreLevelIndex]: leftXOffsets[scoreLevelIndex], yOffsets[scoreLevelIndex]), null); //17.0
+                            scoreRightSide? rightScoreOffsets[scoreLevelIndex]: leftScoreOffsets[scoreLevelIndex], null);
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Align to Score Coral");
                     }
                 }
