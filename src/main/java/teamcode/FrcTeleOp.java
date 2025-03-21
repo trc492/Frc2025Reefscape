@@ -77,6 +77,11 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private int scoreLevelIndex = 3;
     private boolean scoreRightSide = true;
 
+    private double[] rightXOffsets = {0.0, 7.0, 7.0, 7.0};
+    private double[] leftXOffsets = {0.0, -6.5, -6.5, -6.5};
+    private double[] yOffsets      = {0.0, -14.0, -17.0, -19.0};
+
+
     /**
      * Constructor: Create an instance of the object.
      *
@@ -234,12 +239,20 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         if (robot.robotDrive.driveBase.supportsHolonomicDrive())
                         {
                             double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
-                            if ((driveInputs[0] != 0.0 || driveInputs[1] != 0.0) &&
-                                robot.pickupCoralFromStationTask != null &&
-                                robot.pickupCoralFromStationTask.isActive())
+                            if (driveInputs[0] != 0.0 || driveInputs[1] != 0.0)
                             {
-                                robot.pickupCoralFromStationTask.cancel();
-                            }
+                                if(robot.pickupCoralFromStationTask != null && 
+                                robot.pickupCoralFromStationTask.isActive()){
+                                    robot.pickupCoralFromStationTask.cancel();
+                                } 
+
+                                if(robot.scoreCoralTask != null && 
+                                robot.scoreCoralTask.isActive()){
+                                    robot.scoreCoralTask.cancel();
+                                }
+
+                            } 
+
                             robot.robotDrive.driveBase.holonomicDrive(
                                 null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
                             if (showDriveBaseStatus)
@@ -408,8 +421,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                     {
                         //TODO: add logic for different offsets for different levels
                         robot.scoreCoralTask.autoScoreCoral(
-                            moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.2,
-                            new ScoreCoralOffset(scoreRightSide? 5.0: -10.5, -15.0), null);
+                            moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.4,
+                            new ScoreCoralOffset(scoreRightSide? rightXOffsets[scoreLevelIndex]: leftXOffsets[scoreLevelIndex], yOffsets[scoreLevelIndex]), null); //17.0
                         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Align to Score Coral");
                     }
                 }

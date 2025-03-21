@@ -198,7 +198,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 7.5: -10.5), visionYOffset - 10.5),
+                                    visionXOffset + (scoreRightSide? 8.5: -10.5), visionYOffset - 18.5),
                                 event);
                         }
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
@@ -344,7 +344,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
                         null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2,
-                        new ScoreCoralOffset(scoreRightSide? 6.5: -10.5, -18.5), event);
+                        new ScoreCoralOffset(scoreRightSide? 6.5: -10.5, -20.5), event);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;
