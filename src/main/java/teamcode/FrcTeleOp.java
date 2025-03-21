@@ -58,6 +58,21 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private static final double DEF_TURN_NORMAL_SCALE = 0.6;
     private static final double DEF_TURN_SLOW_SCALE = 0.15;
     private static final boolean DEF_DRIVEBASE_STATUS = false;
+    private static final ScoreCoralOffset[] leftScoreOffsets = new ScoreCoralOffset[]
+    {
+        new ScoreCoralOffset(0.0, 0.0),
+        new ScoreCoralOffset(-6.5, -14.0),
+        new ScoreCoralOffset(-6.5, -17.0),
+        new ScoreCoralOffset(-6.5, -19.0)
+    };
+    private static final ScoreCoralOffset[] rightScoreOffsets = new ScoreCoralOffset[]
+    {
+        new ScoreCoralOffset(0.0, 0.0),
+        new ScoreCoralOffset(7.0, -14.0),
+        new ScoreCoralOffset(7.0, -17.0),
+        new ScoreCoralOffset(7.0, -19.0)
+    };
+
     //
     // Global objects.
     //
@@ -76,21 +91,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevWinchPower = 0.0;
     private int scoreLevelIndex = 3;
     private boolean scoreRightSide = true;
-
-    private ScoreCoralOffset[] leftScoreOffsets = new ScoreCoralOffset[]
-    {
-        new ScoreCoralOffset(0.0, 0.0),
-        new ScoreCoralOffset(-6.5, -14.0),
-        new ScoreCoralOffset(-6.5, -17.0),
-        new ScoreCoralOffset(-6.5, -19.0)
-    };
-    private ScoreCoralOffset[] rightScoreOffsets = new ScoreCoralOffset[]
-    {
-        new ScoreCoralOffset(0.0, 0.0),
-        new ScoreCoralOffset(7.0, -14.0),
-        new ScoreCoralOffset(7.0, -17.0),
-        new ScoreCoralOffset(7.0, -19.0)
-    };
 
     /**
      * Constructor: Create an instance of the object.
