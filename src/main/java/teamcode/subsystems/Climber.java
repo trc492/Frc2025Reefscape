@@ -50,7 +50,7 @@ public class Climber extends TrcSubsystem
 
         public static final String MOTOR_NAME                   = COMPONENT_NAME + ".motor";
         public static final int MOTOR_ID                        = RobotParams.HwConfig.CANID_CLIMBERARM_MOTOR;
-        public static final MotorType MOTOR_TYPE                = MotorType.CanTalonSrx;
+        public static final MotorType MOTOR_TYPE                = MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = false;
@@ -129,8 +129,8 @@ public class Climber extends TrcSubsystem
             .setPositionScaleAndOffset(ArmParams.DEG_PER_COUNT, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
         armMotor = new FrcMotorActuator(armMotorParams).getMotor();
         // Configure encoder.
-        FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) armMotor;
-        talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        // FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) armMotor;
+        // talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
         armMotor.setPositionPidParameters(
             ArmParams.posPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED);
         armMotor.setPositionPidPowerComp(this::getArmGravityComp);

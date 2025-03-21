@@ -98,6 +98,7 @@ public class RobotParams
         public static final int CANID_ELEVATOR_MOTOR            = 9;    // White
         public static final int CANID_CORALGRABBER_MOTOR        = 17;   // Purple
         public static final int CANID_CLIMBERGRABBER_MOTOR      = 18;   // Gray
+        public static final int CANID_CLIMBERARM_ENCODER        = 28;   // Gray
         // Miscellaneous CAN IDs.
         public static final int CANID_PDP                       = 30;
         public static final int CANID_PCM                       = 31;
@@ -110,7 +111,7 @@ public class RobotParams
         public static final int AIN_RBSTEER_ENCODER             = 3;
         // Digital Input/Output ports.
         public static final int DIO_CORAL_GRABBER_SENSOR        = 0;
-        public static final int DIO_CLIMBER_GRABBER_SENSOR      = 1;
+        public static final int DIO_CLIMBER_GRABBER_SENSOR      = 3;
         // PWM channels.
         public static final int NUM_LEDS                        = 30;
         public static final int PWM_CHANNEL_LED                 = 0;
