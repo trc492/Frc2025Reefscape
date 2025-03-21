@@ -22,10 +22,7 @@
 
 package teamcode.subsystems;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-
 import frclib.driverio.FrcDashboard;
-import frclib.motor.FrcCANTalonSRX;
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
 import frclib.subsystem.FrcMotorGrabber;
