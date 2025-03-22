@@ -51,7 +51,7 @@ public class Climber extends TrcSubsystem
         public static final MotorType MOTOR_TYPE                = MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = false;
+        public static final boolean MOTOR_INVERTED              = true;
 
         public static final String ENCODER_NAME                 = COMPONENT_NAME + "Enc";
         public static final int ENCODER_ID                      = RobotParams.HwConfig.CANID_CLIMBERARM_ENCODER;
