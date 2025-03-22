@@ -58,9 +58,9 @@ public class Climber extends TrcSubsystem
         public static final EncoderType ENCODER_TYPE            = EncoderType.Canandmag;
         public static final boolean ENCODER_INVERTED            = false;
 
-        public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
+        public static final double DEG_PER_ENC_REV              = 360.0;
         public static final double POS_OFFSET                   = 0.0;
-        public static final double ZERO_OFFSET                  = 1942.0;   //encoder reading at 0-deg
+        public static final double ZERO_OFFSET                  = 0.0;      //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 0.5;
 
         public static final double MIN_POS                      = 45.0;
@@ -132,7 +132,7 @@ public class Climber extends TrcSubsystem
                 ArmParams.MOTOR_ENC_ABS, ArmParams.MOTOR_INVERTED)
             .setExternalEncoder(
                 ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED)
-            .setPositionScaleAndOffset(ArmParams.DEG_PER_COUNT, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
+            .setPositionScaleAndOffset(ArmParams.DEG_PER_ENC_REV, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
         armMotor = new FrcMotorActuator(armMotorParams).getMotor();
         // Configure encoder.
         // FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) armMotor;
