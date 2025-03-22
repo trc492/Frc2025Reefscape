@@ -51,8 +51,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private static final String DBKEY_DRIVE_SLOW_SCALE = "TeleOp/DriveSlowScale";       //Number
     private static final String DBKEY_TURN_NORMAL_SCALE = "TeleOp/TurnNormalScale";     //Number
     private static final String DBKEY_TURN_SLOW_SCALE = "TeleOp/TurnSlowScale";         //Number
-    private static final String DBKEY_DRIVE_POWER = "TeleOp/DrivePower";                //Boolean
-    private static final String DBKEY_DRIVEBASE_POWER = "TeleOp/DriveBasePower";        //String
+    private static final String DBKEY_SHOW_DRIVE_POWER = "TeleOp/ShowDrivePower";       //Boolean
+    private static final String DBKEY_DRIVE_POWER = "TeleOp/DrivePower";                //String
     private static final double DEF_DRIVE_NORMAL_SCALE = 1.0;
     private static final double DEF_DRIVE_SLOW_SCALE = 0.175;
     private static final double DEF_TURN_NORMAL_SCALE = 0.6;
@@ -117,6 +117,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         robot.dashboard.refreshKey(DBKEY_DRIVE_SLOW_SCALE, DEF_DRIVE_SLOW_SCALE);
         robot.dashboard.refreshKey(DBKEY_TURN_NORMAL_SCALE, DEF_TURN_NORMAL_SCALE);
         robot.dashboard.refreshKey(DBKEY_TURN_SLOW_SCALE, DEF_TURN_SLOW_SCALE);
+        robot.dashboard.refreshKey(DBKEY_SHOW_DRIVE_POWER, RobotParams.Preferences.showDrivePower);
+        robot.dashboard.refreshKey(DBKEY_DRIVE_POWER, "");
 
         driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_NORMAL_SCALE, DEF_DRIVE_NORMAL_SCALE);
         turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_NORMAL_SCALE, DEF_TURN_NORMAL_SCALE);
@@ -266,7 +268,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             if (showDriveBaseStatus)
                             {
                                 robot.dashboard.putString(
-                                    DBKEY_DRIVEBASE_POWER,
+                                    DBKEY_DRIVE_POWER,
                                     String.format(
                                         "Holonomic: x=%.2f, y=%.2f, rot=%.2f, gyroAngle=%.2f",
                                         driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle));
@@ -278,7 +280,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             if (showDriveBaseStatus)
                             {
                                 robot.dashboard.putString(
-                                    DBKEY_DRIVEBASE_POWER,
+                                    DBKEY_DRIVE_POWER,
                                     String.format(
                                         "Arcade: x=%.2f, y=%.2f, rot=%.2f",
                                         driveInputs[0], driveInputs[1], driveInputs[2]));
