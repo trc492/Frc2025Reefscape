@@ -61,22 +61,23 @@ public class Climber extends TrcSubsystem
         public static final EncoderType ENCODER_TYPE            = EncoderType.Canandmag;
         public static final boolean ENCODER_INVERTED            = false;
 
-        public static final double MOTOR_GEAR_RATIO             = 20.0 * 42.0 / 16.0;
+        public static final double MOTOR_GEAR_RATIO             = 60.0 * 42.0 / 16.0;
         public static final double DEG_PER_MOTOR_REV            = 360.0 / MOTOR_GEAR_RATIO;
         public static final double POS_OFFSET                   = 0.0;
         public static final double ZERO_OFFSET                  = 0.0;      //encoder reading at 0-deg
-        public static final double POWER_LIMIT                  = 0.5;
+        public static final double POWER_LIMIT                  = 1.0;
+        public static final double CLIMB_POWER                  = 0.5;
 
-        public static final double MIN_POS                      = 45.0;
+        public static final double MIN_POS                      = 10.0;
         public static final double MAX_POS                      = 200.0;
-        public static final double TURTLE_POS                   = 90.0;
+        public static final double TURTLE_POS                   = 10.0;
         public static final double TURTLE_DELAY                 = 0.0;
         public static final double DEPLOY_POS                   = 180.0;
         public static final double CLIMB_POS                    = 90.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.035, 0.0, 0.001, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.1, 0.0, 0.0, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
         public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
     }   //class ArmParams
@@ -169,7 +170,7 @@ public class Climber extends TrcSubsystem
 
     public void climb(String owner)
     {
-        armMotor.setPosition(owner, 0.0, ArmParams.CLIMB_POS, true, ArmParams.POWER_LIMIT, null, 0.0);
+        armMotor.setPosition(owner, 0.0, ArmParams.CLIMB_POS, true, ArmParams.CLIMB_POWER, null, 0.0);
     }   //climb
 
     //

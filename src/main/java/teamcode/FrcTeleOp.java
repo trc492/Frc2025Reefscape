@@ -479,15 +479,20 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 }
                 break;
 
-            case DpadDown:  
+            case DpadDown:
                 if (robot.climber != null && pressed)
                 {
                     robot.climber.climb(moduleName);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
-                }   
+                }
                 break;  
 
             case DpadLeft:
+                if (robot.climber != null && pressed)
+                {
+                    robot.climber.resetState();
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Climber Turtle");
+                }
                 break;
 
             case DpadRight:
