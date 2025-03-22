@@ -131,7 +131,7 @@
           },
           {
             "title": "DebugPidDrive",
-            "x": 256.0,
+            "x": 384.0,
             "y": 0.0,
             "width": 128.0,
             "height": 128.0,
@@ -144,7 +144,7 @@
           },
           {
             "title": "DebugDriveBase",
-            "x": 128.0,
+            "x": 256.0,
             "y": 0.0,
             "width": 128.0,
             "height": 128.0,
@@ -157,7 +157,7 @@
           },
           {
             "title": "DriveBaseStatus",
-            "x": 384.0,
+            "x": 128.0,
             "y": 0.0,
             "width": 128.0,
             "height": 128.0,
@@ -485,7 +485,64 @@
       "name": "DriveBase",
       "grid_layout": {
         "layouts": [],
-        "containers": []
+        "containers": [
+          {
+            "title": "DriveEnc",
+            "x": 768.0,
+            "y": 0.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/DriveEnc",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "RobotPose",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/RobotPose",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SteerBack",
+            "x": 768.0,
+            "y": 128.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/SteerBack",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SteerFront",
+            "x": 0.0,
+            "y": 128.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/SteerFront",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          }
+        ]
       }
     },
     {
@@ -746,7 +803,7 @@
             ]
           },
           {
-            "title": "Winch",
+            "title": "Climber Arm",
             "x": 768.0,
             "y": 0.0,
             "width": 256.0,
@@ -764,7 +821,7 @@
                 "height": 128.0,
                 "type": "Text Display",
                 "properties": {
-                  "topic": "/SmartDashboard/Winch/Power",
+                  "topic": "/SmartDashboard/ClimberArm/Power",
                   "period": 0.06,
                   "data_type": "double",
                   "show_submit_button": false
@@ -778,7 +835,7 @@
                 "height": 128.0,
                 "type": "Text Display",
                 "properties": {
-                  "topic": "/SmartDashboard/Winch/Current",
+                  "topic": "/SmartDashboard/ClimberArm/Current",
                   "period": 0.06,
                   "data_type": "double",
                   "show_submit_button": false
@@ -792,21 +849,79 @@
                 "height": 128.0,
                 "type": "Text Display",
                 "properties": {
-                  "topic": "/SmartDashboard/Winch/Position",
+                  "topic": "/SmartDashboard/ClimberArm/Position",
                   "period": 0.06,
                   "data_type": "string",
                   "show_submit_button": false
                 }
+              }
+            ]
+          },
+          {
+            "title": "Climber Grabber",
+            "x": 1024.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 512.0,
+            "type": "List Layout",
+            "properties": {
+              "label_position": "TOP"
+            },
+            "children": [
+              {
+                "title": "Power",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberGrabber/Power",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
               },
               {
-                "title": "LowerLimitSw",
+                "title": "Current",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberGrabber/Current",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "SensorState",
                 "x": 0.0,
                 "y": 0.0,
                 "width": 128.0,
                 "height": 128.0,
                 "type": "Boolean Box",
                 "properties": {
-                  "topic": "/SmartDashboard/Winch/LowerLimitSw",
+                  "topic": "/SmartDashboard/ClimberGrabber/SensorState",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              },
+              {
+                "title": "HasObject",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberGrabber/HasObject",
                   "period": 0.06,
                   "data_type": "boolean",
                   "true_color": 4283215696,
@@ -851,28 +966,28 @@
             }
           },
           {
-            "title": "BackCam",
+            "title": "BackOV9782",
             "x": 0.0,
             "y": 640.0,
             "width": 1024.0,
             "height": 128.0,
             "type": "Text Display",
             "properties": {
-              "topic": "/SmartDashboard/Vision/BackCam",
+              "topic": "/SmartDashboard/Vision/BackOV9782",
               "period": 0.06,
               "data_type": "string",
               "show_submit_button": false
             }
           },
           {
-            "title": "FrontCam",
+            "title": "FrontOV9782",
             "x": 0.0,
             "y": 512.0,
             "width": 1024.0,
             "height": 128.0,
             "type": "Text Display",
             "properties": {
-              "topic": "/SmartDashboard/Vision/FrontCam",
+              "topic": "/SmartDashboard/Vision/FrontOV9782",
               "period": 0.06,
               "data_type": "string",
               "show_submit_button": false

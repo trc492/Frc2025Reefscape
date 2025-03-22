@@ -24,6 +24,7 @@ package teamcode.subsystems;
 
 import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcMotorActuator;
+import frclib.motor.FrcMotorActuator.EncoderType;
 import frclib.motor.FrcMotorActuator.MotorType;
 import frclib.subsystem.FrcMotorGrabber;
 import teamcode.RobotParams;
@@ -51,6 +52,11 @@ public class Climber extends TrcSubsystem
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
         public static final boolean MOTOR_INVERTED              = false;
+
+        public static final String ENCODER_NAME                 = COMPONENT_NAME + "Enc";
+        public static final int ENCODER_ID                      = RobotParams.HwConfig.CANID_CLIMBERARM_ENCODER;
+        public static final EncoderType ENCODER_TYPE            = EncoderType.Canandmag;
+        public static final boolean ENCODER_INVERTED            = false;
 
         public static final double DEG_PER_COUNT                = 360.0 / 4096.0;
         public static final double POS_OFFSET                   = 0.0;
@@ -119,10 +125,13 @@ public class Climber extends TrcSubsystem
         dashboard.refreshKey(DBKEY_GRABBER_SENSOR_STATE, false);
         dashboard.refreshKey(DBKEY_GRABBER_HAS_OBJECT, false);
 
+
         FrcMotorActuator.Params armMotorParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
                 ArmParams.MOTOR_NAME, ArmParams.MOTOR_ID, ArmParams.MOTOR_TYPE, ArmParams.MOTOR_BRUSHLESS,
                 ArmParams.MOTOR_ENC_ABS, ArmParams.MOTOR_INVERTED)
+            .setExternalEncoder(
+                ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED)
             .setPositionScaleAndOffset(ArmParams.DEG_PER_COUNT, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
         armMotor = new FrcMotorActuator(armMotorParams).getMotor();
         // Configure encoder.
