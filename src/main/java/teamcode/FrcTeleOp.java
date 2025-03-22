@@ -61,14 +61,14 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private static final ScoreCoralOffset[] leftScoreOffsets = new ScoreCoralOffset[]
     {
         new ScoreCoralOffset(0.0, 0.0),
-        new ScoreCoralOffset(-6.5, -14.0),
+        new ScoreCoralOffset(-6.5, -15.0),
         new ScoreCoralOffset(-6.5, -17.0),
         new ScoreCoralOffset(-6.5, -19.0)
     };
     private static final ScoreCoralOffset[] rightScoreOffsets = new ScoreCoralOffset[]
     {
         new ScoreCoralOffset(0.0, 0.0),
-        new ScoreCoralOffset(7.0, -14.0),
+        new ScoreCoralOffset(7.0, -15.0),
         new ScoreCoralOffset(7.0, -17.0),
         new ScoreCoralOffset(7.0, -19.0)
     };
