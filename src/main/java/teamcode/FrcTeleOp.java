@@ -51,13 +51,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private static final String DBKEY_DRIVE_SLOW_SCALE = "TeleOp/DriveSlowScale";       //Number
     private static final String DBKEY_TURN_NORMAL_SCALE = "TeleOp/TurnNormalScale";     //Number
     private static final String DBKEY_TURN_SLOW_SCALE = "TeleOp/TurnSlowScale";         //Number
-    private static final String DBKEY_DRIVEBASE_STATUS = "TeleOp/DriveBaseStatus";      //Boolean
+    private static final String DBKEY_DRIVE_POWER = "TeleOp/DrivePower";                //Boolean
     private static final String DBKEY_DRIVEBASE_POWER = "TeleOp/DriveBasePower";        //String
     private static final double DEF_DRIVE_NORMAL_SCALE = 1.0;
     private static final double DEF_DRIVE_SLOW_SCALE = 0.175;
     private static final double DEF_TURN_NORMAL_SCALE = 0.6;
     private static final double DEF_TURN_SLOW_SCALE = 0.15;
-    private static final boolean DEF_DRIVEBASE_STATUS = false;
     private static final ScoreCoralOffset[] leftScoreOffsets = new ScoreCoralOffset[]
     {
         new ScoreCoralOffset(0.0, 0.0),
@@ -217,7 +216,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (robot.robotDrive != null)
                 {
                     boolean showDriveBaseStatus = robot.dashboard.getBoolean(
-                        DBKEY_DRIVEBASE_STATUS, DEF_DRIVEBASE_STATUS);
+                        DBKEY_DRIVE_POWER, RobotParams.Preferences.showDrivePower);
                     if (relocalizing)
                     {
                         if (robotFieldPose == null)

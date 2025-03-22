@@ -51,6 +51,7 @@ public class RobotParams
         public static final boolean showDriveBase               = false;
         public static final boolean debugDriveBase              = false;
         public static final boolean showPidDrive                = false;
+        public static final boolean showDrivePower              = true;
         public static final boolean showVision                  = true;
         public static final boolean showSubsystems              = true;
         // Sensors and Indicators
