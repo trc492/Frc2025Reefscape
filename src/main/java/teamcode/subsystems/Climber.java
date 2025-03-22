@@ -23,14 +23,17 @@
 package teamcode.subsystems;
 
 import frclib.driverio.FrcDashboard;
+import frclib.motor.FrcCANTalonFX;
 import frclib.motor.FrcMotorActuator;
-import frclib.motor.FrcMotorActuator.EncoderType;
 import frclib.motor.FrcMotorActuator.MotorType;
+import frclib.sensor.FrcEncoder;
+import frclib.sensor.FrcEncoder.EncoderType;
 import frclib.subsystem.FrcMotorGrabber;
 import teamcode.RobotParams;
 import trclib.controller.TrcPidController;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
+import trclib.sensor.TrcEncoder;
 import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
 
@@ -58,7 +61,8 @@ public class Climber extends TrcSubsystem
         public static final EncoderType ENCODER_TYPE            = EncoderType.Canandmag;
         public static final boolean ENCODER_INVERTED            = false;
 
-        public static final double DEG_PER_ENC_REV              = 360.0;
+        public static final double MOTOR_GEAR_RATIO             = 20.0 * 42.0 / 16.0;
+        public static final double DEG_PER_MOTOR_REV            = 360.0 / MOTOR_GEAR_RATIO;
         public static final double POS_OFFSET                   = 0.0;
         public static final double ZERO_OFFSET                  = 0.0;      //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 0.5;
@@ -125,18 +129,17 @@ public class Climber extends TrcSubsystem
         dashboard.refreshKey(DBKEY_GRABBER_SENSOR_STATE, false);
         dashboard.refreshKey(DBKEY_GRABBER_HAS_OBJECT, false);
 
-
         FrcMotorActuator.Params armMotorParams = new FrcMotorActuator.Params()
             .setPrimaryMotor(
                 ArmParams.MOTOR_NAME, ArmParams.MOTOR_ID, ArmParams.MOTOR_TYPE, ArmParams.MOTOR_BRUSHLESS,
                 ArmParams.MOTOR_ENC_ABS, ArmParams.MOTOR_INVERTED)
-            .setExternalEncoder(
-                ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED)
-            .setPositionScaleAndOffset(ArmParams.DEG_PER_ENC_REV, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
+            .setPositionScaleAndOffset(ArmParams.DEG_PER_MOTOR_REV, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
         armMotor = new FrcMotorActuator(armMotorParams).getMotor();
-        // Configure encoder.
-        // FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) armMotor;
-        // talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        // Sync motor encoder with absolute encoder.
+        TrcEncoder absEncoder = FrcEncoder.createEncoder(
+            ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED);
+        ((FrcCANTalonFX) armMotor).motor.setPosition(absEncoder.getScaledPosition() * ArmParams.MOTOR_GEAR_RATIO);
+
         armMotor.setPositionPidParameters(
             ArmParams.posPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED);
         armMotor.setPositionPidPowerComp(this::getArmGravityComp);
