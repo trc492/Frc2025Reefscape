@@ -272,7 +272,7 @@ public class Robot extends FrcRobotBase
     public void robotStartMode(RunMode runMode, RunMode prevMode)
     {
         // Enable LostComm detection.
-        if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_COMMSTATUS_MONITOR, Dashboard.DEF_COMMSTATUS_MONITOR))
+        if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_COMMSTATUS_MONITOR, RobotParams.Preferences.useCommStatusMonitor))
         {
             super.setCommStatusMonitorEnabled(this::commStatusCallback);
         }

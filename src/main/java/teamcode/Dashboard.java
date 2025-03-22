@@ -39,13 +39,6 @@ public class Dashboard
     public static final String DBKEY_PREFERENCE_DEBUG_PIDDRIVE      = "Preferences/DebugPidDrive";
     public static final String DBKEY_PREFERENCE_VISION_STATUS       = "Preferences/VisionStatus";
     public static final String DBKEY_PREFERENCE_SUBSYSTEM_STATUS    = "Preferences/SubsystemStatus";
-    public static final boolean DEF_COMMSTATUS_MONITOR              = false;
-    public static final boolean DEF_UPDATE_DASHBOARD                = false;
-    public static final boolean DEF_DRIVEBASE_STATUS                = false;
-    public static final boolean DEF_DEBUG_DRIVEBASE                 = false;
-    public static final boolean DEF_DEBUG_PIDDRIVE                  = false;
-    public static final boolean DEF_VISION_STATUS                   = false;
-    public static final boolean DEF_SUBSYSTEM_STATUS                = false;
     // Vision
     public static final String DBKEY_VISION_FRONTCAM                = "Vision/FrontCam";
     public static final String DBKEY_VISION_BACKCAM                 = "Vision/BackCam";
@@ -62,13 +55,13 @@ public class Dashboard
         dashboard = FrcDashboard.getInstance();
         nextDashboardUpdateTime = TrcTimer.getCurrentTime();
         // Preferences.
-        dashboard.refreshKey(DBKEY_PREFERENCE_COMMSTATUS_MONITOR, DEF_COMMSTATUS_MONITOR);
-        dashboard.refreshKey(DBKEY_PREFERENCE_UPDATE_DASHBOARD, DEF_UPDATE_DASHBOARD);
-        dashboard.refreshKey(DBKEY_PREFERENCE_DRIVEBASE_STATUS, DEF_DRIVEBASE_STATUS);
-        dashboard.refreshKey(DBKEY_PREFERENCE_DEBUG_DRIVEBASE, DEF_DEBUG_DRIVEBASE);
-        dashboard.refreshKey(DBKEY_PREFERENCE_DEBUG_PIDDRIVE, DEF_DEBUG_PIDDRIVE);
-        dashboard.refreshKey(DBKEY_PREFERENCE_VISION_STATUS, DEF_VISION_STATUS);
-        dashboard.refreshKey(DBKEY_PREFERENCE_SUBSYSTEM_STATUS, DEF_SUBSYSTEM_STATUS);
+        dashboard.refreshKey(DBKEY_PREFERENCE_COMMSTATUS_MONITOR, RobotParams.Preferences.useCommStatusMonitor);
+        dashboard.refreshKey(DBKEY_PREFERENCE_UPDATE_DASHBOARD, RobotParams.Preferences.updateDashboard);
+        dashboard.refreshKey(DBKEY_PREFERENCE_DRIVEBASE_STATUS, RobotParams.Preferences.showDriveBase);
+        dashboard.refreshKey(DBKEY_PREFERENCE_DEBUG_DRIVEBASE, RobotParams.Preferences.debugDriveBase);
+        dashboard.refreshKey(DBKEY_PREFERENCE_DEBUG_PIDDRIVE, RobotParams.Preferences.showPidDrive);
+        dashboard.refreshKey(DBKEY_PREFERENCE_VISION_STATUS, RobotParams.Preferences.showVision);
+        dashboard.refreshKey(DBKEY_PREFERENCE_SUBSYSTEM_STATUS, RobotParams.Preferences.showSubsystems);
     }   //Dashboard
 
     /**
@@ -97,14 +90,14 @@ public class Dashboard
         if (currTime >= nextDashboardUpdateTime)
         {
             nextDashboardUpdateTime = currTime + RobotParams.Robot.DASHBOARD_UPDATE_INTERVAL;
-            if (dashboard.getBoolean(DBKEY_PREFERENCE_UPDATE_DASHBOARD, DEF_UPDATE_DASHBOARD))
+            if (dashboard.getBoolean(DBKEY_PREFERENCE_UPDATE_DASHBOARD, RobotParams.Preferences.updateDashboard))
             {
-                if (dashboard.getBoolean(DBKEY_PREFERENCE_DRIVEBASE_STATUS, DEF_DRIVEBASE_STATUS))
+                if (dashboard.getBoolean(DBKEY_PREFERENCE_DRIVEBASE_STATUS, RobotParams.Preferences.showDriveBase))
                 {
                     lineNum = robot.robotBase.updateStatus(lineNum);
                 }
 
-                if (dashboard.getBoolean(DBKEY_PREFERENCE_VISION_STATUS, DEF_VISION_STATUS))
+                if (dashboard.getBoolean(DBKEY_PREFERENCE_VISION_STATUS, RobotParams.Preferences.showVision))
                 {
                     if (robot.photonVisionFront != null)
                     {
@@ -117,7 +110,7 @@ public class Dashboard
                     }
                 }
 
-                if (dashboard.getBoolean(DBKEY_PREFERENCE_SUBSYSTEM_STATUS, DEF_SUBSYSTEM_STATUS))
+                if (dashboard.getBoolean(DBKEY_PREFERENCE_SUBSYSTEM_STATUS, RobotParams.Preferences.showSubsystems))
                 {
                     lineNum = TrcSubsystem.updateStatusAll(lineNum);
                 }

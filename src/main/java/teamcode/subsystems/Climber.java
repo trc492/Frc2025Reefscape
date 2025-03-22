@@ -147,14 +147,21 @@ public class Climber extends TrcSubsystem
         // armMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
 
         // Climber Grabber.
-        FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
-            .setPrimaryMotor(
-                GrabberParams.MOTOR_NAME, GrabberParams.MOTOR_ID, GrabberParams.MOTOR_TYPE,
-                GrabberParams.MOTOR_BRUSHLESS, GrabberParams.MOTOR_ENC_ABS, GrabberParams.MOTOR_INVERTED)
-            .setDigitalInputTrigger(
-                GrabberParams.SENSOR_NAME, GrabberParams.SENSOR_CHANNEL, GrabberParams.SENSOR_TRIGGER_INVERTED)
-            .setPowerParams(GrabberParams.INTAKE_POWER, GrabberParams.EJECT_POWER, GrabberParams.RETAIN_POWER);
-        grabber = new FrcMotorGrabber(GrabberParams.COMPONENT_NAME, grabberParams).getGrabber();
+        if (RobotParams.Preferences.useClimberGrabber)
+        {
+            FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
+                .setPrimaryMotor(
+                    GrabberParams.MOTOR_NAME, GrabberParams.MOTOR_ID, GrabberParams.MOTOR_TYPE,
+                    GrabberParams.MOTOR_BRUSHLESS, GrabberParams.MOTOR_ENC_ABS, GrabberParams.MOTOR_INVERTED)
+                .setDigitalInputTrigger(
+                    GrabberParams.SENSOR_NAME, GrabberParams.SENSOR_CHANNEL, GrabberParams.SENSOR_TRIGGER_INVERTED)
+                .setPowerParams(GrabberParams.INTAKE_POWER, GrabberParams.EJECT_POWER, GrabberParams.RETAIN_POWER);
+            grabber = new FrcMotorGrabber(GrabberParams.COMPONENT_NAME, grabberParams).getGrabber();
+        }
+        else
+        {
+            grabber = null;
+        }
     }   //Climber
 
     private double getArmGravityComp(double currPower)
@@ -165,7 +172,10 @@ public class Climber extends TrcSubsystem
     public void deploy(String owner)
     {
         armMotor.setPosition(owner, 0.0, ArmParams.DEPLOY_POS, true, ArmParams.POWER_LIMIT, null, 0.0);
-        grabber.autoIntake(owner);
+        if (grabber != null)
+        {
+            grabber.autoIntake(owner);
+        }
     }   //deploy
 
     public void climb(String owner)
@@ -184,7 +194,7 @@ public class Climber extends TrcSubsystem
     public void cancel()
     {
         armMotor.cancel();
-        grabber.cancel();
+        if (grabber != null) grabber.cancel();
     }   //cancel
 
     /**
@@ -207,7 +217,7 @@ public class Climber extends TrcSubsystem
     {
         armMotor.setPosition(
             ArmParams.TURTLE_DELAY, ArmParams.TURTLE_POS, true, ArmParams.POWER_LIMIT);
-        grabber.cancel();
+        if (grabber != null) grabber.cancel();
     }   //resetState
 
     /**
@@ -226,11 +236,13 @@ public class Climber extends TrcSubsystem
             DBKEY_ARM_POSITION,
             String.format("%.1f/%.1f", armMotor.getPosition(), armMotor.getPidTarget()));
         // Climber Grabber.
-        dashboard.putNumber(DBKEY_GRABBER_POWER, grabber.getPower());
-        dashboard.putNumber(DBKEY_GRABBER_CURRENT, grabber.getCurrent());
-        dashboard.putBoolean(DBKEY_GRABBER_SENSOR_STATE, grabber.getSensorState());
-        dashboard.putBoolean(DBKEY_GRABBER_HAS_OBJECT, grabber.hasObject());
-
+        if (grabber != null)
+        {
+            dashboard.putNumber(DBKEY_GRABBER_POWER, grabber.getPower());
+            dashboard.putNumber(DBKEY_GRABBER_CURRENT, grabber.getCurrent());
+            dashboard.putBoolean(DBKEY_GRABBER_SENSOR_STATE, grabber.getSensorState());
+            dashboard.putBoolean(DBKEY_GRABBER_HAS_OBJECT, grabber.hasObject());
+        }
         return lineNum;
     }   //updateStatus
 

@@ -44,7 +44,15 @@ public class RobotParams
         public static final boolean inCompetition               = false;    //true
         public static final boolean hybridMode                  = false;
         public static final boolean useTraceLog                 = true;
+        public static final boolean useCommStatusMonitor        = false;
         public static final boolean invertedRobot               = false;
+        // Dashboard Update
+        public static final boolean updateDashboard             = !inCompetition;
+        public static final boolean showDriveBase               = false;
+        public static final boolean debugDriveBase              = false;
+        public static final boolean showPidDrive                = false;
+        public static final boolean showVision                  = true;
+        public static final boolean showSubsystems              = true;
         // Sensors and Indicators
         public static final boolean useNavX                     = true;
         public static final boolean usePdp                      = false;
@@ -65,6 +73,7 @@ public class RobotParams
         public static final boolean useCoralArm                 = true;
         public static final boolean useCoralGrabber             = useCoralArm;
         public static final boolean useClimber                  = true;
+        public static final boolean useClimberGrabber           = false;
         public static final boolean useElevator                 = true;
         public static final boolean useElevatorArm              = true;
     }   //class Preferences

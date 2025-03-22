@@ -623,7 +623,8 @@ public class RobotBase
         if (robotDrive != null)
         {
             dashboard.putString(DBKEY_ROBOT_POSE, robotDrive.driveBase.getFieldPosition().toString());
-            if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_DEBUG_DRIVEBASE, Dashboard.DEF_DEBUG_DRIVEBASE))
+            if (dashboard.getBoolean(
+                    Dashboard.DBKEY_PREFERENCE_DEBUG_DRIVEBASE, RobotParams.Preferences.debugDriveBase))
             {
                 // DriveBase debug info.
                 double lfDriveEnc =
@@ -667,7 +668,8 @@ public class RobotBase
                             swerveDrive.steerEncoders[FrcRobotDrive.INDEX_RIGHT_BACK].getRawPosition()));
                 }
 
-                if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_DEBUG_PIDDRIVE, Dashboard.DEF_DEBUG_PIDDRIVE))
+                if (dashboard.getBoolean(
+                        Dashboard.DBKEY_PREFERENCE_DEBUG_PIDDRIVE, RobotParams.Preferences.showPidDrive))
                 {
                     TrcPidController xPidCtrl = robotDrive.pidDrive.getXPidCtrl();
                     if (xPidCtrl != null)
