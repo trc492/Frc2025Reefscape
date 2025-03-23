@@ -28,6 +28,7 @@ import frclib.motor.FrcMotorActuator.MotorType;
 import frclib.sensor.FrcEncoder.EncoderType;
 import frclib.subsystem.FrcMotorGrabber;
 import teamcode.RobotParams;
+import teamcode.subsystems.Elevator.Params;
 import trclib.controller.TrcPidController;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
@@ -58,23 +59,26 @@ public class Climber extends TrcSubsystem
         public static final EncoderType ENCODER_TYPE            = EncoderType.Canandmag;
         public static final boolean ENCODER_INVERTED            = false;
 
-        public static final double MOTOR_GEAR_RATIO             = 60.0 * 42.0 / 16.0;
-        public static final double DEG_PER_MOTOR_REV            = 360.0 / MOTOR_GEAR_RATIO;
+        public static final double MOTOR_GEAR_RATIO             = 60.0;
+        public static final double DEG_PER_MOTOR_REV            = 360.0;
         public static final double POS_OFFSET                   = 0.0;
         public static final double ZERO_OFFSET                  = 0.0;      //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 1.0;
         public static final double CLIMB_POWER                  = 0.5;
 
-        public static final double MIN_POS                      = 10.0;
-        public static final double MAX_POS                      = 270.0;
-        public static final double TURTLE_POS                   = 10.0;
+        public static final double MIN_POS                      = 90.0;
+        public static final double MAX_POS                      = 300.0;
+        public static final double TURTLE_POS                   = 287.0;
         public static final double TURTLE_DELAY                 = 0.0;
-        public static final double DEPLOY_POS                   = 210.0;
-        public static final double CLIMB_POS                    = 135.0;
+        public static final double DEPLOY_POS                   = 216.7;
+        public static final double CLIMB_POS                    = 108.0;
+        public static final double SAFE_POS                     = 195.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
-        public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.1, 0.0, 0.0, 0.0, 0.0);
+        public static final TrcPidController.PidCoefficients groundPidCoeffs =
+            new TrcPidController.PidCoefficients(0.03, 0.0, 0.0, 0.0, 0.0);
+        public static final TrcPidController.PidCoefficients climbPidCoeffs =
+            new TrcPidController.PidCoefficients(0.5, 0.0, 0.0, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
     }   //class ArmParams
 
@@ -139,7 +143,7 @@ public class Climber extends TrcSubsystem
         //     ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED);
         // ((FrcCANTalonFX) armMotor).motor.setPosition(absEncoder.getScaledPosition() * ArmParams.MOTOR_GEAR_RATIO);
         armMotor.setPositionPidParameters(
-            ArmParams.posPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED);
+            ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED);
         // armMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
 
         // Climber Grabber.
@@ -162,6 +166,7 @@ public class Climber extends TrcSubsystem
 
     public void deploy(String owner)
     {
+        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
         armMotor.setPosition(owner, 0.0, ArmParams.DEPLOY_POS, true, ArmParams.POWER_LIMIT, null, 0.0);
         if (grabber != null)
         {
@@ -171,8 +176,20 @@ public class Climber extends TrcSubsystem
 
     public void climb(String owner)
     {
+        armMotor.setPositionPidParameters(ArmParams.climbPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
         armMotor.setPosition(owner, 0.0, ArmParams.CLIMB_POS, true, ArmParams.CLIMB_POWER, null, 0.0);
     }   //climb
+
+    public void setPower(double power)
+    {
+        armMotor.setPower(power);
+    }   //setPower
+
+    public void setPidPower(double power, double minPos, double maxPos, boolean holdTarget)
+    {
+        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
+        armMotor.setPidPower(power, minPos, maxPos, holdTarget);
+    }   //setPidPower
 
     //
     // Implements TrcSubsystem abstract methods.
@@ -205,7 +222,8 @@ public class Climber extends TrcSubsystem
      */
     @Override
     public void resetState()
-    {
+    {   
+        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
         armMotor.setPosition(
             ArmParams.TURTLE_DELAY, ArmParams.TURTLE_POS, true, ArmParams.POWER_LIMIT);
         if (grabber != null) grabber.cancel();

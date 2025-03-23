@@ -333,11 +333,11 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         {
                             if (driverAltFunc)
                             {
-                                robot.climber.armMotor.setPower(power);
+                                robot.climber.setPower(power);
                             }
                             else
                             {
-                                robot.climber.armMotor.setPidPower(
+                                robot.climber.setPidPower(
                                     power, Climber.ArmParams.MIN_POS, Climber.ArmParams.MAX_POS, true);
                             }
                             prevClimberArmPower = power;
