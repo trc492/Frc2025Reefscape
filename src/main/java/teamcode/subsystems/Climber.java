@@ -61,7 +61,7 @@ public class Climber extends TrcSubsystem
         public static final EncoderType ENCODER_TYPE            = EncoderType.Canandmag;
         public static final boolean ENCODER_INVERTED            = false;
 
-        public static final double MOTOR_GEAR_RATIO             = 500.0 * 28.0 / 15.0;
+        public static final double MOTOR_GEAR_RATIO             = 60.0 * 42.0 / 16.0;
         public static final double DEG_PER_MOTOR_REV            = 360.0 / MOTOR_GEAR_RATIO;
         public static final double POS_OFFSET                   = 0.0;
         public static final double ZERO_OFFSET                  = 0.0;      //encoder reading at 0-deg
