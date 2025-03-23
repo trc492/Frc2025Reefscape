@@ -28,7 +28,6 @@ import frclib.motor.FrcMotorActuator.MotorType;
 import frclib.sensor.FrcEncoder.EncoderType;
 import frclib.subsystem.FrcMotorGrabber;
 import teamcode.RobotParams;
-import teamcode.subsystems.Elevator.Params;
 import trclib.controller.TrcPidController;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
@@ -222,7 +221,7 @@ public class Climber extends TrcSubsystem
      */
     @Override
     public void resetState()
-    {   
+    {
         armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
         armMotor.setPosition(
             ArmParams.TURTLE_DELAY, ArmParams.TURTLE_POS, true, ArmParams.POWER_LIMIT);

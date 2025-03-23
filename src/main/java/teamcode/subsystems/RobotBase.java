@@ -34,10 +34,10 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
-import frclib.drivebase.FrcSwerveDrive.SteerEncoderType;
 import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcCANTalonFX;
 import frclib.motor.FrcMotorActuator.MotorType;
+import frclib.sensor.FrcEncoder.EncoderType;
 import teamcode.Dashboard;
 import teamcode.RobotParams;
 import teamcode.RobotParams.HwConfig;
@@ -228,7 +228,7 @@ public class RobotBase
             ledChannel = HwConfig.PWM_CHANNEL_LED;
             numLEDs = HwConfig.NUM_LEDS;
             // Steer Encoder parameters.
-            steerEncoderType = SteerEncoderType.Canandmag;
+            steerEncoderType = EncoderType.Canandmag;
             steerEncoderNames = new String[] {"lfSteerEncoder", "rfSteerEncoder", "lbSteerEncoder", "rbSteerEncoder"};
             steerEncoderIds = new int[] {
                 HwConfig.CANID_LFSTEER_ENCODER, HwConfig.CANID_RFSTEER_ENCODER,
@@ -402,7 +402,7 @@ public class RobotBase
             ledChannel = HwConfig.PWM_CHANNEL_LED;
             numLEDs = HwConfig.NUM_LEDS;
             // Steer Encoder parameters.
-            steerEncoderType = SteerEncoderType.Canandmag;
+            steerEncoderType = EncoderType.Canandmag;
             steerEncoderNames = new String[] {"lfSteerEncoder", "rfSteerEncoder", "lbSteerEncoder", "rbSteerEncoder"};
             steerEncoderIds = new int[] {
                 HwConfig.CANID_LFSTEER_ENCODER, HwConfig.CANID_RFSTEER_ENCODER,
