@@ -79,7 +79,6 @@ public class Climber extends TrcSubsystem
         public static final TrcPidController.PidCoefficients posPidCoeffs =
             new TrcPidController.PidCoefficients(0.1, 0.0, 0.0, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
-        public static final double GRAVITY_COMP_MAX_POWER       = 0.075;
     }   //class ArmParams
 
     public static final class GrabberParams
@@ -134,16 +133,16 @@ public class Climber extends TrcSubsystem
             .setPrimaryMotor(
                 ArmParams.MOTOR_NAME, ArmParams.MOTOR_ID, ArmParams.MOTOR_TYPE, ArmParams.MOTOR_BRUSHLESS,
                 ArmParams.MOTOR_ENC_ABS, ArmParams.MOTOR_INVERTED)
+            // .setExternalEncoder(
+            //     ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED)
             .setPositionScaleAndOffset(ArmParams.DEG_PER_MOTOR_REV, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
         armMotor = new FrcMotorActuator(armMotorParams).getMotor();
         // Sync motor encoder with absolute encoder.
         TrcEncoder absEncoder = FrcEncoder.createEncoder(
             ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED);
         ((FrcCANTalonFX) armMotor).motor.setPosition(absEncoder.getScaledPosition() * ArmParams.MOTOR_GEAR_RATIO);
-
         armMotor.setPositionPidParameters(
             ArmParams.posPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED);
-        armMotor.setPositionPidPowerComp(this::getArmGravityComp);
         // armMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
 
         // Climber Grabber.
@@ -163,11 +162,6 @@ public class Climber extends TrcSubsystem
             grabber = null;
         }
     }   //Climber
-
-    private double getArmGravityComp(double currPower)
-    {
-        return ArmParams.GRAVITY_COMP_MAX_POWER * Math.sin(Math.toRadians(armMotor.getPosition()));
-    }   //getArmGravityComp
 
     public void deploy(String owner)
     {
