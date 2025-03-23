@@ -23,17 +23,14 @@
 package teamcode.subsystems;
 
 import frclib.driverio.FrcDashboard;
-import frclib.motor.FrcCANTalonFX;
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
-import frclib.sensor.FrcEncoder;
 import frclib.sensor.FrcEncoder.EncoderType;
 import frclib.subsystem.FrcMotorGrabber;
 import teamcode.RobotParams;
 import trclib.controller.TrcPidController;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
-import trclib.sensor.TrcEncoder;
 import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
 
@@ -133,14 +130,14 @@ public class Climber extends TrcSubsystem
             .setPrimaryMotor(
                 ArmParams.MOTOR_NAME, ArmParams.MOTOR_ID, ArmParams.MOTOR_TYPE, ArmParams.MOTOR_BRUSHLESS,
                 ArmParams.MOTOR_ENC_ABS, ArmParams.MOTOR_INVERTED)
-            // .setExternalEncoder(
-            //     ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED)
+            .setExternalEncoder(
+                ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED)
             .setPositionScaleAndOffset(ArmParams.DEG_PER_MOTOR_REV, ArmParams.POS_OFFSET, ArmParams.ZERO_OFFSET);
         armMotor = new FrcMotorActuator(armMotorParams).getMotor();
-        // Sync motor encoder with absolute encoder.
-        TrcEncoder absEncoder = FrcEncoder.createEncoder(
-            ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED);
-        ((FrcCANTalonFX) armMotor).motor.setPosition(absEncoder.getScaledPosition() * ArmParams.MOTOR_GEAR_RATIO);
+        // // Sync motor encoder with absolute encoder.
+        // absEncoder = FrcEncoder.createEncoder(
+        //     ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED);
+        // ((FrcCANTalonFX) armMotor).motor.setPosition(absEncoder.getScaledPosition() * ArmParams.MOTOR_GEAR_RATIO);
         armMotor.setPositionPidParameters(
             ArmParams.posPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED);
         // armMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
