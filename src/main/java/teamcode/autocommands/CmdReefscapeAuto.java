@@ -236,9 +236,9 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 stationAprilTagId =
                                     RobotParams.Game.APRILTAG_STATION[stationSide == StationSide.PROCESSOR? 0: 1]
                                                                      [alliance == Alliance.Red? 0: 1];
-                                intermediatePose = stationSide == StationSide.PROCESSOR?
+                                intermediatePose = (stationSide == StationSide.PROCESSOR?
                                     RobotParams.Game.PROCESSOR_SIDE_LOOKOUT_BLUE:
-                                    RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE;
+                                    RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE).clone();
                                 // Center start position needs to have an intermediate point further down to avoid the
                                 // reef.
                                 intermediatePose.y += 108.0;
@@ -250,6 +250,20 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 20.0, -45.0);
                         // AprilTag angle is reversed from the robot.
                         targetPose.angle -= 180.0;
+                        if (intermediatePose != null &&
+                            Math.abs(targetPose.y - intermediatePose.y) > RobotParams.Field.LENGTH)
+                        {
+                            // Trying to catch the bug where the calculation of intermediatePose somehow landed
+                            // a point to the opposite side of the field.
+                            robot.globalTracer.traceWarn(
+                                moduleName,
+                                "\n\tAlliance=" + alliance +
+                                "\n\tStartPos=" + startPos +
+                                "\n\tStationSide=" + stationSide +
+                                "\n\tStationAprilTagId=" + stationAprilTagId +
+                                "\n\tIntermediatePose=" + intermediatePose +
+                                "\n\tTargetPose=" + targetPose);
+                        }
                         robot.globalTracer.traceInfo(
                             moduleName,
                             "***** Go to Coral Station: AprilTag=" + stationAprilTagId +
