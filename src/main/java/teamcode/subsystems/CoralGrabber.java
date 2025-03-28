@@ -59,6 +59,12 @@ public class CoralGrabber extends TrcSubsystem
         public static final double DUMP_DELAY                   = 0.0;
     }   //class Params
 
+    private static final String DBKEY_POWER                     = Params.SUBSYSTEM_NAME + "/Power";
+    private static final String DBKEY_CURRENT                   = Params.SUBSYSTEM_NAME + "/Current";
+    private static final String DBKEY_SENSOR_STATE              = Params.SUBSYSTEM_NAME + "/SensorState";
+    private static final String DBKEY_HAS_OBJECT                = Params.SUBSYSTEM_NAME + "/HasObject";
+
+    private final FrcDashboard dashboard;
     private final TrcMotorGrabber motorGrabber;
 
     /**
@@ -67,6 +73,13 @@ public class CoralGrabber extends TrcSubsystem
     public CoralGrabber()
     {
         super(Params.SUBSYSTEM_NAME, Params.NEED_ZERO_CAL);
+
+        dashboard = FrcDashboard.getInstance();
+        dashboard.refreshKey(DBKEY_POWER, 0.0);
+        dashboard.refreshKey(DBKEY_CURRENT, 0.0);
+        dashboard.refreshKey(DBKEY_SENSOR_STATE, false);
+        dashboard.refreshKey(DBKEY_HAS_OBJECT, false);
+
         FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE,Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
@@ -129,12 +142,10 @@ public class CoralGrabber extends TrcSubsystem
     @Override
     public int updateStatus(int lineNum)
     {
-        FrcDashboard.getInstance().displayPrintf(
-            lineNum++,
-            "%s: power=%.3f, current=%f, sensorState=%s, hasObject=%s",
-            Params.SUBSYSTEM_NAME, motorGrabber.getPower(), motorGrabber.getCurrent(), motorGrabber.getSensorState(),
-            motorGrabber.hasObject());
-
+        dashboard.putNumber(DBKEY_POWER, motorGrabber.getPower());
+        dashboard.putNumber(DBKEY_CURRENT, motorGrabber.getCurrent());
+        dashboard.putBoolean(DBKEY_SENSOR_STATE, motorGrabber.getSensorState());
+        dashboard.putBoolean(DBKEY_HAS_OBJECT, motorGrabber.hasObject());
         return lineNum;
     }   //updateStatus
 

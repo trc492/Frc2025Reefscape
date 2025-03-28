@@ -25,7 +25,6 @@ package teamcode;
 import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
@@ -53,6 +52,20 @@ import trclib.timer.TrcTimer;
 public class FrcTest extends FrcTeleOp
 {
     private static final String moduleName = FrcTest.class.getSimpleName();
+    // Smart dashboard keys for Autonomous choices.
+    private static final String DBKEY_TEST_TESTS = "Test/Tests";
+    private static final String DBKEY_TEST_X_DRIVE_DISTANCE = "Test/XDriveDistance";
+    private static final String DBKEY_TEST_Y_DRIVE_DISTANCE = "Test/YDriveDistance";
+    private static final String DBKEY_TEST_TURN_ANGLE = "Test/TurnAngle";
+    private static final String DBKEY_TEST_DRIVE_TIME = "Test/DriveTime";
+    private static final String DBKEY_TEST_DRIVE_POWER = "Test/DrivePower";
+    private static final String DBKEY_TEST_TUNE_KP = "Test/TuneKp";
+    private static final String DBKEY_TEST_TUNE_KI = "Test/TuneKi";
+    private static final String DBKEY_TEST_TUNE_KD = "Test/TuneKd";
+    private static final String DBKEY_TEST_TUNE_KF = "Test/TuneKf";
+    private static final String DBKEY_TEST_TUNE_IZONE = "Test/TuneIZone";
+    private static final String DBKEY_TEST_TARGET_VEL = "Test/TargetVelocity";
+    private static final String DBKEY_TEST_ROBOT_VEL = "Test/RobotVelocity";
     //
     // Global constants.
     //
@@ -91,18 +104,6 @@ public class FrcTest extends FrcTeleOp
      */
     class TestChoices
     {
-        // Smart dashboard keys for Autonomous choices.
-        private static final String DBKEY_TEST_TESTS = "Test/Tests";
-        private static final String DBKEY_TEST_X_DRIVE_DISTANCE = "Test/XDriveDistance";
-        private static final String DBKEY_TEST_Y_DRIVE_DISTANCE = "Test/YDriveDistance";
-        private static final String DBKEY_TEST_TURN_ANGLE = "Test/TurnAngle";
-        private static final String DBKEY_TEST_DRIVE_TIME = "Test/DriveTime";
-        private static final String DBKEY_TEST_DRIVE_POWER = "Test/DrivePower";
-        private static final String DBKEY_TEST_TUNE_KP = "Test/TuneKp";
-        private static final String DBKEY_TEST_TUNE_KI = "Test/TuneKi";
-        private static final String DBKEY_TEST_TUNE_KD = "Test/TuneKd";
-        private static final String DBKEY_TEST_TUNE_KF = "Test/TuneKf";
-    
         private final FrcUserChoices userChoices = new FrcUserChoices();
         private final FrcChoiceMenu<Test> testMenu;
 
@@ -133,15 +134,18 @@ public class FrcTest extends FrcTeleOp
             // Initialize dashboard with default choice values.
             //
             userChoices.addChoiceMenu(DBKEY_TEST_TESTS, testMenu);
-            userChoices.addNumber(DBKEY_TEST_X_DRIVE_DISTANCE, 6.0);    // in ft
-            userChoices.addNumber(DBKEY_TEST_Y_DRIVE_DISTANCE, 6.0);    // in ft
-            userChoices.addNumber(DBKEY_TEST_TURN_ANGLE, 90.0);         // in degrees
-            userChoices.addNumber(DBKEY_TEST_DRIVE_TIME, 4.0);          // in seconds
-            userChoices.addNumber(DBKEY_TEST_DRIVE_POWER, 0.5);
-            userChoices.addNumber(DBKEY_TEST_TUNE_KP, 1.0);
+            userChoices.addNumber(DBKEY_TEST_X_DRIVE_DISTANCE, 0.0);    // in ft
+            userChoices.addNumber(DBKEY_TEST_Y_DRIVE_DISTANCE, 0.0);    // in ft
+            userChoices.addNumber(DBKEY_TEST_TURN_ANGLE, 0.0);          // in degrees
+            userChoices.addNumber(DBKEY_TEST_DRIVE_TIME, 0.0);          // in seconds
+            userChoices.addNumber(DBKEY_TEST_DRIVE_POWER, 0.0);
+            userChoices.addNumber(DBKEY_TEST_TUNE_KP, 0.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KI, 0.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KD, 0.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KF, 0.0);
+            userChoices.addNumber(DBKEY_TEST_TUNE_IZONE, 0.0);
+            userChoices.addNumber(DBKEY_TEST_TARGET_VEL, 0.0);
+            userChoices.addNumber(DBKEY_TEST_ROBOT_VEL, 0.0);
         }   //TestChoices
 
         //
@@ -184,7 +188,8 @@ public class FrcTest extends FrcTeleOp
                 userChoices.getUserNumber(DBKEY_TEST_TUNE_KP),
                 userChoices.getUserNumber(DBKEY_TEST_TUNE_KI),
                 userChoices.getUserNumber(DBKEY_TEST_TUNE_KD),
-                userChoices.getUserNumber(DBKEY_TEST_TUNE_KF));
+                userChoices.getUserNumber(DBKEY_TEST_TUNE_KF),
+                userChoices.getUserNumber(DBKEY_TEST_TUNE_IZONE));
         }   //getTunePidCoefficients
 
         @Override
@@ -289,18 +294,10 @@ public class FrcTest extends FrcTeleOp
             case DRIVE_MOTORS_TEST:
                 if (robot.robotDrive != null)
                 {
-                    //
                     // Initialize motor array with the wheel motors. For 2-motor drive base, it is leftWheel and
                     // rightWheel. For 4-motor drive base, it is lfWheel, rfWheel, lbWheel, rbWheel.
-                    //
                     testCommand = new CmdDriveMotorsTest(
-                        robot.robotDrive.driveBase,
-                        new TrcMotor[] {
-                            robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_FRONT],
-                            robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_FRONT],
-                            robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_BACK],
-                            robot.robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_BACK]},
-                        5.0, 0.5);
+                        robot.robotDrive.driveBase, robot.robotDrive.driveMotors, 5.0, 0.5);
                 }
                 break;
 
@@ -417,6 +414,11 @@ public class FrcTest extends FrcTeleOp
                 }
                 break;
 
+            case X_TIMED_DRIVE:
+            case Y_TIMED_DRIVE:
+                robot.robotDrive.driveBase.setGyroAssistEnabled(null);
+                break;
+
             default:
                 break;
         }
@@ -438,7 +440,7 @@ public class FrcTest extends FrcTeleOp
     @Override
     public void periodic(double elapsedTime, boolean slowPeriodicLoop)
     {
-        int lineNum = 9;
+        int lineNum = 1;
 
         if (testCommand != null)
         {
@@ -509,8 +511,10 @@ public class FrcTest extends FrcTeleOp
                 break;
 
             case PP_DRIVE:
-                SmartDashboard.putNumber("TargetVelocity", robot.robotDrive.purePursuitDrive.getPathTargetVelocity());
-                SmartDashboard.putNumber("RobotVelocity", robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
+                robot.dashboard.putNumber(
+                    DBKEY_TEST_TARGET_VEL, robot.robotDrive.purePursuitDrive.getPathTargetVelocity());
+                robot.dashboard.putNumber(
+                    DBKEY_TEST_ROBOT_VEL, robot.robotDrive.purePursuitDrive.getPathRobotVelocity());
                 break;
 
             default:
@@ -595,10 +599,7 @@ public class FrcTest extends FrcTeleOp
             //
             // Update Dashboard.
             //
-            if (RobotParams.Preferences.doStatusUpdate)
-            {
-                robot.updateStatus(2);
-            }
+            Dashboard.updateDashboard(robot, lineNum);
         }
     }   //periodic
 
@@ -711,6 +712,7 @@ public class FrcTest extends FrcTeleOp
     //
     // Implement tests.
     //
+
     /**
      * This method reads all sensors and prints out their values. This is a very
      * useful diagnostic tool to check if all sensors are working properly. For
@@ -763,7 +765,7 @@ public class FrcTest extends FrcTeleOp
 
         if (robot.photonVisionFront != null)
         {
-            FrcPhotonVision.DetectedObject object = robot.photonVisionFront.getBestDetectedObject();
+            FrcPhotonVision.DetectedObject object = robot.photonVisionFront.getBestDetectedObject(null);
             if (object != null)
             {
                 robot.dashboard.displayPrintf(
@@ -777,7 +779,7 @@ public class FrcTest extends FrcTeleOp
 
         if (robot.photonVisionBack != null)
         {
-            FrcPhotonVision.DetectedObject object = robot.photonVisionBack.getBestDetectedObject();
+            FrcPhotonVision.DetectedObject object = robot.photonVisionBack.getBestDetectedObject(null);
             if (object != null)
             {
                 robot.dashboard.displayPrintf(

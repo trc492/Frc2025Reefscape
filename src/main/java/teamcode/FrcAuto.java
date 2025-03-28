@@ -372,7 +372,6 @@ public class FrcAuto implements TrcRobot.RobotMode
     public void startMode(RunMode prevMode, RunMode nextMode)
     {
         robot.zeroCalibrate(null, null);
-        robot.climbTask.deployClimber(null, null);
         //
         // Retrieve Auto choices.
         //
@@ -493,10 +492,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             //
             // Update robot status.
             //
-            if (RobotParams.Preferences.doStatusUpdate)
-            {
-                robot.updateStatus(2);
-            }
+            Dashboard.updateDashboard(robot, 1);
         }
     }   //periodic
 

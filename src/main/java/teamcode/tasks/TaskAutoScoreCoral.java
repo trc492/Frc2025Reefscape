@@ -42,6 +42,16 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     private static final String moduleName = TaskAutoScoreCoral.class.getSimpleName();
     private static final boolean secondLookEnabled = false;
 
+    public static class ScoreCoralOffset
+    {
+        double xOffset = 0.0, yOffset = 0.0;
+        public ScoreCoralOffset(double xOffset, double yOffset)
+        {
+            this.xOffset = xOffset;
+            this.yOffset = yOffset;
+        }   //ScoreCoralOffset
+    }   //class ScoreCoralOffset
+
     public enum State
     {
         START,
@@ -61,12 +71,11 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean relocalize;
         boolean alignOnly;
         double powerLimit;
-        double visionXOffset;
-        double visionYOffset;
+        ScoreCoralOffset scoreOffset;
 
         TaskParams(
             boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide, boolean removeAlgae,
-            boolean relocalize, boolean alignOnly, double powerLimit, double visionXOffset, double visionYOffset)
+            boolean relocalize, boolean alignOnly, double powerLimit, ScoreCoralOffset scoreOffset)
         {
             this.useVision = useVision;
             this.aprilTagId = aprilTagId;
@@ -76,8 +85,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             this.relocalize = relocalize;
             this.alignOnly = alignOnly;
             this.powerLimit = powerLimit;
-            this.visionXOffset = visionXOffset;
-            this.visionYOffset = visionYOffset;
+            this.scoreOffset = scoreOffset;
         }   //TaskParams
 
         public String toString()
@@ -90,8 +98,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                    ",relocalize=" + relocalize +
                    ",alignOnly=" + alignOnly +
                    ",powerLimit=" + powerLimit +
-                   ",visionXOffset=" + visionXOffset +
-                   ",visionYOffset=" + visionYOffset;
+                   ",scoreXOffset=" + scoreOffset.xOffset +
+                   ",scoreYOffset=" + scoreOffset.yOffset;
         }   //toString
     }   //class TaskParams
 
@@ -132,18 +140,17 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
      * @param relocalize specifies true to relocalize robot position, false otherwise.
      * @param alignOnly specifies true to align the robot for scoring but don't score, false otherwise.
      * @param powerLimit specifies the power limit for approaching the reef.
-     * @param visionXOffset specifies the X offset to add to the vision target accounting for end effector position.
-     * @param visionYOffset specifies the Y offset to add to the vision target accounting for end effector position.
+     * @param scoreOffset specifies the score coral offset accounting for end effector position.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoScoreCoral(
         String owner, boolean useVision, int aprilTagId, int reefLevel, boolean scoreRightSide,
-        boolean removeAlgae, boolean relocalize, boolean alignOnly, double powerLimit, double visionXOffset,
-        double visionYOffset, TrcEvent completionEvent)
+        boolean removeAlgae, boolean relocalize, boolean alignOnly, double powerLimit, ScoreCoralOffset scoreOffset,
+        TrcEvent completionEvent)
     {
         TaskParams taskParams = new TaskParams(
             useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize, alignOnly, powerLimit,
-            visionXOffset, visionYOffset);
+            scoreOffset);
         tracer.traceInfo(
             moduleName,
             "autoScoreCoral(owner=" + owner +
@@ -300,7 +307,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
 
             case APPROACH_REEF:
                 TrcPose2D targetPose = robot.adjustPoseByOffset(
-                    aprilTagRelativePose, taskParams.visionXOffset, taskParams.visionYOffset);
+                    aprilTagRelativePose, taskParams.scoreOffset.xOffset, taskParams.scoreOffset.yOffset);
 
                 tracer.traceInfo(moduleName, "***** Approaching Reef: targetPose=" + targetPose);
                 driveEvent.clear();

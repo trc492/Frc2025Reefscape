@@ -33,7 +33,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
@@ -47,11 +46,10 @@ import frclib.sensor.FrcAHRSGyro;
 import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
+import teamcode.subsystems.Climber;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.CoralGrabber;
 import teamcode.subsystems.Elevator;
-import teamcode.subsystems.Winch;
-import teamcode.tasks.TaskAutoClimb;
 import teamcode.tasks.TaskAutoPickupCoralFromStation;
 import teamcode.tasks.TaskAutoScoreCoral;
 import teamcode.tasks.TaskElevatorArm;
@@ -59,8 +57,6 @@ import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
-import teamcode.vision.PhotonVision.PipelineType;
-import trclib.controller.TrcPidController;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.motor.TrcMotor;
@@ -71,9 +67,6 @@ import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
 import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
-import trclib.timer.TrcTimer;
-import trclib.vision.TrcOpenCvDetector;
-import trclib.vision.TrcVisionTargetInfo;
 
 /**
  * The Main class is configured to instantiate and automatically run this class,
@@ -86,9 +79,8 @@ public class Robot extends FrcRobotBase
     // Global objects.
     public static final String moduleName = Robot.class.getSimpleName();
     public final TrcDbgTrace globalTracer = TrcDbgTrace.getGlobalTracer();
-    public final FrcDashboard dashboard = FrcDashboard.getInstance();
-    private double nextDashboardUpdateTime = TrcTimer.getCurrentTime();
-    private boolean traceLogOpened = false;
+    public FrcDashboard dashboard;
+    private boolean traceLogOpened;
     // Inputs.
     public FrcXboxController driverController;
     public FrcXboxController operatorController;
@@ -113,14 +105,13 @@ public class Robot extends FrcRobotBase
     // Other subsystems.
     //
     public TrcMotorGrabber coralGrabber;
-    public TrcMotor winch;
+    public Climber climber;
     //
     // Auto-Assists.
     //
     public TaskElevatorArm elevatorArmTask;
     public TaskAutoScoreCoral scoreCoralTask;
     public TaskAutoPickupCoralFromStation pickupCoralFromStationTask;
-    public TaskAutoClimb climbTask;
 
     /**
      * Constructor: Create an instance of the object.
@@ -145,12 +136,9 @@ public class Robot extends FrcRobotBase
     @Override
     public void robotInit()
     {
-        // Enable LostComm detection.
-        if (RobotParams.Preferences.useCommStatusMonitor)
-        {
-            super.setCommStatusMonitorEnabled(this::commStatusCallback);
-        }
-
+        // Initialize global objects.
+        dashboard = new Dashboard().getDashboard();
+        traceLogOpened = false;
         // Create and initialize inputs.
         driverController = new FrcXboxController(
             "DriverController", RobotParams.HwConfig.XBOX_DRIVER_CONTROLLER);
@@ -242,9 +230,9 @@ public class Robot extends FrcRobotBase
                     elevator = new Elevator().getElevatorMotor();
                 }
 
-                if (RobotParams.Preferences.useWinch)
+                if (RobotParams.Preferences.useClimber)
                 {
-                    winch = new Winch().getWinchMotor();
+                    climber = new Climber();
                 }
 
                 // Create autotasks.
@@ -256,11 +244,6 @@ public class Robot extends FrcRobotBase
                     elevatorArmTask.setStateTracingEnabled(true);
                     scoreCoralTask = new TaskAutoScoreCoral(this);
                     pickupCoralFromStationTask = new TaskAutoPickupCoralFromStation(this);
-                }
-
-                if (winch != null)
-                {
-                    climbTask = new TaskAutoClimb(this);
                 }
                 // pickupCoralFromGroundTask = new TaskAutoPickupCoralFromGround(this);
                 // Zero calibrate all subsystems only once in robot initialization.
@@ -288,6 +271,12 @@ public class Robot extends FrcRobotBase
     @Override
     public void robotStartMode(RunMode runMode, RunMode prevMode)
     {
+        // Enable LostComm detection.
+        if (dashboard.getBoolean(Dashboard.DBKEY_PREFERENCE_COMMSTATUS_MONITOR, RobotParams.Preferences.useCommStatusMonitor))
+        {
+            super.setCommStatusMonitorEnabled(this::commStatusCallback);
+        }
+
         cancelAll();
         // Read FMS Match info.
         FrcMatchInfo matchInfo = FrcMatchInfo.getMatchInfo();
@@ -398,156 +387,6 @@ public class Robot extends FrcRobotBase
             CommandScheduler.getInstance().run();
         }
     }   //robotPeriodic
-
-    /**
-     * This method is called periodically to update various hardware/subsystem status of the robot to the dashboard
-     * and trace log. In order to lower the potential impact these updates, this method will only update the dashboard
-     * at DASHBOARD_UPDATE_INTERVAL.
-     *
-     * @param lineNum specifies the first Dashboard line for printing status.
-     * @return next available dashboard line.
-     */
-    public int updateStatus(int lineNum)
-    {
-        double currTime = TrcTimer.getCurrentTime();
-        RunMode runMode = getCurrentRunMode();
-
-        if (currTime >= nextDashboardUpdateTime)
-        {
-            nextDashboardUpdateTime = currTime + RobotParams.Robot.DASHBOARD_UPDATE_INTERVAL;
-            if (RobotParams.Preferences.showPowerConsumption)
-            {
-                if (pdp != null)
-                {
-                    dashboard.putNumber("Power/pdpTotalCurrent", pdp.getTotalCurrent());
-                    dashboard.putNumber("Power/totalEnergy", battery.getTotalEnergy());
-                    dashboard.putData("Power/pdpInfo", pdp.getPdpSendable());
-                    if (runMode == RunMode.TELEOP_MODE)
-                    {
-                        globalTracer.traceInfo(
-                            moduleName, "Battery: currVoltage=%.2f, lowestVoltage=%.2f",
-                            battery.getVoltage(), battery.getLowestVoltage());
-                        globalTracer.traceInfo(moduleName, "Total=%.2fA", pdp.getTotalCurrent());
-                    }
-                }
-            }
-
-            if (RobotParams.Preferences.showDriveBase)
-            {
-                if (robotDrive != null)
-                {
-                    dashboard.displayPrintf(
-                        lineNum++, "RobotPose=%s, Orient=%s, GyroAssist=%s",
-                        robotDrive.driveBase.getFieldPosition(),
-                        robotDrive.driveBase.getDriveOrientation(),
-                        robotDrive.driveBase.isGyroAssistEnabled());
-
-                    if (RobotParams.Preferences.debugDriveBase)
-                    {
-                        // DriveBase debug info.
-                        double lfDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_FRONT].getPosition();
-                        double rfDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_FRONT].getPosition();
-                        double lbDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_BACK] != null?
-                            robotDrive.driveMotors[FrcRobotDrive.INDEX_LEFT_BACK].getPosition(): 0.0;
-                        double rbDriveEnc = robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_BACK] != null?
-                            robotDrive.driveMotors[FrcRobotDrive.INDEX_RIGHT_BACK].getPosition(): 0.0;
-
-                        dashboard.displayPrintf(
-                            lineNum++, "DriveEnc: lf=%.0f, rf=%.0f, lb=%.0f, rb=%.0f, avg=%.0f",
-                            lfDriveEnc, rfDriveEnc, lbDriveEnc, rbDriveEnc,
-                            (lfDriveEnc + rfDriveEnc + lbDriveEnc + rbDriveEnc) / 4.0);
-
-                        if (robotDrive instanceof FrcSwerveDrive)
-                        {
-                            FrcSwerveDrive swerveDrive = (FrcSwerveDrive) robotDrive;
-
-                            dashboard.displayPrintf(
-                                lineNum++,
-                                "FrontSteer(angle/motorEnc/absEnc): lf=%.1f/%.3f/%.3f, rf=%.1f/%.3f/%.3f",
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_LEFT_FRONT].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_LEFT_FRONT].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_LEFT_FRONT].getRawPosition(),
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_RIGHT_FRONT].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_RIGHT_FRONT].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_RIGHT_FRONT].getRawPosition());
-                            dashboard.displayPrintf(
-                                lineNum++,
-                                "BackSteer(angle/motorEnc/absEnc): lb=%.1f/%.3f/%.3f, rb=%.1f/%.3f/%.3f",
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_LEFT_BACK].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_LEFT_BACK].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_LEFT_BACK].getRawPosition(),
-                                swerveDrive.swerveModules[FrcRobotDrive.INDEX_RIGHT_BACK].getSteerAngle(),
-                                swerveDrive.steerMotors[FrcRobotDrive.INDEX_RIGHT_BACK].getMotorPosition(),
-                                swerveDrive.steerEncoders[FrcRobotDrive.INDEX_RIGHT_BACK].getRawPosition());
-                        }
-
-                        if (RobotParams.Preferences.showPidDrive)
-                        {
-                            TrcPidController xPidCtrl = robotDrive.pidDrive.getXPidCtrl();
-                            if (xPidCtrl != null)
-                            {
-                                xPidCtrl.displayPidInfo(lineNum);
-                                lineNum += 2;
-                            }
-                            robotDrive.pidDrive.getYPidCtrl().displayPidInfo(lineNum);
-                            lineNum += 2;
-                            robotDrive.pidDrive.getTurnPidCtrl().displayPidInfo(lineNum);
-                            lineNum += 2;
-                        }
-                    }
-                }
-            }
-
-            if (RobotParams.Preferences.showVision)
-            {
-                PipelineType pipelineType;
-
-                if (photonVisionFront != null)
-                {
-                    FrcPhotonVision.DetectedObject object = photonVisionFront.getBestDetectedObject();
-                    if (object != null)
-                    {
-                        pipelineType = photonVisionFront.getPipeline();
-                        SmartDashboard.putString(
-                            "FrontCam",
-                            String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
-                    }
-                }
-
-                if (photonVisionBack != null)
-                {
-                    FrcPhotonVision.DetectedObject object = photonVisionBack.getBestDetectedObject();
-                    if (object != null)
-                    {
-                        pipelineType = photonVisionFront.getPipeline();
-                        SmartDashboard.putString(
-                            "BackCam",
-                            String.format("%s[%d]: %s", pipelineType, object.target.getFiducialId(), object));
-                    }
-                }
-
-                if (openCvVision != null)
-                {
-                    TrcVisionTargetInfo<TrcOpenCvDetector.DetectedObject<?>> object =
-                        openCvVision.getDetectedTargetInfo(null, null);
-                    if (object != null)
-                    {
-                        dashboard.displayPrintf(lineNum, "OpenCv:%s", object);
-                    }
-                    lineNum++;
-                }
-            }
-            //
-            // Display other subsystem status here.
-            //
-            if (RobotParams.Preferences.showSubsystems)
-            {
-                lineNum = TrcSubsystem.updateStatusAll(lineNum);
-            }
-        }
-
-        return lineNum;
-    }   //updateStatus
 
     /**
      * This method is called to cancel all pending operations and release the ownership of all subsystems.
@@ -763,7 +602,10 @@ public class Robot extends FrcRobotBase
         if (aprilTagObj.robotPose != null)
         {
             // Vision found an AprilTag, set the new robot field location.
-            globalTracer.traceInfo(moduleName, ">>>>> Re-localize robot: pose=" + aprilTagObj.robotPose);
+            globalTracer.traceInfo(
+                moduleName,
+                ">>>>> Re-localize robot: beforePose=" + robotDrive.driveBase.getFieldPosition() +
+                ", afterPose=" + aprilTagObj.robotPose);
             robotDrive.driveBase.setFieldPosition(aprilTagObj.robotPose, false);
             success = true;
         }

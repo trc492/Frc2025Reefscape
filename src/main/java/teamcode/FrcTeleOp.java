@@ -22,13 +22,16 @@
 
 package teamcode;
 
+import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
+import teamcode.subsystems.Climber;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
-import teamcode.subsystems.Winch;
+import teamcode.tasks.TaskAutoScoreCoral.ScoreCoralOffset;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcSwerveDriveBase;
+import trclib.driverio.TrcGameController.DriveMode;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcRobot;
@@ -41,22 +44,52 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 {
     private static final String moduleName = FrcTeleOp.class.getSimpleName();
     protected static final boolean traceButtonEvents = true;
+
+    private static final String DBKEY_DRIVE_MODE = "TeleOp/DriveMode";                  //Choices
+    private static final String DBKEY_DRIVE_ORIENTATION = "TeleOp/DriveOrientation";    //Choices
+    private static final String DBKEY_DRIVE_NORMAL_SCALE = "TeleOp/DriveNormalScale";   //Number
+    private static final String DBKEY_DRIVE_SLOW_SCALE = "TeleOp/DriveSlowScale";       //Number
+    private static final String DBKEY_TURN_NORMAL_SCALE = "TeleOp/TurnNormalScale";     //Number
+    private static final String DBKEY_TURN_SLOW_SCALE = "TeleOp/TurnSlowScale";         //Number
+    private static final String DBKEY_SHOW_DRIVE_POWER = "TeleOp/ShowDrivePower";       //Boolean
+    private static final String DBKEY_DRIVE_POWER = "TeleOp/DrivePower";                //String
+    private static final double DEF_DRIVE_NORMAL_SCALE = 1.0;
+    private static final double DEF_DRIVE_SLOW_SCALE = 0.175;
+    private static final double DEF_TURN_NORMAL_SCALE = 0.6;
+    private static final double DEF_TURN_SLOW_SCALE = 0.15;
+    private static final ScoreCoralOffset[] leftScoreOffsets = new ScoreCoralOffset[]
+    {
+        new ScoreCoralOffset(0.0, 0.0),
+        new ScoreCoralOffset(-6.5, -15.0),
+        new ScoreCoralOffset(-6.5, -17.0),
+        new ScoreCoralOffset(-6.5, -19.0)
+    };
+    private static final ScoreCoralOffset[] rightScoreOffsets = new ScoreCoralOffset[]
+    {
+        new ScoreCoralOffset(0.0, 0.0),
+        new ScoreCoralOffset(7.0, -15.0),
+        new ScoreCoralOffset(7.0, -17.0),
+        new ScoreCoralOffset(7.0, -19.0)
+    };
+
     //
     // Global objects.
     //
     protected final Robot robot;
-    private double driveSpeedScale = RobotParams.Robot.DRIVE_NORMAL_SCALE;
-    private double turnSpeedScale = RobotParams.Robot.TURN_NORMAL_SCALE;
+    private final FrcChoiceMenu<DriveMode> driveModeMenu;
+    private final FrcChoiceMenu<DriveOrientation> driveOrientationMenu;
+    private double driveSpeedScale;
+    private double turnSpeedScale;
     private boolean controlsEnabled = false;
     protected boolean driverAltFunc = false;
     protected boolean operatorAltFunc = false;
-    private boolean subsystemStatusOn = true;
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
     private double prevCoralArmPower = 0.0;
     private double prevElevatorPower = 0.0;
-    private double prevWinchPower = 0.0;
-    private int scoreIndex = 3;
+    private double prevClimberArmPower = 0.0;
+    private int scoreLevelIndex = 3;
+    private boolean scoreRightSide = true;
 
     /**
      * Constructor: Create an instance of the object.
@@ -69,7 +102,27 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         // Create and initialize global object.
         //
         this.robot = robot;
-    }   //FrcTeleOp
+
+        driveModeMenu = new FrcChoiceMenu<>(DBKEY_DRIVE_MODE);
+        driveModeMenu.addChoice("Tank", DriveMode.TankMode);
+        driveModeMenu.addChoice("Holonomic", DriveMode.HolonomicMode);
+        driveModeMenu.addChoice("Arcade", DriveMode.ArcadeMode, true, true);
+
+        driveOrientationMenu = new FrcChoiceMenu<>(DBKEY_DRIVE_ORIENTATION);
+        driveOrientationMenu.addChoice("Inverted", DriveOrientation.INVERTED);
+        driveOrientationMenu.addChoice("Robot", DriveOrientation.ROBOT);
+        driveOrientationMenu.addChoice("Field", DriveOrientation.FIELD, true, true);
+
+        robot.dashboard.refreshKey(DBKEY_DRIVE_NORMAL_SCALE, DEF_DRIVE_NORMAL_SCALE);
+        robot.dashboard.refreshKey(DBKEY_DRIVE_SLOW_SCALE, DEF_DRIVE_SLOW_SCALE);
+        robot.dashboard.refreshKey(DBKEY_TURN_NORMAL_SCALE, DEF_TURN_NORMAL_SCALE);
+        robot.dashboard.refreshKey(DBKEY_TURN_SLOW_SCALE, DEF_TURN_SLOW_SCALE);
+        robot.dashboard.refreshKey(DBKEY_SHOW_DRIVE_POWER, RobotParams.Preferences.showDrivePower);
+        robot.dashboard.refreshKey(DBKEY_DRIVE_POWER, "");
+
+        driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_NORMAL_SCALE, DEF_DRIVE_NORMAL_SCALE);
+        turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_NORMAL_SCALE, DEF_TURN_NORMAL_SCALE);
+}   //FrcTeleOp
 
     //
     // Implements TrcRobot.RunMode interface.
@@ -95,7 +148,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         if (robot.robotDrive != null)
         {
             // Set robot to FIELD by default but don't change the heading.
-            robot.setDriveOrientation(RobotParams.Robot.DRIVE_ORIENTATION, false);
+            robot.setDriveOrientation(driveOrientationMenu.getCurrentChoiceObject(), false);
             // Enable AprilTag vision for re-localization.
             if (robot.photonVisionFront != null)
             {
@@ -152,12 +205,9 @@ public class FrcTeleOp implements TrcRobot.RobotMode
      * @param slowPeriodicLoop specifies true if it is running the slow periodic loop on the main robot thread,
      *        false otherwise.
      */
-    @SuppressWarnings("unused")
     @Override
     public void periodic(double elapsedTime, boolean slowPeriodicLoop)
     {
-        int lineNum = 1;
-
         if (slowPeriodicLoop)
         {
             if (controlsEnabled)
@@ -167,9 +217,8 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 //
                 if (robot.robotDrive != null)
                 {
-                    boolean showDriveBaseStatus =
-                        RobotParams.Preferences.showDriveBase &&
-                        (RobotParams.Preferences.doStatusUpdate || subsystemStatusOn);
+                    boolean showDriveBaseStatus = robot.dashboard.getBoolean(
+                        DBKEY_DRIVE_POWER, RobotParams.Preferences.showDrivePower);
                     if (relocalizing)
                     {
                         if (robotFieldPose == null)
@@ -197,23 +246,32 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         double[] driveInputs;
 
                         driveInputs = robot.driverController.getDriveInputs(
-                            RobotParams.Robot.DRIVE_MODE, true, driveSpeedScale, turnSpeedScale);
+                            driveModeMenu.getCurrentChoiceObject(), true, driveSpeedScale, turnSpeedScale);
                         if (robot.robotDrive.driveBase.supportsHolonomicDrive())
                         {
                             double gyroAngle = robot.robotDrive.driveBase.getDriveGyroAngle();
-                            if ((driveInputs[0] != 0.0 || driveInputs[1] != 0.0) &&
-                                robot.pickupCoralFromStationTask != null &&
-                                robot.pickupCoralFromStationTask.isActive())
+                            if (driveInputs[0] != 0.0 || driveInputs[1] != 0.0)
                             {
-                                robot.pickupCoralFromStationTask.cancel();
+                                if (robot.pickupCoralFromStationTask != null && robot.pickupCoralFromStationTask.isActive())
+                                {
+                                    robot.pickupCoralFromStationTask.cancel();
+                                }
+
+                                if (robot.scoreCoralTask != null && robot.scoreCoralTask.isActive())
+                                {
+                                    robot.scoreCoralTask.cancel();
+                                }
                             }
+
                             robot.robotDrive.driveBase.holonomicDrive(
                                 null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
                             if (showDriveBaseStatus)
                             {
-                                robot.dashboard.displayPrintf(
-                                    lineNum, "Holonomic: x=%.2f, y=%.2f, rot=%.2f, gyroAngle=%.2f",
-                                    driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
+                                robot.dashboard.putString(
+                                    DBKEY_DRIVE_POWER,
+                                    String.format(
+                                        "Holonomic: x=%.2f, y=%.2f, rot=%.2f, gyroAngle=%.2f",
+                                        driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle));
                             }
                         }
                         else
@@ -221,16 +279,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.robotDrive.driveBase.arcadeDrive(driveInputs[1], driveInputs[2]);
                             if (showDriveBaseStatus)
                             {
-                                robot.dashboard.displayPrintf(
-                                    lineNum, "Arcade: x=%.2f, y=%.2f, rot=%.2f",
-                                    driveInputs[0], driveInputs[1], driveInputs[2]);
+                                robot.dashboard.putString(
+                                    DBKEY_DRIVE_POWER,
+                                    String.format(
+                                        "Arcade: x=%.2f, y=%.2f, rot=%.2f",
+                                        driveInputs[0], driveInputs[1], driveInputs[2]));
                             }
                         }
-                    }
-
-                    if (showDriveBaseStatus)
-                    {
-                        lineNum++;
                     }
                 }
                 //
@@ -271,14 +326,21 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         }
                     }
 
-                    if (robot.winch != null)
+                    if (robot.climber != null)
                     {
-                        power = robot.driverController.getTrigger(true) * Winch.Params.POWER_LIMIT;
-                        if (power != prevWinchPower)
+                        power = robot.driverController.getTrigger(true) * Climber.ArmParams.POWER_LIMIT;
+                        if (power != prevClimberArmPower)
                         {
-                            //robot.winch.setPower(power);
-                            robot.winch.setPidPower(power, Winch.Params.MIN_POS, Winch.Params.MAX_POS, true);
-                            prevWinchPower = power;
+                            if (driverAltFunc)
+                            {
+                                robot.climber.setPower(power);
+                            }
+                            else
+                            {
+                                robot.climber.setPidPower(
+                                    power, Climber.ArmParams.MIN_POS, Climber.ArmParams.MAX_POS, true);
+                            }
+                            prevClimberArmPower = power;
                         }
                     }
                 }
@@ -286,10 +348,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             //
             // Update robot status.
             //
-            if (RobotParams.Preferences.doStatusUpdate || subsystemStatusOn)
-            {
-                lineNum = robot.updateStatus(lineNum);
-            }
+            Dashboard.updateDashboard(robot, 1);
         }
     }   //periodic
 
@@ -357,19 +416,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case B:
                 // Turtle mode.
-                // if (pressed)
-                // {
-                //     robot.turtle();
-                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
-                // }
-
-                // This does not work!!
-                if (robot.pickupCoralFromStationTask != null)
+                if (pressed)
                 {
-                    if (pressed)
-                    {
-                        robot.pickupCoralFromStationTask.autoPickupCoral(null, true, -1, false, null);
-                    }
+                    robot.turtle();
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
                 }
                 break;
 
@@ -382,67 +432,71 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Y:
-                if (robot.pickupCoralFromStationTask != null && pressed)
+                if (driverAltFunc)
                 {
-                    robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
-                } else{
-                    
+                    if (robot.scoreCoralTask != null && pressed)
+                    {
+                        robot.scoreCoralTask.autoScoreCoral(
+                            moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.4,
+                            scoreRightSide? rightScoreOffsets[scoreLevelIndex]: leftScoreOffsets[scoreLevelIndex], null);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Align to Score Coral");
+                    }
+                }
+                else
+                {
+                    if (robot.pickupCoralFromStationTask != null && pressed)
+                    {
+                        robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, null);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
+                    }
                 }
                 break;  
 
             case LeftBumper:
                 driverAltFunc = pressed;
-                robot.globalTracer.traceInfo(moduleName, ">>>>> DriverAltFunc = " + driverAltFunc);
+                robot.globalTracer.traceInfo(moduleName, ">>>>> DriverAltFunc=" + driverAltFunc);
                 break;
 
             case RightBumper:
                 if (pressed)
                 {
-                    driveSpeedScale = RobotParams.Robot.DRIVE_SLOW_SCALE;
-                    turnSpeedScale = RobotParams.Robot.TURN_SLOW_SCALE;
+                    driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_SLOW_SCALE, DEF_DRIVE_SLOW_SCALE);
+                    turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_SLOW_SCALE, DEF_TURN_SLOW_SCALE);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Slow Drive");
                 }
                 else
                 {
-                    driveSpeedScale = RobotParams.Robot.DRIVE_NORMAL_SCALE;
-                    turnSpeedScale = RobotParams.Robot.TURN_NORMAL_SCALE;
+                    driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_NORMAL_SCALE, DEF_DRIVE_NORMAL_SCALE);
+                    turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_NORMAL_SCALE, DEF_TURN_NORMAL_SCALE);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Normal Drive");
                 }
                 break;
 
             case DpadUp:
-                if (robot.climbTask != null && pressed)
+                if (robot.climber != null && pressed)
                 {
-                    robot.winch.zeroCalibrate(Winch.Params.ZERO_CAL_POWER);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climb");
+                    robot.climber.deploy(moduleName);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
                 }
                 break;
 
-            case DpadDown:  
-                if (robot.climbTask != null && pressed)
+            case DpadDown:
+                if (robot.climber != null && pressed)
                 {
-                    robot.climbTask.climb(null, null);
+                    robot.climber.climb(moduleName);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Climb");
-                }   
+                }
                 break;  
 
             case DpadLeft:
-                if (robot.climbTask != null && pressed)
+                if (robot.climber != null && pressed)
                 {
-                    if(driverAltFunc){
-                        robot.climbTask.deployClimber(null, null);
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Zero Calibrate Climber and Extend");
-                    }
+                    robot.climber.resetState();
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Climber Turtle");
                 }
                 break;
 
             case DpadRight:
-                if (robot.climbTask != null && pressed)
-                {
-                    robot.climbTask.prepClimber(null, null);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Engage Cage");
-                }
                 break;
 
             case Back:
@@ -455,44 +509,33 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Start:
-                if (driverAltFunc)
+                if (robot.photonVisionFront != null &&
+                    robot.photonVisionFront.getPipeline() == PipelineType.APRILTAG ||
+                    robot.photonVisionBack != null &&
+                    robot.photonVisionBack.getPipeline() == PipelineType.APRILTAG)
                 {
-                    if (pressed)
+                    // On press of the button, we will start looking for AprilTag for re-localization.
+                    // On release of the button, we will set the robot's field location if we found the
+                    // AprilTag.
+                    relocalizing = pressed;
+                    if (!pressed)
                     {
-                        subsystemStatusOn = !subsystemStatusOn;
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Toggle Subsystem Status: status=" + subsystemStatusOn);
-                    }
-                }
-                else
-                {
-                    if (robot.photonVisionFront != null &&
-                        robot.photonVisionFront.getPipeline() == PipelineType.APRILTAG ||
-                        robot.photonVisionBack != null &&
-                        robot.photonVisionBack.getPipeline() == PipelineType.APRILTAG)
-                    {
-                        // On press of the button, we will start looking for AprilTag for re-localization.
-                        // On release of the button, we will set the robot's field location if we found the
-                        // AprilTag.
-                        relocalizing = pressed;
-                        if (!pressed)
+                        if (robotFieldPose != null)
                         {
-                            if (robotFieldPose != null)
-                            {
-                                robot.globalTracer.traceInfo(
-                                    moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
-                                robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);
-                                robotFieldPose = null;
-                            }
-                            else
-                            {
-                                robot.globalTracer.traceInfo(
-                                    moduleName, ">>>>> Finish re-localizing: AprilTag not found.");
-                            }
+                            robot.globalTracer.traceInfo(
+                                moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
+                            robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);
+                            robotFieldPose = null;
                         }
                         else
                         {
-                            robot.globalTracer.traceInfo(moduleName, ">>>>> Start re-localizing ...");
+                            robot.globalTracer.traceInfo(
+                                moduleName, ">>>>> Finish re-localizing: AprilTag not found");
                         }
+                    }
+                    else
+                    {
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Start re-localizing ...");
                     }
                 }
                 break;
@@ -536,15 +579,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Coral Intake");
                         }
                     }
-                    else if (robot.coralGrabber.isAutoActive())
-                    {
-                        robot.coralGrabber.cancel();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Coral Intake");
-                    }
                     else
                     {
-                        robot.coralGrabber.stop();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Coral Intake");
+                        robot.coralGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Coral Intake");
                     }
                 }
                 break;
@@ -565,15 +603,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Coral Eject");
                         }
                     }
-                    else if (robot.coralGrabber.isAutoActive())
-                    {
-                        robot.coralGrabber.cancel();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Auto Coral Eject");
-                    }
                     else
                     {
-                        robot.coralGrabber.stop();
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Stop Coral Eject");
+                        robot.coralGrabber.cancel();
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Cancel Coral Eject");
                     }
                 }
                 break;
@@ -581,7 +614,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case X:
                 if (robot.elevatorArmTask !=null && pressed)
                 {
-                    robot.elevatorArmTask.setCoralScorePosition(moduleName, scoreIndex, null);
+                    robot.elevatorArmTask.setCoralScorePosition(moduleName, scoreLevelIndex, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Score Position");
                 }
                 break;
@@ -596,7 +629,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case LeftBumper:
                 operatorAltFunc = pressed;
-                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc = " + driverAltFunc);
+                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc=" + driverAltFunc);
                 break;
 
             case RightBumper:
@@ -605,15 +638,15 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadUp:
                 if (pressed)
                 {
-                    if (scoreIndex < 3)
+                    if (scoreLevelIndex < 3)
                     {
-                        scoreIndex++;
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Up: index=", scoreIndex);
+                        scoreLevelIndex++;
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Up: index=", scoreLevelIndex);
                     }
 
                     if (robot.ledIndicator != null)
                     {
-                        robot.ledIndicator.setReefLevel(scoreIndex);
+                        robot.ledIndicator.setReefLevel(scoreLevelIndex);
                     }
                 }
                 break;
@@ -621,23 +654,33 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadDown:
                 if (pressed)
                 {
-                    if (scoreIndex > 0)
+                    if (scoreLevelIndex > 0)
                     {
-                        scoreIndex--;
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Down: index=", scoreIndex);
+                        scoreLevelIndex--;
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Score Index Down: index=", scoreLevelIndex);
                     }
 
                     if (robot.ledIndicator != null)
                     {
-                        robot.ledIndicator.setReefLevel(scoreIndex);
+                        robot.ledIndicator.setReefLevel(scoreLevelIndex);
                     }
                 }
                 break;
 
             case DpadLeft:
+                if (pressed)
+                {
+                    scoreRightSide = false;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Left Reef Branch");
+                }
                 break;
 
             case DpadRight:
+                if (pressed)
+                {
+                    scoreRightSide = true;
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Score Right Reef Branch");
+                }
                 break;
 
             case Back:

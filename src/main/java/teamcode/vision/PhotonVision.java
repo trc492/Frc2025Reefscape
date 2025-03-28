@@ -22,10 +22,13 @@
 
 package teamcode.vision;
 
+import java.util.Comparator;
+
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Transform3d;
+import frclib.driverio.FrcDashboard;
 import frclib.vision.FrcPhotonVision;
 import teamcode.RobotParams;
 import teamcode.subsystems.LEDIndicator;
@@ -37,6 +40,7 @@ import trclib.robotcore.TrcEvent;
  */
 public class PhotonVision extends FrcPhotonVision
 {
+    private static final String DBKEY_PREFIX                = "Vision/";
     public static final double ONTARGET_THRESHOLD           = 2.0;
     public static final double GUIDANCE_ERROR_THRESHOLD     = 12.0;
 
@@ -55,6 +59,8 @@ public class PhotonVision extends FrcPhotonVision
 
     }   //enum PipelineType
 
+    private final FrcDashboard dashboard;
+    private final String instanceName;
     private final Transform3d robotToCam;
     private final LEDIndicator ledIndicator;
     private PipelineType currPipeline = PipelineType.APRILTAG;
@@ -69,6 +75,9 @@ public class PhotonVision extends FrcPhotonVision
     public PhotonVision(String cameraName, Transform3d robotToCam, LEDIndicator ledIndicator)
     {
         super(cameraName, robotToCam);
+        dashboard = FrcDashboard.getInstance();
+        dashboard.refreshKey(DBKEY_PREFIX + cameraName, "");
+        this.instanceName = cameraName;
         this.robotToCam = robotToCam;
         this.ledIndicator = ledIndicator;
         setPipeline(currPipeline);
@@ -107,12 +116,14 @@ public class PhotonVision extends FrcPhotonVision
     /**
      * This method returns the best detected object.
      *
+     * @param comparator specifies comparator for sorting the detected objects, can be null if not provided.
      * @param detectionEvent specifies the event to signal when it detects the target.
      * @return best detected object.
      */
-    public DetectedObject getBestDetectedObject(TrcEvent detectionEvent)
+    public DetectedObject getBestDetectedObject(
+        Comparator<? super PhotonTrackedTarget> comparator, TrcEvent detectionEvent)
     {
-        DetectedObject bestDetectedObj = super.getBestDetectedObject();
+        DetectedObject bestDetectedObj = super.getBestDetectedObject(comparator);
 
         if (bestDetectedObj != null)
         {
@@ -136,33 +147,23 @@ public class PhotonVision extends FrcPhotonVision
      * @return best detected object.
      */
     @Override
-    public DetectedObject getBestDetectedObject()
+    public DetectedObject getBestDetectedObject(Comparator<? super PhotonTrackedTarget> comparator)
     {
-        return getBestDetectedObject(null);
+        return getBestDetectedObject(comparator, null);
     }   //getBestDetectedObject
 
     /**
-     * This method finds a matching AprilTag ID in the specified array and returns the found index.
+     * This method is called by the comparator to sort the detected object array in descending area of the target.
      *
-     * @param id specifies the AprilTag ID to be matched.
-     * @param aprilTagIds specifies the AprilTag ID array to find the given ID.
-     * @return index in the array that matched the ID, -1 if not found.
+     * @param t1 specifies the target 1 object.
+     * @param t2 specifies the target 2 object.
+     * @return positive value if target 2 area is greater than target 1, negative value if target 2 area is smaller
+     *         than target 1, zero if areas are equal.
      */
-    private int matchAprilTagId(int id, int[] aprilTagIds)
+    private int compareAreas(PhotonTrackedTarget t1, PhotonTrackedTarget t2)
     {
-        int matchedIndex = -1;
-
-        for (int i = 0; i < aprilTagIds.length; i++)
-        {
-            if (id == aprilTagIds[i])
-            {
-                matchedIndex = i;
-                break;
-            }
-        }
-
-        return matchedIndex;
-    }   //matchAprilTagId
+        return (int)((t2.getArea() - t1.getArea())*100);
+    }   //compareArea
 
     /**
      * This method get the best detected AprilTag matching the specified AprilTag IDs array sorted by most preferred
@@ -178,32 +179,7 @@ public class PhotonVision extends FrcPhotonVision
 
         if (currPipeline == PipelineType.APRILTAG)
         {
-            DetectedObject objects[] = super.getDetectedObjects();
-
-            if (objects != null)
-            {
-                if (aprilTagIds == null)
-                {
-                    // Caller did not provide AprilTag IDs to look for, just pick the first one.
-                    bestObj = objects[0];
-                }
-                else
-                {
-                    int bestIdIndex = -1;
-                    for (DetectedObject obj: objects)
-                    {
-                        int id = obj.target.getFiducialId();
-                        int idIndex = matchAprilTagId(id, aprilTagIds);
-
-                        if (idIndex != -1 && (bestIdIndex == -1 || idIndex < bestIdIndex))
-                        {
-                            // Found first match or a better match.
-                            bestObj = obj;
-                            bestIdIndex = idIndex;
-                        }
-                    }
-                }
-            }
+            bestObj = super.getDetectedAprilTag(this::compareAreas, aprilTagIds);
         }
 
         if (bestObj != null)
@@ -231,7 +207,7 @@ public class PhotonVision extends FrcPhotonVision
      */
     public DetectedObject getBestDetectedAprilTag(int... aprilTagIds)
     {
-        return getBestDetectedAprilTag(null, aprilTagIds);
+        return getBestDetectedAprilTag((TrcEvent) null, aprilTagIds);
     }   //getBestDetectedAprilTag
 
     /**
@@ -314,5 +290,39 @@ public class PhotonVision extends FrcPhotonVision
 
         return targetHeight;
     }   //getTargetGroundOffset
+
+    /**
+     * This method update the dashboard with vision status.
+     *
+     * @param lineNum specifies the starting line number to print the subsystem status.
+     * @return updated line number for the next subsystem to print.
+     */
+    public int updateStatus(int lineNum)
+    {
+        PipelineType pipelineType;
+        FrcPhotonVision.DetectedObject object = getBestDetectedObject(this::compareAreas);
+
+        if (object != null)
+        {
+            pipelineType = getPipeline();
+            if (pipelineType == PipelineType.APRILTAG)
+            {
+                dashboard.putString(
+                    DBKEY_PREFIX + instanceName,
+                    String.format(
+                        "%s[%d]:targetPose=%s,robotPose=%s",
+                        pipelineType, object.target.getFiducialId(), object.targetPose, object.robotPose));
+            }
+            else
+            {
+                dashboard.putString(
+                    DBKEY_PREFIX + instanceName,
+                    String.format(
+                        "%s:targetPose=%s,robotPose=%s",
+                        pipelineType, object.targetPose, object.robotPose));
+            }
+        }
+        return lineNum;
+    }   //updateStatus
 
 }   //class PhotonVision

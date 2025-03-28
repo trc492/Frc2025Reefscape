@@ -97,8 +97,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
      *
      * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
      * @param useVision specifies true to use vision to find the coral, false otherwise.
-     * @param aprilTagId specifies the AprilTag ID of the reef branch to score, -1 to use Vision to look for the
-     *        closest one.
+     * @param aprilTagId specifies the AprilTag ID of the coral station, -1 to use Vision to look for the closest one.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */

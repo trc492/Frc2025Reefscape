@@ -36,7 +36,7 @@
             }
           },
           {
-            "title": "IsRedAlliance",
+            "title": "Alliance",
             "x": 256.0,
             "y": 128.0,
             "width": 128.0,
@@ -46,8 +46,8 @@
               "topic": "/FMSInfo/IsRedAlliance",
               "period": 0.06,
               "data_type": "boolean",
-              "true_color": 4283215696,
-              "false_color": 4294198070,
+              "true_color": 4294901760,
+              "false_color": 4278190335,
               "true_icon": "None",
               "false_icon": "None"
             }
@@ -112,11 +112,123 @@
       }
     },
     {
+      "name": "Preferences",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "CommStatusMonitor",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/CommStatusMonitor",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "DebugPidDrive",
+            "x": 384.0,
+            "y": 0.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/DebugPidDrive",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "DebugDriveBase",
+            "x": 256.0,
+            "y": 0.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/DebugDriveBase",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "DriveBaseStatus",
+            "x": 128.0,
+            "y": 0.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/DriveBaseStatus",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "PowerConsumption",
+            "x": 128.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/PowerConsumption",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "UpdateDashboard",
+            "x": 0.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/UpdateDashboard",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "SubsystemStatus",
+            "x": 256.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/SubsystemStatus",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "VisionStatus",
+            "x": 384.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/Preferences/VisionStatus",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "Dashboard",
       "grid_layout": {
         "layouts": [
           {
-            "title": "List Layout",
+            "title": "Dashboard 00-07",
             "x": 0.0,
             "y": 0.0,
             "width": 768.0,
@@ -241,7 +353,7 @@
             ]
           },
           {
-            "title": "List Layout",
+            "title": "Dashboard 08-15",
             "x": 768.0,
             "y": 0.0,
             "width": 768.0,
@@ -367,6 +479,535 @@
           }
         ],
         "containers": []
+      }
+    },
+    {
+      "name": "DriveBase",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "DriveEnc",
+            "x": 768.0,
+            "y": 0.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/DriveEnc",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "RobotPose",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/RobotPose",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SteerBack",
+            "x": 768.0,
+            "y": 128.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/SteerBack",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "SteerFront",
+            "x": 0.0,
+            "y": 128.0,
+            "width": 768.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/DriveBase/SteerFront",
+              "period": 0.06,
+              "data_type": "string",
+              "show_submit_button": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Subsystems",
+      "grid_layout": {
+        "layouts": [
+          {
+            "title": "Coral Arm",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 512.0,
+            "type": "List Layout",
+            "properties": {
+              "label_position": "TOP"
+            },
+            "children": [
+              {
+                "title": "Power",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralArm/Power",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Current",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralArm/Current",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Position",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralArm/Position",
+                  "period": 0.06,
+                  "data_type": "string",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "LowerLimitSw",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralArm/LowerLimitSw",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              },
+              {
+                "title": "UpperLimitSw",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralArm/UpperLimitSw",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              }
+            ]
+          },
+          {
+            "title": "Coral Grabber",
+            "x": 256.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 512.0,
+            "type": "List Layout",
+            "properties": {
+              "label_position": "TOP"
+            },
+            "children": [
+              {
+                "title": "Power",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralGrabber/Power",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Current",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralGrabber/Current",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "SensorState",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralGrabber/SensorState",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              },
+              {
+                "title": "HasObject",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/CoralGrabber/HasObject",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              }
+            ]
+          },
+          {
+            "title": "Elevator",
+            "x": 512.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 512.0,
+            "type": "List Layout",
+            "properties": {
+              "label_position": "TOP"
+            },
+            "children": [
+              {
+                "title": "Power",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/Elevator/Power",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Current",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/Elevator/Current",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Position",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/Elevator/Position",
+                  "period": 0.06,
+                  "data_type": "string",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "LowerLimitSw",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/Elevator/LowerLimitSw",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              },
+              {
+                "title": "UpperLimitSw",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/Elevator/UpperLimitSw",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              }
+            ]
+          },
+          {
+            "title": "Climber Arm",
+            "x": 768.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 512.0,
+            "type": "List Layout",
+            "properties": {
+              "label_position": "TOP"
+            },
+            "children": [
+              {
+                "title": "Power",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberArm/Power",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Current",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberArm/Current",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Position",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberArm/Position",
+                  "period": 0.06,
+                  "data_type": "string",
+                  "show_submit_button": false
+                }
+              }
+            ]
+          },
+          {
+            "title": "Climber Grabber",
+            "x": 1024.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 512.0,
+            "type": "List Layout",
+            "properties": {
+              "label_position": "TOP"
+            },
+            "children": [
+              {
+                "title": "Power",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberGrabber/Power",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "Current",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberGrabber/Current",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "SensorState",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberGrabber/SensorState",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              },
+              {
+                "title": "HasObject",
+                "x": 0.0,
+                "y": 0.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Boolean Box",
+                "properties": {
+                  "topic": "/SmartDashboard/ClimberGrabber/HasObject",
+                  "period": 0.06,
+                  "data_type": "boolean",
+                  "true_color": 4283215696,
+                  "false_color": 4294198070,
+                  "true_icon": "None",
+                  "false_icon": "None"
+                }
+              }
+            ]
+          }
+        ],
+        "containers": []
+      }
+    },
+    {
+      "name": "Vision",
+      "grid_layout": {
+        "layouts": [
+          {
+            "title": "List Layout",
+            "x": 0.0,
+            "y": 512.0,
+            "width": 1024.0,
+            "height": 256.0,
+            "type": "List Layout",
+            "properties": {
+              "label_position": "TOP"
+            },
+            "children": [
+              {
+                "title": "FrontOV9782",
+                "x": 384.0,
+                "y": 512.0,
+                "width": 1024.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/Vision/FrontOV9782",
+                  "period": 0.06,
+                  "data_type": "string",
+                  "show_submit_button": false
+                }
+              },
+              {
+                "title": "BackOV9782",
+                "x": 384.0,
+                "y": 640.0,
+                "width": 1024.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/Vision/BackOV9782",
+                  "period": 0.06,
+                  "data_type": "string",
+                  "show_submit_button": false
+                }
+              }
+            ]
+          }
+        ],
+        "containers": [
+          {
+            "title": "photonvision_Port_1182_Output_MJPEG_Server",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 512.0,
+            "height": 512.0,
+            "type": "Camera Stream",
+            "properties": {
+              "topic": "/CameraPublisher/photonvision_Port_1182_Output_MJPEG_Server",
+              "period": 0.06
+            }
+          },
+          {
+            "title": "photonvision_Port_1184_Output_MJPEG_Server",
+            "x": 512.0,
+            "y": 0.0,
+            "width": 512.0,
+            "height": 512.0,
+            "type": "Camera Stream",
+            "properties": {
+              "topic": "/CameraPublisher/photonvision_Port_1184_Output_MJPEG_Server",
+              "period": 0.06
+            }
+          }
+        ]
       }
     },
     {
@@ -639,61 +1280,111 @@
       "name": "TeleOp",
       "grid_layout": {
         "layouts": [],
-        "containers": []
-      }
-    },
-    {
-      "name": "Vision",
-      "grid_layout": {
-        "layouts": [],
         "containers": [
           {
-            "title": "photonvision_Port_1182_Output_MJPEG_Server",
+            "title": "DriveMode",
             "x": 0.0,
             "y": 0.0,
-            "width": 512.0,
-            "height": 512.0,
-            "type": "Camera Stream",
+            "width": 256.0,
+            "height": 128.0,
+            "type": "ComboBox Chooser",
             "properties": {
-              "topic": "/CameraPublisher/photonvision_Port_1182_Output_MJPEG_Server",
-              "period": 0.06
+              "topic": "/SmartDashboard/TeleOp/DriveMode",
+              "period": 0.06,
+              "sort_options": false
             }
           },
           {
-            "title": "photonvision_Port_1184_Output_MJPEG_Server",
-            "x": 512.0,
+            "title": "DriveOrientation",
+            "x": 256.0,
             "y": 0.0,
-            "width": 512.0,
-            "height": 512.0,
-            "type": "Camera Stream",
+            "width": 256.0,
+            "height": 128.0,
+            "type": "ComboBox Chooser",
             "properties": {
-              "topic": "/CameraPublisher/photonvision_Port_1184_Output_MJPEG_Server",
-              "period": 0.06
+              "topic": "/SmartDashboard/TeleOp/DriveOrientation",
+              "period": 0.06,
+              "sort_options": false
             }
           },
           {
-            "title": "FrontCam",
+            "title": "DriveNormalScale",
             "x": 0.0,
-            "y": 512.0,
-            "width": 1024.0,
+            "y": 128.0,
+            "width": 128.0,
             "height": 128.0,
             "type": "Text Display",
             "properties": {
-              "topic": "/SmartDashboard/FrontCam",
+              "topic": "/SmartDashboard/TeleOp/DriveNormalScale",
               "period": 0.06,
-              "data_type": "string",
+              "data_type": "double",
               "show_submit_button": false
             }
           },
           {
-            "title": "BackCam",
-            "x": 0.0,
-            "y": 640.0,
-            "width": 1024.0,
+            "title": "DriveSlowScale",
+            "x": 128.0,
+            "y": 128.0,
+            "width": 128.0,
             "height": 128.0,
             "type": "Text Display",
             "properties": {
-              "topic": "/SmartDashboard/BackCam",
+              "topic": "/SmartDashboard/TeleOp/DriveSlowScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "TurnNormalScale",
+            "x": 256.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/TeleOp/TurnNormalScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "TurnSlowScale",
+            "x": 384.0,
+            "y": 128.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/TeleOp/TurnSlowScale",
+              "period": 0.06,
+              "data_type": "double",
+              "show_submit_button": false
+            }
+          },
+          {
+            "title": "ShowDrivePower",
+            "x": 512.0,
+            "y": 0.0,
+            "width": 128.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/SmartDashboard/TeleOp/ShowDrivePower",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "DrivePower",
+            "x": 0.0,
+            "y": 256.0,
+            "width": 512.0,
+            "height": 128.0,
+            "type": "Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/TeleOp/DrivePower",
               "period": 0.06,
               "data_type": "string",
               "show_submit_button": false
@@ -855,6 +1546,20 @@
                   "data_type": "double",
                   "show_submit_button": false
                 }
+              },
+              {
+                "title": "TuneIZone",
+                "x": 384.0,
+                "y": 384.0,
+                "width": 128.0,
+                "height": 128.0,
+                "type": "Text Display",
+                "properties": {
+                  "topic": "/SmartDashboard/Test/TuneIZone",
+                  "period": 0.06,
+                  "data_type": "double",
+                  "show_submit_button": false
+                }
               }
             ]
           }
@@ -871,6 +1576,38 @@
               "topic": "/SmartDashboard/Test/Tests",
               "period": 0.06,
               "sort_options": false
+            }
+          },
+          {
+            "title": "TargetVelocity",
+            "x": 512.0,
+            "y": 0.0,
+            "width": 512.0,
+            "height": 512.0,
+            "type": "Graph",
+            "properties": {
+              "topic": "/SmartDashboard/Test/TargetVelocity",
+              "period": 0.033,
+              "data_type": "double",
+              "time_displayed": 5.0,
+              "color": 4278238420,
+              "line_width": 2.0
+            }
+          },
+          {
+            "title": "RobotVelocity",
+            "x": 1024.0,
+            "y": 0.0,
+            "width": 512.0,
+            "height": 512.0,
+            "type": "Graph",
+            "properties": {
+              "topic": "/SmartDashboard/Test/RobotVelocity",
+              "period": 0.033,
+              "data_type": "double",
+              "time_displayed": 5.0,
+              "color": 4278238420,
+              "line_width": 2.0
             }
           }
         ]
