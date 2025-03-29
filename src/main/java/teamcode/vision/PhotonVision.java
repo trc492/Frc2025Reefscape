@@ -41,7 +41,7 @@ import trclib.robotcore.TrcEvent;
 public class PhotonVision extends FrcPhotonVision
 {
     private static final String DBKEY_PREFIX                = "Vision/";
-    public static final double ONTARGET_THRESHOLD           = 2.0;
+    public static final double ONTARGET_THRESHOLD           = 0.5;
     public static final double GUIDANCE_ERROR_THRESHOLD     = 12.0;
 
     public enum PipelineType

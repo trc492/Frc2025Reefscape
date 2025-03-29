@@ -55,19 +55,22 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         boolean useVision;
         int aprilTagId;
         boolean relocalize;
+        boolean alignOnly;
 
-        TaskParams(boolean useVision, int aprilTagId, boolean relocalize)
+        TaskParams(boolean useVision, int aprilTagId, boolean relocalize, boolean alignOnly)
         {
             this.useVision = useVision;
             this.aprilTagId = aprilTagId;
             this.relocalize = relocalize;
+            this.alignOnly = alignOnly;
         }   //TaskParams
 
         public String toString()
         {
             return "useVision=" + useVision +
                    ",aprilTagId=" + aprilTagId +
-                   ",relocalize" + relocalize;
+                   ",relocalize=" + relocalize +
+                   ",alignOnly=" + alignOnly;
         }   //toString
     }   //class TaskParams
 
@@ -104,10 +107,31 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     public void autoPickupCoral(
         String owner, boolean useVision, int aprilTagId, boolean relocalize, TrcEvent completionEvent)
     {
-        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize);
+        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, false);
         tracer.traceInfo(
-        moduleName,
-        "autoPickupCoral(owner=" + owner + ", taskParams=(" + taskParams + "), event=" + completionEvent + ")");
+            moduleName,
+            "autoPickupCoral(owner=" + owner + ", taskParams=(" + taskParams + "), event=" + completionEvent + ")");
+        startAutoTask(owner, State.START, taskParams, completionEvent);
+    }   //autoPickupCoral
+
+    /**
+     * This method starts the auto-assist operation.
+     *
+     * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param useVision specifies true to use vision to find the coral, false otherwise.
+     * @param aprilTagId specifies the AprilTag ID of the coral station, -1 to use Vision to look for the closest one.
+     * @param relocalize specifies true to relocalize robot position, false otherwise.
+     * @param alignOnly specifies true to only do alignment and not picking up, false otherwise.
+     * @param completionEvent specifies the event to signal when done, can be null if none provided.
+     */
+    public void autoPickupCoral(
+        String owner, boolean useVision, int aprilTagId, boolean relocalize, boolean alignOnly,
+        TrcEvent completionEvent)
+    {
+        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, alignOnly);
+        tracer.traceInfo(
+            moduleName,
+            "autoPickupCoral(owner=" + owner + ", taskParams=(" + taskParams + "), event=" + completionEvent + ")");
         startAutoTask(owner, State.START, taskParams, completionEvent);
     }   //autoPickupCoral
 
@@ -268,8 +292,15 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 break;
 
             case RECEIVE_CORAL:
-                robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
-                sm.waitForSingleEvent(grabberEvent, State.DONE);
+                if (taskParams.alignOnly)
+                {
+                    sm.setState(State.DONE);
+                }
+                else
+                {
+                    robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
+                    sm.waitForSingleEvent(grabberEvent, State.DONE);
+                }
                 break;
 
             default:
