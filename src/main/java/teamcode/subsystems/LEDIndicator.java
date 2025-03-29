@@ -41,9 +41,9 @@ public class LEDIndicator
     private static final TrcAddressableLED.Pattern reefLevel1Pattern =      // Yellow
         new TrcAddressableLED.Pattern("ReefLevel1", new FrcColor(63, 63, 0), RobotParams.HwConfig.NUM_LEDS/4);
     private static final TrcAddressableLED.Pattern leftReefBranchPattern =  // Red
-        new TrcAddressableLED.Pattern("ReefLevel1", new FrcColor(63, 0, 0), RobotParams.HwConfig.NUM_LEDS/2);
+        new TrcAddressableLED.Pattern("LeftReef", new FrcColor(63, 0, 0), RobotParams.HwConfig.NUM_LEDS/2);
     private static final TrcAddressableLED.Pattern rightReefBranchPattern =  // Cyan
-        new TrcAddressableLED.Pattern("ReefLevel1", new FrcColor(0, 63, 63), RobotParams.HwConfig.NUM_LEDS/2);
+        new TrcAddressableLED.Pattern("RightReef", new FrcColor(0, 63, 63), RobotParams.HwConfig.NUM_LEDS/2);
     private static final TrcAddressableLED.Pattern aprilTagLockedPattern =  // Magenta
         new TrcAddressableLED.Pattern("AprilTagLocked", new FrcColor(63, 0, 63), RobotParams.HwConfig.NUM_LEDS);
     private static final TrcAddressableLED.Pattern aprilTagPattern =        // Green
