@@ -74,7 +74,7 @@ public class RobotParams
         public static final boolean useCoralArm                 = true;
         public static final boolean useCoralGrabber             = useCoralArm;
         public static final boolean useClimber                  = true;
-        public static final boolean useClimberGrabber           = false;
+        public static final boolean useClimberGrabber           = true;
         public static final boolean useElevator                 = true;
         public static final boolean useElevatorArm              = true;
     }   //class Preferences
