@@ -475,6 +475,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case DpadUp:
                 if (robot.climber != null && pressed)
                 {
+                    robot.elevatorArmTask.coralArm.setPosition(CoralArm.Params.CLIMB_POS);
                     robot.climber.deploy(moduleName);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
                 }
