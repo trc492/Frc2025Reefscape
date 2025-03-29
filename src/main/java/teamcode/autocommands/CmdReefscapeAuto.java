@@ -236,21 +236,20 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 stationAprilTagId =
                                     RobotParams.Game.APRILTAG_STATION[stationSide == StationSide.PROCESSOR? 0: 1]
                                                                      [alliance == Alliance.Red? 0: 1];
-                                intermediatePose = stationSide == StationSide.PROCESSOR?
+                                intermediatePose = (stationSide == StationSide.PROCESSOR?
                                     RobotParams.Game.PROCESSOR_SIDE_LOOKOUT_BLUE:
-                                    RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE;
+                                    RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE).clone();
                                 // Center start position needs to have an intermediate point further down to avoid the
                                 // reef.
-                                intermediatePose = new TrcPose2D(
-                                    intermediatePose.x, intermediatePose.y + 108.0, intermediatePose.angle);
+                                intermediatePose.y += 108.0;
                             }
                             intermediatePose = robot.adjustPoseByAlliance(intermediatePose, alliance);
                         }
 
                         TrcPose2D aprilTagPose = FrcPhotonVision.getAprilTagFieldPose(stationAprilTagId);
                         TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagPose, 20.0, -45.0);
-                        // This is the back camera, adjust direction to go backward.
-                        targetPose = new TrcPose2D(targetPose.x, targetPose.y, targetPose.angle - 180.0);
+                        // AprilTag angle is reversed from the robot.
+                        targetPose.angle -= 180.0;
                         if (intermediatePose != null &&
                             Math.abs(targetPose.y - intermediatePose.y) > RobotParams.Field.LENGTH)
                         {

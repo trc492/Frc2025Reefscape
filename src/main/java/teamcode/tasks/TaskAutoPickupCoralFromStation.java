@@ -258,8 +258,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
 
             case APPROACH_STATION:
                 TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 2.5, -11.0);
-                // This is the back camera, adjust direction to go backward.
-                targetPose = new TrcPose2D(targetPose.x, targetPose.y, targetPose.angle - 180.0);
+                targetPose.angle -= 180.0;
                 tracer.traceInfo(moduleName, "***** Approaching Coral Station: targetPose=" + targetPose);
                 robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.35);
                 robot.robotDrive.purePursuitDrive.start(

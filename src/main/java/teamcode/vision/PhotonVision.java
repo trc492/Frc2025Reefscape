@@ -251,7 +251,7 @@ public class PhotonVision extends FrcPhotonVision
             }
         }
 
-        return closestAprilTagPose;
+        return closestAprilTagPose.clone();
     }   //getClosestAprilTagPose
 
     //

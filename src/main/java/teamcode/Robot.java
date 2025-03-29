@@ -532,7 +532,7 @@ public class Robot extends FrcRobotBase
         }
         else
         {
-            robotPose = pose;
+            robotPose = pose.clone();
         }
 
         if (useCompassHeading && robotDrive.imu != null && robotInfo.imuType == ImuType.NavX)
@@ -541,8 +541,7 @@ public class Robot extends FrcRobotBase
 
             if (fieldZero != null)
             {
-                robotPose = new TrcPose2D(
-                    robotPose.x, robotPose.y, ((FrcAHRSGyro) robotDrive.imu).ahrs.getCompassHeading() - fieldZero);
+                robotPose.angle = ((FrcAHRSGyro) robotDrive.imu).ahrs.getCompassHeading() - fieldZero;
             }
         }
 
@@ -690,7 +689,7 @@ public class Robot extends FrcRobotBase
      */
     public TrcPose2D adjustPoseByAlliance(double x, double y, double heading, Alliance alliance)
     {
-        TrcPose2D newPose;
+        TrcPose2D newPose = new TrcPose2D(x, y, heading);
 
         if (alliance == Alliance.Red)
         {
@@ -698,19 +697,17 @@ public class Robot extends FrcRobotBase
             if (RobotParams.Field.mirroredField)
             {
                 // Mirrored field.
-                double angleDelta = (heading - 90.0)*2.0;
-                newPose = new TrcPose2D(x, RobotParams.Field.LENGTH - y, heading - angleDelta);
+                double angleDelta = (newPose.angle - 90.0)*2.0;
+                newPose.angle -= angleDelta;
+                newPose.y = RobotParams.Field.LENGTH - newPose.y;
             }
             else
             {
                 // Symmetrical field.
-                newPose = new TrcPose2D(
-                    -RobotParams.Field.WIDTH - x,  RobotParams.Field.LENGTH - y, (heading + 180.0) % 360.0);
+                newPose.x = -RobotParams.Field.WIDTH - newPose.x;
+                newPose.y = RobotParams.Field.LENGTH - newPose.y;
+                newPose.angle = (newPose.angle + 180.0) % 360.0;
             }
-        }
-        else
-        {
-            newPose = new TrcPose2D(x, y, heading);
         }
 
         return newPose;
