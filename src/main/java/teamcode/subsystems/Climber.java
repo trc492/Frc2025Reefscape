@@ -222,10 +222,11 @@ public class Climber extends TrcSubsystem
     @Override
     public void resetState()
     {
-        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
-        armMotor.setPosition(
-            ArmParams.TURTLE_DELAY, ArmParams.TURTLE_POS, true, ArmParams.POWER_LIMIT);
-        if (grabber != null) grabber.cancel();
+        // Climber Arm does not need to turtle.
+        // armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
+        // armMotor.setPosition(
+        //     ArmParams.TURTLE_DELAY, ArmParams.TURTLE_POS, true, ArmParams.POWER_LIMIT);
+        // if (grabber != null) grabber.cancel();
     }   //resetState
 
     /**
