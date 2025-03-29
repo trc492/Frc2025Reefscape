@@ -497,6 +497,17 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case DpadRight:
+                if (robot.climber.grabber != null)
+                {
+                    if(pressed)
+                    {
+                        robot.climber.grabber.autoIntake(null);
+                    }
+                    else
+                    {
+                        robot.climber.cancel();
+                    }
+                }
                 break;
 
             case Back:

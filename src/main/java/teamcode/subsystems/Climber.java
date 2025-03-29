@@ -51,7 +51,7 @@ public class Climber extends TrcSubsystem
         public static final MotorType MOTOR_TYPE                = MotorType.CanTalonFx;
         public static final boolean MOTOR_BRUSHLESS             = false;
         public static final boolean MOTOR_ENC_ABS               = false;
-        public static final boolean MOTOR_INVERTED              = true;
+        public static final boolean MOTOR_INVERTED              = false;
 
         public static final String ENCODER_NAME                 = COMPONENT_NAME + "Enc";
         public static final int ENCODER_ID                      = RobotParams.HwConfig.CANID_CLIMBERARM_ENCODER;
@@ -65,12 +65,12 @@ public class Climber extends TrcSubsystem
         public static final double POWER_LIMIT                  = 1.0;
         public static final double CLIMB_POWER                  = 0.5;
 
-        public static final double MIN_POS                      = 90.0;
-        public static final double MAX_POS                      = 300.0;
-        public static final double TURTLE_POS                   = 287.0;
+        public static final double MIN_POS                      = 50.0;
+        public static final double MAX_POS                      = 270.0;
+        public static final double TURTLE_POS                   = 270.0;
         public static final double TURTLE_DELAY                 = 0.0;
-        public static final double DEPLOY_POS                   = 216.7;
-        public static final double CLIMB_POS                    = 108.0;
+        public static final double DEPLOY_POS                   = 180.0;
+        public static final double CLIMB_POS                    = 84.0;
         public static final double SAFE_POS                     = 195.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
@@ -96,7 +96,7 @@ public class Climber extends TrcSubsystem
         public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_CLIMBER_GRABBER_SENSOR;
         public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
-        public static final double INTAKE_POWER                 = 1.0;
+        public static final double INTAKE_POWER                 = 0.5;
         public static final double EJECT_POWER                  = 0.0;
         public static final double RETAIN_POWER                 = 0.0;
     }   //class GrabberParams
