@@ -170,7 +170,7 @@ public class FrcAuto implements TrcRobot.RobotMode
             userChoices.addBoolean(DBKEY_AUTO_RELOCALIZE, true);
             userChoices.addBoolean(DBKEY_AUTO_GO_TO_STATION, true);
             userChoices.addChoiceMenu(DBKEY_AUTO_STATION_SIDE, stationSideChoiceMenu);
-            userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 1.0);
+            userChoices.addNumber(DBKEY_AUTO_STATION_PICKUP, 2.0);
             userChoices.addNumber(DBKEY_AUTO_VISION_X_OFFSET, 0.0);
             userChoices.addNumber(DBKEY_AUTO_VISION_Y_OFFSET, 0.0);
 

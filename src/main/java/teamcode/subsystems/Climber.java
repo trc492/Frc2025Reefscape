@@ -70,14 +70,14 @@ public class Climber extends TrcSubsystem
         public static final double TURTLE_POS                   = 5.0;
         public static final double TURTLE_DELAY                 = 0.0;
         public static final double DEPLOY_POS                   = 172.0;
-        public static final double CLIMB_POS                    = 82.0;
+        public static final double CLIMB_POS                    = 84.0;
         public static final double SAFE_POS                     = 195.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients groundPidCoeffs =
             new TrcPidController.PidCoefficients(0.03, 0.0, 0.0, 0.0, 0.0);
         public static final TrcPidController.PidCoefficients climbPidCoeffs =
-            new TrcPidController.PidCoefficients(0.45, 0.0, 0.0, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.35, 0.0, 0.0, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
     }   //class ArmParams
 
