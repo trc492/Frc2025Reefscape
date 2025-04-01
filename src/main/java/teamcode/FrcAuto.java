@@ -386,6 +386,7 @@ public class FrcAuto implements TrcRobot.RobotMode
                 if (robot.robotDrive != null)
                 {
                     autoCommand = new CmdReefscapeAuto(robot, autoChoices);
+                    robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(true);
                     // if (autoChoices.getStartPos() == AutoStartPos.START_POSE_CENTER)
                     // {
                     //     autoCommand = new CmdAutoMiddle(robot, autoChoices);

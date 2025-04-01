@@ -213,6 +213,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     robot.turtle();
                     if (goToStation)
                     {
+                        robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(
+                            0.5, 0.1, 1.0);
                         TrcPose2D intermediatePose = null;
                         // If we haven't already, determine the Coral Station AprilTag ID to look for.
                         // If we are fetching the 2nd Coral from the Station, we already determined the AprilTag ID
@@ -241,7 +243,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                     RobotParams.Game.FAR_SIDE_LOOKOUT_BLUE).clone();
                                 // Center start position needs to have an intermediate point further down to avoid the
                                 // reef.
-                                intermediatePose.y += 108.0;
+                                intermediatePose.y += 95.0;
                             }
                             intermediatePose = robot.adjustPoseByAlliance(intermediatePose, alliance);
                         }
@@ -358,7 +360,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
                         null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2,
-                        new ScoreCoralOffset(scoreRightSide? 6.5: -10.5, -19.5), event);
+                        new ScoreCoralOffset(scoreRightSide? 6.5: -10.5, scoreRightSide? -19.5: -16.5), event);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;
@@ -368,6 +370,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 default:
                 case DONE:
                     // We are done.
+                    robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(true);
                     cancel();
                     break;
             }

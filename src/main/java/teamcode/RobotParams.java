@@ -239,9 +239,9 @@ public class RobotParams
         };
 
         public static final TrcPose2D PROCESSOR_SIDE_LOOKOUT_BLUE =
-            new TrcPose2D(-87.0, 137.0, -54.0);
+            new TrcPose2D(-87.0, 150.0, -54.0);
         public static final TrcPose2D FAR_SIDE_LOOKOUT_BLUE =
-            new TrcPose2D(-230.0, 137.0, 126.0);
+            new TrcPose2D(-230.0, 150.0, 126.0);
     }   //class Game
 
     /**
