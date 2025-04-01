@@ -358,6 +358,7 @@ public class Robot extends FrcRobotBase
 
         if (runMode != RunMode.DISABLED_MODE)
         {
+            cancelAll();
             printPerformanceMetrics(globalTracer);
         }
         // Stop trace logging.
