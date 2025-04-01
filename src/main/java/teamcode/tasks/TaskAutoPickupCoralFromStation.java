@@ -45,8 +45,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     {
         START,
         FIND_STATION_APRILTAG,
-        APPROACH_STATION,
-        // RECEIVE_CORAL,
+        GET_CORAL,
         DONE
     }   //enum State
 
@@ -245,7 +244,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                         "\n\tabsAprilTagPose=" + aprilTagAbsPose +
                         "\n\trobotPose=" + robotPose +
                         "\n\trelAprilTagPose=" + aprilTagRelativePose);
-                    sm.setState(State.APPROACH_STATION);
+                    sm.setState(State.GET_CORAL);
                 }
                 else
                 {
@@ -272,7 +271,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                     {
                         robot.relocalizeRobotByAprilTag(object);
                     }
-                    sm.setState(State.APPROACH_STATION);
+                    sm.setState(State.GET_CORAL);
                 }
                 else if (visionExpiredTime == null)
                 {
@@ -285,16 +284,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 }
                 break;
 
-            case APPROACH_STATION:
-                if (!taskParams.alignOnly)
-                {
-                    robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
-                    sm.addEvent(grabberEvent);
-                }
-                else
-                {
-                    sm.addEvent(driveEvent);
-                }
+            case GET_CORAL:
                 TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 2.5, -11.0);
                 targetPose.angle -= 180.0;
                 tracer.traceInfo(moduleName, "***** Approaching Coral Station: targetPose=" + targetPose);
@@ -302,20 +292,21 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 robot.robotDrive.purePursuitDrive.start(
                     owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                     robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
+
+                if (taskParams.alignOnly)
+                {
+                    // We will wait for PurePursuit if we are doing align-only.
+                    sm.addEvent(driveEvent);
+                }
+                else
+                {
+                    // Do fire and forget on PurePursuit and only have to wait for grabberEvent.
+                    // This essentially makes it faster. As soon as Intake has picked up a coral, it will be DONE.
+                    robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
+                    sm.addEvent(grabberEvent);
+                }
                 sm.waitForEvents(State.DONE, false);
                 break;
-
-            // case RECEIVE_CORAL:
-            //     if (taskParams.alignOnly)
-            //     {
-            //         sm.setState(State.DONE);
-            //     }
-            //     else
-            //     {
-            //         robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
-            //         sm.waitForSingleEvent(grabberEvent, State.DONE);
-            //     }
-            //     break;
 
             default:
             case DONE:
