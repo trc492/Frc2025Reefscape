@@ -178,7 +178,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 5.0: -10.5), visionYOffset - 16.5),
+                                    visionXOffset + (scoreRightSide? 5.0: -10.5), visionYOffset - 14.5),
                                 event);
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
@@ -303,6 +303,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
 
                 case PICKUP_CORAL:
                     // Check if we need to pick up a Coral from the Station.
+                    robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(true);
                     if (stationPickupCount > 0)
                     {
                         robot.pickupCoralFromStationTask.autoPickupCoral(
@@ -370,7 +371,6 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 default:
                 case DONE:
                     // We are done.
-                    robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(true);
                     cancel();
                     break;
             }
