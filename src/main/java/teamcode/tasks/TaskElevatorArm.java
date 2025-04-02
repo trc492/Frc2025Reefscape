@@ -365,8 +365,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     protected void stopSubsystems(String owner)
     {
         tracer.traceInfo(moduleName, "Stopping subsystems.");
-        if (coralArm != null) coralArm.cancel();
-        elevator.cancel();
+        // Do not cancel elevator or arm because we need them to hold position.
     }   //stopSubsystems
 
     /**

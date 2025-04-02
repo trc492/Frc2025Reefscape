@@ -45,8 +45,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     {
         START,
         FIND_STATION_APRILTAG,
-        APPROACH_STATION,
-        RECEIVE_CORAL,
+        GET_CORAL,
         DONE
     }   //enum State
 
@@ -77,6 +76,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     private final Robot robot;
     private final TrcEvent driveEvent;
     private final TrcEvent grabberEvent;
+    private boolean cancelGrabber = true;
 
     private int aprilTagId = -1;
     private TrcPose2D aprilTagRelativePose = null;
@@ -128,6 +128,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         String owner, boolean useVision, int aprilTagId, boolean relocalize, boolean alignOnly,
         TrcEvent completionEvent)
     {
+        cancelGrabber = !alignOnly;
         TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, alignOnly);
         tracer.traceInfo(
             moduleName,
@@ -185,7 +186,10 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         tracer.traceInfo(moduleName, "Stopping subsystems.");
         robot.robotDrive.cancel(owner);
         robot.elevatorArmTask.cancel();
-        robot.coralGrabber.cancel();
+        if (cancelGrabber)
+        {
+            robot.coralGrabber.cancel();
+        }
         // Restore to full power in case we have changed it.
         robot.robotDrive.purePursuitDrive.setMoveOutputLimit(1.0);
     }   //stopSubsystems
@@ -240,7 +244,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                         "\n\tabsAprilTagPose=" + aprilTagAbsPose +
                         "\n\trobotPose=" + robotPose +
                         "\n\trelAprilTagPose=" + aprilTagRelativePose);
-                    sm.setState(State.APPROACH_STATION);
+                    sm.setState(State.GET_CORAL);
                 }
                 else
                 {
@@ -267,7 +271,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                     {
                         robot.relocalizeRobotByAprilTag(object);
                     }
-                    sm.setState(State.APPROACH_STATION);
+                    sm.setState(State.GET_CORAL);
                 }
                 else if (visionExpiredTime == null)
                 {
@@ -280,27 +284,28 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 }
                 break;
 
-            case APPROACH_STATION:
+            case GET_CORAL:
                 TrcPose2D targetPose = robot.adjustPoseByOffset(aprilTagRelativePose, 2.5, -11.0);
                 targetPose.angle -= 180.0;
                 tracer.traceInfo(moduleName, "***** Approaching Coral Station: targetPose=" + targetPose);
-                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.35);
+                robot.robotDrive.purePursuitDrive.setMoveOutputLimit(0.3);
                 robot.robotDrive.purePursuitDrive.start(
                     owner, driveEvent, 0.0, true, robot.robotInfo.profiledMaxVelocity,
                     robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration, targetPose);
-                sm.waitForSingleEvent(driveEvent, State.RECEIVE_CORAL);
-                break;
 
-            case RECEIVE_CORAL:
                 if (taskParams.alignOnly)
                 {
-                    sm.setState(State.DONE);
+                    // We will wait for PurePursuit if we are doing align-only.
+                    sm.addEvent(driveEvent);
                 }
                 else
                 {
+                    // Do fire and forget on PurePursuit and only have to wait for grabberEvent.
+                    // This essentially makes it faster. As soon as Intake has picked up a coral, it will be DONE.
                     robot.coralGrabber.autoIntake(null, 0.0, grabberEvent, 0.0);
-                    sm.waitForSingleEvent(grabberEvent, State.DONE);
+                    sm.addEvent(grabberEvent);
                 }
+                sm.waitForEvents(State.DONE, false);
                 break;
 
             default:

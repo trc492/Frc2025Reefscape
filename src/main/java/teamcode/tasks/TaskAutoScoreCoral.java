@@ -336,7 +336,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
             case SCORE_CORAL:
                 if (!taskParams.alignOnly)
                 {
-                    robot.coralGrabber.eject(owner, 1.0, scoreEvent);
+                    robot.coralGrabber.eject(owner, 0.65, scoreEvent);
                     sm.waitForSingleEvent(scoreEvent, State.DONE);
                 }
                 else

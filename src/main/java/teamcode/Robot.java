@@ -277,7 +277,6 @@ public class Robot extends FrcRobotBase
             super.setCommStatusMonitorEnabled(this::commStatusCallback);
         }
 
-        cancelAll();
         // Read FMS Match info.
         FrcMatchInfo matchInfo = FrcMatchInfo.getMatchInfo();
         if (runMode != RunMode.DISABLED_MODE)
@@ -331,7 +330,6 @@ public class Robot extends FrcRobotBase
     @Override
     public void robotStopMode(RunMode runMode, RunMode nextMode)
     {
-        cancelAll();
         // Stop RobotDrive.
         if (runMode != RunMode.DISABLED_MODE && robotDrive != null)
         {
@@ -360,6 +358,7 @@ public class Robot extends FrcRobotBase
 
         if (runMode != RunMode.DISABLED_MODE)
         {
+            cancelAll();
             printPerformanceMetrics(globalTracer);
         }
         // Stop trace logging.
@@ -671,9 +670,9 @@ public class Robot extends FrcRobotBase
             // We lost comm, do emergency shutdown to prevent damage.
             if (robotDrive != null && robotDrive instanceof FrcSwerveDrive)
             {
-                cancelAll();
                 ((FrcSwerveDrive) robotDrive).setXModeEnabled(null, true);
                 globalTracer.traceInfo(moduleName, "***** Putting robot in X-Mode. *****");
+                cancelAll();
             }
         }
     }   //commStatusCallback

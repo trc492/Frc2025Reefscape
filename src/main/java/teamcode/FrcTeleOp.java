@@ -193,7 +193,6 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         //
         // Disable subsystems before exiting if necessary.
         //
-        robot.cancelAll();
     }   //stopMode
 
     /**
@@ -472,14 +471,19 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 }
                 break;
 
+            case DpadRight:
+                // Intentional Fall through
             case DpadUp:
                 if (robot.climber != null && pressed)
                 {
+                    robot.elevatorArmTask.coralArm.setPosition(CoralArm.Params.CLIMB_POS);
                     robot.climber.deploy(moduleName);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
                 }
                 break;
 
+            case DpadLeft:
+                // Intentional Fall Through
             case DpadDown:
                 if (robot.climber != null && pressed)
                 {
@@ -488,27 +492,27 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 }
                 break;  
 
-            case DpadLeft:
-                if (robot.climber != null && pressed)
-                {
-                    robot.climber.resetState();
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Climber Turtle");
-                }
-                break;
+            // case DpadLeft:
+            //     if (robot.climber != null && pressed)
+            //     {
+            //         robot.climber.resetState();
+            //         robot.globalTracer.traceInfo(moduleName, ">>>>> Climber Turtle");
+            //     }
+            //     break;
 
-            case DpadRight:
-                if (robot.climber.grabber != null)
-                {
-                    if(pressed)
-                    {
-                        robot.climber.grabber.autoIntake(null);
-                    }
-                    else
-                    {
-                        robot.climber.cancel();
-                    }
-                }
-                break;
+            // case DpadRight:
+            //     if (robot.climber.grabber != null)
+            //     {
+            //         if(pressed)
+            //         {
+            //             robot.climber.grabber.autoIntake(null);
+            //         }
+            //         else
+            //         {
+            //             robot.climber.cancel();
+            //         }
+            //     }
+            //     break;
 
             case Back:
                 if (pressed)

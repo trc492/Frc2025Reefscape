@@ -65,11 +65,11 @@ public class Climber extends TrcSubsystem
         public static final double POWER_LIMIT                  = 1.0;
         public static final double CLIMB_POWER                  = 0.5;
 
-        public static final double MIN_POS                      = 50.0;
-        public static final double MAX_POS                      = 270.0;
-        public static final double TURTLE_POS                   = 270.0;
+        public static final double MIN_POS                      = 60.0;
+        public static final double MAX_POS                      = 200.0;
+        public static final double TURTLE_POS                   = 60.0;
         public static final double TURTLE_DELAY                 = 0.0;
-        public static final double DEPLOY_POS                   = 180.0;
+        public static final double DEPLOY_POS                   = 172.0;
         public static final double CLIMB_POS                    = 84.0;
         public static final double SAFE_POS                     = 195.0;
 
@@ -77,7 +77,7 @@ public class Climber extends TrcSubsystem
         public static final TrcPidController.PidCoefficients groundPidCoeffs =
             new TrcPidController.PidCoefficients(0.03, 0.0, 0.0, 0.0, 0.0);
         public static final TrcPidController.PidCoefficients climbPidCoeffs =
-            new TrcPidController.PidCoefficients(0.5, 0.0, 0.0, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.35, 0.0, 0.0, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
     }   //class ArmParams
 
@@ -96,7 +96,7 @@ public class Climber extends TrcSubsystem
         public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_CLIMBER_GRABBER_SENSOR;
         public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
-        public static final double INTAKE_POWER                 = 0.5;
+        public static final double INTAKE_POWER                 = 0.85;
         public static final double EJECT_POWER                  = 0.0;
         public static final double RETAIN_POWER                 = 0.0;
     }   //class GrabberParams
@@ -222,10 +222,11 @@ public class Climber extends TrcSubsystem
     @Override
     public void resetState()
     {
-        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
-        armMotor.setPosition(
-            ArmParams.TURTLE_DELAY, ArmParams.TURTLE_POS, true, ArmParams.POWER_LIMIT);
-        if (grabber != null) grabber.cancel();
+        // Climber Arm does not need to turtle.
+        // armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
+        // armMotor.setPosition(
+        //     ArmParams.TURTLE_DELAY, ArmParams.TURTLE_POS, true, ArmParams.POWER_LIMIT);
+        // if (grabber != null) grabber.cancel();
     }   //resetState
 
     /**
