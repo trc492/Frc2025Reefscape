@@ -64,6 +64,7 @@ public class RobotParams
         public static final boolean usePhotonVision             = true;
         public static final boolean useOpenCvVision             = false;
         public static final boolean useStreamCamera             = false;
+        public static final boolean doVisionRelocalize          = false;
         // Drive Base
         public static final boolean useDriveBase                = true;
         public static final boolean useVelocityControl          = false;

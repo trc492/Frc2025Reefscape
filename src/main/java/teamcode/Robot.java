@@ -32,6 +32,7 @@ import java.util.Scanner;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -46,6 +47,7 @@ import frclib.sensor.FrcAHRSGyro;
 import frclib.sensor.FrcPdp;
 import frclib.sensor.FrcRobotBattery;
 import frclib.vision.FrcPhotonVision;
+import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.Climber;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.CoralGrabber;
@@ -57,6 +59,7 @@ import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
+import teamcode.vision.VisionRelocalize;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.motor.TrcMotor;
@@ -99,6 +102,7 @@ public class Robot extends FrcRobotBase
     public PhotonVision photonVisionFront;
     public PhotonVision photonVisionBack;
     public OpenCvVision openCvVision;
+    public VisionRelocalize visionRelocalize;
     // Hybrid mode objects.
     public Command m_autonomousCommand;
     //
@@ -193,6 +197,11 @@ public class Robot extends FrcRobotBase
                     CameraServer.getVideo(),
                     CameraServer.putVideo(
                         "UsbWebcam", robotInfo.cam2.camImageWidth, robotInfo.cam2.camImageHeight));
+            }
+
+            if (RobotParams.Preferences.doVisionRelocalize)
+            {
+                visionRelocalize = new VisionRelocalize();
             }
 
             if (RobotParams.Preferences.useStreamCamera)
@@ -377,6 +386,34 @@ public class Robot extends FrcRobotBase
     @Override
     public void robotPeriodic(RunMode runMode, boolean slowPeriodicLoop)
     {
+        if (visionRelocalize != null)
+        {
+            double fpgaTime = Timer.getFPGATimestamp();
+            TrcPose2D robotPose = robotDrive.driveBase.getFieldPosition();
+            DetectedObject aprilTagObj = null;
+
+            visionRelocalize.addTimedPose(fpgaTime, robotPose);
+            if (photonVisionBack != null)
+            {
+                aprilTagObj = photonVisionBack.getBestDetectedAprilTag(null);
+            }
+
+            if (photonVisionFront != null)
+            {
+                aprilTagObj = photonVisionFront.getBestDetectedAprilTag(null);
+            }
+
+            if (aprilTagObj != null)
+            {
+                TrcPose2D relocalizedPose =
+                    visionRelocalize.getRelocalizedPose(aprilTagObj.timestamp, aprilTagObj.robotPose, robotPose);
+                // robotDrive.driveBase.setFieldPosition(relocalizedPose);
+                globalTracer.traceInfo(
+                    moduleName, "VisionRelocalize: Time=%.6f, Before=%s, After=%s, VisionPose(time=%.6f, pose=%s)",
+                    fpgaTime, robotPose, relocalizedPose, aprilTagObj.timestamp, aprilTagObj.robotPose);
+            }
+        }
+
         if (RobotParams.Preferences.hybridMode)
         {
             // Runs the Command Based Scheduler. This is responsible for polling buttons, adding newly-scheduled
