@@ -59,7 +59,6 @@ import teamcode.subsystems.LEDIndicator;
 import teamcode.subsystems.RobotBase;
 import teamcode.vision.OpenCvVision;
 import teamcode.vision.PhotonVision;
-import teamcode.vision.VisionRelocalize;
 import trclib.dataprocessor.TrcUtil;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.motor.TrcMotor;
@@ -70,6 +69,7 @@ import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
 import trclib.subsystem.TrcMotorGrabber;
 import trclib.subsystem.TrcSubsystem;
+import trclib.vision.TrcVisionRelocalize;
 
 /**
  * The Main class is configured to instantiate and automatically run this class,
@@ -102,7 +102,7 @@ public class Robot extends FrcRobotBase
     public PhotonVision photonVisionFront;
     public PhotonVision photonVisionBack;
     public OpenCvVision openCvVision;
-    public VisionRelocalize visionRelocalize;
+    public TrcVisionRelocalize visionRelocalize;
     // Hybrid mode objects.
     public Command m_autonomousCommand;
     //
@@ -201,7 +201,7 @@ public class Robot extends FrcRobotBase
 
             if (RobotParams.Preferences.doVisionRelocalize)
             {
-                visionRelocalize = new VisionRelocalize();
+                visionRelocalize = new TrcVisionRelocalize();
             }
 
             if (RobotParams.Preferences.useStreamCamera)
