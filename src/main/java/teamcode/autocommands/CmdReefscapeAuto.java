@@ -211,12 +211,10 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     break;
 
                 case GO_TO_CORAL_STATION:
-                    // robot.turtle();
                     robot.elevatorArmTask.setCoralStationPickupPosition(null, null);
                     if (goToStation)
                     {
-                        robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(
-                            0.5, 0.1, 5.0);
+                        robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(0.5, 0.1, 5.0);
                         TrcPose2D intermediatePose = null;
                         // If we haven't already, determine the Coral Station AprilTag ID to look for.
                         // If we are fetching the 2nd Coral from the Station, we already determined the AprilTag ID
