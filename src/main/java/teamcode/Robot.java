@@ -398,7 +398,7 @@ public class Robot extends FrcRobotBase
                 aprilTagObj = photonVisionBack.getBestDetectedAprilTag(null);
             }
 
-            if (photonVisionFront != null)
+            if (aprilTagObj == null && photonVisionFront != null)
             {
                 aprilTagObj = photonVisionFront.getBestDetectedAprilTag(null);
             }
