@@ -211,7 +211,8 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         tracer.traceInfo(moduleName, "Stopping subsystems.");
         robot.robotDrive.cancel(owner);
         robot.elevatorArmTask.cancel();
-        if(cancelGrabber){
+        if (cancelGrabber)
+        {
             robot.coralGrabber.cancel();
         }
         // Restore to full power in case we have changed it.

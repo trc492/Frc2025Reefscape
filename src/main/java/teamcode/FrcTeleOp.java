@@ -644,7 +644,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case LeftBumper:
                 operatorAltFunc = pressed;
-                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc=" + driverAltFunc);
+                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc=" + operatorAltFunc);
                 break;
 
             case RightBumper:
