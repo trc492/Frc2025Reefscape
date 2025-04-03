@@ -190,7 +190,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
                                 new ScoreCoralOffset(
                                     visionXOffset + (scoreRightSide? 9.0: -11.5), visionYOffset - 18.5),
-                                event); 
+                                event);
                         }
                         else
                         {
