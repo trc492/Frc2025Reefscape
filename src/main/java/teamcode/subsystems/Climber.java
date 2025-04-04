@@ -63,14 +63,14 @@ public class Climber extends TrcSubsystem
         public static final double POS_OFFSET                   = 0.0;
         public static final double ZERO_OFFSET                  = 0.0;      //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 1.0;
-        public static final double CLIMB_POWER                  = 0.75;
+        public static final double CLIMB_POWER                  = 0.5;
 
         public static final double MIN_POS                      = 60.0;
         public static final double MAX_POS                      = 200.0;
         public static final double TURTLE_POS                   = 60.0;
         public static final double TURTLE_DELAY                 = 0.0;
         public static final double DEPLOY_POS                   = 172.0;
-        public static final double CLIMB_POS                    = 83.0;
+        public static final double CLIMB_POS                    = 82.25 ;
         public static final double SAFE_POS                     = 195.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;

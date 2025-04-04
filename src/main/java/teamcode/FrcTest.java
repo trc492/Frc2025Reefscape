@@ -138,7 +138,7 @@ public class FrcTest extends FrcTeleOp
             userChoices.addNumber(DBKEY_TEST_Y_DRIVE_DISTANCE, 0.0);    // in ft
             userChoices.addNumber(DBKEY_TEST_TURN_ANGLE, 0.0);          // in degrees
             userChoices.addNumber(DBKEY_TEST_DRIVE_TIME, 0.0);          // in seconds
-            userChoices.addNumber(DBKEY_TEST_DRIVE_POWER, 0.0);
+            userChoices.addNumber(DBKEY_TEST_DRIVE_POWER, 1.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KP, 0.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KI, 0.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KD, 0.0);

@@ -179,7 +179,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 5.0: -10.5), visionYOffset - 13.75),
+                                    visionXOffset + (scoreRightSide? 7.0: -10.5), visionYOffset - 13.75),
                                 event);
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
@@ -199,7 +199,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 8.0: -10.5), visionYOffset - 16.5),
+                                    visionXOffset + (scoreRightSide? 8.0: -10.5), visionYOffset - 18.0),
                                 event);
                         }
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
