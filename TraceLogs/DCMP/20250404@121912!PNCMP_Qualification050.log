@@ -1,0 +1,374 @@
+TrcWatchdogMgr.checkForExpiration_WARN [0.117575571] ([1.7437943530972428E9]main.watchdog:threshold=1.0,expiredTime=1.7411456904113603E9,expired=true,paused=false) expired.
+TrcDbgTrace.checkForExpiration_INFO [0.127563983] Thread stack: 
+java.base@17.0.9.7-frc/sun.util.resources.cldr.TimeZoneNames_en.getContents(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.resources.OpenListResourceBundle.loadLookup(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.resources.OpenListResourceBundle.loadLookupTablesIfNecessary(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.resources.OpenListResourceBundle.handleKeySet(Unknown Source)
+java.base@17.0.9.7-frc/java.util.ResourceBundle.containsKey(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.LocaleResources.getTimeZoneNames(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.TimeZoneNameProviderImpl.getDisplayNameArray(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.cldr.CLDRTimeZoneNameProviderImpl.getDisplayNameArray(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.TimeZoneNameProviderImpl.getDisplayName(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.TimeZoneNameUtility$TimeZoneNameGetter.getName(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.TimeZoneNameUtility$TimeZoneNameGetter.getObject(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.TimeZoneNameUtility$TimeZoneNameGetter.getObject(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.LocaleServiceProviderPool.getLocalizedObjectImpl(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.LocaleServiceProviderPool.getLocalizedObject(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.TimeZoneNameUtility.retrieveDisplayNamesImpl(Unknown Source)
+java.base@17.0.9.7-frc/sun.util.locale.provider.TimeZoneNameUtility.retrieveDisplayName(Unknown Source)
+java.base@17.0.9.7-frc/java.util.TimeZone.getDisplayName(Unknown Source)
+java.base@17.0.9.7-frc/java.util.Date.toString(Unknown Source)
+java.base@17.0.9.7-frc/java.util.Formatter$FormatSpecifier.printString(Unknown Source)
+java.base@17.0.9.7-frc/java.util.Formatter$FormatSpecifier.print(Unknown Source)
+java.base@17.0.9.7-frc/java.util.Formatter.format(Unknown Source)
+java.base@17.0.9.7-frc/java.util.Formatter.format(Unknown Source)
+java.base@17.0.9.7-frc/java.lang.String.format(Unknown Source)
+app//trclib.robotcore.TrcDbgTrace.traceInfo(TrcDbgTrace.java:447)
+app//teamcode.Robot.robotStartMode(Robot.java:299)
+app//frclib.robotcore.FrcRobotBase.startCompetition(FrcRobotBase.java:466)
+app//edu.wpi.first.wpilibj.RobotBase.runRobot(RobotBase.java:419)
+app//edu.wpi.first.wpilibj.RobotBase.startRobot(RobotBase.java:510)
+app//teamcode.Main.main(Main.java:33)
+Robot.robotStartMode_INFO [0.14111872] Fri Apr 04 12:19:12 PDT 2025: ***** AUTO_MODE *****
+Robot.zeroCalibrate_INFO [0.198985612] Zero calibrate all subsystems.
+TaskElevatorArm.zeroCalibrate_INFO [0.203083144] zeroCalibrate(owner=null, event=null)
+FrcAuto.startMode_INFO [0.208841706] <Info name="MatchInfo" date="Fri Apr 04 12:19:12 PDT 2025" event="PNCMP" type="Qualification" match=50 replay=1 alliance="Red" location=3 gameMsg="" />
+FrcAuto.startMode_INFO [0.234537023] <Info name="AutoChoices" alliance="Red" strategy="REEFSCAPE_AUTO" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="true" stationSide="FAR" stationPickupCount=2 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=0.0 ft yDistance=0.0 ft turnDegrees=0.0 deg driveTime=0.0 sec drivePower=0.0 />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.303181547] <Event name="StateInfo" time="0.300742547" tag="vvvvv" CmdReefscapeAuto.state="START" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.343517044] <Event name="StateInfo" time="0.338498178" tag="^^^^^" CmdReefscapeAuto.state="START" />
+TaskElevatorArm.autoTask_INFO [0.374256399] <Event name="StateInfo" time="0.371295953" tag="vvvvv" TaskElevatorArm.state="ZERO_CALIBRATE" />
+TaskElevatorArm.autoTask_INFO [0.385129055] <Event name="StateInfo" time="0.384881162" tag="^^^^^" TaskElevatorArm.state="ZERO_CALIBRATE" />
+Elevator.motor.zeroCalibratingMotor_INFO [0.397957468] Limit switch triggered, zero calibration done.
+CmdReefscapeAuto.cmdPeriodic_INFO [0.400585821] <Event name="StateInfo" time="0.39835056" tag="vvvvv" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.407096124] ***** Score Preload.
+Elevator.motor.pidCtrlTask_INFO [0.40759477] Zero calibration done, event=(Elevator=CLEARED)
+Elevator.motor.pidCtrlTask_INFO [0.4222618] controlMode: Power,onTarget=false(0.0/null), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskAutoScoreCoral.autoScoreCoral_INFO [0.426868969] autoScoreCoral(owner=null, taskParams=(useVision=true,aprilTagId=10,reefLevel=3,scoreRightSide=true,removeAlgae=false,relocalize=true,alignOnly=false,powerLimit=0.2,scoreXOffset=8.0,scoreYOffset=-18.0), event=(CmdReefscapeAuto=CLEARED))
+CmdReefscapeAuto.cmdPeriodic_INFO [0.441019852] <Event name="StateInfo" time="0.440748103" tag="^^^^^" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+TaskAutoScoreCoral.autoTask_INFO [0.446632485] <Event name="StateInfo" time="0.446172511" tag="vvvvv" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.setCoralScorePosition_INFO [0.471192505] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=148.0,elevatorPos=70.0), event=(TaskAutoScoreCoral.elevatorArmEvent=CLEARED))
+TaskAutoScoreCoral.runTaskState_INFO [0.475428119] ***** Using AprilTag Vision.
+TaskAutoScoreCoral.autoTask_INFO [0.482515553] <Event name="StateInfo" time="0.482145406" tag="^^^^^" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.autoTask_INFO [0.502755563] <Event name="StateInfo" time="0.498539755" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [0.531249386] <Event name="StateInfo" time="0.508556391" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskAutoScoreCoral.autoTask_INFO [0.53985454] <Event name="StateInfo" time="0.538402251" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.runTaskState_INFO [0.602140176] ***** Vision found AprilTag[10]: aprilTagPose=(x=-0.374436,y=65.544047,angle=-0.067366)
+Robot.relocalizeRobotByAprilTag_INFO [0.611781424] >>>>> Re-localize robot: beforePose=(x=-158.500000,y=411.125000,angle=-0.009999), afterPose=(x=-158.217583,y=409.729234,angle=0.067366)
+TaskAutoScoreCoral.autoTask_INFO [0.620001159] <Event name="StateInfo" time="0.61831787" tag="^^^^^" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskElevatorArm.autoTask_INFO [0.635513155] <Event name="StateInfo" time="0.63522999" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [0.640870193] <Event name="StateInfo" time="0.640640965" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskAutoScoreCoral.autoTask_INFO [0.649442151] <Event name="StateInfo" time="0.648666014" tag="vvvvv" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskAutoScoreCoral.runTaskState_INFO [0.660794573] ***** Approaching Reef: targetPose=(x=7.646722,y=47.553465,angle=-0.067366)
+purePursuitDrive.start_INFO [0.740200848] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-158.215937,y=409.730154,angle=0.137366),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.6309489883288695,pose=(x=-153.341762,y=439.584884,angle=0.095056),vel=56.78540894959824,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-150.455228,y=457.265150,angle=0.070000),vel=0.0)])
+TaskAutoScoreCoral.autoTask_INFO [0.750695344] <Event name="StateInfo" time="0.750333752" tag="^^^^^" TaskAutoScoreCoral.state="APPROACH_REEF" />
+purePursuitDrive.driveTask_INFO [2.389668629] Done: index=2/3, stalled=false, timeout=false, posOnTarget=true, headingOnTarget=true, robotPose=(x=-150.464339,y=457.401874,angle=0.427366)
+purePursuitDrive.driveTask_INFO [2.398199665] Signal completion event (TaskAutoScoreCoral.driveEvent=CLEARED).
+Elevator.motor.pidCtrlTask_INFO [2.816117397] controlMode: Position,onTarget=true(69.76449994343082/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [2.817180443] <Event name="StateInfo" time="2.816441522" tag="vvvvv" TaskElevatorArm.state="DONE" />
+CoralArm.motor.pidCtrlTask_INFO [2.827819576] controlMode: Position,onTarget=true(147.3046875/148.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [2.832316149] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [2.841987831] <Event name="StateInfo" time="2.840421602" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskAutoScoreCoral.autoTask_INFO [2.846079432] <Event name="StateInfo" time="2.845854769" tag="vvvvv" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [2.908010196] <Event name="StateInfo" time="2.903582131" tag="^^^^^" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [3.528057843] <Event name="StateInfo" time="3.527740632" tag="vvvvv" TaskAutoScoreCoral.state="DONE" />
+TaskAutoScoreCoral.stopSubsystems_INFO [3.542780978] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [3.551446829] Canceling auto task operation.
+TaskAutoScoreCoral.autoTask_INFO [3.556787948] <Event name="StateInfo" time="3.555792073" tag="^^^^^" TaskAutoScoreCoral.state="DONE" />
+CmdReefscapeAuto.cmdPeriodic_INFO [3.57314339] <Event name="StateInfo" time="3.572682606" tag="vvvvv" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" />
+TaskElevatorArm.setCoralStationPickupPosition_INFO [3.575586124] setCoralStationPickupPosition(owner=null, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5), event=null)
+CmdReefscapeAuto.cmdPeriodic_INFO [3.578910073] ***** Go to Coral Station: AprilTag=1, AprilTagPose=(x=-25.800000,y=657.370000,angle=54.000000), IntermediatePose=(x=-87.000000,y=445.875000,angle=306.000000), TargetPose=(x=-50.450060,y=614.739324,angle=-126.000000)
+purePursuitDrive.start_INFO [3.583885527] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-150.423362,y=457.452442,angle=0.337366),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.3111035399560862,pose=(x=-120.665097,y=452.020302,angle=-25.157747),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-87.000000,y=445.875000,angle=306.000000),vel=110.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222225,pose=(x=-64.670717,y=549.038486,angle=-97.986621),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=2,pose=(x=-50.450060,y=614.739324,angle=-126.000000),vel=0.0)])
+CmdReefscapeAuto.cmdPeriodic_INFO [3.592073868] <Event name="StateInfo" time="3.590653638" tag="^^^^^" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" RobotPose=(x=-150.423362,y=457.452442,angle=0.337366) TargetPose=(x=-50.450060,y=614.739324,angle=-126.000000) vel=(x=0.000000,y=0.000000,angle=0.313324) Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=0.000000,y=0.000000,angle=0.000000),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.3111035399560862,pose=(x=29.789734,y=-5.256826,angle=-25.495112),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=63.490432,y=-11.203798,angle=305.662634),vel=110.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222225,pose=(x=85.211890,y=92.089377,angle=-98.323987),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=2,pose=(x=99.045448,y=157.872809,angle=-126.337366),vel=0.0)]) />
+TaskElevatorArm.autoTask_INFO [3.626460667] <Event name="StateInfo" time="3.625365766" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [3.63108001] <Event name="StateInfo" time="3.630542414" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [3.655755954] <Event name="StateInfo" time="3.655540039" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.659717842] <Event name="StateInfo" time="3.659486085" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.682158447] <Event name="StateInfo" time="3.681951541" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.684955647] <Event name="StateInfo" time="3.684719918" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.709554623] <Event name="StateInfo" time="3.708450138" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.712920537] <Event name="StateInfo" time="3.71267433" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.737862258] <Event name="StateInfo" time="3.737642285" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.740043457] <Event name="StateInfo" time="3.739439538" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.770772409] <Event name="StateInfo" time="3.770519218" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.774628607] <Event name="StateInfo" time="3.774369167" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.793776555] <Event name="StateInfo" time="3.793565431" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.798176865] <Event name="StateInfo" time="3.79793474" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.823485265] <Event name="StateInfo" time="3.823273222" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.824986315] <Event name="StateInfo" time="3.824752538" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.858895361] <Event name="StateInfo" time="3.858045491" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.860411836] <Event name="StateInfo" time="3.860191491" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.899601949] <Event name="StateInfo" time="3.899355603" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.903959895] <Event name="StateInfo" time="3.903734198" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.932947513] <Event name="StateInfo" time="3.93241073" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.937317278] <Event name="StateInfo" time="3.936481928" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.973968138] <Event name="StateInfo" time="3.973755131" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.979707653] <Event name="StateInfo" time="3.979457197" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.003680545] <Event name="StateInfo" time="4.003460952" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.008118043] <Event name="StateInfo" time="4.007870719" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.043324696] <Event name="StateInfo" time="4.043041319" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.056997503] <Event name="StateInfo" time="4.056615839" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.075008825] <Event name="StateInfo" time="4.074704858" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.077042172] <Event name="StateInfo" time="4.076758192" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.103295392] <Event name="StateInfo" time="4.10304531" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.106343775] <Event name="StateInfo" time="4.106047514" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.123649912] <Event name="StateInfo" time="4.123287378" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.127412718] <Event name="StateInfo" time="4.126011058" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.159861249] <Event name="StateInfo" time="4.159632012" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.163935279] <Event name="StateInfo" time="4.163461981" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.181120475] <Event name="StateInfo" time="4.180903579" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.18807051] <Event name="StateInfo" time="4.18697848" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.219982238] <Event name="StateInfo" time="4.219498303" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.22496659] <Event name="StateInfo" time="4.22472383" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.258370317] <Event name="StateInfo" time="4.258091559" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.263022394] <Event name="StateInfo" time="4.262427139" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.313859269] <Event name="StateInfo" time="4.313605206" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.315856953] <Event name="StateInfo" time="4.315657561" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.346532329] <Event name="StateInfo" time="4.344230609" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.35196535] <Event name="StateInfo" time="4.350425448" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.385368962] <Event name="StateInfo" time="4.385183354" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.389657462] <Event name="StateInfo" time="4.389447646" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.432711256] <Event name="StateInfo" time="4.427113978" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.436244102] <Event name="StateInfo" time="4.436026609" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.466814362] <Event name="StateInfo" time="4.465998871" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.473270934] <Event name="StateInfo" time="4.471841344" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.506420148] <Event name="StateInfo" time="4.504114654" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.510722974] <Event name="StateInfo" time="4.509513157" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.5449074] <Event name="StateInfo" time="4.543560275" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.550359718] <Event name="StateInfo" time="4.548767207" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.58820884] <Event name="StateInfo" time="4.585853519" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.593661501] <Event name="StateInfo" time="4.593372544" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.623758785] <Event name="StateInfo" time="4.623548114" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.628462564] <Event name="StateInfo" time="4.627264594" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.662561891] <Event name="StateInfo" time="4.659204686" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.66649686] <Event name="StateInfo" time="4.666307922" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.698089336] <Event name="StateInfo" time="4.697901476" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.703583419] <Event name="StateInfo" time="4.703393835" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.753526423] <Event name="StateInfo" time="4.753349464" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.761831431] <Event name="StateInfo" time="4.759343236" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.803687536] <Event name="StateInfo" time="4.802330361" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.80812692] <Event name="StateInfo" time="4.807603697" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.843729709] <Event name="StateInfo" time="4.843540014" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.84775978] <Event name="StateInfo" time="4.847549851" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.908076253] <Event name="StateInfo" time="4.907889314" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.914479193] <Event name="StateInfo" time="4.91206896" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.948559385] <Event name="StateInfo" time="4.948366939" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.955481966] <Event name="StateInfo" time="4.955199779" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.982178957] <Event name="StateInfo" time="4.981867469" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.988122684] <Event name="StateInfo" time="4.984675109" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [5.031508491] <Event name="StateInfo" time="5.030024118" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [5.036144809] <Event name="StateInfo" time="5.035940876" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [5.092838373] <Event name="StateInfo" time="5.09149607" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [5.097246991] <Event name="StateInfo" time="5.096652744" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [5.136468346] <Event name="StateInfo" time="5.135617324" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [5.14598973] <Event name="StateInfo" time="5.144437917" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+Elevator.motor.pidCtrlTask_INFO [5.865300573] controlMode: Position,onTarget=true(43.57386968193985/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+CoralArm.motor.pidCtrlTask_INFO [6.233779699] controlMode: Position,onTarget=true(-42.626953125/-43.5), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+purePursuitDrive.xPosPid.isStalled_INFO [6.238075764] PID stalled (currTime=1.7437943592091649E9, stallStartTime=1.7437943590640533E9, timeout=0.1, velError=4.2153382978938, errRateThreshold=5.0).
+purePursuitDrive.yPosPid.isStalled_INFO [6.244026278] PID stalled (currTime=1.7437943592237544E9, stallStartTime=1.743794357062387E9, timeout=0.1, velError=-3.904611577036576, errRateThreshold=5.0).
+TaskElevatorArm.autoTask_INFO [6.283432705] <Event name="StateInfo" time="6.280771751" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [6.28704935] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [6.291673869] <Event name="StateInfo" time="6.290195626" tag="^^^^^" TaskElevatorArm.state="DONE" />
+purePursuitDrive.xPosPid.isStalled_INFO [6.504402112] PID stalled (currTime=1.7437943594836888E9, stallStartTime=1.7437943593661244E9, timeout=0.1, velError=3.52559349401857, errRateThreshold=5.0).
+purePursuitDrive.yPosPid.isStalled_INFO [6.50863436] PID stalled (currTime=1.7437943594873219E9, stallStartTime=1.743794357062387E9, timeout=0.1, velError=1.7489624703405866, errRateThreshold=5.0).
+purePursuitDrive.xPosPid.isStalled_INFO [6.545319138] PID stalled (currTime=1.743794359524593E9, stallStartTime=1.7437943593661244E9, timeout=0.1, velError=2.6084179682726023, errRateThreshold=5.0).
+purePursuitDrive.yPosPid.isStalled_INFO [6.550153047] PID stalled (currTime=1.7437943595288181E9, stallStartTime=1.743794357062387E9, timeout=0.1, velError=0.997571380659817, errRateThreshold=5.0).
+purePursuitDrive.xPosPid.isStalled_INFO [6.581274332] PID stalled (currTime=1.7437943595605536E9, stallStartTime=1.7437943593661244E9, timeout=0.1, velError=1.5308773085841798, errRateThreshold=5.0).
+purePursuitDrive.yPosPid.isStalled_INFO [6.591181179] PID stalled (currTime=1.7437943595707827E9, stallStartTime=1.743794357062387E9, timeout=0.1, velError=0.19763768967118, errRateThreshold=5.0).
+purePursuitDrive.xPosPid.isStalled_INFO [6.938622521] PID stalled (currTime=1.7437943599074357E9, stallStartTime=1.7437943593661244E9, timeout=0.1, velError=0.7395857313931056, errRateThreshold=5.0).
+purePursuitDrive.yPosPid.isStalled_INFO [6.946324246] PID stalled (currTime=1.7437943599238176E9, stallStartTime=1.743794357062387E9, timeout=0.1, velError=0.07468452247886291, errRateThreshold=5.0).
+purePursuitDrive.turnPid.isStalled_INFO [6.952307077] PID stalled (currTime=1.7437943599286528E9, stallStartTime=1.7437943595741715E9, timeout=0.1, velError=-4.871923840106011, errRateThreshold=5.0).
+purePursuitDrive.driveTask_INFO [6.958402595] Done: index=4/5, stalled=true, timeout=false, posOnTarget=true, headingOnTarget=false, robotPose=(x=-50.860137,y=615.222270,angle=-127.512635)
+purePursuitDrive.driveTask_INFO [6.978002449] Signal completion event (CmdReefscapeAuto=CLEARED).
+CmdReefscapeAuto.cmdPeriodic_INFO [6.991813533] <Event name="StateInfo" time="6.988368667" tag="vvvvv" CmdReefscapeAuto.state="PICKUP_CORAL" />
+TaskAutoPickupCoralFromStation.autoPickupCoral_INFO [7.007874545] autoPickupCoral(owner=null, taskParams=(useVision=true,aprilTagId=1,relocalize=true,alignOnly=false), event=(CmdReefscapeAuto=SIGNALED))
+CmdReefscapeAuto.cmdPeriodic_INFO [7.025402996] <Event name="StateInfo" time="7.02288641" tag="^^^^^" CmdReefscapeAuto.state="PICKUP_CORAL" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.041828232] <Event name="StateInfo" time="7.040621881" tag="vvvvv" TaskAutoPickupCoralFromStation.state="START" />
+TaskElevatorArm.setCoralStationPickupPosition_INFO [7.053221572] setCoralStationPickupPosition(owner=null, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5), event=null)
+TaskAutoPickupCoralFromStation.runTaskState_INFO [7.059491261] ***** Using AprilTag Vision.
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.062779185] <Event name="StateInfo" time="7.062143697" tag="^^^^^" TaskAutoPickupCoralFromStation.state="START" />
+TaskElevatorArm.autoTask_INFO [7.072005849] <Event name="StateInfo" time="7.071003226" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [7.078880561] <Event name="StateInfo" time="7.078593639" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.082695615] <Event name="StateInfo" time="7.081917512" tag="vvvvv" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskAutoPickupCoralFromStation.runTaskState_INFO [7.096853575] ***** Vision found AprilTag[1]: aprilTagPose=(x=28.578601,y=-75.199047,angle=-177.636699)
+Robot.relocalizeRobotByAprilTag_INFO [7.101641497] >>>>> Re-localize robot: beforePose=(x=-50.873449,y=615.235925,angle=-127.582635), afterPose=(x=-68.365876,y=588.222923,angle=-128.363301)
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.108660256] <Event name="StateInfo" time="7.107781108" tag="^^^^^" TaskAutoPickupCoralFromStation.state="FIND_STATION_APRILTAG" />
+TaskElevatorArm.autoTask_INFO [7.122232741] <Event name="StateInfo" time="7.121884369" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [7.12614307] <Event name="StateInfo" time="7.125946445" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.128845864] <Event name="StateInfo" time="7.128655544" tag="vvvvv" TaskAutoPickupCoralFromStation.state="GET_CORAL" />
+TaskAutoPickupCoralFromStation.runTaskState_INFO [7.136439499] ***** Approaching Coral Station: targetPose=(x=26.534320,y=-64.105314,angle=-357.636699)
+purePursuitDrive.start_INFO [7.144608317] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-68.367162,y=588.223651,angle=-128.383297),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.9324976485171584,pose=(x=-53.641137,y=614.647251,angle=-127.352885),vel=83.92478836654425,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-34.592313,y=648.827453,angle=-486.019997),vel=0.0)])
+TaskAutoPickupCoralFromStation.autoTask_INFO [7.185591417] <Event name="StateInfo" time="7.184302416" tag="^^^^^" TaskAutoPickupCoralFromStation.state="GET_CORAL" />
+Elevator.motor.pidCtrlTask_INFO [7.283749501] controlMode: Position,onTarget=true(43.54439858692448/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+CoralArm.motor.pidCtrlTask_INFO [7.344944792] controlMode: Position,onTarget=true(-42.626953125/-43.5), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.autoTask_INFO [7.375464755] <Event name="StateInfo" time="7.375194912" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [7.381903221] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [7.384944137] <Event name="StateInfo" time="7.384424135" tag="^^^^^" TaskElevatorArm.state="DONE" />
+purePursuitDrive.xPosPid.isStalled_INFO [9.165173859] PID stalled (currTime=1.7437943621439738E9, stallStartTime=1.7437943619354265E9, timeout=0.2, velError=-0.0029230895474389135, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [9.188580326] PID stalled (currTime=1.7437943621663647E9, stallStartTime=1.7437943606210544E9, timeout=0.2, velError=-7.815626524019221E-4, errRateThreshold=0.1).
+purePursuitDrive.turnPid.isStalled_INFO [9.193787394] PID stalled (currTime=1.7437943621726549E9, stallStartTime=1.7437943606210601E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.driveTask_INFO [9.198140641] Done: index=2/3, stalled=true, timeout=false, posOnTarget=false, headingOnTarget=false, robotPose=(x=-35.904374,y=647.351666,angle=-124.133297)
+purePursuitDrive.driveTask_INFO [9.205679842] Signal completion event (TaskAutoPickupCoralFromStation.driveEvent=CLEARED).
+CoralGrabber.finishAction_INFO [9.288238922] FinishAction(completed=true): isOn=true, hasObject=true, actionParams=(intake=true,owner=null,finishDelay=0.0,completionEvent=(TaskAutoPickupCoralFromStation.grabberEvent=CLEARED),timeout=0.0,callbackEvent=null)
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.297416363] <Event name="StateInfo" time="9.295532437" tag="vvvvv" TaskAutoPickupCoralFromStation.state="DONE" />
+TaskAutoPickupCoralFromStation.stopSubsystems_INFO [9.300618259] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [9.306578003] Canceling auto task operation.
+TaskAutoPickupCoralFromStation.autoTask_INFO [9.310927002] <Event name="StateInfo" time="9.308747728" tag="^^^^^" TaskAutoPickupCoralFromStation.state="DONE" />
+CmdReefscapeAuto.cmdPeriodic_INFO [9.321838205] <Event name="StateInfo" time="9.321501167" tag="vvvvv" CmdReefscapeAuto.state="APPROACH_REEF" />
+TaskElevatorArm.setCoralScorePosition_INFO [9.327030926] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=148.0,elevatorPos=70.0), event=null)
+purePursuitDrive.start_INFO [9.336346139] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-36.031968,y=647.210098,angle=-123.963299),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.0052665804083698335,pose=(x=-51.189532,y=621.031657,angle=-122.718981),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222223,pose=(x=-51.479818,y=620.530308,angle=237.304849),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-85.163293,y=562.355995,angle=240.070000),vel=0.0)])
+CmdReefscapeAuto.cmdPeriodic_INFO [9.343036494] <Event name="StateInfo" time="9.342201109" tag="^^^^^" CmdReefscapeAuto.state="APPROACH_REEF" RobotPose=(x=-36.031968,y=647.210098,angle=-123.963299) TargetPose=(x=-85.163293,y=562.355995,angle=240.070000) vel=(x=-1.228681,y=-1.313704,angle=6.854688) Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=0.000000,y=0.000000,angle=0.000000),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.0052665804083698335,pose=(x=-13.244332,y=27.196510,angle=1.244318),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=false,index=-1,timestep=1.2222222222222223,pose=(x=-13.497977,y=27.717356,angle=361.268148),vel=110.0,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-42.929827,y=88.154045,angle=364.033299),vel=0.0)]) />
+TaskElevatorArm.autoTask_INFO [9.370028431] <Event name="StateInfo" time="9.369465966" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [9.374920352] <Event name="StateInfo" time="9.374715408" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [9.400558451] <Event name="StateInfo" time="9.400330121" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.402796456] <Event name="StateInfo" time="9.402586075" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.433426129] <Event name="StateInfo" time="9.43322845" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.440346425] <Event name="StateInfo" time="9.438417233" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.483117031] <Event name="StateInfo" time="9.481305117" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.486251473] <Event name="StateInfo" time="9.486049921" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.523191226] <Event name="StateInfo" time="9.523013" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.524883796] <Event name="StateInfo" time="9.52469087" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.542639801] <Event name="StateInfo" time="9.542453709" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.546724232] <Event name="StateInfo" time="9.545840677" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.570395751] <Event name="StateInfo" time="9.569485311" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.573163877] <Event name="StateInfo" time="9.572965143" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.593449263] <Event name="StateInfo" time="9.593250954" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.597990924] <Event name="StateInfo" time="9.597542089" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.6322091] <Event name="StateInfo" time="9.630546355" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.63528719] <Event name="StateInfo" time="9.635051263" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.663815358] <Event name="StateInfo" time="9.663218974" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.669220791] <Event name="StateInfo" time="9.666867074" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.694163013] <Event name="StateInfo" time="9.693948388" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.698222327] <Event name="StateInfo" time="9.698009449" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.726983359] <Event name="StateInfo" time="9.726784755" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.735234527] <Event name="StateInfo" time="9.733679221" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.775152821] <Event name="StateInfo" time="9.774967938" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.792189392] <Event name="StateInfo" time="9.791852755" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.821067916] <Event name="StateInfo" time="9.820825604" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.823826336] <Event name="StateInfo" time="9.823640015" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.856432852] <Event name="StateInfo" time="9.856214883" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.863575822] <Event name="StateInfo" time="9.862328724" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.941103824] <Event name="StateInfo" time="9.940251679" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [9.947746353] <Event name="StateInfo" time="9.94645188" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+CoralArm.motor.pidCtrlTask_INFO [10.782844843] controlMode: Position,onTarget=true(148.7109375/148.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+Elevator.motor.pidCtrlTask_INFO [11.871581536] controlMode: Position,onTarget=true(69.77713021999452/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [11.878662282] <Event name="StateInfo" time="11.878373539" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [11.880467799] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [11.881851568] <Event name="StateInfo" time="11.881490915" tag="^^^^^" TaskElevatorArm.state="DONE" />
+purePursuitDrive.xPosPid.isStalled_INFO [12.308035129] PID stalled (currTime=1.7437943652870145E9, stallStartTime=1.743794365080003E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.yPosPid.isStalled_INFO [12.312443122] PID stalled (currTime=1.7437943652913375E9, stallStartTime=1.7437943628146343E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.turnPid.isStalled_INFO [12.315129523] PID stalled (currTime=1.7437943652948582E9, stallStartTime=1.7437943628146403E9, timeout=0.2, velError=0.0, errRateThreshold=0.1).
+purePursuitDrive.driveTask_INFO [12.316734802] Done: index=3/4, stalled=true, timeout=false, posOnTarget=false, headingOnTarget=false, robotPose=(x=-85.246237,y=561.134362,angle=-118.793301)
+purePursuitDrive.driveTask_INFO [12.323687971] Signal completion event (CmdReefscapeAuto=CLEARED).
+CmdReefscapeAuto.cmdPeriodic_INFO [12.327577868] <Event name="StateInfo" time="12.327058778" tag="vvvvv" CmdReefscapeAuto.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoScoreCoral_INFO [12.329477164] autoScoreCoral(owner=null, taskParams=(useVision=true,aprilTagId=6,reefLevel=3,scoreRightSide=true,removeAlgae=false,relocalize=true,alignOnly=false,powerLimit=0.2,scoreXOffset=6.5,scoreYOffset=-19.5), event=(CmdReefscapeAuto=SIGNALED))
+CmdReefscapeAuto.cmdPeriodic_INFO [12.336264998] <Event name="StateInfo" time="12.335558639" tag="^^^^^" CmdReefscapeAuto.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [12.338859373] <Event name="StateInfo" time="12.337981645" tag="vvvvv" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.setCoralScorePosition_INFO [12.348150214] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=148.0,elevatorPos=70.0), event=(TaskAutoScoreCoral.elevatorArmEvent=CLEARED))
+TaskAutoScoreCoral.runTaskState_INFO [12.350364299] ***** Using AprilTag Vision.
+TaskAutoScoreCoral.autoTask_INFO [12.358250095] <Event name="StateInfo" time="12.356902943" tag="^^^^^" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.autoTask_INFO [12.370836159] <Event name="StateInfo" time="12.370621897" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [12.376653304] <Event name="StateInfo" time="12.376453435" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskAutoScoreCoral.autoTask_INFO [12.387956601] <Event name="StateInfo" time="12.383656419" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.runTaskState_INFO [12.40455033] ***** Vision found AprilTag[6]: aprilTagPose=(x=-6.926412,y=50.614272,angle=-1.273058)
+Robot.relocalizeRobotByAprilTag_INFO [12.414889946] >>>>> Re-localize robot: beforePose=(x=-85.247807,y=561.114925,angle=-118.773297), afterPose=(x=-83.835701,y=563.768405,angle=-118.726942)
+TaskAutoScoreCoral.autoTask_INFO [12.418195794] <Event name="StateInfo" time="12.418010274" tag="^^^^^" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskElevatorArm.autoTask_INFO [12.44576269] <Event name="StateInfo" time="12.444312433" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [12.453518544] <Event name="StateInfo" time="12.449633701" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskAutoScoreCoral.autoTask_INFO [12.458452868] <Event name="StateInfo" time="12.458215031" tag="vvvvv" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskAutoScoreCoral.runTaskState_INFO [12.463836396] ***** Approaching Reef: targetPose=(x=0.005220,y=31.263498,angle=-1.273058)
+purePursuitDrive.start_INFO [12.477332697] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-83.836139,y=563.758286,angle=-118.706945),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.1500739140026481,pose=(x=-110.370475,y=549.232739,angle=-119.938733),vel=13.506652260238328,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-111.259483,y=548.746074,angle=-119.980003),vel=0.0)])
+TaskAutoScoreCoral.autoTask_INFO [12.479801519] <Event name="StateInfo" time="12.478851267" tag="^^^^^" TaskAutoScoreCoral.state="APPROACH_REEF" />
+CoralArm.motor.pidCtrlTask_INFO [12.590511357] controlMode: Position,onTarget=true(147.12890625/148.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+Elevator.motor.pidCtrlTask_INFO [12.656060758] controlMode: Position,onTarget=true(69.74766047407941/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [12.667484022] <Event name="StateInfo" time="12.665721388" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [12.67273744] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [12.67946854] <Event name="StateInfo" time="12.677683231" tag="^^^^^" TaskElevatorArm.state="DONE" />
+purePursuitDrive.driveTask_INFO [13.820056673] Done: index=2/3, stalled=false, timeout=false, posOnTarget=true, headingOnTarget=true, robotPose=(x=-111.291014,y=548.762417,angle=-119.956945)
+purePursuitDrive.driveTask_INFO [13.824325408] Signal completion event (TaskAutoScoreCoral.driveEvent=CLEARED).
+TaskAutoScoreCoral.autoTask_INFO [13.826397686] <Event name="StateInfo" time="13.826138322" tag="vvvvv" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [13.830557968] <Event name="StateInfo" time="13.829587376" tag="^^^^^" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [14.482110326] <Event name="StateInfo" time="14.481598496" tag="vvvvv" TaskAutoScoreCoral.state="DONE" />
+TaskAutoScoreCoral.stopSubsystems_INFO [14.493914645] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [14.501585844] Canceling auto task operation.
+TaskAutoScoreCoral.autoTask_INFO [14.505819181] <Event name="StateInfo" time="14.50483933" tag="^^^^^" TaskAutoScoreCoral.state="DONE" />
+CmdReefscapeAuto.cmdPeriodic_INFO [14.51405747] <Event name="StateInfo" time="14.513811987" tag="vvvvv" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" />
+TaskElevatorArm.setCoralStationPickupPosition_INFO [14.516664137] setCoralStationPickupPosition(owner=null, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5), event=null)
+CmdReefscapeAuto.cmdPeriodic_INFO [14.523748727] ***** Go to Coral Station: AprilTag=1, AprilTagPose=(x=-25.800000,y=657.370000,angle=54.000000), IntermediatePose=null, TargetPose=(x=-50.450060,y=614.739324,angle=-126.000000)
+purePursuitDrive.start_INFO [14.540148966] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-111.244893,y=548.798338,angle=-119.986944),vel=0.0), Waypoint(simple=false,index=-1,timestep=1.149295488868085,pose=(x=-90.740357,y=571.038539,angle=-122.014993),vel=103.43659399812765,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-50.450060,y=614.739324,angle=-126.000000),vel=0.0)])
+CmdReefscapeAuto.cmdPeriodic_INFO [14.544341949] <Event name="StateInfo" time="14.543885023" tag="^^^^^" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" RobotPose=(x=-111.245286,y=548.797970,angle=-119.986944) TargetPose=(x=-50.450060,y=614.739324,angle=-126.000000) vel=(x=-0.051138,y=-0.047832,angle=0.000000) Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=0.000000,y=0.000000,angle=0.000000),vel=0.0), Waypoint(simple=false,index=-1,timestep=1.149295488868085,pose=(x=9.014891,y=-28.875496,angle=-2.028049),vel=103.43659399812765,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=26.728662,y=-85.614274,angle=-6.013056),vel=0.0)]) />
+TaskElevatorArm.autoTask_INFO [14.573166074] <Event name="StateInfo" time="14.572635074" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [14.577232302] <Event name="StateInfo" time="14.576224548" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [14.59073871] <Event name="StateInfo" time="14.590552934" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.59604052] <Event name="StateInfo" time="14.595831056" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.614442671] <Event name="StateInfo" time="14.614246623" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.617272587] <Event name="StateInfo" time="14.617077961" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.637879128] <Event name="StateInfo" time="14.636199559" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.640600659] <Event name="StateInfo" time="14.63956766" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.660159215] <Event name="StateInfo" time="14.659911101" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.662967288] <Event name="StateInfo" time="14.662065181" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.684525947] <Event name="StateInfo" time="14.684327497" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.68607129] <Event name="StateInfo" time="14.685871414" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.704199813] <Event name="StateInfo" time="14.703890861" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.705978982] <Event name="StateInfo" time="14.705770795" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.741118709] <Event name="StateInfo" time="14.740911123" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.745395991] <Event name="StateInfo" time="14.744932168" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.772353226] <Event name="StateInfo" time="14.77037914" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.775712187] <Event name="StateInfo" time="14.774875157" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.80135046] <Event name="StateInfo" time="14.801161349" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.804818908] <Event name="StateInfo" time="14.804600303" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.827559961] <Event name="StateInfo" time="14.827373601" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.831297746] <Event name="StateInfo" time="14.830285191" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.865451256] <Event name="StateInfo" time="14.865251509" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.867159592] <Event name="StateInfo" time="14.866959746" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.880601035] <Event name="StateInfo" time="14.880389717" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.88539962] <Event name="StateInfo" time="14.883396569" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.90230666] <Event name="StateInfo" time="14.902118039" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.905841655] <Event name="StateInfo" time="14.905637782" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.923155004] <Event name="StateInfo" time="14.922910735" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.925423927] <Event name="StateInfo" time="14.925225424" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.944299221] <Event name="StateInfo" time="14.943824665" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.945926537] <Event name="StateInfo" time="14.945691733" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.97655203] <Event name="StateInfo" time="14.976361646" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [14.978772833] <Event name="StateInfo" time="14.978585497" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [15.002273034] <Event name="StateInfo" time="15.001690745" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [15.006998992] <Event name="StateInfo" time="15.006197712" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcRobotBase.startCompetition_INFO [15.012894986] *** Transitioning from AUTO_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [15.02543494] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [15.059214426] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.001023s (freq=977.082Hz, min=0.000000s, max=0.593844s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000060s
+[07]               UpdateTask=0.000741s
+[02]                StartMode=0.000000s
+[06]         PostPeriodicTask=0.000094s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=11.702325s
+[01]           RobotStartMode=0.000001s
+[05]                 Periodic=0.000065s
+[10]            RobotStopMode=0.000000s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.064312797] TrcWatchdogMgr: STANDALONE_TASK=3.757963682170543E-4/0.9965016078294574
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.068252829] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.3061903579436924E-5/0.01072763337525953
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.07090011] TrcMotor.odometryTask: STANDALONE_TASK=4.914665057889047E-4/5.981210224471984E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.074211376] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.0041384945/7.520081225
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.076786373] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=4.651542498858116E-6/0.010727623696715526
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.079328324] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=4.999412490138272E-6/0.010727628014616119
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.081193377] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=5.453509571066727E-6/0.0107276277386123
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.083744077] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=2.525828817007848E-5/0.010728084051239465
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.086684312] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=2.120461725626972E-5/0.010727653673351602
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.089182719] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=1.972466230692576E-5/0.010727703090101313
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.09136068] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=3.057555331340309E-5/0.01072768516919947
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.095035062] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.00479754006190061/0.012918369435919792
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.097839042] TrcSwerveDriveBase.stopTask: STOP_TASK=0.0075398125/7.51880551
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.101525945] purePursuitDrive.driveTask: POST_PERIODIC_TASK=0.018198363863247864/0.030332247194444443
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.103771763] LED: OUTPUT_TASK=2.9540974548474155E-5/0.010727629147062488
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.106325947] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=2.369162504359379E-4/0.010727557392634725
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.109207886] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=8.076006850452545E-6/0.010727548402432948
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.113588654] CoralGrabber.sensor.triggerTask: PRE_PERIODIC_TASK=9.301685950413222E-5/0.017311768099173553
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.1161568] Elevator.motor.pidCtrlTask: OUTPUT_TASK=5.854906941503716E-5/0.010727548670403124
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.11923407] ClimberArm.motor.pidCtrlTask: OUTPUT_TASK=4.706060945738365E-6/0.010727540383401835
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.122910467] ClimberGrabber.motor.pidCtrlTask: OUTPUT_TASK=4.5259876696973466E-6/0.010727537037115457
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.126245864] TaskElevatorArm: POST_PERIODIC_TASK=1.0790581479361899E-5/0.0010241393029464833
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.129775473] TaskAutoScoreCoral: POST_PERIODIC_TASK=5.993332803504381E-4/0.01756623108135169
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [15.133340548] TaskAutoPickupCoralFromStation: POST_PERIODIC_TASK=0.0011584847338709677/0.018184774346774193
