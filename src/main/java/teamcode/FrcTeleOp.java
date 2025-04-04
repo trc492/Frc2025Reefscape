@@ -22,6 +22,7 @@
 
 package teamcode;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
@@ -90,6 +91,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevClimberArmPower = 0.0;
     private int scoreLevelIndex = 3;
     private boolean scoreRightSide = true;
+    private boolean rumbling = false;
 
     /**
      * Constructor: Create an instance of the object.
@@ -342,6 +344,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             prevClimberArmPower = power;
                         }
                     }
+                }
+
+                if (RobotParams.Preferences.useRumble && !rumbling &&
+                    elapsedTime > RobotParams.Game.TELEOP_PERIOD - RobotParams.Game.CLIMB_PERIOD)
+                {
+                    robot.driverController.setRumble(RumbleType.kBothRumble, 1.0);
+                    rumbling = true;
                 }
             }
             //
