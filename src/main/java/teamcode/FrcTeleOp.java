@@ -349,7 +349,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 if (RobotParams.Preferences.useRumble && !rumbling &&
                     elapsedTime > RobotParams.Game.TELEOP_PERIOD - RobotParams.Game.CLIMB_PERIOD)
                 {
-                    robot.driverController.setRumble(RumbleType.kBothRumble, 1.0);
+                    robot.driverController.setRumble(RumbleType.kBothRumble, 1.0, 0.5);
                     rumbling = true;
                 }
             }
