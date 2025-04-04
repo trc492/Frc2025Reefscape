@@ -211,7 +211,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     break;
 
                 case GO_TO_CORAL_STATION:
-                    robot.elevatorArmTask.setCoralStationPickupPosition(null, null);
+                    robot.elevatorArmTask.setCoralStationPickupPosition(null, true, null);
                     if (goToStation)
                     {
                         robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(0.5, 0.1, 5.0);
@@ -307,7 +307,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     if (stationPickupCount > 0)
                     {
                         robot.pickupCoralFromStationTask.autoPickupCoral(
-                            null, useVision, stationAprilTagId, relocalize, event);
+                            null, useVision, stationAprilTagId, relocalize, true, event);
                         sm.waitForSingleEvent(event, State.APPROACH_REEF);
                     }
                     else

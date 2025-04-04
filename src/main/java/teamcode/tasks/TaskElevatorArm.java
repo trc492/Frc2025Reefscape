@@ -77,13 +77,15 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
         double power = 0.0;
         Double coralArmPos = null;
         Double elevatorPos = null;
+        boolean inAuto = false;
 
-        static TaskParams setPositionParams(Action action, Double coralArmPos, Double elevatorPos)
+        static TaskParams setPositionParams(Action action, Double coralArmPos, Double elevatorPos, boolean inAuto)
         {
             TaskParams params = new TaskParams();
             params.action = action;
             params.coralArmPos = coralArmPos;
             params.elevatorPos = elevatorPos;
+            params.inAuto = inAuto;
 
             return params;
         }   //setPositionParams
@@ -102,7 +104,8 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
             return "action=" + action +
                    ",power=" + power +
                    ",coralArmPos=" + coralArmPos +
-                   ",elevatorPos=" + elevatorPos;
+                   ",elevatorPos=" + elevatorPos +
+                   ",inAuto=" + inAuto;
         }   //toString
     }   //class TaskParams
 
@@ -165,7 +168,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
     {
         TaskParams taskParams = TaskParams.setPositionParams(
             Action.SetCoralScorePosition, CoralArm.Params.SCORE_LEVEL_POS[scoreLevel],
-            Elevator.Params.SCORE_LEVEL_POS[scoreLevel]);
+            Elevator.Params.SCORE_LEVEL_POS[scoreLevel], false);
         tracer.traceInfo(
             moduleName,
             "setCoralScorePosition(owner=" + owner +
@@ -180,13 +183,14 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
      * with each other.
      *
      * @param owner specifies the owner to acquire subsystem ownerships, can be null if not requiring ownership.
+     * @param inAuto specifies true if caller is auto, false if teleop.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
-    public void setCoralStationPickupPosition(String owner, TrcEvent completionEvent)
+    public void setCoralStationPickupPosition(String owner, boolean inAuto, TrcEvent completionEvent)
     {
         TaskParams taskParams = TaskParams.setPositionParams(
             Action.SetCoralStationPickupPosition, CoralArm.Params.STATION_PICKUP_POS,
-            Elevator.Params.STATION_PICKUP_POS);
+            Elevator.Params.STATION_PICKUP_POS, inAuto);
         tracer.traceInfo(
             moduleName,
             "setCoralStationPickupPosition(owner=" + owner +
@@ -454,7 +458,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
                 elevator.setPosition(
                     owner, 0.0, taskParams.elevatorPos, true, Elevator.Params.POWER_LIMIT, elevatorEvent, 0.0);
                 sm.addEvent(elevatorEvent);
-                if (coralArm != null && coralArm.getPosition() > CoralArm.Params.SAFE_ZONE_POS)
+                if (coralArm != null && !taskParams.inAuto && coralArm.getPosition() > CoralArm.Params.SAFE_ZONE_POS)
                 {
                     // Move coral arm to safe position (fire and forget).
                     coralArm.setPosition(

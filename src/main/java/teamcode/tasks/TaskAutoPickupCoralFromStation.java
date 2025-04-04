@@ -55,13 +55,15 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
         int aprilTagId;
         boolean relocalize;
         boolean alignOnly;
+        boolean inAuto;
 
-        TaskParams(boolean useVision, int aprilTagId, boolean relocalize, boolean alignOnly)
+        TaskParams(boolean useVision, int aprilTagId, boolean relocalize, boolean alignOnly, boolean inAuto)
         {
             this.useVision = useVision;
             this.aprilTagId = aprilTagId;
             this.relocalize = relocalize;
             this.alignOnly = alignOnly;
+            this.inAuto = inAuto;
         }   //TaskParams
 
         public String toString()
@@ -69,7 +71,8 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
             return "useVision=" + useVision +
                    ",aprilTagId=" + aprilTagId +
                    ",relocalize=" + relocalize +
-                   ",alignOnly=" + alignOnly;
+                   ",alignOnly=" + alignOnly +
+                   ",inAuto=" + inAuto;
         }   //toString
     }   //class TaskParams
 
@@ -102,12 +105,13 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
      * @param useVision specifies true to use vision to find the coral, false otherwise.
      * @param aprilTagId specifies the AprilTag ID of the coral station, -1 to use Vision to look for the closest one.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
+     * @param inAuto specifies true if caller is auto, false if teleop.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoPickupCoral(
-        String owner, boolean useVision, int aprilTagId, boolean relocalize, TrcEvent completionEvent)
+        String owner, boolean useVision, int aprilTagId, boolean relocalize, boolean inAuto, TrcEvent completionEvent)
     {
-        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, false);
+        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, inAuto, false);
         tracer.traceInfo(
             moduleName,
             "autoPickupCoral(owner=" + owner + ", taskParams=(" + taskParams + "), event=" + completionEvent + ")");
@@ -122,14 +126,15 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
      * @param aprilTagId specifies the AprilTag ID of the coral station, -1 to use Vision to look for the closest one.
      * @param relocalize specifies true to relocalize robot position, false otherwise.
      * @param alignOnly specifies true to only do alignment and not picking up, false otherwise.
+     * @param inAuto specifies true if caller is auto, false if teleop.
      * @param completionEvent specifies the event to signal when done, can be null if none provided.
      */
     public void autoPickupCoral(
-        String owner, boolean useVision, int aprilTagId, boolean relocalize, boolean alignOnly,
+        String owner, boolean useVision, int aprilTagId, boolean relocalize, boolean alignOnly, boolean inAuto,
         TrcEvent completionEvent)
     {
         cancelGrabber = !alignOnly;
-        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, alignOnly);
+        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, alignOnly, inAuto);
         tracer.traceInfo(
             moduleName,
             "autoPickupCoral(owner=" + owner + ", taskParams=(" + taskParams + "), event=" + completionEvent + ")");
@@ -219,7 +224,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
                 if (robot.elevatorArmTask != null)
                 {
                     // Fire and forget.
-                    robot.elevatorArmTask.setCoralStationPickupPosition(owner, null);
+                    robot.elevatorArmTask.setCoralStationPickupPosition(owner, taskParams.inAuto, null);
                 }
 
                 if (taskParams.useVision && robot.photonVisionBack != null)
