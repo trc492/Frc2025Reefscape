@@ -74,7 +74,7 @@ public class Elevator extends TrcSubsystem
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.4, 0.0, 0.01, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.5, 0.0, 0.01, 0.0, 0.0);
         public static final double POS_PID_TOLERANCE            = 0.5;
         public static final double GRAVITY_COMP_POWER           = 0.0;
     }   //class Params

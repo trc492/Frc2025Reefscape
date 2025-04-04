@@ -423,11 +423,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case B:
-                // Turtle mode.
-                if (pressed)
+                // Deploy climber.
+                if (robot.climber != null && pressed)
                 {
-                    robot.turtle();
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
+                    robot.elevatorArmTask.coralArm.setPosition(CoralArm.Params.CLIMB_POS);
+                    robot.climber.deploy(moduleName);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
                 }
                 break;
 

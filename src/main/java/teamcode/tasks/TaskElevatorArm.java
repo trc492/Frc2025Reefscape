@@ -458,7 +458,7 @@ public class TaskElevatorArm extends TrcAutoTask<TaskElevatorArm.State>
                 {
                     // Move coral arm to safe position (fire and forget).
                     coralArm.setPosition(
-                        owner, 0.0, CoralArm.Params.SAFE_ZONE_POS, true, CoralArm.Params.POWER_LIMIT, null, 0.0);
+                        owner, 0.0, CoralArm.Params.SAFE_ZONE_POS, true, CoralArm.Params.POWER_LIMIT, null, 2.0);
                 }
                 sm.setState(State.CHECK_ELEVATOR_SAFETY_FOR_PICKUP);
                 break;

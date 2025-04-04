@@ -63,7 +63,7 @@ public class Climber extends TrcSubsystem
         public static final double POS_OFFSET                   = 0.0;
         public static final double ZERO_OFFSET                  = 0.0;      //encoder reading at 0-deg
         public static final double POWER_LIMIT                  = 1.0;
-        public static final double CLIMB_POWER                  = 0.5;
+        public static final double CLIMB_POWER                  = 0.75;
 
         public static final double MIN_POS                      = 60.0;
         public static final double MAX_POS                      = 200.0;
@@ -96,7 +96,7 @@ public class Climber extends TrcSubsystem
         public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_CLIMBER_GRABBER_SENSOR;
         public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
-        public static final double INTAKE_POWER                 = 0.85;
+        public static final double INTAKE_POWER                 = 1.0;
         public static final double EJECT_POWER                  = 0.0;
         public static final double RETAIN_POWER                 = 0.0;
     }   //class GrabberParams
