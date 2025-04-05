@@ -361,6 +361,7 @@ public class FrcTest extends FrcTeleOp
             case TUNE_PP_PID:
                 if (robot.robotDrive != null && robot.robotDrive.purePursuitDrive != null)
                 {
+                    robot.robotDrive.driveBase.setFieldPosition(new TrcPose2D(0,0,0));
                     TrcPidController.PidCoefficients tunePidCoeff = testChoices.getTunePidCoefficients();
                     double xTarget = testChoices.getXDriveDistance()*12.0;
                     double yTarget = testChoices.getYDriveDistance()*12.0;

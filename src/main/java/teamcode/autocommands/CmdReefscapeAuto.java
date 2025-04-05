@@ -318,7 +318,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     break;
 
                 case APPROACH_REEF:
-                    // If we haven't already, determine the Reef AprilTag ID to look for.
+                    // If we haven't already, determin            e the Reef AprilTag ID to look for.
                     // If we are scoring the 2nd Coral from the Station, we already determined the AprilTag ID
                     // last time.
                     if (reefAprilTagId == -1)
@@ -361,7 +361,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
                         null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2,
-                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -19.5: -15.5), event);
+                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -18.5: -15.5), event);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;
