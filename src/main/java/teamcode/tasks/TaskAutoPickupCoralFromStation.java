@@ -111,7 +111,7 @@ public class TaskAutoPickupCoralFromStation extends TrcAutoTask<TaskAutoPickupCo
     public void autoPickupCoral(
         String owner, boolean useVision, int aprilTagId, boolean relocalize, boolean inAuto, TrcEvent completionEvent)
     {
-        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, inAuto, false);
+        TaskParams taskParams = new TaskParams(useVision, aprilTagId, relocalize, false, inAuto);
         tracer.traceInfo(
             moduleName,
             "autoPickupCoral(owner=" + owner + ", taskParams=(" + taskParams + "), event=" + completionEvent + ")");
