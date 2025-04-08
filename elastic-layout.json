@@ -1078,7 +1078,7 @@
               "topic": "/SmartDashboard/Auto/AprilTagId",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1131,7 +1131,7 @@
               "topic": "/SmartDashboard/Auto/StationPickupCount",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1158,7 +1158,7 @@
               "topic": "/SmartDashboard/Auto/VisionXOffset",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1172,7 +1172,7 @@
               "topic": "/SmartDashboard/Auto/VisionYOffset",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1186,7 +1186,7 @@
               "topic": "/SmartDashboard/Test/XDriveDistance",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1200,7 +1200,7 @@
               "topic": "/SmartDashboard/Test/YDriveDistance",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1214,7 +1214,7 @@
               "topic": "/SmartDashboard/Test/DrivePower",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1228,7 +1228,7 @@
               "topic": "/SmartDashboard/Test/DriveTime",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1242,7 +1242,7 @@
               "topic": "/SmartDashboard/Auto/StartDelay",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1270,7 +1270,7 @@
               "topic": "/SmartDashboard/Auto/TurnAngle",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           }
         ]
@@ -1318,7 +1318,7 @@
               "topic": "/SmartDashboard/TeleOp/DriveNormalScale",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1332,7 +1332,7 @@
               "topic": "/SmartDashboard/TeleOp/DriveSlowScale",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1346,7 +1346,7 @@
               "topic": "/SmartDashboard/TeleOp/TurnNormalScale",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1360,7 +1360,7 @@
               "topic": "/SmartDashboard/TeleOp/TurnSlowScale",
               "period": 0.06,
               "data_type": "double",
-              "show_submit_button": false
+              "show_submit_button": true
             }
           },
           {
@@ -1419,7 +1419,7 @@
                   "topic": "/SmartDashboard/Test/XDriveDistance",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1433,7 +1433,7 @@
                   "topic": "/SmartDashboard/Test/YDriveDistance",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1447,7 +1447,7 @@
                   "topic": "/SmartDashboard/Test/TurnAngle",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1461,7 +1461,7 @@
                   "topic": "/SmartDashboard/Test/DrivePower",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1475,7 +1475,7 @@
                   "topic": "/SmartDashboard/Test/DriveTime",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               }
             ]
@@ -1502,7 +1502,7 @@
                   "topic": "/SmartDashboard/Test/TuneKp",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1516,7 +1516,7 @@
                   "topic": "/SmartDashboard/Test/TuneKi",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1530,7 +1530,7 @@
                   "topic": "/SmartDashboard/Test/TuneKd",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1544,7 +1544,7 @@
                   "topic": "/SmartDashboard/Test/TuneKf",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               },
               {
@@ -1558,7 +1558,7 @@
                   "topic": "/SmartDashboard/Test/TuneIZone",
                   "period": 0.06,
                   "data_type": "double",
-                  "show_submit_button": false
+                  "show_submit_button": true
                 }
               }
             ]

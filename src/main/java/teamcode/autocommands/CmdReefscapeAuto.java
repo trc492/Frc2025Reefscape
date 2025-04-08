@@ -179,7 +179,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 5.0: -10.5), visionYOffset - 13.75),
+                                    visionXOffset + (scoreRightSide? 7.0: -10.5), visionYOffset - 13.75),
                                 event);
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
@@ -199,7 +199,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 9.0: -10.5), visionYOffset - 16.0),
+                                    visionXOffset + (scoreRightSide? 8.0: -10.5), visionYOffset - 18.0),
                                 event);
                         }
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
@@ -211,7 +211,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     break;
 
                 case GO_TO_CORAL_STATION:
-                    robot.elevatorArmTask.setCoralStationPickupPosition(null, null);
+                    robot.elevatorArmTask.setCoralStationPickupPosition(null, true, null);
                     if (goToStation)
                     {
                         robot.robotDrive.purePursuitDrive.setStallDetectionEnabled(0.5, 0.1, 5.0);
@@ -307,7 +307,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     if (stationPickupCount > 0)
                     {
                         robot.pickupCoralFromStationTask.autoPickupCoral(
-                            null, useVision, stationAprilTagId, relocalize, event);
+                            null, useVision, stationAprilTagId, relocalize, true, event);
                         sm.waitForSingleEvent(event, State.APPROACH_REEF);
                     }
                     else
@@ -318,7 +318,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     break;
 
                 case APPROACH_REEF:
-                    // If we haven't already, determine the Reef AprilTag ID to look for.
+                    // If we haven't already, determin            e the Reef AprilTag ID to look for.
                     // If we are scoring the 2nd Coral from the Station, we already determined the AprilTag ID
                     // last time.
                     if (reefAprilTagId == -1)
@@ -361,7 +361,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
                         null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2,
-                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -19.5: -16.5), event);
+                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -18.5: -15.5), event);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;

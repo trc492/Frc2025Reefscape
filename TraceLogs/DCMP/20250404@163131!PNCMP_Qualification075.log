@@ -1,0 +1,287 @@
+Robot.robotStartMode_INFO [0.13988568] Fri Apr 04 16:31:31 PDT 2025: ***** AUTO_MODE *****
+Robot.zeroCalibrate_INFO [0.183041937] Zero calibrate all subsystems.
+TaskElevatorArm.zeroCalibrate_INFO [0.187189204] zeroCalibrate(owner=null, event=null)
+FrcAuto.startMode_INFO [0.189621029] <Info name="MatchInfo" date="Fri Apr 04 16:31:31 PDT 2025" event="PNCMP" type="Qualification" match=75 replay=1 alliance="Blue" location=1 gameMsg="" />
+FrcAuto.startMode_INFO [0.197452183] <Info name="AutoChoices" alliance="Blue" strategy="REEFSCAPE_AUTO" startPos="START_POSE_CENTER" startDelay=0.0 sec useVision="true" scorePreload="true" aprilTagId="-1" relocalize="true" goToStation="false" stationSide="PROCESSOR" stationPickupCount=2 visionXOffset=0.0 visionYOffset=0.0 pathFile="DrivePath.csv" xDistance=0.0 ft yDistance=0.0 ft turnDegrees=0.0 deg driveTime=0.0 sec drivePower=0.0 />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.26413519] <Event name="StateInfo" time="0.263879518" tag="vvvvv" CmdReefscapeAuto.state="START" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.317732879] <Event name="StateInfo" time="0.317278014" tag="^^^^^" CmdReefscapeAuto.state="START" />
+TaskElevatorArm.autoTask_INFO [0.325713382] <Event name="StateInfo" time="0.325196785" tag="vvvvv" TaskElevatorArm.state="ZERO_CALIBRATE" />
+Elevator.motor.zeroCalibratingMotor_INFO [0.331173943] Limit switch triggered, zero calibration done.
+TaskElevatorArm.autoTask_INFO [0.331413228] <Event name="StateInfo" time="0.329053162" tag="^^^^^" TaskElevatorArm.state="ZERO_CALIBRATE" />
+Elevator.motor.pidCtrlTask_INFO [0.339162731] Zero calibration done, event=(Elevator=CLEARED)
+CmdReefscapeAuto.cmdPeriodic_INFO [0.3437634] <Event name="StateInfo" time="0.342734148" tag="vvvvv" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+CmdReefscapeAuto.cmdPeriodic_INFO [0.348832001] ***** Score Preload.
+Elevator.motor.pidCtrlTask_INFO [0.354328841] controlMode: Power,onTarget=false(0.0/null), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskAutoScoreCoral.autoScoreCoral_INFO [0.36435585] autoScoreCoral(owner=null, taskParams=(useVision=true,aprilTagId=21,reefLevel=3,scoreRightSide=true,removeAlgae=false,relocalize=true,alignOnly=false,powerLimit=0.2,scoreXOffset=8.0,scoreYOffset=-18.0), event=(CmdReefscapeAuto=CLEARED))
+CmdReefscapeAuto.cmdPeriodic_INFO [0.376232647] <Event name="StateInfo" time="0.374454339" tag="^^^^^" CmdReefscapeAuto.state="SCORE_PRELOAD" />
+TaskAutoScoreCoral.autoTask_INFO [0.380258061] <Event name="StateInfo" time="0.379752815" tag="vvvvv" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.setCoralScorePosition_INFO [0.408542708] setCoralScorePosition(owner=null, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=148.0,elevatorPos=70.0,inAuto=false), event=(TaskAutoScoreCoral.elevatorArmEvent=CLEARED))
+TaskAutoScoreCoral.runTaskState_INFO [0.412043221] ***** Using AprilTag Vision.
+TaskAutoScoreCoral.autoTask_INFO [0.420603222] <Event name="StateInfo" time="0.420261153" tag="^^^^^" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.autoTask_INFO [0.444359279] <Event name="StateInfo" time="0.443392531" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [0.448222575] <Event name="StateInfo" time="0.447985414" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskAutoScoreCoral.autoTask_INFO [0.456204426] <Event name="StateInfo" time="0.453557247" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.runTaskState_INFO [0.493401858] ***** Vision found AprilTag[21]: aprilTagPose=(x=-0.469578,y=66.120419,angle=-0.398418)
+Robot.relocalizeRobotByAprilTag_INFO [0.501762734] >>>>> Re-localize robot: beforePose=(x=-158.501336,y=279.758234,angle=179.920000), afterPose=(x=-158.462899,y=281.748229,angle=-179.601582)
+TaskAutoScoreCoral.autoTask_INFO [0.522689645] <Event name="StateInfo" time="0.522450227" tag="^^^^^" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskElevatorArm.autoTask_INFO [0.528790934] <Event name="StateInfo" time="0.528541371" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [0.536948807] <Event name="StateInfo" time="0.535879754" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskAutoScoreCoral.autoTask_INFO [0.54055342] <Event name="StateInfo" time="0.540008359" tag="vvvvv" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskAutoScoreCoral.runTaskState_INFO [0.547631682] ***** Approaching Reef: targetPose=(x=7.655394,y=48.176484,angle=-0.398418)
+purePursuitDrive.start_INFO [0.630244244] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-158.462965,y=281.744199,angle=-179.601582),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.6417151493207153,pose=(x=-163.417850,y=251.902757,angle=-179.848649),vel=57.754363438864374,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-166.453176,y=233.622112,angle=-180.000000),vel=0.0)])
+TaskAutoScoreCoral.autoTask_INFO [0.63573243] <Event name="StateInfo" time="0.634481707" tag="^^^^^" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskElevatorArm.autoTask_INFO [0.727752274] <Event name="StateInfo" time="0.726818088" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [0.738773594] <Event name="StateInfo" time="0.734972529" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+CoralArm.motor.pidCtrlTask_INFO [1.925074551] controlMode: Position,onTarget=true(148.0078125/148.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+purePursuitDrive.driveTask_INFO [2.222155291] Done: index=2/3, stalled=false, timeout=false, posOnTarget=true, headingOnTarget=true, robotPose=(x=-166.469951,y=233.311356,angle=-179.771582)
+purePursuitDrive.driveTask_INFO [2.225436128] Signal completion event (TaskAutoScoreCoral.driveEvent=CLEARED).
+Elevator.motor.pidCtrlTask_INFO [2.920285359] controlMode: Position,onTarget=true(69.88237083248976/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [2.921561035] <Event name="StateInfo" time="2.921073629" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [2.936603305] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [2.941102936] <Event name="StateInfo" time="2.939875998" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskAutoScoreCoral.autoTask_INFO [2.945154457] <Event name="StateInfo" time="2.944887918" tag="vvvvv" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [2.987318564] <Event name="StateInfo" time="2.987056288" tag="^^^^^" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [3.623758392] <Event name="StateInfo" time="3.622717814" tag="vvvvv" TaskAutoScoreCoral.state="DONE" />
+TaskAutoScoreCoral.stopSubsystems_INFO [3.635131616] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [3.646761516] Canceling auto task operation.
+TaskAutoScoreCoral.autoTask_INFO [3.651834181] <Event name="StateInfo" time="3.650767365" tag="^^^^^" TaskAutoScoreCoral.state="DONE" />
+CmdReefscapeAuto.cmdPeriodic_INFO [3.659523871] <Event name="StateInfo" time="3.657376806" tag="vvvvv" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" />
+TaskElevatorArm.setCoralStationPickupPosition_INFO [3.663862573] setCoralStationPickupPosition(owner=null, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=true), event=null)
+CmdReefscapeAuto.cmdPeriodic_INFO [3.667569599] <Event name="StateInfo" time="3.66734224" tag="^^^^^" CmdReefscapeAuto.state="GO_TO_CORAL_STATION" />
+TaskElevatorArm.autoTask_INFO [3.671319488] <Event name="StateInfo" time="3.671075953" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [3.676558111] <Event name="StateInfo" time="3.676342248" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+CmdReefscapeAuto.cmdPeriodic_INFO [3.685425895] <Event name="StateInfo" time="3.685198059" tag="vvvvv" CmdReefscapeAuto.state="DONE" />
+CmdReefscapeAuto.cmdPeriodic_INFO [3.691751898] <Event name="StateInfo" time="3.689467675" tag="^^^^^" CmdReefscapeAuto.state="DONE" />
+TaskElevatorArm.autoTask_INFO [3.708698949] <Event name="StateInfo" time="3.70755045" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.712883402] <Event name="StateInfo" time="3.711399844" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.722137631] <Event name="StateInfo" time="3.720555858" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.726323467] <Event name="StateInfo" time="3.725906785" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.736777685] <Event name="StateInfo" time="3.735192549" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.74031309] <Event name="StateInfo" time="3.739269127" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.747918882] <Event name="StateInfo" time="3.746909633" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.751929455] <Event name="StateInfo" time="3.751329589" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.759056913] <Event name="StateInfo" time="3.758134244" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.762792416] <Event name="StateInfo" time="3.761771375" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.767874114] <Event name="StateInfo" time="3.767645373" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.772886075] <Event name="StateInfo" time="3.771078365" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.778665368] <Event name="StateInfo" time="3.778406569" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.781335673] <Event name="StateInfo" time="3.781109819" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.789199868] <Event name="StateInfo" time="3.788320711" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.793579573] <Event name="StateInfo" time="3.791961497" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.803242091] <Event name="StateInfo" time="3.802032553" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.807771708] <Event name="StateInfo" time="3.807529051" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.818527774] <Event name="StateInfo" time="3.818175202" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.823197106] <Event name="StateInfo" time="3.821585778" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.83481771] <Event name="StateInfo" time="3.830420466" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.838586817] <Event name="StateInfo" time="3.838309244" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.861879859] <Event name="StateInfo" time="3.860948612" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.865677037] <Event name="StateInfo" time="3.865419335" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.877540533] <Event name="StateInfo" time="3.874834821" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.88258786] <Event name="StateInfo" time="3.880674875" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.891411896] <Event name="StateInfo" time="3.89031733" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.895807526] <Event name="StateInfo" time="3.895537651" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.905490603] <Event name="StateInfo" time="3.905258382" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.909890286] <Event name="StateInfo" time="3.909662249" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.92082028] <Event name="StateInfo" time="3.919436773" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.925312127] <Event name="StateInfo" time="3.924404014" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.935222335] <Event name="StateInfo" time="3.931902959" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.939821549] <Event name="StateInfo" time="3.938881545" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.948395884] <Event name="StateInfo" time="3.946284789" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.951334072] <Event name="StateInfo" time="3.951097102" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.97492047] <Event name="StateInfo" time="3.972885821" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.979923039] <Event name="StateInfo" time="3.978275681" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.989142155] <Event name="StateInfo" time="3.987463763" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [3.992773664] <Event name="StateInfo" time="3.992578507" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.001902288] <Event name="StateInfo" time="4.000451449" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.004710189] <Event name="StateInfo" time="4.004487635" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.020667397] <Event name="StateInfo" time="4.020133531" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.022015034] <Event name="StateInfo" time="4.021205922" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.026691593] <Event name="StateInfo" time="4.025530148" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.029125242] <Event name="StateInfo" time="4.028221452" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.036779432] <Event name="StateInfo" time="4.033647774" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.039052805] <Event name="StateInfo" time="4.038076074" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.046972523] <Event name="StateInfo" time="4.045617269" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.051492704] <Event name="StateInfo" time="4.050347163" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.059768749] <Event name="StateInfo" time="4.058408021" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.062820501] <Event name="StateInfo" time="4.061671428" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.069379978] <Event name="StateInfo" time="4.069169547" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.073878836] <Event name="StateInfo" time="4.072828859" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.093892261] <Event name="StateInfo" time="4.092536282" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.097446442] <Event name="StateInfo" time="4.096207901" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.105389145] <Event name="StateInfo" time="4.104471037" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.109060924] <Event name="StateInfo" time="4.108157481" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.114216846] <Event name="StateInfo" time="4.114014443" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.120461586] <Event name="StateInfo" time="4.119957037" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.129904239] <Event name="StateInfo" time="4.128897531" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.134404207] <Event name="StateInfo" time="4.13418543" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.142857321] <Event name="StateInfo" time="4.141482787" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.146464858] <Event name="StateInfo" time="4.145891294" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.15625353] <Event name="StateInfo" time="4.15472695" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.160032005] <Event name="StateInfo" time="4.158914551" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.167525947] <Event name="StateInfo" time="4.167322132" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.174750455] <Event name="StateInfo" time="4.174479306" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.179746219] <Event name="StateInfo" time="4.177880223" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.183245209] <Event name="StateInfo" time="4.182506593" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.188849627] <Event name="StateInfo" time="4.188661723" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.194433951] <Event name="StateInfo" time="4.19423852" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.221989677] <Event name="StateInfo" time="4.221175449" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.225146708] <Event name="StateInfo" time="4.224962711" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.245081808] <Event name="StateInfo" time="4.24337262" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.24801263] <Event name="StateInfo" time="4.247800133" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.257627305] <Event name="StateInfo" time="4.256538051" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.262496293] <Event name="StateInfo" time="4.260698419" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.270820188] <Event name="StateInfo" time="4.269357679" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.274681564] <Event name="StateInfo" time="4.274446581" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.283395097] <Event name="StateInfo" time="4.283157268" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.288063805] <Event name="StateInfo" time="4.286460635" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.296128756] <Event name="StateInfo" time="4.295892285" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.301468971] <Event name="StateInfo" time="4.300599947" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.321936857] <Event name="StateInfo" time="4.320370831" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.326391622] <Event name="StateInfo" time="4.324849111" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.334950546] <Event name="StateInfo" time="4.334749626" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.340392624] <Event name="StateInfo" time="4.340169113" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.348011304] <Event name="StateInfo" time="4.347798507" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.353813205] <Event name="StateInfo" time="4.352860428" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.35995172] <Event name="StateInfo" time="4.359715271" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.366843179] <Event name="StateInfo" time="4.362884582" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.376903857] <Event name="StateInfo" time="4.374432475" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.381336115] <Event name="StateInfo" time="4.379870776" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.38932211] <Event name="StateInfo" time="4.388536526" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.39345089] <Event name="StateInfo" time="4.392702533" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.401429026] <Event name="StateInfo" time="4.399797439" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.405321288] <Event name="StateInfo" time="4.404584391" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.425716883] <Event name="StateInfo" time="4.424808996" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.429000852] <Event name="StateInfo" time="4.42879534" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.436145405] <Event name="StateInfo" time="4.435937293" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.443225728] <Event name="StateInfo" time="4.442446647" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.448687212] <Event name="StateInfo" time="4.447755274" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.451010505] <Event name="StateInfo" time="4.450810347" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.457005548] <Event name="StateInfo" time="4.455293298" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.459692385] <Event name="StateInfo" time="4.459492077" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.465511007] <Event name="StateInfo" time="4.463967985" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.467773902] <Event name="StateInfo" time="4.467547516" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.473643031] <Event name="StateInfo" time="4.473424707" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.476829657] <Event name="StateInfo" time="4.476344621" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.483436993] <Event name="StateInfo" time="4.482699224" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.498701288] <Event name="StateInfo" time="4.497158585" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.502164578] <Event name="StateInfo" time="4.501905582" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.504249027] <Event name="StateInfo" time="4.50404706" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.506789206] <Event name="StateInfo" time="4.506416977" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.508117836] <Event name="StateInfo" time="4.507914404" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.511770918] <Event name="StateInfo" time="4.510742788" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.51548873] <Event name="StateInfo" time="4.514543082" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.531508938] <Event name="StateInfo" time="4.531038538" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.535317094] <Event name="StateInfo" time="4.53440626" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.54297924] <Event name="StateInfo" time="4.540849565" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.546047359] <Event name="StateInfo" time="4.545090068" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.550735226] <Event name="StateInfo" time="4.550204089" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.554433379] <Event name="StateInfo" time="4.553304093" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.557394252] <Event name="StateInfo" time="4.557171883" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.561521204] <Event name="StateInfo" time="4.561321533" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.567257627] <Event name="StateInfo" time="4.56644441" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.569637527] <Event name="StateInfo" time="4.569424324" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.576013561] <Event name="StateInfo" time="4.575091229" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.578867901] <Event name="StateInfo" time="4.578275572" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.584761588] <Event name="StateInfo" time="4.584534154" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.587439862] <Event name="StateInfo" time="4.586923622" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.593742919] <Event name="StateInfo" time="4.592833033" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.596445689] <Event name="StateInfo" time="4.596045616" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.601493604] <Event name="StateInfo" time="4.600901863" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.605780706] <Event name="StateInfo" time="4.60555461" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.609967227] <Event name="StateInfo" time="4.609073314" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.613567005] <Event name="StateInfo" time="4.612304005" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.618387964] <Event name="StateInfo" time="4.618186767" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.621601797] <Event name="StateInfo" time="4.620739108" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.638586057] <Event name="StateInfo" time="4.637761452" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.641242566] <Event name="StateInfo" time="4.641012563" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.64982664] <Event name="StateInfo" time="4.648846117" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.652480384] <Event name="StateInfo" time="4.652258243" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.659584126] <Event name="StateInfo" time="4.659153104" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.662686401] <Event name="StateInfo" time="4.661815258" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.668278786] <Event name="StateInfo" time="4.667770355" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.670478608] <Event name="StateInfo" time="4.670255405" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.678380262] <Event name="StateInfo" time="4.678174542" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.681566269] <Event name="StateInfo" time="4.681067909" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.687488103] <Event name="StateInfo" time="4.686972003" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.689672232] <Event name="StateInfo" time="4.689455923" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.696318619] <Event name="StateInfo" time="4.695473408" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.698816703] <Event name="StateInfo" time="4.698337217" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.704679668] <Event name="StateInfo" time="4.704480384" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.708341156] <Event name="StateInfo" time="4.708138944" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.714329417] <Event name="StateInfo" time="4.713580958" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.716672426] <Event name="StateInfo" time="4.716470819" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.723723862] <Event name="StateInfo" time="4.723176851" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.727149638] <Event name="StateInfo" time="4.726264409" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.743423854] <Event name="StateInfo" time="4.742486538" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.747250573] <Event name="StateInfo" time="4.746902695" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.754833901] <Event name="StateInfo" time="4.75462596" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.758143633] <Event name="StateInfo" time="4.757049833" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.76391579] <Event name="StateInfo" time="4.762823453" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.76656272] <Event name="StateInfo" time="4.765703059" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.774263817] <Event name="StateInfo" time="4.771987477" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.77633612] <Event name="StateInfo" time="4.776133505" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.783335217] <Event name="StateInfo" time="4.783125744" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.787099518] <Event name="StateInfo" time="4.785473368" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.795195588] <Event name="StateInfo" time="4.794208025" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.798328373] <Event name="StateInfo" time="4.797172028" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.807001929] <Event name="StateInfo" time="4.80388501" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.810691643] <Event name="StateInfo" time="4.809753229" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.819242467] <Event name="StateInfo" time="4.817843678" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.822203047] <Event name="StateInfo" time="4.820696602" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.829176074] <Event name="StateInfo" time="4.82860388" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.831586295] <Event name="StateInfo" time="4.831382683" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.85022227] <Event name="StateInfo" time="4.848381509" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.854356049] <Event name="StateInfo" time="4.851761676" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.862843508] <Event name="StateInfo" time="4.861956452" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.865890158] <Event name="StateInfo" time="4.865672183" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.872837771] <Event name="StateInfo" time="4.872643045" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.878375914] <Event name="StateInfo" time="4.877167057" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.885052638] <Event name="StateInfo" time="4.884858581" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.887932435] <Event name="StateInfo" time="4.887715565" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.894874617] <Event name="StateInfo" time="4.892862042" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.901265838] <Event name="StateInfo" time="4.900961737" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.90900606] <Event name="StateInfo" time="4.907327532" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [4.914924033] <Event name="StateInfo" time="4.913746925" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+Elevator.motor.pidCtrlTask_INFO [5.549316436] controlMode: Position,onTarget=true(43.6159710535189/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+CoralArm.motor.pidCtrlTask_INFO [6.283585276] controlMode: Position,onTarget=true(-43.2421875/-43.5), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.autoTask_INFO [6.288301107] <Event name="StateInfo" time="6.28508565" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [6.293123197] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [6.298740835] <Event name="StateInfo" time="6.297624362" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcRobotBase.startCompetition_INFO [6.600928427] *** Transitioning from AUTO_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [6.610348538] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [6.64250474] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.001063s (freq=941.142Hz, min=0.000000s, max=0.665795s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000063s
+[07]               UpdateTask=0.000754s
+[02]                StartMode=0.000001s
+[06]         PostPeriodicTask=0.000078s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=11.638575s
+[01]           RobotStartMode=0.000002s
+[05]                 Periodic=0.000089s
+[10]            RobotStopMode=0.000000s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.644504307] TrcWatchdogMgr: STANDALONE_TASK=2.786344152542373E-4/0.9918603267966101
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.647766945] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.2332110411533899E-5/0.010720969959302856
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.649340399] TrcMotor.odometryTask: STANDALONE_TASK=4.748762426782013E-4/5.882798531935559E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.650711944] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.003443467/3.312880931
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.652159903] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=4.969931569343065E-6/0.010720925074999998
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.654022451] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=4.330559671532847E-6/0.01072092400620438
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.656272698] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=3.974904562043796E-6/0.010720923268156934
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.660336339] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=1.980767512088313E-5/0.010720947860961592
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.661854288] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=1.9358875741264485E-5/0.01072095888814889
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.663570646] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=1.6595014688440835E-5/0.010721050349055744
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.665397184] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=1.6670241766262203E-5/0.01072105913730499
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.66680409] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.0053732899960317465/0.012735637658730158
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.669905524] TrcSwerveDriveBase.stopTask: STOP_TASK=0.0095963805/3.309865545
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.673194244] purePursuitDrive.driveTask: POST_PERIODIC_TASK=0.020877009694915252/0.026467809898305085
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.67517214] LED: OUTPUT_TASK=3.449643103448276E-5/0.01072094788998358
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.679613935] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=2.5035793532202154E-4/0.010720888398558658
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.681022747] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=9.000286691599014E-6/0.010720939613609412
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.682798721] Elevator.motor.pidCtrlTask: OUTPUT_TASK=6.0711311228678275E-5/0.010720938710389491
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.684414092] ClimberArm.motor.pidCtrlTask: OUTPUT_TASK=4.426331752257593E-6/0.010720938093769953
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.685906324] ClimberGrabber.motor.pidCtrlTask: OUTPUT_TASK=3.907656663322083E-6/0.010720937401076349
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.687616938] TaskElevatorArm: POST_PERIODIC_TASK=1.577484375368805E-5/0.0010577023418971794
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [6.691364255] TaskAutoScoreCoral: POST_PERIODIC_TASK=4.5479615000000004E-4/0.004913473553030303

@@ -59,11 +59,13 @@ public class RobotParams
         public static final boolean usePdp                      = false;
         public static final boolean usePressureSensor           = false;
         public static final boolean useLED                      = true;
+        public static final boolean useRumble                   = true;
         // Vision
         public static final boolean useVision                   = true;
         public static final boolean usePhotonVision             = true;
         public static final boolean useOpenCvVision             = false;
         public static final boolean useStreamCamera             = false;
+        public static final boolean doVisionRelocalize          = false;
         // Drive Base
         public static final boolean useDriveBase                = true;
         public static final boolean useVelocityControl          = false;
@@ -177,6 +179,12 @@ public class RobotParams
      */
     public static class Game
     {
+        //
+        // Game time.
+        //
+        public static final double AUTONOMOUS_PERIOD            = 15.0;     // in seconds
+        public static final double TELEOP_PERIOD                = 135.0;    // in seconds
+        public static final double CLIMB_PERIOD                 = 20.0;     // in seconds
         //
         // Robot starting positions.
         //

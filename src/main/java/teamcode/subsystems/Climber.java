@@ -70,7 +70,7 @@ public class Climber extends TrcSubsystem
         public static final double TURTLE_POS                   = 60.0;
         public static final double TURTLE_DELAY                 = 0.0;
         public static final double DEPLOY_POS                   = 172.0;
-        public static final double CLIMB_POS                    = 84.0;
+        public static final double CLIMB_POS                    = 82.25 ;
         public static final double SAFE_POS                     = 195.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
@@ -96,7 +96,7 @@ public class Climber extends TrcSubsystem
         public static final int SENSOR_CHANNEL                  = RobotParams.HwConfig.DIO_CLIMBER_GRABBER_SENSOR;
         public static final boolean SENSOR_TRIGGER_INVERTED     = false;
 
-        public static final double INTAKE_POWER                 = 0.85;
+        public static final double INTAKE_POWER                 = 1.0;
         public static final double EJECT_POWER                  = 0.0;
         public static final double RETAIN_POWER                 = 0.0;
     }   //class GrabberParams

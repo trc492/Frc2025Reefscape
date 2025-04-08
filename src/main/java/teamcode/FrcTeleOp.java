@@ -22,6 +22,7 @@
 
 package teamcode;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
 import frclib.vision.FrcPhotonVision.DetectedObject;
@@ -60,16 +61,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private static final ScoreCoralOffset[] leftScoreOffsets = new ScoreCoralOffset[]
     {
         new ScoreCoralOffset(0.0, 0.0),
-        new ScoreCoralOffset(-6.5, -15.0),
-        new ScoreCoralOffset(-6.5, -17.0),
-        new ScoreCoralOffset(-6.5, -19.0)
+        new ScoreCoralOffset(-6.0, -16.0),
+        new ScoreCoralOffset(-4.0, -18.0),
+        new ScoreCoralOffset(-4.0, -19.0)
     };
     private static final ScoreCoralOffset[] rightScoreOffsets = new ScoreCoralOffset[]
     {
         new ScoreCoralOffset(0.0, 0.0),
-        new ScoreCoralOffset(7.0, -15.0),
-        new ScoreCoralOffset(7.0, -17.0),
-        new ScoreCoralOffset(7.0, -19.0)
+        new ScoreCoralOffset(7.5, -16.0),
+        new ScoreCoralOffset(9.0, -17.5),
+        new ScoreCoralOffset(8.0, -21.0)
     };
 
     //
@@ -90,6 +91,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private double prevClimberArmPower = 0.0;
     private int scoreLevelIndex = 3;
     private boolean scoreRightSide = true;
+    private boolean rumbling = false;
 
     /**
      * Constructor: Create an instance of the object.
@@ -343,6 +345,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                         }
                     }
                 }
+
+                if (RobotParams.Preferences.useRumble && !rumbling &&
+                    elapsedTime > RobotParams.Game.TELEOP_PERIOD - RobotParams.Game.CLIMB_PERIOD)
+                {
+                    robot.driverController.setRumble(RumbleType.kBothRumble, 1.0, 0.5);
+                    rumbling = true;
+                }
             }
             //
             // Update robot status.
@@ -414,11 +423,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case B:
-                // Turtle mode.
-                if (pressed)
+                // Deploy climber.
+                if (robot.climber != null && pressed)
                 {
-                    robot.turtle();
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Turtle Mode");
+                    robot.elevatorArmTask.coralArm.setPosition(CoralArm.Params.CLIMB_POS);
+                    robot.climber.deploy(moduleName);
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
                 }
                 break;
 
@@ -637,14 +647,14 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case Y:
                 if (robot.elevatorArmTask != null && pressed)
                 {
-                    robot.elevatorArmTask.setCoralStationPickupPosition(moduleName, null);
+                    robot.elevatorArmTask.setCoralStationPickupPosition(moduleName, false, null);
                     robot.globalTracer.traceInfo(moduleName, ">>>>> Set Coral Station Pickup Position");
                 }
                 break;
 
             case LeftBumper:
                 operatorAltFunc = pressed;
-                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc=" + driverAltFunc);
+                robot.globalTracer.traceInfo(moduleName, ">>>>> OperatorAltFunc=" + operatorAltFunc);
                 break;
 
             case RightBumper:

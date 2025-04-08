@@ -85,6 +85,7 @@ public class FrcTest extends FrcTeleOp
         Y_TIMED_DRIVE,
         PP_DRIVE,
         PID_DRIVE,
+        TUNE_PP_PID,
         TUNE_X_PID,
         TUNE_Y_PID,
         TUNE_TURN_PID,
@@ -126,6 +127,7 @@ public class FrcTest extends FrcTeleOp
             testMenu.addChoice("Y Timed Drive", Test.Y_TIMED_DRIVE);
             testMenu.addChoice("PurePursuit Drive", Test.PP_DRIVE);
             testMenu.addChoice("PID Drive", Test.PID_DRIVE);
+            testMenu.addChoice("Tune PurePursuit PID", Test.TUNE_PP_PID);
             testMenu.addChoice("Tune X PID", Test.TUNE_X_PID);
             testMenu.addChoice("Tune Y PID", Test.TUNE_Y_PID);
             testMenu.addChoice("Tune Turn PID", Test.TUNE_TURN_PID);
@@ -138,7 +140,7 @@ public class FrcTest extends FrcTeleOp
             userChoices.addNumber(DBKEY_TEST_Y_DRIVE_DISTANCE, 0.0);    // in ft
             userChoices.addNumber(DBKEY_TEST_TURN_ANGLE, 0.0);          // in degrees
             userChoices.addNumber(DBKEY_TEST_DRIVE_TIME, 0.0);          // in seconds
-            userChoices.addNumber(DBKEY_TEST_DRIVE_POWER, 0.0);
+            userChoices.addNumber(DBKEY_TEST_DRIVE_POWER, 1.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KP, 0.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KI, 0.0);
             userChoices.addNumber(DBKEY_TEST_TUNE_KD, 0.0);
@@ -353,6 +355,34 @@ public class FrcTest extends FrcTeleOp
                         new TrcPose2D(
                             testChoices.getXDriveDistance()*12.0, testChoices.getYDriveDistance()*12.0,
                             testChoices.getTurnAngle()));
+                }
+                break;
+
+            case TUNE_PP_PID:
+                if (robot.robotDrive != null && robot.robotDrive.purePursuitDrive != null)
+                {
+                    robot.robotDrive.driveBase.setFieldPosition(new TrcPose2D(0,0,0));
+                    TrcPidController.PidCoefficients tunePidCoeff = testChoices.getTunePidCoefficients();
+                    double xTarget = testChoices.getXDriveDistance()*12.0;
+                    double yTarget = testChoices.getYDriveDistance()*12.0;
+                    double turnTarget = testChoices.getTurnAngle();
+                    double drivePower = testChoices.getDrivePower();
+                    if (turnTarget != 0.0)
+                    {
+                        robot.robotDrive.purePursuitDrive.setTurnPidCoefficients(tunePidCoeff);
+                        robot.robotDrive.purePursuitDrive.setRotOutputLimit(drivePower);
+                    }
+                    else
+                    {
+                        robot.robotDrive.purePursuitDrive.setPositionPidCoefficients(tunePidCoeff);
+                        robot.robotDrive.purePursuitDrive.setMoveOutputLimit(drivePower);
+                    }
+                    robot.robotDrive.purePursuitDrive.start(
+                        null, true,
+                        robot.robotInfo.profiledMaxVelocity,
+                        robot.robotInfo.profiledMaxAcceleration,
+                        robot.robotInfo.profiledMaxDeceleration,
+                        new TrcPose2D(xTarget, yTarget, turnTarget));
                 }
                 break;
 
@@ -574,6 +604,7 @@ public class FrcTest extends FrcTeleOp
 
                 case PP_DRIVE:
                 case PID_DRIVE:
+                case TUNE_PP_PID:
                 case TUNE_X_PID:
                 case TUNE_Y_PID:
                 case TUNE_TURN_PID:

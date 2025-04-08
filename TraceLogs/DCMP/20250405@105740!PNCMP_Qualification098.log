@@ -1,0 +1,1353 @@
+Robot.robotStartMode_INFO [0.010347339] Sat Apr 05 10:57:22 PDT 2025: ***** TELEOP_MODE *****
+FrcTeleOp.startMode_INFO [0.101689349] Enabling FrontCam for AprilTagVision.
+FrcTeleOp.startMode_INFO [0.102398074] Enabling BackCam for AprilTagVision.
+FrcTeleOp.operatorControllerButtonEvent_INFO [0.462401745] ##### button=Back, pressed=true
+Robot.cancelAll_INFO [0.47671667] Cancel all operations.
+Robot.zeroCalibrate_INFO [0.485754911] Zero calibrate all subsystems.
+TaskElevatorArm.zeroCalibrate_INFO [0.492968109] zeroCalibrate(owner=null, event=null)
+FrcTeleOp.operatorControllerButtonEvent_INFO [0.500179723] >>>>> Cancel All and Zero Calibrate
+TaskElevatorArm.autoTask_INFO [0.511417576] <Event name="StateInfo" time="0.509907865" tag="vvvvv" TaskElevatorArm.state="ZERO_CALIBRATE" />
+TaskElevatorArm.autoTask_INFO [0.515191881] <Event name="StateInfo" time="0.514908598" tag="^^^^^" TaskElevatorArm.state="ZERO_CALIBRATE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [0.683315454] ##### button=Back, pressed=false
+Elevator.motor.zeroCalibratingMotor_INFO [1.085530775] Limit switch triggered, zero calibration done.
+Elevator.motor.pidCtrlTask_INFO [1.09497974] Zero calibration done, event=(Elevator=CLEARED)
+Elevator.motor.pidCtrlTask_INFO [1.098739466] controlMode: Power,onTarget=false(0.0/null), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [2.010684724] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [2.017305569] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [2.031527286] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [2.035376773] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [2.061135277] <Event name="StateInfo" time="2.060792631" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [2.065475737] <Event name="StateInfo" time="2.064346401" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [2.085667526] <Event name="StateInfo" time="2.085436106" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [2.08923733] <Event name="StateInfo" time="2.089038143" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [2.125424996] ##### button=Y, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [2.536035837] ##### button=DpadDown, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [2.538613084] >>>>> Score Index Down: index=
+Elevator.motor.pidCtrlTask_INFO [2.609990144] controlMode: Position,onTarget=true(43.39283423525531/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [2.700760726] ##### button=DpadDown, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [2.797399481] ##### button=A, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [2.804476857] >>>>> Reset field forward heading (heading=182.3235761328612)
+FrcTeleOp.driverControllerButtonEvent_INFO [2.852085492] ##### button=A, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [3.345698524] controlMode: Position,onTarget=true(-43.330078125/-43.5), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+TaskElevatorArm.autoTask_INFO [3.370534235] <Event name="StateInfo" time="3.370106894" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [3.381134804] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [3.390730459] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [3.393933938] <Event name="StateInfo" time="3.392982603" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [5.478103178] <Event name="StateInfo" time="5.466702324" tag="vvvvv" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.496241114] <Event name="StateInfo" time="5.494628957" tag="^^^^^" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.516809102] <Event name="StateInfo" time="5.51660414" tag="vvvvv" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.520409458] <Event name="StateInfo" time="5.51920325" tag="^^^^^" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.535876729] <Event name="StateInfo" time="5.535555263" tag="vvvvv" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [5.543407788] <Event name="StateInfo" time="5.543227839" tag="^^^^^" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [5.580839195] <Event name="StateInfo" time="5.579632062" tag="vvvvv" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.587186551] <Event name="StateInfo" time="5.58248323" tag="^^^^^" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.601397764] <Event name="StateInfo" time="5.599960605" tag="vvvvv" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [5.605763763] <Event name="StateInfo" time="5.605570602" tag="^^^^^" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [5.630394588] <Event name="StateInfo" time="5.630215079" tag="vvvvv" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.637122452] <Event name="StateInfo" time="5.634890005" tag="^^^^^" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.646151802] <Event name="StateInfo" time="5.644720852" tag="vvvvv" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [5.654841385] <Event name="StateInfo" time="5.651505655" tag="^^^^^" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [5.662671879] <Event name="StateInfo" time="5.662170787" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [5.670842924] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [5.67579084] <Event name="StateInfo" time="5.675566193" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [5.723540821] <Event name="StateInfo" time="5.723326861" tag="vvvvv" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.729932203] <Event name="StateInfo" time="5.729735874" tag="^^^^^" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.802496465] <Event name="StateInfo" time="5.801387799" tag="vvvvv" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [5.809110464] <Event name="StateInfo" time="5.807876165" tag="^^^^^" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+FrcTeleOp.driverControllerButtonEvent_INFO [5.822609666] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [5.8307884] >>>>> Slow Drive
+TaskElevatorArm.autoTask_INFO [5.894182776] <Event name="StateInfo" time="5.893829648" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [5.901718271] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [5.906746257] <Event name="StateInfo" time="5.906549949" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [5.9622739] <Event name="StateInfo" time="5.962086833" tag="vvvvv" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [5.967505787] <Event name="StateInfo" time="5.965982345" tag="^^^^^" TaskElevatorArm.state="SET_ELEVATOR_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.061468528] <Event name="StateInfo" time="6.058915578" tag="vvvvv" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [6.069479562] <Event name="StateInfo" time="6.066020615" tag="^^^^^" TaskElevatorArm.state="ELEVATOR_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [6.123255114] <Event name="StateInfo" time="6.123050069" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [6.130761056] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [6.13914884] <Event name="StateInfo" time="6.138209503" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [6.52725139] <Event name="StateInfo" time="6.525767775" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.533635965] <Event name="StateInfo" time="6.531772393" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.606283618] <Event name="StateInfo" time="6.60360693" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.60934413] <Event name="StateInfo" time="6.608043028" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.665467758] <Event name="StateInfo" time="6.66335189" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [6.67581542] <Event name="StateInfo" time="6.673398424" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [6.729149883] <Event name="StateInfo" time="6.728916796" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [6.737715083] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [6.747266064] <Event name="StateInfo" time="6.747069061" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [6.935275065] <Event name="StateInfo" time="6.935065714" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.939661739] <Event name="StateInfo" time="6.938506442" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.985904966] <Event name="StateInfo" time="6.985702032" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [6.991114948] <Event name="StateInfo" time="6.990915155" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.042773424] <Event name="StateInfo" time="7.041888957" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [7.049129953] <Event name="StateInfo" time="7.04809703" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [7.12194781] <Event name="StateInfo" time="7.120311141" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [7.124242602] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [7.126409373] <Event name="StateInfo" time="7.126167192" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [7.496272239] <Event name="StateInfo" time="7.496070635" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.507786207] <Event name="StateInfo" time="7.504549443" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.51473604] <Event name="StateInfo" time="7.514477823" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [7.517042167] <Event name="StateInfo" time="7.516835527" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [7.531369895] <Event name="StateInfo" time="7.531168072" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [7.539077348] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [7.546560617] <Event name="StateInfo" time="7.544843699" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [7.639582103] <Event name="StateInfo" time="7.637667388" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.648020769] <Event name="StateInfo" time="7.645539981" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.702745992] <Event name="StateInfo" time="7.702528075" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [7.71154898] <Event name="StateInfo" time="7.710991513" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [7.795237586] <Event name="StateInfo" time="7.790131021" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.801136886] <Event name="StateInfo" time="7.800863059" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.85393973] <Event name="StateInfo" time="7.84959702" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.861969645] <Event name="StateInfo" time="7.860457364" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [7.950718748] <Event name="StateInfo" time="7.95013709" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [7.954598394] <Event name="StateInfo" time="7.954416968" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [8.011626743] <Event name="StateInfo" time="8.010817362" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.020239358] <Event name="StateInfo" time="8.019246746" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.119561961] <Event name="StateInfo" time="8.114870247" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.124875347] <Event name="StateInfo" time="8.122383741" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.142608061] <Event name="StateInfo" time="8.141525889" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [8.149754495] <Event name="StateInfo" time="8.147126301" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [8.163355461] <Event name="StateInfo" time="8.160203338" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [8.169069656] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [8.175058408] <Event name="StateInfo" time="8.174857422" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [8.750660319] <Event name="StateInfo" time="8.749761309" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.75639876] <Event name="StateInfo" time="8.75614482" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.76273903] <Event name="StateInfo" time="8.762477448" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [8.766344677] <Event name="StateInfo" time="8.765845795" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+FrcTeleOp.driverControllerButtonEvent_INFO [8.781126095] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [8.786954091] >>>>> Normal Drive
+TaskElevatorArm.autoTask_INFO [8.822312652] <Event name="StateInfo" time="8.820919646" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.826235335] <Event name="StateInfo" time="8.825451792" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [8.875337939] <Event name="StateInfo" time="8.874850848" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [8.880803021] <Event name="StateInfo" time="8.879974361" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [8.886858152] <Event name="StateInfo" time="8.886497513" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [8.889701111] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [8.895063833] <Event name="StateInfo" time="8.89306409" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [9.083896672] <Event name="StateInfo" time="9.081694295" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.094523955] <Event name="StateInfo" time="9.086024756" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.151637993] <Event name="StateInfo" time="9.151170856" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.155884001] <Event name="StateInfo" time="9.155435192" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.205083328] <Event name="StateInfo" time="9.204880425" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.213976625] <Event name="StateInfo" time="9.209712652" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.264452688] <Event name="StateInfo" time="9.26401412" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [9.270569559] <Event name="StateInfo" time="9.269355766" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [9.31435492] <Event name="StateInfo" time="9.314163933" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [9.32058259] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [9.322943654] <Event name="StateInfo" time="9.322736193" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [9.676658176] <Event name="StateInfo" time="9.676313492" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.681601295] <Event name="StateInfo" time="9.679742656" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [9.720957033] <Event name="StateInfo" time="9.720743553" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [9.729114769] <Event name="StateInfo" time="9.725882652" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [9.740170406] <Event name="StateInfo" time="9.734242342" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [9.745507353] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [9.748597215] <Event name="StateInfo" time="9.747863897" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [9.944591239] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [9.948509666] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [9.957405803] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [9.96308157] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [10.04398142] <Event name="StateInfo" time="10.040121043" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [10.05299705] <Event name="StateInfo" time="10.052767382" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [10.066343771] ##### button=Y, pressed=false
+TaskElevatorArm.autoTask_INFO [10.114842462] <Event name="StateInfo" time="10.114165452" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+CoralArm.motor.acquireOwnership_INFO [10.123835479] Acquired ownership on behalf of FrcTeleOp
+TaskElevatorArm.autoTask_INFO [10.17140678] <Event name="StateInfo" time="10.170650342" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.driverControllerButtonEvent_INFO [10.573223434] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [10.577383892] >>>>> Slow Drive
+Elevator.motor.pidCtrlTask_INFO [10.601354352] controlMode: Position,onTarget=true(43.367573344852865/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [10.640921205] <Event name="StateInfo" time="10.640286091" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [10.642408563] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [10.643350997] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [10.645174852] <Event name="StateInfo" time="10.644733942" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.driverControllerButtonEvent_INFO [10.746707486] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [10.756626116] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [10.851974986] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [10.860787567] >>>>> OperatorAltFunc=true
+FrcTeleOp.driverControllerButtonEvent_INFO [11.005249064] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [11.014938035] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [11.361750411] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [11.367057199] >>>>> Manual Coral Intake
+CoralArm.motor.pidCtrlTask_INFO [11.579877179] controlMode: Position,onTarget=true(-43.9453125/-43.5), stalled=false, expired=false, event=(CoralArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [12.072646383] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [12.106497872] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [12.240875083] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [12.710103361] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [12.711877386] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [13.229715243] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [13.234686774] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [13.236852908] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [13.239735246] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [13.48672633] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [13.49209984] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [13.510332694] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [13.513171176] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [13.5499683] <Event name="StateInfo" time="13.548461797" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [13.557630822] <Event name="StateInfo" time="13.557355336" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [13.632375253] <Event name="StateInfo" time="13.625871594" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.637886735] <Event name="StateInfo" time="13.636670965" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [13.661020486] ##### button=X, pressed=false
+TaskElevatorArm.autoTask_INFO [13.743475314] <Event name="StateInfo" time="13.7423581" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.748517269] <Event name="StateInfo" time="13.747561208" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.796493138] <Event name="StateInfo" time="13.793510314" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.803659331] <Event name="StateInfo" time="13.800577008" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.814606707] <Event name="StateInfo" time="13.813115596" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.820381022] <Event name="StateInfo" time="13.81852083" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.913086599] <Event name="StateInfo" time="13.911549625" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.920329058] <Event name="StateInfo" time="13.918631063" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.973386893] <Event name="StateInfo" time="13.973206175" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [13.981530721] <Event name="StateInfo" time="13.980156201" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [14.052625631] <Event name="StateInfo" time="14.049962619" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [14.05622387] <Event name="StateInfo" time="14.056041369" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+Elevator.motor.pidCtrlTask_INFO [14.264644178] controlMode: Position,onTarget=true(43.477037315688484/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [14.300321236] <Event name="StateInfo" time="14.30013434" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [14.307126253] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [14.31113094] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [14.319323065] <Event name="StateInfo" time="14.31905598" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.driverControllerButtonEvent_INFO [14.797964595] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [14.799293572] >>>>> Slow Drive
+TaskElevatorArm.autoTask_INFO [15.574013277] <Event name="StateInfo" time="15.57367238" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [15.582257962] <Event name="StateInfo" time="15.581873515" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [15.602621822] <Event name="StateInfo" time="15.602065587" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [15.609226177] <Event name="StateInfo" time="15.607423929" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+FrcTeleOp.driverControllerButtonEvent_INFO [15.615525048] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [15.622172513] >>>>> Normal Drive
+TaskElevatorArm.autoTask_INFO [15.646446794] <Event name="StateInfo" time="15.646225579" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [15.650858223] <Event name="StateInfo" time="15.650279082" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [15.657502392] <Event name="StateInfo" time="15.657325785" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [15.662158678] <Event name="StateInfo" time="15.661971324" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [15.717999567] <Event name="StateInfo" time="15.717794607" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [15.719917266] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [15.721419588] <Event name="StateInfo" time="15.72124632" tag="^^^^^" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.autoTask_INFO [16.063427773] <Event name="StateInfo" time="16.062915869" tag="vvvvv" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [16.078748018] <Event name="StateInfo" time="16.077433277" tag="^^^^^" TaskElevatorArm.state="SET_CORALARM_PID_POWER" />
+TaskElevatorArm.autoTask_INFO [16.089901153] <Event name="StateInfo" time="16.089006521" tag="vvvvv" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [16.095746289] <Event name="StateInfo" time="16.093293735" tag="^^^^^" TaskElevatorArm.state="CORALARM_SETPOWER" />
+TaskElevatorArm.autoTask_INFO [16.105868335] <Event name="StateInfo" time="16.105692604" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [16.111761429] Stopping subsystems.
+TaskElevatorArm.autoTask_INFO [16.115403279] <Event name="StateInfo" time="16.115201183" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.driverControllerButtonEvent_INFO [16.211345577] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [16.220024524] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [16.673743431] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [16.678883186] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [16.690234579] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [16.695171257] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [16.736791019] <Event name="StateInfo" time="16.736443331" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [16.739327196] <Event name="StateInfo" time="16.738636282" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [16.761845148] <Event name="StateInfo" time="16.761653137" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [16.766968899] <Event name="StateInfo" time="16.765815431" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [16.796134087] ##### button=X, pressed=false
+Elevator.motor.pidCtrlTask_INFO [16.970721172] controlMode: Position,onTarget=true(43.477037315688484/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [16.974009181] <Event name="StateInfo" time="16.973725303" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [16.983262028] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [16.98582473] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [16.988395102] <Event name="StateInfo" time="16.988038377" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [17.513505629] ##### button=DpadLeft, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [17.515495146] >>>>> Score Left Reef Branch
+FrcTeleOp.operatorControllerButtonEvent_INFO [17.66562216] ##### button=DpadLeft, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [17.882295659] controlMode: Position,onTarget=true(151.5234375/151.2), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [18.488614143] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [18.495178674] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [20.032359598] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [20.039956021] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [20.441329411] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [20.449354222] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [20.694167567] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [20.706492294] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [20.716644472] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [20.719549273] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [21.072396474] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [21.082846044] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [21.094934454] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [21.099249534] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [21.127883918] <Event name="StateInfo" time="21.127397838" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [21.130044521] <Event name="StateInfo" time="21.129816085" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [21.147347019] <Event name="StateInfo" time="21.147166389" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+CoralArm.motor.acquireOwnership_INFO [21.150548647] Acquired ownership on behalf of FrcTeleOp
+TaskElevatorArm.autoTask_INFO [21.154538277] <Event name="StateInfo" time="21.154332597" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [21.190869176] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [21.332048791] controlMode: Position,onTarget=true(43.4812475203014/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [21.341799202] <Event name="StateInfo" time="21.340164428" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [21.346169592] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [21.350751993] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [21.356724576] <Event name="StateInfo" time="21.356524529" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.driverControllerButtonEvent_INFO [22.517337179] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [22.518001238] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [22.620103706] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [22.628119923] >>>>> OperatorAltFunc=true
+CoralArm.motor.pidCtrlTask_INFO [22.903284119] controlMode: Position,onTarget=true(-44.384765625/-43.5), stalled=false, expired=false, event=(CoralArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.395591244] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [23.407100664] >>>>> Manual Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [24.104088041] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [24.121223845] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.461604546] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.463307207] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.513004622] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.516830208] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.673111556] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [24.674767247] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [24.676667966] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.677764837] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [24.717799206] <Event name="StateInfo" time="24.716842199" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [24.721608052] <Event name="StateInfo" time="24.720133709" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [24.739679704] <Event name="StateInfo" time="24.73950263" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.743215792] <Event name="StateInfo" time="24.743032379" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.748968959] <Event name="StateInfo" time="24.748778799" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.752319761] <Event name="StateInfo" time="24.751518145" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.760508605] <Event name="StateInfo" time="24.760306513" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.76369253] <Event name="StateInfo" time="24.763499953" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.769098941] <Event name="StateInfo" time="24.768425282" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.77014917] <Event name="StateInfo" time="24.769919241" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.773511251] <Event name="StateInfo" time="24.773328651" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.781155528] <Event name="StateInfo" time="24.774790978" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [24.786737361] ##### button=X, pressed=false
+TaskElevatorArm.autoTask_INFO [24.80402812] <Event name="StateInfo" time="24.803832287" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.807066381] <Event name="StateInfo" time="24.806698009" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.812533761] <Event name="StateInfo" time="24.812349771" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.815364423] <Event name="StateInfo" time="24.815157624" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.822747522] <Event name="StateInfo" time="24.822502039" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.824637993] <Event name="StateInfo" time="24.824444302" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.830624064] <Event name="StateInfo" time="24.829464862" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.833393002] <Event name="StateInfo" time="24.832694069" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.864147218] <Event name="StateInfo" time="24.863889784" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.865326001] <Event name="StateInfo" time="24.865091002" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.867655511] <Event name="StateInfo" time="24.867472984" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.869609438] <Event name="StateInfo" time="24.869122972" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.874370789] <Event name="StateInfo" time="24.874176062" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.883711663] <Event name="StateInfo" time="24.883370734" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.88889606] <Event name="StateInfo" time="24.888146951" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.89033922] <Event name="StateInfo" time="24.890104908" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.908897811] <Event name="StateInfo" time="24.908702169" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.911764246] <Event name="StateInfo" time="24.911555878" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.917996811] <Event name="StateInfo" time="24.917812812" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.922371319] <Event name="StateInfo" time="24.92217903" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.92876091] <Event name="StateInfo" time="24.926780548" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.931226165] <Event name="StateInfo" time="24.930459695" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.939533317] <Event name="StateInfo" time="24.936121189" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.942712646] <Event name="StateInfo" time="24.941202559" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [24.998903002] <Event name="StateInfo" time="24.997947373" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.002641032] <Event name="StateInfo" time="25.001418569" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.028992671] <Event name="StateInfo" time="25.027567555" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.030871672] <Event name="StateInfo" time="25.030677646" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.037929828] <Event name="StateInfo" time="25.037065394" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.039791268] <Event name="StateInfo" time="25.039611535" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.043986558] <Event name="StateInfo" time="25.042271596" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.046831739] <Event name="StateInfo" time="25.046604148" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.051917058] <Event name="StateInfo" time="25.04999712" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.054222064] <Event name="StateInfo" time="25.05389184" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.076245697] <Event name="StateInfo" time="25.075288279" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.079062058] <Event name="StateInfo" time="25.078575035" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.083680913] <Event name="StateInfo" time="25.083494818" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.086919692] <Event name="StateInfo" time="25.086597391" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.092030405] <Event name="StateInfo" time="25.09142485" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.094893323] <Event name="StateInfo" time="25.094685756" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.101195077] <Event name="StateInfo" time="25.09978534" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.10327816] <Event name="StateInfo" time="25.103091525" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.11084974] <Event name="StateInfo" time="25.110655887" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.114269784] <Event name="StateInfo" time="25.114070907" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.159857032] <Event name="StateInfo" time="25.159581808" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.162116524] <Event name="StateInfo" time="25.161926578" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.169991847] <Event name="StateInfo" time="25.168073098" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.171762712] <Event name="StateInfo" time="25.171310882" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.200161544] <Event name="StateInfo" time="25.199454137" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.202243601] <Event name="StateInfo" time="25.202060234" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.20899014] <Event name="StateInfo" time="25.20878737" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.211510662] <Event name="StateInfo" time="25.211290817" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.220589576] <Event name="StateInfo" time="25.220392411" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.221660548] <Event name="StateInfo" time="25.221487766" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [25.228250687] ##### button=DpadRight, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [25.23255967] >>>>> Score Right Reef Branch
+TaskElevatorArm.autoTask_INFO [25.262304392] <Event name="StateInfo" time="25.262123104" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [25.264426036] <Event name="StateInfo" time="25.264074701" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [25.381472295] ##### button=DpadRight, pressed=false
+TaskElevatorArm.autoTask_INFO [25.482170216] <Event name="StateInfo" time="25.481881443" tag="vvvvv" TaskElevatorArm.state="DONE" />
+Elevator.motor.pidCtrlTask_INFO [25.482252652] controlMode: Position,onTarget=true(43.4812475203014/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.stopSubsystems_INFO [25.485077237] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [25.489214306] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [25.491190997] <Event name="StateInfo" time="25.490250333" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.driverControllerButtonEvent_INFO [26.068177625] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [26.072449495] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [26.179527127] ##### button=DpadRight, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [26.182950697] >>>>> Score Right Reef Branch
+FrcTeleOp.operatorControllerButtonEvent_INFO [26.330741811] ##### button=DpadRight, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [26.382595051] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [26.387107436] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [26.797000993] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [26.799720888] >>>>> Slow Drive
+CoralArm.motor.pidCtrlTask_INFO [26.987774486] controlMode: Position,onTarget=true(151.5234375/151.2), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [27.522832256] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [27.526506621] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [27.674157624] ##### button=LeftBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [27.682211985] >>>>> DriverAltFunc=true
+FrcTeleOp.driverControllerButtonEvent_INFO [27.936682219] ##### button=LeftBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [27.939107343] >>>>> DriverAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [27.987814813] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [27.991828158] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [28.402854517] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [28.409047043] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [28.614658146] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [28.616157182] >>>>> OperatorAltFunc=true
+FrcTeleOp.driverControllerButtonEvent_INFO [29.022196123] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [29.032358954] >>>>> Slow Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [29.480593909] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [29.482409212] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [29.947268783] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [29.954228555] >>>>> Slow Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [30.260665554] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [30.262364803] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [30.776688206] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [30.783907423] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [30.825618923] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [30.829525599] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [30.875645742] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [30.878433919] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.311191485] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.323985929] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.719416613] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.726759861] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.727905863] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.738717473] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.871181675] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [32.89746939] >>>>> Auto Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.029311064] ##### button=A, pressed=false
+CoralGrabber.finishAction_INFO [33.032033312] FinishAction(completed=false): isOn=true, hasObject=false, actionParams=(intake=true,owner=null,finishDelay=0.0,completionEvent=null,timeout=0.0,callbackEvent=null)
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.034146427] >>>>> Cancel Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [33.132681249] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [33.134385989] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.463083875] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [33.471233523] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [33.480672276] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.484909321] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [33.532596784] <Event name="StateInfo" time="33.531692127" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [33.542567467] <Event name="StateInfo" time="33.54186125" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [33.587627733] <Event name="StateInfo" time="33.58569514" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+CoralArm.motor.acquireOwnership_INFO [33.591765317] Acquired ownership on behalf of FrcTeleOp
+TaskElevatorArm.autoTask_INFO [33.600372878] <Event name="StateInfo" time="33.6001843" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [33.610051291] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [33.752760947] controlMode: Position,onTarget=true(43.4812475203014/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [33.79183485] <Event name="StateInfo" time="33.787291123" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [33.796832619] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [33.8020248] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [33.807009388] <Event name="StateInfo" time="33.80627952" tag="^^^^^" TaskElevatorArm.state="DONE" />
+CoralArm.motor.pidCtrlTask_INFO [35.512975833] controlMode: Position,onTarget=true(-43.505859375/-43.5), stalled=false, expired=false, event=(CoralArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [36.900078284] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [36.908819448] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [36.919838125] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [36.922665796] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.629822414] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.633943771] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.732435575] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [37.733940873] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [38.496501702] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [38.50512559] >>>>> Manual Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [38.700585551] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [38.70254927] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.460881989] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.469794856] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.482040429] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.484583499] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.93919855] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [39.942682466] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [39.943264976] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [39.943682055] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [39.981351447] <Event name="StateInfo" time="39.980984732" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [39.982892729] <Event name="StateInfo" time="39.98266346" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [40.015820449] <Event name="StateInfo" time="40.015426652" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.024129999] <Event name="StateInfo" time="40.023870849" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.026802583] <Event name="StateInfo" time="40.026565373" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.028134683] <Event name="StateInfo" time="40.027967128" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.030819348] <Event name="StateInfo" time="40.030651108" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.033963067] <Event name="StateInfo" time="40.033051371" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.039253721] <Event name="StateInfo" time="40.037783564" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.041473066] <Event name="StateInfo" time="40.040942137" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.06440769] <Event name="StateInfo" time="40.064231682" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.066267363] <Event name="StateInfo" time="40.0659652" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.072131287] <Event name="StateInfo" time="40.07141219" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.076112114] <Event name="StateInfo" time="40.075582891" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.07981024] <Event name="StateInfo" time="40.079626162" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.083710115] <Event name="StateInfo" time="40.08292388" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.090168624] <Event name="StateInfo" time="40.089928111" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.093000716] <Event name="StateInfo" time="40.092815161" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [40.096860532] ##### button=X, pressed=false
+TaskElevatorArm.autoTask_INFO [40.135650618] <Event name="StateInfo" time="40.134077278" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.137728882] <Event name="StateInfo" time="40.137512744" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.188222536] <Event name="StateInfo" time="40.188023622" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.190577952] <Event name="StateInfo" time="40.190287863" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.198148156] <Event name="StateInfo" time="40.197137466" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.202782386] <Event name="StateInfo" time="40.201408734" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.28427588] <Event name="StateInfo" time="40.276803381" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.287497786] <Event name="StateInfo" time="40.286361312" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.33170913] <Event name="StateInfo" time="40.330358482" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.341550381] <Event name="StateInfo" time="40.341362574" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.41357909] <Event name="StateInfo" time="40.413392594" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.419646161] <Event name="StateInfo" time="40.419428513" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.461684712] <Event name="StateInfo" time="40.45880933" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.464123105] <Event name="StateInfo" time="40.463381032" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.534635328] <Event name="StateInfo" time="40.533617947" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [40.538141502] <Event name="StateInfo" time="40.537943132" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [40.54862485] ##### button=DpadRight, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [40.55579071] >>>>> Score Right Reef Branch
+FrcTeleOp.operatorControllerButtonEvent_INFO [40.656768369] ##### button=DpadRight, pressed=false
+Elevator.motor.pidCtrlTask_INFO [40.745391274] controlMode: Position,onTarget=true(43.48545738763926/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [40.763150049] <Event name="StateInfo" time="40.762702257" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [40.764945893] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [40.766650255] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [40.769437647] <Event name="StateInfo" time="40.768334444" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [40.879316579] ##### button=DpadRight, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [40.882492292] >>>>> Score Right Reef Branch
+FrcTeleOp.operatorControllerButtonEvent_INFO [40.982453284] ##### button=DpadRight, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [41.71978318] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [41.727421408] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [41.97382132] ##### button=DpadLeft, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [41.978932464] >>>>> Score Left Reef Branch
+FrcTeleOp.operatorControllerButtonEvent_INFO [42.128414251] ##### button=DpadLeft, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [42.437487551] ##### button=DpadRight, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [42.438442742] >>>>> Score Right Reef Branch
+FrcTeleOp.operatorControllerButtonEvent_INFO [42.589501216] ##### button=DpadRight, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [43.183663017] controlMode: Position,onTarget=true(150.64453125/151.2), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [43.372845882] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [43.379837257] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [43.473757788] ##### button=LeftBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [43.4747954] >>>>> DriverAltFunc=true
+FrcTeleOp.driverControllerButtonEvent_INFO [43.627121594] ##### button=Y, pressed=true
+TaskAutoScoreCoral.autoScoreCoral_INFO [43.63457712] autoScoreCoral(owner=FrcTeleOp, taskParams=(useVision=true,aprilTagId=-1,reefLevel=2,scoreRightSide=true,removeAlgae=false,relocalize=false,alignOnly=true,powerLimit=0.4,scoreXOffset=9.0,scoreYOffset=-17.5), event=null)
+TaskAutoScoreCoral.startAutoTask_INFO [43.635638882] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.driverControllerButtonEvent_INFO [43.653522547] >>>>> Auto Align to Score Coral
+TaskAutoScoreCoral.autoTask_INFO [43.67444764] <Event name="StateInfo" time="43.671954682" tag="vvvvv" TaskAutoScoreCoral.state="START" />
+TaskElevatorArm.setCoralScorePosition_INFO [43.677075096] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=(TaskAutoScoreCoral.elevatorArmEvent=CLEARED))
+TaskElevatorArm.startAutoTask_INFO [43.679735316] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+TaskAutoScoreCoral.runTaskState_INFO [43.681741607] ***** Using AprilTag Vision.
+TaskAutoScoreCoral.autoTask_INFO [43.683977281] <Event name="StateInfo" time="43.682939563" tag="^^^^^" TaskAutoScoreCoral.state="START" />
+FrcTeleOp.driverControllerButtonEvent_INFO [43.689817155] ##### button=Y, pressed=false
+TaskElevatorArm.autoTask_INFO [43.696317689] <Event name="StateInfo" time="43.694911354" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [43.699989486] <Event name="StateInfo" time="43.698009931" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskAutoScoreCoral.autoTask_INFO [43.70179535] <Event name="StateInfo" time="43.700997772" tag="vvvvv" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskAutoScoreCoral.runTaskState_INFO [43.709839322] ***** Vision found AprilTag[10]: aprilTagPose=(x=-4.392926,y=49.479331,angle=-14.415714)
+TaskAutoScoreCoral.autoTask_INFO [43.712774175] <Event name="StateInfo" time="43.712576865" tag="^^^^^" TaskAutoScoreCoral.state="FIND_REEF_APRILTAG" />
+TaskElevatorArm.autoTask_INFO [43.719246193] <Event name="StateInfo" time="43.718584862" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [43.724896216] <Event name="StateInfo" time="43.724709401" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskAutoScoreCoral.autoTask_INFO [43.725654719] <Event name="StateInfo" time="43.725380619" tag="vvvvv" TaskAutoScoreCoral.state="APPROACH_REEF" />
+TaskAutoScoreCoral.runTaskState_INFO [43.727085438] ***** Approaching Reef: targetPose=(x=8.680430,y=34.770919,angle=-14.415714)
+purePursuitDrive.start_INFO [43.734772093] Path=TrcPath(degrees=true, [Waypoint(simple=true,index=0,pose=(x=-231.376383,y=527.509778,angle=19.223587),vel=0.0), Waypoint(simple=false,index=-1,timestep=0.3523906324067573,pose=(x=-214.794596,y=552.810111,angle=7.055649),vel=31.71515691660815,encPos=0.0,accel=0.0,jerk=0.0), Waypoint(simple=true,index=1,pose=(x=-211.731453,y=557.483824,angle=4.807874),vel=0.0)])
+TaskAutoScoreCoral.autoTask_INFO [43.737276417] <Event name="StateInfo" time="43.735809161" tag="^^^^^" TaskAutoScoreCoral.state="APPROACH_REEF" />
+FrcTeleOp.driverControllerButtonEvent_INFO [43.742305017] ##### button=LeftBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [43.746309166] >>>>> DriverAltFunc=false
+CoralArm.motor.pidCtrlTask_INFO [43.911339031] controlMode: Position,onTarget=true(151.34765625/151.2), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+Elevator.motor.pidCtrlTask_INFO [43.93284163] controlMode: Position,onTarget=true(43.4812475203014/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [43.941840587] <Event name="StateInfo" time="43.941148358" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [43.94377993] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [43.946132387] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [43.947816931] <Event name="StateInfo" time="43.947221523" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [44.171855641] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [44.18083702] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [44.916198318] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [44.920604395] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.101140007] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.10352315] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.104147655] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.10597007] >>>>> OperatorAltFunc=false
+purePursuitDrive.driveTask_INFO [45.234302166] Done: index=2/3, stalled=false, timeout=false, posOnTarget=true, headingOnTarget=true, robotPose=(x=-211.447549,y=557.562146,angle=5.133588)
+purePursuitDrive.driveTask_INFO [45.245152478] Signal completion event (TaskAutoScoreCoral.driveEvent=CLEARED).
+TaskAutoScoreCoral.autoTask_INFO [45.247825649] <Event name="StateInfo" time="45.246623254" tag="vvvvv" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [45.25287641] <Event name="StateInfo" time="45.252470824" tag="^^^^^" TaskAutoScoreCoral.state="SCORE_CORAL" />
+TaskAutoScoreCoral.autoTask_INFO [45.258099228] <Event name="StateInfo" time="45.257802468" tag="vvvvv" TaskAutoScoreCoral.state="DONE" />
+TaskAutoScoreCoral.stopSubsystems_INFO [45.264546475] Stopping subsystems.
+TaskElevatorArm.cancel_INFO [45.27315173] Canceling auto task operation.
+TaskAutoScoreCoral.releaseSubsystemsOwnership_INFO [45.277993617] Releasing subsystem ownership on behalf of FrcTeleOp
+	robotDrive=FrcTeleOp
+TaskAutoScoreCoral.autoTask_INFO [45.280160773] <Event name="StateInfo" time="45.279806582" tag="^^^^^" TaskAutoScoreCoral.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.282446003] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.284308594] >>>>> Auto Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [45.334129304] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [45.33778729] >>>>> Slow Drive
+CoralGrabber.finishAction_INFO [45.384042562] FinishAction(completed=true): isOn=true, hasObject=true, actionParams=(intake=true,owner=null,finishDelay=0.0,completionEvent=null,timeout=0.0,callbackEvent=null)
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.44436834] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.44614377] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.563703722] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [45.566533147] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.243577844] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.247343928] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.294432917] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.299565836] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.402342667] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.41615902] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.605893059] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [46.618186477] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [47.47443687] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [47.47612989] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [47.575567561] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [47.577968727] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.185667628] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.191313209] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [48.541816927] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [48.543666275] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.644897896] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.64970118] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.749689935] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [48.751840488] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [49.008489415] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [49.010536949] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [49.011433287] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [49.011882941] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [49.068929977] <Event name="StateInfo" time="49.068692273" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [49.07052546] <Event name="StateInfo" time="49.07028963" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [49.089344352] <Event name="StateInfo" time="49.089175637" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+CoralArm.motor.acquireOwnership_INFO [49.092108822] Acquired ownership on behalf of FrcTeleOp
+TaskElevatorArm.autoTask_INFO [49.096800915] <Event name="StateInfo" time="49.096328006" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [49.130001336] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [49.275160804] controlMode: Position,onTarget=true(43.477037315688484/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [49.276630366] <Event name="StateInfo" time="49.275675535" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [49.281585161] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [49.282101491] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [49.283224197] <Event name="StateInfo" time="49.282246147" tag="^^^^^" TaskElevatorArm.state="DONE" />
+CoralArm.motor.pidCtrlTask_INFO [50.35447977] controlMode: Position,onTarget=true(-43.857421875/-43.5), stalled=false, expired=false, event=(CoralArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [57.462238828] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [57.463910747] >>>>> Slow Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [59.29694692] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [59.30629832] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [59.501253805] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [59.511339556] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [59.601206554] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.652161167] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.653486115] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.702845511] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [59.705254344] >>>>> Manual Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [60.071566166] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [60.072668664] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [60.121739033] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [60.127111442] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [61.704889288] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [61.706015444] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.060723296] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.066650996] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.213613132] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.225069068] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.416323883] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.417466417] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.619855007] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.621725415] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.873724593] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [62.880215232] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.026440563] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.027482634] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.181084499] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.187119585] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.487544275] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.488700129] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.641579412] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.642574371] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.849258189] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [63.85794788] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.002361657] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [64.012828851] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [66.160118076] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [66.161090152] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [66.421756594] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [66.422915081] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [66.480768785] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [66.485791426] >>>>> OperatorAltFunc=true
+FrcTeleOp.driverControllerButtonEvent_INFO [67.396728] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [67.407837841] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [67.549750466] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [67.652785196] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [67.661050773] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [67.702631219] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [67.804059255] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [67.81598902] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [67.854409151] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [67.860023686] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [67.867522728] >>>>> Manual Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.473113382] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.480562731] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.523944462] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [68.52837273] >>>>> Cancel Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [68.829380888] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [68.845901059] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [68.981801639] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [69.033062404] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [69.04778682] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [69.136999361] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [69.189801628] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [69.196780826] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [69.704008219] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [69.706160363] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [69.80629305] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [69.809476317] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.022887654] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.027857862] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.176814142] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.183590392] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.697412729] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.702761669] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.749409579] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [70.757103967] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.005068547] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.007458495] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.157353311] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.160163182] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.670662975] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.671802461] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.773348459] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [71.775020638] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.082149996] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.083693807] >>>>> Manual Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.386639935] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.393166659] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.438374396] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.43936075] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.540637288] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.543170998] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.847961639] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [72.855404498] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [73.206700016] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [73.20817852] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [73.567809748] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [73.58126457] >>>>> Manual Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [73.671183549] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [73.688005491] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [73.771865369] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [75.150007489] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [75.158101157] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [75.167155448] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [75.169105429] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [75.457198804] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [75.465052222] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [75.472833426] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [75.474628834] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [75.493836808] <Event name="StateInfo" time="75.49354641" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [75.495326984] <Event name="StateInfo" time="75.495011548" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [75.500578202] <Event name="StateInfo" time="75.499873322" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.50322396] <Event name="StateInfo" time="75.501969258" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.508817102] <Event name="StateInfo" time="75.507723418" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.510460902] <Event name="StateInfo" time="75.510289115" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.537918164] <Event name="StateInfo" time="75.537727154" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.540164405] <Event name="StateInfo" time="75.53997973" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.545558724] <Event name="StateInfo" time="75.544484772" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.547925244] <Event name="StateInfo" time="75.54758248" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.552649861] <Event name="StateInfo" time="75.552474578" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.554749946] <Event name="StateInfo" time="75.554558376" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.559748886] <Event name="StateInfo" time="75.557552043" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.561529136] <Event name="StateInfo" time="75.561353378" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.565503696] <Event name="StateInfo" time="75.563944014" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.567484997] <Event name="StateInfo" time="75.56730562" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [75.573550681] ##### button=X, pressed=false
+TaskElevatorArm.autoTask_INFO [75.587709078] <Event name="StateInfo" time="75.586874591" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.589601445] <Event name="StateInfo" time="75.589430076" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.595820473] <Event name="StateInfo" time="75.595030206" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.59764673] <Event name="StateInfo" time="75.597459362" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.602534623] <Event name="StateInfo" time="75.602357436" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.605594773] <Event name="StateInfo" time="75.60510102" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.61170477] <Event name="StateInfo" time="75.61054332" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.613315253] <Event name="StateInfo" time="75.613137994" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.619725288] <Event name="StateInfo" time="75.618654258" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.622526404] <Event name="StateInfo" time="75.622027373" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.655235777] <Event name="StateInfo" time="75.655038469" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.658065737] <Event name="StateInfo" time="75.657861141" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.660626472] <Event name="StateInfo" time="75.660446945" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.663834238] <Event name="StateInfo" time="75.663651998" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.667602972] <Event name="StateInfo" time="75.667436504" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.672449872] <Event name="StateInfo" time="75.671865744" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.693959454] <Event name="StateInfo" time="75.693401791" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.699078747] <Event name="StateInfo" time="75.698101079" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.708483001] <Event name="StateInfo" time="75.707266354" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.714328132] <Event name="StateInfo" time="75.714140422" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.722342508] <Event name="StateInfo" time="75.720449838" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.737368511] <Event name="StateInfo" time="75.736364891" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.77931712] <Event name="StateInfo" time="75.779014394" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.781759431] <Event name="StateInfo" time="75.781571179" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.789684933] <Event name="StateInfo" time="75.786608719" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.792524253] <Event name="StateInfo" time="75.792346782" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.822769697] <Event name="StateInfo" time="75.820276395" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.828857547] <Event name="StateInfo" time="75.82641835" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.837723675] <Event name="StateInfo" time="75.83606453" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.839949655] <Event name="StateInfo" time="75.839751209" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.847168266] <Event name="StateInfo" time="75.845805059" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.852140173] <Event name="StateInfo" time="75.849942627" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.892470965] <Event name="StateInfo" time="75.892283072" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.897263349] <Event name="StateInfo" time="75.897014446" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.907502823] <Event name="StateInfo" time="75.904060775" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.910446577] <Event name="StateInfo" time="75.910224513" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.956797963] <Event name="StateInfo" time="75.956446201" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.958637228] <Event name="StateInfo" time="75.957051207" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.961861354] <Event name="StateInfo" time="75.961692701" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [75.96427784] <Event name="StateInfo" time="75.964034295" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [76.005360514] <Event name="StateInfo" time="76.005183454" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [76.008004495] <Event name="StateInfo" time="76.007832508" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [76.020552616] <Event name="StateInfo" time="76.018292248" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [76.026116636] <Event name="StateInfo" time="76.022792686" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [76.057115772] <Event name="StateInfo" time="76.056906753" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [76.063013355] <Event name="StateInfo" time="76.06144714" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+Elevator.motor.pidCtrlTask_INFO [76.266725965] controlMode: Position,onTarget=true(43.48545738763926/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [76.270649718] <Event name="StateInfo" time="76.269982031" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [76.273638106] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [76.275904382] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [76.279881312] <Event name="StateInfo" time="76.279320254" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [76.504207926] ##### button=DpadDown, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [76.507169337] >>>>> Score Index Down: index=
+FrcTeleOp.operatorControllerButtonEvent_INFO [76.606121291] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [76.608652234] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=115.4,elevatorPos=39.25,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [76.612855206] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [76.615817136] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [76.619462955] ##### button=DpadDown, pressed=false
+TaskElevatorArm.autoTask_INFO [76.646840894] <Event name="StateInfo" time="76.645756184" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [76.651784072] <Event name="StateInfo" time="76.651135638" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [76.654504504] <Event name="StateInfo" time="76.65433146" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [76.657960269] <Event name="StateInfo" time="76.657777925" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [76.713828252] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [76.820227226] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [76.82822491] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [77.179637887] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [77.182457968] >>>>> OperatorAltFunc=true
+Elevator.motor.pidCtrlTask_INFO [77.201967047] controlMode: Position,onTarget=true(39.683652613948034/39.25), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [77.205777014] <Event name="StateInfo" time="77.205493957" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [77.210591142] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [77.211910604] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [77.21591356] <Event name="StateInfo" time="77.214478351" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [77.332724707] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [77.334398343] >>>>> OperatorAltFunc=false
+CoralArm.motor.pidCtrlTask_INFO [77.336322326] controlMode: Position,onTarget=true(115.48828125/115.4), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [77.436052073] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [77.4378087] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.154159405] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.161493799] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.313675494] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.314558142] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.358358394] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.359698358] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.51530657] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.521767167] >>>>> Auto Coral Intake
+CoralGrabber.finishAction_INFO [79.617071901] FinishAction(completed=true): isOn=true, hasObject=true, actionParams=(intake=true,owner=null,finishDelay=0.0,completionEvent=null,timeout=0.0,callbackEvent=null)
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.723884959] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.732745037] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.830462322] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [79.831410857] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.03473615] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.037550775] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [80.592945315] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [80.594190483] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.643393196] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.650632094] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.694266511] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.700366338] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.957530041] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [80.961138993] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [80.961516827] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [80.962119435] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [80.989044874] <Event name="StateInfo" time="80.988131219" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [80.99198593] <Event name="StateInfo" time="80.991756994" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [80.997736836] <Event name="StateInfo" time="80.996873909" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+CoralArm.motor.acquireOwnership_INFO [81.000371542] Acquired ownership on behalf of FrcTeleOp
+TaskElevatorArm.autoTask_INFO [81.002143808] <Event name="StateInfo" time="81.001956085" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [81.11173156] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [81.573759277] controlMode: Position,onTarget=true(43.37599341680364/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [81.58880674] <Event name="StateInfo" time="81.588049823" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [81.594995444] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [81.597890959] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [81.599393507] <Event name="StateInfo" time="81.598093567" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.driverControllerButtonEvent_INFO [81.792432122] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [81.793666396] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [82.049773338] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [82.054837668] >>>>> OperatorAltFunc=true
+CoralArm.motor.pidCtrlTask_INFO [82.477982234] controlMode: Position,onTarget=true(-43.857421875/-43.5), stalled=false, expired=false, event=(CoralArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [82.663066672] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [82.679830075] >>>>> X Mode
+FrcTeleOp.operatorControllerButtonEvent_INFO [82.716236277] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [82.726252151] >>>>> Manual Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [82.822505616] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [82.92132268] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [82.93302596] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [83.022573972] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [83.123790889] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [83.133739258] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [83.174552528] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [83.275699773] ##### button=X, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [83.284920026] >>>>> X Mode
+FrcTeleOp.driverControllerButtonEvent_INFO [83.377862832] ##### button=X, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [83.989176738] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [83.990387111] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.141244747] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.147971015] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.148791891] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.149700803] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.292950388] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [84.294125601] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=115.4,elevatorPos=39.25,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [84.294757] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.295642537] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [84.334827827] <Event name="StateInfo" time="84.333461034" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [84.340124253] <Event name="StateInfo" time="84.33990044" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [84.402522332] <Event name="StateInfo" time="84.399654443" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.406851268] <Event name="StateInfo" time="84.40668804" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [84.414130073] ##### button=X, pressed=false
+TaskElevatorArm.autoTask_INFO [84.443930006] <Event name="StateInfo" time="84.439978129" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.447031928] <Event name="StateInfo" time="84.446286568" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.455322931] <Event name="StateInfo" time="84.455153754" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.460187138] <Event name="StateInfo" time="84.460021134" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.463294653] <Event name="StateInfo" time="84.463056919" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.465185923] <Event name="StateInfo" time="84.465000474" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.515307613] <Event name="StateInfo" time="84.514750901" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.5192517] <Event name="StateInfo" time="84.51907503" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.560813271] <Event name="StateInfo" time="84.560229107" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.567025574] <Event name="StateInfo" time="84.566789968" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.571016998] <Event name="StateInfo" time="84.570834331" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.577497439] <Event name="StateInfo" time="84.575431115" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.636824231] <Event name="StateInfo" time="84.635503225" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.639929746] <Event name="StateInfo" time="84.63975072" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.674902729] <Event name="StateInfo" time="84.674533339" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.678934671] <Event name="StateInfo" time="84.677817383" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.688167612] <Event name="StateInfo" time="84.685646936" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.692874857] <Event name="StateInfo" time="84.692683353" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.699211118] <Event name="StateInfo" time="84.699034861" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.703578259] <Event name="StateInfo" time="84.703392499" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.755855985] <Event name="StateInfo" time="84.754232632" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.762274389] <Event name="StateInfo" time="84.759645316" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.791317502] <Event name="StateInfo" time="84.791148563" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.797685732] <Event name="StateInfo" time="84.797170673" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.80284209] <Event name="StateInfo" time="84.802663828" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.805333869] <Event name="StateInfo" time="84.805160142" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.812187799] <Event name="StateInfo" time="84.808492173" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.818642114] <Event name="StateInfo" time="84.814243826" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.88281857] <Event name="StateInfo" time="84.881331214" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [84.885791545] <Event name="StateInfo" time="84.885621754" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [85.22656249] ##### button=DpadRight, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [85.230227678] >>>>> Score Right Reef Branch
+FrcTeleOp.operatorControllerButtonEvent_INFO [85.402545106] ##### button=DpadRight, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [85.482926955] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [85.486385832] >>>>> Slow Drive
+Elevator.motor.pidCtrlTask_INFO [85.51059521] controlMode: Position,onTarget=true(39.65839134411114/39.25), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [85.523594577] <Event name="StateInfo" time="85.523163855" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [85.52858678] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [85.535497887] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [85.539652093] <Event name="StateInfo" time="85.539438011" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [85.969350344] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [85.971478154] >>>>> OperatorAltFunc=true
+CoralArm.motor.pidCtrlTask_INFO [86.285058627] controlMode: Position,onTarget=true(114.43359375/115.4), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [87.805758356] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [87.809886442] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.00984281] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.010845244] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.011381378] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.011943894] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.113568096] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.119406306] >>>>> Auto Coral Intake
+CoralGrabber.finishAction_INFO [88.193529423] FinishAction(completed=true): isOn=true, hasObject=false, actionParams=(intake=true,owner=null,finishDelay=0.0,completionEvent=null,timeout=0.0,callbackEvent=null)
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.31624824] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.317284262] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.317791308] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [88.318422063] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.089572924] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.101789314] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.446276279] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.449987489] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.599443792] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.604787962] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [89.751417546] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [89.759897173] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.76648895] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.771321] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.77543448] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [89.777508068] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [90.080227071] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [90.081548116] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [90.082342188] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [90.082938069] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [90.088175347] <Event name="StateInfo" time="90.087947169" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [90.090688105] <Event name="StateInfo" time="90.090219205" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [90.092618552] <Event name="StateInfo" time="90.092445314" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+CoralArm.motor.acquireOwnership_INFO [90.095679279] Acquired ownership on behalf of FrcTeleOp
+TaskElevatorArm.autoTask_INFO [90.097200771] <Event name="StateInfo" time="90.097032051" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [90.186426302] ##### button=Y, pressed=false
+Elevator.motor.pidCtrlTask_INFO [90.638942098] controlMode: Position,onTarget=true(43.35915293562703/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [90.64979272] <Event name="StateInfo" time="90.648234942" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [90.651670965] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [90.653105532] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [90.654810606] <Event name="StateInfo" time="90.654572537" tag="^^^^^" TaskElevatorArm.state="DONE" />
+CoralArm.motor.pidCtrlTask_INFO [91.65891732] controlMode: Position,onTarget=true(-44.033203125/-43.5), stalled=false, expired=false, event=(CoralArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [92.999364885] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [93.00662744] >>>>> Slow Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [93.71731579] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [93.717797716] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [94.175792983] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [94.177134879] >>>>> Manual Coral Intake
+FrcTeleOp.driverControllerButtonEvent_INFO [94.536238222] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [94.538335019] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [95.249144875] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [95.253001392] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [95.254361668] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [95.255676656] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [95.808914906] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [95.810355984] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [96.022109933] ##### button=A, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [96.028940492] >>>>> Manual Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [97.093366974] ##### button=A, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [97.101764096] >>>>> Cancel Coral Intake
+FrcTeleOp.operatorControllerButtonEvent_INFO [97.103240897] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [97.104185057] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [97.403732679] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [97.404894041] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=115.4,elevatorPos=39.25,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [97.412735206] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [97.414103233] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [97.441876304] <Event name="StateInfo" time="97.440927048" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [97.445276975] <Event name="StateInfo" time="97.444146914" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [97.453166829] <Event name="StateInfo" time="97.449973048" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.455284315] <Event name="StateInfo" time="97.454690984" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.479267483] <Event name="StateInfo" time="97.478224946" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.481184305] <Event name="StateInfo" time="97.480991811" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.489944202] <Event name="StateInfo" time="97.489691551" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.491951797] <Event name="StateInfo" time="97.491323779" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.497350422] <Event name="StateInfo" time="97.494542078" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.502507281] <Event name="StateInfo" time="97.50230002" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.50521806] <Event name="StateInfo" time="97.505059067" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.508761485] <Event name="StateInfo" time="97.508458529" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.546663405] <Event name="StateInfo" time="97.542813934" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.548171623] <Event name="StateInfo" time="97.54799196" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.55286059] <Event name="StateInfo" time="97.552496252" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.556754533] <Event name="StateInfo" time="97.555556614" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.58920713] <Event name="StateInfo" time="97.58904241" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.591343599] <Event name="StateInfo" time="97.591152201" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.598840791] <Event name="StateInfo" time="97.597063247" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.601097884] <Event name="StateInfo" time="97.600916414" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.607075281] <Event name="StateInfo" time="97.606915441" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.611358969] <Event name="StateInfo" time="97.611130962" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [97.618239543] ##### button=X, pressed=false
+TaskElevatorArm.autoTask_INFO [97.664264169] <Event name="StateInfo" time="97.66397774" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.667854839] <Event name="StateInfo" time="97.66647221" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.69754898] <Event name="StateInfo" time="97.693376351" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.699780888] <Event name="StateInfo" time="97.699597362" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.702961758] <Event name="StateInfo" time="97.70280096" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.705467069] <Event name="StateInfo" time="97.705307758" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.713915065] <Event name="StateInfo" time="97.713751775" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.717410773] <Event name="StateInfo" time="97.71626134" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.720565673] <Event name="StateInfo" time="97.72032018" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.722957815] <Event name="StateInfo" time="97.722791474" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.767833304] <Event name="StateInfo" time="97.767132324" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.770010891] <Event name="StateInfo" time="97.769852967" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.780303333] <Event name="StateInfo" time="97.779355227" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.786003508] <Event name="StateInfo" time="97.783569382" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.813216207] <Event name="StateInfo" time="97.813044376" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.816549047] <Event name="StateInfo" time="97.816169234" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.839849556] <Event name="StateInfo" time="97.838993954" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.846585422] <Event name="StateInfo" time="97.843648846" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.912923212] <Event name="StateInfo" time="97.912667162" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.917424809] <Event name="StateInfo" time="97.917211993" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.951486682] <Event name="StateInfo" time="97.95122073" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.955653433] <Event name="StateInfo" time="97.954466663" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.965362109] <Event name="StateInfo" time="97.965194686" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [97.971740317] <Event name="StateInfo" time="97.971554553" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.156865977] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.160251706] >>>>> Score Index Up: index=
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.312260123] ##### button=DpadUp, pressed=false
+Elevator.motor.pidCtrlTask_INFO [98.597060483] controlMode: Position,onTarget=true(39.60786880443736/39.25), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [98.616743571] <Event name="StateInfo" time="98.616073985" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [98.621696301] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [98.623044464] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [98.625903293] <Event name="StateInfo" time="98.625648757" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.642037098] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [98.646079025] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [98.649204338] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.652041212] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [98.696970929] <Event name="StateInfo" time="98.69680028" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [98.701252451] <Event name="StateInfo" time="98.70108806" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+FrcTeleOp.driverControllerButtonEvent_INFO [98.710890766] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [98.712716312] >>>>> Slow Drive
+TaskElevatorArm.autoTask_INFO [98.754395003] <Event name="StateInfo" time="98.753745693" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [98.763490401] <Event name="StateInfo" time="98.763324628" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [98.824536572] ##### button=X, pressed=false
+Elevator.motor.pidCtrlTask_INFO [99.283941303] controlMode: Position,onTarget=true(43.37599341680364/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [99.292325341] <Event name="StateInfo" time="99.29167396" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [99.296371457] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [99.29762473] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [99.302009348] <Event name="StateInfo" time="99.299668039" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [99.534626758] ##### button=DpadDown, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [99.537294504] >>>>> Score Index Down: index=
+FrcTeleOp.operatorControllerButtonEvent_INFO [99.643954117] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [99.650851549] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=115.4,elevatorPos=39.25,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [99.653189869] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [99.656769051] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [99.658436451] ##### button=DpadDown, pressed=false
+TaskElevatorArm.autoTask_INFO [99.696894516] <Event name="StateInfo" time="99.69381232" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [99.700076138] <Event name="StateInfo" time="99.699863392" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [99.753286022] <Event name="StateInfo" time="99.753123833" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [99.76296723] <Event name="StateInfo" time="99.759479541" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [99.768801974] ##### button=X, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [100.327169103] controlMode: Position,onTarget=true(114.9609375/115.4), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+Elevator.motor.pidCtrlTask_INFO [100.347140325] controlMode: Position,onTarget=true(39.58681773921339/39.25), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [100.352589721] <Event name="StateInfo" time="100.350096864" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [100.356691197] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [100.359651839] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [100.364544482] <Event name="StateInfo" time="100.362612133" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [100.656055484] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [100.660519112] >>>>> OperatorAltFunc=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [100.81400679] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [100.8195012] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.186932986] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.192423417] >>>>> Score Index Up: index=
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.287689564] ##### button=DpadUp, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.390363975] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [102.396264555] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=151.2,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [102.41195795] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.414353574] >>>>> Set Coral Score Position
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.417033232] ##### button=DpadUp, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.421667381] >>>>> Score Index Up: index=
+TaskElevatorArm.autoTask_INFO [102.442299849] <Event name="StateInfo" time="102.442066753" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [102.444661391] <Event name="StateInfo" time="102.443835094" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.450481571] ##### button=DpadUp, pressed=false
+TaskElevatorArm.autoTask_INFO [102.479414889] <Event name="StateInfo" time="102.479237536" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [102.486830869] <Event name="StateInfo" time="102.486520392" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.501397417] ##### button=X, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.716308481] ##### button=X, pressed=true
+TaskElevatorArm.setCoralScorePosition_INFO [102.722255665] setCoralScorePosition(owner=FrcTeleOp, taskParams=(action=SetCoralScorePosition,power=0.0,coralArmPos=148.0,elevatorPos=70.0,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [102.734020373] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.73586676] >>>>> Set Coral Score Position
+TaskElevatorArm.autoTask_INFO [102.75885997] <Event name="StateInfo" time="102.758132853" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [102.762221382] <Event name="StateInfo" time="102.761244979" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_SCORE_POS" />
+TaskElevatorArm.autoTask_INFO [102.767929291] <Event name="StateInfo" time="102.767749851" tag="vvvvv" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+TaskElevatorArm.autoTask_INFO [102.773431434] <Event name="StateInfo" time="102.772569868" tag="^^^^^" TaskElevatorArm.state="CHECK_CORALARM_SAFETY_FOR_SCORE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [102.83238665] ##### button=X, pressed=false
+CoralArm.motor.pidCtrlTask_INFO [103.400558047] controlMode: Position,onTarget=true(148.18359375/148.0), stalled=false, expired=false, event=(CoralArm=SIGNALED)
+FrcTeleOp.operatorControllerButtonEvent_INFO [103.448756392] ##### button=LeftBumper, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [103.452433852] >>>>> OperatorAltFunc=true
+TaskElevatorArm.autoTask_INFO [104.739910695] <Event name="StateInfo" time="104.738391029" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [104.74347971] Stopping subsystems.
+Elevator.motor.pidCtrlTask_INFO [104.738840473] controlMode: Position,onTarget=true(69.844490774521/70.0), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [104.759119779] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [104.761502852] <Event name="StateInfo" time="104.76126587" tag="^^^^^" TaskElevatorArm.state="DONE" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [105.998224641] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.002698322] >>>>> Manual Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.205666806] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.213372451] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.51094587] ##### button=B, pressed=true
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.520024832] >>>>> Manual Coral Eject
+FrcTeleOp.driverControllerButtonEvent_INFO [106.817665054] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [106.8216701] >>>>> Normal Drive
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.934644815] ##### button=B, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.942227156] >>>>> Cancel Coral Eject
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.952257137] ##### button=LeftBumper, pressed=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [106.960780271] >>>>> OperatorAltFunc=false
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.246120878] ##### button=Y, pressed=true
+TaskElevatorArm.setCoralStationPickupPosition_INFO [107.262931893] setCoralStationPickupPosition(owner=FrcTeleOp, taskParams=(action=SetCoralStationPickupPosition,power=0.0,coralArmPos=-43.5,elevatorPos=43.5,inAuto=false), event=null)
+TaskElevatorArm.startAutoTask_INFO [107.277113737] Successfully acquired subsystem ownerships on behalf of FrcTeleOp
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.280070731] >>>>> Set Coral Station Pickup Position
+TaskElevatorArm.autoTask_INFO [107.317667692] <Event name="StateInfo" time="107.317026689" tag="vvvvv" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [107.321591457] <Event name="StateInfo" time="107.320517263" tag="^^^^^" TaskElevatorArm.state="SET_CORAL_STATION_PICKUP_POS" />
+TaskElevatorArm.autoTask_INFO [107.341652508] <Event name="StateInfo" time="107.341479941" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.346058915] <Event name="StateInfo" time="107.344756887" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.352080367] <Event name="StateInfo" time="107.351885778" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.355856493] <Event name="StateInfo" time="107.355664513" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.362630481] <Event name="StateInfo" time="107.362452607" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.365422997] <Event name="StateInfo" time="107.365030742" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.372917615] <Event name="StateInfo" time="107.372739348" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.375583782] <Event name="StateInfo" time="107.374712984" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+FrcTeleOp.operatorControllerButtonEvent_INFO [107.381047945] ##### button=Y, pressed=false
+TaskElevatorArm.autoTask_INFO [107.445338593] <Event name="StateInfo" time="107.444551778" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.448210509] <Event name="StateInfo" time="107.446737772" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.492413202] <Event name="StateInfo" time="107.4922416" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.494957022] <Event name="StateInfo" time="107.494774539" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.507016625] <Event name="StateInfo" time="107.505377691" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.512976181] <Event name="StateInfo" time="107.512752861" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.560991929] <Event name="StateInfo" time="107.560168446" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.562346] <Event name="StateInfo" time="107.562024151" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.597921127] <Event name="StateInfo" time="107.597031142" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.602829132] <Event name="StateInfo" time="107.602649789" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.616045348] <Event name="StateInfo" time="107.613071792" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.619827494] <Event name="StateInfo" time="107.617258597" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.626843994] <Event name="StateInfo" time="107.626662431" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.632675708] <Event name="StateInfo" time="107.632005457" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.683114485] <Event name="StateInfo" time="107.682800985" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.712758457] <Event name="StateInfo" time="107.697788182" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.753229759] <Event name="StateInfo" time="107.752429151" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.756021485] <Event name="StateInfo" time="107.755815129" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.764087973] <Event name="StateInfo" time="107.762590779" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.768746362] <Event name="StateInfo" time="107.768090365" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.823550291] <Event name="StateInfo" time="107.823367081" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.825071072] <Event name="StateInfo" time="107.824895336" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.867752038] <Event name="StateInfo" time="107.867492037" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.872487589] <Event name="StateInfo" time="107.871882987" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.880474849] <Event name="StateInfo" time="107.879823625" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.883284769] <Event name="StateInfo" time="107.882064676" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.94613975] <Event name="StateInfo" time="107.945972145" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.948051018] <Event name="StateInfo" time="107.947882683" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.980381811] <Event name="StateInfo" time="107.979000625" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.9815088] <Event name="StateInfo" time="107.981335105" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.987455924] <Event name="StateInfo" time="107.985477576" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [107.992807096] <Event name="StateInfo" time="107.992632438" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.000713017] <Event name="StateInfo" time="108.000438888" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.002935705] <Event name="StateInfo" time="108.002735538" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.056093006] <Event name="StateInfo" time="108.055918794" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.063876271] <Event name="StateInfo" time="108.062908275" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.09870863] <Event name="StateInfo" time="108.096956293" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.104289338] <Event name="StateInfo" time="108.101240969" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.111115633] <Event name="StateInfo" time="108.110937122" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.117950249] <Event name="StateInfo" time="108.115156986" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.125857246] <Event name="StateInfo" time="108.125671756" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.129388128] <Event name="StateInfo" time="108.128553535" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.194841497] <Event name="StateInfo" time="108.194070919" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.198802974] <Event name="StateInfo" time="108.198381299" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.234631241] <Event name="StateInfo" time="108.233999291" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.239435242] <Event name="StateInfo" time="108.237524337" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.247416733] <Event name="StateInfo" time="108.2472452" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.252545381] <Event name="StateInfo" time="108.252356298" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.271059524] <Event name="StateInfo" time="108.270883193" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.276022901] <Event name="StateInfo" time="108.275829466" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.281899611] <Event name="StateInfo" time="108.28173042" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.287029216] <Event name="StateInfo" time="108.28521831" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.293422713] <Event name="StateInfo" time="108.293262446" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.300167516] <Event name="StateInfo" time="108.298574818" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.30531981] <Event name="StateInfo" time="108.30510588" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.307143411] <Event name="StateInfo" time="108.306493639" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.345712263] <Event name="StateInfo" time="108.34516958" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.350579985] <Event name="StateInfo" time="108.350007636" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.355798485] <Event name="StateInfo" time="108.355601771" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.357553331] <Event name="StateInfo" time="108.35738399" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.373283702] <Event name="StateInfo" time="108.372503685" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.375157317] <Event name="StateInfo" time="108.374964717" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.38068352] <Event name="StateInfo" time="108.380506398" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.384640606] <Event name="StateInfo" time="108.38440449" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.390245312] <Event name="StateInfo" time="108.390081533" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.395134936] <Event name="StateInfo" time="108.394937702" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.400310178] <Event name="StateInfo" time="108.400055037" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.402494589] <Event name="StateInfo" time="108.401840238" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.411129886] <Event name="StateInfo" time="108.4107105" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.415214248] <Event name="StateInfo" time="108.413988136" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.426583071] <Event name="StateInfo" time="108.42627414" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.432919092] <Event name="StateInfo" time="108.42942379" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.439612] <Event name="StateInfo" time="108.439070008" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.444846361] <Event name="StateInfo" time="108.443562109" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.456634233] <Event name="StateInfo" time="108.456444079" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.45899443] <Event name="StateInfo" time="108.458797988" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.466816303] <Event name="StateInfo" time="108.466096402" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.47241905] <Event name="StateInfo" time="108.471367568" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.521398954] <Event name="StateInfo" time="108.521220514" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.52482044] <Event name="StateInfo" time="108.524348084" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.559730287] <Event name="StateInfo" time="108.555922438" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.562064043] <Event name="StateInfo" time="108.561877337" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.58301536] <Event name="StateInfo" time="108.581366225" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.586823022] <Event name="StateInfo" time="108.584488002" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.642757977] <Event name="StateInfo" time="108.638888213" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.645497612] <Event name="StateInfo" time="108.644538424" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.685789699] <Event name="StateInfo" time="108.684749735" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.688844121] <Event name="StateInfo" time="108.688576413" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.693146313] <Event name="StateInfo" time="108.692977237" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.700853456] <Event name="StateInfo" time="108.698841845" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+TaskElevatorArm.autoTask_INFO [108.744871707] <Event name="StateInfo" time="108.744693354" tag="vvvvv" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+CoralArm.motor.acquireOwnership_INFO [108.754020398] Acquired ownership on behalf of FrcTeleOp
+TaskElevatorArm.autoTask_INFO [108.756936002] <Event name="StateInfo" time="108.756485415" tag="^^^^^" TaskElevatorArm.state="CHECK_ELEVATOR_SAFETY_FOR_PICKUP" />
+Elevator.motor.pidCtrlTask_INFO [109.403609323] controlMode: Position,onTarget=true(43.59071115386195/43.5), stalled=false, expired=false, event=(Elevator=SIGNALED)
+TaskElevatorArm.autoTask_INFO [109.430982288] <Event name="StateInfo" time="109.430320846" tag="vvvvv" TaskElevatorArm.state="DONE" />
+TaskElevatorArm.stopSubsystems_INFO [109.433541291] Stopping subsystems.
+TaskElevatorArm.releaseSubsystemsOwnership_INFO [109.434874708] Releasing subsystem ownership on behalf of FrcTeleOp
+	coralArmOwner=null
+	elevatorOwner=null
+TaskElevatorArm.autoTask_INFO [109.436082069] <Event name="StateInfo" time="109.435316294" tag="^^^^^" TaskElevatorArm.state="DONE" />
+CoralArm.motor.pidCtrlTask_INFO [109.988011117] controlMode: Position,onTarget=true(-42.626953125/-43.5), stalled=false, expired=false, event=(CoralArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [114.854532141] ##### button=B, pressed=true
+ClimberArm.motor.acquireOwnership_INFO [114.862545279] Acquired ownership on behalf of FrcTeleOp
+ClimberGrabber.acquireOwnership_INFO [114.875244093] Acquired ownership on behalf of FrcTeleOp
+ClimberGrabber.finishAction_INFO [114.880137469] FinishAction(completed=true): isOn=false, hasObject=true, actionParams=(intake=true,owner=FrcTeleOp,finishDelay=0.0,completionEvent=(ClimberGrabber.releaseOwnership=CLEARED),timeout=0.0,callbackEvent=null)
+ClimberGrabber.motor.acquireOwnership_INFO [114.882814205] Acquired ownership on behalf of FrcTeleOp
+FrcTeleOp.driverControllerButtonEvent_INFO [114.88650793] >>>>> Deploy Climber
+ClimberGrabber.releaseOwnership_INFO [114.889264586] Released ownership on behalf of FrcTeleOp
+FrcTeleOp.driverControllerButtonEvent_INFO [114.962505237] ##### button=B, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [116.145589666] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [116.155177117] >>>>> Slow Drive
+ClimberArm.motor.pidCtrlTask_INFO [118.413599219] controlMode: Position,onTarget=true(171.62841796875/172.0), stalled=false, expired=false, event=(ClimberArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [120.979518359] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [120.980600016] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [123.032037797] ##### button=DpadDown, pressed=true
+ClimberArm.motor.acquireOwnership_INFO [123.04543651] Acquired ownership on behalf of FrcTeleOp
+FrcTeleOp.driverControllerButtonEvent_INFO [123.053265855] >>>>> Climb
+FrcTeleOp.driverControllerButtonEvent_INFO [123.184651612] ##### button=DpadDown, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [124.52126718] ##### button=B, pressed=true
+ClimberArm.motor.acquireOwnership_INFO [124.524201164] Acquired ownership on behalf of FrcTeleOp
+ClimberGrabber.acquireOwnership_INFO [124.5267827] Acquired ownership on behalf of FrcTeleOp
+ClimberGrabber.finishAction_INFO [124.528222719] FinishAction(completed=true): isOn=false, hasObject=true, actionParams=(intake=true,owner=FrcTeleOp,finishDelay=0.0,completionEvent=(ClimberGrabber.releaseOwnership=CLEARED),timeout=0.0,callbackEvent=null)
+ClimberGrabber.motor.acquireOwnership_INFO [124.531680138] Acquired ownership on behalf of FrcTeleOp
+FrcTeleOp.driverControllerButtonEvent_INFO [124.533182741] >>>>> Deploy Climber
+ClimberGrabber.releaseOwnership_INFO [124.5352839] Released ownership on behalf of FrcTeleOp
+FrcTeleOp.driverControllerButtonEvent_INFO [124.671157588] ##### button=B, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [125.947503406] ##### button=RightBumper, pressed=true
+FrcTeleOp.driverControllerButtonEvent_INFO [125.952707374] >>>>> Slow Drive
+ClimberArm.motor.pidCtrlTask_INFO [126.769864632] controlMode: Position,onTarget=true(171.62841796875/172.0), stalled=false, expired=false, event=(ClimberArm.motor.releaseOwnership=SIGNALED)
+FrcTeleOp.driverControllerButtonEvent_INFO [127.541785182] ##### button=RightBumper, pressed=false
+FrcTeleOp.driverControllerButtonEvent_INFO [127.542860761] >>>>> Normal Drive
+FrcTeleOp.driverControllerButtonEvent_INFO [129.8547469] ##### button=DpadDown, pressed=true
+ClimberArm.motor.acquireOwnership_INFO [129.86350699] Acquired ownership on behalf of FrcTeleOp
+FrcTeleOp.driverControllerButtonEvent_INFO [129.873655607] >>>>> Climb
+FrcTeleOp.driverControllerButtonEvent_INFO [130.064504988] ##### button=DpadDown, pressed=false
+ClimberArm.motor.pidCtrlTask_INFO [134.518219662] controlMode: Position,onTarget=true(81.826171875/82.25), stalled=false, expired=false, event=(ClimberArm.motor.releaseOwnership=SIGNALED)
+FrcRobotBase.startCompetition_INFO [135.033217413] *** Transitioning from TELEOP_MODE to DISABLED_MODE ***
+Robot.cancelAll_INFO [135.054162135] Cancel all operations.
+FrcRobotBase.printPerformanceMetrics_INFO [135.07521245] [FrcRobotBase] Loop Performance Metrics:
+Average Loop Interval = 0.001529s (freq=653.854Hz, min=0.000000s, max=0.777840s)
+[03]                StartTask=0.000000s
+[04]          PrePeriodicTask=0.000099s
+[07]               UpdateTask=0.000983s
+[02]                StartMode=0.000000s
+[06]         PostPeriodicTask=0.000093s
+[08]                 StopTask=0.000000s
+[09]                 StopMode=0.000000s
+[00]                RobotInit=12.074733s
+[01]           RobotStartMode=0.000001s
+[05]                 Periodic=0.000273s
+[10]            RobotStopMode=0.000001s
+
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.091842516] TrcWatchdogMgr: STANDALONE_TASK=1.984694906832298E-4/0.9972635169565217
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.097168871] DriverController.buttonEventTask: PRE_PERIODIC_TASK=3.263868229155753E-5/0.0028272235257003958
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.099619116] OperatorController.buttonEventTask: PRE_PERIODIC_TASK=4.596475225782118E-5/0.002827206182092492
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.101895318] lfDriveMotor.pidCtrlTask: OUTPUT_TASK=2.0750864181456863E-5/0.011065256872747207
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.105824416] TrcMotor.odometryTask: STANDALONE_TASK=4.423294612698246E-4/5.126782938245384E-4
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.107487962] lfDriveMotor.odometryCleanupTask: STOP_TASK=0.00192265125/38.29675101475
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.111466788] rfDriveMotor.pidCtrlTask: OUTPUT_TASK=1.0464983896940419E-5/0.011065244611573646
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.113362401] lbDriveMotor.pidCtrlTask: OUTPUT_TASK=8.957347757563298E-6/0.011065244001027855
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.117913931] rbDriveMotor.pidCtrlTask: OUTPUT_TASK=8.671765512043034E-6/0.011065243766437114
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.120848705] lfSteerMotor.pidCtrlTask: OUTPUT_TASK=1.47507788337673E-4/0.011065234107167329
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.123424052] rfSteerMotor.pidCtrlTask: OUTPUT_TASK=1.1530247080992188E-4/0.011065236950527614
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.125686145] lbSteerMotor.pidCtrlTask: OUTPUT_TASK=1.1235812251610251E-4/0.011065235147457858
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.128619907] rbSteerMotor.pidCtrlTask: OUTPUT_TASK=1.1660880584486774E-4/0.011065236242428396
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.132478318] TrcSwerveDriveBase.odometryTask: INPUT_TASK=0.003280785257613373/0.012660681312810328
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.134228578] TrcSwerveDriveBase.stopTask: STOP_TASK=0.0072630475/38.2959480935
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.139294053] purePursuitDrive.driveTask: POST_PERIODIC_TASK=0.01621217005882353/0.46136366379411764
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.142177235] LED: OUTPUT_TASK=3.529209407653568E-5/0.011065224509438486
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.143268409] CoralArm.motor.pidCtrlTask: OUTPUT_TASK=4.061321860226105E-4/0.011065205688900308
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.14594311] CoralGrabber.motor.pidCtrlTask: OUTPUT_TASK=1.0221751730044536E-5/0.011065205318705036
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.147598817] CoralGrabber.sensor.triggerTask: PRE_PERIODIC_TASK=9.047527536231885E-5/0.4006631304202899
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.152329881] Elevator.motor.pidCtrlTask: OUTPUT_TASK=3.8876136611853376E-4/0.011065200859815005
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.154844638] ClimberArm.motor.pidCtrlTask: OUTPUT_TASK=5.979855527388579E-5/0.01106518508187455
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.15778417] ClimberGrabber.motor.pidCtrlTask: OUTPUT_TASK=5.326112363399677E-6/0.011065181925148163
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.160961048] TaskElevatorArm: POST_PERIODIC_TASK=2.957706397356867E-5/0.0018519536946718879
+TrcTaskMgr.printTaskPerformanceMetrics_INFO [135.163519455] TaskAutoScoreCoral: POST_PERIODIC_TASK=4.5277306754772393E-4/0.09245260101615271

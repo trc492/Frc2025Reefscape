@@ -112,6 +112,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     private TrcPose2D aprilTagRelativePose = null;
     private Double visionExpiredTime;
     private boolean secondLook = false;
+    private boolean cancelGrabber = true;
 
     /**
      * Constructor: Create an instance of the object.
@@ -148,6 +149,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         boolean removeAlgae, boolean relocalize, boolean alignOnly, double powerLimit, ScoreCoralOffset scoreOffset,
         TrcEvent completionEvent)
     {
+        cancelGrabber = !alignOnly;
         TaskParams taskParams = new TaskParams(
             useVision, aprilTagId, reefLevel, scoreRightSide, removeAlgae, relocalize, alignOnly, powerLimit,
             scoreOffset);
@@ -209,7 +211,10 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
         tracer.traceInfo(moduleName, "Stopping subsystems.");
         robot.robotDrive.cancel(owner);
         robot.elevatorArmTask.cancel();
-        robot.coralGrabber.cancel();
+        if (cancelGrabber)
+        {
+            robot.coralGrabber.cancel();
+        }
         // Restore to full power in case we have changed it.
         robot.robotDrive.purePursuitDrive.setMoveOutputLimit(1.0);
     }   //stopSubsystems
