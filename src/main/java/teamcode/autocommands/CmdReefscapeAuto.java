@@ -318,7 +318,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     break;
 
                 case APPROACH_REEF:
-                    // If we haven't already, determin            e the Reef AprilTag ID to look for.
+                    // If we haven't already, determine the Reef AprilTag ID to look for.
                     // If we are scoring the 2nd Coral from the Station, we already determined the AprilTag ID
                     // last time.
                     if (reefAprilTagId == -1)
