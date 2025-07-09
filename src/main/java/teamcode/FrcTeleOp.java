@@ -54,6 +54,11 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private static final String DBKEY_TURN_SLOW_SCALE = "TeleOp/TurnSlowScale";         //Number
     private static final String DBKEY_SHOW_DRIVE_POWER = "TeleOp/ShowDrivePower";       //Boolean
     private static final String DBKEY_DRIVE_POWER = "TeleOp/DrivePower";                //String
+    // Debugging Odometry
+    public static final String DBKEY_ODOMETRY_IMU_TURNRATE = "Odom/IMUTurnRate";        //Number
+    public static final String DBKEY_ODOMETRY_KIN_TURNRATE = "Odom/KinTurnRate";        //Number
+    public static final String DBKEY_ODOMETRY_DRIVE_MOTOR_VEL = "Odom/DriveMotorVel";   //Number
+
     private static final double DEF_DRIVE_NORMAL_SCALE = 1.0;
     private static final double DEF_DRIVE_SLOW_SCALE = 0.175;
     private static final double DEF_TURN_NORMAL_SCALE = 0.6;
@@ -121,6 +126,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         robot.dashboard.refreshKey(DBKEY_TURN_SLOW_SCALE, DEF_TURN_SLOW_SCALE);
         robot.dashboard.refreshKey(DBKEY_SHOW_DRIVE_POWER, RobotParams.Preferences.showDrivePower);
         robot.dashboard.refreshKey(DBKEY_DRIVE_POWER, "");
+        // Debugging Odometry
+        robot.dashboard.refreshKey(DBKEY_ODOMETRY_IMU_TURNRATE, 0.0);
+        robot.dashboard.refreshKey(DBKEY_ODOMETRY_KIN_TURNRATE, 0.0);
+        robot.dashboard.refreshKey(DBKEY_ODOMETRY_DRIVE_MOTOR_VEL, 0.0);
 
         driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_NORMAL_SCALE, DEF_DRIVE_NORMAL_SCALE);
         turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_NORMAL_SCALE, DEF_TURN_NORMAL_SCALE);
@@ -265,7 +274,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             }
 
                             robot.robotDrive.driveBase.holonomicDrive(
-                                null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
+                                null, /*driveInputs[0]*/ 0.0, driveInputs[1], driveInputs[2], gyroAngle);
                             if (showDriveBaseStatus)
                             {
                                 robot.dashboard.putString(
@@ -357,8 +366,14 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             // Update robot status.
             //
             Dashboard.updateDashboard(robot, 1);
+            robot.dashboard.putNumber(DBKEY_ODOMETRY_KIN_TURNRATE, robot.robotDrive.driveBase.getTurnRate());
+            robot.dashboard.putNumber(DBKEY_ODOMETRY_IMU_TURNRATE, robot.robotDrive.imu.getZRotationRate().value);
+            // robot.dashboard.putNumber("LFMotorVel", robot.robotDrive.driveMotors[0].getVelocity());
+            // robot.dashboard.putNumber("RFMotorVel",robot.robotDrive.driveMotors[1].getVelocity());
+            // robot.dashboard.putNumber("LBMotorVel", robot.robotDrive.driveMotors[2].getVelocity());
+            // robot.dashboard.putNumber("RBMotorVel", robot.robotDrive.driveMotors[3].getVelocity());
         }
-    }   //periodic
+}   //periodic
 
     /**
      * This method enables/disables joystick controls.
