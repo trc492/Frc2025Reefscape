@@ -392,7 +392,8 @@ public class RobotBase
             usePurePursuitDrive = true;
             enablePurePursuitDriveSquareRootPid = false;
             ppdFollowingDistance = 10.0;
-            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1/profiledMaxVelocity, 0.0);
+            //velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1/profiledMaxVelocity, 0.0);
+            velPidCoeffs = new PidCoefficients(0.0, 0.0, 0.0, 1/robotMaxVelocity, 0.0);
             fastModeEnabled = true; 
             // Vision
             cam1 = new ReefscapeFrontCamParams();
