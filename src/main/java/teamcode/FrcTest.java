@@ -25,12 +25,14 @@ package teamcode;
 import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frclib.drivebase.FrcRobotDrive;
 import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcUserChoices;
 import frclib.driverio.FrcXboxController;
+import frclib.motor.FrcCANPhoenix6Controller;
 import frclib.vision.FrcPhotonVision;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
@@ -537,6 +539,19 @@ public class FrcTest extends FrcTeleOp
                         lineNum++, "Drive Decel: (%.1f/%.1f)", deceleration, maxDriveDeceleration);
                     robot.dashboard.displayPrintf(
                         lineNum++, "Turn Vel: (%.1f/%.1f)", velPose.angle, maxTurnVelocity);
+                    SmartDashboard.putNumber("WheelVel1", robot.robotDrive.driveMotors[0].getVelocity());
+                    SmartDashboard.putNumber("WheelVel2", robot.robotDrive.driveMotors[1].getVelocity());
+                    SmartDashboard.putNumber("WheelVel3", robot.robotDrive.driveMotors[2].getVelocity());
+                    SmartDashboard.putNumber("WheelVel4", robot.robotDrive.driveMotors[3].getVelocity());
+                    // SmartDashboard.putNumber("AvgRobotVel", Math.hypot(robot.robotDrive.driveBase.getXVelocity(), robot.robotDrive.driveBase.getYVelocity()));
+
+                    for (int i = 0; i < 4; i++) {
+                        FrcCANPhoenix6Controller<?> motor = (FrcCANPhoenix6Controller<?>) robot.robotDrive.driveMotors[i];
+                        SmartDashboard.putNumber("TargetWheelVel" + String.valueOf(i), motor.targetVel);
+                    }
+                    
+                    
+                    
                 }
                 break;
 

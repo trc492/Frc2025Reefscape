@@ -23,8 +23,10 @@
 package teamcode;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import frclib.drivebase.FrcRobotDrive.RobotInfo;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
+import frclib.motor.FrcCANPhoenix6Controller;
 import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.Climber;
 import teamcode.subsystems.CoralArm;
@@ -33,6 +35,7 @@ import teamcode.tasks.TaskAutoScoreCoral.ScoreCoralOffset;
 import teamcode.vision.PhotonVision.PipelineType;
 import trclib.drivebase.TrcSwerveDriveBase;
 import trclib.driverio.TrcGameController.DriveMode;
+import trclib.controller.TrcPidController.PidCoefficients;
 import trclib.drivebase.TrcDriveBase.DriveOrientation;
 import trclib.pathdrive.TrcPose2D;
 import trclib.robotcore.TrcRobot;
@@ -124,6 +127,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
         driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_NORMAL_SCALE, DEF_DRIVE_NORMAL_SCALE);
         turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_NORMAL_SCALE, DEF_TURN_NORMAL_SCALE);
+        
 }   //FrcTeleOp
 
     //
@@ -149,6 +153,10 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         //
         if (robot.robotDrive != null)
         {
+            for(int i = 0; i<4; i++){
+                // dont multiply by 12 if not velocity comp
+                robot.robotDrive.driveMotors[i].setMotorVelocityPidCoefficients(new PidCoefficients(0.0, 0.0, 0.0,0.12, 0.0)); //0.02
+            }
             // Set robot to FIELD by default but don't change the heading.
             robot.setDriveOrientation(driveOrientationMenu.getCurrentChoiceObject(), false);
             // Enable AprilTag vision for re-localization.
@@ -483,6 +491,13 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case DpadRight:
                 // Intentional Fall through
+                if(robot.robotDrive.driveMotors != null){
+                    robot.robotDrive.driveMotors[0].setVelocity(80);
+                    robot.robotDrive.driveMotors[1].setVelocity(80);
+                    robot.robotDrive.driveMotors[2].setVelocity(80);
+                    robot.robotDrive.driveMotors[3].setVelocity(80);
+                }
+                break;
             case DpadUp:
                 if (robot.climber != null && pressed)
                 {
