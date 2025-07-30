@@ -32,7 +32,6 @@ import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcUserChoices;
 import frclib.driverio.FrcXboxController;
-import frclib.motor.FrcCANPhoenix6Controller;
 import frclib.vision.FrcPhotonVision;
 import teamcode.subsystems.CoralArm;
 import teamcode.subsystems.Elevator;
@@ -545,10 +544,10 @@ public class FrcTest extends FrcTeleOp
                     SmartDashboard.putNumber("WheelVel4", robot.robotDrive.driveMotors[3].getVelocity());
                     // SmartDashboard.putNumber("AvgRobotVel", Math.hypot(robot.robotDrive.driveBase.getXVelocity(), robot.robotDrive.driveBase.getYVelocity()));
 
-                    for (int i = 0; i < 4; i++) {
-                        FrcCANPhoenix6Controller<?> motor = (FrcCANPhoenix6Controller<?>) robot.robotDrive.driveMotors[i];
-                        SmartDashboard.putNumber("TargetWheelVel" + String.valueOf(i), motor.targetVel);
-                    }
+                    // for (int i = 0; i < 4; i++) {
+                    //     FrcCANPhoenix6Controller<?> motor = (FrcCANPhoenix6Controller<?>) robot.robotDrive.driveMotors[i];
+                    //     SmartDashboard.putNumber("TargetWheelVel" + String.valueOf(i), motor.targetVel);
+                    // }
                     
                     
                     
