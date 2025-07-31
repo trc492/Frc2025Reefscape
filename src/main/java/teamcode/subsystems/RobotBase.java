@@ -184,9 +184,6 @@ public class RobotBase
             xDrivePosScale = yDrivePosScale = 0.91311455; //DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
             // Robot Drive Characteristics
             driveMotorMaxVelocity = null;
-            driveMotorVelPidCoeffs = null;
-            driveMotorVelPidTolerance = null;
-            driveMotorSoftwarePid = false;
             robotMaxVelocity = 171.0;           // inch/sec
             robotMaxAcceleration = 23000.0;     // inch/sec sq
             robotMaxDeceleration = robotMaxAcceleration;
@@ -371,9 +368,6 @@ public class RobotBase
             xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
             // Robot Drive Characteristics
             driveMotorMaxVelocity = null;
-            driveMotorVelPidCoeffs = null;
-            driveMotorVelPidTolerance = null;
-            driveMotorSoftwarePid = false;
             robotMaxVelocity = 201.0;           // inch/sec
             robotMaxAcceleration = 6935.0;      // inch/sec sq
             robotMaxDeceleration = robotMaxAcceleration;
