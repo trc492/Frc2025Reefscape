@@ -23,8 +23,10 @@
 package teamcode;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import frclib.drivebase.FrcRobotDrive.RobotInfo;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
+import frclib.motor.FrcCANPhoenix6Controller;
 import frclib.vision.FrcPhotonVision.DetectedObject;
 import teamcode.subsystems.Climber;
 import teamcode.subsystems.CoralArm;
