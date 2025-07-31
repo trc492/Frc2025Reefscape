@@ -22,6 +22,7 @@
 
 package teamcode;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -227,6 +228,8 @@ public class FrcTest extends FrcTeleOp
     private double prevVelocity = 0.0;
     private PipelineType frontPipeline = PipelineType.APRILTAG;
     private PipelineType backPipeline = PipelineType.APRILTAG;
+    private ArrayList<Double> velRanges = new ArrayList<>();
+    private ArrayList<Double> rotVelRanges = new ArrayList<>();
 
     public FrcTest(Robot robot)
     {
@@ -437,6 +440,28 @@ public class FrcTest extends FrcTeleOp
     public void stopMode(RunMode prevMode, RunMode nextMode)
     {
         super.stopMode(prevMode, nextMode);
+        if(velRanges.size() != 0){
+            double sum = 0.0;
+            for(int i = 0; i<velRanges.size(); i++){
+                sum+= velRanges.get(i); 
+            }
+            System.out.println("MeanVelRange" + sum/velRanges.size());
+            velRanges.clear();
+        } else{
+            System.out.println("velRanges is 0");
+        }
+
+
+        if(rotVelRanges.size() != 0){
+            double sum = 0.0;
+            for(int i = 0; i<rotVelRanges.size(); i++){
+                sum+=rotVelRanges.get(i);
+            }
+            System.out.println("MeanRotVelRange" + sum/rotVelRanges.size());
+        } else{
+            System.out.println("rotVelRanges is 0");
+        }
+
         switch (testChoices.getTest())
         {
             case SWERVE_CALIBRATION:
@@ -549,8 +574,39 @@ public class FrcTest extends FrcTeleOp
                         FrcCANPhoenix6Controller<?> motor = (FrcCANPhoenix6Controller<?>) robot.robotDrive.driveMotors[i];
                         SmartDashboard.putNumber("TargetWheelVel" + String.valueOf(i), motor.targetVel);
                     }
-                    
-                    
+                    double highest = Double.NEGATIVE_INFINITY;
+                    double lowest = Double.POSITIVE_INFINITY;
+                    double sum = 0;
+                    for(int i = 0; i<4; i++){
+                        double vel = Math.abs(robot.robotDrive.driveMotors[i].getVelocity());
+                        sum+=vel;
+                        if(vel > highest){
+                            highest = vel;
+                        }
+
+                        if(vel < lowest){
+                            lowest = vel;
+                        }
+
+                    }
+
+                    if(slowPeriodicLoop){
+                        double rotVel = Math.abs(robot.robotDrive.imu.getZRotationRate().value) / (sum/4+1e-6);
+                        SmartDashboard.putNumber("MeanAbsVel", rotVel);
+
+                        if((sum/4) > 20){
+                            rotVelRanges.add(rotVel);
+                        }
+                    }
+
+
+                    double velRange = (highest - lowest) / (sum/4+1e-6);
+                    if((sum/4) > 20){
+                        velRanges.add(velRange);
+                    }
+            
+                    SmartDashboard.putNumber("VelRange", (highest-lowest)/((sum/4) + 1e-6));
+
                     
                 }
                 break;

@@ -23,6 +23,7 @@
 package teamcode;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frclib.drivebase.FrcRobotDrive.RobotInfo;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
@@ -155,7 +156,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         {
             for(int i = 0; i<4; i++){
                 // dont multiply by 12 if not velocity comp
-                robot.robotDrive.driveMotors[i].setMotorVelocityPidCoefficients(new PidCoefficients(0.0, 0.0, 0.0,0.12, 0.0)); //0.02
+                robot.robotDrive.driveMotors[i].setMotorVelocityPidCoefficients(new PidCoefficients(0.25, 0.0, 0.0,0.12, 0.0)); //0.02
             }
             // Set robot to FIELD by default but don't change the heading.
             robot.setDriveOrientation(driveOrientationMenu.getCurrentChoiceObject(), false);
@@ -268,7 +269,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
                                 if (robot.scoreCoralTask != null && robot.scoreCoralTask.isActive())
                                 {
-                                    robot.scoreCoralTask.cancel();
+                                robot.scoreCoralTask.cancel();
                                 }
                             }
 
