@@ -255,4 +255,14 @@ public class Climber extends TrcSubsystem
         return lineNum;
     }   //updateStatus
 
+    /**
+     * This method is called to prep the subsystem for tuning.
+     *
+     * @param tuneParams specifies tuning parameters.
+     */
+    @Override
+    public void prepSubsystemForTuning(double... tuneParams)
+    {
+    }   //prepSubsystemForTuning
+
 }   //class Climber
