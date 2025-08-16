@@ -57,7 +57,7 @@ public class Elevator extends TrcSubsystem
         public static final double ZERO_CAL_POWER               = -0.5;
 
         public static final double MIN_POS                      = POS_OFFSET;
-        public static final double MAX_POS                      = 70.5;
+        public static final double MAX_POS                      = 69.5;
         public static final double TURTLE_POS                   = MIN_POS;
         public static final double TURTLE_DELAY                 = 0.0;
         public static final double CLIMB_POS                    = MIN_POS;
@@ -66,7 +66,7 @@ public class Elevator extends TrcSubsystem
         public static final double TROUGH_SCORE_LEVEL_POS       = MIN_POS;  // TODO
         public static final double REEF_SCORE_LEVEL1_POS        = MIN_POS;  // TODO
         public static final double REEF_SCORE_LEVEL2_POS        = 43.5; // TODO
-        public static final double REEF_SCORE_LEVEL3_POS        = 70.0; // TODO
+        public static final double REEF_SCORE_LEVEL3_POS        = 66.0; // TODO
         public static final double[] SCORE_LEVEL_POS            =
             {TROUGH_SCORE_LEVEL_POS, REEF_SCORE_LEVEL1_POS, REEF_SCORE_LEVEL2_POS, REEF_SCORE_LEVEL3_POS};
         public static final double[] posPresets                 = {MIN_POS, 45.0, 50.0, 55.0, 60.0, 65.0, MAX_POS};
@@ -74,7 +74,7 @@ public class Elevator extends TrcSubsystem
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;
         public static final TrcPidController.PidCoefficients posPidCoeffs =
-            new TrcPidController.PidCoefficients(0.5, 0.0, 0.01, 0.0, 0.0);
+            new TrcPidController.PidCoefficients(0.25, 0.0, 0.01, 0.0, 0.0); //kp: 0.5, kd: 0.01
         public static final double POS_PID_TOLERANCE            = 0.5;
         public static final double GRAVITY_COMP_POWER           = 0.0;
     }   //class Params
