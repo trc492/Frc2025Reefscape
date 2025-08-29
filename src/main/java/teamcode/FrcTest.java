@@ -426,7 +426,7 @@ public class FrcTest extends FrcTeleOp
                 break;
 
             default:
-                break;
+                break;   
         }
 
         LiveWindow.setEnabled(liveWindowEnabled);

@@ -25,6 +25,7 @@ package teamcode;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frclib.drivebase.FrcRobotDrive.RobotInfo;
+import frclib.drivebase.FrcSwerveDrive;
 import frclib.driverio.FrcChoiceMenu;
 import frclib.driverio.FrcXboxController;
 import frclib.motor.FrcCANPhoenix6Controller;
@@ -96,6 +97,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
     private int scoreLevelIndex = 3;
     private boolean scoreRightSide = true;
     private boolean rumbling = false;
+    private boolean aButtonPressed = false;
 
     /**
      * Constructor: Create an instance of the object.
@@ -156,10 +158,12 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         {
             for(int i = 0; i<4; i++){
                 // dont multiply by 12 if not velocity comp
-                robot.robotDrive.driveMotors[i].setMotorVelocityPidCoefficients(new PidCoefficients(0.25, 0.0, 0.0,0.12, 0.0)); //0.02
+                robot.robotDrive.driveMotors[i].setMotorVelocityPidCoefficients(new PidCoefficients(0.35, 0.0, 0.0,0.12, 0.0)); //0.02
             }
             // Set robot to FIELD by default but don't change the heading.
-            robot.setDriveOrientation(driveOrientationMenu.getCurrentChoiceObject(), false);
+            //TODO: Change back
+            //robot.setDriveOrientation(driveOrientationMenu.getCurrentChoiceObject(), false);
+            robot.setDriveOrientation(DriveOrientation.ROBOT, false);
             // Enable AprilTag vision for re-localization.
             if (robot.photonVisionFront != null)
             {
@@ -274,7 +278,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                             }
 
                             robot.robotDrive.driveBase.holonomicDrive(
-                                null, driveInputs[0], driveInputs[1], driveInputs[2], gyroAngle);
+                                null, aButtonPressed? driveInputs[0]: 0.0, driveInputs[1], driveInputs[2], gyroAngle);
                             if (showDriveBaseStatus)
                             {
                                 robot.dashboard.putString(
@@ -405,13 +409,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
         {
             case A:
                 // Toggle between field or robot oriented driving.
+                aButtonPressed = pressed;
                 if (robot.robotDrive != null && pressed)
                 {
+                    
                     if (driverAltFunc)
                     {
                         if (robot.robotDrive.driveBase.getDriveOrientation() != DriveOrientation.FIELD)
                         {
-                            robot.setDriveOrientation(DriveOrientation.FIELD, true);
+                            robot.setDriveOrientation(DriveOrientation.ROBOT, true);
+                            //TODO: CHANGE TO ROBOT
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Setting Mode to: Field");
                         }
                         else
@@ -433,11 +440,16 @@ public class FrcTeleOp implements TrcRobot.RobotMode
 
             case B:
                 // Deploy climber.
-                if (robot.climber != null && pressed)
-                {
-                    robot.elevatorArmTask.coralArm.setPosition(CoralArm.Params.CLIMB_POS);
-                    robot.climber.deploy(moduleName);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
+                // if (robot.climber != null && pressed)
+                // {
+                //     robot.elevatorArmTask.coralArm.setPosition(CoralArm.Params.CLIMB_POS);
+                //     robot.climber.deploy(moduleName);
+                //     robot.globalTracer.traceInfo(moduleName, ">>>>> Deploy Climber");
+                // }
+                if (pressed) {
+                    var swerve = (TrcSwerveDriveBase) robot.robotDrive.driveBase;
+                    swerve.setSteerAngle(0.0, false);
+                    System.out.println("set to 0");
                 }
                 break;
 
