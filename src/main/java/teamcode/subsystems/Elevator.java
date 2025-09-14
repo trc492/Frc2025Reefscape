@@ -51,9 +51,9 @@ public class Elevator extends TrcSubsystem
         public static final boolean LOWER_LIMITSW_NORMAL_CLOSE  = true;
         public static final boolean UPPER_LIMITSW_NORMAL_CLOSE  = true;
 
-        public static final double INCHES_PER_COUNT             = 0.17682926829268292682926829268293;
+        public static final double INCHES_PER_COUNT             = 0.3766766782; //0.17682926829268292682926829268293;
         public static final double POS_OFFSET                   = 39.25;
-        public static final double POWER_LIMIT                  = 1.0;
+        public static final double POWER_LIMIT                  = 0.75; //1.0
         public static final double ZERO_CAL_POWER               = -0.5;
 
         public static final double MIN_POS                      = POS_OFFSET;
