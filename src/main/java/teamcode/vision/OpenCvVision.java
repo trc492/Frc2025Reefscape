@@ -43,8 +43,10 @@ public class OpenCvVision extends FrcOpenCvDetector
 {
     // YCrCb Color Space.
     private static final int colorConversion = Imgproc.COLOR_BGR2YCrCb;
-    private static final double[] redBlobColorThresholds = {10.0, 180.0, 170.0, 240.0, 80.0, 120.0};
-    private static final double[] blueBlobColorThresholds = {0.0, 180.0, 80.0, 150.0, 150.0, 200.0};
+    private static final double[] redBlobColorThresholdsLow = {10.0, 170.0, 80.0};
+    private static final double[] redBlobColorThresholdsHigh = {180.0, 240.0, 120.0};
+    private static final double[] blueBlobColorThresholdsLow = {0.0, 80.0, 150.0};
+    private static final double[] blueBlobColorThresholdsHigh = {180.0, 150.0, 200.0};
     private static final TrcOpenCvColorBlobPipeline.FilterContourParams colorBlobFilterContourParams =
         new TrcOpenCvColorBlobPipeline.FilterContourParams()
             .setMinArea(10000.0)
@@ -57,7 +59,7 @@ public class OpenCvVision extends FrcOpenCvDetector
 
     public enum ObjectType
     {
-        APRILTAG, REDBLOB, BLUEBLOB, NONE;
+        APRILTAG, COLORBLOB, NONE;
 
         static ObjectType nextObjectType(ObjectType objType)
         {
@@ -66,19 +68,15 @@ public class OpenCvVision extends FrcOpenCvDetector
             switch (objType)
             {
                 case APRILTAG:
-                    nextObjType = REDBLOB;
+                    nextObjType = COLORBLOB;
                     break;
 
-                case REDBLOB:
-                    nextObjType = BLUEBLOB;
-                    break;
-
-                case BLUEBLOB:
+                case COLORBLOB:
                     nextObjType = NONE;
                     break;
 
-                default:
                 case NONE:
+                default:
                     nextObjType = APRILTAG;
                     break;
             }
@@ -91,8 +89,7 @@ public class OpenCvVision extends FrcOpenCvDetector
     public final TrcDbgTrace tracer;
     private final FrcRobotDrive.VisionInfo cameraInfo;
     private final TrcOpenCvPipeline<DetectedObject<?>> aprilTagPipeline;
-    private final TrcOpenCvPipeline<DetectedObject<?>> redBlobPipeline;
-    private final TrcOpenCvPipeline<DetectedObject<?>> blueBlobPipeline;
+    private final TrcOpenCvPipeline<DetectedObject<?>> colorBlobPipeline;
     private ObjectType objectType = ObjectType.NONE;
 
     /**
@@ -116,10 +113,11 @@ public class OpenCvVision extends FrcOpenCvDetector
             "tag16h5", null, new AprilTagPoseEstimator.Config(
                 Units.inchesToMeters(cameraInfo.aprilTagSize), cameraInfo.camFx, cameraInfo.camFy, cameraInfo.camCx,
                 cameraInfo.camCy));
-        redBlobPipeline = new TrcOpenCvColorBlobPipeline(
-            "redBlobPipeline", colorConversion, redBlobColorThresholds, colorBlobFilterContourParams, true);
-        blueBlobPipeline = new TrcOpenCvColorBlobPipeline(
-            "blueBlobPipeline", colorConversion, blueBlobColorThresholds, colorBlobFilterContourParams, true);
+        TrcOpenCvColorBlobPipeline.PipelineParams pipelineParams = new TrcOpenCvColorBlobPipeline.PipelineParams()
+            .setColorThresholds(colorConversion, "RedBlob", redBlobColorThresholdsLow, redBlobColorThresholdsHigh)
+            .addColorThresholds("BlueBlob", blueBlobColorThresholdsLow, blueBlobColorThresholdsHigh)
+            .setContourDetectionParams(true, colorBlobFilterContourParams);
+        colorBlobPipeline = new TrcOpenCvColorBlobPipeline("ColorBlobPipeline", pipelineParams);
     }   //OpenCvVision
 
     /**
@@ -134,12 +132,8 @@ public class OpenCvVision extends FrcOpenCvDetector
                 setPipeline(aprilTagPipeline);
                 break;
 
-            case REDBLOB:
-                setPipeline(redBlobPipeline);
-                break;
-
-            case BLUEBLOB:
-                setPipeline(blueBlobPipeline);
+            case COLORBLOB:
+                setPipeline(colorBlobPipeline);
                 break;
 
             case NONE:
@@ -184,7 +178,15 @@ public class OpenCvVision extends FrcOpenCvDetector
      */
     public void setAnnotateEnabled(boolean enabled)
     {
-        getPipeline().setAnnotateEnabled(enabled);
+        TrcOpenCvPipeline<DetectedObject<?>> pipeline = getPipeline();
+        if (enabled)
+        {
+            pipeline.enableAnnotation(false, false);
+        }
+        else
+        {
+            pipeline.disableAnnotation();
+        }
     }   //setAnnotateEnabled
 
     /**

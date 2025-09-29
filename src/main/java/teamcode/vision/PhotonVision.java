@@ -295,33 +295,38 @@ public class PhotonVision extends FrcPhotonVision
      * This method update the dashboard with vision status.
      *
      * @param lineNum specifies the starting line number to print the subsystem status.
+     * @param slowLoop specifies true if this is a slow loop, false otherwise.
      * @return updated line number for the next subsystem to print.
      */
-    public int updateStatus(int lineNum)
+    public int updateStatus(int lineNum, boolean slowLoop)
     {
-        PipelineType pipelineType;
-        FrcPhotonVision.DetectedObject object = getBestDetectedObject(this::compareAreas);
-
-        if (object != null)
+        if (slowLoop)
         {
-            pipelineType = getPipeline();
-            if (pipelineType == PipelineType.APRILTAG)
+            PipelineType pipelineType;
+            FrcPhotonVision.DetectedObject object = getBestDetectedObject(this::compareAreas);
+
+            if (object != null)
             {
-                dashboard.putString(
-                    DBKEY_PREFIX + instanceName,
-                    String.format(
-                        "%s[%d]:targetPose=%s,robotPose=%s",
-                        pipelineType, object.target.getFiducialId(), object.targetPose, object.robotPose));
-            }
-            else
-            {
-                dashboard.putString(
-                    DBKEY_PREFIX + instanceName,
-                    String.format(
-                        "%s:targetPose=%s,robotPose=%s",
-                        pipelineType, object.targetPose, object.robotPose));
+                pipelineType = getPipeline();
+                if (pipelineType == PipelineType.APRILTAG)
+                {
+                    dashboard.putString(
+                        DBKEY_PREFIX + instanceName,
+                        String.format(
+                            "%s[%d]:targetPose=%s,robotPose=%s",
+                            pipelineType, object.target.getFiducialId(), object.targetPose, object.robotPose));
+                }
+                else
+                {
+                    dashboard.putString(
+                        DBKEY_PREFIX + instanceName,
+                        String.format(
+                            "%s:targetPose=%s,robotPose=%s",
+                            pipelineType, object.targetPose, object.robotPose));
+                }
             }
         }
+
         return lineNum;
     }   //updateStatus
 

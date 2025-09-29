@@ -25,11 +25,12 @@ package teamcode.subsystems;
 import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
-import frclib.subsystem.FrcMotorGrabber;
+import frclib.subsystem.FrcRollerIntake;
 import teamcode.RobotParams;
 import trclib.robotcore.TrcEvent;
-import trclib.subsystem.TrcMotorGrabber;
+import trclib.subsystem.TrcRollerIntake;
 import trclib.subsystem.TrcSubsystem;
+import trclib.subsystem.TrcRollerIntake.TriggerAction;
 
 /**
  * This class implements the Coral Grabber Subsystem.
@@ -65,7 +66,7 @@ public class CoralGrabber extends TrcSubsystem
     private static final String DBKEY_HAS_OBJECT                = Params.SUBSYSTEM_NAME + "/HasObject";
 
     private final FrcDashboard dashboard;
-    private final TrcMotorGrabber motorGrabber;
+    private final TrcRollerIntake motorGrabber;
 
     /**
      * Constructor: Creates an instance of the object.
@@ -80,13 +81,15 @@ public class CoralGrabber extends TrcSubsystem
         dashboard.refreshKey(DBKEY_SENSOR_STATE, false);
         dashboard.refreshKey(DBKEY_HAS_OBJECT, false);
 
-        FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
+        FrcRollerIntake.Params grabberParams = new FrcRollerIntake.Params()
             .setPrimaryMotor(
                 Params.MOTOR_NAME, Params.MOTOR_ID, Params.MOTOR_TYPE,Params.MOTOR_BRUSHLESS, Params.MOTOR_ENC_ABS,
                 Params.MOTOR_INVERTED)
-            .setDigitalInputTrigger(Params.SENSOR_NAME, Params.SENSOR_CHANNEL, Params.SENSOR_TRIGGER_INVERTED)
-            .setPowerParams(Params.INTAKE_POWER, Params.EJECT_POWER, Params.RETAIN_POWER);
-        motorGrabber = new FrcMotorGrabber(Params.SUBSYSTEM_NAME, grabberParams).getGrabber();
+            .setBackDigitalInputTrigger(
+                Params.SENSOR_NAME, Params.SENSOR_CHANNEL, Params.SENSOR_TRIGGER_INVERTED,
+                TriggerAction.FinishOnTrigger, null, null, null)
+            .setPowerLevels(Params.INTAKE_POWER, Params.EJECT_POWER, Params.RETAIN_POWER);
+        motorGrabber = new FrcRollerIntake(Params.SUBSYSTEM_NAME, grabberParams).getIntake();
     }   //CoralGrabber
 
     /**
@@ -94,7 +97,7 @@ public class CoralGrabber extends TrcSubsystem
      *
      * @return created grabber object.
      */
-    public TrcMotorGrabber getMotorGrabber()
+    public TrcRollerIntake getMotorGrabber()
     {
         return motorGrabber;
     }   //getMotorGrabber
@@ -137,26 +140,41 @@ public class CoralGrabber extends TrcSubsystem
      * This method update the dashboard with the subsystem status.
      *
      * @param lineNum specifies the starting line number to print the subsystem status.
+     * @param slowLoop specifies true if this is a slow loop, false otherwise.
      * @return updated line number for the next subsystem to print.
      */
     @Override
-    public int updateStatus(int lineNum)
+    public int updateStatus(int lineNum, boolean slowLoop)
     {
-        dashboard.putNumber(DBKEY_POWER, motorGrabber.getPower());
-        dashboard.putNumber(DBKEY_CURRENT, motorGrabber.getCurrent());
-        dashboard.putBoolean(DBKEY_SENSOR_STATE, motorGrabber.getSensorState());
-        dashboard.putBoolean(DBKEY_HAS_OBJECT, motorGrabber.hasObject());
+        if (slowLoop)
+        {
+            dashboard.putNumber(DBKEY_POWER, motorGrabber.getPower());
+            dashboard.putNumber(DBKEY_CURRENT, motorGrabber.getCurrent());
+            dashboard.putBoolean(DBKEY_SENSOR_STATE, motorGrabber.getBackTriggerState());
+            dashboard.putBoolean(DBKEY_HAS_OBJECT, motorGrabber.hasObject());
+        }
+
         return lineNum;
     }   //updateStatus
 
     /**
-     * This method is called to prep the subsystem for tuning.
+     * This method is called to initialize the Dashboard from subsystem parameters.
      *
-     * @param tuneParams specifies tuning parameters.
+     * @param subComponent specifies the sub-component of the Subsystem to be tuned, can be null if no sub-component.
      */
     @Override
-    public void prepSubsystemForTuning(double... tuneParams)
+    public void initDashboardFromSubsystemParams(String subComponent)
     {
-    }   //prepSubsystemForTuning
+    }   //initDashboardFromSubsystemParams
+
+    /**
+     * This method is called to initialize the subsystem parameters from the Dashboard for tuning.
+     *
+     * @param subComponent specifies the sub-component of the Subsystem to be tuned, can be null if no sub-component.
+     */
+    @Override
+    public void initSubsystemParamsForTuning(String subComponent)
+    {
+    }   //initSubsystemParamsForTuning
 
 }   //class CoralGrabber

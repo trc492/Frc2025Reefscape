@@ -26,13 +26,14 @@ import frclib.driverio.FrcDashboard;
 import frclib.motor.FrcMotorActuator;
 import frclib.motor.FrcMotorActuator.MotorType;
 import frclib.sensor.FrcEncoder.EncoderType;
-import frclib.subsystem.FrcMotorGrabber;
+import frclib.subsystem.FrcRollerIntake;
 import teamcode.RobotParams;
 import trclib.controller.TrcPidController;
 import trclib.motor.TrcMotor;
 import trclib.robotcore.TrcEvent;
-import trclib.subsystem.TrcMotorGrabber;
+import trclib.subsystem.TrcRollerIntake;
 import trclib.subsystem.TrcSubsystem;
+import trclib.subsystem.TrcRollerIntake.TriggerAction;
 
 /**
  * This class implements the Climber Subsystem that consists of an arm and a grabber.
@@ -111,7 +112,7 @@ public class Climber extends TrcSubsystem
 
     private final FrcDashboard dashboard;
     public final TrcMotor armMotor;
-    public final TrcMotorGrabber grabber;
+    public final TrcRollerIntake grabber;
 
     /**
      * Constructor: Creates an instance of the object.
@@ -142,20 +143,21 @@ public class Climber extends TrcSubsystem
         //     ArmParams.ENCODER_NAME, ArmParams.ENCODER_ID, ArmParams.ENCODER_TYPE, ArmParams.ENCODER_INVERTED);
         // ((FrcCANTalonFX) armMotor).motor.setPosition(absEncoder.getScaledPosition() * ArmParams.MOTOR_GEAR_RATIO);
         armMotor.setPositionPidParameters(
-            ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED);
+            ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, ArmParams.SOFTWARE_PID_ENABLED, null);
         // armMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
 
         // Climber Grabber.
         if (RobotParams.Preferences.useClimberGrabber)
         {
-            FrcMotorGrabber.Params grabberParams = new FrcMotorGrabber.Params()
+            FrcRollerIntake.Params grabberParams = new FrcRollerIntake.Params()
                 .setPrimaryMotor(
                     GrabberParams.MOTOR_NAME, GrabberParams.MOTOR_ID, GrabberParams.MOTOR_TYPE,
                     GrabberParams.MOTOR_BRUSHLESS, GrabberParams.MOTOR_ENC_ABS, GrabberParams.MOTOR_INVERTED)
-                .setDigitalInputTrigger(
-                    GrabberParams.SENSOR_NAME, GrabberParams.SENSOR_CHANNEL, GrabberParams.SENSOR_TRIGGER_INVERTED)
-                .setPowerParams(GrabberParams.INTAKE_POWER, GrabberParams.EJECT_POWER, GrabberParams.RETAIN_POWER);
-            grabber = new FrcMotorGrabber(GrabberParams.COMPONENT_NAME, grabberParams).getGrabber();
+                .setBackDigitalInputTrigger(
+                    GrabberParams.SENSOR_NAME, GrabberParams.SENSOR_CHANNEL, GrabberParams.SENSOR_TRIGGER_INVERTED,
+                    TriggerAction.FinishOnTrigger, null, null, null)
+                .setPowerLevels(GrabberParams.INTAKE_POWER, GrabberParams.EJECT_POWER, GrabberParams.RETAIN_POWER);
+            grabber = new FrcRollerIntake(GrabberParams.COMPONENT_NAME, grabberParams).getIntake();
         }
         else
         {
@@ -165,7 +167,7 @@ public class Climber extends TrcSubsystem
 
     public void deploy(String owner)
     {
-        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
+        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true, null);
         armMotor.setPosition(owner, 0.0, ArmParams.DEPLOY_POS, true, ArmParams.POWER_LIMIT, null, 0.0);
         if (grabber != null)
         {
@@ -175,7 +177,7 @@ public class Climber extends TrcSubsystem
 
     public void climb(String owner)
     {
-        armMotor.setPositionPidParameters(ArmParams.climbPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
+        armMotor.setPositionPidParameters(ArmParams.climbPidCoeffs, ArmParams.POS_PID_TOLERANCE, true, null);
         armMotor.setPosition(owner, 0.0, ArmParams.CLIMB_POS, true, ArmParams.CLIMB_POWER, null, 0.0);
     }   //climb
 
@@ -186,7 +188,7 @@ public class Climber extends TrcSubsystem
 
     public void setPidPower(double power, double minPos, double maxPos, boolean holdTarget)
     {
-        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true);
+        armMotor.setPositionPidParameters(ArmParams.groundPidCoeffs, ArmParams.POS_PID_TOLERANCE, true, null);
         armMotor.setPidPower(power, minPos, maxPos, holdTarget);
     }   //setPidPower
 
@@ -233,36 +235,51 @@ public class Climber extends TrcSubsystem
      * This method update the dashboard with the subsystem status.
      *
      * @param lineNum specifies the starting line number to print the subsystem status.
+     * @param slowLoop specifies true if this is a slow loop, false otherwise.
      * @return updated line number for the next subsystem to print.
      */
     @Override
-    public int updateStatus(int lineNum)
+    public int updateStatus(int lineNum, boolean slowLoop)
     {
-        // Climber Arm.
-        dashboard.putNumber(DBKEY_ARM_POWER, armMotor.getPower());
-        dashboard.putNumber(DBKEY_ARM_CURRENT, armMotor.getCurrent());
-        dashboard.putString(
-            DBKEY_ARM_POSITION,
-            String.format("%.1f/%.1f", armMotor.getPosition(), armMotor.getPidTarget()));
-        // Climber Grabber.
-        if (grabber != null)
+        if (slowLoop)
         {
-            dashboard.putNumber(DBKEY_GRABBER_POWER, grabber.getPower());
-            dashboard.putNumber(DBKEY_GRABBER_CURRENT, grabber.getCurrent());
-            dashboard.putBoolean(DBKEY_GRABBER_SENSOR_STATE, grabber.getSensorState());
-            dashboard.putBoolean(DBKEY_GRABBER_HAS_OBJECT, grabber.hasObject());
+            // Climber Arm.
+            dashboard.putNumber(DBKEY_ARM_POWER, armMotor.getPower());
+            dashboard.putNumber(DBKEY_ARM_CURRENT, armMotor.getCurrent());
+            dashboard.putString(
+                DBKEY_ARM_POSITION,
+                String.format("%.1f/%.1f", armMotor.getPosition(), armMotor.getPidTarget()));
+            // Climber Grabber.
+            if (grabber != null)
+            {
+                dashboard.putNumber(DBKEY_GRABBER_POWER, grabber.getPower());
+                dashboard.putNumber(DBKEY_GRABBER_CURRENT, grabber.getCurrent());
+                dashboard.putBoolean(DBKEY_GRABBER_SENSOR_STATE, grabber.getBackTriggerState());
+                dashboard.putBoolean(DBKEY_GRABBER_HAS_OBJECT, grabber.hasObject());
+            }
         }
+
         return lineNum;
     }   //updateStatus
 
     /**
-     * This method is called to prep the subsystem for tuning.
+     * This method is called to initialize the Dashboard from subsystem parameters.
      *
-     * @param tuneParams specifies tuning parameters.
+     * @param subComponent specifies the sub-component of the Subsystem to be tuned, can be null if no sub-component.
      */
     @Override
-    public void prepSubsystemForTuning(double... tuneParams)
+    public void initDashboardFromSubsystemParams(String subComponent)
     {
-    }   //prepSubsystemForTuning
+    }   //initDashboardFromSubsystemParams
+
+    /**
+     * This method is called to initialize the subsystem parameters from the Dashboard for tuning.
+     *
+     * @param subComponent specifies the sub-component of the Subsystem to be tuned, can be null if no sub-component.
+     */
+    @Override
+    public void initSubsystemParamsForTuning(String subComponent)
+    {
+    }   //initSubsystemParamsForTuning
 
 }   //class Climber

@@ -67,7 +67,7 @@ import trclib.robotcore.TrcDbgTrace;
 import trclib.robotcore.TrcEvent;
 import trclib.robotcore.TrcRobot.RunMode;
 import trclib.sensor.TrcRobotBattery;
-import trclib.subsystem.TrcMotorGrabber;
+import trclib.subsystem.TrcRollerIntake;
 import trclib.subsystem.TrcSubsystem;
 import trclib.vision.TrcVisionRelocalize;
 
@@ -108,7 +108,7 @@ public class Robot extends FrcRobotBase
     //
     // Other subsystems.
     //
-    public TrcMotorGrabber coralGrabber;
+    public TrcRollerIntake coralGrabber;
     public Climber climber;
     //
     // Auto-Assists.
@@ -697,12 +697,13 @@ public class Robot extends FrcRobotBase
      * This method is called when Comm Status changes state. This is an indication of losing or regaining comm.
      *
      * @param context specifies true for comm connected, false for comm disconnected.
+     * @param canceled specifies if the callback is canceled.
      */
-    private void commStatusCallback(Object context)
+    private void commStatusCallback(Object context, boolean canceled)
     {
         Boolean commStatus = (Boolean) context;
 
-        if (!commStatus)
+        if (!canceled && !commStatus)
         {
             // We lost comm, do emergency shutdown to prevent damage.
             if (robotDrive != null && robotDrive instanceof FrcSwerveDrive)

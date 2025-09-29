@@ -124,7 +124,7 @@ public class CoralArm extends TrcSubsystem
         FrcCANTalonSRX talonSrx = (FrcCANTalonSRX) coralArmMotor;
         talonSrx.setFeedbackDevice(FeedbackDevice.CTRE_MagEncoder_Absolute);
 
-        coralArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED);
+        coralArmMotor.setPositionPidParameters(Params.posPidCoeffs, Params.POS_PID_TOLERANCE, Params.SOFTWARE_PID_ENABLED, null);
         coralArmMotor.setPositionPidPowerComp(this::getGravityComp);
         // coralArmMotor.tracer.setTraceLevel(MsgLevel.DEBUG);
     }   //CoralArm
@@ -177,28 +177,43 @@ public class CoralArm extends TrcSubsystem
      * This method update the dashboard with the subsystem status.
      *
      * @param lineNum specifies the starting line number to print the subsystem status.
+     * @param slowLoop specifies true if this is a slow loop, false otherwise.
      * @return updated line number for the next subsystem to print.
      */
     @Override
-    public int updateStatus(int lineNum)
+    public int updateStatus(int lineNum, boolean slowLoop)
     {
-        dashboard.putNumber(DBKEY_POWER, coralArmMotor.getPower());
-        dashboard.putNumber(DBKEY_CURRENT, coralArmMotor.getCurrent());
-        dashboard.putString(
-            DBKEY_POSITION, String.format("%.1f/%.1f", coralArmMotor.getPosition(), coralArmMotor.getPidTarget()));
-        dashboard.putBoolean(DBKEY_LOWER_LIMIT_SW, coralArmMotor.isLowerLimitSwitchActive());
-        dashboard.putBoolean(DBKEY_UPPER_LIMIT_SW, coralArmMotor.isUpperLimitSwitchActive());
+        if (slowLoop)
+        {
+            dashboard.putNumber(DBKEY_POWER, coralArmMotor.getPower());
+            dashboard.putNumber(DBKEY_CURRENT, coralArmMotor.getCurrent());
+            dashboard.putString(
+                DBKEY_POSITION, String.format("%.1f/%.1f", coralArmMotor.getPosition(), coralArmMotor.getPidTarget()));
+            dashboard.putBoolean(DBKEY_LOWER_LIMIT_SW, coralArmMotor.isLowerLimitSwitchActive());
+            dashboard.putBoolean(DBKEY_UPPER_LIMIT_SW, coralArmMotor.isUpperLimitSwitchActive());
+        }
+
         return lineNum;
     }   //updateStatus
 
     /**
-     * This method is called to prep the subsystem for tuning.
+     * This method is called to initialize the Dashboard from subsystem parameters.
      *
-     * @param tuneParams specifies tuning parameters.
+     * @param subComponent specifies the sub-component of the Subsystem to be tuned, can be null if no sub-component.
      */
     @Override
-    public void prepSubsystemForTuning(double... tuneParams)
+    public void initDashboardFromSubsystemParams(String subComponent)
     {
-    }   //prepSubsystemForTuning
+    }   //initDashboardFromSubsystemParams
+
+    /**
+     * This method is called to initialize the subsystem parameters from the Dashboard for tuning.
+     *
+     * @param subComponent specifies the sub-component of the Subsystem to be tuned, can be null if no sub-component.
+     */
+    @Override
+    public void initSubsystemParamsForTuning(String subComponent)
+    {
+    }   //initSubsystemParamsForTuning
 
 }   //class CoralArm

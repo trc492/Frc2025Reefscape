@@ -45,7 +45,7 @@ public class Dashboard
     public static final String DBKEY_VISION_OPENCV                  = "Vision/OpenCv";
 
     private static FrcDashboard dashboard;
-    private static double nextDashboardUpdateTime;
+    private static Double nextDashboardUpdateTime =  null;
 
     /**
      * Constructor: Creates an instance of the object and publishes the keys in the Network Table.
@@ -86,34 +86,36 @@ public class Dashboard
     public static int updateDashboard(Robot robot, int lineNum)
     {
         double currTime = TrcTimer.getCurrentTime();
+        boolean slowLoop = nextDashboardUpdateTime == null || currTime >= nextDashboardUpdateTime;
 
-        if (currTime >= nextDashboardUpdateTime)
+        if (slowLoop)
         {
             nextDashboardUpdateTime = currTime + RobotParams.Robot.DASHBOARD_UPDATE_INTERVAL;
-            if (dashboard.getBoolean(DBKEY_PREFERENCE_UPDATE_DASHBOARD, RobotParams.Preferences.updateDashboard))
+        }
+
+        if (dashboard.getBoolean(DBKEY_PREFERENCE_UPDATE_DASHBOARD, RobotParams.Preferences.updateDashboard))
+        {
+            if (dashboard.getBoolean(DBKEY_PREFERENCE_DRIVEBASE_STATUS, RobotParams.Preferences.showDriveBase))
             {
-                if (dashboard.getBoolean(DBKEY_PREFERENCE_DRIVEBASE_STATUS, RobotParams.Preferences.showDriveBase))
+                lineNum = robot.robotBase.updateStatus(lineNum, slowLoop);
+            }
+
+            if (dashboard.getBoolean(DBKEY_PREFERENCE_VISION_STATUS, RobotParams.Preferences.showVision))
+            {
+                if (robot.photonVisionFront != null)
                 {
-                    lineNum = robot.robotBase.updateStatus(lineNum);
+                    lineNum = robot.photonVisionFront.updateStatus(lineNum, slowLoop);
                 }
 
-                if (dashboard.getBoolean(DBKEY_PREFERENCE_VISION_STATUS, RobotParams.Preferences.showVision))
+                if (robot.photonVisionBack != null)
                 {
-                    if (robot.photonVisionFront != null)
-                    {
-                        lineNum = robot.photonVisionFront.updateStatus(lineNum);
-                    }
-
-                    if (robot.photonVisionBack != null)
-                    {
-                        lineNum = robot.photonVisionBack.updateStatus(lineNum);
-                    }
+                    lineNum = robot.photonVisionBack.updateStatus(lineNum, slowLoop);
                 }
+            }
 
-                if (dashboard.getBoolean(DBKEY_PREFERENCE_SUBSYSTEM_STATUS, RobotParams.Preferences.showSubsystems))
-                {
-                    lineNum = TrcSubsystem.updateStatusAll(lineNum);
-                }
+            if (dashboard.getBoolean(DBKEY_PREFERENCE_SUBSYSTEM_STATUS, RobotParams.Preferences.showSubsystems))
+            {
+                lineNum = TrcSubsystem.updateStatusAll(lineNum, slowLoop);
             }
         }
 
