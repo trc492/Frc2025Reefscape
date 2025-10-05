@@ -593,7 +593,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     if (pressed)
                     {
-                        if (operatorAltFunc)
+                        if (!operatorAltFunc)
                         {
                             robot.coralGrabber.intake(0.0, null);
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Coral Intake");
@@ -617,7 +617,7 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 {
                     if (pressed)
                     {
-                        if (operatorAltFunc)
+                        if (!operatorAltFunc)
                         {
                             robot.coralGrabber.eject(0.0, null);
                             robot.globalTracer.traceInfo(moduleName, ">>>>> Manual Coral Eject");

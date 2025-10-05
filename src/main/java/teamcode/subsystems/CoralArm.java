@@ -68,7 +68,7 @@ public class CoralArm extends TrcSubsystem
         public static final double CLIMB_POS                    = 15.0;
         public static final double SAFE_ZONE_POS                = 35.0;
         public static final double STATION_PICKUP_POS           = -35.5;//TODO
-        public static final double TROUGH_SCORE_LEVEL_POS       = -43.5;  // TODO
+        public static final double TROUGH_SCORE_LEVEL_POS       = -35.5;  // TODO
         public static final double REEF_SCORE_LEVEL1_POS        = 125.4;// TODO
         public static final double REEF_SCORE_LEVEL2_POS        = 151.9;// TODO
         public static final double REEF_SCORE_LEVEL3_POS        = 163.0;// TODO
