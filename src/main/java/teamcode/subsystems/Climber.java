@@ -65,12 +65,12 @@ public class Climber extends TrcSubsystem
         public static final double POWER_LIMIT                  = 1.0;
         public static final double CLIMB_POWER                  = 0.5;
 
-        public static final double MIN_POS                      = 60.0;
-        public static final double MAX_POS                      = 200.0;
-        public static final double TURTLE_POS                   = 60.0;
+        public static final double MIN_POS                      = 2.0;
+        public static final double MAX_POS                      = 233.0;
+        public static final double TURTLE_POS                   = 7.6;
         public static final double TURTLE_DELAY                 = 0.0;
-        public static final double DEPLOY_POS                   = 172.0;
-        public static final double CLIMB_POS                    = 82.25 ;
+        public static final double DEPLOY_POS                   = 209.5;
+        public static final double CLIMB_POS                    = 118.25 ;
         public static final double SAFE_POS                     = 195.0;
 
         public static final boolean SOFTWARE_PID_ENABLED        = true;

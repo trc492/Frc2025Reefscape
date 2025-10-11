@@ -441,24 +441,25 @@ public class FrcTeleOp implements TrcRobot.RobotMode
                 break;
 
             case Y:
-                if (driverAltFunc)
-                {
-                    if (robot.scoreCoralTask != null && pressed)
-                    {
-                        robot.scoreCoralTask.autoScoreCoral(
-                            moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.4,
-                            scoreRightSide? rightScoreOffsets[scoreLevelIndex]: leftScoreOffsets[scoreLevelIndex], null);
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Align to Score Coral");
-                    }
-                }
-                else
-                {
-                    if (robot.pickupCoralFromStationTask != null && pressed)
-                    {
-                        robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, true, null);
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
-                    }
-                }
+                // if (driverAltFunc)
+                // {
+                //     if (robot.scoreCoralTask != null && pressed)
+                //     {
+                //         robot.scoreCoralTask.autoScoreCoral(
+                //             moduleName, true, -1, scoreLevelIndex, scoreRightSide, false, false, true, 0.4,
+                //             scoreRightSide? rightScoreOffsets[scoreLevelIndex]: leftScoreOffsets[scoreLevelIndex], null);
+                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Align to Score Coral");
+                //     }
+                // }
+                // else
+                // {
+                //     if (robot.pickupCoralFromStationTask != null && pressed)
+                //     {
+                //         robot.pickupCoralFromStationTask.autoPickupCoral(moduleName, true, -1, false, true, null);
+                //         robot.globalTracer.traceInfo(moduleName, ">>>>> Auto Pickup Coral");
+                //     }
+                // }
+                robot.globalTracer.traceInfo(moduleName, "Doing nothing");
                 break;  
 
             case LeftBumper:
@@ -469,9 +470,15 @@ public class FrcTeleOp implements TrcRobot.RobotMode
             case RightBumper:
                 if (pressed)
                 {
-                    driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_SLOW_SCALE, DEF_DRIVE_SLOW_SCALE);
-                    turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_SLOW_SCALE, DEF_TURN_SLOW_SCALE);
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Slow Drive");
+                    if(driverAltFunc){
+                        driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_SLOW_SCALE, (DEF_DRIVE_SLOW_SCALE/2));
+                        turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_SLOW_SCALE, (DEF_TURN_SLOW_SCALE/2));
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Double Slow Drive");
+                    } else{
+                        driveSpeedScale = robot.dashboard.getNumber(DBKEY_DRIVE_SLOW_SCALE, DEF_DRIVE_SLOW_SCALE);
+                        turnSpeedScale = robot.dashboard.getNumber(DBKEY_TURN_SLOW_SCALE, DEF_TURN_SLOW_SCALE);
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Slow Drive");
+                    }
                 }
                 else
                 {

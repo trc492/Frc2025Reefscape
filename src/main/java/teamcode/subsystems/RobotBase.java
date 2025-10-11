@@ -380,7 +380,7 @@ public class RobotBase
             xDrivePidCoeffs = yDrivePidCoeffs = new PidCoefficients(0.02, 0.0, 0.002, 0.0, 5.0);
             xDrivePidPowerLimit = yDrivePidPowerLimit = 0.5;
             xDriveMaxPidRampRate = yDriveMaxPidRampRate = 0.5;  // %power per sec
-            turnPidCoeffs = new PidCoefficients(0.0078, 0.0, 0.0, 0.0, 0.0);//0.0044
+            turnPidCoeffs = new PidCoefficients(0.006318, 0.0, 0.00077, 0.0, 0.0);//0.0044
             turnPidPowerLimit = 0.5;
             turnMaxPidRampRate = 1.0;           // %power per sec
             // PID Stall Detection

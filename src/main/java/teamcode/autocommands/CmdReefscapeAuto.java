@@ -179,7 +179,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 7.0: -10.5), visionYOffset - 13.75),
+                                    visionXOffset + (scoreRightSide? 8.0: -10.5), visionYOffset - 10.75),
                                 event);
                         }
                         else if (startPos == AutoStartPos.START_POSE_FAR_SIDE)
@@ -195,12 +195,12 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                         else
                         {
                             preloadAprilTagId =
-                                RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];
+                                RobotParams.Game.APRILTAG_FAR_MID_REEF[alliance == Alliance.Red? 0: 1];                            
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.2,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 8.0: -10.5), visionYOffset - 18.0),
-                                event);
+                                    visionXOffset + (scoreRightSide? 8.0: -10.5), visionYOffset - 14.0),
+                                event);                                
                         }
                         sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     }
@@ -361,7 +361,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
                         null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2,
-                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -18.5: -15.5), event);
+                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -18.5: -13.5), event);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;
