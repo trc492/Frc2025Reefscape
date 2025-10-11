@@ -48,6 +48,8 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
     {
         START,
         SCORE_PRELOAD,
+        NUDGE,
+        BACKUP,
         GO_TO_CORAL_STATION,
         PICKUP_CORAL,
         SCORE_CORAL,
@@ -202,12 +204,31 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                                     visionXOffset + (scoreRightSide? 8.0: -10.5), visionYOffset - 14.0),
                                 event);                                
                         }
-                        sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
+                        sm.waitForSingleEvent(event, State.NUDGE);
                     }
                     else
                     {
                         sm.setState(State.GO_TO_CORAL_STATION);
                     }
+                    break;
+                case NUDGE:
+                    TrcPose2D currentPose = robot.robotDrive.driveBase.getFieldPosition().clone();
+                    TrcPose2D nudgePose = robot.adjustPoseByOffset(currentPose, 0.0, 3.0);
+                    robot.robotDrive.purePursuitDrive.start(
+                        null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
+                        robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
+                        nudgePose);
+                    sm.waitForSingleEvent(event, State.BACKUP);
+                    break;
+
+                case BACKUP:
+                    currentPose = robot.robotDrive.driveBase.getFieldPosition().clone();
+                    TrcPose2D backupPose = robot.adjustPoseByOffset(currentPose, 0.0, -3.0);
+                    robot.robotDrive.purePursuitDrive.start(
+                        null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
+                        robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
+                        backupPose);
+                    sm.waitForSingleEvent(event, State.GO_TO_CORAL_STATION);
                     break;
 
                 case GO_TO_CORAL_STATION:
