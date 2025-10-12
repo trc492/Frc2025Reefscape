@@ -191,7 +191,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                             robot.scoreCoralTask.autoScoreCoral(
                                 null, useVision, preloadAprilTagId, 3, true, false, relocalize, false, 0.3,
                                 new ScoreCoralOffset(
-                                    visionXOffset + (scoreRightSide? 9.0: -11.5), visionYOffset - 18.5),
+                                    visionXOffset + (scoreRightSide? 9.0: -11.5), visionYOffset - 16.5),
                                 event);
                         }
                         else
@@ -354,7 +354,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                     TrcPose2D reefAprilTagPose = FrcPhotonVision.getAprilTagFieldPose(reefAprilTagId);
                     TrcPose2D reefTargetPose = robot.adjustPoseByOffset(reefAprilTagPose, 5.0, -55.0);
                     robot.robotDrive.purePursuitDrive.start(
-                        null, event, 0.0, false, robot.robotInfo.profiledMaxVelocity,
+                        null, event, 7.0, false, robot.robotInfo.profiledMaxVelocity,
                         robot.robotInfo.profiledMaxAcceleration, robot.robotInfo.profiledMaxDeceleration,
                         reefTargetPose);
                     sm.waitForSingleEvent(event, State.SCORE_CORAL);
@@ -363,7 +363,7 @@ public class CmdReefscapeAuto implements TrcRobot.RobotCommand
                 case SCORE_CORAL:
                     robot.scoreCoralTask.autoScoreCoral(
                         null, useVision, reefAprilTagId, 3, scoreRightSide, false, relocalize, false, 0.2,
-                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -18.5: -13.5), event);
+                        new ScoreCoralOffset(scoreRightSide? 6.5: -9.0, scoreRightSide? -15.0: -13.5), event);
                     // Decrement the number of station pickup and flip to the other side.
                     stationPickupCount--;
                     scoreRightSide = !scoreRightSide;
