@@ -56,6 +56,7 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
     {
         START,
         FIND_REEF_APRILTAG,
+        DRIVE_FORWARD,
         APPROACH_REEF,
         SCORE_CORAL,
         DONE
@@ -306,8 +307,13 @@ public class TaskAutoScoreCoral extends TrcAutoTask<TaskAutoScoreCoral.State>
                 else if (TrcTimer.getCurrentTime() >= visionExpiredTime)
                 {
                     tracer.traceInfo(moduleName, "***** No AprilTag found.");
-                    sm.setState(State.DONE);
+                    sm.setState(State.DRIVE_FORWARD);
                 }
+                break;
+
+            case DRIVE_FORWARD:
+                robot.robotDrive.pidDrive.setRelativeTarget(owner, 0.0, 24.0, 0.0, true, driveEvent, 5.0);
+                sm.waitForSingleEvent(driveEvent, State.DONE);
                 break;
 
             case APPROACH_REEF:

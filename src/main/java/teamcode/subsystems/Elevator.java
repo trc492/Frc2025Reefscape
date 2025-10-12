@@ -66,7 +66,7 @@ public class Elevator extends TrcSubsystem
         public static final double TROUGH_SCORE_LEVEL_POS       = MIN_POS;  // TODO
         public static final double REEF_SCORE_LEVEL1_POS        = MIN_POS;  // TODO
         public static final double REEF_SCORE_LEVEL2_POS        = 45.1; // TODO
-        public static final double REEF_SCORE_LEVEL3_POS        = 66.0; // TODO
+        public static final double REEF_SCORE_LEVEL3_POS        = 68.9; // TODO
         public static final double[] SCORE_LEVEL_POS            =
             {TROUGH_SCORE_LEVEL_POS, REEF_SCORE_LEVEL1_POS, REEF_SCORE_LEVEL2_POS, REEF_SCORE_LEVEL3_POS};
         public static final double[] posPresets                 = {MIN_POS, 45.0, 50.0, 55.0, 60.0, 65.0, MAX_POS};
