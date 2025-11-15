@@ -337,7 +337,8 @@ public class RobotBase
     public static class ReefscapeRobotParams extends FrcSwerveDrive.SwerveInfo
     {
         public final double FALCON_MAX_RPM                      = 6380.0;
-        public final double DRIVE_GEAR_RATIO                    = 5.60;//6.75;
+        public final double DRIVE_MOTOR_CPR                     = 4096.0;   //TODO: Please verify and update.
+        public final double DRIVE_MOTOR_GEAR_RATIO              = 5.60;//6.75;
         public final double DRIVE_WHEEL_DIAMETER                = 3.9326556997620689090425924610785;    // inches
         public final double STEER_GEAR_RATIO                    = 13.3714;
 
@@ -360,11 +361,12 @@ public class RobotBase
                 HwConfig.CANID_LFDRIVE_MOTOR, HwConfig.CANID_RFDRIVE_MOTOR,
                 HwConfig.CANID_LBDRIVE_MOTOR, HwConfig.CANID_RBDRIVE_MOTOR};
             driveMotorInverted = new boolean[] {false, false, false, false};
+            driveMotorPosScale = DRIVE_WHEEL_DIAMETER*Math.PI/DRIVE_MOTOR_GEAR_RATIO/DRIVE_MOTOR_CPR;
             odometryType = OdometryType.MotorOdometry;
             // Absolute Odometry
             absoluteOdometry = null;
             // Drive Motor Odometry
-            xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_GEAR_RATIO;    // inch/rev
+            xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_MOTOR_GEAR_RATIO;    // inch/rev
             // Robot Drive Characteristics
             robotMaxVelocity = 201.0;           // inch/sec
             robotMaxAcceleration = 6935.0;     // inch/sec sq
@@ -421,7 +423,7 @@ public class RobotBase
             steerMotorPidTolerance = 0.5; // in degrees
             // Swerve Module parameters.
             swerveModuleNames = new String[] {"lfWheel", "rfWheel", "lbWheel", "rbWheel"};
-            driveGearRatio = DRIVE_GEAR_RATIO;
+            driveGearRatio = DRIVE_MOTOR_GEAR_RATIO;
             steerGearRatio = STEER_GEAR_RATIO;
             steerPositionScale = 360.0 / steerGearRatio;
             //
