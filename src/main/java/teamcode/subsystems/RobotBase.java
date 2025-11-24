@@ -337,7 +337,7 @@ public class RobotBase
     public static class ReefscapeRobotParams extends FrcSwerveDrive.SwerveInfo
     {
         public final double FALCON_MAX_RPM                      = 6380.0;
-        public final double DRIVE_MOTOR_CPR                     = 4096.0;   //TODO: Please verify and update.
+        public final double DRIVE_MOTOR_CPR                     = 4096.0; //2048.0; //4096.0;   //TODO: Please verify and update.
         public final double DRIVE_MOTOR_GEAR_RATIO              = 5.60;//6.75;
         public final double DRIVE_WHEEL_DIAMETER                = 3.9326556997620689090425924610785;    // inches
         public final double STEER_GEAR_RATIO                    = 13.3714;
