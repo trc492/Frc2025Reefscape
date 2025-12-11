@@ -347,8 +347,8 @@ public class RobotBase
             // Robot Dimensions.
             robotLength = RobotParams.Robot.ROBOT_LENGTH;
             robotWidth = RobotParams.Robot.ROBOT_WIDTH;
-            wheelBaseLength = 23.25;
-            wheelBaseWidth = 23.25;
+            wheelBaseLength = 23.2;
+            wheelBaseWidth = 23.2;
             // Gyro parameters.
             imuName = "NavX";
             imuType = FrcRobotDrive.ImuType.NavX;
