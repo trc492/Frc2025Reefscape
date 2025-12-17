@@ -54,7 +54,7 @@ public class RobotParams
         public static final boolean showDrivePower              = true;
         public static final boolean showVision                  = true;
         public static final boolean showSubsystems              = true;
-        public static final boolean useHootFileLogging          = false;
+        public static final boolean useHootFileLogging          = true;
         // Sensors and Indicators
         public static final boolean useNavX                     = true;
         public static final boolean usePdp                      = false;

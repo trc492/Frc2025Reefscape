@@ -338,7 +338,7 @@ public class RobotBase
     {
         public final double FALCON_MAX_RPM                      = 6380.0;
         public final double DRIVE_MOTOR_GEAR_RATIO              = 5.60;//6.75;
-        public final double DRIVE_WHEEL_DIAMETER                = 3.89208728; //3.8790093; //3.9326556997620689090425924610785;    // inches
+        public final double DRIVE_WHEEL_DIAMETER                = 3.89208728;    // inches
         public final double STEER_GEAR_RATIO                    = 13.3714;
 
         public ReefscapeRobotParams()
@@ -365,7 +365,8 @@ public class RobotBase
             // Absolute Odometry
             absoluteOdometry = null;
             // Drive Motor Odometry
-            xDrivePosScale = yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_MOTOR_GEAR_RATIO;    // inch/rev
+            yDrivePosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_MOTOR_GEAR_RATIO;    // inch/rev
+            xDrivePosScale =  3.93258483* Math.PI / DRIVE_MOTOR_GEAR_RATIO;
             // Robot Drive Characteristics
             robotMaxVelocity = 201.0;           // inch/sec
             robotMaxAcceleration = 6935.0;      // inch/sec sq
