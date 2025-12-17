@@ -29,6 +29,8 @@ import java.io.PrintStream;
 import java.util.Locale;
 import java.util.Scanner;
 
+import com.ctre.phoenix6.SignalLogger;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -286,6 +288,9 @@ public class Robot extends FrcRobotBase
             super.setCommStatusMonitorEnabled(this::commStatusCallback);
         }
 
+        if(RobotParams.Preferences.useHootFileLogging){
+            SignalLogger.start();
+        }
         // Read FMS Match info.
         FrcMatchInfo matchInfo = FrcMatchInfo.getMatchInfo();
         if (runMode != RunMode.DISABLED_MODE)
@@ -356,6 +361,11 @@ public class Robot extends FrcRobotBase
         {
             ledIndicator.reset();
         }
+
+        if(RobotParams.Preferences.useHootFileLogging){
+            SignalLogger.stop();
+        }
+
         // Performance status report.
         if (battery != null)
         {
