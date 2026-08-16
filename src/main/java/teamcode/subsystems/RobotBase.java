@@ -404,7 +404,7 @@ public class RobotBase
             ledChannel = HwConfig.PWM_CHANNEL_LED;
             numLEDs = HwConfig.NUM_LEDS;
             // Steer Encoder parameters.
-            steerEncoderType = EncoderType.Canandmag;
+            steerEncoderType = EncoderType.CANCoder;
             steerEncoderNames = new String[] {"lfSteerEncoder", "rfSteerEncoder", "lbSteerEncoder", "rbSteerEncoder"};
             steerEncoderIds = new int[] {
                 HwConfig.CANID_LFSTEER_ENCODER, HwConfig.CANID_RFSTEER_ENCODER,
