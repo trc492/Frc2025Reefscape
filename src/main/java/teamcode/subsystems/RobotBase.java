@@ -359,7 +359,7 @@ public class RobotBase
             driveMotorIds = new int[] {
                 HwConfig.CANID_LFDRIVE_MOTOR, HwConfig.CANID_RFDRIVE_MOTOR,
                 HwConfig.CANID_LBDRIVE_MOTOR, HwConfig.CANID_RBDRIVE_MOTOR};
-            driveMotorInverted = new boolean[] {false, false, false, false};
+            driveMotorInverted = new boolean[] {true, false, true, false};
             driveMotorPosScale = DRIVE_WHEEL_DIAMETER * Math.PI / DRIVE_MOTOR_GEAR_RATIO;   // inch/rev
             odometryType = null;
             // Absolute Odometry
